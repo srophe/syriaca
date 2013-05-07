@@ -1,4 +1,4 @@
 syriaca
 =======
 
-Public respository for Syriaca.org: The Syriac Reference Portal
+Miscellaneous public respository for Syriaca.org: The Syriac Reference Portal
