@@ -1,28 +1,29 @@
-For the web button or pop up.
+For the web button or pop up please use one of the following:
 
-"No Syriac?"
-"Need Syriac Fonts?"(DM's Preferred)
-"No Syriac Characters?"
-"Where is the Syriac?"
-"Syriac Display Issues"
+* "No Syriac?"
+* "Need Syriac Fonts?"(DM's Preferred)
+* "No Syriac Characters?"
+* "Where is the Syriac?"
+* "Syriac Display Issues"
 
-Subheader:
+This pop up should display on every `/place/` page if the user is on Mac OS, iOS, Android or Linux, of if the user is using Windows IE as a browser on Windows.
 
 #How to View Syriac Text on Syriaca.org   
 
 If you cannot see Syriac text in this box, your device is not displaying Syriac properly:
 		
 		Test: ܫܠܡܐ
-		 	 
+This problem is commonly due to one of the following causes:
 
-T
+* incompatible web browser
+* lack of [unicode](http://www.unicode.org/standard/WhatIsUnicode.html) fonts
+* incompatible operating syste
 
-* changing web browsers
-* installing [unicode](http://www.unicode.org/standard/WhatIsUnicode.html) fonts
-* changing operating system
+##Recommended Web Browsers
 
+Syriaca.org is best viewed using either the [Firefox](http://www.mozilla.org/en-US/firefox/new/) or [Chrome](www.google.com/chrome‎) browsers. Please try Syriaca.org in one of these recommended browsers to see if your problem persists before proceeding to the solutions below.
 
-
+##Installing Fonts and OS Compatibility
 
 * Mac OS
 	
@@ -36,7 +37,10 @@ T
 		2. Once the "Font Book" window opens, select "Install Font."
 		3. A message will display, "Problems may have been found with some fonts during validation. Please review the reported problem before continuing…. One minor problem was found. Proceed with caution."
 		4. Check the box "Select all fonts."
-		5. Select "Install checked."	
+		5. Select "Install checked."
+		
+		Even with Meltho or other fonts installed there is also a known conflict with Apple's default rendering of the ܘ (waw) character when a conflicting Arabic font is installed.	
+	
 * Windows
 	
 	Common Solution: Install [fonts](http://www.bethmardutho.org/index.php/resources/fonts.html)
