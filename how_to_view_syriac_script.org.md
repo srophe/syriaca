@@ -17,7 +17,7 @@ This problem is commonly due to one of the following causes:
 
 * incompatible web browser
 * lack of [unicode](http://www.unicode.org/standard/WhatIsUnicode.html) fonts
-* incompatible operating syste
+* incompatible operating system
 
 ##Recommended Web Browsers
 
