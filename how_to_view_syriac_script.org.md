@@ -58,7 +58,7 @@ Syriaca.org is best viewed using either the [Firefox](http://www.mozilla.org/en-
 	
 	Common Solution: Syriac unavailable.
 
-	Unfortunately at this time Android devices do not support Syriac unicode display without first being "rooted" which is recommended only for advanced users. Prospective users could submit a feature request to Google (or other Android providers) for "full unicode font support for world heritage languages including Syriac (U+0700–074F)." We are not aware of the best to contact the Android development community at this time.
+	Unfortunately at this time Android devices do not support Syriac unicode display without first being "rooted" which is recommended only for advanced users. Prospective users could submit a feature request to Google (or other Android providers) for "full unicode font support for world heritage languages including Syriac (U+0700–074F)." We are not aware of the best way to contact the Android development community at this time.
 
 * Linux
 	
