@@ -64,4 +64,4 @@ Syriaca.org is best viewed using either the [Firefox](http://www.mozilla.org/en-
 	
 	Common Solution: Install [fonts](http://www.bethmardutho.org/index.php/resources/fonts.html)
 	
-	Syriac can be supported on some distributions of the Linux operating system. If you cannot view Syriac characters you likely need to install a [unicode](http://www.unicode.org/standard/WhatIsUnicode.html) Syriac font Syriaca.org recommends you install the Meltho family of Fonts available free from [Beth Mardutho](http://www.bethmardutho.org/index.php/resources/fonts.html). Notes: We recommend you install at least Estrangelo Edessa, though you may wish to install all the fonts.
+	Syriac can be supported on some distributions of the Linux operating system. If you cannot view Syriac characters you likely need to install a [unicode](http://www.unicode.org/standard/WhatIsUnicode.html) Syriac font.  Syriaca.org recommends you install the Meltho family of Fonts available free from [Beth Mardutho](http://www.bethmardutho.org/index.php/resources/fonts.html). Notes: We recommend you install at least Estrangelo Edessa, though you may wish to install all the fonts.
