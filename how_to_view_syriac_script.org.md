@@ -6,6 +6,8 @@ For the web button or pop up please use one of the following:
 * "Where is the Syriac?"
 * "Got Syriac?"
 * "Syriac Display Issues"
+* "Syriac Trouble?" (TAC's preferred)
+* "Don't see Syriac?"
 
 This pop up should display on every `/place/` page if the user is on Mac OS, iOS, Android or Linux, of if the user is using Windows IE as a browser on Windows.  It should also appear on the `geo/browse.html` because of the Syriac headwords in the place names.
 
