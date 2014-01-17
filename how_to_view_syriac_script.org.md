@@ -52,7 +52,7 @@ Syriaca.org is best viewed using either the [Firefox](http://www.mozilla.org/en-
 	
 	Common Solution: Syriac unavailable.
 	
-	Unfortunately at this time Apple does not support Syriac unicode display on any iOS devices (such as the iPad or iPhone). Prospective users are encouraged to submit a feature request to Apple for "full unicode font support for world heritage languages including Syriac (U+0700–074F)." Apple is solciting input [here](http://www.apple.com/feedback/ipad.html).
+	Unfortunately at this time Apple does not support Syriac unicode display on any iOS devices (such as the iPad or iPhone). Prospective users are encouraged to submit a feature request to Apple for "full unicode font support for world heritage languages including Syriac (U+0700–074F)." Apple is soliciting input [here](http://www.apple.com/feedback/ipad.html).
 	
 * Android
 	
