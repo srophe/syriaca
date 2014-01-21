@@ -89,8 +89,4 @@ To assist with disambiguation of the indentifiers, [Syriaca.org](http://syriaca.
 
 ## Demo Sites:
 
-A working draft of the Gazetteer is here:
-
-[demo.syriaca.org](http://demo.syriaca.org)
-
 A limited demo website showing the RDF linking technology in action is found at: [http://pipsqueak.atlantides.org/srpdemo1/persons/13.html](http://pipsqueak.atlantides.org/srpdemo1/persons/13.html)
