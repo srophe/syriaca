@@ -17,11 +17,11 @@ The methodological approach of Syriaca.org is informed by the emerging field of 
 
 http://linkeddata.org/faq
 
-# Overview of Syriaca.org: The Syriac Reference Portal
+#Overview of Syriaca.org: The Syriac Reference Portal
 
 * * *
 
-## Mission:
+##Mission:
 
 [Syriaca.org](http://syriaca.org);is a collaborative online search tool and reference guide for the study of Syriac literature and culture.
 
@@ -45,12 +45,7 @@ http://linkeddata.org/faq
 
 Linking between partner sites is achieved through the emerging technology of Linked Open Data (specifically, the semantic web technologies of RDF and XML).  [Syriaca.org](http://syriaca.org) uses shared systems of unique identifiers (reference id numbers) to link data between partner sites. 
 
-## 
-
-* * *
-
-## 
-
+---
 ## Data:
 
 [Syriaca.org](http://syriaca.org) is currently creating unique identifiers for seven types of entities: 
