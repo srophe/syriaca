@@ -114,33 +114,42 @@ declare function data:get-records($collection as xs:string*, $element as xs:stri
     let $sort := 
         if(request:get-parameter('sort', '') != '') then request:get-parameter('sort', '') 
         else if(request:get-parameter('sort-element', '') != '') then request:get-parameter('sort-element', '')
+        else if($element) then $element 
         else ()         
-    let $hits := util:eval(data:build-collection-path($collection))[descendant::tei:body[ft:query(., (),sf:facet-query())]]                        
+    let $hits := util:eval(data:build-collection-path($collection))[descendant::tei:body[ft:query(., (),sf:facet-query())]]  
     return 
         if(request:get-parameter('view', '') = 'map') then 
             for $hit in $hits
-            let $sort-element := data:sort-element($hit, $element, request:get-parameter('lang', ''))    
-            let $sort := global:build-sort-string($sort-element,request:get-parameter('lang', ''))
+            let $sort := 
+                if($collection = 'bibl') then
+                    data:add-sort-options-bibl($hit, $sort)
+                else data:add-sort-options($hit, $sort)    
             order by $sort ascending collation 'http://www.w3.org/2013/collation/UCA'
             where $hit[1]//tei:geo
-            return $hit[1]                             
+            return $hit                             
         else if(request:get-parameter('alpha-filter', '') = ('ALL','all')) then 
             for $hit in $hits
-            let $sort-element := data:sort-element($hit, $element, request:get-parameter('lang', ''))    
-            let $sort := global:build-sort-string($sort-element,request:get-parameter('lang', ''))
+            let $sort := 
+                if($collection = 'bibl') then
+                    data:add-sort-options-bibl($hit, $sort)
+                else data:add-sort-options($hit, $sort)    
             order by $sort ascending collation 'http://www.w3.org/2013/collation/UCA'
-            return $hit[1]              
+            return $hit              
         else if(request:get-parameter('alpha-filter', '') != '') then 
             for $hit in $hits
-            let $sort-element := data:sort-element($hit, $element, request:get-parameter('lang', ''))    
-            let $sort := global:build-sort-string($sort-element,request:get-parameter('lang', ''))
+            let $sort := 
+                if($collection = 'bibl') then
+                    data:add-sort-options-bibl($hit, $sort)
+                else data:add-sort-options($hit, $sort)
             order by $sort ascending collation 'http://www.w3.org/2013/collation/UCA'
             where matches($sort,global:get-alpha-filter())
             return $hit             
         else
             for $hit in $hits
-            let $sort-element := data:sort-element($hit, $element, request:get-parameter('lang', ''))    
-            let $sort := global:build-sort-string($sort-element,request:get-parameter('lang', ''))
+            let $sort := 
+                if($collection = 'bibl') then
+                    data:add-sort-options-bibl($hit, $sort)
+                else data:add-sort-options($hit, $sort) 
             order by $sort ascending collation 'http://www.w3.org/2013/collation/UCA' 
             return $hit
 };
@@ -151,21 +160,29 @@ declare function data:get-records($collection as xs:string*, $element as xs:stri
  : Add sort options. 
 :)
 declare function data:search($collection as xs:string*, $queryString as xs:string?, $sort-element as xs:string?) {                      
-    let $eval-string := if($queryString != '') then $queryString 
-                        else concat(data:build-collection-path($collection), data:create-query($collection),slider:date-filter(()))
+    let $eval-string := if($queryString != '') then concat($queryString,slider:date-filter($collection)) 
+                        else concat(data:build-collection-path($collection), data:create-query($collection),slider:date-filter($collection))
     let $hits :=
             if(request:get-parameter-names() = '' or empty(request:get-parameter-names())) then 
                 collection($config:data-root || '/' || $collection)//tei:body[ft:query(., (),sf:facet-query())]
             else util:eval($eval-string)//tei:body[ft:query(., (),sf:facet-query())]              
     return
         if(request:get-parameter('sort-element', '') != '' and request:get-parameter('sort-element', '') != 'relevance') then 
-            for $hit in $hits
-            order by global:build-sort-string(data:add-sort-options($hit, request:get-parameter('sort-element', '')),'')
-            return $hit/ancestor-or-self::tei:TEI
+                for $hit in $hits/ancestor-or-self::tei:TEI
+                let $sort := 
+                    if($collection = 'bibl') then
+                        data:add-sort-options-bibl($hit, request:get-parameter('sort-element', ''))
+                    else data:sort-element($hit, request:get-parameter('sort-element', ''), request:get-parameter('lang', '')) 
+                order by $sort
+                return $hit
         else if($sort-element != '' and $sort-element != 'relevance') then  
-            for $hit in $hits
-            order by global:build-sort-string(data:add-sort-options($hit, $sort-element),'')
-            return $hit/ancestor-or-self::tei:TEI
+                for $hit in $hits/ancestor-or-self::tei:TEI
+                let $sort := 
+                    if($collection = 'bibl') then
+                        data:add-sort-options-bibl($hit, request:get-parameter('sort-element', ''))
+                    else data:sort-element($hit, request:get-parameter('sort-element', ''), request:get-parameter('lang', '')) 
+                order by $sort
+                return $hit
         else 
             for $hit in $hits
             order by ft:score($hit) descending
@@ -199,10 +216,13 @@ declare function data:create-query($collection as xs:string?) as xs:string?{
 :)
 declare function data:add-sort-options($hit, $sort-option as xs:string*){
     if($sort-option != '') then
+        (: fields for Caeserea testimonia module:) 
         if($sort-option = 'title') then 
             global:build-sort-string($hit/descendant::tei:titleStmt/tei:title[1],request:get-parameter('lang', ''))
-        else if($sort-option = 'author') then 
-            if($hit/descendant::tei:titleStmt/tei:author[1]) then 
+        else if($sort-option = 'author' or $sort-option = 'creator') then
+            if($hit/descendant::tei:profileDesc/tei:creation/tei:persName[@role='author']) then 
+                $hit/descendant::tei:profileDesc/tei:creation/tei:persName[@role='author'][1]
+            else if($hit/descendant::tei:titleStmt/tei:author[1]) then 
                 if($hit/descendant::tei:titleStmt/tei:author[1]/descendant-or-self::tei:surname) then 
                     $hit/descendant::tei:titleStmt/tei:author[1]/descendant-or-self::tei:surname[1]
                 else $hit//descendant::tei:author[1]
@@ -218,8 +238,16 @@ declare function data:add-sort-options($hit, $sort-option as xs:string*){
             if($hit/descendant::tei:birth) then $hit/descendant::tei:birth/@syriaca-computed-start
             else if($hit/descendant::tei:death) then $hit/descendant::tei:death/@syriaca-computed-start
             else ()
-        else $hit
-    else $hit
+        else 
+            if($hit/descendant::tei:profileDesc/tei:creation/tei:title[@type='uniform']) then
+                global:build-sort-string($hit/descendant::tei:profileDesc/tei:creation/tei:title[@type='uniform'], request:get-parameter('lang', ''))
+            else global:build-sort-string($hit/descendant::tei:titleStmt/tei:title[1],request:get-parameter('lang', ''))
+        
+    else     
+        if($hit/descendant::tei:profileDesc/tei:creation/tei:title[@type='uniform']) then
+                global:build-sort-string($hit/descendant::tei:profileDesc/tei:creation/tei:title[@type='uniform'], request:get-parameter('lang', ''))
+        else global:build-sort-string($hit/descendant::tei:titleStmt/tei:title[1],request:get-parameter('lang', ''))
+        
 };
 
 
@@ -232,9 +260,11 @@ declare function data:add-sort-options-bibl($hit, $sort-option as xs:string*){
     if($sort-option != '') then
         if($sort-option = 'title') then 
             if($hit/descendant::tei:body/tei:biblStruct) then 
-                global:build-sort-string($hit/descendant::tei:body/tei:biblStruct/descendant::tei:title[1],request:get-parameter('lang', ''))
+                if($hit/descendant::tei:body/tei:biblStruct/descendant::tei:title[@level='a']) then 
+                    global:build-sort-string($hit/descendant::tei:body/tei:biblStruct/descendant::tei:title[@level='a'][1],request:get-parameter('lang', ''))
+                else global:build-sort-string($hit/descendant::tei:body/tei:biblStruct/descendant::tei:title[1],request:get-parameter('lang', '')) 
             else global:build-sort-string($hit/descendant::tei:titleStmt/tei:title[1],request:get-parameter('lang', ''))
-        else if($sort-option = 'author') then 
+        else if($sort-option = 'author' or $sort-option = 'creator') then 
             if($hit/descendant::tei:body/tei:biblStruct) then 
                 if($hit/descendant::tei:body/tei:biblStruct/descendant::tei:author) then 
                     if($hit/descendant::tei:body/tei:biblStruct/descendant::tei:author[1]/descendant-or-self::tei:surname) then 
@@ -264,10 +294,15 @@ declare function data:add-sort-options-bibl($hit, $sort-option as xs:string*){
             if($hit/descendant::tei:birth) then $hit/descendant::tei:birth/@syriaca-computed-start
             else if($hit/descendant::tei:death) then $hit/descendant::tei:death/@syriaca-computed-start
             else ()
-        else $hit
-    else $hit
+        else 
+            if($hit/descendant::tei:body/tei:biblStruct) then 
+                global:build-sort-string($hit/descendant::tei:body/tei:biblStruct/descendant::tei:title[1],request:get-parameter('lang', ''))
+            else global:build-sort-string($hit/descendant::tei:titleStmt/tei:title[1],request:get-parameter('lang', ''))
+    else             
+        if($hit/descendant::tei:body/tei:biblStruct) then 
+                global:build-sort-string($hit/descendant::tei:body/tei:biblStruct/descendant::tei:title[1],request:get-parameter('lang', ''))
+        else global:build-sort-string($hit/descendant::tei:titleStmt/tei:title[1],request:get-parameter('lang', ''))
 };
-
 
 (:~ 
  : Adds sort filter based on sort prameter
@@ -278,12 +313,12 @@ declare function data:sort-element($hit, $sort-element as xs:string*, $lang as x
     if($sort-element != '') then
         if($sort-element = "tei:place/tei:placeName[@srophe:tags='#headword']") then 
             if($lang != '') then
-                $hit/descendant::tei:place/tei:placeName[@srophe:tags='#headword'][@xml:lang=$lang][1]
-            else $hit/descendant::tei:place/tei:placeName[@srophe:tags='#headword'][1]
+                global:build-sort-string($hit/descendant::tei:place/tei:placeName[@srophe:tags='#headword'][@xml:lang=$lang][1],request:get-parameter('lang', ''))
+            else global:build-sort-string($hit/descendant::tei:place/tei:placeName[@srophe:tags='#headword'][1],request:get-parameter('lang', ''))
         else if($sort-element = "tei:place/tei:placeName") then 
             if($lang != '') then
-                $hit/descendant::tei:place/tei:placeName[@xml:lang=$lang][1]
-            else $hit/descendant::tei:place/tei:placeName[1]            
+                global:build-sort-string($hit/descendant::tei:place/tei:placeName[@xml:lang=$lang][1],request:get-parameter('lang', ''))
+            else global:build-sort-string($hit/descendant::tei:place/tei:placeName[1],request:get-parameter('lang', ''))            
         else if($sort-element = "tei:person/tei:persName[@srophe:tags='#headword']") then 
             if($lang != '') then
                 $hit/descendant::tei:person/tei:pers[@srophe:tags='#headword'][@xml:lang=$lang][1]
@@ -294,53 +329,21 @@ declare function data:sort-element($hit, $sort-element as xs:string*, $lang as x
             else $hit/descendant::tei:person/tei:persName[1]
         else if($sort-element = "tei:titleStmt/tei:title[@level='a']") then 
             if($lang != '') then
-                $hit/descendant::tei:titleStmt/tei:title[@level='a'][@xml:lang=$lang][1]
-            else $hit/descendant::tei:titleStmt/tei:title[@level='a'][1]
+                global:build-sort-string($hit/descendant::tei:titleStmt/tei:title[@level='a'][@xml:lang=$lang][1],request:get-parameter('lang', ''))
+            else global:build-sort-string($hit/descendant::tei:titleStmt/tei:title[@level='a'][1],request:get-parameter('lang', ''))
         else if($sort-element = "tei:titleStmt/tei:title") then 
             if($lang != '') then
-                $hit/descendant::tei:titleStmt/tei:title[@xml:lang=$lang][1]
-            else $hit/descendant::tei:titleStmt/tei:title[1]
+                global:build-sort-string($hit/descendant::tei:titleStmt/tei:title[@xml:lang=$lang][1],request:get-parameter('lang', ''))
+            else global:build-sort-string($hit/descendant::tei:titleStmt/tei:title[1],request:get-parameter('lang', ''))
         else if($sort-element = "tei:title") then 
             if($lang != '') then
-                $hit/descendant::tei:title[@xml:lang=$lang][1]
-            else $hit/descendant::tei:title[1]
+                global:build-sort-string($hit/descendant::tei:title[@xml:lang=$lang][1],request:get-parameter('lang', ''))
+            else global:build-sort-string($hit/descendant::tei:title[1],request:get-parameter('lang', ''))
         else 
             if($lang != '') then
-                util:eval(concat('$hit/descendant::',$sort-element,'[@xml:lang="',$lang,'"][1]'))
-            else util:eval(concat('$hit/descendant::',$sort-element,'[1]'))            
-    else $hit/descendant::tei:titleStmt/tei:title[1]
-};
-
-
-(:~ 
- : Adds sort filter based on sort prameter
- : Currently supports sort on title, author, publication date and person dates
- : @param $sort-option
-:)
-declare function data:add-sort-options-bibl($hit, $sort-option as xs:string*){
-    if($sort-option != '') then
-        if($sort-option = 'title') then 
-            $hit/descendant::tei:body/tei:biblStruct/tei:title[1]
-        else if($sort-option = 'author') then 
-            if($hit/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]) then 
-                if($hit/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]/descendant-or-self::tei:surname) then 
-                    $hit/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]/descendant-or-self::tei:surname[1]
-                else $hit/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]
-            else 
-                if($hit/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:editor[1]/descendant-or-self::tei:surname) then 
-                    $hit/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:editor[1]/descendant-or-self::tei:surname[1]
-                else $hit/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:editor[1]
-        else if($sort-option = 'pubDate') then 
-            $hit/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:imprint[1]/descendant-or-self::tei:date[1]
-        else if($sort-option = 'pubPlace') then  
-            $hit/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:imprint[1]/descendant-or-self::tei:pubPlace[1]
-        (: Caesarea options :)
-        else if($sort-option = 'origDate') then 
-            $hit/descendant::tei:teiHeader/tei:profileDesc/tei:creation/tei:origDate
-        else if($sort-option = 'origPlace') then
-            $hit/descendant::tei:teiHeader/tei:profileDesc/tei:creation/tei:origPlace
-        else $hit
-    else $hit
+                global:build-sort-string(util:eval(concat('$hit/descendant::',$sort-element,'[@xml:lang="',$lang,'"][1]')),request:get-parameter('lang', ''))
+            else global:build-sort-string(util:eval(concat('$hit/descendant::',$sort-element,'[1]')),request:get-parameter('lang', ''))            
+    else global:build-sort-string($hit/descendant::tei:titleStmt/tei:title[1],request:get-parameter('lang', ''))
 };
 
 (:~

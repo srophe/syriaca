@@ -73,7 +73,7 @@ declare function browse:show-hits($node as node(), $model as map(*), $collection
                     if($browse:alpha-filter != '') then $browse:alpha-filter else 'A')}</h3>,
                 <div class="results {if($browse:lang = 'syr' or $browse:lang = 'ar') then 'syr-list' else 'en-list'}">
                     {if(($browse:lang = 'syr') or ($browse:lang = 'ar')) then (attribute dir {"rtl"}) else()}
-                    {browse:display-hits($hits)}
+                    {browse:display-hits($hits,$collection)}
                 </div>
             )}
         </div>
@@ -82,11 +82,19 @@ declare function browse:show-hits($node as node(), $model as map(*), $collection
 (:
  : Page through browse results
 :)
-declare function browse:display-hits($hits){
+declare function browse:display-hits($hits, $collection){
     for $hit in subsequence($hits, $browse:start,$browse:perpage)
     let $sort-title := 
-        if($browse:lang != 'en' and $browse:lang != 'syr') then 
-            <span class="sort-title" lang="{$browse:lang}" xml:lang="{$browse:lang}">{(if($browse:lang='ar') then attribute dir { "rtl" } else (), string($hit/@sort-title))}</span> 
+        if($browse:lang != 'en' and $browse:lang != 'syr' and $browse:lang != '') then 
+            <span class="sort-title" lang="{$browse:lang}" xml:lang="{$browse:lang}">
+            {(if($browse:lang='ar') then attribute dir { "rtl" } else (), 
+                if($collection = 'places') then 
+                    tei2html:tei2html($hit//tei:placeName[@xml:lang = $browse:lang][matches(global:build-sort-string(., $browse:lang),global:get-alpha-filter())])
+                else if($collection = 'persons' or $collection = 'sbd' or $collection = 'q' ) then
+                    tei2html:tei2html($hit//tei:persName[@xml:lang = $browse:lang][matches(global:build-sort-string(., $browse:lang),global:get-alpha-filter())])
+                else tei2html:tei2html($hit//tei:title[@xml:lang = $browse:lang][matches(global:build-sort-string(., $browse:lang),global:get-alpha-filter())])
+                )}
+            </span> 
         else () 
     let $uri := replace($hit/descendant::tei:publicationStmt/tei:idno[1],'/tei','')
     return 

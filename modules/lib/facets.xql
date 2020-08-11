@@ -21,6 +21,7 @@ xquery version "3.1";
 module namespace sf = "http://srophe.org/srophe/facets";
 import module namespace functx="http://www.functx.com";
 import module namespace config="http://srophe.org/srophe/config" at "../config.xqm";
+import module namespace slider = "http://srophe.org/srophe/slider" at "date-slider.xqm";
 
 declare namespace srophe="https://srophe.app";
 declare namespace facet="http://expath.org/ns/facet";
@@ -115,8 +116,7 @@ declare function sf:build-index(){
  : Update collection.xconf file for data application, can be called by post install script, or index.xql
  : Save collection to correct application subdirectory in /db/system/config
  : Trigger a re-index.
- : 
- : @note reindex does not seem to work... investigate 
+ :  
  :)
 declare function sf:update-index(){
     let $updateXconf := 
@@ -186,7 +186,10 @@ declare function sf:display($result as item()*, $facet-definition as item()*) {
     let $count := if(request:get-parameter(concat('all-',$name), '') = 'on' ) then () else string($facet/facet:max-values/@show)
     let $f := ft:facets($result, $name, $count)
     return 
-        if (map:size($f) > 0) then
+        if($facet[@display = 'none']) then () 
+        else if($facet[@display = 'slider']) then 
+            slider:browse-date-slider($result,$facet/facet:group-by/facet:sub-path)
+        else if (map:size($f) > 0) then
             <span class="facet-grp">
                 <span class="facet-title">{string($facet/@label)}</span>
                 <span class="facet-list">
