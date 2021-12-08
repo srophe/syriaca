@@ -1,23 +1,21 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml" data-template="app:get-work" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" data-template="app:get-work">
     <head>
-        <title data-template="app:record-title" data-template-collection="places">App Title</title>
+        <title data-template="app:record-title">App Title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <meta data-template="config:app-meta"/>
-        <!-- DC -->
-        <link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"/>
-        <link rel="schema.DCTERMS" href="http://purl.org/dc/terms/"/>
-        <meta name="DC.subject" property="dc.subject" content="Geography, Ancient"/>
         <meta name="DC.type" property="dc.type" content="Text"/>
         <meta name="DC.isPartOf" property="dc.ispartof" content="Syriaca.org: The Syriac Reference Portal"/>
-        <meta name="DC.isPartOf" property="dc.ispartof" content="The Syriac Gazetteer"/>
+        <link data-template="app:metadata"/>
+        <link rel="shortcut icon" href="$nav-base/resources/images/fav-icons/geo-favicon.ico"/>
         <!-- Bootstrap 3 -->
         <link rel="stylesheet" type="text/css" href="$nav-base/resources/bootstrap/css/bootstrap.min.css"/>
-        <!-- Smart menus -->
         <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/sm-core-css.css"/>
         <!-- Srophe styles -->
         <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/syr-icon-fonts.css"/>
         <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/syriaca.css"/>
+        <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/geo.css"/>
+        <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/slider.css"/>
+        <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/lightslider.css"/>
         <link rel="stylesheet" type="text/css" media="print" href="$nav-base/resources/css/print.css"/>
         <!-- Leaflet -->
         <link rel="stylesheet" href="$nav-base/resources/leaflet/leaflet.css"/>
@@ -94,8 +92,10 @@
                     <span class="icon-bar"/>
                 </button>
                 <a class="navbar-brand banner-container" href="$nav-base/geo/index.html"> 
-                    <span class="syriaca-icon syriaca-syriaca banner-icon" data-template="app:logo"/>
-                    <span class="banner-text" data-template="config:collection-title" data-template-collection="places">Collection Title</span>
+                    <span class="syriaca-icon syriaca-geo banner-icon">
+                        <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+                    </span>
+                    <span class="banner-text"><span data-template="config:collection-title" data-template-collection="places"/></span>
                 </a>
             </div>
             <div class="navbar-collapse collapse pull-right" id="navbar-collapse-1">
@@ -103,39 +103,22 @@
                     <li>
                         <a href="$nav-base/geo/browse.html" class="nav-text">Browse</a>
                     </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown"> 
-                            <span class="mobile-submenu">Publications</span>  <b class="caret"/>
-                        </a>
-                        <ul class="dropdown-menu pull-right">
-                            <li>
-                                <a href="$nav-base/index.html">
-                                    <span class="icon-text">Home</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="$nav-base/geo/index.html">
-                                    <span class="icon-text">Gazetteer</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="$nav-base/bibl/index.html">
-                                    <span class="icon-text">Works Cited</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="$nav-base/d3xquery/index.html">
-                                    <span class="icon-text">Visualize relationships</span>
-                                </a>
-                            </li>
-                        </ul>
+                    <li>
+                        <a href="$nav-base/geo/about.html" class="nav-text">About</a>
                     </li>
                     <li>
-                        <a href="$nav-base/search.html" class="nav-text">Advanced Search</a>
+                        <a href="$nav-base/geo/help/index.html" class="nav-text">Help</a>
+                    </li>
+                    <li>
+                        <a href="$nav-base/geo/howtoadd.html" class="nav-text">Add new place</a>
+                    </li>
+                    <li data-template="app:shared-content" data-template-path="/templates/shared-links.html"/>
+                    <li>
+                        <a href="$nav-base/geo/search.html" class="nav-text">Advanced Search</a>
                     </li>
                     <li>
                         <div id="search-wrapper">
-                            <form class="navbar-form navbar-right search-box" role="search" action="$nav-base/search.html" method="get">
+                            <form class="navbar-form navbar-right search-box" role="search" action="$nav-base/geo/search.html" method="get">
                                 <div class="form-group">
                                     <input type="text" class="form-control keyboard" placeholder="search" name="keyword" id="keywordNav"/>
                                     <span data-template="app:keyboard-select-menu" data-template-input-id="keywordNav"/>
@@ -175,13 +158,14 @@
             </div>
         </nav>
         <div id="content" class="text"/>
-        <footer>
-            <a class="poweredby" href="http://srophe.org">
-                <img src="$nav-base/resources/images/srophe.svg" alt="Srophe"/>
-            </a>
-        </footer>
+        <!-- Footer -->
+        <footer data-template="app:shared-content" data-template-path="/templates/footer.html"/>
     </body>
     <!-- Additional Javascript -->
     <script type="text/javascript" src="$nav-base/resources/js/jquery.validate.min.js"/>
+    <script type="text/javascript" src="$nav-base/resources/js/require.min.js"/>
     <script type="text/javascript" src="$nav-base/resources/js/srophe.js"/>
+    <script type="text/javascript" src="$nav-base/resources/js/lightslider.min.js"/>
+    <script type="text/javascript" src="$nav-base/resources/js/lightslider-functions.js"/>
+    <script data-template="app:google-analytics"/>
 </html>

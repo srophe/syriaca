@@ -18,6 +18,7 @@ import module namespace global="http://srophe.org/srophe/global" at "lib/global.
 import module namespace maps="http://srophe.org/srophe/maps" at "lib/maps.xqm";
 import module namespace page="http://srophe.org/srophe/page" at "lib/paging.xqm";
 import module namespace rel="http://srophe.org/srophe/related" at "lib/get-related.xqm";
+import module namespace relations="http://srophe.org/srophe/relationships" at "lib/relationships.xqm";
 import module namespace slider = "http://srophe.org/srophe/slider" at "lib/date-slider.xqm";
 import module namespace timeline = "http://srophe.org/srophe/timeline" at "lib/timeline.xqm";
 import module namespace teiDocs="http://srophe.org/srophe/teiDocs" at "teiDocs/teiDocs.xqm";
@@ -56,7 +57,7 @@ declare function app:get-work($node as node(), $model as map(*)) {
         let $rec := data:get-document()
         return 
             if(empty($rec)) then 
-                ('No record found. ',xmldb:encode-uri($config:data-root || "/" || request:get-parameter('doc', '') || '.xml'))
+                ('No record found. ',request:get-parameter('id', ''))
                 (: Debugging ('No record found. ',xmldb:encode-uri($config:data-root || "/" || request:get-parameter('doc', '') || '.xml')):)
                (:response:redirect-to(xs:anyURI(concat($config:nav-base, '/404.html'))):)
             else map {"hits" : $rec }
@@ -152,7 +153,7 @@ declare %templates:wrap function app:other-data-formats($node as node(), $model 
 let $id := (:replace($model("hits")/descendant::tei:idno[contains(., $config:base-uri)][1],'/tei',''):)request:get-parameter('id', '')
 return 
     if($formats) then
-        <div class="container" style="width:100%;clear:both;margin-bottom:1em; text-align:right;">
+        <div class="container otherFormats">
             {
                 for $f in tokenize($formats,',')
                 return 
@@ -231,7 +232,11 @@ declare %templates:wrap function app:pageination($node as node()*, $model as map
 :)                   
 declare function app:internal-relationships($node as node(), $model as map(*), $relationship-type as xs:string?, $display as xs:string?, $map as xs:string?,$label as xs:string?){
     if($model("hits")//tei:relation) then 
-        rel:build-relationships($model("hits")//tei:relation,request:get-parameter('id', ''),$relationship-type, $display, $map, $label)
+        <div id="internalRelationships">
+           <h3>{if($label != '') then $label else 'Internal Relationships' }</h3> 
+           {relations:display-internal-relatiobships($model("hits"), replace($model("hits")//tei:idno[@type='URI'][1],'/tei',''), $relationship-type)}
+           
+        </div>
     else ()
 };
 
@@ -246,19 +251,15 @@ declare function app:external-relationships($node as node(), $model as map(*), $
     let $title := if(contains($rec/descendant::tei:title[1]/text(),' — ')) then 
                         substring-before($rec/descendant::tei:title[1],' — ') 
                    else $rec/descendant::tei:title[1]/text()
-    return rel:external-relationships($recid, $title[1], $relationship-type, $sort, $count, $label)
+    return <div class="dynamicContent" data-url="{concat($config:nav-base,'/modules/data.xql?currentID=',$recid,'&amp;relationship=external&amp;relationshipType=',$relationship-type,'&amp;label=',$label)}"></div>
 };
 
 (:~
  : Passes any tei:geo coordinates in results set to map function. 
  : Suppress map if no coords are found. 
 :)                   
-declare function app:display-related-places-map($relationships as item()*){
-    if(contains($relationships,'/place/')) then
-        let $places := for $place in tokenize($relationships,' ')
-                       return data:get-document($place)
-        return maps:build-map($places,count($places//tei:geo))
-    else ()
+declare function app:display-related-places-map($node as node(), $model as map(*), $relationship-type as xs:string?, $display as xs:string?, $map as xs:string?,$label as xs:string?){
+   relations:related-places-map($model("hits"), $model("hits")//tei:idno[@type='URI'][starts-with(.,$config:base-uri)][1])
 };
 
 (:~
@@ -273,6 +274,7 @@ declare function app:display-map($node as node(), $model as map(*)){
 
 (:~
  : Display Dates using timelinejs
+ : @depreciataed: timeline functions are depreciated. 
  :)                 
 declare function app:display-timeline($node as node(), $model as map(*)){
     if($model("hits")/descendant::tei:body/descendant::*[@when or @notBefore or @notAfter]) then
@@ -311,24 +313,16 @@ declare function app:display-slider($node as node(), $model as map(*), $collecti
 
 (:~
  : bibl module relationships
-:)                   
-declare function app:cited($node as node(), $model as map(*)){
-    (:rel:cited($model("data")//tei:idno[@type='URI'][ends-with(.,'/tei')], request:get-parameter('start', 1),request:get-parameter('perpage', 5)):)
-    if($model("hits")//tei:relation[@ref='dcterms:references']) then
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 class="panel-title">Cited Manuscripts</h3></div>
-            <div class="panel-body">
-                {
-                    for $cited in $model("hits")//tei:relation[@ref='dcterms:references']
-                    return 
-                        <span class="related-subject">{$cited/tei:desc/tei:msDesc/string-join(tei:msIdentifier/*, ", ")}&#160;
-                        <a href='../search.html?mss="{$cited/tei:desc/tei:msDesc/string-join(tei:msIdentifier/*, ", ")}"'>
-                        <span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></span>
-                }
-            </div>
-        </div>
-  else ()
+:)           
+(: Needs work
+declare function app:subject-headings($node as node(), $model as map(*)){
+    relations:subject-headings(replace($model("hits")//tei:idno[@type='URI'][ends-with(.,'/tei')],'/tei',''))
 };
+:)
+declare function app:cited($node as node(), $model as map(*)){
+    relations:cited(replace($model("hits")//tei:idno[@type='URI'][ends-with(.,'/tei')],'/tei',''), request:get-parameter('start', 1),request:get-parameter('perpage', 5))
+};
+
 
 (:~
  : Generic contact form can be added to any page by calling:
@@ -337,6 +331,7 @@ declare function app:cited($node as node(), $model as map(*)){
  : <button class="btn btn-default" data-toggle="modal" data-target="#feedback">CLink text</button>&#160;
 :)
 declare %templates:wrap function app:contact-form($node as node(), $model as map(*), $collection) {
+<div xmlns="http://www.w3.org/1999/xhtml">
    <div class="modal fade" id="feedback" tabindex="-1" role="dialog" aria-labelledby="feedbackLabel" aria-hidden="true" xmlns="http://www.w3.org/1999/xhtml">
        <div class="modal-dialog">
            <div class="modal-content">
@@ -378,6 +373,29 @@ declare %templates:wrap function app:contact-form($node as node(), $model as map
            </div>
        </div>
    </div>
+   <div class="modal fade" id="selection" tabindex="-1" role="dialog" aria-labelledby="selectionLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true"> x </span>
+                        <span class="sr-only">Close</span>
+                    </button>
+                    <h2 class="modal-title" id="selectionLabel">Is this record complete?</h2>
+                </div>
+                <div class="modal-body">
+                    <div>
+                        <div id="recComplete" style="border:none; margin:0;padding:0;margin-top:-2em;"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn" href="{$config:nav-base}/documentation/faq.html" aria-hidden="true">See all FAQs</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div> 
 };
 
 

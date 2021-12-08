@@ -65,10 +65,10 @@ $('a.getData').click(function(event) {
     
 $('#showSection').click(function(event) {
     event.preventDefault();
-    $('#recComplete').load('/exist/apps/srophe/documentation/faq.html #selection');
+    $('#recComplete').load('/exist/apps/syriaca/documentation/faq.html #selection');
 });
 
-//Changes text on toggle buttons, toggle funtion handled by Bootstrap
+//Changes text on toggle buttons, toggle funtion handled by Bootstrap        
 $('.togglelink').click(function(e){
     e.preventDefault();
     var el = $(this);
@@ -80,7 +80,21 @@ $('.togglelink').click(function(e){
         }
 });           
 
-
+//Load dynamic content
+$('.dynamicContent').each(function(index, element) { 
+    var url = $(this).data('url');
+    var current = $(this) 
+    $.get(url, function(data) {
+        /* 
+        var searchResults = $(data).find('#search-results')
+        if(searchResults) {
+            $(current).html(searchResults);
+        } else {$(current).html(data);}
+         * */
+         $(current).html(data);
+        //console.log('testing');
+    }); 
+   });
 
 if (navigator.appVersion.indexOf("Mac") > -1 || navigator.appVersion.indexOf("Linux") > -1) {
     $('.get-syriac').show();

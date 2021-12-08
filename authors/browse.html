@@ -1,0 +1,35 @@
+<div xmlns="http://www.w3.org/1999/xhtml" xmlns:xi="http://www.w3.org/2001/XInclude" data-template="templates:surround" data-template-with="templates/authors.html" data-template-at="content">
+    <div class="main-content-block">
+        <div class="indent">
+        <h1>Browse Authors</h1>
+        <br/>
+        <div class="indent" data-template="browse:get-all" data-template-collection="authors">
+            <div class="tabbable"> 
+                <!-- Browse Tabs Configurable. -->
+                <ul class="nav nav-tabs" id="nametabs">
+                    <li>
+                        <a href="browse.html" default="default">English</a>
+                    </li>
+                    <li>
+                        <a href="browse.html?lang=syr&amp;element=title&amp;alpha-filter=ܐ" lang="syr" dir="rtl">
+                            ܠܫܢܐ ܣܘܪܝܝܐ
+                        </a>
+                    </li>
+                    <li>
+                        <a href="browse.html?view=map">Map</a>
+                    </li>
+                </ul>
+                <!-- Browse Content -->
+                <div class="tab-content">
+                    <div class="tab-pane active">
+                        <div class="row">
+                            <div data-template="browse:show-hits" data-template-collection="authors"/>
+                        </div>
+                        <div data-template="app:pageination" data-template-collection="authors"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>

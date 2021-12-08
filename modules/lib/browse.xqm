@@ -63,14 +63,16 @@ declare function browse:show-hits($node as node(), $model as map(*), $collection
                          {page:pages($hits, $collection, $browse:start, $browse:perpage,'', $sort-options)}
                     </div>
                     {
-                    if($browse:view = 'type' or $browse:view = 'date' or $browse:view = 'facets') then ()
+                    if($browse:view = 'type' or $browse:view = 'date' or $browse:view = 'facets' or ($collection = 'bibl' and $browse:view != 'A-Z')) then ()
                     else browse:browse-abc-menu()
                     }
                 </div>,
-                <h3>{(
-                    if(($browse:lang = 'syr') or ($browse:lang = 'ar')) then (attribute dir {"rtl"}, attribute lang {"syr"}, attribute class {"label pull-right"}) 
-                    else attribute class {"label"},
-                    if($browse:alpha-filter != '') then $browse:alpha-filter else 'A')}</h3>,
+                if($collection = 'bibl') then () 
+                else 
+                    <h3>{(
+                        if(($browse:lang = 'syr') or ($browse:lang = 'ar')) then (attribute dir {"rtl"}, attribute lang {"syr"}, attribute class {"label pull-right"}) 
+                        else attribute class {"label"},
+                        if($browse:alpha-filter != '') then $browse:alpha-filter else 'A')}</h3>,
                 <div class="results {if($browse:lang = 'syr' or $browse:lang = 'ar') then 'syr-list' else 'en-list'}">
                     {if(($browse:lang = 'syr') or ($browse:lang = 'ar')) then (attribute dir {"rtl"}) else()}
                     {browse:display-hits($hits)}
@@ -85,8 +87,14 @@ declare function browse:show-hits($node as node(), $model as map(*), $collection
 declare function browse:display-hits($hits){
     for $hit in subsequence($hits, $browse:start,$browse:perpage)
     let $sort-title := 
-        if($browse:lang != 'en' and $browse:lang != 'syr') then 
-            <span class="sort-title" lang="{$browse:lang}" xml:lang="{$browse:lang}">{(if($browse:lang='ar') then attribute dir { "rtl" } else (), string($hit/@sort-title))}</span> 
+        if($browse:lang != 'en') then 
+            <span class="sort-title" lang="{$browse:lang}" xml:lang="{$browse:lang}">{(if($browse:lang='ar' or $browse:lang='syr') then attribute dir { "rtl" } else (), 
+                if($browse:lang = 'syr') then ft:field($hit, "titleSyriac")[1]
+                else if($browse:lang = 'ar') then ft:field($hit, "titleArabic")[1]
+                else if(request:get-parameter('lang', '') = 'fr') then ft:field($hit, "titleFrench")[1]
+                else if(request:get-parameter('lang', '') = 'en-x-gedsh') then ft:field($hit, "titleTransliteration")[1]
+                else ()
+            )}</span> 
         else () 
     let $uri := replace($hit/descendant::tei:publicationStmt/tei:idno[1],'/tei','')
     return 
@@ -128,13 +136,13 @@ declare function browse:get-map($hits as node()*){
         let $locations := 
             for $id in $places
             for $geo in collection($config:data-root || '/places/tei')//tei:idno[. = $id][ancestor::tei:TEI[descendant::tei:geo]]
-            let $title := $geo/ancestor::tei:TEI/descendant::*[@syriaca-tags="#syriaca-headword"][1] | $geo/ancestor::tei:TEI/descendant::*[@srophe:tags="#headword"][1]
+            let $title := $geo/ancestor::tei:TEI/descendant::tei:title[1]
             let $type := string($geo/ancestor::tei:TEI/descendant::tei:place/@type)
             let $geo := $geo/ancestor::tei:TEI/descendant::tei:geo
             return 
                 <place xmlns="http://www.tei-c.org/ns/1.0">
                     <idno>{$id}</idno>
-                    <title>{concat(normalize-space($title), ' - ', $type)}</title>
+                    <title>{concat(normalize-space($title), ' (', $type,') ')}</title>
                     <desc>Related:
                     {
                         for $p in $related[child::tei:placeName[. = $id]]/tei:title

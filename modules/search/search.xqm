@@ -21,7 +21,13 @@ import module namespace slider = "http://srophe.org/srophe/slider" at "../lib/da
 import module namespace tei2html="http://srophe.org/srophe/tei2html" at "../content-negotiation/tei2html.xqm";
 
 (: Syriaca.org search modules :)
+import module namespace bhses="http://srophe.org/srophe/bhses" at "bhse-search.xqm";
 import module namespace bibls="http://srophe.org/srophe/bibls" at "bibl-search.xqm";
+import module namespace ms="http://srophe.org/srophe/ms" at "ms-search.xqm";
+import module namespace nhsls="http://srophe.org/srophe/nhsls" at "nhsl-search.xqm";
+import module namespace persons="http://srophe.org/srophe/persons" at "persons-search.xqm";
+import module namespace places="http://srophe.org/srophe/places" at "places-search.xqm";
+import module namespace spears="http://srophe.org/srophe/spears" at "spear-search.xqm";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 (:declare namespace facet="http://expath.org/ns/facet";:)
@@ -34,13 +40,21 @@ declare variable $search:perpage {request:get-parameter('perpage', 20) cast as x
  : Builds search result, saves to model("hits") for use in HTML display
 :)
 
+declare function search:build-query($collection as xs:string?){
+    if($collection = ('sbd','q','authors','saints','persons')) then persons:query-string($collection)
+    else if($collection ='spear') then spears:query-string()
+    else if($collection = 'places') then places:query-string()
+    else if($collection = ('bhse','nhsl','bible')) then bhses:query-string($collection)
+    else if($collection = 'bibl') then bibls:query-string()
+    else if($collection = 'manuscripts') then ms:query-string()
+    else ()
+};
+
 (:~
  : Search results stored in map for use by other HTML display functions 
 :)
 declare %templates:wrap function search:search-data($node as node(), $model as map(*), $collection as xs:string?, $sort-element as xs:string?){
-    let $queryExpr := if($collection = 'bibl') then
-                            bibls:query-string()
-                      else ()                     
+    let $queryExpr := search:build-query($collection)
     let $hits := data:search($collection, $queryExpr, $sort-element)
     return
         map {
@@ -59,8 +73,9 @@ declare
 function search:show-hits($node as node()*, $model as map(*), $collection as xs:string?, $kwic as xs:string?) {
     let $hits := $model("hits")
     let $facet-config := global:facet-definition-file($collection)
+    let $facetsDisplay := sf:display($model("hits"),$facet-config)
     return 
-        if(not(empty($facet-config))) then 
+        if(not(empty($facetsDisplay))) then 
             <div class="row" id="search-results" xmlns="http://www.w3.org/1999/xhtml">
                 <div class="col-md-8 col-md-push-4">
                     <div class="indent" id="search-results" xmlns="http://www.w3.org/1999/xhtml">{
@@ -88,8 +103,8 @@ function search:show-hits($node as node()*, $model as map(*), $collection as xs:
                  let $hits := $model("hits")
                  let $facet-config := global:facet-definition-file($collection)
                  return 
-                     if(not(empty($facet-config))) then 
-                         sf:display($model("hits"),$facet-config)
+                     if(not(empty($facetsDisplay))) then 
+                         $facetsDisplay
                      else ()  
                 }</div>
         </div>
@@ -131,7 +146,12 @@ else
         if($collection != '') then concat($config:app-root, '/', string(config:collection-vars($collection)/@app-root),'/','search-config.xml')
         else concat($config:app-root, '/','search-config.xml')
     return 
-        if($collection ='bibl') then <div>{bibls:search-form()}</div>
+        if($collection = ('persons','sbd','authors','q','saints')) then <div>{persons:search-form($collection)}</div>
+        else if($collection ='spear') then <div>{spears:search-form()}</div>
+        else if($collection ='manuscripts') then <div>{ms:search-form()}</div>
+        else if($collection = ('bhse','nhsl')) then <div>{bhses:search-form($collection)}</div>
+        else if($collection ='bibl') then <div>{bibls:search-form()}</div>
+        else if($collection ='places') then <div>{places:search-form()}</div> 
         else if(doc-available($search-config)) then 
             search:build-form($search-config)             
         else search:default-search-form()
@@ -235,6 +255,18 @@ declare function search:default-search-form() {
                                 <input type="text" id="placeName" name="placeName" class="form-control keyboard"/>
                                 <div class="input-group-btn">
                                 {global:keyboard-select-menu('placeName')}
+                                </div>
+                            </div>   
+                        </div>
+                    </div>
+                    <!-- Place Name-->
+                    <div class="form-group">
+                        <label for="persName" class="col-sm-2 col-md-3  control-label">Person Name: </label>
+                        <div class="col-sm-10 col-md-9 ">
+                            <div class="input-group">
+                                <input type="text" id="persName" name="persName" class="form-control keyboard"/>
+                                <div class="input-group-btn">
+                                {global:keyboard-select-menu('persName')}
                                 </div>
                             </div>   
                         </div>

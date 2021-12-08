@@ -1,16 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<html xmlns="http://www.w3.org/1999/xhtml" data-template="app:get-work" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" data-template="app:get-work">
     <head>
         <title data-template="app:record-title">App Title</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-        <meta data-template="config:app-meta"/>
-        <link rel="shortcut icon" href="$nav-base/favicon.ico"/>
+        <link data-template="app:metadata"/>
+        <link rel="shortcut icon" href="$nav-base/resources/images/fav-icons/syriaca-favicon.ico"/>
         <!-- Bootstrap 3 -->
         <link rel="stylesheet" type="text/css" href="$nav-base/resources/bootstrap/css/bootstrap.min.css"/>
         <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/sm-core-css.css"/>
         <!-- Srophe styles -->
         <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/syr-icon-fonts.css"/>
         <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/syriaca.css"/>
+        <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/slider.css"/>
+        <link rel="stylesheet" type="text/css" href="$nav-base/resources/css/lightslider.css"/>
         <link rel="stylesheet" type="text/css" media="print" href="$nav-base/resources/css/print.css"/>
         <!-- Leaflet -->
         <link rel="stylesheet" href="$nav-base/resources/leaflet/leaflet.css"/>
@@ -87,44 +89,52 @@
                     <span class="icon-bar"/>
                 </button>
                 <a class="navbar-brand banner-container" href="$nav-base/index.html"> 
-                    <span class="syriaca-icon syriaca-syriaca banner-icon" data-template="app:logo"/>
-                    <span class="banner-text" data-template="config:app-title">App Title</span>
+                    <span class="syriaca-icon syriaca-syriaca banner-icon">
+                        <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+                    </span>
+                    <span class="banner-text">Syriaca.org</span>
                 </a>
             </div>
             <div class="navbar-collapse collapse pull-right" id="navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="$nav-base/index.html" class="nav-text">Home</a>
-                    </li>
-                    <li>
-                        <a href="$nav-base/browse.html" class="nav-text">Browse</a>
-                    </li>
-                    <li>
-                        <a href="$nav-base/documentation/index.html" class="nav-text">Documentation </a>
-                    </li>
+                    <li data-template="app:shared-content" data-template-path="/templates/shared-links.html"/>
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown"> 
-                            <span class="mobile-submenu">Publications</span>  <b class="caret"/>
+                            <span class="mobile-submenu">About</span>  <b class="caret"/>
                         </a>
                         <ul class="dropdown-menu pull-right">
                             <li>
-                                <a href="$nav-base/index.html">
-                                    <span class="icon-text">Home</span>
-                                </a>
+                                <a href="$nav-base/about-syriac.html">What is Syriac?</a>
                             </li>
+                            <li role="presentation" class="divider"/>
                             <li>
-                                <a href="$nav-base/geo/index.html">
-                                    <span class="icon-text">Gazetteer</span>
-                                </a>
+                                <a href="$nav-base/about-srophe.html">Project Overview</a>
                             </li>
+                            <li role="presentation" class="divider"/>
                             <li>
-                                <a href="$nav-base/bibl/index.html">
-                                    <span class="icon-text">Works Cited</span>
-                                </a>
+                                <a href="$nav-base/project-team.html">Project Team</a>
                             </li>
+                            <li role="presentation" class="divider"/>
                             <li>
-                                <a href="$nav-base/d3xquery/index.html">
-                                    <span class="icon-text">Relationship Visualization</span>
+                                <a href="$nav-base/project-partners.html">Project Partners</a>
+                            </li>
+                            <li role="presentation" class="divider"/>
+                            <li>
+                                <a href="$nav-base/media-releases.html">Media Releases</a>
+                            </li>
+                            <li role="presentation" class="divider"/>
+                            <li>
+                                <a href="http://vu.edu/syriac">Support Our Work</a>
+                            </li>
+                            <li role="presentation" class="divider"/>
+                            <li>
+                                <a href="$nav-base/contact-us.html">Contact Us</a>
+                            </li>
+                            <li role="presentation" class="divider"/>
+                            <li>
+                                <a href="$nav-base/documentation/index.html">
+                                    <span class="syriaca-icon syriaca-book icon-nav" style="color:red;"/>
+                                    <span class="icon-text">Documentation</span>
                                 </a>
                             </li>
                         </ul>
@@ -174,13 +184,14 @@
             </div>
         </nav>
         <div id="content" class="text"/>
-        <footer>
-            <a class="poweredby" href="http://srophe.org">
-                <img src="$nav-base/resources/images/srophe.svg" alt="Srophe"/>
-            </a>
-        </footer>
+        <!-- Footer -->
+        <footer data-template="app:shared-content" data-template-path="/templates/footer.html"/>
     </body>
     <!-- Additional Javascript -->
     <script type="text/javascript" src="$nav-base/resources/js/jquery.validate.min.js"/>
+    <script type="text/javascript" src="$nav-base/resources/js/require.min.js"/>
     <script type="text/javascript" src="$nav-base/resources/js/srophe.js"/>
+    <script type="text/javascript" src="$nav-base/resources/js/lightslider.min.js"/>
+    <script type="text/javascript" src="$nav-base/resources/js/lightslider-functions.js"/>
+    <script data-template="app:google-analytics"/>
 </html>

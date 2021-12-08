@@ -69,6 +69,13 @@ else if(contains($exist:path,'/d3xquery/')) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <cache-control cache="yes"/>
     </dispatch>
+
+else if(contains($exist:path,'/documentation/')) then
+    (: everything else is passed through :)
+    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+        <cache-control cache="yes"/>
+    </dispatch>
+    
 (: Passes any api requests to correct endpoint:)    
 else if (contains($exist:path,'/api/')) then
   if (ends-with($exist:path,"/")) then
@@ -102,7 +109,7 @@ else if(ends-with($exist:resource,('.tei','.xml','.txt','.pdf','.json','.geojson
     
 (: Checks for any record uri patterns as defined in repo.xml :)    
 else if(replace($exist:path, $exist:resource,'') =  $exist:record-uris) then
-    if($exist:resource = ('index.html','search.html','browse.html','about.html')) then    
+    if($exist:resource = ('index.html','search.html','browse.html','about.html','aggregate.html')) then    
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
             <view>
                 <forward url="{$exist:controller}/modules/view.xql"/>

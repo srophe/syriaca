@@ -165,6 +165,40 @@ declare function page:display-search-params($collection as xs:string?){
             if($parameter = 'start' or $parameter = 'sort-element' or $parameter = 'fq') then ()
             else if($parameter = ('q','keyword')) then 
                 (<span class="param">Keyword: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)
+            else if($parameter = ('coll')) then 
+                (<span class="param">Collection: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)
+            else if($parameter = ('persName')) then 
+                (<span class="param">Person Name: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)
+            else if($parameter = ('persName')) then 
+                (<span class="param">Person Name: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)
+            else if($parameter = ('p','placeName')) then 
+                (<span class="param">Place Name: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)
+            else if($parameter = ('p','placeName')) then 
+                (<span class="param">Place Name: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)    
+            else if($parameter = ('loc')) then 
+                (<span class="param">Location: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)
+            else if($parameter = ('e')) then 
+                (<span class="param">Events: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)
+            else if($parameter = ('eds')) then 
+                (<span class="param">Event Start Date: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)
+            else if($parameter = ('ede')) then 
+                (<span class="param">Event End Date: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)
+            else if($parameter = ('a')) then 
+                (<span class="param">Attestations: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)                
+            else if($parameter = ('ads')) then 
+                (<span class="param">Attestations Start Date: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)
+            else if($parameter = ('ade')) then 
+                (<span class="param">Attestations End Date: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)
+            else if($parameter = ('c')) then 
+                (<span class="param">Religious Communities: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)                
+            else if($parameter = ('cds')) then 
+                (<span class="param">Religious Communities Start Date: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)
+            else if($parameter = ('cde')) then 
+                (<span class="param">Religious Communities End Date: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)
+            else if($parameter = ('existds')) then 
+                (<span class="param">Existence Dates: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)
+            else if($parameter = ('existde')) then 
+                (<span class="param">Existence Dates: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)                
             else (<span class="param">{replace(concat(upper-case(substring($parameter,1,1)),substring($parameter,2)),'-',' ')}: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160; </span>)    
         else ())
         }
