@@ -720,7 +720,7 @@
     </xsl:template>
     <xsl:template match="t:place">
         <xsl:if test="t:desc[@type='abstract'] | t:desc[starts-with(@xml:id, 'abstract-en')] | t:note[@type='abstract']">
-            <div class="tei-desc text">
+            <div class="tei-desc text abstract">
                 <xsl:apply-templates select="t:desc[@type='abstract' or starts-with(@xml:id, 'abstract-en')][1] | t:note[@type='abstract']"/>
             </div>
         </xsl:if>
@@ -1375,7 +1375,7 @@
             <!-- End Title -->
         </div>
         <!-- emit record URI and associated help links -->
-        <div class="idno seriesStmt" style="margin:0; margin-top:-1em; margin-bottom: 1em; padding:1em; color: #999999;">
+        <div class="idno seriesStmt" style="margin:0; margin-top:.25em; margin-bottom: 1em; padding:1em; color: #999999;">
             <xsl:variable name="current-id">
                 <xsl:variable name="idString" select="tokenize($resource-id,'/')[last()]"/>
                 <xsl:variable name="idSubstring">
