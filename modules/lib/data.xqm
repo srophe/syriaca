@@ -32,7 +32,7 @@ declare function data:get-document() {
                 for $rec in collection($config:data-root)//tei:ab[tei:idno[. = request:get-parameter('id', '')]]
                 return <tei:TEI xmlns="http://www.tei-c.org/ns/1.0">{$rec/ancestor::tei:TEI/tei:teiHeader, <body>{$rec}</body>}</tei:TEI>   
         else if($config:document-id) then 
-           collection($config:data-root)//tei:idno[. = request:get-parameter('id', '')]/ancestor::tei:TEI
+           collection($config:data-root)//tei:idno[@type='URI'][. = request:get-parameter('id', '')]/ancestor::tei:TEI
         else collection($config:data-root)/id(request:get-parameter('id', ''))/ancestor::tei:TEI
     (: Get document by document path. :)
     else if(request:get-parameter('doc', '') != '') then 
@@ -53,7 +53,7 @@ declare function data:get-document($id as xs:string?) {
         return <tei:TEI xmlns="http://www.tei-c.org/ns/1.0">{$rec/ancestor::tei:TEI/tei:teiHeader, <body>{$rec}</body>}</tei:TEI>  
     else if(starts-with($id,'http')) then
         if($config:document-id) then 
-            collection($config:data-root)//tei:idno[. = $id]/ancestor::tei:TEI
+            collection($config:data-root)//tei:idno[@type='URI'][. = $id]/ancestor::tei:TEI
         else collection($config:data-root)/id($id)/ancestor::tei:TEI
     else if(starts-with($id,$config:data-root)) then 
             doc(xmldb:encode-uri($id || '.xml'))
