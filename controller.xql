@@ -70,12 +70,12 @@ else if(contains($exist:path,'/d3xquery/')) then
         <cache-control cache="yes"/>
     </dispatch>
 
-else if(contains($exist:path,'/documentation/')) then
-    (: everything else is passed through :)
+else if(contains($exist:path,'/documentation/') and ends-with($exist:path,('.tei','.xml','.txt','.pdf'))) then
+    (: Pass though XML,pdf and txt records everything else is passed through :)
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
         <cache-control cache="yes"/>
     </dispatch>
-    
+
 (: Passes any api requests to correct endpoint:)    
 else if (contains($exist:path,'/api/')) then
   if (ends-with($exist:path,"/")) then
