@@ -1641,7 +1641,7 @@
     </xsl:template>
     <xsl:template match="t:state | t:birth | t:death | t:floruit | t:sex | t:langKnowledge">
        <div class="person-details">
-           <span class="label">
+           <h3>
                <xsl:choose>
                    <xsl:when test="self::t:birth">Birth:</xsl:when>
                    <xsl:when test="self::t:death">Death:</xsl:when>
@@ -1655,8 +1655,8 @@
                        <xsl:value-of select="concat(upper-case(substring(@type,1,1)),substring(@type,2))"/>:        
                    </xsl:otherwise>
                </xsl:choose>
-           </span>
-           <xsl:text> </xsl:text>
+           </h3>
+           <div>
            <xsl:choose>
                <xsl:when test="count(t:date) &gt; 1">
                    <xsl:for-each select="t:date">
@@ -1670,6 +1670,7 @@
                </xsl:otherwise>
            </xsl:choose>
            <xsl:sequence select="local:add-footnotes(@source,.)"/>
+           </div>    
        </div>
     </xsl:template>
     <xsl:template match="t:sources">
