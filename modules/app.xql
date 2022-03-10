@@ -557,8 +557,8 @@ declare %templates:wrap function app:set-data($node as node(), $model as map(*),
  : @param $doc as string
 :)
 declare %templates:wrap function app:build-documentation($node as node(), $model as map(*), $doc as xs:string?){
-    let $doc := doc($config:app-root || '/documentation/' || $doc)//tei:encodingDesc
-    return tei2html:tei2html($doc)
+    let $doc := doc($config:app-root || '/documentation/' || $doc)//tei:text/tei:body/tei:list
+    return global:tei2html($doc, ())
 };
 
 (:~   
