@@ -1643,20 +1643,20 @@
        <div class="person-details">
            <h3>
                <xsl:choose>
-                   <xsl:when test="self::t:birth">Birth:</xsl:when>
-                   <xsl:when test="self::t:death">Death:</xsl:when>
-                   <xsl:when test="self::t:floruit">Floruit:</xsl:when>
-                   <xsl:when test="self::t:sex">Sex:</xsl:when>
-                   <xsl:when test="self::t:langKnowledge">Language Knowledge:</xsl:when>
+                   <xsl:when test="self::t:birth">Birth</xsl:when>
+                   <xsl:when test="self::t:death">Death</xsl:when>
+                   <xsl:when test="self::t:floruit">Floruit</xsl:when>
+                   <xsl:when test="self::t:sex">Sex</xsl:when>
+                   <xsl:when test="self::t:langKnowledge">Language Knowledge</xsl:when>
                    <xsl:when test="@role">
-                       <xsl:value-of select="concat(upper-case(substring(@role,1,1)),substring(@role,2))"/>:
+                       <xsl:value-of select="concat(upper-case(substring(@role,1,1)),substring(@role,2))"/>
                    </xsl:when>
                    <xsl:otherwise>
-                       <xsl:value-of select="concat(upper-case(substring(@type,1,1)),substring(@type,2))"/>:        
+                       <xsl:value-of select="concat(upper-case(substring(@type,1,1)),substring(@type,2))"/>      
                    </xsl:otherwise>
                </xsl:choose>
            </h3>
-           <div>
+           <div class="indent">
            <xsl:choose>
                <xsl:when test="count(t:date) &gt; 1">
                    <xsl:for-each select="t:date">
