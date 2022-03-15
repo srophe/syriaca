@@ -234,8 +234,7 @@ declare function app:internal-relationships($node as node(), $model as map(*), $
     if($model("hits")//tei:relation) then 
         <div id="internalRelationships">
            <h3>{if($label != '') then $label else 'Internal Relationships' }</h3> 
-           {relations:display-internal-relatiobships($model("hits"), replace($model("hits")//tei:idno[@type='URI'][1],'/tei',''), $relationship-type)}
-           
+           {relations:display-internal-relationships($model("hits"), replace($model("hits")//tei:idno[@type='URI'][1],'/tei',''), $relationship-type)}
         </div>
     else ()
 };
@@ -558,7 +557,7 @@ declare %templates:wrap function app:set-data($node as node(), $model as map(*),
 :)
 declare %templates:wrap function app:build-documentation($node as node(), $model as map(*), $doc as xs:string?){
     let $doc := doc($config:app-root || '/documentation/' || $doc)//tei:text/tei:body/tei:list
-    return global:tei2html($doc, ())
+    return (:tei2html:tei2html($doc):)  global:tei2html($doc, ())
 };
 
 (:~   
