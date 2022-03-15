@@ -1114,17 +1114,15 @@
         <xsl:if test="not(empty(t:desc[not(starts-with(@xml:id,'abstract'))][1]))">
             <div id="description">
                 <h3>Brief Descriptions</h3>
-                <ul>
                     <xsl:for-each-group select="t:desc" group-by="if (contains(@xml:lang, '-')=true()) then substring-before(@xml:lang, '-') else @xml:lang">
                         <xsl:sort collation="{$languages}" select="if (contains(@xml:lang, '-')=true()) then substring-before(@xml:lang, '-') else @xml:lang"/>
                         <xsl:for-each select="current-group()">
                             <xsl:sort lang="{current-grouping-key()}" select="normalize-space(.)"/>
-                            <li>
+                            <div class="tei-desc text">
                                 <xsl:apply-templates select="."/>
-                            </li>
+                            </div>
                         </xsl:for-each>
                     </xsl:for-each-group>
-                </ul>
             </div>
         </xsl:if>
         <xsl:if test="self::t:entryFree">
@@ -1137,7 +1135,7 @@
                 <xsl:if test="t:term">
                     <h3>Terms</h3>
                     <ul class="inline-list-boxes">
-                        <xsl:for-each-group select="t:term" group-by="@syriaca-tags">
+                        <xsl:for-each-group select="t:term" group-by=".">
                             <xsl:for-each select="current-group()">
                                 <xsl:for-each-group select="." group-by="@xml:lang">
                                     <xsl:sort collation="{$mixed}" select="."/>

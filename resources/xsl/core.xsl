@@ -114,11 +114,11 @@
                 </xsl:when>
                 <xsl:when test="@type='inline' or @type='runin'">
                     <p>
-                        <xsl:apply-templates select="*[not(self::t:head or self::t:trailer)]"  mode="inline"/>
+                        <xsl:apply-templates select="*[not(self::t:head or self::t:trailer)]" mode="inline"/>
                     </p>
                 </xsl:when>
                 <xsl:when test="@type='bibl'">
-                    <xsl:apply-templates select="*[not(self::t:head or self::t:trailer)]"  mode="bibl"/>
+                    <xsl:apply-templates select="*[not(self::t:head or self::t:trailer)]" mode="bibl"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <xsl:element name="ul">
@@ -127,9 +127,9 @@
                                 <xsl:value-of select="substring-after(@type,':')"/>
                             </xsl:attribute>
                         </xsl:if>
-                        <xsl:apply-templates select="*[not(self::t:head or self::t:trailer)]" />
+                        <xsl:apply-templates select="*[not(self::t:head or self::t:trailer)]"/>
                     </xsl:element>
-                    <xsl:apply-templates select="t:trailer" />
+                    <xsl:apply-templates select="t:trailer"/>
                 </xsl:otherwise>
             </xsl:choose>
     </xsl:template>
