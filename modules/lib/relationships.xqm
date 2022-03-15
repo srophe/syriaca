@@ -10,6 +10,7 @@ import module namespace tei2html="http://srophe.org/srophe/tei2html" at "../cont
 import module namespace functx="http://www.functx.com";
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 declare namespace html="http://www.w3.org/1999/xhtml";
+declare namespace srophe="https://srophe.app";
 
 (:
  : Get a series of records by id (in data.xql), display as expandable list
@@ -20,21 +21,36 @@ declare namespace html="http://www.w3.org/1999/xhtml";
 declare function relations:get-related($data as node()*, $relID as xs:string?){    
     let $count := count($data)
     return 
-    (
-    for $r in subsequence($data,1,2)
-    let $rid := replace($r//tei:idno[@type='URI'][1],'/tei','')
-    return tei2html:summary-view(root($r), '', $rid),
-    if($count gt 2) then
-        <span>
-            <span class="collapse" id="showRel-{$relID}">{
-                for $r in subsequence($data,3,$count)
+        if($data/descendant-or-self::*:external) then
+            for $r in subsequence($data,1,2)
+            return 
+            <div class="short-rec-view">
+                <a href="{$r/@uri}" dir="ltr">
+                    <span class="tei-title" lang="en">{$r//*:title[1]/text()}</span>
+                </a>
+                <span class="results-list-desc uri">
+                    <span class="srp-label">URI: </span>
+                    <a href="{$r/@uri}">{string($r/@uri)}</a>
+                </span>
+            </div>
+        else 
+            (   
+                for $r in subsequence($data,1,2)
                 let $rid := replace($r//tei:idno[@type='URI'][1],'/tei','')
-                return tei2html:summary-view(root($r), '', $rid)                        
-            }</span>
-            <a class="more" data-toggle="collapse" data-target="#showRel-{$relID}" data-text-swap="Hide"> See all {$count} &#160;<i class="glyphicon glyphicon-circle-arrow-right"></i></a>
-        </span>                        
-    else ())
+                return tei2html:summary-view(root($r), '', $rid),
+                    if($count gt 2) then
+                        <span>
+                            <span class="collapse" id="showRel-{$relID}">{
+                                for $r in subsequence($data,3,$count)
+                                let $rid := replace($r//tei:idno[@type='URI'][1],'/tei','')
+                                return tei2html:summary-view(root($r), '', $rid)                        
+                            }</span>
+                            <a class="more" data-toggle="collapse" data-target="#showRel-{$relID}" data-text-swap="Hide"> See all {$count} &#160;<i class="glyphicon glyphicon-circle-arrow-right"></i></a>
+                        </span>                        
+                     else ()
+            )
 };
+
 
 declare function relations:display-records($data as node()*, $queryString as xs:string?){   
     if($data != '') then
@@ -67,7 +83,7 @@ declare function relations:display-records($data as node()*, $queryString as xs:
 
 declare function relations:stringify-relationship-type($type as xs:string*){
     if(global:odd2text('relation',$type) != '') then global:odd2text('relation',$type)    
-    else relations:decode-relationship($type)  
+    else relations:decode-relationship($type)
 };
 
 (:~
@@ -76,8 +92,10 @@ declare function relations:stringify-relationship-type($type as xs:string*){
  :)
 declare function relations:decode-relationship($type as xs:string?){
     let $relationship-name := 
-        if(contains($type,':')) then 
-            substring-after($type,':')
+        if(contains($type,'#')) then 
+            substring-after($type,'#')   
+        else if(contains($type,':')) then 
+            substring-after($type,':')         
         else $type
     return 
         switch ($relationship-name)
@@ -122,7 +140,11 @@ declare function relations:decode-relationship($type as xs:string?){
             (: @ana 'event' :)
             case "SameAs" return " refer to the same event. "
             case "CloseConnection" return " deal with closely related events."
-            default return concat(' ', functx:capitalize-first(functx:camel-case-to-words(replace($relationship-name,'-',' '),' ')),' ') 
+            (: general :)
+            case "broader" return " has a broader match with "
+            case "closeMatch" return " has a close match with "
+            default return concat('TEST1 ',$relationship-name)
+            (:concat(' ', functx:capitalize-first(functx:camel-case-to-words(replace($relationship-name,'-',' '),' ')),' '):) 
 };
 
 (: Get cited works :)
@@ -146,6 +168,7 @@ declare function relations:subject-headings($idno as xs:string?){
 :)
 
 (:
+ : @depreciated - spelling error
  : Get internal relationships, group by type
  : dynamically pass related ids to data.xql for async loading.  
  : 
@@ -183,6 +206,59 @@ declare function relations:display-internal-relatiobships($data as node()*, $cur
         return 
             <div class="relation internal-relationships"  xmlns="http://www.w3.org/1999/xhtml">
                 <h4 class="relationship-type">{$title}&#160;{relations:stringify-relationship-type($relationship)} ({$count})</h4>
+                <div class="indent">
+                    <div class="dynamicContent" data-url="{concat($config:nav-base,'/modules/data.xql?ids=',$ids,'&amp;relID=',$relationshipTypeID,'&amp;relationship=internal')}"></div>
+                    {
+                    if($count gt 10) then 
+                        <a class="more" href="{concat($config:nav-base,'/search.html?=?ids=',$ids,'&amp;relID=',$relationshipTypeID,'&amp;relationship=internal')}">See all</a>
+                    else ()
+                    }
+                </div>
+            </div>
+};
+
+(:
+ : Get internal relationships, group by type
+ : dynamically pass related ids to data.xql for async loading.  
+ : 
+:)
+declare function relations:display-internal-relationships($data as node()*, $currentID as xs:string?, $type as xs:string?){
+    let $record := $data
+    let $title := if($record[1]/descendant::tei:text/tei:body[descendant::*[@srophe:tags = '#syriaca-headword2']]) then
+                        $record[1]/descendant::tei:text/tei:body[descendant::*[@srophe:tags = '#syriaca-headword']][@xml:lang = 'en']/text()
+                   else if(contains($record/descendant::tei:title[1]/text(),' — ')) then 
+                        substring-before($record/descendant::tei:title[1],' — ')
+                   else if(contains($record/descendant::tei:title[1]/text(),' - ')) then 
+                        substring-before($record/descendant::tei:title[1],' - ')     
+                   else string-join($record/descendant::tei:title[1]//text(),'')
+    let $uris := 
+                string-join(
+                    if($type != '') then
+                        for $r in $record/descendant-or-self::tei:relation[@ref=$type]
+                        return string-join(($r/@active/string(),$r/@passive/string(),$r/@mutual/string()),' ')
+                    else
+                        for $r in $record/descendant-or-self::tei:relation
+                        return string-join(($r/@active/string(),$r/@passive/string(),$r/@mutual/string()),' '),' ')
+    let $relationships := 
+                    if($type != '') then
+                        $record/descendant-or-self::tei:relation[@ref=$type]
+                    else $record/descendant-or-self::tei:relation 
+    for $related in $relationships
+    let $rel-id := index-of($record, $related[1])
+    let $rel-type := if($related/@name) then $related/@name else if($related/@ref) then $related/@ref else $related/@name
+    group by $relationship := $rel-type
+    return 
+        let $ids := string-join(($related/@active/string(),$related/@passive/string(),$related/@mutual/string()),' ')
+        let $ids := 
+            string-join(
+                distinct-values(
+                    tokenize($ids,' ')[not(. = $currentID)]),' ')
+        let $count := count(tokenize($ids,' ')[not(. = $currentID)])
+        let $relationship-type := $relationship 
+        let $relationshipTypeID := replace($relationship-type,' ','')
+        return 
+            <div class="relation internal-relationships"  xmlns="http://www.w3.org/1999/xhtml">
+                <h4 class="relationship-type">{$title[1]}&#160;{relations:stringify-relationship-type($relationship)} ({$count})</h4>
                 <div class="indent">
                     <div class="dynamicContent" data-url="{concat($config:nav-base,'/modules/data.xql?ids=',$ids,'&amp;relID=',$relationshipTypeID,'&amp;relationship=internal')}"></div>
                     {

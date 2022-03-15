@@ -8,7 +8,7 @@ xquery version "3.1";
  : @see lib/relationships.xqm for building and visualizing relatiobships 
  :)
  
-
+import module namespace http="http://expath.org/ns/http-client";
 import module namespace config="http://srophe.org/srophe/config" at "config.xqm";
 import module namespace cntneg="http://srophe.org/srophe/cntneg" at "content-negotiation/content-negotiation.xqm";
 import module namespace relations="http://srophe.org/srophe/relationships" at "lib/relationships.xqm";
@@ -31,7 +31,14 @@ let $collection-path :=
             else if($collection != '') then concat('/',$collection)
             else ()
 let $data := if($ids != '') then
-                collection($config:data-root)//tei:idno[@type='URI'][. = tokenize($ids,' ')]
+                if(starts-with($ids, $config:base-uri)) then 
+                    collection($config:data-root)//tei:idno[@type='URI'][. = tokenize($ids,' ')]
+                else 
+                    for $id in tokenize($ids,' ')
+                    return 
+                    <external uri="{$id}">
+                        {http:send-request(<http:request http-version="1.1" href="{xs:anyURI($id)}" method="get"/>)}
+                    </external>
              else if($collection != '') then
                   collection($config:data-root || $collection-path)
              else collection($config:data-root)
