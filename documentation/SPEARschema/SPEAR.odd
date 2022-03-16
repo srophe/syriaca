@@ -286,7 +286,7 @@
           </constraintSpec>
           
           <remarks>
-            <p>The identification of Syriaca.org as the responsible entity is accomplished by an <gi>authority</gi> element.</p>
+            <p>The identification of Syriaca.org as the responsible entity is accomplished with an <gi>authority</gi> element.</p>
           </remarks>
         </elementSpec>
         
@@ -587,7 +587,7 @@
             <p>SPEAR only uses @xml:id and @type attributes on the <gi>bibl</gi> element. SPEAR uses
               <gi>bibl</gi> elements with an @xml:id only in the <gi>back</gi> of the TEI file. The 
               @type attribute indicates whether the <gi>bibl</gi> is "primary", "secondary", or a "urn". 
-              Since SPEAR relies on the Linked Data infrastructure of Syriaca.org, a <gi>bibl</gi>
+              Since SPEAR relies on the Linked Open Data infrastructure of Syriaca.org, a <gi>bibl</gi>
               element only requires a <gi>ptr</gi> element indicating the Syriaca.org URI or CTS URN for 
               the bibliographic reference. When indicating a CTS URNs no other additional information 
               is required. When indicating a Syriaca.org URI, a <gi>citedRange</gi> is needed.</p>
@@ -891,9 +891,7 @@
             <memberOf key="model.pPart.transcriptional"/>
           </classes>
           
-          <remarks>
-            <p></p>
-          </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="listEvent" module="namesdates" mode="replace">
@@ -909,9 +907,7 @@
               <elementRef key="personGrp" minOccurs="1" maxOccurs="1"/>
             </alternate>
           </content>
-          <remarks>
-            <p></p>
-          </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="orig" module="core" mode="change">
@@ -919,9 +915,7 @@
             <memberOf key="model.choicePart"/>
             <memberOf key="model.pPart.transcriptional"/>
           </classes>
-          <remarks>
-            <p></p>
-          </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="personGrp" module="namesdates" mode="change">
@@ -973,10 +967,7 @@
             <attDef ident="age" mode="delete"/>
             <attDef ident="size" mode="delete"/>
           </attList>
-          <remarks>
-            <p>This customization removes all attributes from the <gi>personGrp</gi> element. And
-              limits the child elements to the prescribed options.</p>
-          </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="reg" module="core" mode="change">
@@ -984,9 +975,7 @@
             <memberOf key="model.choicePart"/>
             <memberOf key="model.pPart.transcriptional"/>
           </classes>
-          <remarks>
-            <p>This customization removes all attributes from the <gi>reg</gi> element.</p>
-          </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="sic" module="core" mode="change">
@@ -994,9 +983,7 @@
             <memberOf key="model.choicePart"/>
             <memberOf key="model.pPart.transcriptional"/>
           </classes>
-          <remarks>
-            <p>This customization removes all attributes from the <gi>sic</gi> element.</p>
-          </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="ab" module="linking" mode="replace">
@@ -1080,25 +1067,17 @@
             </attDef>
             <attDef ident="subtype" mode="add" usage="req">
               <valList type="closed">
-                <valItem ident="birthDate">
-                  <gloss>birth date</gloss>
-                  <desc>Used to designate person factoids that encode birth dates</desc>
-                </valItem>
-                <valItem ident="birthPlace">
-                  <gloss>birth place</gloss>
-                  <desc>Used to designate person factoids that encode birth places</desc>
+                <valItem ident="birth">
+                  <gloss>birth</gloss>
+                  <desc>Used to designate person factoids that encode birth dates and/or locations</desc>
                 </valItem>
                 <valItem ident="citizenship">
                   <gloss>citizenship</gloss>
                   <desc>Used to designate person factoids that encode citizenship</desc>
                 </valItem>
-                <valItem ident="deathDate">
-                  <gloss>death date</gloss>
-                  <desc>Used to designate person factoids that encode death dates</desc>
-                </valItem>
-                <valItem ident="deathPlace">
-                  <gloss>death place</gloss>
-                  <desc>Used to designate person factoids that encode death places</desc>
+                <valItem ident="death">
+                  <gloss>death</gloss>
+                  <desc>Used to designate person factoids that encode death dates and/or locations</desc>
                 </valItem>
                 <valItem ident="education">
                   <gloss>education</gloss>
@@ -1241,7 +1220,7 @@
               <sch:rule context="tei:event/@ana">
                 <sch:let name="anaValues" value="tokenize(., ' ')"/>
                 <sch:let name="ti"
-                  value="doc('https://raw.githubusercontent.com/srophe/srophe-app-data/dev/data/subjects/taxonomyIndex.xml')"/>
+                  value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
                 <sch:let name="taxonomyAllURIs"
                   value="$ti//listURI[@type = 'taxonomyAllURIs']/uri"/>
                 <sch:let name="error" value="."/>
@@ -1282,11 +1261,7 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
-          <remarks>
-            <p>This customization removes the <gi>event</gi> element from all model and attribute
-              classes. It removes the @where attribute and makes the <gi>desc</gi> element the only
-              acceptable child element.</p>
-          </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="note" module="core" mode="change">
@@ -1391,17 +1366,6 @@
               <datatype>
                 <dataRef key="teidata.enumerated"/>
               </datatype>
-              <constraintSpec ident="type-note-child-ab" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//tei:ab/tei:note/@type">
-                    <sch:report test=". = 'desc'">"Desc" not allowed. Only notes of @type "incerta", "dubia", or
-                      "errata" or "relatedEvent" may appear as children of an &lt;ab&gt; element.</sch:report>
-                  </sch:rule>
-                  <sch:rule context="//tei:note[@type='relatedEvent']">
-                    <sch:assert test=".[ancestor::tei:ab/@subtype='event']">"relatedEvent" not allowed. This type of note is only allowed as a descendant of &lt;ab&gt; with @type="event".</sch:assert>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec>
               <constraintSpec ident="notes-type-desc" scheme="schematron">
                 <constraint>
                   <sch:rule
@@ -1444,11 +1408,7 @@
           
           
           
-          <remarks>
-            <p>
-              
-            </p>
-          </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="persName" module="namesdates" mode="change">
@@ -1487,11 +1447,7 @@
               </constraintSpec>
             </attDef>
           </attList>
-          <remarks>
-            <p>
-              
-            </p>
-          </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="placeName" module="namesdates" mode="change">
@@ -1530,11 +1486,7 @@
           </attList>
           
           
-          <remarks>
-            <p>
-              
-            </p>
-          </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="ptr" module="core" mode="change">
@@ -1593,11 +1545,7 @@
           
           
           
-          <remarks>
-            <p>
-              
-            </p>
-          </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="relation" module="namesdates" mode="change">
@@ -1622,23 +1570,23 @@
             <constraint>
               <sch:rule context="tei:ab[@subtype='relation']/tei:listRelation/tei:relation | tei:ab[@subtype='event']/tei:listEvent/tei:event/tei:desc/tei:listRelation/tei:relation"><!-- This doesn't currently catch incorrect person URIs on @mutual, @active, and @passive when these are embedded in event factoids. -->
                 <sch:let name="ti"
-                  value="doc('https://raw.githubusercontent.com/srophe/srophe-app-data/dev/data/subjects/taxonomyIndex.xml')"/>
+                  value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
                 <sch:let name="mutual"
-                  value="$ti//listURI[@ref = 'http://syriaca.org/keyword/relationships']//uri[@ana = 'mutual']"/>
-                <sch:let name="reciprocal"
-                  value="$ti//listURI[@ref = 'http://syriaca.org/keyword/relationships']//uri[@ana = 'reciprocal']"/>
-                <sch:assert test=".[@ref = $mutual]/@mutual or .[@ref = $reciprocal]/@active"
+                  value="$ti//listURI[@type = 'relationships']//uri[@ana = 'mutual']"/>
+                <sch:let name="directed"
+                  value="$ti//listURI[@type = 'relationships']//uri[@ana = 'directed']"/>
+                <sch:assert test=".[@ref = $mutual]/@mutual or .[@ref = $directed]/@active"
                   >Elements of type &lt;relation&gt; take either a @mutual attribute with mutual
-                  relationship and both @active and @passive attributes with reciprocal
+                  relationship and both @active and @passive attributes with directed
                   relationships. Mutual relationships include: <sch:value-of
-                    select="string-join($mutual, ';  ')"/>. Reciprocal relationships include:
-                    <sch:value-of select="string-join($reciprocal, ';  ')"/>.</sch:assert>
-                <sch:assert test=".[@ref = $mutual]/@mutual or .[@ref = $reciprocal]/@passive"
+                    select="string-join($mutual, ';  ')"/>. Directed relationships include:
+                    <sch:value-of select="string-join($directed, ';  ')"/>.</sch:assert>
+                <sch:assert test=".[@ref = $mutual]/@mutual or .[@ref = $directed]/@passive"
                   >Elements of type &lt;relation&gt; take either a @mutual attribute with mutual
-                  relationship and both @active and @passive attributes with reciprocal
+                  relationship and both @active and @passive attributes with directed
                   relationships. Mutual relationships include: <sch:value-of
-                    select="string-join($mutual, ';  ')"/>. Reciprocal relationships include:
-                    <sch:value-of select="string-join($reciprocal, ';  ')"/>.</sch:assert>
+                    select="string-join($mutual, ';  ')"/>. Directed relationships include:
+                    <sch:value-of select="string-join($directed, ';  ')"/>.</sch:assert>
                 <sch:report test=".[@mutual]/@active">A &lt;relation&gt; element cannot take both
                   @active and @mutual attributes.</sch:report>
                 <sch:report test=".[@mutual]/@passive">A &lt;relation&gt; element cannot take both
@@ -1670,22 +1618,22 @@
                 <constraint>
                   <sch:rule context="tei:ab[@subtype='relation']/tei:listRelation/tei:relation/@ref">
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-app-data/dev/data/subjects/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:assert
-                      test=". = $ti//listURI[@ref = 'http://syriaca.org/keyword/relationships']//uri"
+                      test=". = $ti//listURI[@type = 'relationships']//uri"
                       >Value must be one of the following from the Syriaca.org taxonomy:
                         <sch:value-of
-                        select="string-join($ti//listURI[@ref = 'http://syriaca.org/keyword/relationships']//uri, ';  ')"
+                        select="string-join($ti//listURI[@type = 'relationships']//uri, ';  ')"
                       />.</sch:assert>
                   </sch:rule>
                   <sch:rule context="tei:ab[@subtype='event']/tei:listRelation/tei:relation/@ref">
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-app-data/dev/data/subjects/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:assert
-                      test=". = $ti//listURI[@ref = 'http://syriaca.org/keyword/event-relationships']/uri"
+                      test=". = $ti//listURI[@type = 'related-event']/uri"
                       >Value must be one of the following from the Syriaca.org taxonomy:
                         <sch:value-of
-                        select="string-join($ti//listURI[@ref = 'http://syriaca.org/keyword/event-relationships']/uri, ';  ')"
+                        select="string-join($ti//listURI[@type = 'related-event']/uri, ';  ')"
                       />.</sch:assert>
                   </sch:rule>
                 </constraint>
@@ -1739,9 +1687,9 @@
                 <constraint>
                   <sch:rule context="tei:ab/tei:listRelation/tei:relation/@ana">
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-app-data/dev/data/subjects/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:let name="qrURI"
-                      value="$ti//listURI[@ref = 'http://syriaca.org/keyword/qualifier-relationships']//uri"/>
+                      value="$ti//listURI[@type = 'qualifier-relationship']//uri"/>
                     <sch:let name="error" value="."/>
                     <sch:assert
                       test="
@@ -1833,10 +1781,7 @@
           
           
           
-          <remarks>
-            <p>This customization removes all attributes from the <gi>person</gi> element except for
-              the @ref attribute.</p>
-          </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="birth" module="namesdates" mode="change">
@@ -1845,22 +1790,14 @@
             <memberOf key="att.datable.w3c"/>
           </classes>
           <content>
-            <alternate>
-              <sequence preserveOrder="true">
+            <sequence preserveOrder="true">
+              <alternate minOccurs="0" maxOccurs="1">
                 <elementRef key="date" minOccurs="1" maxOccurs="1"/>
-                <elementRef key="note" minOccurs="1" maxOccurs="1"/>
-              </sequence>
-
-              <sequence preserveOrder="true">
                 <elementRef key="choice" minOccurs="1" maxOccurs="1"/>
-                <elementRef key="note" minOccurs="1" maxOccurs="1"/>
-              </sequence>
-
-              <sequence preserveOrder="true">
-                <elementRef key="placeName" minOccurs="1" maxOccurs="1"/>
-                <elementRef key="note" minOccurs="1" maxOccurs="1"/>
-              </sequence>
-            </alternate>
+              </alternate>
+              <elementRef key="placeName" minOccurs="0" maxOccurs="1"/>
+              <elementRef key="note" minOccurs="1" maxOccurs="1"/>
+            </sequence>
           </content>
           <attList>
             <attDef ident="from" mode="delete"/>
@@ -1880,22 +1817,14 @@
             <memberOf key="att.datable.w3c"/>
           </classes>
           <content>
-            <alternate>
-              <sequence preserveOrder="true">
+            <sequence preserveOrder="true">
+              <alternate minOccurs="0" maxOccurs="1">
                 <elementRef key="date" minOccurs="1" maxOccurs="1"/>
-                <elementRef key="note" minOccurs="1" maxOccurs="1"/>
-              </sequence>
-
-              <sequence preserveOrder="true">
                 <elementRef key="choice" minOccurs="1" maxOccurs="1"/>
-                <elementRef key="note" minOccurs="1" maxOccurs="1"/>
-              </sequence>
-
-              <sequence preserveOrder="true">
-                <elementRef key="placeName" minOccurs="1" maxOccurs="1"/>
-                <elementRef key="note" minOccurs="1" maxOccurs="1"/>
-              </sequence>
-            </alternate>
+              </alternate>
+              <elementRef key="placeName" minOccurs="0" maxOccurs="1"/>
+              <elementRef key="note" minOccurs="1" maxOccurs="1"/>
+            </sequence>
           </content>
           <attList>
             <attDef ident="from" mode="delete"/>
@@ -1904,7 +1833,7 @@
           
           
           <remarks>
-            <p>This customization restricts the attribute classes of the <gi>birth</gi> element to
+            <p>This customization restricts the attribute classes of the <gi>death</gi> element to
               att.datable.w3c but excludes the @to and @from attributes. If more precise dating is
               required for a SPEAR factoid, encoder should use the <gi>date</gi> element.</p>
           </remarks>
@@ -1928,9 +1857,9 @@
                   <sch:rule context="//tei:education/@ana">
                     <sch:let name="anaValues" value="tokenize(., ' ')"/>
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-app-data/dev/data/subjects/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:let name="fieldsOfStudy"
-                      value="$ti//listURI[@ref = 'http://syriaca.org/keyword/fields-of-study']/uri"/>
+                      value="$ti//listURI[@type = 'fields-of-study']/uri"/>
                     <sch:let name="error" value="."/>
                     <sch:assert
                       test="
@@ -1970,7 +1899,7 @@
           <remarks>
             <p>The TEI name for the <gi>nationality</gi> element is highly problematic from a
               pre-Modern perspective. Citizenship would be preferable in one sense, yet could in
-              many instances exclude subaltern people such as slaves. SPEAR uses the
+              many instances exclude subaltern people such as the enslaved. SPEAR uses the
               <gi>nationality</gi> element as a general category for living under a particular
               jurisdiction. This customization limits the attribute classes of the
               <gi>nationality</gi> element to att.datable.custom and att.datable.w3c and removes the
@@ -1992,11 +1921,7 @@
             </sequence>
           </content>
           
-          <remarks>
-            <p>This customization limits the attribute classes of the <gi>residence</gi> element to
-              att.datable.custom and att.datable.w3c and removes the <gi>residence</gi> element from
-              all model classes. It also requires exactly one <gi>placeName</gi> element..</p>
-          </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="occupation" module="namesdates" mode="change">
@@ -2017,9 +1942,9 @@
                   <sch:rule context="//tei:occupation/@ana">
                     <sch:let name="anaValues" value="tokenize(., ' ')"/>
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-app-data/dev/data/subjects/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:let name="occupations"
-                      value="$ti//listURI[@ref = 'http://syriaca.org/keyword/occupations']/uri"/>
+                      value="$ti//listURI[@type = 'occupations']/uri"/>
                     <sch:let name="error" value="."/>
                     <sch:assert
                       test="
@@ -2038,12 +1963,7 @@
           
           
           
-          <remarks>
-            <p>This customization removes the <gi>occupation</gi> element from all attribute and
-              member classes. It makes the <gi>note</gi> element the only acceptable child of the
-              <gi>occupation</gi> element. It also requires a @ref attribute on the
-              <gi>occupation</gi> element.</p>
-          </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="langKnowledge" module="namesdates" mode="replace">
@@ -2054,11 +1974,7 @@
             </sequence>
           </content>
           
-          <remarks>
-            <p>This customization removes the <gi>langKnowledge</gi> element from all attribute and
-              member classes. It makes the <gi>langKnown</gi> element the only acceptable child of
-              the <gi>langKnowledge</gi> element. </p>
-          </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="langKnown" module="namesdates" mode="change">
@@ -2067,9 +1983,9 @@
               <sch:rule context="//tei:langKnown/@ana">
                 <sch:let name="anaValues" value="tokenize(., ' ')"/>
                 <sch:let name="ti"
-                  value="doc('https://raw.githubusercontent.com/srophe/srophe-app-data/dev/data/subjects/taxonomyIndex.xml')"/>
+                  value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
                 <sch:let name="languages"
-                  value="$ti//listURI[@ref = 'http://syriaca.org/keyword/languages']/uri"/>
+                  value="$ti//listURI[@type = 'languages']/uri"/>
                 <sch:let name="error" value="."/>
                 <sch:assert
                   test="
@@ -2098,11 +2014,7 @@
             </attDef>
           </attList>
           
-          <remarks>
-            <p>This customization removes the <gi>langKnown</gi> element from all model and attribute
-              classes. It also provides a semi closed value list for the required @tag attribute and
-              a closed list for the optional @level attribute. </p>
-          </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="socecStatus" module="namesdates" mode="change">
@@ -2123,9 +2035,9 @@
                   <sch:rule context="tei:socecStatus/@ana">
                     <sch:let name="anaValues" value="tokenize(., ' ')"/>
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-app-data/dev/data/subjects/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:let name="socioeconomicStatus"
-                      value="$ti//listURI[@ref = 'http://syriaca.org/keyword/socioeconomic-status']/uri"/>
+                      value="$ti//listURI[@type = 'socioeconomic-status']/uri"/>
                     <sch:let name="error" value="."/>
                     <sch:assert
                       test="
@@ -2142,12 +2054,7 @@
             </attDef>
           </attList>
           
-          <remarks>
-            <p>This customization removes the <gi>socecStatus</gi> element from all attribute and
-              member classes. It makes the <gi>note</gi> element the only acceptable child of the
-              <gi>socecStatus</gi> element. It also requires a @ref attribute on the
-              <gi>socecStatus</gi> element.</p>
-          </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="trait" module="namesdates" mode="change">
@@ -2189,9 +2096,9 @@
                   <sch:rule context="tei:trait[@type='ethnicLabel']/@ana">
                     <sch:let name="anaValues" value="tokenize(., ' ')"/>
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-app-data/dev/data/subjects/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:let name="ethnicLabels"
-                      value="$ti//listURI[@ref = 'http://syriaca.org/keyword/ethnicity']/uri"/>
+                      value="$ti//listURI[@type = 'ethnicity']/uri"/>
                     <sch:let name="error" value="."/>
                     <sch:assert
                       test="
@@ -2220,7 +2127,7 @@
                   <sch:rule context="tei:trait[@type='physical']/@ana">
                     <sch:let name="anaValues" value="tokenize(., ' ')"/>
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-app-data/dev/data/subjects/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:let name="taxonomyAllURIs"
                       value="$ti//listURI[@type = 'taxonomyAllURIs']/uri"/>
                     <sch:let name="error" value="."/>
@@ -2240,13 +2147,7 @@
           
           
           
-          <remarks>
-            <p>This customization removes the <gi>trait</gi> element from all attribute and member
-              classes. It makes the <gi>note</gi> element the only acceptable child of the
-              <gi>trait</gi> element. It also requires a @type attribute with closed list of values
-              on the <gi>trait</gi> element and limits the attribute values on the <gi>trait</gi>
-              element to @type and @ref.</p>
-          </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="back" module="textstructure" mode="change">
@@ -2301,9 +2202,9 @@
                   <sch:rule context="tei:state[@type='mental']/@ana">
                     <sch:let name="anaValues" value="tokenize(., ' ')"/>
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-app-data/dev/data/subjects/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:let name="mentalStates"
-                      value="$ti//listURI[@ref = 'http://syriaca.org/keyword/mental-states']/uri"/>
+                      value="$ti//listURI[@type = 'mental-states']/uri"/>
                     <sch:let name="error" value="."/>
                     <sch:assert
                       test="
@@ -2318,9 +2219,9 @@
                   <sch:rule context="tei:state[@type='sanctity']/@ana">
                     <sch:let name="anaValues" value="tokenize(., ' ')"/>
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-app-data/dev/data/subjects/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:let name="sanctity"
-                      value="$ti//listURI[@ref = 'http://syriaca.org/keyword/sanctity']/uri"/>
+                      value="$ti//listURI[@type = 'sanctity']/uri"/>
                     <sch:let name="error" value="."/>
                     <sch:assert
                       test="
