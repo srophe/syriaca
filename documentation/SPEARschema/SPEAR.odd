@@ -1220,7 +1220,7 @@
               <sch:rule context="tei:event/@ana">
                 <sch:let name="anaValues" value="tokenize(., ' ')"/>
                 <sch:let name="ti"
-                  value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
+                  value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex.xml')"/>
                 <sch:let name="taxonomyAllURIs"
                   value="$ti//listURI[@type = 'taxonomyAllURIs']/uri"/>
                 <sch:let name="error" value="."/>
@@ -1570,7 +1570,7 @@
             <constraint>
               <sch:rule context="tei:ab[@subtype='relation']/tei:listRelation/tei:relation | tei:ab[@subtype='event']/tei:listEvent/tei:event/tei:desc/tei:listRelation/tei:relation"><!-- This doesn't currently catch incorrect person URIs on @mutual, @active, and @passive when these are embedded in event factoids. -->
                 <sch:let name="ti"
-                  value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
+                  value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex.xml')"/>
                 <sch:let name="mutual"
                   value="$ti//listURI[@type = 'relationships']//uri[@ana = 'mutual']"/>
                 <sch:let name="directed"
@@ -1618,7 +1618,7 @@
                 <constraint>
                   <sch:rule context="tei:ab[@subtype='relation']/tei:listRelation/tei:relation/@ref">
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:assert
                       test=". = $ti//listURI[@type = 'relationships']//uri"
                       >Value must be one of the following from the Syriaca.org taxonomy:
@@ -1628,7 +1628,7 @@
                   </sch:rule>
                   <sch:rule context="tei:ab[@subtype='event']/tei:listRelation/tei:relation/@ref">
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:assert
                       test=". = $ti//listURI[@type = 'related-event']/uri"
                       >Value must be one of the following from the Syriaca.org taxonomy:
@@ -1687,7 +1687,7 @@
                 <constraint>
                   <sch:rule context="tei:ab/tei:listRelation/tei:relation/@ana">
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:let name="qrURI"
                       value="$ti//listURI[@type = 'qualifier-relationship']//uri"/>
                     <sch:let name="error" value="."/>
@@ -1857,7 +1857,7 @@
                   <sch:rule context="//tei:education/@ana">
                     <sch:let name="anaValues" value="tokenize(., ' ')"/>
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:let name="fieldsOfStudy"
                       value="$ti//listURI[@type = 'fields-of-study']/uri"/>
                     <sch:let name="error" value="."/>
@@ -1942,7 +1942,7 @@
                   <sch:rule context="//tei:occupation/@ana">
                     <sch:let name="anaValues" value="tokenize(., ' ')"/>
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:let name="occupations"
                       value="$ti//listURI[@type = 'occupations']/uri"/>
                     <sch:let name="error" value="."/>
@@ -1983,7 +1983,7 @@
               <sch:rule context="//tei:langKnown/@ana">
                 <sch:let name="anaValues" value="tokenize(., ' ')"/>
                 <sch:let name="ti"
-                  value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
+                  value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex.xml')"/>
                 <sch:let name="languages"
                   value="$ti//listURI[@type = 'languages']/uri"/>
                 <sch:let name="error" value="."/>
@@ -2035,7 +2035,7 @@
                   <sch:rule context="tei:socecStatus/@ana">
                     <sch:let name="anaValues" value="tokenize(., ' ')"/>
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:let name="socioeconomicStatus"
                       value="$ti//listURI[@type = 'socioeconomic-status']/uri"/>
                     <sch:let name="error" value="."/>
@@ -2096,7 +2096,7 @@
                   <sch:rule context="tei:trait[@type='ethnicLabel']/@ana">
                     <sch:let name="anaValues" value="tokenize(., ' ')"/>
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:let name="ethnicLabels"
                       value="$ti//listURI[@type = 'ethnicity']/uri"/>
                     <sch:let name="error" value="."/>
@@ -2127,7 +2127,7 @@
                   <sch:rule context="tei:trait[@type='physical']/@ana">
                     <sch:let name="anaValues" value="tokenize(., ' ')"/>
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:let name="taxonomyAllURIs"
                       value="$ti//listURI[@type = 'taxonomyAllURIs']/uri"/>
                     <sch:let name="error" value="."/>
@@ -2202,7 +2202,7 @@
                   <sch:rule context="tei:state[@type='mental']/@ana">
                     <sch:let name="anaValues" value="tokenize(., ' ')"/>
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:let name="mentalStates"
                       value="$ti//listURI[@type = 'mental-states']/uri"/>
                     <sch:let name="error" value="."/>
@@ -2219,7 +2219,7 @@
                   <sch:rule context="tei:state[@type='sanctity']/@ana">
                     <sch:let name="anaValues" value="tokenize(., ' ')"/>
                     <sch:let name="ti"
-                      value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/taxonomyIndex.xml')"/>
+                      value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex.xml')"/>
                     <sch:let name="sanctity"
                       value="$ti//listURI[@type = 'sanctity']/uri"/>
                     <sch:let name="error" value="."/>
