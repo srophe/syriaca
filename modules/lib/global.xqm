@@ -196,10 +196,12 @@ declare function global:make-iso-date($date as xs:string?) as xs:date* {
 xs:date(
     if($date = '0-100') then '0001-01-01'
     else if($date = '2000-') then '2100-01-01'
+    (:
     else if(matches($date,'\d{4}')) then concat($date,'-01-01')
     else if(matches($date,'\d{3}')) then concat('0',$date,'-01-01')
     else if(matches($date,'\d{2}')) then concat('00',$date,'-01-01')
     else if(matches($date,'\d{1}')) then concat('000',$date,'-01-01')
+    :)
     else '0100-01-01')
 };
 

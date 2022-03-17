@@ -1021,7 +1021,7 @@
             </xsl:choose>
         </xsl:variable>
         <xsl:choose>
-            <xsl:when test="matches(text(),'^\d')">
+            <xsl:when test="matches(text()[1],'^\d')">
                 <xsl:value-of select="concat($unit,' ',text())"/>
             </xsl:when>
             <xsl:when test="not(text()) and (@to or @from)">
