@@ -85,17 +85,23 @@ $('.dynamicContent').each(function(index, element) {
     var url = $(this).data('url');
     var current = $(this) 
     $.get(url, function(data) {
-        /* 
-        var searchResults = $(data).find('#search-results')
-        if(searchResults) {
-            $(current).html(searchResults);
-        } else {$(current).html(data);}
-         * */
-         $(current).html(data);
-        //console.log('testing');
+        $(current).html(data);    
     }); 
    });
 
+//Load dynamic content
+$('.getContent').click(function(index, element) { 
+    var url = $(this).data('url');
+    var current = $(this) 
+    $('.spinning').show();
+    $.get(url, function(data) {
+        $(current).html(data);
+        $('.spinning').hide();
+        console.log('Getting data...')
+    }); 
+   });
+   
+   
 if (navigator.appVersion.indexOf("Mac") > -1 || navigator.appVersion.indexOf("Linux") > -1) {
     $('.get-syriac').show();
 }
