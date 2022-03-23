@@ -28,18 +28,29 @@
     <xsl:template match="t:titleStmt" mode="cite-foot">
         <!-- creator(s) of the entry -->
         <!-- Process editors/authors using local function in helper-functions.xsl local:emit-responsible-persons -->
-        <xsl:sequence select="local:emit-responsible-persons(t:editor[@role='creator'],'footnote',1)"/>
-        <xsl:text>, </xsl:text>
+        <xsl:if test="t:editor[@role='creator']">
+            <xsl:sequence select="local:emit-responsible-persons(t:editor[@role='creator'],'footnote',1)"/>
+            <xsl:text>, </xsl:text>
+        </xsl:if>
         
         <!-- title of the entry -->
         <xsl:text>“</xsl:text>
-        <xsl:apply-templates select="t:title[@level='a'][1]" mode="footnote"/>
+        <xsl:choose>
+            <xsl:when test="t:title[@level='a'][1]">
+                <xsl:apply-templates select="t:title[@level='a'][1]" mode="footnote"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="t:title[1]" mode="footnote"/>
+            </xsl:otherwise>
+        </xsl:choose>
         <xsl:text>”</xsl:text>
         
         <!-- monographic title -->
-        <xsl:text> in </xsl:text>
-        <xsl:apply-templates select="../descendant::t:titleStmt/t:title[@level='m'][1]" mode="footnote"/>
-        <xsl:text>, </xsl:text>
+        <xsl:if test="../descendant::t:titleStmt/t:title[@level='m'][1]">
+            <xsl:text> in </xsl:text>
+            <xsl:apply-templates select="../descendant::t:titleStmt/t:title[@level='m'][1]" mode="footnote"/>
+            <xsl:text>, </xsl:text>
+        </xsl:if>
         
         <!-- publication date statement -->
         <xsl:text> last modified </xsl:text>
@@ -68,17 +79,28 @@
     <xsl:template match="t:titleStmt" mode="cite-biblist">
         <!-- creator(s) of the entry -->
         <!-- Process editors/authors using local function in helper-functions.xsl local:emit-responsible-persons -->
-        <xsl:sequence select="local:emit-responsible-persons(t:editor[@role='creator'],'biblist',1)"/>
-        <xsl:text>, </xsl:text>
+        <xsl:if test="t:editor[@role='creator']">
+            <xsl:sequence select="local:emit-responsible-persons(t:editor[@role='creator'],'biblist',1)"/>
+            <xsl:text>, </xsl:text>            
+        </xsl:if>
         
         <!-- title of the entry -->
         <xsl:text>“</xsl:text>
-        <xsl:apply-templates select="t:title[@level='a'][1]" mode="biblist"/>
+        <xsl:choose>
+            <xsl:when test="t:title[@level='a'][1]">
+                <xsl:apply-templates select="t:title[@level='a'][1]" mode="biblist"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <xsl:apply-templates select="t:title[1]" mode="biblist"/>
+            </xsl:otherwise>
+        </xsl:choose>
         <xsl:text>.”</xsl:text>
         
         <!-- monographic title -->
-        <xsl:text> In </xsl:text>
-        <xsl:apply-templates select="../descendant::t:titleStmt/t:title[@level='m'][1]" mode="footnote"/>
+        <xsl:if test="../descendant::t:titleStmt/t:title[@level='m'][1]">
+            <xsl:text> In </xsl:text>
+            <xsl:apply-templates select="../descendant::t:titleStmt/t:title[@level='m'][1]" mode="footnote"/>
+        </xsl:if>
         
         <!-- general editors -->
         <xsl:text>, edited by </xsl:text>
