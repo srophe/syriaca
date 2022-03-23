@@ -30,7 +30,21 @@ let $collection-path :=
             if(config:collection-vars($collection)/@data-root != '') then concat('/',config:collection-vars($collection)/@data-root)
             else if($collection != '') then concat('/',$collection)
             else ()
-let $data := if($ids != '') then
+let $data := if(request:get-parameter("getRSS", ()) != '') then 
+                let $feed := 
+                    http:send-request(
+                        <http:request href="{xs:anyURI(request:get-parameter("getRSS", ()))}" method="get">
+                            <http:header name="Connection" value="close"/>
+                        </http:request>)[2]
+                    for $item in subsequence($feed//*:item, 1, 4)
+                    return 
+                        <div>
+                           <h4>{$item/*:title/text()}</h4>
+                            <p class="small">{$item/*:pubDate/text()}</p>
+                            <div>{$item/*:description/text()}</div>
+                            <p class="small moreInfo"><a href="{$item/*:link/text()}" class="btn btn-default btn-rounded btn-light btn-sm text-center">Read More</a></p>
+                        </div>
+            else if($ids != '') then
                 if(starts-with($ids, $config:base-uri)) then 
                     collection($config:data-root)//tei:idno[@type='URI'][. = tokenize($ids,' ')]
                 else 
