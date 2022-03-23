@@ -80,4 +80,5 @@ return
         return  
         (response:set-header("Content-Type", "text/html; charset=utf-8"), 
         relations:display-records(data:search($collection, $queryExpr, ()),$queryString))
-    else ()
+    else 
+        (response:set-header("Content-Type", "text/html; charset=utf-8"), $data)
