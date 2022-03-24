@@ -401,7 +401,7 @@
                     <xsl:for-each select="t:*">
                         <xsl:apply-templates select="."/>
                         <xsl:if test="following-sibling::t:*">
-                            <xsl:text> within </xsl:text>
+                            <xsl:text>, </xsl:text>
                         </xsl:if>
                     </xsl:for-each>
                     <xsl:text>.</xsl:text>
