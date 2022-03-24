@@ -43,7 +43,6 @@ let $data :=
                         <div>
                            <h4>{$item/*:title/text()}</h4>
                             <p class="small">{$item/*:pubDate/text()}</p>
-                            <div>{parse-xml-fragment($item/*:description/text())}</div>
                             <p class="small moreInfo"><a href="{$item/*:link/text()}" class="btn btn-default btn-rounded btn-light btn-sm text-center">Read More</a></p>
                         </div>
             else if($ids != '') then
