@@ -8,7 +8,7 @@ xquery version "3.1";
  : @see lib/relationships.xqm for building and visualizing relatiobships 
  :)
  
-import module namespace http="http://expath.org/ns/http-client";
+
 import module namespace config="http://srophe.org/srophe/config" at "config.xqm";
 import module namespace cntneg="http://srophe.org/srophe/cntneg" at "content-negotiation/content-negotiation.xqm";
 import module namespace relations="http://srophe.org/srophe/relationships" at "lib/relationships.xqm";
@@ -16,6 +16,7 @@ import module namespace data="http://srophe.org/srophe/data" at "lib/data.xqm";
 import module namespace maps="http://srophe.org/srophe/maps" at "lib/maps.xqm";
 import module namespace search="http://srophe.org/srophe/search" at "search/search.xqm";
 
+declare namespace http="http://expath.org/ns/http-client";
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
 let $collection :=  request:get-parameter("collection", ())
@@ -30,7 +31,8 @@ let $collection-path :=
             if(config:collection-vars($collection)/@data-root != '') then concat('/',config:collection-vars($collection)/@data-root)
             else if($collection != '') then concat('/',$collection)
             else ()
-let $data := if(request:get-parameter("getRSS", ()) != '') then 
+let $data := 
+            if(request:get-parameter("getRSS", ()) != '') then 
                 let $feed := 
                     http:send-request(
                         <http:request href="{xs:anyURI(request:get-parameter("getRSS", ()))}" method="get">
@@ -41,18 +43,11 @@ let $data := if(request:get-parameter("getRSS", ()) != '') then
                         <div>
                            <h4>{$item/*:title/text()}</h4>
                             <p class="small">{$item/*:pubDate/text()}</p>
-                            <div>{$item/*:description/text()}</div>
+                            <div>{parse-xml-fragment($item/*:description/text())}</div>
                             <p class="small moreInfo"><a href="{$item/*:link/text()}" class="btn btn-default btn-rounded btn-light btn-sm text-center">Read More</a></p>
                         </div>
             else if($ids != '') then
-                if(starts-with($ids, $config:base-uri)) then 
-                    collection($config:data-root)//tei:idno[@type='URI'][. = tokenize($ids,' ')]
-                else 
-                    for $id in tokenize($ids,' ')
-                    return 
-                    <external uri="{$id}">
-                        {http:send-request(<http:request http-version="1.1" href="{xs:anyURI($id)}" method="get"/>)}
-                    </external>
+                collection($config:data-root)//tei:idno[@type='URI'][. = tokenize($ids,' ')]
              else if($collection != '') then
                   collection($config:data-root || $collection-path)
              else collection($config:data-root)
