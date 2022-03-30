@@ -80,25 +80,43 @@ else if(contains($exist:path,'/documentation/') and ends-with($exist:path,('.tei
 else if (contains($exist:path,'/api/')) then
   if (ends-with($exist:path,"/")) then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <redirect url="/api-documentation/index.html"/>
+        <redirect url="{concat($config:nav-base,'/api-documentation/index.html')}"/>
     </dispatch> 
    else if($exist:resource = 'index.html') then
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <redirect url="/api-documentation/index.html"/>
+        <redirect url="{concat($config:nav-base,'/api-documentation/index.html')}"/>
     </dispatch>
     else if($exist:resource = 'oai') then
      <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="{replace($exist:path,'/api/oai','/srophe/modules/oai.xql')}"/>
+        <forward url="{replace($exist:path,'/api/oai',concat($exist:controller,'/modules/oai.xql'))}"/>
      </dispatch>
     else if($exist:resource = 'sparql') then
      <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="{replace($exist:path,'/api/sparql','/srophe/sparql/run-sparql.xql')}"/>
+        <forward url="{replace($exist:path,'/api/sparql',concat($exist:controller,'/sparql/run-sparql.xql'))}"/>
      </dispatch>
+    else if(contains($exist:path, '/search/')) then
+        let $element := tokenize($exist:path,'/')[last()]
+        return 
+        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+            <forward url="{concat($exist:controller,'/modules/content-negotiation/content-negotiation.xql')}">
+                <add-parameter name="api" value="'true'"/>
+                <add-parameter name="element" value="{$element}"/>
+            </forward>
+        </dispatch>
+    else if(contains($exist:path, '/geo/')) then
+        let $format := tokenize($exist:path,'/')[last()]
+        return 
+        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+            <forward url="{concat($exist:controller,'/modules/content-negotiation/content-negotiation.xql')}">
+                <add-parameter name="api" value="'true'"/>
+                <add-parameter name="geo" value="'true'"/>
+                <add-parameter name="format" value="{if($format = 'json') then 'geojson' else if($format='kml') then 'kml' else 'xml'}"/>
+            </forward>
+        </dispatch>
     else
-    <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
-        <forward url="{concat('/restxq/srophe', $exist:path)}" absolute="yes"/>
-    </dispatch>
-
+        <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+            <redirect url="{concat($config:nav-base,'/api-documentation/index.html')}"/>
+        </dispatch>
 (: Passes data to content negotiation module:)
 else if(request:get-parameter('format', '') != '' and request:get-parameter('format', '') != 'html') then
     local:content-negotiation($exist:path, $exist:resource)
