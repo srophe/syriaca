@@ -20,6 +20,8 @@ declare variable $data:QUERY_OPTIONS := map {
     "filter-rewrite": "yes"
 };
 
+declare variable $data:SORT_FIELDS := $config:get-config//*:sortFields/*:fields;
+
 (:~
  : Return document by id/tei:idno or document path
  : Return by id if get-parameter $id
@@ -100,7 +102,7 @@ declare function data:element-filter($element as xs:string?) as xs:string? {
 declare function data:build-collection-path($collection as xs:string?) as xs:string?{  
     let $collection-path := 
             if(config:collection-vars($collection)/@data-root != '') then concat('/',config:collection-vars($collection)/@data-root)
-            else if($collection != '') then concat('/',$collection)
+            else if($config:get-config//repo:collections[@title = $collection]) then  concat('/',$config:get-config//repo:collections[@title = $collection]/@data-root)                
             else ()
     let $get-series :=  
             if(config:collection-vars($collection)/@collection-URI != '') then string(config:collection-vars($collection)/@collection-URI)
