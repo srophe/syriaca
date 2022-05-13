@@ -1372,7 +1372,7 @@
                     context="tei:note[parent::tei:birth or parent::tei:death or parent::tei:education or parent::tei:langKnowledge or parent::tei:nationality or parent::tei:occupation or parent::tei:residence or parent::tei:socecStatus or parent::tei:state or parent::tei:trait]">
                     <sch:assert test="@type = 'desc'">Elements of type &lt;note&gt; must contain the
                       attribute @type="desc" and other &lt;note&gt; types are not allowed in this context.
-                      Other types of notes ("incerta", "dubia", and "errata") may appear as children of
+                      Other types of notes ("certainty") may appear as children of
                       the &lt;ab&gt; element as needed.</sch:assert>
                   </sch:rule>
                 </constraint>
@@ -1390,10 +1390,27 @@
               </constraintSpec>
               <valList type="closed">
                 <valItem ident="desc"/>
+                <valItem ident="certainty"/>
+                <valItem ident="relatedEvent"/>
+              </valList>
+            </attDef>
+            <attDef ident="subtype" usage="opt" mode="replace">
+              <datatype>
+                <dataRef key="teidata.enumerated"/>
+              </datatype>
+              <constraintSpec ident="certainty-subtype" scheme="schematron">
+                <constraint>
+                  <sch:rule context="//tei:note[@type='certainty']">
+                    <sch:assert test="@subtype">
+                      A &lt;note&gt; element with @type="certainty" requires a @subtype.
+                    </sch:assert>
+                  </sch:rule>
+                </constraint>
+              </constraintSpec>
+              <valList type="closed">
                 <valItem ident="incerta"/>
                 <valItem ident="dubia"/>
                 <valItem ident="errata"/>
-                <valItem ident="relatedEvent"/>
               </valList>
             </attDef>
             <attDef ident="ana" usage="opt" mode="replace">
