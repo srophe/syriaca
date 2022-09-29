@@ -475,9 +475,9 @@ declare function data:dynamic-paths($search-config as xs:string?){
                 if($p = 'keyword') then
                     data:keyword-search()
                 else if(string($config//input[@name = $p]/@element) = '.') then
-                    concat("[ft:query(descendant-or-self::tei:body,'",data:clean-string(request:get-parameter($p, '')),"',data:search-options())]")
+                    concat("[ft:query(descendant-or-self::tei:body,'",data:clean-string(request:get-parameter($p, '')),"',sf:facet-query())]")
                 else if(string($config//input[@name = $p]/@element) != '') then
-                    concat("[ft:query(descendant-or-self::",string($config//input[@name = $p]/@element),",'",data:clean-string(request:get-parameter($p, '')),"',data:search-options())]")
+                    concat("[ft:query(descendant-or-self::",string($config//input[@name = $p]/@element),",'",data:clean-string(request:get-parameter($p, '')),"',sf:facet-query())]")
                 else ()    
             else (),'')
 };
@@ -488,10 +488,10 @@ declare function data:dynamic-paths($search-config as xs:string?){
 declare function data:keyword-search(){
     if(request:get-parameter('keyword', '') != '') then 
         for $query in request:get-parameter('keyword', '') 
-        return concat("[ft:query(descendant-or-self::tei:body,'",data:clean-string($query),"',data:search-options()) or ft:query(ancestor::tei:TEI/descendant::tei:teiHeader,'",data:clean-string($query),"',data:search-options())]")
+        return concat("[ft:query(descendant-or-self::tei:body,'",data:clean-string($query),"',sf:facet-query()) or ft:query(ancestor::tei:TEI/descendant::tei:teiHeader,'",data:clean-string($query),"',sf:facet-query())]")
     else if(request:get-parameter('q', '') != '') then 
         for $query in request:get-parameter('q', '') 
-        return concat("[ft:query(descendant-or-self::tei:body,'",data:clean-string($query),"',data:search-options()) or ft:query(ancestor::tei:TEI/descendant::tei:teiHeader,'",data:clean-string($query),"',data:search-options())]")
+        return concat("[ft:query(descendant-or-self::tei:body,'",data:clean-string($query),"',sf:facet-query()) or ft:query(ancestor::tei:TEI/descendant::tei:teiHeader,'",data:clean-string($query),"',sf:facet-query())]")
     else ()
 };
 
@@ -515,7 +515,7 @@ declare function data:uri() as xs:string? {
         let $q := request:get-parameter('uri', '')
         return 
         concat("
-        [ft:query(descendant::*,'&quot;",$q,"&quot;',data:search-options()) or 
+        [ft:query(descendant::*,'&quot;",$q,"&quot;',sf:facet-query()) or 
             .//@passive[matches(.,'",$q,"(\W.*)?$')]
             or 
             .//@mutual[matches(.,'",$q,"(\W.*)?$')]
@@ -538,7 +538,7 @@ declare function data:element-search($element, $query){
     if(exists($element) and $element != '') then 
         if(request:get-parameter($element, '') != '') then 
             for $e in $element
-            return concat("[ft:query(descendant-or-self::tei:",$element,",'",data:clean-string($query),"',data:search-options())]")            
+            return concat("[ft:query(descendant-or-self::tei:",$element,",'",data:clean-string($query),"',sf:facet-query())]")            
         else ()
     else ()
 };
@@ -555,7 +555,7 @@ declare function data:element-search($element, $query){
                 normalize-space($search:bibl)
             else 
                 string-join(distinct-values(
-                for $r in collection($global:data-root || '/bibl')//tei:body[ft:query(.,$terms, data:search-options())]/ancestor::tei:TEI/descendant::tei:publicationStmt/tei:idno[starts-with(.,'http://syriaca.org')][1]
+                for $r in collection($global:data-root || '/bibl')//tei:body[ft:query(.,$terms, sf:facet-query())]/ancestor::tei:TEI/descendant::tei:publicationStmt/tei:idno[starts-with(.,'http://syriaca.org')][1]
                 return concat(substring-before($r,'/tei'),'(\s|$)')),'|')
         return concat("[descendant::tei:bibl/tei:ptr[@target[matches(.,'",$ids,"')]]]")
     else ()  
@@ -574,7 +574,7 @@ declare function data:related-places() as xs:string?{
                 normalize-space($related-place)
             else 
                 string-join(distinct-values(
-                    for $r in collection($config:data-root || '/places')//tei:place[ft:query(tei:placeName,$related-place,data:search-options())]
+                    for $r in collection($config:data-root || '/places')//tei:place[ft:query(tei:placeName,$related-place,sf:facet-query())]
                     let $id := $r//tei:idno[starts-with(.,'http://syriaca.org')]
                     return $id),'|')                   
         return 
@@ -603,7 +603,7 @@ declare function data:related-persons() as xs:string?{
                 normalize-space($rel-person)
             else 
                 string-join(distinct-values(
-                    for $r in collection($config:data-root || '/persons')//tei:person[ft:query(tei:persName,$rel-person,data:search-options())]
+                    for $r in collection($config:data-root || '/persons')//tei:person[ft:query(tei:persName,$rel-person,sf:facet-query())]
                     let $id := $r//tei:idno[starts-with(.,'http://syriaca.org')]
                     return $id),'|')   
         return 
@@ -624,6 +624,6 @@ declare function data:mentioned() as xs:string?{
             let $id := normalize-space(request:get-parameter('mentioned', ''))
             return concat("[descendant::*[@ref[matches(.,'",$id,"(\W.*)?$')]]]")
         else 
-            concat("[descendant::*[ft:query(tei:title,'",data:clean-string(request:get-parameter('mentioned', '')),"',data:search-options())]]")
+            concat("[descendant::*[ft:query(tei:title,'",data:clean-string(request:get-parameter('mentioned', '')),"',sf:facet-query())]]")
     else ()  
 };

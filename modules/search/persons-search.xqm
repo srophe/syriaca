@@ -39,7 +39,7 @@ declare variable $persons:mentioned {request:get-parameter('mentioned', '')};
 :)
 declare function persons:name() as xs:string? {
     if($persons:name != '') then
-        concat("[ft:query(descendant::tei:person/tei:persName,'",data:clean-string($persons:name),"',data:search-options())]")   
+        concat("[ft:query(descendant::tei:person/tei:persName,'",data:clean-string($persons:name),"',sf:facet-query())]")   
     else ()
 };
 

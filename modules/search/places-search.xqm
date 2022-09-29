@@ -44,7 +44,7 @@ declare variable $places:ar {request:get-parameter('ar', '')};
  
 :)
 declare function places:keyword(){
-    if(exists($places:q) and $places:q != '') then concat("[ft:query(.,'",data:clean-string($places:q),"',data:search-options()) or ft:query(descendant::tei:placeName,'",data:clean-string($places:q),"',data:search-options()) or ft:query(descendant::tei:persName,'",data:clean-string($places:q),"',data:search-options()) or ft:query(ancestor::tei:TEI/descendant::tei:teiHeader/descendant::tei:title,'",data:clean-string($places:q),"',data:search-options()) or ft:query(descendant::tei:desc,'",data:clean-string($places:q),"',data:search-options())]")
+    if(exists($places:q) and $places:q != '') then concat("[ft:query(.,'",data:clean-string($places:q),"',sf:facet-query()) or ft:query(descendant::tei:placeName,'",data:clean-string($places:q),"',sf:facet-query()) or ft:query(descendant::tei:persName,'",data:clean-string($places:q),"',sf:facet-query()) or ft:query(ancestor::tei:TEI/descendant::tei:teiHeader/descendant::tei:title,'",data:clean-string($places:q),"',sf:facet-query()) or ft:query(descendant::tei:desc,'",data:clean-string($places:q),"',sf:facet-query())]")
     else ''    
 };
 
@@ -53,7 +53,7 @@ declare function places:keyword(){
  : @p full text query
 :)
 declare function places:place-name(){
-    if(exists($places:p) and $places:p != '') then concat("[ft:query(descendant::tei:place/tei:placeName,'",data:clean-string($places:p),"',data:search-options())]")
+    if(exists($places:p) and $places:p != '') then concat("[ft:query(descendant::tei:place/tei:placeName,'",data:clean-string($places:p),"',sf:facet-query())]")
     else ''    
 };
 
@@ -72,7 +72,7 @@ declare function places:type(){
  : NOTE: need to understand location search better. 
 :)
 declare function places:location(){
-    if(exists($places:loc) and $places:loc != '') then concat("[ft:query(descendant::tei:place/tei:location,'",data:clean-string($places:loc),"',data:search-options())]")
+    if(exists($places:loc) and $places:loc != '') then concat("[ft:query(descendant::tei:place/tei:location,'",data:clean-string($places:loc),"',sf:facet-query())]")
     else ''
 };
 
@@ -82,7 +82,7 @@ declare function places:location(){
  : @e full text query
 :)
 declare function places:event(){
-    if(exists($places:e) and $places:e != '') then concat("[ft:query(descendant::tei:place/tei:event[@type != 'attestation' or not(@type)],'",data:clean-string($places:e),"',data:search-options())]")
+    if(exists($places:e) and $places:e != '') then concat("[ft:query(descendant::tei:place/tei:event[@type != 'attestation' or not(@type)],'",data:clean-string($places:e),"',sf:facet-query())]")
     else ''
 };
 
@@ -120,7 +120,7 @@ declare function places:event-dates(){
  : @e full text query
 :)
 declare function places:attestation(){
-    if(exists($places:a) and $places:a != '') then concat("[ft:query(descendant::tei:place/tei:event[@type = 'attestation'],'",data:clean-string($places:a),"',data:search-options())]")
+    if(exists($places:a) and $places:a != '') then concat("[ft:query(descendant::tei:place/tei:event[@type = 'attestation'],'",data:clean-string($places:a),"',sf:facet-query())]")
     else ''
 };
 
@@ -225,7 +225,7 @@ if(exists($places:cds) and $places:cds != '') then
  : @e full text query
 :)
 declare function places:existence(){
-    if(exists($places:exist) and $places:exist != '') then concat("[ft:query(descendant::tei:state[@type = 'existence'],'",data:clean-string($places:exist),"',data:search-options())]")
+    if(exists($places:exist) and $places:exist != '') then concat("[ft:query(descendant::tei:state[@type = 'existence'],'",data:clean-string($places:exist),"',sf:facet-query())]")
     else ''
 };
 

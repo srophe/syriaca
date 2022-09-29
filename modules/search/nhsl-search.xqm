@@ -31,12 +31,12 @@ declare variable $nhsls:id-type {request:get-parameter('id-type', '')};
  : @param $q query string
 :)
 declare function nhsls:keyword() as xs:string? {
-    if($nhsls:q != '') then concat("[ft:query(.,'",data:clean-string($nhsls:q),"',data:search-options()) or ft:query(descendant::tei:persName,'",data:clean-string($nhsls:q),"',data:search-options()) or ft:query(descendant::tei:placeName,'",data:clean-string($nhsls:q),"',data:search-options()) or ft:query(ancestor::tei:TEI/descendant::tei:teiHeader/descendant::tei:title,'",data:clean-string($nhsls:q),"',data:search-options()) or ft:query(descendant::tei:desc,'",data:clean-string($nhsls:q),"',data:search-options())]")
+    if($nhsls:q != '') then concat("[ft:query(.,'",data:clean-string($nhsls:q),"',sf:facet-query()) or ft:query(descendant::tei:persName,'",data:clean-string($nhsls:q),"',sf:facet-query()) or ft:query(descendant::tei:placeName,'",data:clean-string($nhsls:q),"',sf:facet-query()) or ft:query(ancestor::tei:TEI/descendant::tei:teiHeader/descendant::tei:title,'",data:clean-string($nhsls:q),"',sf:facet-query()) or ft:query(descendant::tei:desc,'",data:clean-string($nhsls:q),"',sf:facet-query())]")
     else ()    
 };
 
 declare function nhsls:title() as xs:string? {
-    if($nhsls:title != '') then concat("[ft:query(tei:bibl/tei:title,'",data:clean-string($nhsls:title),"',data:search-options())]")
+    if($nhsls:title != '') then concat("[ft:query(tei:bibl/tei:title,'",data:clean-string($nhsls:title),"',sf:facet-query())]")
     else ()    
 };
 
@@ -45,47 +45,47 @@ declare function nhsls:author() as xs:string? {
         if(starts-with($nhsls:author,$config:base-uri)) then 
             concat("[tei:bibl/tei:author[@ref='",$nhsls:author,"']]")
         else
-            concat("[ft:query(tei:bibl/tei:author,'",data:clean-string($nhsls:author),"',data:search-options())]")
+            concat("[ft:query(tei:bibl/tei:author,'",data:clean-string($nhsls:author),"',sf:facet-query())]")
     else ()    
 };
 
 declare function nhsls:prologue() as xs:string? {
-    if($nhsls:prologue != '') then concat("[ft:query(tei:bibl/tei:note[@type='prologue'],'",data:clean-string($nhsls:prologue),"',data:search-options())]")
+    if($nhsls:prologue != '') then concat("[ft:query(tei:bibl/tei:note[@type='prologue'],'",data:clean-string($nhsls:prologue),"',sf:facet-query())]")
     else ()    
 };
 
 declare function nhsls:incipit() as xs:string? {
-    if($nhsls:incipit != '') then concat("[ft:query(tei:bibl/tei:note[@type='incipit'],'",data:clean-string($nhsls:incipit),"',data:search-options())]")
+    if($nhsls:incipit != '') then concat("[ft:query(tei:bibl/tei:note[@type='incipit'],'",data:clean-string($nhsls:incipit),"',sf:facet-query())]")
     else ()    
 };
 
 declare function nhsls:explicit() as xs:string? {
-    if($nhsls:explicit != '') then concat("[ft:query(tei:bibl/tei:note[@type='explicit'],'",data:clean-string($nhsls:explicit),"',data:search-options())]")
+    if($nhsls:explicit != '') then concat("[ft:query(tei:bibl/tei:note[@type='explicit'],'",data:clean-string($nhsls:explicit),"',sf:facet-query())]")
     else ()    
 };
 
 declare function nhsls:editions() as xs:string? {
-    if($nhsls:editions != '') then concat("[ft:query(tei:bibl/tei:note[@type='editions'],'",data:clean-string($nhsls:editions),"',data:search-options())]")
+    if($nhsls:editions != '') then concat("[ft:query(tei:bibl/tei:note[@type='editions'],'",data:clean-string($nhsls:editions),"',sf:facet-query())]")
     else ()    
 };
 
 declare function nhsls:modern() as xs:string? {
-    if($nhsls:modern != '') then concat("[ft:query(tei:bibl/tei:note[@type='modernTranslation'],'",data:clean-string($nhsls:modern),"',data:search-options())]")
+    if($nhsls:modern != '') then concat("[ft:query(tei:bibl/tei:note[@type='modernTranslation'],'",data:clean-string($nhsls:modern),"',sf:facet-query())]")
     else ()    
 };
 
 declare function nhsls:ancient() as xs:string? {
-    if($nhsls:ancient != '') then concat("[ft:query(tei:bibl/tei:note[@type='ancientVersion'],'",data:clean-string($nhsls:ancient),"',data:search-options())]")
+    if($nhsls:ancient != '') then concat("[ft:query(tei:bibl/tei:note[@type='ancientVersion'],'",data:clean-string($nhsls:ancient),"',sf:facet-query())]")
     else ()    
 };
 
 declare function nhsls:mss() as xs:string? {
-    if($nhsls:mss != '') then concat("[ft:query(tei:bibl/tei:note[@type='MSS'],'",data:clean-string($nhsls:mss),"',data:search-options())]")
+    if($nhsls:mss != '') then concat("[ft:query(tei:bibl/tei:note[@type='MSS'],'",data:clean-string($nhsls:mss),"',sf:facet-query())]")
     else ()    
 };
 
 declare function nhsls:refs() as xs:string? {
-    if($nhsls:refs != '') then concat("[ft:query(tei:bibl/tei:bibl,'",data:clean-string($nhsls:refs),"',data:search-options())]")
+    if($nhsls:refs != '') then concat("[ft:query(tei:bibl/tei:bibl,'",data:clean-string($nhsls:refs),"',sf:facet-query())]")
     else ()    
 };
 
