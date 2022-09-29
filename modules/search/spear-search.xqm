@@ -29,7 +29,7 @@ declare variable $spears:title {request:get-parameter('title', '')};
 :)
 declare function spears:name() as xs:string? {
     if($spears:name != '') then
-        concat("[ft:query(descendant::tei:persName,'",data:clean-string($spears:name),"',data:search-options())]")   
+        concat("[ft:query(descendant::tei:persName,'",data:clean-string($spears:name),"',sf:facet-query())]")   
     else ()
 };
 
@@ -39,7 +39,7 @@ declare function spears:name() as xs:string? {
 :)
 declare function spears:place() as xs:string? {
     if($spears:place != '') then
-        concat("[ft:query(descendant::tei:placeName,'",data:clean-string($spears:place),"',data:search-options())]")   
+        concat("[ft:query(descendant::tei:placeName,'",data:clean-string($spears:place),"',sf:facet-query())]")   
     else ()
 };
 
@@ -49,7 +49,7 @@ declare function spears:place() as xs:string? {
 :)
 declare function spears:event() as xs:string? {
     if($spears:event != '') then
-        concat("[ft:query(descendant::tei:event,'",data:clean-string($spears:event),"',data:search-options())]")   
+        concat("[ft:query(descendant::tei:event,'",data:clean-string($spears:event),"',sf:facet-query())]")   
     else ()
 };
 

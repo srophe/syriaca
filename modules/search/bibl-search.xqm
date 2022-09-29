@@ -22,12 +22,12 @@ declare variable $bibls:publisher {request:get-parameter('publisher', '')};
 declare variable $bibls:date {request:get-parameter('date', '')};
 
 declare function bibls:title() as xs:string? {
-    if($bibls:title != '') then concat("[ft:query(descendant::tei:title,'",data:clean-string($bibls:title),"',data:search-options())]")
+    if($bibls:title != '') then concat("[ft:query(descendant::tei:title,'",data:clean-string($bibls:title),"',sf:facet-query())]")
     else ()    
 };
 
 declare function bibls:author() as xs:string? {
-    if($bibls:author != '') then concat("[ft:query(descendant::tei:author,'",data:clean-string($bibls:author),"',data:search-options()) or ft:query(descendant::tei:editor,'",data:clean-string($bibls:author),"',data:search-options())]")
+    if($bibls:author != '') then concat("[ft:query(descendant::tei:author,'",data:clean-string($bibls:author),"',sf:facet-query()) or ft:query(descendant::tei:editor,'",data:clean-string($bibls:author),"',sf:facet-query())]")
     else ()    
 };
 
@@ -52,13 +52,13 @@ declare function bibls:idno() as xs:string? {
 
 declare function bibls:pub-place() as xs:string? {
     if($bibls:pub-place != '') then 
-        concat("[ft:query(descendant::tei:imprint/tei:pubPlace,'",data:clean-string($bibls:pub-place),"',data:search-options())]")
+        concat("[ft:query(descendant::tei:imprint/tei:pubPlace,'",data:clean-string($bibls:pub-place),"',sf:facet-query())]")
     else ()  
 };
 
 declare function bibls:publisher() as xs:string? {
     if($bibls:publisher != '') then 
-        concat("[ft:query(descendant::tei:imprint/tei:publisher,'",data:clean-string($bibls:publisher),"',data:search-options())]")
+        concat("[ft:query(descendant::tei:imprint/tei:publisher,'",data:clean-string($bibls:publisher),"',sf:facet-query())]")
     else ()  
 };
 

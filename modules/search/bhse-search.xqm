@@ -27,7 +27,7 @@ declare variable $bhses:id-type {request:get-parameter('id-type', '')};
 declare variable $bhses:coll {request:get-parameter('coll', '')};
 
 declare function bhses:title() as xs:string? {
-    if($bhses:title != '') then concat("[ft:query(.//tei:bibl/tei:title,'",data:clean-string($bhses:title),"',data:search-options())]")
+    if($bhses:title != '') then concat("[ft:query(.//tei:bibl/tei:title,'",data:clean-string($bhses:title),"',sf:facet-query())]")
     else ()    
 };
 
@@ -36,47 +36,47 @@ declare function bhses:author() as xs:string? {
         if(starts-with($bhses:author,$config:base-uri)) then 
             concat("[tei:bibl/tei:author[@ref='",$bhses:author,"']]")
         else
-            concat("[ft:query(.//tei:bibl/tei:author,'",data:clean-string($bhses:author),"',data:search-options())]")
+            concat("[ft:query(.//tei:bibl/tei:author,'",data:clean-string($bhses:author),"',sf:facet-query())]")
     else ()    
 };
 
 declare function bhses:prologue() as xs:string? {
-    if($bhses:prologue != '') then concat("[ft:query(.//tei:bibl/tei:note[@type='prologue'],'",data:clean-string($bhses:prologue),"',data:search-options())]")
+    if($bhses:prologue != '') then concat("[ft:query(.//tei:bibl/tei:note[@type='prologue'],'",data:clean-string($bhses:prologue),"',sf:facet-query())]")
     else ()    
 };
 
 declare function bhses:incipit() as xs:string? {
-    if($bhses:incipit != '') then concat("[ft:query(.//tei:bibl/tei:note[@type='incipit'],'",data:clean-string($bhses:incipit),"',data:search-options())]")
+    if($bhses:incipit != '') then concat("[ft:query(.//tei:bibl/tei:note[@type='incipit'],'",data:clean-string($bhses:incipit),"',sf:facet-query())]")
     else ()    
 };
 
 declare function bhses:explicit() as xs:string? {
-    if($bhses:explicit != '') then concat("[ft:query(.//tei:bibl/tei:note[@type='explicit'],'",data:clean-string($bhses:explicit),"',data:search-options())]")
+    if($bhses:explicit != '') then concat("[ft:query(.//tei:bibl/tei:note[@type='explicit'],'",data:clean-string($bhses:explicit),"',sf:facet-query())]")
     else ()    
 };
 
 declare function bhses:editions() as xs:string? {
-    if($bhses:editions != '') then concat("[ft:query(.//tei:bibl/tei:bibl[@type='lawd:Edition'],'",data:clean-string($bhses:editions),"',data:search-options())]")
+    if($bhses:editions != '') then concat("[ft:query(.//tei:bibl/tei:bibl[@type='lawd:Edition'],'",data:clean-string($bhses:editions),"',sf:facet-query())]")
     else ()    
 };
 
 declare function bhses:modern() as xs:string? {
-    if($bhses:modern != '') then concat("[ft:query(.//tei:bibl/tei:bibl[@type='syriaca:ModernTranslation'],'",data:clean-string($bhses:modern),"',data:search-options())]")
+    if($bhses:modern != '') then concat("[ft:query(.//tei:bibl/tei:bibl[@type='syriaca:ModernTranslation'],'",data:clean-string($bhses:modern),"',sf:facet-query())]")
     else ()    
 };
 
 declare function bhses:ancient() as xs:string? {
-    if($bhses:ancient != '') then concat("[ft:query(.//tei:bibl/tei:bibl[@type='syriaca:AncientVersion'],'",data:clean-string($bhses:ancient),"',data:search-options())]")
+    if($bhses:ancient != '') then concat("[ft:query(.//tei:bibl/tei:bibl[@type='syriaca:AncientVersion'],'",data:clean-string($bhses:ancient),"',sf:facet-query())]")
     else ()    
 };
 
 declare function bhses:mss() as xs:string? {
-    if($bhses:mss != '') then concat("[ft:query(.//tei:bibl/tei:bibl[@type='syriaca:Manuscript'],'",data:clean-string($bhses:mss),"',data:search-options())]")
+    if($bhses:mss != '') then concat("[ft:query(.//tei:bibl/tei:bibl[@type='syriaca:Manuscript'],'",data:clean-string($bhses:mss),"',sf:facet-query())]")
     else ()    
 };
 
 declare function bhses:refs() as xs:string? {
-    if($bhses:refs != '') then concat("[ft:query(.//tei:bibl/tei:bibl,'",data:clean-string($bhses:refs),"',data:search-options())]")
+    if($bhses:refs != '') then concat("[ft:query(.//tei:bibl/tei:bibl,'",data:clean-string($bhses:refs),"',sf:facet-query())]")
     else ()    
 };
 
