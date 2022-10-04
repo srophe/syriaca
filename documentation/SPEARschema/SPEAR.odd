@@ -381,8 +381,8 @@
           <constraintSpec ident="uriInSeriesStmt" scheme="schematron">
             <constraint>
               <sch:rule context="tei:seriesStmt[1]/tei:idno">
-                <sch:assert test=". = 'http://syriaca.org/spear'">
-                  This &lt;idno&gt; element must be "http://syriaca.org/spear".
+                <sch:assert test=". = 'https://spear-prosop.org'">
+                  This &lt;idno&gt; element must be "https://spear-prosop.org".
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:seriesStmt[2]/tei:idno[preceding-sibling::tei:title = 'The Lives of the Eastern Saints']">
@@ -1519,7 +1519,7 @@
                 <constraint>
                   <sch:rule context="tei:sourceDesc//tei:bibl[@type = 'primary']/tei:ptr/@target">
                     <sch:let name="docURIno"
-                      value="//tei:publicationStmt/tei:idno[@type]/substring-after(substring-before(., '/tei'), 'spear/')"/>
+                      value="//tei:publicationStmt/tei:idno[@type]/substring-after(substring-before(., '/tei'), 'spear-prosop.org/')"/>
                     <sch:assert
                       test=". = concat('http://syriaca.org/work/', $docURIno) or starts-with(., 'http://syriaca.org/bibl/')"
                       > The @target attribute on a &lt;ptr&gt; element inside a &lt;bibl&gt; element
