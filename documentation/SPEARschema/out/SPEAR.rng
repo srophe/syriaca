@@ -5,7 +5,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2022-10-04T15:45:39Z. .
+Schema generated from ODD source 2022-10-04T21:35:51Z. .
 TEI Edition: Version 4.3.0. Last updated on
         31st August 2021, revision b4f72b1ff
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.3.0/
@@ -2483,7 +2483,7 @@ Suggested values include: 1] volume (volume); 2] issue; 3] page (page); 4] line;
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       context="tei:back//tei:bibl/@xml:id">
                <sch:let name="docURIno"
-                        value="//tei:publicationStmt/tei:idno[@type]/substring-after(substring-before(., '/tei'), 'spear-prosop.org/')"/>
+                        value="//tei:publicationStmt/tei:idno[@type='URI']/substring-after(substring-before(., '/tei'), 'spear-prosop.org/')"/>
                <sch:assert test="contains(., concat('bibl', $docURIno, '-'))">The @xml:id on the
                   &lt;bibl&gt; element in the back matter must take the following form: 'bibl' +
                     '<sch:value-of select="$docURIno"/>' + '-' + a unique number.</sch:assert>
@@ -4284,7 +4284,55 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="SPEAR-relation-reforkeyorname-constraint-assert-99">
+                  id="SPEAR-relation-dates-in-relations-in-events-constraint-rule-86">
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:xi="http://www.w3.org/2001/XInclude"
+                      context="tei:event[@when]//tei:relation">
+               <sch:assert test="./@when = ./ancestor::tei:event/@when">
+                  This &lt;relation&gt; element must have a @when attribute with the value <sch:value-of select="./ancestor::tei:event/@when"/>.
+                </sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:xi="http://www.w3.org/2001/XInclude"
+                      context="tei:event[@notBefore]//tei:relation">
+               <sch:assert test="./@notBefore = ./ancestor::tei:event/@notBefore">
+                  This &lt;relation&gt; element must have a @notBefore attribute with the value <sch:value-of select="./ancestor::tei:event/@notBefore"/>.
+                </sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:xi="http://www.w3.org/2001/XInclude"
+                      context="tei:event[@notAfter]//tei:relation">
+               <sch:assert test="./@notAfter = ./ancestor::tei:event/@notAfter">
+                  This &lt;relation&gt; element must have a @notAfter attribute with the value <sch:value-of select="./ancestor::tei:event/@notAfter"/>.
+                </sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:xi="http://www.w3.org/2001/XInclude"
+                      context="tei:event[@from]//tei:relation">
+               <sch:assert test="./@from = ./ancestor::tei:event/@from">
+                  This &lt;relation&gt; element must have a @from attribute with the value <sch:value-of select="./ancestor::tei:event/@from"/>.
+                </sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:xi="http://www.w3.org/2001/XInclude"
+                      context="tei:event[@to]//tei:relation">
+               <sch:assert test="./@to = ./ancestor::tei:event/@to">
+                  This &lt;relation&gt; element must have a @to attribute with the value <sch:value-of select="./ancestor::tei:event/@to"/>.
+                </sch:assert>
+            </sch:rule>
+         </pattern>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="SPEAR-relation-reforkeyorname-constraint-assert-104">
             <rule context="tei:relation">
                <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4347,7 +4395,7 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="SPEAR-relation-ana-ana-on-event-relation-constraint-rule-86">
+                  id="SPEAR-relation-ana-ana-on-event-relation-constraint-rule-91">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4382,7 +4430,7 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="SPEAR-relation-ref-ref-in-context-constraint-rule-88">
+                  id="SPEAR-relation-ref-ref-in-context-constraint-rule-93">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4411,7 +4459,7 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
             </data>
          </attribute>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="SPEAR-relation-type-type-on-relation-constraint-rule-90">
+                  id="SPEAR-relation-type-type-on-relation-constraint-rule-95">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4460,7 +4508,7 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="SPEAR-relation-name-name-in-relation-constraint-rule-92">
+                  id="SPEAR-relation-name-name-in-relation-constraint-rule-97">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4518,7 +4566,7 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
             <data type="anyURI"/>
          </attribute>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="SPEAR-socecStatus-ana-ana-in-socecStatus-constraint-rule-94">
+                  id="SPEAR-socecStatus-ana-ana-in-socecStatus-constraint-rule-99">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4567,7 +4615,7 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
             </list>
          </attribute>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="SPEAR-state-ana-ana-in-state-constraint-rule-95">
+                  id="SPEAR-state-ana-ana-in-state-constraint-rule-100">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4631,7 +4679,7 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
             </list>
          </attribute>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="SPEAR-trait-ana-ana-in-trait-constraint-rule-97">
+                  id="SPEAR-trait-ana-ana-in-trait-constraint-rule-102">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4708,7 +4756,7 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="SPEAR-att.global.analytic-ana-anaValues-constraint-rule-100">
+            id="SPEAR-att.global.analytic-ana-anaValues-constraint-rule-105">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 context="//tei:ab/tei:listEvent/tei:event/@ana | //tei:langKnown/@ana | //tei:occupation/@ana | //tei:socecStatus/@ana | //tei:state/@ana | //tei:trait/@ana">

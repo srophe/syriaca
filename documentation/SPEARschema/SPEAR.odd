@@ -1629,6 +1629,35 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
+          <constraintSpec ident="dates-in-relations-in-events" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:event[@when]//tei:relation">
+                <sch:assert test="./@when = ./ancestor::tei:event/@when">
+                  This &lt;relation&gt; element must have a @when attribute with the value <sch:value-of select="./ancestor::tei:event/@when"/>.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:event[@notBefore]//tei:relation">
+                <sch:assert test="./@notBefore = ./ancestor::tei:event/@notBefore">
+                  This &lt;relation&gt; element must have a @notBefore attribute with the value <sch:value-of select="./ancestor::tei:event/@notBefore"/>.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:event[@notAfter]//tei:relation">
+                <sch:assert test="./@notAfter = ./ancestor::tei:event/@notAfter">
+                  This &lt;relation&gt; element must have a @notAfter attribute with the value <sch:value-of select="./ancestor::tei:event/@notAfter"/>.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:event[@from]//tei:relation">
+                <sch:assert test="./@from = ./ancestor::tei:event/@from">
+                  This &lt;relation&gt; element must have a @from attribute with the value <sch:value-of select="./ancestor::tei:event/@from"/>.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:event[@to]//tei:relation">
+                <sch:assert test="./@to = ./ancestor::tei:event/@to">
+                  This &lt;relation&gt; element must have a @to attribute with the value <sch:value-of select="./ancestor::tei:event/@to"/>.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
           <attList>
             <attDef ident="ref" mode="change" usage="opt">
               <constraintSpec ident="ref-in-context" scheme="schematron">
