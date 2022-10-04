@@ -556,7 +556,7 @@
               </sch:rule>
               <sch:rule context="tei:back//tei:bibl/@xml:id">
                 <sch:let name="docURIno"
-                  value="//tei:publicationStmt/tei:idno[@type]/substring-after(substring-before(., '/tei'), 'spear-prosop.org/')"/>
+                  value="//tei:publicationStmt/tei:idno[@type='URI']/substring-after(substring-before(., '/tei'), 'spear-prosop.org/')"/>
                 <sch:assert test="contains(., concat('bibl', $docURIno, '-'))">The @xml:id on the
                   &lt;bibl&gt; element in the back matter must take the following form: 'bibl' +
                     '<sch:value-of select="$docURIno"/>' + '-' + a unique number.</sch:assert>
