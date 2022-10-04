@@ -386,13 +386,13 @@
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:seriesStmt[2]/tei:idno[preceding-sibling::tei:title = 'The Lives of the Eastern Saints']">
-                <sch:assert test=". = 'http://syriaca.org/spear/lives-eastern-saints'">
-                  This &lt;idno&gt; must be "http://syriaca.org/spear/lives-eastern-saints".
+                <sch:assert test=". = 'https://spear-prosop.org/lives-eastern-saints'">
+                  This &lt;idno&gt; must be "https://spear-prosop.org/lives-eastern-saints".
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:seriesStmt[2]/tei:idno[preceding-sibling::tei:title = 'The Letters of Severus of Antioch']">
-                <sch:assert test=". = 'http://syriaca.org/spear/letters-severus'">
-                  This &lt;idno&gt; must be "http://syriaca.org/spear/letters-severus".
+                <sch:assert test=". = 'https://spear-prosop.org/letters-severus'">
+                  This &lt;idno&gt; must be "https://spear-prosop.org/letters-severus".
                 </sch:assert>
               </sch:rule>
             </constraint>
@@ -1181,7 +1181,7 @@
             <constraint>
               <sch:rule context="//tei:publicationStmt/tei:idno[@type='URI']">
                 <sch:let name="fileNo" value="replace(document-uri(/), '[\D]', '')"/>
-                <sch:assert test=". = concat('http://syriaca.org/spear/', $fileNo, '/tei')">
+                <sch:assert test=". = concat('https://spear-prosop.org/', $fileNo, '/tei')">
                   The text node of this &lt;idno&gt; element must be "http://syriaca.org.spear/<sch:value-of select="$fileNo"/>/tei".
                 </sch:assert>
               </sch:rule>
