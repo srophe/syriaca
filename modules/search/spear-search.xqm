@@ -5,7 +5,6 @@ xquery version "3.0";
  :)
 module namespace spears="http://srophe.org/srophe/spears";
 import module namespace functx="http://www.functx.com";
-import module namespace facet="http://expath.org/ns/facet" at "../lib/facet.xqm";
 import module namespace config="http://srophe.org/srophe/config" at "../config.xqm";
 import module namespace data="http://srophe.org/srophe/data" at "../lib/data.xqm";
 import module namespace global="http://srophe.org/srophe/global" at "../lib/global.xqm";
