@@ -1453,7 +1453,7 @@
                     <sch:assert test="
                       every $i in .
                       satisfies $i = $personURIs" role="warning">
-                      <sch:value-of select="$error"/> is not currently in Syriaca.org person data. 
+                      <sch:value-of select="$error"/> is not currently in use. 
                       Note that all person URIs take the form 'http://syriaca.org/person/{\d+}' 
                       (where {\d+} is a number). If a URI is not current available, replace the number portion of the URI with 
                       "#" followed without a space by a number that you use consistently when encoding information 
@@ -1490,7 +1490,7 @@
                     <sch:assert test="
                       every $i in .
                       satisfies $i = $placeURIs" role="warning">
-                      <sch:value-of select="$error"/> is not currently in Syriaca.org place data. 
+                      <sch:value-of select="$error"/> is not currently in use. 
                       Note that all properly formatted place URIs take the form 'http://syriaca.org/place/{\d+}' 
                       (where {\d+} is a number). If a URI is not current available, replace the number portion of the URI with 
                       "#" followed without a space by a number that you use consistently when encoding information 
@@ -1624,7 +1624,11 @@
                 <sch:assert test="
                   every $i in (tokenize(., ' '))
                   satisfies $i = $personURIs" role="warning">
-                  <sch:value-of select="$error"/> is not currently in Syriaca.org person data. If a URI is not current available, replace the number portion of the URI with a letter and use it consistently when encoding information about a person. Note that all person URIs take the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
+                  <sch:value-of select="$error"/> is not currently in use. 
+                  Note that all person URIs take the form 'http://syriaca.org/person/{\d+}' 
+                  (where {\d+} is a number). If a URI is not current available, replace the number portion of the URI with 
+                  "#" followed without a space by a number that you use consistently when encoding information 
+                  about that person.
                 </sch:assert>
               </sch:rule>
             </constraint>
@@ -1741,7 +1745,7 @@
                       test="
                       every $i in (tokenize(., ' '))
                       satisfies $i = $qrURI"
-                      ><sch:value-of select="$error"/> is not is use. The value of this @ana attribute must 
+                      ><sch:value-of select="$error"/> is not currently in use. The value of this @ana attribute must 
                       be one of the following: <sch:value-of select="string-join($qrURI, ';  ')"/>.</sch:assert>
                   </sch:rule>
                   <sch:rule context="tei:ab/tei:listEvent/tei:listRelation/tei:relation">
