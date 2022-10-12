@@ -249,7 +249,7 @@ declare function sf:sort($facets as map(*)?) {
         if (exists($facets)) then
             for $key in map:keys($facets)
             let $value := map:get($facets, $key)
-            order by $key ascending
+            order by $key[1] ascending
             return
                 map { $key: $value }
         else
@@ -276,7 +276,7 @@ if($facet-definition/facet:order-by/text() = 'value') then
             if (exists($facets)) then
                 for $key in map:keys($facets)
                 let $value := map:get($facets, $key)
-                order by $key descending
+                order by $key[1] descending
                 return
                     map { $key: $value }
             else
@@ -287,7 +287,7 @@ if($facet-definition/facet:order-by/text() = 'value') then
             if (exists($facets)) then
                 for $key in map:keys($facets)
                 let $value := map:get($facets, $key)
-                order by $key ascending
+                order by $key[1] ascending
                 return
                     map { $key: $value }
             else
@@ -302,7 +302,7 @@ if($facet-definition/facet:range) then
                 let $value := map:get($facets, $key)
                 let $order := string($facet-definition/facet:range/facet:bucket[@name = $key]/@order)
                 let $order := if($order castable as xs:integer) then xs:integer($order) else 0
-                order by $order descending
+                order by $order[1] descending
                 return
                     map { $key: $value }
             else
@@ -315,7 +315,7 @@ if($facet-definition/facet:range) then
                 let $value := map:get($facets, $key)
                 let $order := string($facet-definition/facet:range/facet:bucket[@name = $key]/@order)
                 let $order := if($order castable as xs:integer) then xs:integer($order) else 0
-                order by $order ascending
+                order by $order[1] ascending
                 return
                     map { $key: $value }
             else
@@ -326,7 +326,7 @@ else if($facet-definition/facet:order-by[@direction='descending']) then
         if(exists($facets)) then
             for $key in map:keys($facets)
             let $value := map:get($facets, $key)
-            order by $value descending
+            order by $value[1] descending
             return
                 map { $key: $value }
         else
@@ -337,7 +337,7 @@ else
         if(exists($facets)) then
             for $key in map:keys($facets)
             let $value := map:get($facets, $key)
-            order by $value ascending
+            order by $value[1] ascending
             return
                 map { $key: $value }
         else

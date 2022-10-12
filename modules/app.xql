@@ -582,7 +582,7 @@ declare %templates:wrap function app:build-editor-list($node as node(), $model a
         return concat($editor-name/tei:persName/tei:forename,' ',$editor-name/tei:persName/tei:addName,' ',$editor-name/tei:persName/tei:surname)
     let $sort-name :=
         for $editor-name in $editors//tei:person[@xml:id = $editor] return $editor-name/tei:persName/tei:surname
-    order by $sort-name
+    order by $sort-name[1]
     return
         if($editor != '') then 
             if(normalize-space($name) != '') then 

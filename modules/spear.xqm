@@ -86,13 +86,13 @@ declare function spear:get-all($node as node(), $model as map(*), $collection as
                                             if($spear:alpha-filter != '' and $spear:alpha-filter != 'ALL') then 
                                                 for $place in $places
                                                 let $sort := global:build-sort-string($place/descendant::tei:placeName[contains(@syriaca-tags,'#syriaca-headword')][starts-with(@xml:lang,'en')][1],'')
-                                                order by $sort ascending
+                                                order by $sort[1] ascending
                                                 where matches($sort,global:get-alpha-filter()) 
                                                 return $place
                                             else 
                                                 for $place in $places
                                                 let $sort := global:build-sort-string($place/descendant::tei:placeName[contains(@syriaca-tags,'#syriaca-headword')][starts-with(@xml:lang,'en')][1],'')
-                                                order by $sort ascending 
+                                                order by $sort[1] ascending 
                                                 return $place                            }
         else if(request:get-parameter('view', '') = 'events') then 
                     map{"hits" :
@@ -106,7 +106,7 @@ declare function spear:get-all($node as node(), $model as map(*), $collection as
                                             else if($date/@from) then $date/@from 
                                             else if($date/@notAfter) then $date/@notAfter                                                 
                                             else ()
-                                order by $sort descending
+                                order by $sort[1] descending
                                 return $event
                                 }
         else if(request:get-parameter('view', '') = 'relations') then 
@@ -126,13 +126,13 @@ declare function spear:get-all($node as node(), $model as map(*), $collection as
                                             if($spear:alpha-filter != '' and $spear:alpha-filter != 'ALL') then 
                                                 for $person in $persons
                                                 let $sort := global:build-sort-string($person/descendant::tei:persName[contains(@syriaca-tags,'#syriaca-headword')][starts-with(@xml:lang,'en')][1],'')
-                                                order by $sort ascending
+                                                order by $sort[1] ascending
                                                 where matches($sort,global:get-alpha-filter()) 
                                                 return $person
                                             else 
                                                 for $person in $persons
                                                 let $sort := global:build-sort-string($person/descendant::tei:persName[contains(@syriaca-tags,'#syriaca-headword')][starts-with(@xml:lang,'en')][1],'')
-                                                order by $sort ascending 
+                                                order by $sort[1] ascending 
                                                 return $person
                             }
 };
@@ -483,7 +483,7 @@ declare %templates:wrap function spear:events($node as node(), $model as map(*))
             else if($date/@from) then $date/@from 
             else if($date/@notAfter) then $date/@notAfter                                                 
             else ()
-        order by $sort descending
+        order by $sort[1] descending
         (:return <div class="results">{spear:factoid-title($event)}</div>:)
         let $id := $event/tei:idno[@type="URI"]
         return <div class="event" style="display:block; margin:.75em; border-bottom:1pt solid #eee;">{spear:factoid-title($event)} <a href="factoid.html?id={$id}">See factoid page <span class="glyphicon glyphicon-circle-arrow-right" aria-hidden="true"/></a></div>        
@@ -878,7 +878,7 @@ declare function spear:build-events-panel($nodes as node()*){
             for $event in $data
             let $date := substring($event/descendant-or-self::tei:date[1]/@syriaca-computed-start,1,2)
             group by $date
-            order by $date ascending
+            order by $date[1] ascending
             return
             <li>
                 <h4>
@@ -925,7 +925,7 @@ declare function spear:events($nodes as node()*){
             for $event in $data
             let $date := substring($event/descendant-or-self::tei:date[1]/@syriaca-computed-start,1,2)
             group by $date
-            order by $date ascending
+            order by $date[1] ascending
             return
             <li>
                 <h4>
