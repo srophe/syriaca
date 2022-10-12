@@ -168,56 +168,6 @@ declare function relations:subject-headings($idno as xs:string?){
 :)
 
 (:
- : @depreciated - spelling error
- : Get internal relationships, group by type
- : dynamically pass related ids to data.xql for async loading.  
- : 
-:)
-declare function relations:display-internal-relatiobships($data as node()*, $currentID as xs:string?, $type as xs:string?){
-    let $record := $data
-    let $title := if(contains($record/descendant::tei:title[1]/text(),' — ')) then 
-                        substring-before($record/descendant::tei:title[1],' — ') 
-                   else $record/descendant::tei:title[1]/text()
-    let $uris := 
-                string-join(
-                    if($type != '') then
-                        for $r in $record/descendant-or-self::tei:relation[@ref=$type]
-                        return string-join(($r/@active/string(),$r/@passive/string(),$r/@mutual/string()),' ')
-                    else
-                        for $r in $record/descendant-or-self::tei:relation
-                        return string-join(($r/@active/string(),$r/@passive/string(),$r/@mutual/string()),' '),' ')
-    let $relationships := 
-                    if($type != '') then
-                        $record/descendant-or-self::tei:relation[@ref=$type]
-                    else $record/descendant-or-self::tei:relation 
-    for $related in $relationships
-    let $rel-id := index-of($record, $related[1])
-    let $rel-type := if($related/@ref) then $related/@ref else $related/@name
-    group by $relationship := $rel-type
-    return 
-        let $ids := string-join(($related/@active/string(),$related/@passive/string(),$related/@mutual/string()),' ')
-        let $ids := 
-            string-join(
-                distinct-values(
-                    tokenize($ids,' ')[not(. = $currentID)]),' ')
-        let $count := count(tokenize($ids,' ')[not(. = $currentID)])
-        let $relationship-type := $relationship 
-        let $relationshipTypeID := replace($relationship-type,' ','')
-        return 
-            <div class="relation internal-relationships"  xmlns="http://www.w3.org/1999/xhtml">
-                <h4 class="relationship-type">{$title}&#160;{relations:stringify-relationship-type($relationship)} ({$count})</h4>
-                <div class="indent">
-                    <div class="dynamicContent" data-url="{concat($config:nav-base,'/modules/data.xql?ids=',$ids,'&amp;relID=',$relationshipTypeID,'&amp;relationship=internal')}"></div>
-                    {
-                    if($count gt 10) then 
-                        <a class="more" href="{concat($config:nav-base,'/search.html?=?ids=',$ids,'&amp;relID=',$relationshipTypeID,'&amp;relationship=internal')}">See all</a>
-                    else ()
-                    }
-                </div>
-            </div>
-};
-
-(:
  : Get internal relationships, group by type
  : dynamically pass related ids to data.xql for async loading.  
  : 

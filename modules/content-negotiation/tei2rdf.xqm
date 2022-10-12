@@ -6,7 +6,6 @@ xquery version "3.0";
 module namespace tei2rdf="http://srophe.org/srophe/tei2rdf";
 import module namespace bibl2html="http://srophe.org/srophe/bibl2html" at "bibl2html.xqm";
 import module namespace tei2html="http://srophe.org/srophe/tei2html" at "tei2html.xqm";
-import module namespace rel="http://srophe.org/srophe/related" at "../lib/get-related.xqm";
 import module namespace config="http://srophe.org/srophe/config" at "../config.xqm";
 
 import module namespace functx="http://www.functx.com";
@@ -193,11 +192,6 @@ declare function tei2rdf:rec-label-and-titles($rec, $element as xs:string?){
     else if($rec/descendant::tei:body/tei:listPlace/tei:place) then 
         for $headword in $rec/descendant::tei:body/tei:listPlace/tei:place/tei:placeName[node()]
         return tei2rdf:create-element($element, string($headword/@xml:lang), string-join($headword/descendant-or-self::text(),''), 'literal')
-    else if($rec[self::tei:div/@uri]) then 
-        if(tei2rdf:rec-type($rec) = 'http://syriaca.org/schema#/relationFactoid') then
-            tei2rdf:create-element($element, (), normalize-space(rel:relationship-sentence($rec/descendant::tei:listRelation/tei:relation)), 'literal')
-        else tei2rdf:create-element($element, (),
-        normalize-space(string-join((tei2html:tei2html($rec/child::*[not(self::tei:bibl)])),' ')), 'literal')
     else tei2rdf:create-element($element, string($rec/descendant::tei:title[1]/@xml:lang), string-join($rec/descendant::tei:title[1]/text(),''), 'literal')
 };
 

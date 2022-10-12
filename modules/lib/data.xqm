@@ -7,7 +7,6 @@ module namespace data="http://srophe.org/srophe/data";
 
 import module namespace config="http://srophe.org/srophe/config" at "../config.xqm";
 import module namespace global="http://srophe.org/srophe/global" at "global.xqm";
-import module namespace facet="http://expath.org/ns/facet" at "facet.xqm";
 import module namespace sf="http://srophe.org/srophe/facets" at "facets.xql";
 import module namespace slider = "http://srophe.org/srophe/slider" at "date-slider.xqm";
 import module namespace functx="http://www.functx.com";
@@ -34,8 +33,9 @@ declare function data:get-document() {
                 for $rec in collection($config:data-root)//tei:ab[tei:idno[. = request:get-parameter('id', '')]]
                 return <tei:TEI xmlns="http://www.tei-c.org/ns/1.0">{$rec/ancestor::tei:TEI/tei:teiHeader, <body>{$rec}</body>}</tei:TEI>   
         else if($config:document-id) then 
-           collection($config:data-root)//tei:idno[@type='URI'][. = request:get-parameter('id', '')]/ancestor::tei:TEI
-        else collection($config:data-root)/id(request:get-parameter('id', ''))/ancestor::tei:TEI
+            let $id := if(ends-with(request:get-parameter('id', ''),'/tei')) then request:get-parameter('id', '') else concat(request:get-parameter('id', ''),'/tei')
+            return collection($config:data-root)//tei:idno[@type='URI'][. = $id]/ancestor::tei:TEI[1]
+        else collection($config:data-root)/id(request:get-parameter('id', ''))/ancestor::tei:TEI[1]
     (: Get document by document path. :)
     else if(request:get-parameter('doc', '') != '') then 
         if(starts-with(request:get-parameter('doc', ''),$config:data-root)) then 
@@ -386,6 +386,7 @@ declare function data:add-sort-options-bibl($hit, $sort-option as xs:string*){
  : Currently supports sort on title, author, publication date and person dates
  : @param $sort-option
 :)
+(:
 declare function data:sort-element($hit, $sort-element as xs:string*, $lang as xs:string?){
     if($sort-element != '') then
         if($sort-element = "tei:place/tei:placeName[@srophe:tags='#headword']") then 
@@ -422,7 +423,7 @@ declare function data:sort-element($hit, $sort-element as xs:string*, $lang as x
             else util:eval(concat('$hit/descendant::',$sort-element,'[1]'))            
     else $hit/descendant::tei:titleStmt/tei:title[1]
 };
-
+:)
 (:~
  : Search options passed to ft:query functions
  : Defaults to AND

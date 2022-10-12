@@ -12,12 +12,10 @@ import module namespace templates="http://exist-db.org/xquery/templates" ;
 (: Import Srophe application modules. :)
 import module namespace config="http://srophe.org/srophe/config" at "config.xqm";
 import module namespace data="http://srophe.org/srophe/data" at "lib/data.xqm";
-import module namespace facet="http://expath.org/ns/facet" at "lib/facet.xqm";
 import module namespace sf="http://srophe.org/srophe/facets" at "lib/facets.xql";
 import module namespace global="http://srophe.org/srophe/global" at "lib/global.xqm";
 import module namespace maps="http://srophe.org/srophe/maps" at "lib/maps.xqm";
 import module namespace page="http://srophe.org/srophe/page" at "lib/paging.xqm";
-import module namespace rel="http://srophe.org/srophe/related" at "lib/get-related.xqm";
 import module namespace relations="http://srophe.org/srophe/relationships" at "lib/relationships.xqm";
 import module namespace slider = "http://srophe.org/srophe/slider" at "lib/date-slider.xqm";
 import module namespace timeline = "http://srophe.org/srophe/timeline" at "lib/timeline.xqm";
@@ -122,14 +120,16 @@ function app:google-analytics($node as node(), $model as map(*)){
 :)
 declare function app:display-nodes($node as node(), $model as map(*), $paths as xs:string?, $collection as xs:string?){
     let $record := $model("hits")
+    (: Causes this bug: Function call stack is empty, but XQueryContext.functionEnd() was called. This could indicate a concurrency issue (shared XQueryContext?) 
     let $nodes := if($paths != '') then 
                     for $p in $paths
                     return util:eval(concat('$record/',$p))
                   else $record/descendant::tei:text
+    :)                  
     return 
         if($config:get-config//repo:html-render/@type='xslt') then
-            global:tei2html($nodes, $collection)
-        else tei2html:tei2html($nodes)
+            global:tei2html($record, $collection)
+        else tei2html:tei2html($record)
 }; 
 
 (:~  
@@ -301,7 +301,6 @@ declare function app:display-facets($node as node(), $model as map(*), $collecti
     return 
         if(not(empty($facet-config))) then 
             sf:display($model("hits"),$facet-config)
-           (:(facet:output-html-facets($hits, $facet-config/descendant::facet:facets/facet:facet-definition)):)
         else ()
 };
 

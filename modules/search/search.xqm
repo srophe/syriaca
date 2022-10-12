@@ -14,7 +14,6 @@ import module namespace kwic="http://exist-db.org/xquery/kwic";
 import module namespace config="http://srophe.org/srophe/config" at "../config.xqm";
 import module namespace data="http://srophe.org/srophe/data" at "../lib/data.xqm";
 import module namespace global="http://srophe.org/srophe/global" at "../lib/global.xqm";
-import module namespace facet="http://expath.org/ns/facet" at "../lib/facet.xqm";
 import module namespace sf="http://srophe.org/srophe/facets" at "../lib/facets.xql";
 import module namespace page="http://srophe.org/srophe/page" at "../lib/paging.xqm";
 import module namespace slider = "http://srophe.org/srophe/slider" at "../lib/date-slider.xqm";
