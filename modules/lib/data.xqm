@@ -211,7 +211,7 @@ declare function data:get-records($collection as xs:string*, $element as xs:stri
  : Build a search XPath based on search parameters. 
  : Add sort options. 
 :)
-declare function data:search($collection as xs:string*, $queryString as xs:string?, $sort-element as xs:string?) {                      
+declare function data:search($collection as xs:string*, $queryString as xs:string?, $sort-element as xs:string*) {                      
     let $eval-string := if($queryString != '') then $queryString 
                         else concat(data:build-collection-path($collection), data:create-query($collection),slider:date-filter(()))
     let $hits :=
@@ -250,7 +250,7 @@ declare function data:search($collection as xs:string*, $queryString as xs:strin
  : Build a search XPath based on search parameters. 
  : Add sort options. 
 :)
-declare function data:apiSearch($collection as xs:string*, $element as xs:string?, $queryString as xs:string?, $sort-element as xs:string?) {                      
+declare function data:apiSearch($collection as xs:string*, $element as xs:string?, $queryString as xs:string?, $sort-element as xs:string*) {                      
     let $elementSearch :=  
                 if(exists($element) and $element != '') then  
                     for $e in $element
