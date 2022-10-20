@@ -52,7 +52,7 @@ declare function search:build-query($collection as xs:string?){
 (:~
  : Search results stored in map for use by other HTML display functions 
 :)
-declare %templates:wrap function search:search-data($node as node(), $model as map(*), $collection as xs:string?, $sort-element as xs:string?){
+declare %templates:wrap function search:search-data($node as node(), $model as map(*), $collection as xs:string?, $sort-element as xs:string*){
     let $queryExpr := search:build-query($collection)
     let $hits := data:search($collection, $queryExpr, $sort-element)
     return
