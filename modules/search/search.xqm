@@ -52,7 +52,7 @@ declare function search:build-query($collection as xs:string?){
 (:~
  : Search results stored in map for use by other HTML display functions 
 :)
-declare %templates:wrap function search:search-data($node as node(), $model as map(*), $collection as xs:string?, $sort-element as xs:string*){
+declare %templates:wrap function search:search-data($node as node(), $model as map(*), $collection as xs:string?, $sort-element as xs:string?){
     let $queryExpr := search:build-query($collection)
     let $hits := data:search($collection, $queryExpr, $sort-element)
     return
@@ -69,46 +69,65 @@ declare %templates:wrap function search:search-data($node as node(), $model as m
 :)
 declare 
     %templates:default("start", 1)
-function search:show-hits($node as node()*, $model as map(*), $collection as xs:string?, $kwic as xs:string?) {
+function search:show-hits($node as node()*, $model as map(*), $collection as xs:string?, $kwic as xs:string?, $sort-options as xs:string*, $search-string as xs:string?) {
     let $hits := $model("hits")
+    let $count := count($hits)
     let $facet-config := global:facet-definition-file($collection)
     let $facetsDisplay := sf:display($model("hits"),$facet-config)
-    return 
+    return     
+        if(request:get-parameter-names() = '' or empty(request:get-parameter-names())) then () 
+           (: search:search-form($node, $model, $collection):) 
+        else if($count = 0  and exists(request:get-parameter-names())) then ()
+        (:
+            <div>
+                {page:pages($hits, $collection, $search:start, $search:perpage,$search-string, $sort-options)}
+                {search:search-form($node, $model, $collection)}
+                <br/>
+            </div>
+            :)
+        else 
+        (:
         if(not(empty($facetsDisplay))) then 
-            <div class="row" id="search-results" xmlns="http://www.w3.org/1999/xhtml">
-                <div class="col-md-8 col-md-push-4">
-                    <div class="indent" id="search-results" xmlns="http://www.w3.org/1999/xhtml">{
-                            let $hits := $model("hits")
-                            for $hit at $p in subsequence($hits, $search:start, $search:perpage)
-                            let $id := replace($hit/descendant::tei:idno[1],'/tei','')
-                            let $kwic := if($kwic = ('true','yes','true()','kwic')) then kwic:expand($hit) else () 
-                            return 
-                             <div class="row record" xmlns="http://www.w3.org/1999/xhtml" style="border-bottom:1px dotted #eee; padding-top:.5em">
-                                 <div class="col-md-1" style="margin-right:-1em; padding-top:.25em;">        
-                                     <span class="badge" style="margin-right:1em;">{$search:start + $p - 1}</span>
-                                 </div>
-                                 <div class="col-md-11" style="margin-right:-1em; padding-top:.25em;">
-                                     {tei2html:summary-view($hit, '', $id)}
-                                     {
-                                        if($kwic//exist:match) then 
-                                           tei2html:output-kwic($kwic, $id)
-                                        else ()
-                                     }
-                                 </div>
-                             </div>   
+            <div>
+                {page:pages($hits, $collection, $search:start, $search:perpage,$search-string, $sort-options)}
+                <div class="row" id="search-results" xmlns="http://www.w3.org/1999/xhtml">
+                    <div class="col-md-8 col-md-push-4">
+                        <div class="indent" id="search-results" xmlns="http://www.w3.org/1999/xhtml">{
+                                let $hits := $model("hits")
+                                for $hit at $p in subsequence($hits, $search:start, $search:perpage)
+                                let $id := replace($hit/descendant::tei:idno[1],'/tei','')
+                                let $kwic := if($kwic = ('true','yes','true()','kwic')) then kwic:expand($hit) else () 
+                                return 
+                                 <div class="row record" xmlns="http://www.w3.org/1999/xhtml" style="border-bottom:1px dotted #eee; padding-top:.5em">
+                                     <div class="col-md-1" style="margin-right:-1em; padding-top:.25em;">        
+                                         <span class="badge" style="margin-right:1em;">{$search:start + $p - 1}</span>
+                                     </div>
+                                     <div class="col-md-11" style="margin-right:-1em; padding-top:.25em;">
+                                         {tei2html:summary-view($hit, '', $id)}
+                                         {
+                                            if($kwic//exist:match) then 
+                                               tei2html:output-kwic($kwic, $id)
+                                            else ()
+                                         }
+                                     </div>
+                                 </div>   
+                        }</div>
+                    </div>
+                    <div class="col-md-4 col-md-pull-8">{
+                     let $hits := $model("hits")
+                     let $facet-config := global:facet-definition-file($collection)
+                     return 
+                         if(not(empty($facetsDisplay))) then 
+                             $facetsDisplay
+                         else ()  
                     }</div>
                 </div>
-                <div class="col-md-4 col-md-pull-8">{
-                 let $hits := $model("hits")
-                 let $facet-config := global:facet-definition-file($collection)
-                 return 
-                     if(not(empty($facetsDisplay))) then 
-                         $facetsDisplay
-                     else ()  
-                }</div>
-        </div>
+                {page:pages($hits, $collection, $search:start, $search:perpage,'no', $sort-options)}
+            </div>
         else 
+        :)
          <div class="indent" id="search-results" xmlns="http://www.w3.org/1999/xhtml">
+         {page:pages($hits, $collection, $search:start, $search:perpage,$search-string, $sort-options)}
          {
                  let $hits := $model("hits")
                  for $hit at $p in subsequence($hits, $search:start, $search:perpage)
@@ -128,7 +147,9 @@ function search:show-hits($node as node()*, $model as map(*), $collection as xs:
                           }
                       </div>
                   </div>   
-         }</div>
+         }
+         {page:pages($hits, $collection, $search:start, $search:perpage,'no', $sort-options)}
+         </div>
 };
 
 (:~
@@ -139,7 +160,7 @@ function search:show-hits($node as node()*, $model as map(*), $collection as xs:
  : @depreciated: do a manual HTML build, add xquery keyboard options 
 :)
 declare function search:search-form($node as node(), $model as map(*), $collection as xs:string?){
-if(exists(request:get-parameter-names())) then ()
+if(exists(request:get-parameter-names()) and count($model("hits")) gt 0) then ()
 else 
     let $search-config := 
         if($collection != '') then concat($config:app-root, '/', string(config:collection-vars($collection)/@app-root),'/','search-config.xml')

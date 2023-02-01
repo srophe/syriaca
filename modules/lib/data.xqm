@@ -211,13 +211,29 @@ declare function data:get-records($collection as xs:string*, $element as xs:stri
  : Build a search XPath based on search parameters. 
  : Add sort options. 
 :)
-declare function data:search($collection as xs:string*, $queryString as xs:string?, $sort-element as xs:string*) {                      
-    let $eval-string := if($queryString != '') then $queryString 
-                        else concat(data:build-collection-path($collection), data:create-query($collection),slider:date-filter(()))
+declare function data:search($collection as xs:string*, $queryString as xs:string?, $sort-element as xs:string?) {                      
+    let $params := 
+        for $p in request:get-parameter-names()
+        where request:get-parameter($p, '') != ''
+        return $p
+    (: for debugging        
+    let $evalString := 
+            if($p != '') then  
+                if($queryString != '') then $queryString
+                else if(data:create-query($collection) != '') then
+                    concat(data:build-collection-path($collection), data:create-query($collection),slider:date-filter(()))
+                else()    
+            else ()
+    :)            
     let $hits :=
-            if(request:get-parameter-names() = '' or empty(request:get-parameter-names())) then 
-               collection($config:data-root || '/' || $collection)//tei:body[ft:query(., (),sf:facet-query())]
-            else util:eval($eval-string)      
+        if($params != '') then
+            if($queryString != '') then 
+                if(ends-with($queryString,'//tei:body')) then () 
+                else util:eval($queryString)
+            else if(data:create-query($collection) != '') then
+                util:eval(concat(data:build-collection-path($collection), data:create-query($collection),slider:date-filter(())))
+            else () 
+        else ()            
     let $sort := if($sort-element != '') then 
                     $sort-element
                  else if(request:get-parameter('sort-element', '') != '') then
@@ -242,7 +258,7 @@ declare function data:search($collection as xs:string*, $queryString as xs:strin
         else 
             for $hit in $hits
             order by ft:score($hit) descending
-            return $hit/ancestor-or-self::tei:TEI 
+            return $hit/ancestor-or-self::tei:TEI  
 };
 
 (:~
@@ -250,7 +266,7 @@ declare function data:search($collection as xs:string*, $queryString as xs:strin
  : Build a search XPath based on search parameters. 
  : Add sort options. 
 :)
-declare function data:apiSearch($collection as xs:string*, $element as xs:string?, $queryString as xs:string?, $sort-element as xs:string*) {                      
+declare function data:apiSearch($collection as xs:string*, $element as xs:string?, $queryString as xs:string?, $sort-element as xs:string?) {                      
     let $elementSearch :=  
                 if(exists($element) and $element != '') then  
                     for $e in $element
