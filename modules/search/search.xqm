@@ -127,7 +127,6 @@ function search:show-hits($node as node()*, $model as map(*), $collection as xs:
         else 
         :)
          <div class="indent" id="search-results" xmlns="http://www.w3.org/1999/xhtml">
-         {page:pages($hits, $collection, $search:start, $search:perpage,$search-string, $sort-options)}
          {
                  let $hits := $model("hits")
                  for $hit at $p in subsequence($hits, $search:start, $search:perpage)
@@ -148,7 +147,6 @@ function search:show-hits($node as node()*, $model as map(*), $collection as xs:
                       </div>
                   </div>   
          }
-         {page:pages($hits, $collection, $search:start, $search:perpage,'no', $sort-options)}
          </div>
 };
 
