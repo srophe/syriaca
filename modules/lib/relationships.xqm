@@ -143,8 +143,7 @@ declare function relations:decode-relationship($type as xs:string?){
             (: general :)
             case "broader" return " has a broader match with "
             case "closeMatch" return " has a close match with "
-            default return concat('TEST1 ',$relationship-name)
-            (:concat(' ', functx:capitalize-first(functx:camel-case-to-words(replace($relationship-name,'-',' '),' ')),' '):) 
+            default return concat(' ', functx:capitalize-first(functx:camel-case-to-words(replace($relationship-name,'-',' '),' ')),' ') 
 };
 
 (: Get cited works :)
@@ -230,7 +229,7 @@ declare function relations:display-internal-relationships($data as node()*, $cur
  : @param $sort sort on title or part number default to title
  : @param $count number of records to return, if empty defaults to 5 with a popup for more.
 :)
-declare function relations:display-external-relatiobships($currentID as xs:string?, $type as xs:string?, $label as xs:string?){
+declare function relations:display-external-relationships($currentID as xs:string?, $type as xs:string?, $label as xs:string?){
    let $relationship-string := 
         if($type != '') then
             concat("[descendant::tei:relation[@passive[matches(.,'",$currentID,"(\W.*)?$')] or @mutual[matches(.,'",$currentID,"(\W.*)?$')]][@ref = '",$type ,"' or @name = '",$type ,"']]")
