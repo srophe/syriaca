@@ -5,7 +5,7 @@ xquery version "3.0";
 module namespace spear="http://srophe.org/srophe/spear";
 
 (: eXistdb modules :)
-import module namespace templates="http://exist-db.org/xquery/templates" ;
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 import module namespace functx="http://www.functx.com";
 
 (:Syriaca.org modules. :)
