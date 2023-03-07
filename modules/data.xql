@@ -16,6 +16,7 @@ import module namespace data="http://srophe.org/srophe/data" at "lib/data.xqm";
 import module namespace maps="http://srophe.org/srophe/maps" at "lib/maps.xqm";
 import module namespace search="http://srophe.org/srophe/search" at "search/search.xqm";
 import module namespace sf="http://srophe.org/srophe/facets" at "facets.xql";
+import module namespace functx="http://www.functx.com";
 
 declare namespace http="http://expath.org/ns/http-client";
 declare namespace tei="http://www.tei-c.org/ns/1.0";
@@ -51,9 +52,10 @@ let $data :=
                             <p class="small moreInfo"><a href="{$item/*:link/text()}" class="btn btn-default btn-rounded btn-light btn-sm text-center">Read More</a></p>
                         </div>
             else if($ids != '') then 
-                for $r in collection($config:data-root)[descendant::tei:body[ft:query(., (),sf:facet-query())]]
-                where ft:field($r, 'idno') = (tokenize($ids,' '))
-                return $r
+                let $ids := string-join(for $id in tokenize($ids,' ') return replace($id,'(/|:)','\\$1'),' OR ')
+                for $r in collection($config:data-root)//tei:body[ft:query(., data:searchField('idno', $ids))] 
+                return root($r)
+                (:collection($config:data-root)//tei:TEI[ft:query(., 'idno:(' || $ids ||')')]:)
             else if($params != '') then
                 data:search($collection, (), ())
             else <message>Incorrect search parameters</message>

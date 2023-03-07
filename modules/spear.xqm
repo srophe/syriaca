@@ -118,7 +118,6 @@ declare function spear:get-all($node as node(), $model as map(*), $collection as
                     let $spear := collection($config:data-root || $collection-path)//tei:ab[tei:listPerson]
                     return 
                         map{"spear" : $spear,
-                            "path"  : $browse-path,
                             "hits" : 
                                         let $uris := distinct-values($spear//@ref[contains(.,concat($config:base-uri,'/person/'))])
                                         let $persons := collection($config:data-root || '/persons')//tei:TEI[.//tei:idno[@type='URI'][. = ($uris)]]

@@ -262,9 +262,11 @@ if(contains($id,'/spear/')) then
                 element { xs:QName('rdf:Description') } {(
                             attribute {xs:QName("rdf:about")} { $s },
                             for $o in tokenize($rel/@mutual,' ')[. != $s]
+                            (:
                             let $element-name := if($rel/@ref and $rel/@ref != '') then string($rel/@ref) else if($rel/@name and $rel/@name != '') then string($rel/@name) else 'dcterms:relation'
                             let $element-name := if(starts-with($element-name,'dct:')) then replace($element-name,'dct:','dcterms:') else $element-name
                             let $relationshipURI := concat($o,'#',$element-name,'-',$s)
+                            :)
                             return 
                                 (tei2rdf:create-element('dcterms:relation', (), $o, ()),
                                 tei2rdf:create-element('snap:hasBond', (), $id, ()))
@@ -275,9 +277,11 @@ if(contains($id,'/spear/')) then
                    element { xs:QName('rdf:Description') } {(
                             attribute {xs:QName("rdf:about")} { $s },
                             for $o in tokenize($rel/@passive,' ')
+                            (:
                             let $element-name := if($rel/@ref and $rel/@ref != '') then string($rel/@ref) else if($rel/@name and $rel/@name != '') then string($rel/@name) else 'dcterms:relation'
                             let $element-name := if(starts-with($element-name,'dct:')) then replace($element-name,'dct:','dcterms:') else $element-name
                             let $relationshipURI := concat($o,'#',$element-name,'-',$s)
+                            :)
                             return 
                                 (tei2rdf:create-element('dcterms:relation', (), $o, ()),
                                 tei2rdf:create-element('snap:hasBond', (), $id, ()))
@@ -313,7 +317,7 @@ declare function tei2rdf:relations($rec, $id){
         else 
             for $s in tokenize($rel/@active,' ')
             for $o in tokenize($rel/@passive,' ')
-            let $element-name := if($rel/@ref and $rel/@ref != '') then string($rel/@ref) else if($rel/@name and $rel/@name != '') then string($rel/@name) else 'dcterms:relation'
+            let $element-name := if($rel/@name and $rel/@name != '') then string($rel/@name) else if($rel/@ref and $rel/@ref != '') then string($rel/@ref) else 'dcterms:relation'
             let $element-name := if(starts-with($element-name,'dct:')) then replace($element-name,'dct:','dcterms:') else $element-name
             let $relationshipURI := concat($o,'#',$element-name,'-',$s)
             return 

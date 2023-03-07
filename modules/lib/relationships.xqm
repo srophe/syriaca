@@ -180,18 +180,11 @@ declare function relations:display-internal-relationships($data as node()*, $cur
                    else if(contains($record/descendant::tei:title[1]/text(),' - ')) then 
                         substring-before($record/descendant::tei:title[1],' - ')     
                    else string-join($record/descendant::tei:title[1]//text(),'')
-    let $uris := 
-                string-join(
-                    if($type != '') then
-                        for $r in $record/descendant-or-self::tei:relation[@ref=$type]
-                        return string-join(($r/@active/string(),$r/@passive/string(),$r/@mutual/string()),' ')
-                    else
-                        for $r in $record/descendant-or-self::tei:relation
-                        return string-join(($r/@active/string(),$r/@passive/string(),$r/@mutual/string()),' '),' ')
+
     let $relationships := 
-                    if($type != '') then
-                        $record/descendant-or-self::tei:relation[@ref=$type]
-                    else $record/descendant-or-self::tei:relation 
+                     if($type != '') then
+                          $record//tei:listRelation[not(parent::tei:bibl/parent::tei:bibl)]/tei:relation[@ref=$type]
+                     else $record//tei:listRelation[not(parent::tei:bibl/parent::tei:bibl)]/tei:relation                  
     for $related in $relationships
     let $rel-id := index-of($record, $related[1])
     let $rel-type := if($related/@name) then $related/@name else if($related/@ref) then $related/@ref else $related/@name

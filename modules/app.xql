@@ -30,8 +30,8 @@ declare namespace html="http://www.w3.org/1999/xhtml";
 declare namespace srophe="https://srophe.app";
 
 (: Global Variables:)
-declare variable $app:start {request:get-parameter('start', 1) cast as xs:integer};
-declare variable $app:perpage {request:get-parameter('perpage', 25) cast as xs:integer};
+declare variable $app:start {request:get-parameter('start', 1)[1] cast as xs:integer};
+declare variable $app:perpage {request:get-parameter('perpage', 25)[1] cast as xs:integer};
 
 (:~
  : Get app logo. Value passed from repo-config.xml  
@@ -224,14 +224,14 @@ return
  : Used by browse and search pages. 
 :)
 declare %templates:wrap function app:pageination($node as node()*, $model as map(*), $collection as xs:string?, $sort-options as xs:string*, $search-string as xs:string?){
-   page:pages($model("hits"), $collection, $app:start, $app:perpage,$search-string, $sort-options)
+   page:pages($model("hits"), $collection, $app:start, $app:perpage, $search-string, $sort-options)
 };
 
 (:~
  : Builds list of related records based on tei:relation  
 :)                   
 declare function app:internal-relationships($node as node(), $model as map(*), $relationship-type as xs:string?, $display as xs:string?, $map as xs:string?,$label as xs:string?){
-    if($model("hits")//tei:relation) then 
+    if($model("hits")//tei:listRelation[not(parent::tei:bibl/parent::tei:bibl)]/tei:relation) then 
         <div id="internalRelationships">
            <h3>{if($label != '') then $label else 'Internal Relationships' }</h3> 
            {relations:display-internal-relationships($model("hits"), replace($model("hits")//tei:idno[@type='URI'][1],'/tei',''), $relationship-type)}
