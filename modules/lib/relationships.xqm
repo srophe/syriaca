@@ -143,8 +143,7 @@ declare function relations:decode-relationship($type as xs:string?){
             (: general :)
             case "broader" return " has a broader match with "
             case "closeMatch" return " has a close match with "
-            default return concat('TEST1 ',$relationship-name)
-            (:concat(' ', functx:capitalize-first(functx:camel-case-to-words(replace($relationship-name,'-',' '),' ')),' '):) 
+            default return concat(' ', functx:capitalize-first(functx:camel-case-to-words(replace($relationship-name,'-',' '),' ')),' ') 
 };
 
 (: Get cited works :)
@@ -181,18 +180,11 @@ declare function relations:display-internal-relationships($data as node()*, $cur
                    else if(contains($record/descendant::tei:title[1]/text(),' - ')) then 
                         substring-before($record/descendant::tei:title[1],' - ')     
                    else string-join($record/descendant::tei:title[1]//text(),'')
-    let $uris := 
-                string-join(
-                    if($type != '') then
-                        for $r in $record/descendant-or-self::tei:relation[@ref=$type]
-                        return string-join(($r/@active/string(),$r/@passive/string(),$r/@mutual/string()),' ')
-                    else
-                        for $r in $record/descendant-or-self::tei:relation
-                        return string-join(($r/@active/string(),$r/@passive/string(),$r/@mutual/string()),' '),' ')
+
     let $relationships := 
-                    if($type != '') then
-                        $record/descendant-or-self::tei:relation[@ref=$type]
-                    else $record/descendant-or-self::tei:relation 
+                     if($type != '') then
+                          $record//tei:listRelation[not(parent::tei:bibl/parent::tei:bibl)]/tei:relation[@ref=$type]
+                     else $record//tei:listRelation[not(parent::tei:bibl/parent::tei:bibl)]/tei:relation                  
     for $related in $relationships
     let $rel-id := index-of($record, $related[1])
     let $rel-type := if($related/@name) then $related/@name else if($related/@ref) then $related/@ref else $related/@name
@@ -230,7 +222,7 @@ declare function relations:display-internal-relationships($data as node()*, $cur
  : @param $sort sort on title or part number default to title
  : @param $count number of records to return, if empty defaults to 5 with a popup for more.
 :)
-declare function relations:display-external-relatiobships($currentID as xs:string?, $type as xs:string?, $label as xs:string?){
+declare function relations:display-external-relationships($currentID as xs:string?, $type as xs:string?, $label as xs:string?){
    let $relationship-string := 
         if($type != '') then
             concat("[descendant::tei:relation[@passive[matches(.,'",$currentID,"(\W.*)?$')] or @mutual[matches(.,'",$currentID,"(\W.*)?$')]][@ref = '",$type ,"' or @name = '",$type ,"']]")

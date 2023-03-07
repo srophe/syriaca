@@ -6,7 +6,7 @@ xquery version "3.1";
 module namespace browse="http://srophe.org/srophe/browse";
 
 (:eXist templating module:)
-import module namespace templates="http://exist-db.org/xquery/templates" ;
+import module namespace templates="http://exist-db.org/xquery/html-templating";
 
 (: Import Srophe application modules. :)
 import module namespace config="http://srophe.org/srophe/config" at "../config.xqm";
@@ -23,11 +23,11 @@ declare namespace html="http://www.w3.org/1999/xhtml";
 declare namespace srophe="https://srophe.app";
 
 (: Global Variables :)
-declare variable $browse:alpha-filter {request:get-parameter('alpha-filter', '')};
-declare variable $browse:lang {request:get-parameter('lang', '')};
-declare variable $browse:view {request:get-parameter('view', '')};
-declare variable $browse:start {request:get-parameter('start', 1) cast as xs:integer};
-declare variable $browse:perpage {request:get-parameter('perpage', 25) cast as xs:integer};
+declare variable $browse:alpha-filter {request:get-parameter('alpha-filter', '')[1]};
+declare variable $browse:lang {request:get-parameter('lang', '')[1]};
+declare variable $browse:view {request:get-parameter('view', '')[1]};
+declare variable $browse:start {request:get-parameter('start', 1)[1] cast as xs:integer};
+declare variable $browse:perpage {request:get-parameter('perpage', 25)[1] cast as xs:integer};
 
 (:~
  : Build initial browse results based on parameters

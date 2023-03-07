@@ -22,13 +22,21 @@ declare namespace xlink = "http://www.w3.org/1999/xlink";
 :)
 declare function page:pages(
     $hits as node()*, 
-    $collection as xs:string?,
-    $start as xs:integer?, 
-    $perpage as xs:integer?, 
+    $collection as xs:string*,
+    $start as xs:integer*, 
+    $perpage as xs:integer*, 
     $search-string as xs:string*,
     $sort-options as xs:string*){
-let $perpage := if($perpage) then xs:integer($perpage) else 20
-let $start := if($start) then $start else 1
+let $perpage := if($perpage) then 
+                    if($perpage[1] castable as xs:integer) then 
+                        xs:integer($perpage[1]) 
+                    else 20
+                 else 20
+let $start := if($start) then 
+                if($start[1] castable as xs:integer) then 
+                    xs:integer($start[1]) 
+                else 1 
+              else 1
 let $total-result-count := count($hits)
 let $end := 
     if ($total-result-count lt $perpage) then 
@@ -38,10 +46,18 @@ let $end :=
 let $number-of-pages :=  xs:integer(ceiling($total-result-count div $perpage))
 let $current-page := xs:integer(($start + $perpage) div $perpage)
 (: get all parameters to pass to paging function, strip start parameter :)
+(:
+let $url-params2 :=
+        for $page in request:get-parameter-names()
+        where request:get-parameter($page, '') != '' and $page != 'start'
+        group by $p := $page
+        return ($p || '=' || request:get-parameter($p, ''))
+        :)
 let $url-params := replace(replace(request:get-query-string(), '&amp;start=\d+', ''),'start=\d+','')
-let $param-string := if($url-params != '') then concat('?',$url-params,'&amp;start=') else '?start='        
+let $param-string := if($url-params != '') then concat('?',string-join($url-params,'&amp;'),'&amp;start=') else '?start='        
 let $pagination-links := 
-    (<div class="row alpha-pages" xmlns="http://www.w3.org/1999/xhtml">
+    (
+    <div class="row alpha-pages" xmlns="http://www.w3.org/1999/xhtml">
             {
             if($search-string = ('yes','Yes')) then  
                 if(page:display-search-params($collection) != '') then 

@@ -33,8 +33,7 @@ declare function data:get-document() {
                 for $rec in collection($config:data-root)//tei:ab[tei:idno[. = request:get-parameter('id', '')]]
                 return <tei:TEI xmlns="http://www.tei-c.org/ns/1.0">{$rec/ancestor::tei:TEI/tei:teiHeader, <body>{$rec}</body>}</tei:TEI>   
         else if($config:document-id) then 
-            let $id := if(ends-with(request:get-parameter('id', ''),'/tei')) then request:get-parameter('id', '') else concat(request:get-parameter('id', ''),'/tei')
-            return collection($config:data-root)//tei:idno[@type='URI'][. = $id]/ancestor::tei:TEI[1]
+            collection($config:data-root)//tei:idno[@type='URI'][. = request:get-parameter('id', '')]/ancestor::tei:TEI[1]
         else collection($config:data-root)/id(request:get-parameter('id', ''))/ancestor::tei:TEI[1]
     (: Get document by document path. :)
     else if(request:get-parameter('doc', '') != '') then 
@@ -211,7 +210,7 @@ declare function data:get-records($collection as xs:string*, $element as xs:stri
  : Build a search XPath based on search parameters. 
  : Add sort options. 
 :)
-declare function data:search($collection as xs:string*, $queryString as xs:string?, $sort-element as xs:string?) {                      
+declare function data:search($collection as xs:string*, $queryString as xs:string*, $sort-element as xs:string*) {                      
     let $params := 
         for $p in request:get-parameter-names()
         where request:get-parameter($p, '') != ''
@@ -266,7 +265,7 @@ declare function data:search($collection as xs:string*, $queryString as xs:strin
  : Build a search XPath based on search parameters. 
  : Add sort options. 
 :)
-declare function data:apiSearch($collection as xs:string*, $element as xs:string?, $queryString as xs:string?, $sort-element as xs:string?) {                      
+declare function data:apiSearch($collection as xs:string*, $element as xs:string*, $queryString as xs:string*, $sort-element as xs:string*) {                     
     let $elementSearch :=  
                 if(exists($element) and $element != '') then  
                     for $e in $element

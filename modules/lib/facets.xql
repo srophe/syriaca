@@ -38,7 +38,7 @@ declare variable $sf:sortFields :=  let $fields :=
                                         if($sf:sortFieldsConfig != '') then
                                             for $f in $sf:sortFieldsConfig
                                             return $f 
-                                        else ("title", "author","titleSyriac","titleArabic")
+                                        else ("title", "idno", "author","titleSyriac","titleArabic")
                                     return map { "fields": $fields };
 
 (:~ 
@@ -80,6 +80,7 @@ declare function sf:build-index(){
                            }
                 else 
                    ( <field name="title" expression="sf:field(descendant-or-self::tei:body,'title')"/>,
+                    <field name="idno" expression="sf:field(descendant-or-self::tei:body,'idno')"/>,
                     <field name="titleSyriac" expression="sf:field(descendant-or-self::tei:body, 'titleSyriac')"/>,
                     <field name="titleArabic" expression="sf:field(descendant-or-self::tei:body, 'titleArabic')"/>,
                     <field name="author" expression="sf:field(descendant-or-self::tei:body, 'author')"/>)
@@ -119,12 +120,16 @@ declare function sf:build-index(){
             <create qname="@level" type="xs:string"/>
             <create qname="@status" type="xs:string"/>
             <create qname="tei:idno" type="xs:string"/>
+            <!--
             <create qname="tei:title" type="xs:string"/>
+            -->
             <create qname="tei:geo" type="xs:string"/>
             <create qname="tei:relation" type="xs:string"/>
             <create qname="tei:persName" type="xs:string"/>
             <create qname="tei:placeName" type="xs:string"/>
+            <!--
             <create qname="tei:author" type="xs:string"/>
+            -->
         </range>
     </index>
 </collection>
@@ -505,6 +510,13 @@ declare function sf:field-title($element as item()*, $name as xs:string){
         for $title in $element/ancestor-or-self::tei:TEI/descendant::tei:biblStruct/descendant::tei:title
         return sf:build-sort-string($title)         
     else sf:build-sort-string($element/ancestor-or-self::tei:TEI/descendant::tei:titleStmt/tei:title[1])
+};
+
+(:~
+ : TEI idno field, specific to Srophe applications 
+ :)
+declare function sf:field-idno($element as item()*, $name as xs:string){
+    replace($element/ancestor-or-self::tei:TEI/descendant::tei:publicationStmt/tei:idno[@type="URI"][1],'/tei','')
 };
 
 (:~
