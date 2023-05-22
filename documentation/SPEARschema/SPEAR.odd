@@ -761,6 +761,16 @@
           </constraintSpec>
           <constraintSpec ident="descInRelation" scheme="schematron">
             <constraint>
+              <sch:rule context="//tei:body/tei:ab/tei:listRelation/tei:relation">
+                <sch:assert test="tei:desc">
+                  This &lt;relation&gt; element requires a &lt;desc&gt;.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:sourceDesc//tei:relation">
+                <sch:report test="tei:desc">
+                  The &lt;desc&gt; element may not appear here.
+                </sch:report>
+              </sch:rule>
               <sch:rule context="//tei:ab/tei:listEvent/tei:listRelation/tei:relation/tei:desc">
                 <sch:let name="SameEventURIs" value="tokenize(parent::tei:relation/@mutual, ' ')"/>
                 <sch:assert test="count(child::tei:rs) = count($SameEventURIs)">
@@ -1570,20 +1580,6 @@
           <content>
             <elementRef key="desc" minOccurs="0" maxOccurs="1"/>
           </content>
-          <constraintSpec ident="descInRelation" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:body/tei:ab/tei:listRelation/tei:relation">
-                <sch:assert test="tei:desc">
-                  This &lt;relation&gt; element requires a &lt;desc&gt;.
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="//tei:sourceDesc//tei:relation">
-                <sch:report test="tei:desc">
-                  The &lt;desc&gt; element may not appear here.
-                </sch:report>
-              </sch:rule>
-            </constraint>
-          </constraintSpec>
           <constraintSpec ident="ref-mutual-act-pass-in-relation" scheme="schematron">
             <constraint>
               <sch:rule context="tei:ab[@subtype='relation']/tei:listRelation/tei:relation | tei:ab[@subtype='event']/tei:listEvent/tei:event/tei:desc/tei:listRelation/tei:relation"><!-- This doesn't currently catch incorrect person URIs on @mutual, @active, and @passive when these are embedded in event factoids. -->
