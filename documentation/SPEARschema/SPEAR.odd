@@ -105,10 +105,10 @@
             </sequence>
           </content>
           <remarks>
-            <p> Every <gi>teiHeader</gi> element contains a <gi>fileDesc</gi> element (information
-              about the creation of a file), an <gi>encodingDesc</gi> element (editorial rules), a
-              <gi>profileDesc</gi>> element (non-bibliographic aspects of a text), and a
-              <gi>revisionDesc</gi> element (history of revisions). </p>
+            <p> Every <gi>teiHeader</gi> contains a <gi>fileDesc</gi> (information
+              about the creation of a file), an <gi>encodingDesc</gi> (editorial rules), a
+              <gi>profileDesc</gi>> (non-bibliographic aspects of a text), and a
+              <gi>revisionDesc</gi> (history of revisions). </p>
           </remarks>
         </elementSpec>
         
@@ -123,7 +123,7 @@
             </sequence>
           </content>
           <remarks>
-            <p> Each <gi>fileDesc</gi> element contains (in order) a <gi>titleStmt</gi>, an
+            <p> Each <gi>fileDesc</gi> contains (in order) a <gi>titleStmt</gi>, an
               <gi>editionStmt</gi>, a <gi>publicationStmt</gi>, an optional <gi>seriesStmt</gi>, and a <gi>sourceDesc</gi>. </p>
           </remarks>
         </elementSpec>
@@ -142,18 +142,18 @@
             <constraint>
               <sch:rule context="//tei:titleStmt/tei:title[1]">
                 <sch:assert test="@level='m' or @level='a'">
-                  The first &lt;title&gt; element under a &lt;titleStmt&gt; element must have 
+                  The first &lt;title&gt; element child of &lt;titleStmt&gt; must have 
                   @level attribute with a value of "m" indicating "monographic" or "a" indicating
                   analytic.
                 </sch:assert>
                 <sch:assert test="@type='main'">
-                  The first &lt;title&gt; element under a &lt;titleStmt&gt; element must have 
+                  The first &lt;title&gt; element child of &lt;titleStmt&gt; must have 
                   @type attribute with a value of "main".
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:titleStmt/tei:title[2]">
                 <sch:assert test="@type='sub'">
-                  The second &lt;title&gt; element under a &lt;titleStmt&gt; element must have 
+                  The second &lt;title&gt; element child of &lt;titleStmt&gt; must have 
                   @type attribute with a value of "sub".
                 </sch:assert>
                 <sch:assert test="normalize-space(.) = 'A SPEAR Prosopography'">
@@ -224,7 +224,7 @@
           </constraintSpec>
           
           <remarks>
-            <p>This customization limits the vaules of @ref attributes on a <gi>name</gi> element inside the <gi>titleStmt</gi> 
+            <p>This customization limits the vaules of @ref attributes on <gi>name</gi> as child of <gi>titleStmt</gi> 
             to a Syriaca.org URI for project contributors.</p>
           </remarks>
         </elementSpec>
@@ -236,8 +236,8 @@
           </content>
           
           <remarks>
-            <p> Within the <gi>titleStmt</gi>, funding bodies are identified by use of the
-              <gi>funder</gi> element. If multiple funding bodies are relevant, then each one gets
+            <p> Within the <gi>titleStmt</gi>, funding bodies are identified with the
+              <gi>funder</gi> element. If multiple funding bodies are relevant, then each one receives
               a separate <gi>funder</gi> element. </p>
           </remarks>
         </elementSpec>
@@ -286,7 +286,7 @@
           </constraintSpec>
           
           <remarks>
-            <p>The identification of Syriaca.org as the responsible entity is accomplished with an <gi>authority</gi> element.</p>
+            <p>Syriaca.org is identified as the responsible entity using <gi>authority</gi>.</p>
           </remarks>
         </elementSpec>
         
@@ -298,16 +298,16 @@
             <constraint>
               <sch:rule context="//tei:licence/tei:p">
                 <sch:assert test="normalize-space(.) = 'Distributed under a Creative Commons Attribution 3.0 Unported License.'">
-                  The &lt;licence&gt; element must contain a &lt;p&gt; element with the text: "Distributed under a Creative Commons Attribution 3.0 Unported License."
+                  The &lt;licence&gt; element must contain &lt;p&gt; with the text: "Distributed under a Creative Commons Attribution 3.0 Unported License."
                 </sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>
           
           <remarks>
-            <p> The <gi>license</gi> element within the <gi>availability</gi> element is used to specify the Creative Commons CC-BY license under which 
-              this record is made available. Some records incorporate information from works under copyright (with permission), a fact which is also 
-              indicated in the <gi>license</gi> element. </p>
+            <p> The <gi>license</gi> element, child of <gi>availability</gi>, is used to specify the Creative Commons CC-BY license under which 
+              this record is made available. Some records may incorporate information from works under copyright (with permission), a fact which is also 
+              indicated with <gi>license</gi>. </p>
           </remarks>
         </elementSpec>
         
@@ -328,31 +328,31 @@
             <constraint>
               <sch:rule context="tei:seriesStmt[1]/tei:title[1]">
                 <sch:assert test="@level='s'">
-                  The &lt;title&gt; element requires a @level attribute with a value of "s".
+                  The &lt;title&gt; requires a @level attribute with a value of "s".
                 </sch:assert>
                 <sch:assert test=". = 'SPEAR: Syriac Persons, Events, and Relations'">
-                  This &lt;title&gt; element must be "SPEAR: Syriac Persons, Events, and Relations".
+                  This &lt;title&gt; must be "SPEAR: Syriac Persons, Events, and Relations".
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:seriesStmt[2]/tei:title[1]">
                 <sch:assert test="@level='m'">
-                  The &lt;title&gt; element requires a @level attribute with a value of "m".
+                  The &lt;title&gt; requires a @level attribute with a value of "m".
                 </sch:assert>
                 <sch:assert test="
                   . = 'The Chronicle of Edessa' or
                   . = 'The Letters of Severus of Antioch' or
                   . = 'The Lives of the Eastern Saints'
                   ">
-                  This &lt;title&gt; element must be "The Lives of the Eastern Saints"
+                  This &lt;title&gt; must be one of the following: "The Chronicle of Edessa", "The Lives of the Eastern Saints",
                   or "The Letters of Severus of Antioch".
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:seriesStmt[2]/tei:title[2]">
                 <sch:assert test="@type='sub'">
-                  The &lt;title&gt; element requires a @type attribute with a value of "sub".
+                  This &lt;title&gt; requires a @type attribute with a value of "sub".
                 </sch:assert>
                 <sch:assert test=". = 'A SPEAR Prosopography'">
-                  This &lt;title&gt; element must be "A SPEAR Prosopography".
+                  This &lt;title&gt; must be "A SPEAR Prosopography".
                 </sch:assert>
               </sch:rule>
             </constraint>
@@ -361,20 +361,20 @@
             <constraint>
               <sch:rule context="tei:seriesStmt/tei:editor">
                 <sch:assert test="@role='general'">
-                  This &lt;editor&gt; element must have a @role attribute with a value of "general".
+                  This &lt;editor&gt; must have a @role attribute with a value of "general".
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:seriesStmt/tei:editor">
                 <sch:report test="@role='creator'">
-                  This &lt;editor&gt; element cannot have a @role attribute with a value of "creator".
+                  This &lt;editor&gt; cannot have a @role attribute with a value of "creator".
                 </sch:report>
               </sch:rule>
               <sch:rule context="tei:seriesStmt[1]/tei:editor">
                 <sch:assert test="@ref='http://syriaca.org/documentation/editors.xml#dschwartz'">
-                  This &lt;editor&gt; element must have a @ref attribute with a value of "http://syriaca.org/documentation/editors.xml#dschwartz".
+                  This &lt;editor&gt; must have a @ref attribute with a value of "http://syriaca.org/documentation/editors.xml#dschwartz".
                 </sch:assert>
                 <sch:assert test=". = 'Daniel L. Schwartz'">
-                  This &lt;editor&gt; element must be "Daniel L. Schwartz".
+                  This &lt;editor&gt; must be "Daniel L. Schwartz".
                 </sch:assert>
               </sch:rule>
             </constraint>
@@ -383,7 +383,7 @@
             <constraint>
               <sch:rule context="tei:seriesStmt[1]/tei:idno">
                 <sch:assert test=". = 'https://spear-prosop.org'">
-                  This &lt;idno&gt; element must be "https://spear-prosop.org".
+                  This &lt;idno&gt; must be "https://spear-prosop.org".
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:seriesStmt[2]/tei:idno[preceding-sibling::tei:title = 'The Lives of the Eastern Saints']">
@@ -516,7 +516,7 @@
           </content>
           <remarks>
             <p>The body of a SPEAR file contains factoids, each of which appears in a separate <gi>ab</gi> element. 
-              As such,  <gi>ab</gi> is the only acceptable child element of <gi>body</gi>.</p>
+              As such, <gi>ab</gi> is the only acceptable child element of <gi>body</gi>.</p>
           </remarks>
         </elementSpec>
 
@@ -525,12 +525,12 @@
             <elementRef key="relation" minOccurs="1" maxOccurs="unbounded"/>
           </content>
           <remarks>
-            <p>SPEAR has three basic types of data located in <gi>listPerson</gi>, <gi>listEvent</gi>,
-              and <gi>listRelation</gi> elements. The first two are allowed to nest inside a
-              <gi>ab</gi> element while the last one is not. For uniformity and ease of encoding,
+            <p>SPEAR has three basic types of factoid data that are encoded using <gi>listPerson</gi>, <gi>listEvent</gi>,
+              and <gi>listRelation</gi> elements. The TEI Guidelines allow the first two to nest inside <gi>ab</gi> 
+              while the last one is not. For uniformity and ease of encoding,
               SPEAR makes the <gi>listRelation</gi> element a part of the model class
               model.listLike so that it can function like other list elements and nest directly
-              under the <gi>ab</gi> element. SPEAR removes all attributes from the
+              under the <gi>ab</gi> element. SPEAR also removes all attributes from the
               <gi>listRelation</gi> element and restricts the child elements to <gi>relation</gi>.</p>
           </remarks>
         </elementSpec>
@@ -558,13 +558,12 @@
               <sch:rule context="tei:back//tei:bibl/@xml:id">
                 <sch:let name="docURIno"
                   value="//tei:publicationStmt/tei:idno[@type='URI']/substring-after(substring-before(., '/tei'), 'spear-prosop.org/')"/>
-                <sch:assert test="contains(., concat('bibl', $docURIno, '-'))">The @xml:id on the
-                  &lt;bibl&gt; element in the back matter must take the following form: 'bibl' +
+                <sch:assert test="contains(., concat('bibl', $docURIno, '-'))">The @xml:id on 
+                  &lt;bibl&gt; in the back matter must take the following form: 'bibl' +
                     '<sch:value-of select="$docURIno"/>' + '-' + a unique number.</sch:assert>
                 <sch:assert
                   test="count(distinct-values(//tei:back//tei:bibl/@xml:id)) eq count(//tei:back//tei:bibl/@xml:id)"
-                  >Each @xml:id attribute on a &lt;bibl&gt; element must have a unique
-                  value.</sch:assert>
+                  >Each @xml:id attribute on &lt;bibl&gt; must have a unique value.</sch:assert>
                 <sch:report test="matches(substring-after(., '-'), '\D')">A properly formatted
                   @xml:id ends with a number.</sch:report>
                 <sch:assert test="matches(substring-after(., '-'), '\d')">A properly formatted
@@ -588,8 +587,9 @@
             <p>SPEAR only uses @xml:id and @type attributes on the <gi>bibl</gi> element. SPEAR uses
               <gi>bibl</gi> elements with an @xml:id only in the <gi>back</gi> of the TEI file. The 
               @type attribute indicates whether the <gi>bibl</gi> is "primary", "secondary", or a "urn". 
-              Since SPEAR relies on the Linked Open Data infrastructure of Syriaca.org, a <gi>bibl</gi>
-              element only requires a <gi>ptr</gi> element indicating the Syriaca.org URI or CTS URN for 
+            </p>
+              <p>Since SPEAR relies on the Linked Open Data infrastructure of Syriaca.org, a <gi>bibl</gi>
+              element in the body only requires a <gi>ptr</gi> element indicating the Syriaca.org URI or CTS URN for 
               the bibliographic reference. When indicating a CTS URNs no other additional information 
               is required. When indicating a Syriaca.org URI, a <gi>citedRange</gi> is needed.</p>
           </remarks>
@@ -703,9 +703,8 @@
               <constraintSpec ident="Gregorian-in-reg-date" scheme="schematron">
                 <constraint>
                   <sch:rule context="tei:date[parent::tei:reg]/@calendar">
-                    <sch:assert test=". = 'Gregorian'">A &lt;date&gt; element inside a &lt;reg&gt;
-                      element must have a @calendar attribute with a value of
-                      "Gregorian".</sch:assert>
+                    <sch:assert test=". = 'Gregorian'">A &lt;date&gt; element child of &lt;reg&gt;
+                      must have a @calendar attribute with a value of "Gregorian".</sch:assert>
                   </sch:rule>
                 </constraint>
               </constraintSpec>
@@ -752,7 +751,7 @@
               </sch:rule>
               <sch:rule context="tei:ab/tei:listEvent/tei:event/tei:desc" role="warning">
                 <sch:assert test="./tei:persName or tei:placeName">The &lt;desc&gt; element should
-                  generally contain either a &lt;persName&gt; or a &lt;placeName&gt; element. SPEAR
+                  generally contain either &lt;persName&gt; or &lt;placeName&gt;. SPEAR
                   encourages a liberal use of &lt;persName&gt;, &lt;placeName&gt;, and &lt;date&gt;
                   elements in the &lt;desc&gt; element of event factoids.</sch:assert>
               </sch:rule>
@@ -763,7 +762,7 @@
             <constraint>
               <sch:rule context="//tei:body/tei:ab/tei:listRelation/tei:relation">
                 <sch:assert test="tei:desc">
-                  This &lt;relation&gt; element requires a &lt;desc&gt;.
+                  This &lt;relation&gt; requires a &lt;desc&gt;.
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:sourceDesc//tei:relation">
@@ -774,10 +773,10 @@
               <sch:rule context="//tei:ab/tei:listEvent/tei:listRelation/tei:relation/tei:desc">
                 <sch:let name="SameEventURIs" value="tokenize(parent::tei:relation/@mutual, ' ')"/>
                 <sch:assert test="count(child::tei:rs) = count($SameEventURIs)">
-                  This &lt;desc&gt; element must contain <sch:value-of select="count($SameEventURIs)"/> &lt;rs&gt; elements, one for each values in the @mutual attribute on &lt;relation&gt;.
+                  This &lt;desc&gt; must contain <sch:value-of select="count($SameEventURIs)"/> &lt;rs&gt; elements, one for each values in the @mutual attribute on &lt;relation&gt;.
                 </sch:assert>
                 <sch:assert test="count(distinct-values(tei:rs/@ref)) = count(tei:rs)">
-                  The &lt;desc&gt; element requires &lt;rs&gt; elements with unique @ref attribute values. 
+                  This &lt;desc&gt; requires &lt;rs&gt; elements with unique @ref attribute values. 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:ab/tei:listEvent/tei:listRelation/tei:relation[@ref='syriaca:SameEvent']/tei:desc">
@@ -847,10 +846,10 @@
             <constraint>
               <sch:rule context="//tei:titleStmt/tei:editor">
                 <sch:assert test="@role">
-                  This &lt;editor&gt; element must have a @role attribute.
+                  This &lt;editor&gt; must have a @role attribute.
                 </sch:assert>
                 <sch:assert test="@ref">
-                  This &lt;editor&gt; element must have a @ref attribute.
+                  This &lt;editor&gt; must have a @ref attribute.
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:titleStmt//tei:editor/@ref">
@@ -889,7 +888,7 @@
             </attDef>
           </attList>
           <remarks>
-            <p>This customization limits the attributes available to the <gi>desc</gi> element to
+            <p>This customization limits the attributes available on <gi>desc</gi> to
               @role and @ref and suggests values for @role.</p>
           </remarks>
         </elementSpec>
@@ -998,7 +997,6 @@
         </elementSpec>
 
         <elementSpec ident="ab" module="linking" mode="replace">
-          <!-- I cannot get a valid result unless I use @mode="replace". I should be able to use "change" but the results don't work. Try again later. -->
           <content>
             <alternate>
               <sequence preserveOrder="true">
@@ -1027,12 +1025,9 @@
           <constraintSpec ident="atts-on-ab" scheme="schematron">
             <constraint>
               <sch:rule context="tei:ab[ancestor::tei:body]">
-                <sch:assert test="@xml:id">Elements of type &lt;ab&gt; within the &lt;body&gt; element
-                  require an @xml:id attribute.</sch:assert>
-                <sch:assert test="@resp">Elements of type &lt;ab&gt; within the body element
-                  require a @resp attribute.</sch:assert>
-                <sch:assert test="@type='factoid'">Elements of type &lt;ab&gt; within the body element
-                require a @type attribute with the value "factoid".</sch:assert>
+                <sch:assert test="@xml:id">An &lt;ab&gt; descendant of &lt;body&gt; requires an @xml:id attribute.</sch:assert>
+                <sch:assert test="@resp">An &lt;ab&gt; descendant of &lt;body&gt; requires a @resp attribute.</sch:assert>
+                <sch:assert test="@type='factoid'">An &lt;ab&gt; descendant of &lt;body&gt; requires a @type attribute with the value "factoid".</sch:assert>
               </sch:rule>
               <sch:rule context="tei:ab[ancestor::tei:body]/@resp">
                 <sch:let name="contributorRefs" value="//tei:name[ancestor::tei:respStmt]/@ref"/>
@@ -1130,10 +1125,10 @@
                   <gloss>relation</gloss>
                   <desc>Used to designate relation factoids</desc>
                 </valItem>
-                <valItem ident="religiousAffiliation">
+                <!--<valItem ident="religiousAffiliation">
                   <gloss>religious affiliation</gloss>
                   <desc>Used to designate person factoids that encode the religious affiliation of a person</desc>
-                </valItem>
+                </valItem>-->
                 <valItem ident="residence">
                   <gloss>residence</gloss>
                   <desc>Used to designate person factoids that encode places and dates of residence</desc>
@@ -1150,21 +1145,20 @@
             </attDef>
           </attList>
           
-          
-          
-          
           <remarks>
             <p>
-              <!-- Rewrite -->
-              This customization requires the basic pattern of SPEAR to be encoded correctly. Each
-              factoid is encoded in a <gi>ab</gi> element. Since each factoid contains data of type
-              Person, Event, or Relation, the schema requires that a <gi>ab</gi> must then contain a
-              <gi>listPerson</gi>, <gi>listEvent</gi>, or <gi>listRelation</gi> element. Since every
-              factoid requires a bibliographic reference, every <gi>ab</gi> must contain one or more
-              <gi>bibl</gi> elements. The encoder then has the option of adding a <gi>note</gi>
-              element to the factoid as well. This customization also requires that every
-              <gi>ab</gi> element receives a @uri attribute that identifies the content of the
-              <gi>ab</gi> as a SPEAR factoid.</p>
+              This customization requires the basic pattern of SPEAR factoids to be encoded correctly. Each
+              factoid is encoded in an <gi>ab</gi> element. Since each factoid contains data on a 
+              Person, Event, or Relation, the schema requires that <gi>ab</gi> must contain a
+              <gi>listPerson</gi>, <gi>listEvent</gi>, or <gi>listRelation</gi> child element. Since every
+              factoid requires a bibliographic reference, every <gi>ab</gi> must contain one or more child
+              <gi>bibl</gi> elements. The encoder also has the option of adding a <gi>note</gi>
+              element to the factoid as well. </p>
+            <p>This customization also requires that every <gi>ab</gi> element receives @xml:id, @type, @subtype, 
+              and @resp attributes. The @xml:id must take the form "factoid-{\d}" where {\d} is a number unique within 
+              the document. The @type attribute must be "factoid". The @subtype attribute comes from a closed list
+              of data types encoded in the SPEAR project. The @resp attribute must point to an editor listed in the 
+              <gi>titleStmt</gi>. This ensures that all contributions are attributed at the factoid level.</p>
           </remarks>
         </elementSpec>
         
@@ -1175,11 +1169,11 @@
           <constraintSpec ident="type-on-idno" scheme="schematron">
             <constraint>
               <sch:rule context="tei:ab[ancestor::tei:body]/tei:idno">
-                <sch:assert test="@type='URI'">An &lt;idno&gt; elements inside a factoid &lt;ab&gt;
+                <sch:assert test="@type='URI'">An &lt;idno&gt; descendant of &lt;ab&gt;
                   requires a @type attribute with the value "URI".</sch:assert>
               </sch:rule>
               <sch:rule context="//tei:publicationStmt/tei:idno">
-                <sch:assert test="@type='URI'">This &lt;idno&gt; element
+                <sch:assert test="@type='URI'">This &lt;idno&gt; 
                   requires a @type attribute with the value "URI".</sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt/tei:idno">
@@ -1193,7 +1187,7 @@
               <sch:rule context="//tei:publicationStmt/tei:idno[@type='URI']">
                 <sch:let name="fileNo" value="replace(document-uri(/), '[\D]', '')"/>
                 <sch:assert test=". = concat('https://spear-prosop.org/', $fileNo, '/tei')">
-                  The text node of this &lt;idno&gt; element must be "https://spear-prosop.org/<sch:value-of select="$fileNo"/>/tei".
+                  The text node of this &lt;idno&gt; must be "https://spear-prosop.org/<sch:value-of select="$fileNo"/>/tei".
                 </sch:assert>
               </sch:rule>
             </constraint>
@@ -1217,7 +1211,19 @@
               </datatype>
             </attDef>
           </attList>
-          
+          <remarks>
+            <p>
+              This customization requires properly formatted identifiers for each TEI document 
+              and for each factoid. It ensures the alignment of the document cool-URI, the document name (always a number), 
+              and the factoid cool-URI.</p>
+            <p>In the <gi>teiHeader</gi>, an <gi>idno</gi> requires a @type attribute indicating that it is a "URI".
+              It must also have the text node "https://spear-prosop.org/{\d}/tei", where {\d} is a number that matches
+              the number of the document name.</p>
+            <p>Each factoid also requires an <gi>idno</gi> with a @type attribute of "URI". 
+              It must contain the full cool-URI for that factoid. This URI is constructed using the <gi>idno</gi> from the
+              <gi>publicationStmt</gi> and attaching to it the "-{\d}" from the @xml:id on the parent <gi>ab</gi>.
+              </p>
+          </remarks>
           
           
         </elementSpec>
@@ -1250,17 +1256,27 @@
             <constraint>
               <sch:rule context="tei:event[tei:desc/tei:date/@when] | tei:event[tei:desc/tei:choice/tei:corr/tei:date/@when] | tei:event[tei:desc/tei:choice/tei:reg/tei:date/@when]">
                 <sch:assert test="./@when = ./tei:desc/tei:date/@when | ./tei:desc/tei:choice/tei:corr/tei:date/@when | ./tei:desc/tei:choice/tei:reg/tei:date/@when">
-                  &lt;event&gt; must have a @when attribute with the value <sch:value-of select="./tei:desc/tei:date/@when | ./tei:desc/tei:choice/tei:corr/tei:date/@when | ./tei:desc/tei:choice/tei:reg/tei:date/@when"/>.
+                  This &lt;event&gt; must have a @when attribute with the value <sch:value-of select="./tei:desc/tei:date/@when | ./tei:desc/tei:choice/tei:corr/tei:date/@when | ./tei:desc/tei:choice/tei:reg/tei:date/@when"/>.
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:event[tei:desc/tei:date/@notBefore] | tei:event[tei:desc/tei:choice/tei:corr/tei:date/@notBefore] | tei:event[tei:desc/tei:choice/tei:reg/tei:date/@notBefore]">
                 <sch:assert test="./@notBefore = ./tei:desc/tei:date/@notBefore | ./tei:desc/tei:choice/tei:corr/tei:date/@notBefore | ./tei:desc/tei:choice/tei:reg/tei:date/@notBefore">
-                  &lt;event&gt; must have a @notBefore attribute with the value <sch:value-of select="./tei:desc/tei:date/@notBefore | ./tei:desc/tei:choice/tei:corr/tei:date/@notBefore | ./tei:desc/tei:choice/tei:reg/tei:date/@notBefore"/>.
+                  This &lt;event&gt; must have a @notBefore attribute with the value <sch:value-of select="./tei:desc/tei:date/@notBefore | ./tei:desc/tei:choice/tei:corr/tei:date/@notBefore | ./tei:desc/tei:choice/tei:reg/tei:date/@notBefore"/>.
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:event[tei:desc/tei:date/@notAfter] | tei:event[tei:desc/tei:choice/tei:corr/tei:date/@notAfter] | tei:event[tei:desc/tei:choice/tei:reg/tei:date/@notAfter]">
                 <sch:assert test="./@notAfter = ./tei:desc/tei:date/@notAfter | ./tei:desc/tei:choice/tei:corr/tei:date/@notAfter | ./tei:desc/tei:choice/tei:reg/tei:date/@notAfter">
-                  &lt;event&gt; must have a @notAfter attribute with the value <sch:value-of select="./tei:desc/tei:date/@notAfter | ./tei:desc/tei:choice/tei:corr/tei:date/@notAfter | ./tei:desc/tei:choice/tei:reg/tei:date/@notAfter"/>.
+                  This &lt;event&gt; must have a @notAfter attribute with the value <sch:value-of select="./tei:desc/tei:date/@notAfter | ./tei:desc/tei:choice/tei:corr/tei:date/@notAfter | ./tei:desc/tei:choice/tei:reg/tei:date/@notAfter"/>.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:event[tei:desc/tei:date/@from] | tei:event[tei:desc/tei:choice/tei:corr/tei:date/@from] | tei:event[tei:desc/tei:choice/tei:reg/tei:date/@from]">
+                <sch:assert test="./@from = ./tei:desc/tei:date/@from | ./tei:desc/tei:choice/tei:corr/tei:date/@from | ./tei:desc/tei:choice/tei:reg/tei:date/@from">
+                  This &lt;event&gt; must have a @from attribute with the value <sch:value-of select="./tei:desc/tei:date/@from | ./tei:desc/tei:choice/tei:corr/tei:date/@from | ./tei:desc/tei:choice/tei:reg/tei:date/@from"/>.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:event[tei:desc/tei:date/@to] | tei:event[tei:desc/tei:choice/tei:corr/tei:date/@to] | tei:event[tei:desc/tei:choice/tei:reg/tei:date/@to]">
+                <sch:assert test="./@to = ./tei:desc/tei:date/@to | ./tei:desc/tei:choice/tei:corr/tei:date/@to | ./tei:desc/tei:choice/tei:reg/tei:date/@to">
+                  This &lt;event&gt; must have a @to attribute with the value <sch:value-of select="./tei:desc/tei:date/@to | ./tei:desc/tei:choice/tei:corr/tei:date/@to | ./tei:desc/tei:choice/tei:reg/tei:date/@to"/>.
                 </sch:assert>
               </sch:rule>
             </constraint>
@@ -1272,7 +1288,13 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
-          
+          <remarks>
+            <p>
+              This customization makes <gi>desc</gi> the only acceptable child of <gi>event</gi>. It also requires an @ana attribute
+              and constrains the values of that attribute to the full list of Syriaca.org keyword URIs. In the case of dates associated with an event,
+              the customization also requires that date attributes (@when, @notBefore, @notAfter, @from, and @to) match on the <gi>event</gi> element and within the child
+              <gi>desc</gi> element.</p>
+          </remarks>
         </elementSpec>
 
         <elementSpec ident="note" module="core" mode="change">
@@ -1280,62 +1302,62 @@
             <constraint>
               <sch:rule context="tei:note[parent::tei:birth and preceding-sibling::tei:placeName]">
                 <sch:assert test="tei:persName">The &lt;note&gt; element in a birth place factoid
-                  must contain a &lt;persName&gt; element.</sch:assert>
+                  must contain a &lt;persName&gt;.</sch:assert>
                 <sch:assert test="tei:placeName">The &lt;note&gt; element in a birth place factoid
-                  must contain a &lt;placeName&gt; element.</sch:assert>
+                  must contain a &lt;placeName&gt;.</sch:assert>
               </sch:rule>
               <sch:rule context="tei:note[parent::tei:birth and preceding-sibling::tei:date]">
                 <sch:assert test="tei:persName">The &lt;note&gt; element in a birth date factoid
-                  must contain a &lt;persName&gt; element.</sch:assert>
+                  must contain a &lt;persName&gt;.</sch:assert>
               </sch:rule>
               <sch:rule
                 context="tei:note[parent::tei:nationality and preceding-sibling::tei:placeName]">
                 <sch:assert test="tei:persName">The &lt;note&gt; element in a citizenship factoid
-                  must contain a &lt;persName&gt; element.</sch:assert>
+                  must contain a &lt;persName&gt;.</sch:assert>
                 <sch:assert test="tei:placeName">The &lt;note&gt; element in a citizenship factoid
-                  must contain a &lt;placeName&gt; element.</sch:assert>
+                  must contain a &lt;placeName&gt;.</sch:assert>
               </sch:rule>
               <sch:rule context="tei:note[parent::tei:death and preceding-sibling::tei:placeName]">
                 <sch:assert test="tei:persName">The &lt;note&gt; element in a death place factoid
-                  must contain a &lt;persName&gt; element.</sch:assert>
+                  must contain a &lt;persName&gt;.</sch:assert>
                 <sch:assert test="tei:placeName">The &lt;note&gt; element in a birth place factoid
-                  must contain a &lt;placeName&gt; element.</sch:assert>
+                  must contain a &lt;placeName&gt;.</sch:assert>
               </sch:rule>
               <sch:rule context="tei:note[parent::tei:education]">
                 <sch:assert test="tei:persName">The &lt;note&gt; element in an education factoid
-                  must contain a &lt;persName&gt; element.</sch:assert>
+                  must contain a &lt;persName&gt;.</sch:assert>
               </sch:rule>
               <sch:rule context="tei:note[parent::tei:death and preceding-sibling::tei:date]">
                 <sch:assert test="tei:persName">The &lt;note&gt; element in a death date factoid
-                  must contain a &lt;persName&gt; element.</sch:assert>
+                  must contain a &lt;persName&gt;.</sch:assert>
               </sch:rule>
               <sch:rule context="tei:note[parent::tei:occupation]">
                 <sch:assert test="tei:persName">The &lt;note&gt; element in an occupation factoid
-                  must contain a &lt;persName&gt; element.</sch:assert>
+                  must contain a &lt;persName&gt;.</sch:assert>
               </sch:rule>
               <sch:rule
                 context="tei:note[parent::tei:residence and preceding-sibling::tei:placeName]">
                 <sch:assert test="tei:persName">The &lt;note&gt; element in a residence factoid must
-                  contain a &lt;persName&gt; element.</sch:assert>
+                  contain a &lt;persName&gt;.</sch:assert>
                 <sch:assert test="tei:placeName">The &lt;note&gt; element in a residence factoid
-                  must contain a &lt;placeName&gt; element.</sch:assert>
+                  must contain a &lt;placeName&gt;.</sch:assert>
               </sch:rule>
               <sch:rule context="tei:note[parent::tei:socecStatus]">
                 <sch:assert test="tei:persName">The &lt;note&gt; element in a socioeconomic status
-                  factoid must contain a &lt;persName&gt; element.</sch:assert>
+                  factoid must contain a &lt;persName&gt;.</sch:assert>
               </sch:rule>
               <sch:rule
                 context="tei:note[parent::tei:langKnowledge and preceding-sibling::tei:langKnown]">
                 <sch:assert test="tei:persName">The &lt;note&gt; element in a language-known factoid
-                  must contain a &lt;persName&gt; element.</sch:assert>
+                  must contain a &lt;persName&gt;.</sch:assert>
               </sch:rule>
               <sch:rule context="tei:note[parent::tei:trait]">
                 <sch:assert test="tei:persName">The &lt;note&gt; element inside the &lt;trait&gt;
-                  element must contain a &lt;persName&gt; element.</sch:assert>
+                  element must contain a &lt;persName&gt;.</sch:assert>
               </sch:rule>
               <sch:rule context="tei:note[parent::tei:state]">
                 <sch:assert test="tei:persName">The &lt;note&gt; element inside the &lt;state&gt;
-                  element must contain a &lt;persName&gt; element.</sch:assert>
+                  element must contain a &lt;persName&gt;.</sch:assert>
               </sch:rule>
               <sch:rule context="tei:note[parent::tei:reg and preceding-sibling::tei:date]">
                 <sch:assert test="@ana">This &lt;note&gt; element requires an @ana
@@ -1381,9 +1403,9 @@
                 <constraint>
                   <sch:rule
                     context="tei:note[parent::tei:birth or parent::tei:death or parent::tei:education or parent::tei:langKnowledge or parent::tei:nationality or parent::tei:occupation or parent::tei:residence or parent::tei:socecStatus or parent::tei:state or parent::tei:trait]">
-                    <sch:assert test="@type = 'desc'">Elements of type &lt;note&gt; must contain the
+                    <sch:assert test="@type = 'desc'">This &lt;note&gt; must contain the
                       attribute @type="desc" and other &lt;note&gt; types are not allowed in this context.
-                      Other types of notes ("certainty") may appear as children of
+                      Other types of notes (those dealing with "certainty") may appear as children of
                       the &lt;ab&gt; element as needed.</sch:assert>
                   </sch:rule>
                 </constraint>
@@ -1392,7 +1414,7 @@
                 <constraint>
                   <sch:rule context="tei:note[parent::tei:education | parent::tei:langKnowledge | parent::tei:nationality | parent::tei:occupation | parent::tei:residence | parent::tei:socecStatus | parent::tei:state | parent::tei:trait]">
                     <sch:report test="./tei:date">
-                      If you wish to apply a date to this factoid, you need must use
+                      If you wish to apply a date to this factoid, you must use
                       date attributes (@when, @notBefore, @notAfter, @to, and/or @from) on the 
                       parent of the &lt;note&gt; element.
                     </sch:report>
@@ -1433,9 +1455,13 @@
               </valList>
             </attDef>
           </attList>
-          
-          
-          
+          <remarks>
+            <p>
+              SPEAR factoids contain <gi>note</gi> elements that allow the encoder to offer a more prose-oriented description of the data that they have
+              derived from the source they are analyzing. The content of the <gi>note</gi> is what human users encounter when using the HTML serialization of 
+              the data. This customization constrains the use of this element to ensure that the data
+              marked up inside the <gi>note</gi> agrees with the more data-oriented encoding found elsewhere in the factoid.</p>
+          </remarks>
           
         </elementSpec>
 
@@ -1475,7 +1501,10 @@
               </constraintSpec>
             </attDef>
           </attList>
-          
+          <remarks>
+            <p>
+              This customization requires <gi>persName</gi> to have a @ref attribute that points to a Syriaca.org authority file for a person.</p>
+          </remarks>
         </elementSpec>
 
         <elementSpec ident="placeName" module="namesdates" mode="change">
@@ -1512,7 +1541,10 @@
               </constraintSpec>
             </attDef>
           </attList>
-          
+          <remarks>
+            <p>
+              This customization requires <gi>placeName</gi> to have a @ref attribute that points to a Syriaca.org authority file for a place.</p>
+          </remarks>
           
           
         </elementSpec>
@@ -1570,7 +1602,13 @@
               </constraintSpec>
             </attDef>
           </attList>
-          
+          <remarks>
+            <p>
+              This customization requires a <gi>ptr</gi> to have a @type attribute (indicating "primary", "secondary", or "URN") 
+              and a @target attribute. It also ensures that the @target attribute with primary and secondary sources indicates a 
+              Syriaca.org authority file for a work or a bibliographic item.
+            </p>
+          </remarks>
           
           
           
@@ -1590,29 +1628,25 @@
                 <sch:let name="directed"
                   value="$ti//listURI[@type = 'relationships']//uri[@ana = 'directed']"/>
                 <sch:assert test=".[@ref = $mutual]/@mutual or .[@ref = $directed]/@active"
-                  >Elements of type &lt;relation&gt; take either a @mutual attribute with mutual
-                  relationship and both @active and @passive attributes with directed
+                  >This &lt;relation&gt; takes either a @mutual attribute with mutual
+                  relationships or both @active and @passive attributes with directed
                   relationships. Mutual relationships include: <sch:value-of
                     select="string-join($mutual, ';  ')"/>. Directed relationships include:
                     <sch:value-of select="string-join($directed, ';  ')"/>.</sch:assert>
                 <sch:assert test=".[@ref = $mutual]/@mutual or .[@ref = $directed]/@passive"
-                  >Elements of type &lt;relation&gt; take either a @mutual attribute with mutual
-                  relationship and both @active and @passive attributes with directed
+                  >This &lt;relation&gt; takes either a @mutual attribute with mutual
+                  relationship or both @active and @passive attributes with directed
                   relationships. Mutual relationships include: <sch:value-of
                     select="string-join($mutual, ';  ')"/>. Directed relationships include:
                     <sch:value-of select="string-join($directed, ';  ')"/>.</sch:assert>
-                <sch:report test=".[@mutual]/@active">A &lt;relation&gt; element cannot take both
-                  @active and @mutual attributes.</sch:report>
-                <sch:report test=".[@mutual]/@passive">A &lt;relation&gt; element cannot take both
-                  @passive and @mutual attributes.</sch:report>
               </sch:rule>
               <sch:rule context="tei:ab[@subtype='event']/tei:listRelation/tei:relation">
                 <sch:assert test="@mutual">A @mutual attribute is required on &lt;relation&gt;
-                  elements in event factoids.</sch:assert>
+                  in event factoids.</sch:assert>
                 <sch:report test="@active">@active attributes are not allowed on &lt;relation&gt;
-                  elements in event factoids.</sch:report>
+                  in event factoids.</sch:report>
                 <sch:report test="@passive">@passive attributes are not allowed on &lt;relation&gt;
-                  elements in event factoids.</sch:report>
+                  in event factoids.</sch:report>
               </sch:rule>
               <sch:rule context="tei:ab[@subtype='relation']/tei:listRelation/tei:relation/@mutual | tei:ab[@subtype='relation']/tei:listRelation/tei:relation/@active | tei:ab[@subtype='relation']/tei:listRelation/tei:relation/@passive | tei:ab[@subtype='event']/tei:listEvent/tei:event/tei:desc/tei:listRelation/tei:relation/@mutual | tei:ab[@subtype='event']/tei:listEvent/tei:event/tei:desc/tei:listRelation/tei:relation/@active | tei:ab[@subtype='event']/tei:listEvent/tei:event/tei:desc/tei:listRelation/tei:relation/@passive">
                 <sch:let name="personIndex" value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/persons.xml')"></sch:let>
@@ -1634,32 +1668,51 @@
             <constraint>
               <sch:rule context="tei:event[@when]//tei:relation">
                 <sch:assert test="./@when = ./ancestor::tei:event/@when">
-                  This &lt;relation&gt; element must have a @when attribute with the value <sch:value-of select="./ancestor::tei:event/@when"/>.
+                  This &lt;relation&gt; must have a @when attribute with the value <sch:value-of select="./ancestor::tei:event/@when"/>.
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:event[@notBefore]//tei:relation">
                 <sch:assert test="./@notBefore = ./ancestor::tei:event/@notBefore">
-                  This &lt;relation&gt; element must have a @notBefore attribute with the value <sch:value-of select="./ancestor::tei:event/@notBefore"/>.
+                  This &lt;relation&gt; must have a @notBefore attribute with the value <sch:value-of select="./ancestor::tei:event/@notBefore"/>.
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:event[@notAfter]//tei:relation">
                 <sch:assert test="./@notAfter = ./ancestor::tei:event/@notAfter">
-                  This &lt;relation&gt; element must have a @notAfter attribute with the value <sch:value-of select="./ancestor::tei:event/@notAfter"/>.
+                  This &lt;relation&gt; must have a @notAfter attribute with the value <sch:value-of select="./ancestor::tei:event/@notAfter"/>.
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:event[@from]//tei:relation">
                 <sch:assert test="./@from = ./ancestor::tei:event/@from">
-                  This &lt;relation&gt; element must have a @from attribute with the value <sch:value-of select="./ancestor::tei:event/@from"/>.
+                  This &lt;relation&gt; must have a @from attribute with the value <sch:value-of select="./ancestor::tei:event/@from"/>.
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:event[@to]//tei:relation">
                 <sch:assert test="./@to = ./ancestor::tei:event/@to">
-                  This &lt;relation&gt; element must have a @to attribute with the value <sch:value-of select="./ancestor::tei:event/@to"/>.
+                  This &lt;relation&gt; must have a @to attribute with the value <sch:value-of select="./ancestor::tei:event/@to"/>.
                 </sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>
           <attList>
+            <attList>
+              <attList org="choice">
+                <attDef ident="active">
+                  <datatype maxOccurs="unbounded">
+                    <dataRef key="teidata.pointer"/>
+                  </datatype>
+                </attDef>
+                <attDef ident="passive">
+                  <datatype maxOccurs="unbounded">
+                    <dataRef key="teidata.pointer"/>
+                  </datatype>
+                </attDef>
+              </attList>
+              <attDef ident="mutual">
+                <datatype maxOccurs="unbounded">
+                  <dataRef key="teidata.pointer"/>
+                </datatype>
+              </attDef>
+            </attList>
             <attDef ident="ref" mode="change" usage="opt">
               <constraintSpec ident="ref-in-context" scheme="schematron">
                 <constraint>
@@ -1753,17 +1806,30 @@
               </constraintSpec>
             </attDef>
           </attList>
-          
-          
-          
-          
-          
           <remarks>
-            <p>This customization removes from the <gi>relation</gi> element all attributes except
-              @name, @type, @ana, @mutual, @passive, and @active. It also restricts values for the
-              @name, @type, and @ana attributes and requires the encoder to use the @name and @ana
-              attributes.</p>
+            <p>
+              The <gi>relation</gi> element is used for personal relationships and constitutes one of the three main data types in SPEAR. 
+              When SPEAR encodes straight relationships, they appear in a relationship factoid (tei:ab[@subtype="relation"]/tei:listRelation/tei:relation).
+              Relationships can also appear inside an event factoid in cases where an event creates a relationship, i.e. a wedding is an event that
+              created a spousal relationship. In such cases, SPEAR encodes this relationship inside the event factoid. In addition to these personal relationships,
+              the <gi>relation</gi> element is also used to encode relationships between closely related events. The <gi>relation</gi> element is also used in 
+              the <gi>teiHeader</gi>.
+            </p>
+            <p>
+              In the context of personal relationships, this customization constrains the @ref, @ana, @active, @passive, and @mutual attributes.
+              A @ref attribute is required and must contain a URI pointing to a personal relationship in the Syriac Taxonomy. An @ana attribute is optional but when 
+              used must contain a URI pointing to a qualifier relationship in the Syriac Taxonomy, i.e. a sibling relationship might be qualified as a 
+              step-sibling relationship using @ana. For mutual relationship where each participant has the same relationship to the other (i.e. spousal), a 
+              @mutual attribute is used with all of the participants in that relationship listed. In the case of a directed relationship (i.e. where person X
+              is the parent of person Y) both the @active and @passive attributes are used. The values allowed on the @active, @passive, and @mutual 
+              attributes are URIs pointing to Syriaca.org authority files for persons. 
+            </p>
+            <p>
+              In the context of relationships between events, this customization only allows appropriate values on @ref while excluding @ana, @active, and @passive 
+              attributes.
+            </p>
           </remarks>
+          
         </elementSpec>
 
         <elementSpec ident="person" module="namesdates" mode="change">
@@ -1787,11 +1853,11 @@
               </sequence>
               <sequence preserveOrder="true">
                 <elementRef key="persName" minOccurs="1" maxOccurs="1"/>
-                <elementRef key="nationality" minOccurs="0" maxOccurs="1"/>
+                <elementRef key="langKnowledge" minOccurs="1" maxOccurs="1"/>
               </sequence>
               <sequence preserveOrder="true">
                 <elementRef key="persName" minOccurs="1" maxOccurs="1"/>
-                <elementRef key="residence" minOccurs="1" maxOccurs="1"/>
+                <elementRef key="nationality" minOccurs="0" maxOccurs="1"/>
               </sequence>
               <sequence preserveOrder="true">
                 <elementRef key="persName" minOccurs="1" maxOccurs="1"/>
@@ -1799,7 +1865,11 @@
               </sequence>
               <sequence preserveOrder="true">
                 <elementRef key="persName" minOccurs="1" maxOccurs="1"/>
-                <elementRef key="langKnowledge" minOccurs="1" maxOccurs="1"/>
+                <elementRef key="residence" minOccurs="1" maxOccurs="1"/>
+              </sequence>
+              <sequence preserveOrder="true">
+                <elementRef key="persName" minOccurs="1" maxOccurs="1"/>
+                <elementRef key="socecStatus" minOccurs="0" maxOccurs="1"/>
               </sequence>
               <sequence preserveOrder="true">
                 <elementRef key="persName" minOccurs="1" maxOccurs="1"/>
@@ -1809,25 +1879,17 @@
                 <elementRef key="persName" minOccurs="1" maxOccurs="1"/>
                 <elementRef key="trait" minOccurs="0" maxOccurs="1"/>
               </sequence>
-              <sequence preserveOrder="true">
-                <elementRef key="persName" minOccurs="1" maxOccurs="1"/>
-                <elementRef key="socecStatus" minOccurs="0" maxOccurs="1"/>
-              </sequence>
             </alternate>
           </content>
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
-          
+          <remarks>
+            <p>
+              The <gi>person</gi> element contains person factoid data. This customization requires the proper structure for that data.
+              The first child of <gi>person</gi> must be a self-closing <gi>persName</gi> element with a @ref attribute containing a 
+              URIs pointing to Syriaca.org authority file for a person. The next child element must be one of the following: 
+              <gi>birth</gi>, <gi>death</gi>, <gi>education</gi>, <gi>langKnown</gi>, <gi>nationality</gi>, <gi>occupation</gi>, 
+              <gi>residence</gi>, <gi>socecStatus</gi>, <gi>state</gi>, or <gi>trait</gi>.
+            </p>
+          </remarks>
           
         </elementSpec>
 
@@ -1850,11 +1912,14 @@
             <attDef ident="from" mode="delete"/>
             <attDef ident="to" mode="delete"/>
           </attList>
-          
           <remarks>
             <p>This customization restricts the attribute classes of the <gi>birth</gi> element to
               att.datable.w3c but excludes the @to and @from attributes. If more precise dating is
               required for a SPEAR factoid, encoder should use the <gi>date</gi> element.</p>
+            <p>
+              It also restricts the child elements to those dealing with dates (<gi>date</gi> or <gi>choice</gi>),
+              <gi>placeName</gi>, and <gi>note</gi>.
+            </p>
           </remarks>
         </elementSpec>
 
@@ -1877,12 +1942,14 @@
             <attDef ident="from" mode="delete"/>
             <attDef ident="to" mode="delete"/>
           </attList>
-          
-          
           <remarks>
             <p>This customization restricts the attribute classes of the <gi>death</gi> element to
               att.datable.w3c but excludes the @to and @from attributes. If more precise dating is
               required for a SPEAR factoid, encoder should use the <gi>date</gi> element.</p>
+            <p>
+              It also restricts the child elements to those dealing with dates (<gi>date</gi> or <gi>choice</gi>),
+              <gi>placeName</gi>, and <gi>note</gi>.
+            </p>
           </remarks>
         </elementSpec>
 
@@ -1924,9 +1991,13 @@
           </attList>
           
           <remarks>
-            <p>This customization restricts the attribute classes of the <gi>education</gi> element
+            <p>This customization restricts the attribute classes of <gi>education</gi>
               to att.datable.w3c and the @ana attribute. If more precise dating is required for a
-              SPEAR factoid, encoder should use the <gi>date</gi> element.</p>
+              SPEAR factoid, the encoder should use the <gi>date</gi> element.</p>
+            <p>
+              It also restricts the required @ana attribute to keyword URIs in the Syriac Taxonomy that pertain to 
+              fields of education.
+            </p>
           </remarks>
         </elementSpec>
 
@@ -1944,14 +2015,15 @@
           </content>
           
           <remarks>
-            <p>The TEI name for the <gi>nationality</gi> element is highly problematic from a
-              pre-Modern perspective. Citizenship would be preferable in one sense, yet could in
+            <p>The TEI name for the <gi>nationality</gi> element is problematic from a
+              pre-Modern perspective. "Citizenship" would be preferable in one sense, yet could in
               many instances exclude subaltern people such as the enslaved. SPEAR uses the
-              <gi>nationality</gi> element as a general category for living under a particular
-              jurisdiction. This customization limits the attribute classes of the
+              <gi>nationality</gi> element as a general category for people living under a particular
+              jurisdiction.</p>
+            <p>This customization limits the attribute classes of the
               <gi>nationality</gi> element to att.datable.custom and att.datable.w3c and removes the
               <gi>nationality</gi> element from all model classes. It also requires exactly one
-              <gi>placeName</gi> element.</p>
+              <gi>placeName</gi> child and one <gi>note</gi> child and allows an optional <gi>date</gi> child.</p>
           </remarks>
         </elementSpec>
 
@@ -1967,7 +2039,12 @@
               <elementRef key="note" minOccurs="1" maxOccurs="1"/>
             </sequence>
           </content>
-          
+          <remarks>
+            <p>This customization limits the attribute classes of the
+              <gi>residence</gi> element to att.datable.custom and att.datable.w3c and removes the
+              <gi>residence</gi> element from all model classes. It also requires exactly one
+              <gi>placeName</gi> child and one <gi>note</gi> child and allows an optional <gi>date</gi> child.</p>
+          </remarks>
           
         </elementSpec>
 
@@ -2007,10 +2084,15 @@
               </constraintSpec>
             </attDef>
           </attList>
-          
-          
-          
-          
+          <remarks>
+            <p>This customization restricts the attribute classes of <gi>occupation</gi>
+              to att.datable.w3c and att.global.analytic. If more precise dating is required for a
+              SPEAR factoid, the encoder should use the <gi>date</gi> element.</p>
+            <p>
+              It only allows <gi>note</gi> as a child element and it restricts the required @ana attribute to keyword URIs in the Syriac Taxonomy that pertain to 
+              occupations.
+            </p>
+          </remarks>
         </elementSpec>
 
         <elementSpec ident="langKnowledge" module="namesdates" mode="replace">
@@ -2020,7 +2102,12 @@
               <elementRef key="note" minOccurs="1" maxOccurs="1"/>
             </sequence>
           </content>
-          
+          <remarks>
+            <p>
+              This customization constrains the child elements under <gi>langKnowledge</gi> to include only
+              <gi>langKnown</gi> and <gi>note</gi>.
+            </p>
+          </remarks>
           
         </elementSpec>
 
@@ -2060,7 +2147,13 @@
               </valList>
             </attDef>
           </attList>
-          
+          <remarks>
+            <p>
+              This customization allows a closed list of values on the @level attribute ("low", "medium", and "high"). 
+              It also restricts the required @ana attribute to keyword URIs in the Syriac Taxonomy that pertain to 
+              languages.
+            </p>
+          </remarks>
           
         </elementSpec>
 
@@ -2100,7 +2193,15 @@
               </constraintSpec>
             </attDef>
           </attList>
-          
+          <remarks>
+            <p>This customization restricts the attribute classes of <gi>socecStatus</gi>
+              to att.datable.w3c and att.global.analytic. If more precise dating is required for a
+              SPEAR factoid, the encoder should use the <gi>date</gi> element.</p>
+            <p>
+              It only allows <gi>note</gi> as a child element and it restricts the required @ana attribute to keyword URIs in the Syriac Taxonomy that pertain to 
+              socioeconomic status.
+            </p>
+          </remarks>
           
         </elementSpec>
 
@@ -2191,7 +2292,16 @@
               </constraintSpec>
             </attDef>
           </attList>
-          
+          <remarks>
+            <p>This customization restricts the attribute classes of <gi>trait</gi>
+              to att.datable.w3c and att.global.analytic. If more precise dating is required for a
+              SPEAR factoid, the encoder should use the <gi>date</gi> element.</p>
+            <p>
+              It only allows <gi>note</gi> as a child element. It restricts the required @type attribute to the values
+              "physical", "gender", and "ethnicLabel". It restricts the required @ana attribute to keyword URIs in the 
+              Syriac Taxonomy that pertain to each of these three types.
+            </p>
+          </remarks>
           
           
           
@@ -2201,7 +2311,11 @@
           <content>
             <elementRef key="listBibl" minOccurs="1" maxOccurs="1"/>
           </content>
-          
+          <remarks>
+            <p>
+              The <gi>back</gi> element must contain only one <gi>listBibl</gi>.
+            </p>
+          </remarks>
         </elementSpec>
 
         <elementSpec ident="listBibl" module="core" mode="change">
@@ -2209,7 +2323,12 @@
             <elementRef key="head" minOccurs="1" maxOccurs="1"/>
             <elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/>
           </content>
-          
+          <remarks>
+            <p>
+              The <gi>listBibl</gi> element must contain a <gi>head</gi> and at least
+              one <gi>bibl</gi>.
+            </p>
+          </remarks>
         </elementSpec>
 
         <elementSpec ident="head" module="core" mode="change">
@@ -2227,7 +2346,12 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
-          
+          <remarks>
+            <p>
+              When the child of <gi>sourceDesc</gi>, <gi>head</gi> must contain "Sources for the Data in this Born Digital Prosopography".
+              When the child of <gi>back</gi>, <gi>head</gi> must contain "Works Cited".
+            </p>
+          </remarks>
         </elementSpec>
 
         <elementSpec ident="state" module="namesdates" mode="change">
@@ -2303,10 +2427,19 @@
               </valList>
             </attDef>
           </attList>
-          
+          <remarks>
+            <p>This customization restricts the attribute classes of <gi>state</gi>
+              to att.datable.w3c and att.global.analytic. If more precise dating is required for a
+              SPEAR factoid, the encoder should use the <gi>date</gi> element.</p>
+            <p>
+              It only allows <gi>note</gi> as a child element. It restricts the required @type attribute to the values
+              "mental", "religiousAffiliation", and "sanctity". It restricts the required @ana attribute to keyword URIs in the 
+              Syriac Taxonomy that pertain to each of these three types.
+            </p>
+          </remarks>
           
         </elementSpec>
-</schemaSpec>
+    </schemaSpec>
 
 
     </body>
