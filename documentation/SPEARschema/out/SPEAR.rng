@@ -5,7 +5,7 @@
          xmlns:xlink="http://www.w3.org/1999/xlink"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-05-23T20:31:45Z. .
+Schema generated from ODD source 2023-05-24T19:46:01Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -4824,7 +4824,7 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
                   relationships. Mutual relationships include: <sch:value-of select="string-join($mutual, ';  ')"/>. Directed relationships include:
                     <sch:value-of select="string-join($directed, ';  ')"/>.</sch:assert>
                <sch:assert test=".[@ref = $mutual]/@mutual or .[@ref = $directed]/@passive">This &lt;relation&gt; takes either a @mutual attribute with mutual
-                  relationship or both @active and @passive attributes with directed
+                  relationships or both @active and @passive attributes with directed
                   relationships. Mutual relationships include: <sch:value-of select="string-join($mutual, ';  ')"/>. Directed relationships include:
                     <sch:value-of select="string-join($directed, ';  ')"/>.</sch:assert>
             </sch:rule>
@@ -5140,7 +5140,7 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
    </define>
    <define name="socecStatus">
       <element name="socecStatus">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(socio-economic status) contains an informal description of a person's perceived social or economic status. [15.2.2. The Participant Description]</a:documentation>
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
          <oneOrMore>
             <ref name="note"/>
          </oneOrMore>
@@ -5154,9 +5154,7 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="SPEAR-socecStatus-ana-ana-in-socecStatus-constraint-rule-102">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:xi="http://www.w3.org/2001/XInclude"
                       context="tei:socecStatus/@ana">
                <sch:let name="anaValues" value="tokenize(., ' ')"/>
                <sch:let name="ti"
@@ -5172,22 +5170,6 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
                       preferred descriptive term: <sch:value-of select="string-join($socioeconomicStatus, ';  ')"/>.</sch:assert>
             </sch:rule>
          </pattern>
-         <optional>
-            <attribute name="scheme">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">identifies the classification system or taxonomy in use, for example by pointing to a locally-defined <code xmlns="http://www.w3.org/1999/xhtml">&lt;taxonomy&gt;</code> element or by supplying a URI for an externally-defined system.</a:documentation>
-               <data type="anyURI">
-                  <param name="pattern">\S+</param>
-               </data>
-            </attribute>
-         </optional>
-         <optional>
-            <attribute name="code">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">identifies a status code defined within the classification system or taxonomy defined by the <code xmlns="http://www.w3.org/1999/xhtml">@scheme</code> attribute.</a:documentation>
-               <data type="anyURI">
-                  <param name="pattern">\S+</param>
-               </data>
-            </attribute>
-         </optional>
          <empty/>
       </element>
    </define>
