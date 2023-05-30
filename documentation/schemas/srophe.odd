@@ -75,7 +75,7 @@
           </attList>
         </classSpec>
 
-        <classSpec ident="att.datable" mode="change" type="atts" source="tei">
+        <classSpec ident="att.datable" type="atts" source="tei">
           <attList>
             <attDef ident="srophe:computed-start" ns="https://srophe.app" mode="add">
               <desc>Start date</desc>
@@ -623,7 +623,7 @@
           <content>
             <sequence preserveOrder="true">
               <elementRef key="authority" minOccurs="1"/>
-              <elementRef key="idno" minOccurs="1"/>
+              <elementRef key="idno" minOccurs="1" maxOccurs="unbounded"/>
               <elementRef key="availability" minOccurs="1"/>
               <elementRef key="date" minOccurs="1"/>
             </sequence>
@@ -1132,28 +1132,28 @@
         </elementSpec>
         
         <elementSpec ident="state" module="namesdates" mode="change">
-          <classes mode="change">
+          <classes mode="replace">
+            <memberOf key="att.datable" mode="add"/>
             <memberOf key="att.datable.iso" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/><!-- not deleted -->
-            <memberOf key="att.global.linking" mode="delete"/><!-- not deleted -->
-            <memberOf key="att.global.facs" mode="delete"/><!-- deleted -->
-            <memberOf key="att.global.change" mode="delete"/><!-- deleted -->
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.editLike" mode="delete"/><!-- deleted -->
-            <memberOf key="att.dimensions" mode="delete"/><!-- deleted -->
-            <memberOf key="att.ranging" mode="delete"/><!-- deleted -->
+            <memberOf key="att.datable.custom" mode="delete"/>
+            <memberOf key="att.typed" mode="add"/>
+            <memberOf key="att.global.source" mode="add"/>
+            <memberOf key="model.orgStateLike" mode="add"/>
+            <memberOf key="model.persStateLike" mode="add"/>
+            <memberOf key="model.placeStateLike" mode="add"/>
           </classes>
           <content>
             <elementRef key="p" minOccurs="0" maxOccurs="1"/>
             <elementRef key="label" minOccurs="0"/>
             <elementRef key="precision" minOccurs="0" maxOccurs="unbounded"/>
+            <textNode/>
           </content>
-          <attList>
+          <!-- I do not know why I put this in here. I know we use tei:precision to clarify what we mean by @to and @from.
+              But it seems like there would still be cases where we would need a simple @notBefore or @notAfter.
+            <attList>
             <attDef ident="notAfter" mode="delete"/>
             <attDef ident="notBefore" mode="delete"/>
-            <attDef ident="notAfter-custom" mode="delete"/>
-            <attDef ident="notBefore-custom" mode="delete"/>
-          </attList>
+          </attList>-->
           <exemplum>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
               <state resp="http://syriaca.org" type="existence" from="0400" to="0473" srophe:computed-start="0400-01-01" srophe:computed-end="0473-0101">

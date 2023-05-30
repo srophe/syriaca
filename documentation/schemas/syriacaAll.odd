@@ -47,12 +47,13 @@
         <moduleRef key="header" include="authority availability catDesc category change classDecl edition editionStmt editorialDecl encodingDesc fileDesc funder idno interpretation langUsage licence principal profileDesc publicationStmt revisionDesc seriesStmt sourceDesc sponsor taxonomy teiHeader titleStmt"/>
         <moduleRef key="linking" include="link"/>
         <moduleRef key="msdescription"/>
-        <moduleRef key="namesdates" include="addName bloc country death district event forename geo listPerson listPlace listRelation location offset persName person place placeName region relation roleName settlement sex state surname"/>
+        <moduleRef key="namesdates" include="addName birth bloc country death district event floruit forename geo lang listPerson listPlace listRelation location offset orgName persName person place placeName region relation roleName settlement sex state surname trait"/>
         <moduleRef key="tagdocs" include="gi"/>
         <moduleRef key="textcrit"/>
         <moduleRef key="transcr"/>
         <moduleRef key="textstructure" include="back body div front TEI text"/>
         
+               
         <classSpec type="atts" ident="att.global.analytic" mode="add">
           <desc>I have needed to include this because it somehow disappeared from this
             customization. I do not know why this was necessary.</desc>
@@ -63,6 +64,29 @@
               </datatype>
             </attDef>
           </attList>
+        </classSpec>
+        
+        <classSpec type="atts" ident="att.canonical" mode="change">
+          <desc>Syriaca.org only uses one value in a @ref attribute.</desc>
+          <constraintSpec ident="syriaca-ref" scheme="schematron">
+            <constraint>
+              <sch:rule context="//@ref">
+                <sch:report test="contains(., ' ')" role="error">The Syriaca.org data model only allows one value on a @ref attribute.</sch:report>
+              </sch:rule>
+              <sch:rule context="//tei:persName/@ref">
+                <sch:assert test="matches(., concat('http://syriaca.org/person/', '\d+'))" role="error">
+                  The @ref attribute on &lt;persName&gt; must take a Syriaca.org person URI which reqires 
+                  the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:placeName/@ref">
+                <sch:assert test="matches(., concat('http://syriaca.org/place/', '\d+'))" role="error">
+                  The @ref attribute on &lt;placeName&gt; must take a Syriaca.org person URI which reqires 
+                  the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
         </classSpec>
         
         <classSpec ident="att.global" mode="change" module="tei" type="atts">
@@ -370,7 +394,6 @@
               
         
         <elementSpec ident="seriesStmt" module="header" mode="change">
-          <!-- Clean up. For syriacaAll and move what is appropriate to places. -->
           <constraintSpec ident="seriesStmt-content" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:seriesStmt/tei:respStmt">
@@ -378,33 +401,11 @@
                   A &lt;respStmt&gt; element may not appear in a &lt;seriesStmt&gt; that also has a &lt;title&gt; of @type="s". 
                 </sch:report>
               </sch:rule>
-              <sch:rule context="//tei:seriesStmt//tei:title[@level='s']">
-                <!-- Add additional values with an "or" operator if there are multiple series levels associated with a document. -->
-                <sch:assert test="matches(., 'The Syriac Gazetteer')">
-                  The text node of this &lt;title&gt; element must be "The Syriac Gazetteer". 
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="//tei:seriesStmt//tei:title[node() = 'The Syriac Gazetteer']">
-                <!-- Add additional rules with appropriate contexts when adding additional monograph values above. -->
-                <sch:assert test="./following-sibling::tei:idno/node() = 'http://syriaca.org/geo'">
-                  A &lt;title&gt; containing "The Syriac Gazetteer" requires a following sibling &lt;idno&gt; element containing "http://syriaca.org/geo'. 
-                </sch:assert>
-              </sch:rule>
               <sch:rule context="//tei:seriesStmt/tei:title[@level='m']">
-                <sch:assert test="matches(., 'Beth Qaṭraye Gazetteer')">
-                  <!-- Add additional monograph values with an "or" operator as needed. -->
-                  The text node of this &lt;title&gt; element must be "Beth Qaṭraye Gazetteer". 
-                </sch:assert>
                 <sch:assert test="./following-sibling::tei:biblScope">
                   A &lt;seriesStmt&gt; containing a &lt;title&gt; element @level="m" must have a &lt;biblScope&gt; element.
                   This &lt;biblScope&gt; element is used to indicate the series (&lt;title&gt; element @level="s") of which this 
                   'monograph' (&lt;title&gt; element @level="m") is a part.
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="//tei:seriesStmt[tei:title='Beth Qaṭraye Gazetteer']/tei:idno">
-                <!-- Add additional rules with appropriate contexts when adding additional monograph values above. -->
-                <sch:assert test="matches(., 'http://syriaca.org/bethqatraye')">
-                  The text node of this &lt;idno&gt; element must be "http://syriaca.org/bethqatraye'. 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt/tei:biblScope">
@@ -415,12 +416,6 @@
                   This &lt;biblScope&gt; element must contain a &lt;title&gt; element @level="s". It is used 
                   to indicate the series (&lt;title&gt; element @level="s") of which the 'monograph' (&lt;title&gt; element @level="m") 
                   in this &lt;seriesStmt&gt; is a part. 
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="//tei:seriesStmt[tei:title='Beth Qaṭraye Gazetteer']/tei:biblScope/@n">
-                <!-- Add an additional rule with appropriate context/assert if there are multiple monographs. -->
-                <sch:assert test=". = '1'">
-                  The @n attribute must be "1" since the Beth Qaṭraye Gazetteer is volume 1 of The Syriac Gazetteer.
                 </sch:assert>
               </sch:rule>
             </constraint>

@@ -39,7 +39,7 @@
   <text>
     <body>
       
-      <schemaSpec ident="syriacaPlaces" prefix="tei_" source="syriacaAll.compiled.odd" xml:lang="en" defaultExceptions="http://www.tei-c.org/ns/1.0 teix:egXML​ http://www.example.org/ns/">
+      <schemaSpec ident="syriacaPlaces" prefix="tei_" xml:lang="en" defaultExceptions="http://www.tei-c.org/ns/1.0 teix:egXML​ http://www.example.org/ns/">
         <moduleRef key="tei"/>
         <moduleRef key="certainty" include="precision"/>
         <moduleRef key="core" include="abbr author bibl biblScope choice citedRange corr date desc editor expan foreign label listBibl measure name note orig p ptr quote reg ref resp respStmt sic title"/>
@@ -49,6 +49,43 @@
         <moduleRef key="tagdocs" include="gi"/>
         <moduleRef key="textstructure" include="TEI body text"/>
         
+        
+        <elementSpec ident="seriesStmt" module="header" mode="change">
+          <constraintSpec ident="seriesStmt-content" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:seriesStmt//tei:title[@level='s']">
+                <!-- Add additional values with an "or" operator if there are multiple series levels associated with a document. -->
+                <sch:assert test="matches(., 'The Syriac Gazetteer') ">
+                  The text node of this &lt;title&gt; element must be "The Syriac Gazetteer". 
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:seriesStmt//tei:title[node() = 'The Syriac Gazetteer']">
+                <!-- Add additional rules with appropriate contexts when adding additional monograph values above. -->
+                <sch:assert test="./following-sibling::tei:idno/node() = 'http://syriaca.org/geo'">
+                  A &lt;title&gt; containing "The Syriac Gazetteer" requires a following sibling &lt;idno&gt; element containing "http://syriaca.org/geo'. 
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:seriesStmt/tei:title[@level='m']">
+                <sch:assert test="matches(., 'Beth Qaṭraye Gazetteer')">
+                  <!-- Add additional monograph values with an "or" operator as needed. -->
+                  The text node of this &lt;title&gt; element must be "Beth Qaṭraye Gazetteer". 
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:seriesStmt[tei:title='Beth Qaṭraye Gazetteer']/tei:idno">
+                <!-- Add additional rules with appropriate contexts when adding additional monograph values above. -->
+                <sch:assert test="matches(., 'http://syriaca.org/bethqatraye')">
+                  The text node of this &lt;idno&gt; element must be "http://syriaca.org/bethqatraye'. 
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:seriesStmt[tei:title='Beth Qaṭraye Gazetteer']/tei:biblScope/@n">
+                <!-- Add an additional rule with appropriate context/assert if there are multiple monographs. -->
+                <sch:assert test=". = '1'">
+                  The @n attribute must be "1" since the Beth Qaṭraye Gazetteer is volume 1 of The Syriac Gazetteer.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+        </elementSpec>
         
         <elementSpec ident="idno" module="header" mode="change">
           <content>
