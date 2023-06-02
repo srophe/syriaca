@@ -148,6 +148,10 @@
                   <desc>Names or terms Romanized into German according to the standards adopted by
                     Anton Baumstark's Geschichte der syrischen Literatur.</desc>
                 </valItem>
+                <valItem ident="fr-x-zanetti">
+                  <gloss>French—Zanetti</gloss>
+                  <desc>Names or terms Romanized into French according to the standards adopted by Ugo Zanetti.</desc>
+                </valItem>
                 <valItem ident="el">
                   <gloss>Greek—Modern</gloss>
                   <desc>Modern Greek after A.D. 1453</desc>
@@ -344,8 +348,8 @@
           <constraintSpec ident="ref-on-name" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:teiHeader//tei:name/@ref">
-                <sch:let name="edsDoc" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/editors.xml')"/>
-                <sch:let name="eds" value="$edsDoc//tei:text/tei:body/tei:listPerson/tei:person/@xml:id"/>
+                <sch:let name="edsDoc" value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/editors.xml')"/>
+                <sch:let name="eds" value="$edsDoc//tei:body//@xml:id"/>
                 <sch:let name="refValues" value="for $i in $eds return concat('http://syriaca.org/documentation/editors.xml#', $i)"/>
                 <sch:assert test="                   every $i in .                   satisfies $i = $refValues">
                   Acceptable values for the @ref attribute on a &lt;name&gt; element inside the &lt;teiHeader&gt; include: 
@@ -394,32 +398,11 @@
               
         
         <elementSpec ident="seriesStmt" module="header" mode="change">
-          <constraintSpec ident="seriesStmt-content" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:seriesStmt/tei:respStmt">
-                <sch:report test="preceding-sibling::tei:title[@level='s']">
-                  A &lt;respStmt&gt; element may not appear in a &lt;seriesStmt&gt; that also has a &lt;title&gt; of @type="s". 
-                </sch:report>
-              </sch:rule>
-              <sch:rule context="//tei:seriesStmt/tei:title[@level='m']">
-                <sch:assert test="./following-sibling::tei:biblScope">
-                  A &lt;seriesStmt&gt; containing a &lt;title&gt; element @level="m" must have a &lt;biblScope&gt; element.
-                  This &lt;biblScope&gt; element is used to indicate the series (&lt;title&gt; element @level="s") of which this 
-                  'monograph' (&lt;title&gt; element @level="m") is a part.
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="//tei:seriesStmt/tei:biblScope">
-                <sch:report test="preceding-sibling::tei:title[@level='s']">
-                  A &lt;biblScope&gt; element may not appear in a &lt;seriesStmt&gt; that also has a &lt;title&gt; of @type="s". 
-                </sch:report>
-                <sch:assert test="./tei:title/@level='s'">
-                  This &lt;biblScope&gt; element must contain a &lt;title&gt; element @level="s". It is used 
-                  to indicate the series (&lt;title&gt; element @level="s") of which the 'monograph' (&lt;title&gt; element @level="m") 
-                  in this &lt;seriesStmt&gt; is a part. 
-                </sch:assert>
-              </sch:rule>
-            </constraint>
-          </constraintSpec>
+          <content>
+            <elementRef key="title" minOccurs="1" maxOccurs="1"/>
+            <elementRef key="editor" minOccurs="1" maxOccurs="unbounded"/>
+            <elementRef key="idno" minOccurs="1" maxOccurs="1"/>
+          </content>
         </elementSpec>
         
         
@@ -589,17 +572,23 @@
                     Syriac Gazetteer). The "a" value stands for analytic, which means that the title
                     is part of a larger publication. </desc>
                 </valItem>
+                <valItem ident="j">
+                  <gloss>journal</gloss>
+                  <desc>
+                    A journal title.
+                  </desc>
+                </valItem>
                 <valItem ident="s">
                   <gloss>series</gloss>
                   <desc>
-                    The series title. This applies to Syriaca.org modules such as the "Syriac Biographical Dictionary" 
+                    A series title. Syriaca.org uses this for a book series. It also uses this for Syriaca.org modules such as the "Syriac Biographical Dictionary" 
                     and the "Syriac Gazetteer."
                   </desc>
                 </valItem>
                 <valItem ident="m">
                   <gloss>monographic</gloss>
                   <desc> The <att>level</att> "m" indicates that this title is monographic which TEI defines as a distinct 
-                    publication that may be part of the larger publication. Syriaca.org uses this title level to indicate
+                    publication that may be part of the larger publication. Syriaca.org uses this for monograph titles. It also uses this title level to indicate
                     a sub-module or volume of a module such as the "Saints" sub-module which is part of the larger "Syriac Biographical Dictionary."</desc>
                 </valItem>
               </valList>
@@ -875,12 +864,12 @@
           </constraintSpec>
           <constraintSpec ident="mssCitation" scheme="schematron">
             <constraint>
-              <!-- This is a temporary rule until we have URIs for mss. -->
-              <sch:rule context="//tei:text//tei:bibl" role="warning">
-                <sch:assert test="./tei:ptr">A &lt;bibl&gt; should contain a &lt;ptr&gt; 
-                indicating the URI or URL for the citation. The only exception is when 
-                when citing a manuscript in which case this &lt;bibl&gt; should have
-                @type="syriaca:Manuscript".</sch:assert>
+              <!-- This is a temporary rule until we have URIs for mss. Then the MSS option should go away.-->
+              <sch:rule context="//tei:text//tei:bibl">
+                <sch:assert test="./@type['syriaca:Manuscript'] | ./tei:ptr">A &lt;bibl&gt; should contain a &lt;ptr&gt; 
+                  indicating the URI or URL for the citation. The only exception is when 
+                  when citing a manuscript in which case this &lt;bibl&gt; should have
+                  @type="syriaca:Manuscript".</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>

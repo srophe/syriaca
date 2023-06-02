@@ -906,25 +906,29 @@ The MS. was lost in transmission by mail from <del rend="overstrike"><gap reason
 	  </p>
       </remarks>
   
-</classSpec><classSpec rend="add" module="tei" type="atts" xml:id="DATABLE" ident="att.datable">
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-06-12" xml:lang="en">provides attributes for normalization of elements
-    that contain dates, times, or datable events.</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">날짜, 시간 또는 날짜 명기 사건을 포함하는 요소의 규격화에 대한 속성을 제공한다.</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">提供用於元素規格化的屬性， 這些元素包含日期明確的事件。</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">日付や時間または時間事象を含む要素の正規化手法を示す属性を示す。</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-06-12" xml:lang="fr">fournit des attributs pour la normalisation
-    d'éléments qui contiennent des mentions d'événements datés ou susceptibles de l'être</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">atributos para registrar expresiones temporales
-    normalizadas.</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">assegna attributi per la normalizzazione di elementi
-    che contengono eventi databili</desc>
-  <classes xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <memberOf key="att.datable.w3c"/>
-    <memberOf key="att.datable.iso"/>
-    <memberOf key="att.datable.custom"/>
-  </classes>
-  <attList xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <attDef ident="calendar" usage="opt">
+</classSpec><classSpec rend="change" module="tei" type="atts" xml:id="DATABLE" ident="att.datable"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-06-12" xml:lang="en">provides attributes for normalization of elements
+    that contain dates, times, or datable events.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">날짜, 시간 또는 날짜 명기 사건을 포함하는 요소의 규격화에 대한 속성을 제공한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">提供用於元素規格化的屬性， 這些元素包含日期明確的事件。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">日付や時間または時間事象を含む要素の正規化手法を示す属性を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-06-12" xml:lang="fr">fournit des attributs pour la normalisation
+    d'éléments qui contiennent des mentions d'événements datés ou susceptibles de l'être</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">atributos para registrar expresiones temporales
+    normalizadas.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">assegna attributi per la normalizzazione di elementi
+    che contengono eventi databili</desc><classes xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude"><memberOf key="att.datable.w3c"/><memberOf key="att.datable.iso"/><memberOf key="att.datable.custom"/></classes><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="calendar" scheme="schematron">
+        <constraint>
+          <sch:rule context="tei:*[@calendar]">
+            <sch:assert test="string-length( normalize-space(.) ) gt 0"> @calendar indicates one or more
+            systems or calendars to which the date represented by the content of this element belongs,
+            but this <sch:name/> element has no textual content.</sch:assert>
+          </sch:rule>
+        </constraint>
+      </constraintSpec><attList xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude"><attDef ident="srophe:computed-start" ns="https://srophe.app">
+              <desc>Start date</desc>
+              <datatype maxOccurs="unbounded" minOccurs="1">
+                <rng:text/>
+              </datatype>
+            </attDef><attDef ident="srophe:computed-end" ns="https://srophe.app">
+              <desc>End date</desc>
+              <datatype maxOccurs="unbounded" minOccurs="1">
+                <rng:text/>
+              </datatype>
+            </attDef><attDef ident="calendar" usage="opt">
       <desc versionDate="2021-04-26" xml:lang="en">indicates one or more systems or calendars to which the
         date represented by the content of this element belongs.</desc>
       <desc versionDate="2007-12-20" xml:lang="ko">날짜 표현 시스템 또는 달력 표시 형식을 표시한다.</desc>
@@ -980,8 +984,7 @@ The MS. was lost in transmission by mail from <del rend="overstrike"><gap reason
         <att>calendar</att>属性は(<ident type="class">att.datable.custom</ident>クラスで定義される<att>datingMethod</att>属性と異なり、
         親要素によって定義される原資料の日付の暦日システムを定義するものであり、
         どの暦日に日付を正規化するかではない。</p></remarks>
-    </attDef>
-    <attDef ident="period" usage="opt">
+    </attDef><attDef ident="period" usage="opt">
       <desc versionDate="2021-04-19" xml:lang="en">supplies pointers to one or more definitions of 
         named periods of time (typically <gi>category</gi>s or <gi>calendar</gi>s) within which the datable item is understood to have occurred.</desc>
       <desc versionDate="2007-12-20" xml:lang="ko">시간을 명시할 수 있는 항목이 일어난 시간의 기간명을 정의하는 특정 위치로의 포인터를
@@ -999,9 +1002,7 @@ The MS. was lost in transmission by mail from <del rend="overstrike"><gap reason
       <datatype minOccurs="1" maxOccurs="unbounded">
         <dataRef key="teidata.pointer"/>
       </datatype>
-    </attDef>
-  </attList>
-  <remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2011-11-25" xml:lang="en">
+    </attDef></attList><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2011-11-25" xml:lang="en">
     <p>This <soCalled>superclass</soCalled> provides attributes that can be used to provide
       normalized values of temporal information. By default, the attributes from the <ident type="class">att.datable.w3c</ident> class are provided. If the module for names &amp; dates
       is loaded, this class also provides attributes from the <ident type="class">att.datable.iso</ident> and <ident type="class">att.datable.custom</ident> classes. In
@@ -1009,8 +1010,7 @@ The MS. was lost in transmission by mail from <del rend="overstrike"><gap reason
       those values available via the ISO 8601 standard. However, the greater expressiveness of the
       ISO datatypes may not be needed, and there exists much greater software support for the W3C
       datatypes.</p>
-  </remarks>
-  <remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="fr" versionDate="2007-06-12">
+  </remarks><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="fr" versionDate="2007-06-12">
     <p>Cette<soCalled>superclasse</soCalled> fournit des attributs qui peuvent être employés pour
       donner des valeurs normalisées à des informations relatives au temps. Par défaut, les
       attributs de la classe <ident type="class">att.datable.w3c</ident> sont fournis. Si le module
@@ -1020,8 +1020,7 @@ The MS. was lost in transmission by mail from <del rend="overstrike"><gap reason
       trouve dans la norme ISO 8601. Cependant, il n'est peut-être pas nécessaire de recourir aux
       possibilités très étendues des types de données de l'ISO. Il existe en effet une bien plus
       grande offre logicielle pour le traitement des types de données W3C.</p>
-  </remarks>
-  <remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="es" versionDate="2008-04-06">
+  </remarks><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="es" versionDate="2008-04-06">
     <p>Esta <soCalled>superclase</soCalled> proporciona atributos que pueden ser utilizados para
       proporcionar valores normalizados de información temporal. Por defecto, los atributos de la
       clase <ident type="class">att.datable.w3c</ident> son proporcionados. Si el módulo para los
@@ -1030,8 +1029,7 @@ The MS. was lost in transmission by mail from <del rend="overstrike"><gap reason
       disponibles vía el estándar de ISO 8601. Sin embargo, la mayoría de expresiones de los
       datatypes de ISO pueden no ser necesarios, y existe software de soporte para los datatypes de
       W3C.</p>
-  </remarks>
-  <remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2019-02-03">
+  </remarks><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2019-02-03">
     <p>この<soCalled>親クラス(スーパークラス)</soCalled>は、 
       正規化された時間情報を示すために用いる属性を提供する。デフォルト値として、当該属性は、
       クラス<ident type="class">att.datable.w3c</ident>が付与されている。
@@ -1040,9 +1038,7 @@ The MS. was lost in transmission by mail from <del rend="overstrike"><gap reason
       しかし、より強力な表現力を持つISOのデータ形式が必要にはならないかもしれない。
       W3Cのデータ形式に対するさらに強力な表現力をサポートするソフトウェアも存在する。
     </p>
-  </remarks>
-  
-</classSpec><classSpec rend="add" module="tei" xml:id="DATCAT" type="atts" ident="att.datcat">
+  </remarks></classSpec><classSpec rend="add" module="tei" xml:id="DATCAT" type="atts" ident="att.datcat">
   <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-09-17" xml:lang="en">provides attributes that are used to align XML
     elements or attributes with the appropriate Data Categories (DCs) defined by an external 
     taxonomy, in this way establishing the identity of information containers and values, 
@@ -2213,6 +2209,9 @@ the TEI header.</p>
                   <gloss>German—Baumstark Romanization</gloss>
                   <desc>Names or terms Romanized into German according to the standards adopted by
                     Anton Baumstark's Geschichte der syrischen Literatur.</desc>
+                </valItem><valItem ident="fr-x-zanetti">
+                  <gloss>French—Zanetti</gloss>
+                  <desc>Names or terms Romanized into French according to the standards adopted by Ugo Zanetti.</desc>
                 </valItem><valItem ident="el">
                   <gloss>Greek—Modern</gloss>
                   <desc>Modern Greek after A.D. 1453</desc>
@@ -6780,8 +6779,8 @@ Normalization</ref>
   </listRef></elementSpec><elementSpec rend="change" module="core" ident="name"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2005-01-14" xml:lang="en">name, proper noun</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">이름, 고유명사</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">名稱，特定名稱</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">nom, nom propre</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">nombre, nombre propio</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">nome, nome proprio</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2016-11-24" xml:lang="de">Name, Eigenname</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2005-01-14" xml:lang="en">contains a proper noun or noun phrase.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">고유명사 또는 명사구를 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">包含一個特定名稱 或名詞詞組。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-05" xml:lang="ja">固有名詞。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">contient un nom propre ou un syntagme nominal.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">contiene un nombre propio o un sintagma nominal</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">contiene un nome proprio o un sintagma nominale.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2016-11-24" xml:lang="de">enthält einen Eigennamen in Form eines Nomens oder einer Nominalphrase.</desc><classes><memberOf key="att.global"/><memberOf key="model.nameLike.agent"/><memberOf key="model.personPart"/><memberOf key="att.personal"/><memberOf key="att.datable"/><memberOf key="att.editLike"/><memberOf key="att.typed"/></classes><content><macroRef xmlns:rng="http://relaxng.org/ns/structure/1.0" key="macro.phraseSeq"/></content><constraintSpec ident="ref-on-name" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:teiHeader//tei:name/@ref">
-                <sch:let name="edsDoc" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/editors.xml')"/>
-                <sch:let name="eds" value="$edsDoc//tei:text/tei:body/tei:listPerson/tei:person/@xml:id"/>
+                <sch:let name="edsDoc" value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/editors.xml')"/>
+                <sch:let name="eds" value="$edsDoc//tei:body//@xml:id"/>
                 <sch:let name="refValues" value="for $i in $eds return concat('http://syriaca.org/documentation/editors.xml#', $i)"/>
                 <sch:assert test="                   every $i in .                   satisfies $i = $refValues">
                   Acceptable values for the @ref attribute on a &lt;name&gt; element inside the &lt;teiHeader&gt; include: 
@@ -7643,6 +7642,9 @@ entre les Romains.</label>
               <desc>Describes the function of the note. This attribute is recommended and determines
                 how the note is displayed on the page.</desc>
               <valList mode="replace" type="closed">
+                <valItem ident="abstract">
+                  <desc>A note that contains an abstract for an authority file.</desc>
+                </valItem>
                 <valItem ident="corrigenda">
                   <desc>A note describing how the record should be corrected or read
                     differently.</desc>
@@ -8165,16 +8167,21 @@ autor/a/es, ya sea una persona o una institución, de una obra; por ejemplo, en 
                     with value "a" to distinguish it from the title of the entire project (e.g. The
                     Syriac Gazetteer). The "a" value stands for analytic, which means that the title
                     is part of a larger publication. </desc>
+                </valItem><valItem ident="j">
+                  <gloss>journal</gloss>
+                  <desc>
+                    A journal title.
+                  </desc>
                 </valItem><valItem ident="s">
                   <gloss>series</gloss>
                   <desc>
-                    The series title. This applies to Syriaca.org modules such as the "Syriac Biographical Dictionary" 
+                    A series title. Syriaca.org uses this for a book series. It also uses this for Syriaca.org modules such as the "Syriac Biographical Dictionary" 
                     and the "Syriac Gazetteer."
                   </desc>
                 </valItem><valItem ident="m">
                   <gloss>monographic</gloss>
                   <desc> The <att>level</att> "m" indicates that this title is monographic which TEI defines as a distinct 
-                    publication that may be part of the larger publication. Syriaca.org uses this title level to indicate
+                    publication that may be part of the larger publication. Syriaca.org uses this for monograph titles. It also uses this title level to indicate
                     a sub-module or volume of a module such as the "Saints" sub-module which is part of the larger "Syriac Biographical Dictionary."</desc>
                 </valItem></valList><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-05-23" xml:lang="en">
         <p>The level of a title is sometimes implied by its context:
@@ -8506,11 +8513,11 @@ inclus, peuvent être encodés dans un élément
           </constraintSpec><constraintSpec ident="mssCitation" scheme="schematron">
             <constraint>
               
-              <sch:rule context="//tei:text//tei:bibl" role="warning">
-                <sch:assert test="./tei:ptr">A &lt;bibl&gt; should contain a &lt;ptr&gt; 
-                indicating the URI or URL for the citation. The only exception is when 
-                when citing a manuscript in which case this &lt;bibl&gt; should have
-                @type="syriaca:Manuscript".</sch:assert>
+              <sch:rule context="//tei:text//tei:bibl">
+                <sch:assert test="./@type['syriaca:Manuscript'] | ./tei:ptr">A &lt;bibl&gt; should contain a &lt;ptr&gt; 
+                  indicating the URI or URL for the citation. The only exception is when 
+                  when citing a manuscript in which case this &lt;bibl&gt; should have
+                  @type="syriaca:Manuscript".</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec><attList><attDef ident="type" usage="opt">
@@ -9740,32 +9747,7 @@ définissant les droits d'utilisation.</desc><desc xmlns:rng="http://relaxng.org
   </listRef></elementSpec><elementSpec rend="change" module="header" ident="seriesStmt"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">series statement</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-01-05" xml:lang="fr">mention de collection</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">연속간행물 진술</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">集叢陳述</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2016-11-17" xml:lang="de">Angaben zu einer Publikationsreihe</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">declaración de serie</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">dichiarazione sulla serie</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">groups information about the series, if any, to which a publication belongs.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-01-05" xml:lang="fr">regroupe toute information relative à la collection (si
     elle existe) à laquelle appartient une publication.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">연속 간행물에 대한 정보를 모아 놓는다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">若出版品隸屬於某叢書，則在此匯集該叢書的相關資訊。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">出版されたシリーズの情報をまとめる。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2016-11-17" xml:lang="de">umfasst Angaben zu einer Publikationsreihe, zu der eine Veröffentlichung gehört.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">agrupa información sobre la serie, si la hay, a la que
     pertenece una publicación.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">raggruppa le informazioni circa la serie alla quale
-    eventualmente la pubblicazione appartiene.</desc><classes><memberOf key="att.global"/><memberOf key="att.declarable"/></classes><content><sequence minOccurs="0" maxOccurs="unbounded"><elementRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" key="title" minOccurs="1" maxOccurs="1"/><elementRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" key="editor" minOccurs="1" maxOccurs="unbounded"/><elementRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" key="respStmt" minOccurs="0" maxOccurs="unbounded"/><elementRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" key="idno" minOccurs="1" maxOccurs="1"/><elementRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" key="biblScope" minOccurs="0" maxOccurs="unbounded"/></sequence></content><constraintSpec ident="seriesStmt-content" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:seriesStmt/tei:respStmt">
-                <sch:report test="preceding-sibling::tei:title[@level='s']">
-                  A &lt;respStmt&gt; element may not appear in a &lt;seriesStmt&gt; that also has a &lt;title&gt; of @type="s". 
-                </sch:report>
-              </sch:rule>
-              <sch:rule context="//tei:seriesStmt/tei:title[@level='m']">
-                <sch:assert test="./following-sibling::tei:biblScope">
-                  A &lt;seriesStmt&gt; containing a &lt;title&gt; element @level="m" must have a &lt;biblScope&gt; element.
-                  This &lt;biblScope&gt; element is used to indicate the series (&lt;title&gt; element @level="s") of which this 
-                  'monograph' (&lt;title&gt; element @level="m") is a part.
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="//tei:seriesStmt/tei:biblScope">
-                <sch:report test="preceding-sibling::tei:title[@level='s']">
-                  A &lt;biblScope&gt; element may not appear in a &lt;seriesStmt&gt; that also has a &lt;title&gt; of @type="s". 
-                </sch:report>
-                <sch:assert test="./tei:title/@level='s'">
-                  This &lt;biblScope&gt; element must contain a &lt;title&gt; element @level="s". It is used 
-                  to indicate the series (&lt;title&gt; element @level="s") of which the 'monograph' (&lt;title&gt; element @level="m") 
-                  in this &lt;seriesStmt&gt; is a part. 
-                </sch:assert>
-              </sch:rule>
-            </constraint>
-          </constraintSpec><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+    eventualmente la pubblicazione appartiene.</desc><classes><memberOf key="att.global"/><memberOf key="att.declarable"/></classes><content><elementRef key="title" minOccurs="1" maxOccurs="1"/><elementRef key="editor" minOccurs="1" maxOccurs="unbounded"/><elementRef key="idno" minOccurs="1" maxOccurs="1"/></content><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
       <seriesStmt>
         <title>Machine-Readable Texts for the Study of Indian Literature</title>

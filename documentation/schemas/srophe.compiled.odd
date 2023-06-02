@@ -910,25 +910,29 @@ The MS. was lost in transmission by mail from <del rend="overstrike"><gap reason
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#CONADA">3.6.4. Dates and Times</ref>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html#NDDATE">13.4. Dates</ref>
   </listRef>
-</classSpec><classSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" module="tei" type="atts" xml:id="DATABLE" ident="att.datable">
-  <desc versionDate="2007-06-12" xml:lang="en">provides attributes for normalization of elements
-    that contain dates, times, or datable events.</desc>
-  <desc versionDate="2007-12-20" xml:lang="ko">날짜, 시간 또는 날짜 명기 사건을 포함하는 요소의 규격화에 대한 속성을 제공한다.</desc>
-  <desc versionDate="2007-05-02" xml:lang="zh-TW">提供用於元素規格化的屬性， 這些元素包含日期明確的事件。</desc>
-  <desc versionDate="2008-04-05" xml:lang="ja">日付や時間または時間事象を含む要素の正規化手法を示す属性を示す。</desc>
-  <desc versionDate="2007-06-12" xml:lang="fr">fournit des attributs pour la normalisation
-    d'éléments qui contiennent des mentions d'événements datés ou susceptibles de l'être</desc>
-  <desc versionDate="2007-05-04" xml:lang="es">atributos para registrar expresiones temporales
-    normalizadas.</desc>
-  <desc versionDate="2007-01-21" xml:lang="it">assegna attributi per la normalizzazione di elementi
-    che contengono eventi databili</desc>
-  <classes>
-    <memberOf key="att.datable.w3c"/>
-    <memberOf key="att.datable.iso"/>
-    <memberOf key="att.datable.custom"/>
-  </classes>
-  <attList>
-    <attDef ident="calendar" usage="opt">
+</classSpec><classSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" rend="change" module="tei" type="atts" xml:id="DATABLE" ident="att.datable"><desc versionDate="2007-06-12" xml:lang="en">provides attributes for normalization of elements
+    that contain dates, times, or datable events.</desc><desc versionDate="2007-12-20" xml:lang="ko">날짜, 시간 또는 날짜 명기 사건을 포함하는 요소의 규격화에 대한 속성을 제공한다.</desc><desc versionDate="2007-05-02" xml:lang="zh-TW">提供用於元素規格化的屬性， 這些元素包含日期明確的事件。</desc><desc versionDate="2008-04-05" xml:lang="ja">日付や時間または時間事象を含む要素の正規化手法を示す属性を示す。</desc><desc versionDate="2007-06-12" xml:lang="fr">fournit des attributs pour la normalisation
+    d'éléments qui contiennent des mentions d'événements datés ou susceptibles de l'être</desc><desc versionDate="2007-05-04" xml:lang="es">atributos para registrar expresiones temporales
+    normalizadas.</desc><desc versionDate="2007-01-21" xml:lang="it">assegna attributi per la normalizzazione di elementi
+    che contengono eventi databili</desc><classes><memberOf key="att.datable.w3c"/><memberOf key="att.datable.iso"/><memberOf key="att.datable.custom"/></classes><constraintSpec ident="calendar" scheme="schematron">
+        <constraint>
+          <sch:rule context="tei:*[@calendar]">
+            <sch:assert test="string-length( normalize-space(.) ) gt 0"> @calendar indicates one or more
+            systems or calendars to which the date represented by the content of this element belongs,
+            but this <sch:name/> element has no textual content.</sch:assert>
+          </sch:rule>
+        </constraint>
+      </constraintSpec><attList><attDef ident="srophe:computed-start" ns="https://srophe.app">
+              <desc>Start date</desc>
+              <datatype maxOccurs="unbounded" minOccurs="1">
+                <rng:text/>
+              </datatype>
+            </attDef><attDef ident="srophe:computed-end" ns="https://srophe.app">
+              <desc>End date</desc>
+              <datatype maxOccurs="unbounded" minOccurs="1">
+                <rng:text/>
+              </datatype>
+            </attDef><attDef ident="calendar" usage="opt">
       <desc versionDate="2021-04-26" xml:lang="en">indicates one or more systems or calendars to which the
         date represented by the content of this element belongs.</desc>
       <desc versionDate="2007-12-20" xml:lang="ko">날짜 표현 시스템 또는 달력 표시 형식을 표시한다.</desc>
@@ -984,8 +988,7 @@ The MS. was lost in transmission by mail from <del rend="overstrike"><gap reason
         <att>calendar</att>属性は(<ident type="class">att.datable.custom</ident>クラスで定義される<att>datingMethod</att>属性と異なり、
         親要素によって定義される原資料の日付の暦日システムを定義するものであり、
         どの暦日に日付を正規化するかではない。</p></remarks>
-    </attDef>
-    <attDef ident="period" usage="opt">
+    </attDef><attDef ident="period" usage="opt">
       <desc versionDate="2021-04-19" xml:lang="en">supplies pointers to one or more definitions of 
         named periods of time (typically <gi>category</gi>s or <gi>calendar</gi>s) within which the datable item is understood to have occurred.</desc>
       <desc versionDate="2007-12-20" xml:lang="ko">시간을 명시할 수 있는 항목이 일어난 시간의 기간명을 정의하는 특정 위치로의 포인터를
@@ -1003,9 +1006,7 @@ The MS. was lost in transmission by mail from <del rend="overstrike"><gap reason
       <datatype minOccurs="1" maxOccurs="unbounded">
         <dataRef key="teidata.pointer"/>
       </datatype>
-    </attDef>
-  </attList>
-  <remarks versionDate="2011-11-25" xml:lang="en">
+    </attDef></attList><remarks versionDate="2011-11-25" xml:lang="en">
     <p>This <soCalled>superclass</soCalled> provides attributes that can be used to provide
       normalized values of temporal information. By default, the attributes from the <ident type="class">att.datable.w3c</ident> class are provided. If the module for names &amp; dates
       is loaded, this class also provides attributes from the <ident type="class">att.datable.iso</ident> and <ident type="class">att.datable.custom</ident> classes. In
@@ -1013,8 +1014,7 @@ The MS. was lost in transmission by mail from <del rend="overstrike"><gap reason
       those values available via the ISO 8601 standard. However, the greater expressiveness of the
       ISO datatypes may not be needed, and there exists much greater software support for the W3C
       datatypes.</p>
-  </remarks>
-  <remarks xml:lang="fr" versionDate="2007-06-12">
+  </remarks><remarks xml:lang="fr" versionDate="2007-06-12">
     <p>Cette<soCalled>superclasse</soCalled> fournit des attributs qui peuvent être employés pour
       donner des valeurs normalisées à des informations relatives au temps. Par défaut, les
       attributs de la classe <ident type="class">att.datable.w3c</ident> sont fournis. Si le module
@@ -1024,8 +1024,7 @@ The MS. was lost in transmission by mail from <del rend="overstrike"><gap reason
       trouve dans la norme ISO 8601. Cependant, il n'est peut-être pas nécessaire de recourir aux
       possibilités très étendues des types de données de l'ISO. Il existe en effet une bien plus
       grande offre logicielle pour le traitement des types de données W3C.</p>
-  </remarks>
-  <remarks xml:lang="es" versionDate="2008-04-06">
+  </remarks><remarks xml:lang="es" versionDate="2008-04-06">
     <p>Esta <soCalled>superclase</soCalled> proporciona atributos que pueden ser utilizados para
       proporcionar valores normalizados de información temporal. Por defecto, los atributos de la
       clase <ident type="class">att.datable.w3c</ident> son proporcionados. Si el módulo para los
@@ -1034,8 +1033,7 @@ The MS. was lost in transmission by mail from <del rend="overstrike"><gap reason
       disponibles vía el estándar de ISO 8601. Sin embargo, la mayoría de expresiones de los
       datatypes de ISO pueden no ser necesarios, y existe software de soporte para los datatypes de
       W3C.</p>
-  </remarks>
-  <remarks xml:lang="ja" versionDate="2019-02-03">
+  </remarks><remarks xml:lang="ja" versionDate="2019-02-03">
     <p>この<soCalled>親クラス(スーパークラス)</soCalled>は、 
       正規化された時間情報を示すために用いる属性を提供する。デフォルト値として、当該属性は、
       クラス<ident type="class">att.datable.w3c</ident>が付与されている。
@@ -1044,12 +1042,10 @@ The MS. was lost in transmission by mail from <del rend="overstrike"><gap reason
       しかし、より強力な表現力を持つISOのデータ形式が必要にはならないかもしれない。
       W3Cのデータ形式に対するさらに強力な表現力をサポートするソフトウェアも存在する。
     </p>
-  </remarks>
-  <listRef>
+  </remarks><listRef>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#CONADA">3.6.4. Dates and Times</ref>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html#NDDATE">13.4. Dates</ref>
-  </listRef>
-</classSpec><classSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" module="tei" xml:id="DATCAT" type="atts" ident="att.datcat">
+  </listRef></classSpec><classSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" module="tei" xml:id="DATCAT" type="atts" ident="att.datcat">
   <desc versionDate="2022-09-17" xml:lang="en">provides attributes that are used to align XML
     elements or attributes with the appropriate Data Categories (DCs) defined by an external 
     taxonomy, in this way establishing the identity of information containers and values, 
@@ -8659,6 +8655,9 @@ entre les Romains.</label>
               <desc>Describes the function of the note. This attribute is recommended and determines
                 how the note is displayed on the page.</desc>
               <valList mode="replace" type="closed">
+                <valItem ident="abstract">
+                  <desc>A note that contains an abstract for an authority file.</desc>
+                </valItem>
                 <valItem ident="corrigenda">
                   <desc>A note describing how the record should be corrected or read
                     differently.</desc>
@@ -24445,21 +24444,6 @@ underdotting, thus reinstating the words "just some" and
             <attDef ident="ana" mode="add">
               <datatype>
                 <dataRef key="teidata.text"/>
-              </datatype>
-            </attDef>
-          </attList>
-        </classSpec><classSpec rend="add" module="derived-module-srophe" ident="att.datable" type="atts" source="tei">
-          <attList>
-            <attDef ident="srophe:computed-start" ns="https://srophe.app" mode="add">
-              <desc>Start date</desc>
-              <datatype maxOccurs="unbounded" minOccurs="1">
-                <rng:text xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
-              </datatype>
-            </attDef>
-            <attDef ident="srophe:computed-end" ns="https://srophe.app" mode="add">
-              <desc>End date</desc>
-              <datatype maxOccurs="unbounded" minOccurs="1">
-                <rng:text xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
               </datatype>
             </attDef>
           </attList>
