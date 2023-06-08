@@ -6,7 +6,7 @@
         
         
         <sch:rule context="//tei:text//tei:place/tei:placeName[contains(@srophe:tags, 'syriaca-headword')]">
-            <sch:report test="./parent::tei:place/tei:placeName[contains(@xml:lang, 'en')][contains(@srophe:tags, '#syriaca-headword')]/following-sibling::tei:placeName[contains(@xml:lang, 'en')][contains(@srophe:tags, '#syriaca-headword')]">
+            <sch:report test=".[contains(@xml:lang, 'en')]/following-sibling::tei:placeName[contains(@xml:lang, 'en')][contains(@srophe:tags, '#syriaca-headword')]">
                 There must be one and only one &lt;placeName&gt; element with the combination of @srophe:tags="#syriaca-headword" and @xml:lang="en".
             </sch:report>
         </sch:rule>
@@ -19,7 +19,7 @@
         </sch:rule>-->
         
         <sch:rule context="//tei:text//tei:person/tei:persName[contains(@srophe:tags, 'syriaca-headword')]">
-            <sch:report test="./parent::tei:person/tei:persName[contains(@xml:lang, 'en')][contains(@srophe:tags, '#syriaca-headword')]/following-sibling::tei:persName[contains(@xml:lang, 'en')][contains(@srophe:tags, '#syriaca-headword')]">
+            <sch:report test=".[contains(@xml:lang, 'en')]/following-sibling::tei:persName[contains(@xml:lang, 'en')][contains(@srophe:tags, '#syriaca-headword')]">
                 There must be one and only one &lt;persName&gt; element with the combination of @srophe:tags="#syriaca-headword" and @xml:lang="en".
             </sch:report>
         </sch:rule>
