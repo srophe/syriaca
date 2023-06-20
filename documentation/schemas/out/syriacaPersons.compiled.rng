@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-06-14T18:56:17Z. .
+Schema generated from ODD source 2023-06-20T21:18:16Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -2053,6 +2053,7 @@ Suggested values include: 1] top; 2] bottom; 3] margin; 4] opposite; 5] overleaf
          <ref name="tei_persName"/>
          <ref name="tei_floruit"/>
          <ref name="tei_gender"/>
+         <ref name="tei_occupation"/>
          <ref name="tei_state"/>
          <ref name="tei_trait"/>
       </choice>
@@ -4730,6 +4731,43 @@ Sample values include: 1] proclaimed; 2] assumed; 3] verified; 4] clinical; 5] b
          <empty/>
       </element>
    </define>
+   <define name="tei_occupation">
+      <element name="occupation">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(occupation) contains an informal description of a person's trade, profession or occupation. [15.2.2. The Participant Description]</a:documentation>
+         <ref name="tei_macro.specialPara"/>
+         <ref name="tei_att.global.attributes"/>
+         <ref name="tei_att.datable.attributes"/>
+         <ref name="tei_att.editLike.attributes"/>
+         <ref name="tei_att.naming.attributes"/>
+         <ref name="tei_att.typed.attribute.subtype"/>
+         <optional>
+            <attribute name="type">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">characterizes the element in some sense, using any convenient classification scheme or typology.
+Sample values include: 1] primary; 2] other; 3] paid; 4] unpaid</a:documentation>
+               <data type="token">
+                  <param name="pattern">[^\p{C}\p{Z}]+</param>
+               </data>
+            </attribute>
+         </optional>
+         <optional>
+            <attribute name="scheme">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the classification system or taxonomy in use, for example by supplying the identifier of a <code xmlns="http://www.w3.org/1999/xhtml">&lt;taxonomy&gt;</code> element, or pointing to some other resource.</a:documentation>
+               <data type="anyURI">
+                  <param name="pattern">\S+</param>
+               </data>
+            </attribute>
+         </optional>
+         <optional>
+            <attribute name="code">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">identifies an occupation code defined within the classification system or taxonomy defined by the <code xmlns="http://www.w3.org/1999/xhtml">@scheme</code> attribute.</a:documentation>
+               <data type="anyURI">
+                  <param name="pattern">\S+</param>
+               </data>
+            </attribute>
+         </optional>
+         <empty/>
+      </element>
+   </define>
    <define name="tei_person">
       <element name="person">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(person) provides information about an identifiable individual, for example a participant in a language interaction, or a person referred to in a historical source. [13.3.2. The Person Element 15.2.2. The Participant Description]</a:documentation>
@@ -4950,6 +4988,8 @@ Sample values include: 1] proclaimed; 2] assumed; 3] verified; 4] clinical; 5] b
                        test="@passive and not(@active)">the attribute 'passive' may be supplied only if the attribute 'active' is supplied</report>
             </rule>
          </pattern>
+         <ref name="tei_att.global.responsibility.attributes"/>
+         <ref name="tei_att.typed.attributes"/>
          <ref name="tei_att.global.source.attributes"/>
          <ref name="tei_att.datable.attributes"/>
          <ref name="tei_att.canonical.attributes"/>
@@ -5015,6 +5055,7 @@ Sample values include: 1] proclaimed; 2] assumed; 3] verified; 4] clinical; 5] b
             <ref name="tei_precision"/>
          </zeroOrMore>
          <text/>
+         <ref name="tei_att.canonical.attributes"/>
          <ref name="tei_att.datable.attributes"/>
          <ref name="tei_att.typed.attributes"/>
          <ref name="tei_att.global.source.attributes"/>
