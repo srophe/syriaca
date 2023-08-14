@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<TEI xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:svg="http://www.w3.org/2000/svg"
-  xmlns:math="http://www.w3.org/1998/Math/MathML" xmlns="http://www.tei-c.org/ns/1.0">
+<TEI xmlns="http://www.tei-c.org/ns/1.0" xmlns:sch="http://purl.oclc.org/dsdl/schematron" xmlns:srophe="https://srophe.app">
   <teiHeader>
     <fileDesc>
       <titleStmt>
@@ -19,16 +18,52 @@
       <schemaSpec ident="syriacaPersons" prefix="tei_" source="syriacaAll.compiled.odd" xml:lang="en" defaultExceptions="http://www.tei-c.org/ns/1.0 teix:egXML​ http://www.example.org/ns/">
         <moduleRef key="tei"/>
         <moduleRef key="certainty" include="precision"/>
-        <moduleRef key="core" include="abbr author bibl biblScope choice citedRange corr date desc editor foreign label listBibl name note orig p ptr quote reg ref resp respStmt sic title"/>
+        <moduleRef key="core" include="author bibl choice citedRange corr date desc editor foreign label listBibl name note orig p ptr quote reg ref resp respStmt sic title"/>
         <moduleRef key="header" include="authority availability catDesc category change classDecl edition editionStmt editorialDecl encodingDesc fileDesc funder idno interpretation langUsage licence principal profileDesc publicationStmt revisionDesc seriesStmt sourceDesc sponsor taxonomy teiHeader titleStmt"/>
         <moduleRef key="linking" include="link"/>
-        <moduleRef key="namesdates" include="addName birth death event floruit forename gender lang listPerson listRelation occupation orgName persName person personGrp place placeName relation roleName state surname trait"/>
-        <moduleRef key="textstructure" include="back body div front TEI text"/>
+        <moduleRef key="namesdates" include="addName birth death event floruit forename gender listPerson listRelation orgName persName person personGrp placeName relation roleName state surname trait"/>
+        <moduleRef key="textstructure" include="back body front TEI text"/>
         <moduleRef key="analysis" exclude="c cl interp interpGrp m pc phr s span spanGrp w"/>
-      
-      
-      
-      
+        
+        <elementSpec ident="person" module="namesdates" mode="change">
+          <content>
+            <sequence minOccurs="1" maxOccurs="1" preserveOrder="true">
+              <elementRef key="persName" minOccurs="1" maxOccurs="unbounded"/>
+              <elementRef key="floruit" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="birth" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="death" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="gender" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="note" minOccurs="1" maxOccurs="unbounded"/>
+              <elementRef key="state" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="trait" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="event" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="idno" minOccurs="1" maxOccurs="unbounded"/>
+              <elementRef key="link" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/>
+            </sequence>
+          </content>
+        </elementSpec>
+        
+        <elementSpec ident="personGrp" module="namesdates" mode="change">
+          <content>
+            <sequence minOccurs="1" maxOccurs="1" preserveOrder="true">
+              <elementRef key="persName" minOccurs="1" maxOccurs="unbounded"/>
+              <elementRef key="floruit" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="birth" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="death" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="gender" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="note" minOccurs="1" maxOccurs="unbounded"/>
+              <elementRef key="state" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="trait" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="event" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="idno" minOccurs="1" maxOccurs="unbounded"/>
+              <elementRef key="link" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/>
+            </sequence>
+          </content>
+        </elementSpec>
+        
+        
       </schemaSpec>
       
     </body>
