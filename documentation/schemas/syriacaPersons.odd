@@ -32,11 +32,200 @@
           </content>
         </elementSpec>
         
+        
         <elementSpec ident="bibl" module="core" mode="change">
           <content>
-            <elementRef key="persName"/>
+            <sequence preserveOrder="false">
+              <elementRef key="author" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="citedRange" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="date" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="editor" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="ptr" minOccurs="0" maxOccurs="unbounded"/> <!-\-Required in a citation but not inside a note.-\->
+              <elementRef key="title" minOccurs="0" maxOccurs="unbounded"/>
+            </sequence>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="birth" module="namesdates" mode="change">
+          <content>
+            <sequence preserveOrder="true">
+              <elementRef key="date" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/>
+            </sequence>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="citedRange" module="core" mode="change">
+          <content>
+            <textNode/>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="date" module="core" mode="change">
+          <content>
+            <textNode/>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="death" module="namesdates" mode="change">
+          <content>
+            <sequence preserveOrder="true">
+              <elementRef key="date" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/>
+            </sequence>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="desc" module="core" mode="change">
+          <content>
+            <sequence preserveOrder="false">
+              <elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="ptr" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="title" minOccurs="0" maxOccurs="unbounded"/>
+            </sequence>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="editor" module="core" mode="change">
+          <content>
+            <sequence preserveOrder="false">
+              <elementRef key="persName" minOccurs="0" maxOccurs="1"/>
+              <textNode/>
+            </sequence>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="event" module="namesdates" mode="change">
+          <content>
+            <elementRef key="desc" minOccurs="1" maxOccurs="1"/>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="floruit" module="namesdates" mode="change">
+          <content>
+            <sequence preserveOrder="false">
+              <elementRef key="date" minOccurs="0" maxOccurs="1"/>
+              <elementRef key="persName" minOccurs="0" maxOccurs="1"/>
+              <textNode/>
+            </sequence>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="foreign" module="core" mode="change">
+          <content>
+            <textNode/>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="gender" module="namesdates" mode="change">
+          <content>
+            <textNode/>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="idno" module="header" mode="change">
+          <content>
+            <textNode/>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="label" module="core" mode="change">
+          <content>
+            <textNode/>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="link" module="linking" mode="change">
+          
+        </elementSpec>
+        
+        
+        <elementSpec ident="listPerson" module="namesdates" mode="change">
+          <content>
+            <sequence preserveOrder="false">
+              <alternate>
+                <elementRef key="person" minOccurs="1" maxOccurs="1"/>
+                <elementRef key="personGrp" minOccurs="1" maxOccurs="1"/>
+              </alternate>
+              <elementRef key="listRelation" minOccurs="0" maxOccurs="1"/>
+            </sequence>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="listRelation" module="namesdates" mode="change">
+          <content>
+            <elementRef key="relation" minOccurs="1" maxOccurs="unbounded"/>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="note" module="core" mode="change">
+          <content>
+            <sequence preserveOrder="false">
+              <elementRef key="bibl" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="quote" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="ref" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="title" minOccurs="0" maxOccurs="unbounded"/>
+              <textNode/>
+            </sequence>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="orgName" module="core" mode="change">
+          <content>
+            <sequence preserveOrder="false">
+              <elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/>
+              <textNode/>
+            </sequence>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="p" module="core" mode="change">
+          <content>
+            <sequence preserveOrder="false">
+              <elementRef key="listBibl" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="note" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="ref" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="title" minOccurs="0" maxOccurs="unbounded"/>
+              <textNode/>
+            </sequence>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="place" module="core" mode="change">
+          <content>
+            <sequence preserveOrder="false">
+              <elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/>
+              <textNode/>
+            </sequence>
           </content>
         </elementSpec>-->
+        
+        
         
         <elementSpec ident="person" module="namesdates" mode="change">
           <content>
@@ -57,6 +246,7 @@
           </content>
         </elementSpec>
         
+        
         <elementSpec ident="personGrp" module="namesdates" mode="change">
           <content>
             <sequence minOccurs="1" maxOccurs="1" preserveOrder="true">
@@ -75,6 +265,67 @@
             </sequence>
           </content>
         </elementSpec>
+        
+        
+        <!--<elementSpec ident="precision" module="certainty" mode="change">
+          <content>
+            <empty/>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="ptr" module="core" mode="change">
+          
+        </elementSpec>
+        
+        
+        <elementSpec ident="quote" module="core" mode="change">
+          <content>
+            <sequence preserveOrder="false">
+              <elementRef key="bibl" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="orgName" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="title" minOccurs="0" maxOccurs="unbounded"/>
+              <textNode/>
+            </sequence>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="relation" module="namesdates" mode="change">
+          <content>
+            <elementRef key="desc" minOccurs="1" maxOccurs="1"/>
+          </content>
+        </elementSpec>
+        
+        <elementSpec ident="state" module="namesdates" mode="change">
+          <content>
+            <sequence preserveOrder="false">
+              <elementRef key="desc" minOccurs="1" maxOccurs="1"/>
+              <elementRef key="precision" minOccurs="0" maxOccurs="1"/>
+            </sequence>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="title" module="core" mode="change">
+          <content>
+            <sequence preserveOrder="false">
+              <elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/>
+              <textNode/>
+            </sequence>
+          </content>
+        </elementSpec>
+        
+        
+        <elementSpec ident="trait" module="namesdates" mode="change">
+          <content>
+            <elementRef key="label" minOccurs="1" maxOccurs="1"/>
+          </content>
+        </elementSpec>-->
         
         
       </schemaSpec>
