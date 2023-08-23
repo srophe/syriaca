@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-08-23T14:34:31Z. .
+Schema generated from ODD source 2023-08-23T14:56:29Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -2533,6 +2533,7 @@ Suggested values include: 1] top; 2] bottom; 3] margin; 4] opposite; 5] overleaf
             <zeroOrMore>
                <ref name="tei_title"/>
             </zeroOrMore>
+            <text/>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="syriacaPersons-desc-deprecationInfo-only-in-deprecated-constraint-rule-13">
@@ -4406,9 +4407,9 @@ Sample values include: 1] proclaimed; 2] assumed; 3] verified; 4] clinical; 5] b
       <element name="floruit">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(floruit) contains information about a person's period of activity. [13.3.2.1. Personal Characteristics]</a:documentation>
          <interleave>
-            <optional>
+            <zeroOrMore>
                <ref name="tei_date"/>
-            </optional>
+            </zeroOrMore>
             <optional>
                <ref name="tei_persName"/>
             </optional>
@@ -4757,9 +4758,9 @@ Sample values include: 1] proclaimed; 2] assumed; 3] verified; 4] clinical; 5] b
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(state) contains a description of some status or quality attributed to a person, place, or organization often at some specific time or for a specific date range. [13.3.1. Basic Principles 13.3.2.1. Personal Characteristics]</a:documentation>
          <interleave>
             <ref name="tei_desc"/>
-            <optional>
+            <zeroOrMore>
                <ref name="tei_precision"/>
-            </optional>
+            </zeroOrMore>
          </interleave>
          <ref name="tei_att.canonical.attributes"/>
          <ref name="tei_att.datable.attributes"/>
