@@ -2001,7 +2001,7 @@
           </remarks>
         </elementSpec>
 
-        <elementSpec ident="nationality" module="namesdates" mode="replace">
+        <!--<elementSpec ident="nationality" module="namesdates" mode="replace">
           <classes mode="replace">
             <memberOf key="att.datable.custom"/>
             <memberOf key="att.datable.w3c"/>
@@ -2025,7 +2025,7 @@
               <gi>nationality</gi> element from all model classes. It also requires exactly one
               <gi>placeName</gi> child and one <gi>note</gi> child and allows an optional <gi>date</gi> child.</p>
           </remarks>
-        </elementSpec>
+        </elementSpec>-->
 
         <elementSpec ident="residence" module="namesdates" mode="replace">
           <classes mode="replace">
@@ -2361,9 +2361,10 @@
           </classes>
           <content>
             <elementRef key="note" minOccurs="1" maxOccurs="1"/>
+            <elementRef key="placeName" minOccurs="0" maxOccurs="1"/>
           </content>
           <attList>
-            <attDef ident="ana" mode="change" usage="req">
+            <attDef ident="ana" mode="change" usage="rec"><!-- I've changed this to recommended because state type="citizenship" does not need it. Look into changing the schematron rule below to require @ana only mental and sanctity -->
               <datatype minOccurs="1" maxOccurs="unbounded">
                 <dataRef key="teidata.pointer"/>
               </datatype>
@@ -2423,6 +2424,9 @@
                 </valItem>
                 <valItem ident="sanctity">
                   <desc>used for references to a person's sanctity.</desc>
+                </valItem>
+                <valItem ident="citizenship">
+                  <desc>used for references to a person's citizenship in a city, kingdom, empire, etc.</desc>
                 </valItem>
               </valList>
             </attDef>
