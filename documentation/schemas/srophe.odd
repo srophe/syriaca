@@ -53,7 +53,49 @@
         
         
         
-        <classSpec ident="att.global" mode="change" type="atts" source="tei">
+        <classSpec type="atts" ident="att.personal" module="tei" mode="change">
+          <attList>
+            <attDef ident="srophe:tags" ns="https://srophe.app" mode="add">
+              <desc>Specialized attribute specific to sorting headwords in the Srophe App.</desc>
+              <datatype maxOccurs="unbounded" minOccurs="1">
+                <dataRef key="teidata.text"/>
+              </datatype>
+            </attDef>
+          </attList>
+        </classSpec>
+        
+        
+        
+        <classSpec type="atts" ident="att.datable" module="tei" mode="change">
+          <attList>
+            <attDef ident="srophe:computed-start" ns="https://srophe.app" mode="add">
+              <desc>Start date for a Srophe timeline</desc>
+              <datatype maxOccurs="unbounded" minOccurs="1">
+                <dataRef key="teidata.temporal.w3c"/>
+              </datatype>
+            </attDef>
+            <attDef ident="srophe:computed-end" ns="https://srophe.app" mode="add">
+              <desc>End date for a Srophe timeline</desc>
+              <datatype maxOccurs="unbounded" minOccurs="1">
+                <dataRef key="teidata.temporal.w3c"/>
+              </datatype>
+            </attDef>
+          </attList>
+        </classSpec>
+        
+        
+        
+        <!--<classSpec type="atts" ident="att.global" mode="add">
+          <classes>
+            <memberOf key="att.tags.srophe" mode="add"/>
+            <memberOf key="att.datable.srophe" mode="add"/>
+          </classes>
+        </classSpec>
+        
+        
+        
+        <classSpec ident="att.tags.srophe" module="tei" mode="add" type="atts">
+          
           <attList>
             <attDef ident="srophe:tags" ns="https://srophe.app" mode="add">
               <desc>Specialized attributes specific to the functions performed by the Srophé
@@ -64,24 +106,26 @@
             </attDef>
           </attList>
         </classSpec>
+        
 
-        <classSpec ident="att.datable" type="atts" source="tei" mode="change">
+        
+        <classSpec ident="att.datable.srophe" module="tei" mode="add" type="atts">
+          
           <attList>
             <attDef ident="srophe:computed-start" ns="https://srophe.app" mode="add">
-              <desc>Start date</desc>
+              <desc>Start date for timeline</desc>
               <datatype maxOccurs="unbounded" minOccurs="1">
                 <rng:text xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
               </datatype>
             </attDef>
             <attDef ident="srophe:computed-end" ns="https://srophe.app" mode="add">
-              <desc>End date</desc>
+              <desc>End date for timeline</desc>
               <datatype maxOccurs="unbounded" minOccurs="1">
                 <rng:text xmlns:rng="http://relaxng.org/ns/structure/1.0"/>
               </datatype>
             </attDef>
           </attList>
-        </classSpec>
-
+        </classSpec>-->
 
 
         <elementSpec ident="teiHeader" module="header" mode="change">
@@ -1111,18 +1155,6 @@
         </elementSpec>
         
         <elementSpec ident="state" module="namesdates" mode="change">
-          <classes mode="replace">
-            <memberOf key="att.canonical" mode="add"/>
-            <memberOf key="att.datable" mode="add"/>
-            <memberOf key="att.datable.iso" mode="delete"/>
-            <memberOf key="att.datable.custom" mode="delete"/>
-            <memberOf key="att.typed" mode="add"/>
-            <memberOf key="att.global.source" mode="add"/>
-            <memberOf key="att.global.responsibility" mode="add"/>
-            <memberOf key="model.orgStateLike" mode="add"/>
-            <memberOf key="model.persStateLike" mode="add"/>
-            <memberOf key="model.placeStateLike" mode="add"/>
-          </classes>
           <content>
             <elementRef key="desc" minOccurs="0" maxOccurs="1"/>
             <elementRef key="p" minOccurs="0" maxOccurs="1"/>
@@ -1140,16 +1172,6 @@
         </elementSpec>
 
         <elementSpec ident="precision" module="certainty" mode="change">
-          <classes mode="change">
-            <!-- all deleted -->
-            <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.facs" mode="delete"/>
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
-          </classes>
           <attList>
             <attDef ident="target" mode="delete"/>
             <attDef ident="match" mode="change" usage="req">

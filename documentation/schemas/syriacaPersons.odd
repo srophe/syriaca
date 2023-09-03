@@ -18,7 +18,7 @@
       <schemaSpec ident="syriacaPersons" prefix="tei_" source="syriacaAll.compiled.odd" xml:lang="en" defaultExceptions="http://www.tei-c.org/ns/1.0 teix:egXML​ http://www.example.org/ns/">
         <moduleRef key="tei"/>
         <moduleRef key="certainty" include="precision"/>
-        <moduleRef key="core" include="author bibl choice citedRange corr date desc editor foreign label listBibl name note orig p ptr quote reg ref resp respStmt sic title"/>
+        <moduleRef key="core" include="author bibl choice citedRange corr date desc editor foreign listBibl name note orig p ptr quote reg ref resp respStmt sic title"/>
         <moduleRef key="header" include="authority availability catDesc category change classDecl edition editionStmt editorialDecl encodingDesc fileDesc funder idno interpretation langUsage licence principal profileDesc publicationStmt revisionDesc seriesStmt sourceDesc sponsor taxonomy teiHeader titleStmt"/>
         <moduleRef key="linking" include="link"/>
         <moduleRef key="namesdates" include="addName birth death event floruit forename gender listPerson listRelation orgName persName person personGrp placeName relation roleName state surname trait"/>
@@ -27,31 +27,27 @@
         <classRef key="att.global.change"/>
         
         
-        <elementSpec ident="author" module="core" mode="change">
-          <content>
-            <elementRef key="persName"/>
-          </content>
-        </elementSpec>
         
-        
-        <elementSpec ident="bibl" module="core" mode="change">
-          <content>
-            <sequence preserveOrder="false">
-              <elementRef key="author" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="citedRange" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="date" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="editor" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="ptr" minOccurs="0" maxOccurs="unbounded"/> <!--Required in a citation but not inside a note.-->
-              <elementRef key="title" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="idno" minOccurs="0" maxOccurs="1"/>
-              <textNode/>
-            </sequence>
-          </content>
-        </elementSpec>
         
         
         <elementSpec ident="birth" module="namesdates" mode="change">
+          <classes mode="change">
+            <memberOf key="att.global" mode="delete"/>
+            <memberOf key="att.global.rendition" mode="delete"/>
+            <memberOf key="att.global.linking" mode="delete"/>
+            <memberOf key="att.global.analytic" mode="delete"/>
+            <memberOf key="att.global.change" mode="delete"/>
+            <memberOf key="att.global.responsibility" mode="delete"/>
+            <memberOf key="att.global.source" mode="delete"/>
+            <memberOf key="att.datable" mode="delete"/>
+            <memberOf key="att.datable.w3c" mode="delete"/>
+            <memberOf key="att.datable.custom" mode="delete"/>
+            <memberOf key="att.dimensions" mode="delete"/>
+            <memberOf key="att.rangign" mode="delete"/>
+            <memberOf key="att.naming" mode="delete"/>
+            <memberOf key="att.canonical" mode="delete"/>
+            <memberOf key="att.typed" mode="delete"/>
+          </classes>
           <content>
             <sequence preserveOrder="true">
               <elementRef key="date" minOccurs="0" maxOccurs="unbounded"/>
@@ -61,61 +57,68 @@
         </elementSpec>
         
         
-        <elementSpec ident="citedRange" module="core" mode="change">
+        <elementSpec ident="body" module="textstructure" mode="change">
+          <classes mode="change"><!-- all deleted -->
+            <memberOf key="att.global" mode="delete"/>
+            <memberOf key="att.global.rendition" mode="delete"/>
+            <memberOf key="att.global.linking" mode="delete"/>
+            <memberOf key="att.global.analytic" mode="delete"/>
+            <memberOf key="att.global.change" mode="delete"/>
+            <memberOf key="att.global.responsibility" mode="delete"/>
+            <memberOf key="att.global.source" mode="delete"/>
+          </classes>
           <content>
-            <textNode/>
+            <elementRef key="listPerson" minOccurs="1" maxOccurs="1"/>
           </content>
+          <remarks mode="replace">
+            <p>The <gi>body</gi> element of a person record must contain a <gi>listPerson</gi> element.
+            </p>
+          </remarks>
         </elementSpec>
         
-        
-        <elementSpec ident="date" module="core" mode="change">
-          <content>
-            <textNode/>
-          </content>
-        </elementSpec>
         
         
         <elementSpec ident="death" module="namesdates" mode="change">
+          <classes mode="change">
+            <memberOf key="att.datable" mode="delete"/>
+            <memberOf key="att.datable.w3c" mode="delete"/>
+            <memberOf key="att.datable.custom" mode="delete"/>
+            <memberOf key="att.dimensions" mode="delete"/>
+            <memberOf key="att.global" mode="delete"/>
+            <memberOf key="att.global.rendition" mode="delete"/>
+            <memberOf key="att.global.linking" mode="delete"/>
+            <memberOf key="att.global.analytic" mode="delete"/>
+            <memberOf key="att.global.change" mode="delete"/>
+            <memberOf key="att.global.responsibility" mode="delete"/>
+            <memberOf key="att.global.source" mode="delete"/>
+            <memberOf key="att.naming" mode="delete"/>
+            <memberOf key="att.canonical" mode="delete"/>
+            <memberOf key="att.typed" mode="delete"/>
+          </classes>
           <content>
             <sequence preserveOrder="true">
               <elementRef key="date" minOccurs="0" maxOccurs="unbounded"/>
               <elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/>
-            </sequence>
-          </content>
-        </elementSpec>
-        
-        
-        <elementSpec ident="desc" module="core" mode="change">
-          <content>
-            <sequence preserveOrder="false">
-              <elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="ptr" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="title" minOccurs="0" maxOccurs="unbounded"/>
-              <textNode/>
-            </sequence>
-          </content>
-        </elementSpec>
-        
-        
-        <elementSpec ident="editor" module="core" mode="change">
-          <content>
-            <sequence preserveOrder="false">
-              <elementRef key="persName" minOccurs="0" maxOccurs="1"/>
-              <textNode/>
             </sequence>
           </content>
         </elementSpec>
         
         
         <elementSpec ident="event" module="namesdates" mode="change">
-          <content>
-            <elementRef key="desc" minOccurs="1" maxOccurs="1"/>
-          </content>
+          <!-- compare syriacaPlaces.odd for possible development -->
+          
         </elementSpec>
         
         
         <elementSpec ident="floruit" module="namesdates" mode="change">
+          <classes mode="change">
+            <memberOf key="att.global.rendition" mode="delete"/>
+            <memberOf key="att.global.linking" mode="delete"/>
+            <memberOf key="att.global.analytic" mode="delete"/>
+            <memberOf key="att.global.change" mode="delete"/>
+            <memberOf key="att.dimensions" mode="delete"/>
+            <memberOf key="att.ranging" mode="delete"/>
+          </classes>
           <content>
             <sequence preserveOrder="false">
               <elementRef key="date" minOccurs="0" maxOccurs="unbounded"/>
@@ -123,43 +126,56 @@
               <textNode/>
             </sequence>
           </content>
+          <attList>
+            <attDef ident="xml:id" mode="delete"/>
+            <attDef ident="n" mode="delete"/>
+          </attList>
         </elementSpec>
         
         
-        <elementSpec ident="foreign" module="core" mode="change">
-          <content>
-            <textNode/>
-          </content>
-        </elementSpec>
-        
-        
-        <elementSpec ident="gender" module="namesdates" mode="change">
-          <content>
-            <textNode/>
-          </content>
+       <elementSpec ident="gender" module="namesdates" mode="change">
+         <classes mode="change">
+           <memberOf key="att.global" mode="delete"/>
+           <memberOf key="att.global.rendition" mode="delete"/>
+           <memberOf key="att.global.linking" mode="delete"/>
+           <memberOf key="att.global.change" mode="delete"/>
+           <memberOf key="att.global.responsibiliby" mode="add"/>
+           <memberOf key="att.global.source" mode="add"/>
+           <memberOf key="att.datable" mode="delete"/>
+           <memberOf key="att.datable.w3c" mode="delete"/>
+           <memberOf key="att.datable.custom" mode="delete"/>
+           <memberOf key="att.typed" mode="delete"/>
+         </classes>
+         <content>
+           <textNode/>
+         </content>
+         <attList>
+           <attDef ident="ana" mode="add">
+             <datatype>
+               <dataRef key="teidata.pointer"/>
+             </datatype>
+           </attDef>
+         </attList>
         </elementSpec>
         
         
         <elementSpec ident="idno" module="header" mode="change">
-          <content>
-            <textNode/>
-          </content>
-        </elementSpec>
-        
-        
-        <elementSpec ident="label" module="core" mode="change">
-          <content>
-            <textNode/>
-          </content>
-        </elementSpec>
-        
-        
-        <elementSpec ident="link" module="linking" mode="change">
+          <!-- see syriacaPlaces for possible developments -->
           
         </elementSpec>
         
         
         <elementSpec ident="listPerson" module="namesdates" mode="change">
+          <classes mode="change">
+            <memberOf key="att.global" mode="delete"/>
+            <memberOf key="att.global.rendition" mode="delete"/>
+            <memberOf key="att.global.linking" mode="delete"/>
+            <memberOf key="att.global.analytic" mode="delete"/>
+            <memberOf key="att.global.change" mode="add"/>
+            <memberOf key="att.global.responsibility" mode="add"/>
+            <memberOf key="att.global.source" mode="delete"/>
+            <memberOf key="att.sortable" mode="delete"/>
+          </classes>
           <content>
             <sequence preserveOrder="false">
               <alternate>
@@ -172,30 +188,26 @@
         </elementSpec>
         
         
-        <elementSpec ident="listRelation" module="namesdates" mode="change">
-          <content>
-            <elementRef key="relation" minOccurs="1" maxOccurs="unbounded"/>
-          </content>
-        </elementSpec>
-        
-        
         <elementSpec ident="note" module="core" mode="change">
-          <content>
-            <sequence preserveOrder="false">
-              <elementRef key="bibl" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="quote" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="ref" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="title" minOccurs="0" maxOccurs="unbounded"/>
-              <textNode/>
-            </sequence>
-          </content>
+          
         </elementSpec>
         
         
         <elementSpec ident="orgName" module="core" mode="change">
+          <classes mode="change">
+            <memberOf key="att.global.rendition" mode="delete"/>
+            <memberOf key="att.global.linking" mode="delete"/>
+            <memberOf key="att.global.analytic" mode="delete"/>
+            <memberOf key="att.global.change" mode="delete"/>
+            <memberOf key="att.global.responsibility" mode="delete"/>
+            <memberOf key="att.global.source" mode="delete"/>
+            <memberOf key="att.datable" mode="delete"/>
+            <memberOf key="att.datable.w3c" mode="delete"/>
+            <memberOf key="att.datable.custom" mode="delete"/>
+            <memberOf key="att.personal" mode="delete"/>
+            <memberOf key="att.naming" mode="delete"/>
+            <memberOf key="att.type" mode="delete"/>
+          </classes>
           <content>
             <sequence preserveOrder="false">
               <elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/>
@@ -203,35 +215,22 @@
               <textNode/>
             </sequence>
           </content>
+          <attList>
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="xml:lang" mode="delete"/>
+          </attList>
         </elementSpec>
-        
-        
-        <elementSpec ident="p" module="core" mode="change">
-          <content>
-            <sequence preserveOrder="false">
-              <elementRef key="listBibl" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="note" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="ref" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="title" minOccurs="0" maxOccurs="unbounded"/>
-              <textNode/>
-            </sequence>
-          </content>
-        </elementSpec>
-        
-        
-        <elementSpec ident="place" module="core" mode="change">
-          <content>
-            <sequence preserveOrder="false">
-              <elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/>
-              <textNode/>
-            </sequence>
-          </content>
-        </elementSpec>
-        
         
         
         <elementSpec ident="person" module="namesdates" mode="change">
+          <classes mode="change">
+            <memberOf key="att.global.rendition" mode="delete"/>
+            <memberOf key="att.global.linking" mode="delete"/>
+            <memberOf key="att.global.change" mode="delete"/>
+            <memberOf key="att.global.responsibility" mode="delete"/>
+            <memberOf key="att.global.source" mode="delete"/>
+            <memberOf key="att.sortable" mode="delete"/>
+          </classes>
           <content>
             <sequence minOccurs="1" maxOccurs="1" preserveOrder="true">
               <elementRef key="persName" minOccurs="1" maxOccurs="unbounded"/>
@@ -248,10 +247,24 @@
               <elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/>
             </sequence>
           </content>
-        </elementSpec>
+          <attList>
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="xml:lang" mode="delete"/>
+          </attList>
+         </elementSpec>
+        
+                
         
         
         <elementSpec ident="personGrp" module="namesdates" mode="change">
+          <classes mode="change">
+            <memberOf key="att.global.rendition" mode="delete"/>
+            <memberOf key="att.global.linking" mode="delete"/>
+            <memberOf key="att.global.change" mode="delete"/>
+            <memberOf key="att.global.responsibility" mode="delete"/>
+            <memberOf key="att.global.source" mode="delete"/>
+            <memberOf key="att.sortable" mode="delete"/>
+          </classes>
           <content>
             <sequence minOccurs="1" maxOccurs="1" preserveOrder="true">
               <elementRef key="persName" minOccurs="1" maxOccurs="unbounded"/>
@@ -268,14 +281,19 @@
               <elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/>
             </sequence>
           </content>
+          <attList>
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="xml:lang" mode="delete"/>
+          </attList>
         </elementSpec>
         
         
-        <elementSpec ident="precision" module="certainty" mode="change">
-          <content>
-            <empty/>
-          </content>
+        <elementSpec ident="placeName" module="core" mode="change">
+          <classes mode="change">
+            <memberOf key="att.global" mode="delete"/>
+          </classes>
         </elementSpec>
+        
         
         
         <elementSpec ident="ptr" module="core" mode="change">
@@ -283,26 +301,15 @@
         </elementSpec>
         
         
-        <elementSpec ident="quote" module="core" mode="change">
-          <content>
-            <sequence preserveOrder="false">
-              <elementRef key="bibl" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="orgName" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/>
-              <elementRef key="title" minOccurs="0" maxOccurs="unbounded"/>
-              <textNode/>
-            </sequence>
-          </content>
-        </elementSpec>
-        
         
         <elementSpec ident="relation" module="namesdates" mode="change">
           <content>
             <elementRef key="desc" minOccurs="1" maxOccurs="1"/>
           </content>
         </elementSpec>
+        
+        
+        
         
         <elementSpec ident="state" module="namesdates" mode="change">
           <content>
@@ -317,7 +324,7 @@
         <elementSpec ident="title" module="core" mode="change">
           <content>
             <sequence preserveOrder="false">
-              <elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/><!-- only in tei:header -->
               <elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/>
               <textNode/>
             </sequence>
@@ -330,6 +337,7 @@
             <elementRef key="label" minOccurs="1" maxOccurs="1"/>
           </content>
         </elementSpec>
+        
         
         
       </schemaSpec>
