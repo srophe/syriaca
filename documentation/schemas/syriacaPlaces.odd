@@ -603,7 +603,7 @@
         
         
         <elementSpec ident="placeName" module="namesdates" mode="change">
-          <!--<constraintSpec ident="source-on-placeName" scheme="schematron"><!-\- I should be able to do this using attDef -\->
+          <constraintSpec ident="source-on-placeName" scheme="schematron"><!-- I should be able to do this using attDef -->
             <constraint>
               <sch:rule context="//tei:text/tei:place/tei:placeName">
                 <sch:assert test="attribute::source or attribute::resp">
@@ -614,7 +614,7 @@
                 </sch:report>
               </sch:rule>
             </constraint>
-          </constraintSpec>-->
+          </constraintSpec>
           <constraintSpec ident="placeName-content" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:text//tei:place/tei:placeName">
@@ -637,10 +637,6 @@
             </constraint>
           </constraintSpec>-->
           <attList>
-            <attList org="choice">
-              <attDef ident="resp" mode="change"/>
-              <attDef ident="source" mode="change"/>
-            </attList>
             <attDef ident="xml:id" mode="change">
               <desc>
                 The <gi>placeName</gi> element requires an <att>xml:id</att> attribute whose value is the concatenation of "name", 
