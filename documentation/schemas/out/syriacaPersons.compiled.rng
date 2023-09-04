@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-09-04T16:44:05Z. .
+Schema generated from ODD source 2023-09-04T17:04:39Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -562,9 +562,10 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(responsible party) indicates the agency responsible for the intervention or interpretation, for example an editor or transcriber.</a:documentation>
             <list>
                <oneOrMore>
-                  <data type="anyURI">
-                     <param name="pattern">\S+</param>
-                  </data>
+                  <choice>
+                     <value>http://syriaca.org</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Syriaca.org has a preference for sourcing information by pointing to a <code xmlns="http://www.w3.org/1999/xhtml">&lt;bibl&gt;</code> element by means of an <code xmlns="http://www.w3.org/1999/xhtml">@xml:id</code> attribute. Sometimes, however, when information is common knowledge or has been collected by a Syriaca.org contributor but is not attested in print, a <code xmlns="http://www.w3.org/1999/xhtml">@resp</code> attribute is used with a value of 'http://syriaca.org'.</a:documentation>
+                  </choice>
                </oneOrMore>
             </list>
          </attribute>

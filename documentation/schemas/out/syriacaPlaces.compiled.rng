@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-09-04T16:35:59Z. .
+Schema generated from ODD source 2023-09-04T17:05:03Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -562,9 +562,10 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(responsible party) indicates the agency responsible for the intervention or interpretation, for example an editor or transcriber.</a:documentation>
             <list>
                <oneOrMore>
-                  <data type="anyURI">
-                     <param name="pattern">\S+</param>
-                  </data>
+                  <choice>
+                     <value>http://syriaca.org</value>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Syriaca.org has a preference for sourcing information by pointing to a <code xmlns="http://www.w3.org/1999/xhtml">&lt;bibl&gt;</code> element by means of an <code xmlns="http://www.w3.org/1999/xhtml">@xml:id</code> attribute. Sometimes, however, when information is common knowledge or has been collected by a Syriaca.org contributor but is not attested in print, a <code xmlns="http://www.w3.org/1999/xhtml">@resp</code> attribute is used with a value of 'http://syriaca.org'.</a:documentation>
+                  </choice>
                </oneOrMore>
             </list>
          </attribute>
@@ -4485,6 +4486,7 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
          <ref name="tei_att.global.analytic.attribute.ana"/>
          <ref name="tei_att.global.change.attribute.change"/>
          <ref name="tei_att.global.responsibility.attribute.cert"/>
+         <ref name="tei_att.global.responsibility.attribute.resp"/>
          <ref name="tei_att.global.source.attribute.source"/>
          <ref name="tei_att.personal.attributes"/>
          <ref name="tei_att.typed.attributes"/>
@@ -4604,19 +4606,6 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
                <sch:assert test="./@xml:lang">A &lt;placeName&gt; element that is the direct child of the &lt;place&gt; element must have an @xml:lang attribute.</sch:assert>
             </sch:rule>
          </pattern>
-         <optional>
-            <attribute name="resp">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(responsible party) Most <code xmlns="http://www.w3.org/1999/xhtml">&lt;placeName&gt;</code> elements will have a <code xmlns="http://www.w3.org/1999/xhtml">@source</code> attribute pointing to the <code xmlns="http://www.w3.org/1999/xhtml">&lt;bibl&gt;</code> element that is the source of that name. In instances where a place name is generated for consistency of transcription but is not attested in a print or online source, a <code xmlns="http://www.w3.org/1999/xhtml">@resp</code> is used with a value of 'http://syriaca.org'.</a:documentation>
-               <list>
-                  <oneOrMore>
-                     <choice>
-                        <value>http://syriaca.org</value>
-                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                     </choice>
-                  </oneOrMore>
-               </list>
-            </attribute>
-         </optional>
          <empty/>
       </element>
    </define>
@@ -5030,20 +5019,8 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
          <ref name="tei_att.global.analytic.attribute.ana"/>
          <ref name="tei_att.global.change.attribute.change"/>
          <ref name="tei_att.global.responsibility.attribute.cert"/>
+         <ref name="tei_att.global.responsibility.attribute.resp"/>
          <ref name="tei_att.datable.attributes"/>
-         <optional>
-            <attribute name="resp">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(responsible party) In most cases the <code xmlns="http://www.w3.org/1999/xhtml">&lt;location&gt;</code> element will have a <code xmlns="http://www.w3.org/1999/xhtml">@source</code> attribute pointing to the <code xmlns="http://www.w3.org/1999/xhtml">&lt;bibl&gt;</code> element that is the source of that location information. In instances were the location information has been collected by a Syriaca.org contributor but is not attested in print, a a <code xmlns="http://www.w3.org/1999/xhtml">@resp</code> is used with a value of 'http://syriaca.org'.</a:documentation>
-               <list>
-                  <oneOrMore>
-                     <choice>
-                        <value>http://syriaca.org</value>
-                        <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                     </choice>
-                  </oneOrMore>
-               </list>
-            </attribute>
-         </optional>
          <optional>
             <attribute name="source">
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">In most cases the <code xmlns="http://www.w3.org/1999/xhtml">&lt;location&gt;</code> element will have a <code xmlns="http://www.w3.org/1999/xhtml">@source</code> attribute pointing to the <code xmlns="http://www.w3.org/1999/xhtml">&lt;bibl&gt;</code> element that is the source of that location information. In instances were the location information has been collected by a Syriaca.org contributor but is not attested in print, a <code xmlns="http://www.w3.org/1999/xhtml">@resp</code> is used with a value of 'http://syriaca.org'.</a:documentation>
