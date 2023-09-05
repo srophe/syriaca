@@ -945,14 +945,7 @@
 
         <elementSpec ident="text" module="textstructure" mode="change">
           <classes mode="change">
-            <!-- all deleted -->
             <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.facs" mode="delete"/>
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
             <memberOf key="att.declaring" mode="delete"/>
             <memberOf key="att.typed" mode="delete"/>
             <memberOf key="att.written" mode="delete"/>
@@ -1031,7 +1024,7 @@
                 <valItem ident="description">
                   <desc>A note describing this entity (person, place, work, etc.).</desc>
                 </valItem>
-                                <valItem ident="discursive">
+                  <valItem ident="discursive">
                   <desc>A discursive note discussing a bibliographic item related to this entity.</desc>
                 </valItem>
                 <valItem ident="errata">
@@ -1062,30 +1055,28 @@
 
         <elementSpec ident="link" module="linking" mode="change">
           <classes mode="change">
-            <!-- all deleted -->
             <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.facs" mode="delete"/>
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
             <memberOf key="att.typed" mode="delete"/>
           </classes>
-          <constraintSpec ident="target-on-link" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:link/@target">
-                <sch:let name="allIDs" value="//@xml:id"/>
-                <sch:let name="targetVals" value="for $i in $allIDs return concat('#', $i)"/>
-                <sch:assert test="                   every $i in (tokenize(., ' '))                   satisfies $i = $targetVals">A &lt;link&gt; element takes a @target attribute with two or more of the
-                  following values: <sch:value-of select="string-join($targetVals, ' | ')"/>.
-                </sch:assert>
-              </sch:rule>
-            </constraint>
-          </constraintSpec>
+          <content>
+            <empty/>
+          </content>
           <attList>
             <attDef ident="targetLang" mode="delete"/>
             <attDef ident="evaluate" mode="delete"/>
+            <attDef ident="target" mode="change">
+              <constraintSpec ident="target-on-link" scheme="schematron">
+                <constraint>
+                  <sch:rule context="//tei:link/@target">
+                    <sch:let name="allIDs" value="//@xml:id"/>
+                    <sch:let name="targetVals" value="for $i in $allIDs return concat('#', $i)"/>
+                    <sch:assert test="                   every $i in (tokenize(., ' '))                   satisfies $i = $targetVals">A &lt;link&gt; element takes a @target attribute with two or more of the
+                      following values: <sch:value-of select="string-join($targetVals, ' | ')"/>.
+                    </sch:assert>
+                  </sch:rule>
+                </constraint>
+              </constraintSpec>
+            </attDef>
           </attList>
           <exemplum>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
@@ -1173,7 +1164,7 @@
 
         <elementSpec ident="citedRange" module="core" mode="change">
           <attList>
-            <attDef ident="unit" mode="change" usage="req">
+            <attDef ident="unit" mode="change" usage="req" module="att.citing">
               <datatype>
                 <dataRef key="teidata.enumerated"/>
               </datatype>
@@ -1234,10 +1225,9 @@
         <elementSpec ident="p" module="core" mode="change">
           <constraintSpec ident="lang-on-p-in-body" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:text//tei:p">
-                <sch:assert test="./@xml:lang">A &lt;p&gt; element in the text body must have an
-                  @xml:lang attribute.</sch:assert>
-              </sch:rule>
+<sch:rule context="//tei:text//tei:p">
+   <sch:assert test="./@xml:lang">A &lt;p&gt; element in the text body must have an @xml:lang attribute.</sch:assert>
+</sch:rule>
             </constraint>
           </constraintSpec>
           <exemplum>
