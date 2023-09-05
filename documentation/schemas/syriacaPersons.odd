@@ -195,18 +195,19 @@
         
         <elementSpec ident="orgName" module="core" mode="change">
           <classes mode="change">
-            <memberOf key="att.global.rendition" mode="delete"/>
+            <memberOf key="att.global" mode="delete"/>
+            <!--<memberOf key="att.global.rendition" mode="delete"/>
             <memberOf key="att.global.linking" mode="delete"/>
             <memberOf key="att.global.analytic" mode="delete"/>
             <memberOf key="att.global.change" mode="delete"/>
             <memberOf key="att.global.responsibility" mode="delete"/>
             <memberOf key="att.global.source" mode="delete"/>
-            <memberOf key="att.datable" mode="delete"/>
+            --><memberOf key="att.datable" mode="delete"/>
             <memberOf key="att.datable.w3c" mode="delete"/>
             <memberOf key="att.datable.custom" mode="delete"/>
             <memberOf key="att.personal" mode="delete"/>
             <memberOf key="att.naming" mode="delete"/>
-            <memberOf key="att.type" mode="delete"/>
+            <memberOf key="att.typed" mode="delete"/>
           </classes>
           <content>
             <sequence preserveOrder="false">
@@ -216,8 +217,16 @@
             </sequence>
           </content>
           <attList>
-            <attDef ident="n" mode="delete"/>
-            <attDef ident="xml:lang" mode="delete"/>
+            <attDef ident="xml:id" mode="add">
+              <datatype>
+                <dataRef key="ID"/>
+              </datatype>
+            </attDef>
+            <attDef ident="ref" mode="add">
+              <datatype>
+                <dataRef key="teidata.pointer"/>
+              </datatype>
+            </attDef>
           </attList>
         </elementSpec>
         
