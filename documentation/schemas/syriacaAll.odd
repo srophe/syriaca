@@ -744,6 +744,22 @@
           </constraintSpec>
           <attList>
             <attDef ident="subtype" mode="delete"/>
+            <attDef ident="change" mode="change">
+              <constraintSpec ident="change-on-idno" scheme="schematron">
+                <constraint>
+                  <sch:rule context="//tei:idno[@type='deprecation']">
+                    <sch:assert test="@change">
+                      An &lt;idno&gt; element with a @type attribute of "deprecation" must have a @change attribute.
+                    </sch:assert>
+                  </sch:rule>
+                  <sch:rule context="//tei:idno[not(@type='deprecation')]">
+                    <sch:report test="@change">
+                      Only an &lt;idno&gt; element with a @type attribute of "deprecation" may have a @change attribute.
+                    </sch:report>
+                  </sch:rule>
+                </constraint>
+              </constraintSpec>
+            </attDef>
           </attList>
         </elementSpec>
         

@@ -8428,7 +8428,22 @@ creation of an electronic text.</desc><desc xmlns:rng="http://relaxng.org/ns/str
                 </sch:assert>
               </sch:rule>
             </constraint>
-          </constraintSpec><attList><attDef ident="subtype" mode="delete"/><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="type" usage="opt" mode="change">
+          </constraintSpec><attList><attDef ident="subtype" mode="delete"/><attDef ident="change" mode="change">
+              <constraintSpec ident="change-on-idno" scheme="schematron">
+                <constraint>
+                  <sch:rule context="//tei:idno[@type='deprecation']">
+                    <sch:assert test="@change">
+                      An &lt;idno&gt; element with a @type attribute of "deprecation" must have a @change attribute.
+                    </sch:assert>
+                  </sch:rule>
+                  <sch:rule context="//tei:idno[not(@type='deprecation')]">
+                    <sch:report test="@change">
+                      Only an &lt;idno&gt; element with a @type attribute of "deprecation" may have a @change attribute.
+                    </sch:report>
+                  </sch:rule>
+                </constraint>
+              </constraintSpec>
+            </attDef><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="type" usage="opt" mode="change">
       <desc versionDate="2010-04-30" xml:lang="en">categorizes the identifier, for example as an
         ISBN, Social Security number, etc.</desc>
       <desc versionDate="2009-01-05" xml:lang="fr">classe un numéro dans une catégorie, par exemple

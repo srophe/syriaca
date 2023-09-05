@@ -6503,7 +6503,7 @@ creation of an electronic text.</desc><desc xmlns:rng="http://relaxng.org/ns/str
     objecto; se usa parla la identificación de, por ejemplo, un elemento bibliográfico, una persona,
     un título o una organización.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2020-10-25" xml:lang="it">fornisce un identificatore, standard o meno, usato
     per identificare un oggetto, come per esempio un'unità bibliografica, una persona, un titolo,
-    un'organizzazione, ecc.</desc><classes><memberOf key="att.typed"/><memberOf key="model.nameLike"/></classes><content><textNode/></content><constraintSpec ident="idno-uri" scheme="schematron">
+    un'organizzazione, ecc.</desc><classes><memberOf key="att.global.change"/><memberOf key="att.global.source"/><memberOf key="att.typed"/><memberOf key="model.nameLike"/></classes><content><textNode/></content><constraintSpec ident="idno-uri" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:publicationStmt/tei:idno[@type='URI']">
                 <sch:let name="fileNo" value="replace(document-uri(/), '.*?(\d{1,5}).xml', '$1')"/>
@@ -6513,7 +6513,35 @@ creation of an electronic text.</desc><desc xmlns:rng="http://relaxng.org/ns/str
                 </sch:assert>
               </sch:rule>
             </constraint>
-          </constraintSpec><attList><attDef ident="subtype" mode="delete"/><attDef ident="type" mode="change" rend="change" usage="req"><desc rend="replace">The <att>type</att> attribute on <gi>idno</gi> defines the kind of identifier
+          </constraintSpec><constraintSpec ident="change-on-idno" scheme="schematron">
+                <constraint>
+                  <sch:rule context="//tei:idno[@type='deprecation']">
+                    <sch:assert test="@change">
+                      An &lt;idno&gt; element with a @type attribute of "deprecation" must have a @change attribute.
+                    </sch:assert>
+                  </sch:rule>
+                  <sch:rule context="//tei:idno[not(@type='deprecation')]">
+                    <sch:report test="@change">
+                      Only an &lt;idno&gt; element with a @type attribute of "deprecation" may have a @change attribute.
+                    </sch:report>
+                  </sch:rule>
+                </constraint>
+              </constraintSpec><attList><attDef ident="subtype" mode="delete"/><attDef ident="change" mode="change">
+              <constraintSpec ident="change-on-idno" scheme="schematron">
+                <constraint>
+                  <sch:rule context="//tei:idno[@type='deprecation']">
+                    <sch:assert test="@change">
+                      An &lt;idno&gt; element with a @type attribute of "deprecation" must have a @change attribute.
+                    </sch:assert>
+                  </sch:rule>
+                  <sch:rule context="//tei:idno[not(@type='deprecation')]">
+                    <sch:report test="@change">
+                      Only an &lt;idno&gt; element with a @type attribute of "deprecation" may have a @change attribute.
+                    </sch:report>
+                  </sch:rule>
+                </constraint>
+              </constraintSpec>
+            </attDef><attDef ident="type" mode="change" rend="change" usage="req"><desc rend="replace">The <att>type</att> attribute on <gi>idno</gi> defines the kind of identifier
                 contained in the text value. In the Gazetteer, the only type of <gi>idno</gi> used is "URI".</desc><datatype xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
         <dataRef key="teidata.enumerated"/>
       </datatype><valList type="closed" mode="add"><valItem ident="URI">
