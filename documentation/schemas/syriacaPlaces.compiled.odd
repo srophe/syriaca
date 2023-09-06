@@ -7598,7 +7598,8 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                   <desc>Any event that does something other than attest to the entity described in the document</desc>
                 </valItem>
               </valList>
-            </attDef><attDef ident="subtype" mode="delete"/><attDef ident="xml:id" mode="delete" rend="delete"><constraintSpec ident="xmlID-on-event" scheme="schematron">
+            </attDef><attDef ident="xml:id" mode="change">
+              <constraintSpec ident="xmlID-on-event" scheme="schematron">
                 <constraint>
                   <sch:rule context="//tei:place/tei:event[@type='attestation']">
                     <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
@@ -7607,7 +7608,8 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                     </sch:assert>
                   </sch:rule>
                 </constraint>
-              </constraintSpec></attDef><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="source" mode="change" usage="req">
+              </constraintSpec>
+            </attDef><attDef ident="subtype" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="source" mode="change" usage="req">
               <desc>The <gi>event</gi> element requires a <att>source</att> attribute.</desc>
             </attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
