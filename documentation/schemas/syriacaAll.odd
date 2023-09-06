@@ -668,9 +668,14 @@
           <classes mode="change">
             <memberOf key="att.datable" mode="delete"/>
             <memberOf key="att.global" mode="delete"/>
+            <memberOf key="att.pointing" mode="delete"/>
           </classes>
           <attList>
-            <attDef ident="target" mode="delete"/>
+            <attDef ident="n" mode="add">
+              <datatype>
+                <dataRef key="teidata.text"/>
+              </datatype>
+            </attDef>
             <attDef ident="xml:id" mode="add">
               <datatype>
                 <dataRef key="ID"/>
@@ -887,6 +892,7 @@
         
         <elementSpec ident="event" module="namesdates" mode="change">
           <classes mode="change">
+            <memberOf key="att.global" mode="add"/>
             <memberOf key="att.naming" mode="delete"/>
             <memberOf key="att.canonical" mode="delete"/>
             <memberOf key="att.sortable" mode="delete"/>
@@ -1457,6 +1463,7 @@
             <memberOf key="att.naming" mode="delete"/>
             <memberOf key="att.dimensions" mode="delete"/>
             <memberOf key="att.ranging" mode="delete"/>
+            <memberOf key="att.canonical" mode="add"/>
           </classes>
           <content>
             <sequence preserveOrder="false">
@@ -1465,6 +1472,7 @@
             </sequence>
           </content>
           <attList>
+            <attDef ident="key" mode="delete"/>
             <attDef ident="n" mode="delete"/>
             <attDef ident="xml:lang" mode="delete"/>
             <attDef ident="ana" mode="delete"/>
