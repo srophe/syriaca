@@ -54,6 +54,7 @@
         <moduleRef key="textstructure" include="back body div front TEI text"/>
         <classRef key="att.global.analytic"/>
         <classRef key="att.global.change"/>
+        <classRef key="att.global.linking"/>
                
                 
                 
@@ -86,8 +87,8 @@
         </classSpec>
         
         
-        <dataSpec ident="teidata.language" mode="change" module="tei">
-          <!-- Should this be ingested into the Taxonomy? We could we use keyword URIs instead of these. -->
+        <!--<dataSpec ident="teidata.language" mode="change" module="tei">
+          <!-\- Should this be ingested into the Taxonomy? We could we use keyword URIs instead of these. -\->
           <valList type="closed">
             <valItem ident="ar">
               <gloss>Arabic</gloss>
@@ -257,18 +258,204 @@
               <desc>Turkish</desc>
             </valItem>
           </valList>
-        </dataSpec>
+        </dataSpec>-->
         
         
         <classSpec ident="att.global" mode="change" module="tei" type="atts">
           <attList>
             <attDef ident="xml:base" mode="delete"/>
             <attDef ident="xml:space" mode="delete"/>
+            <attDef ident="xml:lang" mode="change">
+              <valList type="closed">
+                <!-- Should this be ingested into the Taxonomy? We could we use keyword URIs instead of these. -->
+                <valItem ident="ar">
+                  <gloss>Arabic</gloss>
+                  <desc>Arabic of any variety or period</desc>
+                </valItem>
+                <valItem ident="ar-Syrc">
+                  <gloss>Arabic—Garshuni</gloss>
+                  <desc>Arabic Garshuni in unvocalized or undetermined Syriac script</desc>
+                </valItem>
+                <valItem ident="ar-Syre">
+                  <gloss>Arabic—Garshuni—Estrangela</gloss>
+                  <desc>Arabic Garshuni in Estrangela Syriac script</desc>
+                </valItem>
+                <valItem ident="ar-Syrj">
+                  <gloss>Arabic—Garshuni—West Syriac</gloss>
+                  <desc>Arabic Garshuni in vocalized West Syriac script</desc>
+                </valItem>
+                <valItem ident="ar-Syrn">
+                  <gloss>Arabic—Garshuni—East Syriac</gloss>
+                  <desc>Arabic Garshuni in vocalized East Syriac script</desc>
+                </valItem>
+                <valItem ident="cop">
+                  <gloss>Coptic</gloss>
+                  <desc>Coptic of any variety or period</desc>
+                </valItem>
+                <valItem ident="cu">
+                  <gloss>Slavonic—Old Church</gloss>
+                  <desc>Old Church Slavonic</desc>
+                </valItem>
+                <valItem ident="de">
+                  <gloss>German</gloss>
+                  <desc>German of any variety or period</desc>
+                </valItem>
+                <valItem ident="de-x-baumstrk">
+                  <gloss>German—Baumstark Romanization</gloss>
+                  <desc>Names or terms Romanized into German according to the standards adopted by
+                    Anton Baumstark's Geschichte der syrischen Literatur.</desc>
+                </valItem>
+                <valItem ident="fr-x-zanetti">
+                  <gloss>French—Zanetti</gloss>
+                  <desc>Names or terms Romanized into French according to the standards adopted by Ugo Zanetti.</desc>
+                </valItem>
+                <valItem ident="el">
+                  <gloss>Greek—Modern</gloss>
+                  <desc>Modern Greek after A.D. 1453</desc>
+                </valItem>
+                <valItem ident="en">
+                  <gloss>English</gloss>
+                  <desc>English of any variety or period</desc>
+                </valItem>
+                <valItem ident="en-x-gedsh">
+                  <gloss>English—GEDSH Romanization</gloss>
+                  <desc>Names or terms Romanized into English according to the standards adopted by
+                    the Gorgias Encyclopedic Dictionary of the Syriac Heritage</desc>
+                </valItem>
+                <valItem ident="en-x-lah">
+                  <gloss>English—LAH Romanization</gloss>
+                  <desc>Names or terms Romanized into English according to the standards adopted by
+                    the Late Antique Historiography project.</desc>
+                </valItem>
+                <valItem ident="en-x-srp1">
+                  <gloss>English—Syriaca.org Alternate Romanization</gloss>
+                  <desc>Names or terms Romanized into English by Syriaca.org using alternate methods
+                    for indexing purposes.</desc>
+                </valItem>
+                <valItem ident="es">
+                  <gloss>Spanish</gloss>
+                  <desc>Spanish</desc>
+                </valItem>
+                <valItem ident="fr">
+                  <gloss>French</gloss>
+                  <desc>French of any variety or period</desc>
+                </valItem>
+                <valItem ident="fr-x-bhs">
+                  <gloss>French—BHS Romanization</gloss>
+                  <desc>Names or terms Romanized into French according to the standards adopted by
+                    the Bibliotheca Hagiographica Syriaca</desc>
+                </valItem>
+                <valItem ident="fr-x-fiey">
+                  <gloss>French—Fiey Romanization</gloss>
+                  <desc>Names or terms Romanized into French according to the standards adopted by
+                    Fiey, Saints Syriaques</desc>
+                </valItem>
+                <valItem ident="gez">
+                  <gloss>Ge'ez</gloss>
+                  <desc>Ge'ez</desc>
+                </valItem>
+                <valItem ident="grc">
+                  <gloss>Greek—Ancient</gloss>
+                  <desc>Ancient Greek to A.D. 1453</desc>
+                </valItem>
+                <valItem ident="hy">
+                  <gloss>Armenian</gloss>
+                  <desc>Classical or Modern Armenian</desc>
+                </valItem>
+                <valItem ident="it">
+                  <gloss>Italian</gloss>
+                  <desc>Italian</desc>
+                </valItem>
+                <valItem ident="ka">
+                  <gloss>Georgian</gloss>
+                  <desc>Classical or Modern Georgian</desc>
+                </valItem>
+                <valItem ident="la">
+                  <gloss>Latin</gloss>
+                  <desc>Latin of any variety or period</desc>
+                </valItem>
+                <valItem ident="mal">
+                  <gloss>Malayalam</gloss>
+                  <desc>Malayalam of any variety or period</desc>
+                </valItem>
+                <valItem ident="mal-Syrc">
+                  <gloss>Malayalam—Garshuni</gloss>
+                  <desc>Malayalam Garshuni in unvocalized or undetermined Syriac script</desc>
+                </valItem>
+                <valItem ident="mal-Syre">
+                  <gloss>Malayalam—Garshuni—Estrangela</gloss>
+                  <desc>Malayalam Garshuni in Estrangela Syriac script</desc>
+                </valItem>
+                <valItem ident="mal-Syrj">
+                  <gloss>Malayalam—Garshuni—West Syriac</gloss>
+                  <desc>Malayalam Garshuni in vocalized West Syriac script</desc>
+                </valItem>
+                <valItem ident="mal-Syrn">
+                  <gloss>Malayalam—Garshuni—East Syriac</gloss>
+                  <desc>Malayalam Garshuni in vocalized East Syriac script</desc>
+                </valItem>
+                <valItem ident="nl">
+                  <gloss>Dutch</gloss>
+                  <desc>Dutch</desc>
+                </valItem>
+                <valItem ident="pt">
+                  <gloss>Portuguese</gloss>
+                  <desc>Portuguese</desc>
+                </valItem>
+                <valItem ident="ru">
+                  <gloss>Russian</gloss>
+                  <desc>Russian</desc>
+                </valItem>
+                <valItem ident="syr">
+                  <gloss>Syriac</gloss>
+                  <desc>Syriac of any variety or period</desc>
+                </valItem>
+                <valItem ident="syr-Syre">
+                  <gloss>Syriac—Estrangela script</gloss>
+                  <desc>Syriac in Estrangela script</desc>
+                </valItem>
+                <valItem ident="syr-Syrj">
+                  <gloss>Syriac—West</gloss>
+                  <desc>Syriac in vocalized West Syriac script</desc>
+                </valItem>
+                <valItem ident="syr-Syrn">
+                  <gloss>Syriac—East</gloss>
+                  <desc>Syriac in vocalized East Syriac script</desc>
+                </valItem>
+                <valItem ident="syr-x-syrm">
+                  <gloss>Syriac—Melkite script</gloss>
+                  <desc>Syriac in Melkite script. Note: This is not an ISO code but a private use
+                    code for Melkite employed by Syriaca.org until an ISO code is created</desc>
+                </valItem>
+                <valItem ident="sog">
+                  <gloss>Sogdian</gloss>
+                  <desc>Sogdian</desc>
+                </valItem>
+                <valItem ident="tr">
+                  <gloss>Turkish</gloss>
+                  <desc>Turkish</desc>
+                </valItem>
+              </valList>
+            </attDef>
           </attList>
         </classSpec>
         
         
         <classSpec type="atts" ident="att.global.facs" module="transcr" mode="delete"/>
+        
+        
+        <classSpec type="atts" ident="att.global.linking" module="linking" mode="change">
+          <attList>
+            <attDef ident="synch" mode="delete"/>
+            <attDef ident="sameAs" mode="delete"/>
+            <attDef ident="copyOf" mode="delete"/>
+            <attDef ident="next" mode="delete"/>
+            <attDef ident="prev" mode="delete"/>
+            <attDef ident="previous" mode="delete"/>
+            <attDef ident="exclude" mode="delete"/>
+            <attDef ident="select" mode="delete"/>
+          </attList>
+        </classSpec>
         
         
         <classSpec type="atts" ident="att.global.rendition" module="tei" mode="change">
@@ -281,6 +468,7 @@
         
         <classSpec type="atts" ident="att.global.responsibility" mode="change">
           <attList>
+            <attDef ident="cert" mode="delete"/>
             <attDef ident="resp" mode="change">
               <valList mode="replace" type="closed">
                 <valItem ident="http://syriaca.org">
@@ -344,6 +532,14 @@
         </classSpec>
         
         
+        <classSpec type="atts" ident="att.pointing" module="tei" mode="change">
+          <attList>
+            <attDef ident="targetLang" mode="delete"/>
+            <attDef ident="evaluate" mode="delete"/>
+          </attList>
+        </classSpec>
+        
+        
         <classSpec type="atts" ident="att.translatable" mode="delete"/>
         
         
@@ -395,7 +591,6 @@
         
         <elementSpec ident="bibl" module="core" mode="change">
           <classes mode="change">
-            <memberOf key="att.global" mode="delete"/>
             <memberOf key="att.sortable" mode="delete"/>
             <memberOf key="att.docStatus" mode="delete"/>
           </classes>
@@ -424,6 +619,14 @@
           </constraintSpec>
           <attList>
             <attDef ident="subtype" mode="delete"/>
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="xml:lang" mode="delete"/>
+            <attDef ident="ana" mode="delete"/>
+            <attDef ident="change" mode="delete"/>
+            <attDef ident="resp" mode="delete"/>
+            <attDef ident="source" mode="delete"/>
+            <attDef ident="rend" mode="delete"/>
+            <attDef ident="corresp" mode="delete"/>
             <attDef ident="type" mode="change" usage="opt">
               <!-- This is a temporary addition until we have URIs for mss. -->
               <valList mode="change" type="closed">
@@ -432,7 +635,7 @@
                 </valItem>
               </valList>
             </attDef>
-            <attDef ident="xml:id" mode="add">
+            <attDef ident="xml:id" mode="change">
               <datatype>
                 <dataRef key="ID"/>
               </datatype>
@@ -516,10 +719,6 @@
           <content>
             <textNode/>
           </content>
-          <attList>
-            <attDef ident="targetLang" mode="delete"/>
-            <attDef ident="evaluate" mode="delete"/>
-          </attList>
         </elementSpec>
         
         
@@ -536,7 +735,6 @@
         
         <elementSpec ident="date" module="core" mode="change">
           <classes mode="change">
-            <memberOf key="att.global" mode="delete"/>
             <memberOf key="att.canonical" mode="delete"/>
             <memberOf key="att.duration.iso" mode="delete"/>
             <memberOf key="att.dimensions" mode="delete"/>
@@ -547,11 +745,13 @@
             <textNode/>
           </content>
           <attList>
-            <attDef ident="xml:lang" mode="add">
-              <datatype>
-                <dataRef key="teidata.language"/>
-              </datatype>
-            </attDef>
+            <attDef ident="xml:id" mode="delete"/>
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="ana" mode="delete"/>
+            <attDef ident="change" mode="delete"/>
+            <attDef ident="resp" mode="delete"/>
+            <attDef ident="rend" mode="delete"/>
+            <attDef ident="corresp" mode="delete"/>
             <attDef ident="type" mode="change" usage="rec"><!-- Move to NHSL -->
               <desc>specifies how the date is associated with the entity (work, person, etc.) to
                 which it refers</desc>
@@ -599,9 +799,6 @@
         
         
         <elementSpec ident="desc" module="core" mode="change">
-          <classes mode="change">
-            <memberOf key="att.global" mode="delete"/>
-          </classes>
           <content>
             <sequence preserveOrder="false">
               <elementRef key="choice" minOccurs="0" maxOccurs="unbounded"/>
@@ -616,15 +813,17 @@
           </content>
           <attList>
             <attDef ident="subtype" mode="delete"/>
-            <attDef ident="type" mode="replace">
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="ana" mode="delete"/>
+            <attDef ident="change" mode="delete"/>
+            <attDef ident="rend" mode="delete"/>
+            <attDef ident="corresp" mode="delete"/>
+            <attDef ident="type" mode="change">
               <valList type="closed">
                 <valItem ident="abstract"/>
               </valList>
             </attDef>
-            <attDef ident="xml:lang" mode="add" usage="rec">
-              <datatype>
-                <dataRef key="teidata.language"/>
-              </datatype>
+            <attDef ident="xml:lang" mode="change" usage="rec">
               <constraintSpec ident="lang-on-desc" scheme="schematron">
                 <constraint>
                   <sch:rule context="//tei:body//tei:desc">
@@ -643,10 +842,7 @@
                 </constraint>
               </constraintSpec>
             </attDef>
-            <attDef ident="xml:id" mode="add">
-              <datatype>
-                <dataRef key="ID"/>
-              </datatype>
+            <attDef ident="xml:id" mode="change">
               <constraintSpec ident="xmlID-on-desc" scheme="schematron">
                 <constraint>
                   <sch:rule context="//tei:text//tei:desc[@type='abstract']">
@@ -680,12 +876,10 @@
         
         <elementSpec ident="event" module="namesdates" mode="change">
           <classes mode="change">
-            <memberOf key="att.global" mode="delete"/>
             <memberOf key="att.naming" mode="delete"/>
             <memberOf key="att.canonical" mode="delete"/>
             <memberOf key="att.sortable" mode="delete"/>
             <memberOf key="att.locatable" mode="delete"/>
-            <memberOf key="att.global.source" mode="add"/>
           </classes>
           <content>
             <sequence preserveOrder="false">
@@ -695,33 +889,34 @@
             </sequence>
           </content>
           <attList>
+            <attDef ident="subtype" mode="delete"/>
+            <attDef ident="xml:id" mode="delete"/>
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="ana" mode="delete"/>
+            <attDef ident="change" mode="delete"/>
+            <attDef ident="resp" mode="delete"/>
+            <attDef ident="rend" mode="delete"/>
+            <attDef ident="corresp" mode="delete"/>
             <attDef ident="source" mode="change" usage="req">
               <desc>The <gi>event</gi> element requires a <att>source</att> attribute.</desc>
             </attDef>
-            <attDef ident="subtype" mode="delete"/>
           </attList>
         </elementSpec>
         
         
         
         <elementSpec ident="foreign" module="core" mode="change">
-          <classes mode="change">
-            <memberOf key="att.global" mode="delete"/>
-          </classes>
           <content>
             <textNode/>
           </content>
           <attList>
-            <attDef ident="xml:lang" mode="add" usage="req">
-              <datatype>
-                <dataRef key="teidata.language"/>
-              </datatype>
-            </attDef>
-            <attDef ident="rend" mode="add">
-              <datatype>
-                <dataRef key="teidata.word"/>
-              </datatype>
-            </attDef>
+            <attDef ident="xml:id" mode="delete"/>
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="ana" mode="delete"/>
+            <attDef ident="change" mode="delete"/>
+            <attDef ident="resp" mode="delete"/>
+            <attDef ident="source" mode="delete"/>
+            <attDef ident="corresp" mode="delete"/>
           </attList>
         </elementSpec>
         
@@ -749,7 +944,6 @@
         
         <elementSpec ident="idno" module="header" mode="change">
           <classes mode="change">
-            <memberOf key="att.global" mode="delete"/>
             <memberOf key="att.sortable" mode="delete"/>
             <memberOf key="att.datable" mode="delete"/>
           </classes>
@@ -769,6 +963,13 @@
           </constraintSpec>
           <attList>
             <attDef ident="subtype" mode="delete"/>
+            <attDef ident="xml:id" mode="delete"/>
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="xml:lang" mode="delete"/>
+            <attDef ident="ana" mode="delete"/>
+            <attDef ident="resp" mode="delete"/>
+            <attDef ident="rend" mode="delete"/>
+            <attDef ident="corresp" mode="delete"/>
             <attDef ident="change" mode="change">
               <constraintSpec ident="change-on-idno" scheme="schematron">
                 <constraint>
@@ -794,10 +995,6 @@
           <content>
             <empty/>
           </content>
-          <attList>
-            <attDef ident="targetLang" mode="delete"/>
-            <attDef ident="evaluate" mode="delete"/>
-          </attList>
         </elementSpec>-->
         
         
@@ -839,6 +1036,13 @@
         
         
         <elementSpec ident="name" module="namesdates" mode="change">
+          <classes mode="change">
+            <memberOf key="att.global" mode="delete"/>
+            <memberOf key="att.datable" mode="delete"/>
+            <memberOf key="att.naming" mode="delete"/>
+            <memberOf key="att.editLike" mode="delete"/>
+            <memberOf key="att.typed" mode="delete"/>
+          </classes>
           <constraintSpec ident="ref-on-name" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:teiHeader//tei:name/@ref">
@@ -852,15 +1056,18 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
+          <attList>
+            <attDef ident="key" mode="delete"/>
+          </attList>
         </elementSpec>
         
         
         
         <elementSpec ident="note" module="core" mode="change">
           <classes mode="change">
-            <memberOf key="att.global" mode="delete"/>
             <memberOf key="att.placement" mode="delete"/>
             <memberOf key="att.written" mode="delete"/>
+            <memberOf key="att.anchoring" mode="delete"/>
           </classes>
           <content>
             <sequence preserveOrder="false">
@@ -875,24 +1082,14 @@
             </sequence>
           </content>
           <attList>
-            <attDef ident="targetLang" mode="delete"/>
-            <attDef ident="evaluate" mode="delete"/>
             <attDef ident="subtype" mode="delete"/>
-            <attDef ident="xml:id" mode="add">
-              <datatype>
-                <dataRef key="ID"/>
-              </datatype>
-            </attDef>
-            <attDef ident="xml:lang" mode="add">
-              <datatype>
-                <dataRef key="teidata.language"/>
-              </datatype>
-            </attDef>
-            <attDef ident="source" mode="add">
-              <datatype>
-                <dataRef key="teidata.pointer"/>
-              </datatype>
-            </attDef>
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="ana" mode="delete"/>
+            <attDef ident="change" mode="delete"/>
+            <attDef ident="resp" mode="delete"/>
+            <attDef ident="source" mode="delete"/>
+            <attDef ident="rend" mode="delete"/>
+            <attDef ident="corresp" mode="delete"/>
           </attList>
         </elementSpec>
         
@@ -908,7 +1105,6 @@
         
         <elementSpec ident="p" module="core" mode="change">
           <classes mode="change">
-            <memberOf key="att.global" mode="delete"/>
             <memberOf key="att.declaring" mode="delete"/>
             <memberOf key="att.fragmentable" mode="delete"/>
             <memberOf key="att.written" mode="delete"/>
@@ -928,11 +1124,14 @@
             </sequence>
           </content>
           <attList>
-            <attDef ident="xml:lang" mode="add">
-              <datatype>
-                <dataRef key="teidata.language"/>
-              </datatype>
-            </attDef>
+            <attDef ident="xml:id" mode="delete"/>
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="ana" mode="delete"/>
+            <attDef ident="change" mode="delete"/>
+            <attDef ident="resp" mode="delete"/>
+            <attDef ident="source" mode="delete"/>
+            <attDef ident="rend" mode="delete"/>
+            <attDef ident="corresp" mode="delete"/>
           </attList>
         </elementSpec>
         
@@ -940,13 +1139,10 @@
         
         <elementSpec ident="persName" module="namesdates" mode="change">
           <classes mode="change">
-            <memberOf key="att.global" mode="delete"/>
             <memberOf key="att.datable" mode="delete"/>
             <memberOf key="att.naming" mode="delete"/>
             <memberOf key="att.typed" mode="delete"/>
             <memberOf key="att.canonical" mode="delete"/>
-            <memberOf key="att.global.source" mode="add"/>
-            <memberOf key="att.global.change" mode="add"/>
           </classes>
           <content>
             <sequence preserveOrder="false">
@@ -960,31 +1156,9 @@
             </sequence>
           </content>
           <attList>
-            <attDef ident="xml:id" mode="add">
-              <datatype>
-                <dataRef key="ID"/>
-              </datatype>
-            </attDef>
-            <attDef ident="xml:lang" mode="add">
-              <datatype>
-                <dataRef key="teidata.language"/>
-              </datatype>
-            </attDef>
-            <attDef ident="corresp" mode="add">
-              <datatype>
-                <dataRef key="teidata.pointer"/>
-              </datatype>
-            </attDef>
-            <attDef ident="ref" mode="add">
-              <datatype>
-                <dataRef key="teidata.pointer"/>
-              </datatype>
-            </attDef>
-            <attDef ident="resp" mode="add">
-              <datatype>
-                <dataRef key="teidata.pointer"/>
-              </datatype>
-            </attDef>
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="ana" mode="delete"/>
+            <attDef ident="rend" mode="delete"/>
             <!--<attDef ident="ref" mode="change">
               <constraintSpec ident="ref-on-person" scheme="schematron"> <!-\- ONLY WHEN NOT CHILD OF PERSON or PERSONGRP! -\->
                 <constraint>
@@ -1006,13 +1180,10 @@
         
         <elementSpec ident="placeName" module="namesdates" mode="change">
           <classes mode="change">
-            <memberOf key="att.global" mode="delete"/>
             <memberOf key="att.datable" mode="delete"/>
             <memberOf key="att.naming" mode="delete"/>
             <memberOf key="att.typed" mode="delete"/>
             <memberOf key="att.canonical" mode="delete"/>
-            <memberOf key="att.global.source" mode="add"/>
-            <memberOf key="att.global.change" mode="add"/>
           </classes>
           <content>
             <sequence preserveOrder="false">
@@ -1022,26 +1193,11 @@
             </sequence>
           </content>
           <attList>
-            <attDef ident="xml:id" mode="add">
-              <datatype>
-                <dataRef key="ID"/>
-              </datatype>
-            </attDef>
-            <attDef ident="xml:lang" mode="add">
-              <datatype>
-                <dataRef key="teidata.language"/>
-              </datatype>
-            </attDef>
-            <attDef ident="ref" mode="add">
-              <datatype>
-                <dataRef key="teidata.pointer"/>
-              </datatype>
-            </attDef>
-            <attDef ident="resp" mode="add">
-              <datatype>
-                <dataRef key="teidata.pointer"/>
-              </datatype>
-            </attDef>
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="ana" mode="delete"/>
+            <attDef ident="change" mode="delete"/>
+            <attDef ident="rend" mode="delete"/>
+            <attDef ident="corresp" mode="delete"/>
             <!--<attDef ident="ref" mode="change">
               <constraintSpec ident="ref-on-placeName" scheme="schematron"> <!-\- ONLY WHEN NOT CHILD OF PLACE -\->
                 <constraint>
@@ -1063,12 +1219,7 @@
         
         <elementSpec ident="precision" module="certainty" mode="change">
           <classes mode="change">
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.analytic" mode="delete"/>
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
+            <memberOf key="att.global" mode="delete"/>
             <memberOf key="att.ranging" mode="delete"/>
           </classes>
           <content>
@@ -1077,6 +1228,17 @@
           <attList>
             <attDef ident="precision" mode="delete"/>
             <attDef ident="stdDeviation" mode="delete"/>
+            <attDef ident="calendar" mode="delete"/>
+            <attDef ident="period" mode="delete"/>
+            <attDef ident="from" mode="delete"/>
+            <attDef ident="to" mode="delete"/>
+            <attDef ident="when-custom" mode="delete"/>
+            <attDef ident="notBefore-custom" mode="delete"/>
+            <attDef ident="notAfter-custom" mode="delete"/>
+            <attDef ident="from-custom" mode="delete"/>
+            <attDef ident="to-custom" mode="delete"/>
+            <attDef ident="datingPoint" mode="delete"/>
+            <attDef ident="datingMethod" mode="delete"/>
           </attList>
         </elementSpec>
         
@@ -1109,21 +1271,13 @@
         
         
         <elementSpec ident="ptr" module="linking" mode="change">
-          <classes mode="change"><!-- all deleted -->
+          <classes mode="change">
             <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.analytic" mode="delete"/>
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
             <memberOf key="att.internetMedia" mode="delete"/>
             <memberOf key="att.typed" mode="delete"/>
             <memberOf key="att.cReferencing" mode="delete"/>
           </classes>
           <attList>
-            <attDef ident="targetLang" mode="delete"/>
-            <attDef ident="evaluate" mode="delete"/>
             <attDef ident="target" mode="change">
               <constraintSpec ident="target-in-ptr" scheme="schematron">
                 <constraint>
@@ -1150,11 +1304,6 @@
         
         <elementSpec ident="quote" module="core" mode="change">
           <classes mode="change">
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.analytic" mode="delete"/>
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
             <memberOf key="att.notated" mode="delete"/>
           </classes>
           <content>
@@ -1171,6 +1320,11 @@
           <attList>
             <attDef ident="xml:id" mode="delete"/>
             <attDef ident="n" mode="delete"/>
+            <attDef ident="ana" mode="delete"/>
+            <attDef ident="change" mode="delete"/>
+            <attDef ident="resp" mode="delete"/>
+            <attDef ident="rend" mode="delete"/>
+            <attDef ident="corresp" mode="delete"/>
             <attDef ident="source" mode="change" usage="req">
               <!-- write a schematron rule in syriacaAll.odd that requires the @source value to point to an xml:id in the doc. -->
             </attDef>
@@ -1191,15 +1345,9 @@
         
         
         <elementSpec ident="relation" module="namesdates" mode="change">
-          <classes mode="change"><!-- all deleted -->
-            <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="add"/>
+          <classes mode="change"><!-- WORK ON THIS -->
             <memberOf key="att.sortable" mode="delete"/>
             <memberOf key="att.typed" mode="add"/>
-            <memberOf key="att.global.source" mode="add"/>
           </classes>
         </elementSpec>
         
@@ -1285,12 +1433,26 @@
         
         
         <elementSpec ident="state" module="namesdates" mode="change">
+          <classes mode="change">
+            <memberOf key="att.editLike" mode="delete"/>
+            <memberOf key="att.naming" mode="delete"/>
+            <memberOf key="att.dimensions" mode="delete"/>
+            <memberOf key="att.ranging" mode="delete"/>
+          </classes>
           <content>
             <sequence preserveOrder="false">
               <elementRef key="desc" minOccurs="0" maxOccurs="1"/>
               <elementRef key="precision" minOccurs="0" maxOccurs="unbounded"/>
             </sequence>
           </content>
+          <attList>
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="xml:lang" mode="delete"/>
+            <attDef ident="ana" mode="delete"/>
+            <attDef ident="change" mode="delete"/>
+            <attDef ident="rend" mode="delete"/>
+            <attDef ident="corresp" mode="delete"/>
+          </attList>
         </elementSpec>
         
         
@@ -1298,13 +1460,8 @@
         <elementSpec ident="text" module="textstructure" mode="change">
           <classes mode="change">
             <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.analytic" mode="delete"/>
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
-            <memberOf key="att.typed" mode="delete"/> <!-- not deleted -->
+            <memberOf key="att.declaring" mode="delete"/>
+            <memberOf key="att.typed" mode="delete"/> 
             <memberOf key="att.written" mode="delete"/>
           </classes>
           <content>
@@ -1322,6 +1479,9 @@
         
         
         <elementSpec ident="title" module="core" mode="change">
+          <classes mode="change">
+            <memberOf key="att.datable" mode="delete"/>
+          </classes>
           <constraintSpec ident="lang-on-title-in-body" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:text//tei:bibl/tei:title">
@@ -1350,6 +1510,13 @@
             </constraint>
           </constraintSpec>
           <attList> <!-- Move to the NHSL ODD -->
+            <attDef ident="xml:id" mode="delete"/>
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="ana" mode="delete"/>
+            <attDef ident="change" mode="delete"/>
+            <attDef ident="resp" mode="delete"/>
+            <attDef ident="source" mode="delete"/>
+            <attDef ident="corresp" mode="delete"/>
             <attDef ident="type" mode="change" usage="opt">
               <desc>Describes the function of the title. This attribute is optional. Certain
                 non-blank values (such as "final-rubric") may cause the title to be moved to a

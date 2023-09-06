@@ -12018,238 +12018,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD6">2.6. The Revision Description</ref>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD4C">2.4.1. Creation</ref>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/PH.html#PH-changes">11.7. Identifying Changes and Revisions</ref>
-  </listRef></elementSpec><classSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" predeclare="true" module="linking" xml:id="CLLINK" type="atts" ident="att.global.linking">
-  <desc versionDate="2016-02-16" xml:lang="en">provides a set of attributes for hypertextual linking.</desc>
-  <desc versionDate="2007-12-20" xml:lang="ko">하이퍼텍스트와 다른 연결에 대한 속성의 집합을 정의한다. 이것은 연결에 대한 부가적 태그 집합이 선택될 때 모든 요소에 가능해야 한다.</desc>
-  <desc versionDate="2007-05-02" xml:lang="zh-TW">定義一組用於超文字連結及其他連結的屬性，當連結的附加標籤組被選擇時，這些屬性可用於所有元素。</desc>
-  <desc versionDate="2019-07-21" xml:lang="ja">ハイパーテキストリンクの属性セットを提供する。</desc>
-  <desc versionDate="2016-02-16" xml:lang="fr">fournit un ensemble d'attributs pour décrire les
-      liens hypertextuels.</desc>
-  <desc versionDate="2007-05-04" xml:lang="es">define un conjunto de atributos para hipertexto u otro vínculo habilitado para todos los elementos cuando se selecciona la etiqueta adicional para los enlaces.</desc>
-  <desc versionDate="2007-01-21" xml:lang="it">definisce un insieme di attributi per ipertesto o altro legame abilitati per tutti gli elementi quando è selezionato il sottoinsieme di marcatori per i collegamenti</desc>
-  <attList>
-    <attDef ident="corresp" usage="opt">
-      <gloss versionDate="2007-07-04" xml:lang="en">corresponds</gloss>
-      <gloss versionDate="2007-12-20" xml:lang="ko">일치</gloss>
-      <gloss versionDate="2008-04-06" xml:lang="es">correspondencia</gloss>
-      <gloss versionDate="2008-03-30" xml:lang="fr">correspond</gloss>
-      <gloss versionDate="2007-11-06" xml:lang="it">corrispondente</gloss>
-      <gloss versionDate="2019-07-21" xml:lang="ja">対応</gloss>
-      <desc versionDate="2005-10-10" xml:lang="en">points to elements that correspond to the current
-      element in some way.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">어떤 식으로든 현 요소와 일치하는 요소를 가리킨다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">連結到的元素在某方面符合現有元素。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">当該要素と対応する要素を示す。</desc>
-      <desc versionDate="2007-06-12" xml:lang="fr">pointe vers des éléments qui ont une
-          correspondance avec l'élément en question.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">señala los elementos que presentan una correspondencia con el elemento corriente.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">punta a elementi che hanno una qualche corrispondenza con l'elemento corrente</desc>
-      <datatype maxOccurs="unbounded"><dataRef key="teidata.pointer"/></datatype>
-
-      <exemplum xml:lang="en" versionDate="2017-05-11">
-        <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
-          <group>
-            <text xml:id="t1-g1-t1" xml:lang="mi">
-              <body xml:id="t1-g1-t1-body1">
-                <div type="chapter">
-                  <head>He Whakamaramatanga mo te Ture Hoko, Riihi hoki, i nga Whenua Maori, 1876.</head>
-                  <p>…</p>
-                </div>
-              </body>
-            </text>
-            <text xml:id="t1-g1-t2" xml:lang="en">
-              <body xml:id="t1-g1-t2-body1" corresp="#t1-g1-t1-body1">
-                <div type="chapter">
-                  <head>An Act to regulate the Sale, Letting, and Disposal of Native Lands, 1876.</head>
-                  <p>…</p>
-                </div>
-              </body>
-            </text>
-          </group>
-        </egXML>
-        <p>In this example a <gi>group</gi> contains two <gi>text</gi>s, each containing the same document in a different language. The correspondence is indicated using <att>corresp</att>. The language is indicated using <att>xml:lang</att>, whose value is inherited; both the tag with the <att>corresp</att> and the tag pointed to by the <att>corresp</att> inherit the value from their immediate parent.  </p>
-      </exemplum>
-      
-      <exemplum xml:lang="en" versionDate="2017-05-25">
-        <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
-          
-        <!-- In a placeography called "places.xml" -->
-        <place xml:id="LOND1" corresp="people.xml#LOND2 people.xml#GENI1">
-          <placeName>London</placeName>
-          <desc>The city of London...</desc>
-        </place>
-        
-        <!-- In a literary personography called "people.xml" -->
-        <person xml:id="LOND2" corresp="places.xml#LOND1 #GENI1">
-          <persName type="lit">London</persName>
-          <note>
-            <p>Allegorical character representing the city of <placeName ref="places.xml#LOND1">London</placeName>.</p>
-          </note>
-        </person>
-        <person xml:id="GENI1" corresp="places.xml#LOND1 #LOND2">
-          <persName type="lit">London’s Genius</persName>
-          <note>
-            <p>Personification of London’s genius. Appears as an 
-              allegorical character in mayoral shows.
-            </p>
-          </note>
-        </person>
-      </egXML>
-        <p>In this example, a <gi>place</gi> element containing information about the city of 
-           London is linked with two <gi>person</gi> elements in a literary personography. 
-           This correspondence represents a slightly looser relationship than the one in the 
-           preceding example; there is no sense in which an allegorical character could be 
-           substituted for the physical city, or vice versa, but there is obviously a correspondence 
-           between them.</p>
-      </exemplum>
-      
-    </attDef>
-    <attDef ident="synch" usage="opt">
-      <gloss versionDate="2007-07-04" xml:lang="en">synchronous</gloss>
-      <gloss versionDate="2007-12-20" xml:lang="ko">동시발생</gloss>
-      <gloss versionDate="2008-04-06" xml:lang="es">sincrónico</gloss>
-      <gloss versionDate="2008-03-30" xml:lang="fr">synchrone</gloss>
-      <gloss versionDate="2007-11-06" xml:lang="it">sincrono</gloss>
-      <gloss versionDate="2019-07-21" xml:lang="ja">連動</gloss>
-      <desc versionDate="2005-10-10" xml:lang="en">points to elements that are synchronous with the current
-      element.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">현 요소와 동시 발생하는 요소를 가리킨다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">連結到的元素和現有元素同時出現。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">当該要素と連動する要素を示す。</desc>
-      <desc versionDate="2007-06-12" xml:lang="fr">pointe vers des éléments qui sont synchrones avec l'élément en question.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">señala los elementos que son sincrónicos con el elemento corriente.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">punta a elementi sincroni rispetto all'elemento corrente</desc>
-      <datatype maxOccurs="unbounded"><dataRef key="teidata.pointer"/></datatype>
-    </attDef>
-    <attDef ident="sameAs" usage="opt">
-      <desc versionDate="2005-10-10" xml:lang="en">points to an element that is the same as the current
-      element.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">현 요소와 동일한 요소를 가리킨다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">連結到的元素和現有元素相同。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">当該要素と同一の要素を示す。</desc>
-      <desc versionDate="2007-06-12" xml:lang="fr">pointe vers un élément identique à l'élément en question.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">señala el elementos que se corresponde exactamente con el elemento corriente.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">punta a un elemento che corrisponde esattamente all'elemento corrente</desc>
-      <datatype><dataRef key="teidata.pointer"/></datatype>
-    </attDef>
-    <attDef ident="copyOf" usage="opt">
-      <desc versionDate="2005-10-10" xml:lang="en">points to an element of which the current element is a
-	copy.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">현 요소가 그 복사인 요소를 가리킨다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">現有元素為所連結元素的複製本。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">当該要素のコピー要素を示す。</desc>
-      <desc versionDate="2007-06-12" xml:lang="fr">pointe vers un élément dont l'élément en question
-          est une copie.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">señala un elemento del que el elemento corriente es una copia.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">punta a un elemento di cui l'elemento corrente è una copia</desc>
-      <datatype><dataRef key="teidata.pointer"/></datatype>
-      <remarks versionDate="2005-10-10" xml:lang="en">
-        <p>Any content of the current element should be ignored. Its
-	true content is that of the element being pointed at.</p>
-      </remarks>
-      <remarks xml:lang="fr" versionDate="2007-06-12">
-        <p>Tout contenu appartenant à l'élément en cours doit être ignoré. Le vrai
-                        contenu est celui de l'élément cible du pointeur.</p>
-      </remarks>
-      <remarks xml:lang="ja" versionDate="2008-04-05">
-        <p>
-        当該要素の内容は無視されるべき。本当の内容は、参照先の要素の内
-        容になる。
-        </p>
-      </remarks>
-    </attDef>
-    <attDef ident="next" usage="opt">
-      <desc versionDate="2005-10-10" xml:lang="en">points to the next element of a virtual aggregate of which
-      the current element is part.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">현 요소가 그 부분인 가상 집합의 다음 요소를 가리킨다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">連結到現有元素所屬虛擬集合中的下一個元素。</desc>
-      <desc versionDate="2008-04-06" xml:lang="es">indica el elemento siguiente de un agregado virtual del cual elemento actual es una parte.</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">当該要素も所属する仮想集合における次の要素を示す。</desc>
-      <desc versionDate="2007-06-12" xml:lang="fr">pointe vers l'élément suivant d'un ensemble
-          virtuel dont l'élément en question est une partie.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">punta all'elemento
-      seguente all'interno di un aggregazione virtuale di cui l'elemento corrente fa parte</desc>
-      <datatype><dataRef key="teidata.pointer"/></datatype>
-      <remarks versionDate="2017-05-02" xml:lang="en"><p>It is recommended that the element indicated be of the same type as the element bearing this attribute.</p></remarks>
-      <remarks xml:lang="ja" versionDate="2019-09-16">
-        <p>指定された要素も、この属性を持つ要素と同じ型であることが推奨される。</p>
-      </remarks>
-    </attDef>
-    <attDef ident="prev" usage="opt">
-      <gloss versionDate="2007-07-04" xml:lang="en">previous</gloss>
-      <gloss versionDate="2007-12-20" xml:lang="ko">이전</gloss>
-      <gloss versionDate="2008-04-06" xml:lang="es">anterior</gloss>
-      <gloss versionDate="2008-03-30" xml:lang="fr"> précédent</gloss>
-      <gloss versionDate="2007-11-06" xml:lang="it">precedente</gloss>
-      <gloss versionDate="2019-07-21" xml:lang="ja">前の</gloss>
-      <desc versionDate="2005-10-10" xml:lang="en">points to the previous element of a virtual aggregate of
-      which the current element is part.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">현 요소가 그 부분인 가상 집합의 이전 요소를 가리킨다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">連結到現有元素所屬虛擬集合中的上一個元素。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">当該要素も所属する仮想集合における前の要素を示す。</desc>
-      <desc versionDate="2007-06-12" xml:lang="fr">pointe vers l'élément précédent d'un ensemble
-          virtuel auquel appartient l'élément en question.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">señala al elemento precedente de una adición virtual, de la cual el elemento corriente forma parte.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">punta all'elemento
-      precedente all'interno di un aggregazione virtuale di cui l'elemento corrente fa parte</desc>
-      <datatype><dataRef key="teidata.pointer"/></datatype>
-      <remarks versionDate="2017-05-02" xml:lang="en"><p>It is recommended that the element indicated be of the same type as the element bearing this attribute.</p></remarks>
-      <remarks xml:lang="ja" versionDate="2019-09-16">
-        <p>指定された要素も、この属性を持つ要素と同じ型であることが推奨される。</p>
-      </remarks>
-    </attDef>
-    <attDef ident="exclude" usage="opt">
-      <desc versionDate="2005-10-10" xml:lang="en">points to elements that are in exclusive alternation
-      with the current element.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">현 요소와 배타적 교체인 요소를 가리킨다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">連結到的元素是現有元素的專有替換元素。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">当該要素の代替要素を示す。</desc>
-      <desc versionDate="2007-06-12" xml:lang="fr">pointe vers des éléments qui sont une alternative
-          exclusive à l'élément en question.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">señala los elementos que estan en relación de alternancia exclusiva con el elemento corriente.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">punta a elementi in relazione di alternanza esclusiva con l'elemento corrente</desc>
-      <datatype maxOccurs="unbounded"><dataRef key="teidata.pointer"/></datatype>
-    </attDef>
-    <attDef ident="select" usage="opt">
-      <desc versionDate="2005-10-10" xml:lang="en">selects one or more alternants; if one alternant is
-      selected, the ambiguity or uncertainty is marked as resolved. If
-      more than one alternant is selected, the degree of ambiguity or
-      uncertainty is marked as reduced by the number of alternants not
-      selected.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">하나 이상의 교체형을 선택한다; 만약 하나의 교체형이 선택되면 중의성 또는 불활실성이 해결된 것으로 표시된다. 만약 둘 이상의 교체형이 선택되면, 중의성 또는 불확실성의 정도가, 선택되지 않은 교체형의 수로 감소된 것으로 표시된다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">選擇一個或多個替換；若選擇一個替換，則疑惑或不明確被標記為已解決。若選擇的替換多於一個，則疑惑或不明確的程度因為未選擇的替換而被標記為減低。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">ひとつ以上の選択肢を選ぶ。ひとつの選択肢が選ばれる場合、その曖昧
-      度や不確実度が示される。複数の選択肢が選ばれる場合、選ばれなかっ
-      た選択肢の数から還元される、曖昧度や不確実度が示される。</desc>
-      <desc versionDate="2007-06-12" xml:lang="fr">sélectionne une ou plusieurs valeurs alternatives
-          ; si une seule valeur est sélectionnée, l'ambiguïté ou l'incertitude est marquée comme
-          résolue. Si plus d'une valeur alternative est sélectionnée, le degré d'ambiguïté ou
-          d'incertitude est marqué comme réduit par le nombre de valeurs alternatives non
-          sélectionnées.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">selecciona una o más alternativas; si se selecciona una de las alternativas, la ambigüidad o la incerteza se indica como resuelta; si se selecciona más de una alternativa, el grado de ambigüidad o incerteza se indica como reducido del número de las alternativas no seleccionadas.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">seleziona una o più alternative; se viene selezionata una delle alternative, l'ambiguità o incertezza è indicata come risolta; se viene selezionata più di un'alternativa, il grado di ambiguità o incertezza è indicato come ridotto dal numero delle alternative non selezionate</desc>
-      <datatype maxOccurs="unbounded"><dataRef key="teidata.pointer"/></datatype>
-      <remarks versionDate="2005-10-10" xml:lang="en">
-        <p>This attribute should be placed on an element which is
-	superordinate to all of the alternants from which the
-	selection is being made.</p>
-      </remarks>
-      <remarks xml:lang="fr" versionDate="2007-06-12">
-        <p>Cet attribut doit être placé dans un élément hiérarchiquement supérieur à
-                        tous les éléments possibles parmi lesquelles la sélection est faite.</p>
-      </remarks>
-      <remarks xml:lang="ja" versionDate="2008-04-05">
-        <p>
-        当該属性は、選択対象となる全ての要素の上位に位置する要素に付与
-        されるべきである。
-        </p>
-      </remarks>
-    </attDef>
-  </attList>
-  <listRef>
-    <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SA">16. Linking, Segmentation, and Alignment</ref>
-  </listRef>
-</classSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" rend="change" module="linking" ident="link"><gloss xml:lang="en" versionDate="2007-06-12">link</gloss><gloss versionDate="2007-06-12" xml:lang="fr"> lien</gloss><desc versionDate="2005-01-14" xml:lang="en">defines an association or hypertextual link among elements or passages, of some type not more precisely specifiable by other elements.</desc><desc versionDate="2007-12-20" xml:lang="ko">다른 요소들에 의해 좀 더 명확하게 명시되지 않는 유형의 요소 또는 단락들의 연관 또는 하이퍼텍스트 연결을 정의한다.</desc><desc versionDate="2007-05-02" xml:lang="zh-TW">定義元素或段落之間的關連或超文字連結，其他元素無法將此連結類型作更詳細說明。</desc><desc versionDate="2008-04-05" xml:lang="ja">他の要素では上手く示せない、要素や一節間にある関連性やハイパーテキス トリンクを定義する。</desc><desc versionDate="2007-06-12" xml:lang="fr">définit une association ou un lien hypertextuel entre des éléments ou des passages, lien dont le type ne peut être spécifié précisément par d'autres éléments.</desc><desc versionDate="2007-05-04" xml:lang="es">define una asociación o vínculo hipertextual entre elementos o fragmentos de texto que no es especificable por otros elementos.</desc><desc versionDate="2007-01-21" xml:lang="it">definisce tra elementi o porzioni di testo un'associazione o legame ipertestuale non meglio specificabile da altri elementi</desc><classes><memberOf key="att.pointing"/><memberOf key="model.global.meta"/></classes><content><empty/></content><constraintSpec ident="linkTargets3" scheme="schematron">
+  </listRef></elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" rend="change" module="linking" ident="link"><gloss xml:lang="en" versionDate="2007-06-12">link</gloss><gloss versionDate="2007-06-12" xml:lang="fr"> lien</gloss><desc versionDate="2005-01-14" xml:lang="en">defines an association or hypertextual link among elements or passages, of some type not more precisely specifiable by other elements.</desc><desc versionDate="2007-12-20" xml:lang="ko">다른 요소들에 의해 좀 더 명확하게 명시되지 않는 유형의 요소 또는 단락들의 연관 또는 하이퍼텍스트 연결을 정의한다.</desc><desc versionDate="2007-05-02" xml:lang="zh-TW">定義元素或段落之間的關連或超文字連結，其他元素無法將此連結類型作更詳細說明。</desc><desc versionDate="2008-04-05" xml:lang="ja">他の要素では上手く示せない、要素や一節間にある関連性やハイパーテキス トリンクを定義する。</desc><desc versionDate="2007-06-12" xml:lang="fr">définit une association ou un lien hypertextuel entre des éléments ou des passages, lien dont le type ne peut être spécifié précisément par d'autres éléments.</desc><desc versionDate="2007-05-04" xml:lang="es">define una asociación o vínculo hipertextual entre elementos o fragmentos de texto que no es especificable por otros elementos.</desc><desc versionDate="2007-01-21" xml:lang="it">definisce tra elementi o porzioni di testo un'associazione o legame ipertestuale non meglio specificabile da altri elementi</desc><classes><memberOf key="att.pointing"/><memberOf key="model.global.meta"/></classes><content><empty/></content><constraintSpec ident="linkTargets3" scheme="schematron">
     <constraint>
       <sch:assert test="contains(normalize-space(@target),' ')">You must supply at least two values for @target or  on <sch:name/></sch:assert>
     </constraint>
@@ -24779,6 +24548,237 @@ associated.</desc>
     </attDef>
   </attList>
   
+</classSpec><classSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" predeclare="true" module="linking" xml:id="CLLINK" type="atts" ident="att.global.linking">
+  <desc versionDate="2016-02-16" xml:lang="en">provides a set of attributes for hypertextual linking.</desc>
+  <desc versionDate="2007-12-20" xml:lang="ko">하이퍼텍스트와 다른 연결에 대한 속성의 집합을 정의한다. 이것은 연결에 대한 부가적 태그 집합이 선택될 때 모든 요소에 가능해야 한다.</desc>
+  <desc versionDate="2007-05-02" xml:lang="zh-TW">定義一組用於超文字連結及其他連結的屬性，當連結的附加標籤組被選擇時，這些屬性可用於所有元素。</desc>
+  <desc versionDate="2019-07-21" xml:lang="ja">ハイパーテキストリンクの属性セットを提供する。</desc>
+  <desc versionDate="2016-02-16" xml:lang="fr">fournit un ensemble d'attributs pour décrire les
+      liens hypertextuels.</desc>
+  <desc versionDate="2007-05-04" xml:lang="es">define un conjunto de atributos para hipertexto u otro vínculo habilitado para todos los elementos cuando se selecciona la etiqueta adicional para los enlaces.</desc>
+  <desc versionDate="2007-01-21" xml:lang="it">definisce un insieme di attributi per ipertesto o altro legame abilitati per tutti gli elementi quando è selezionato il sottoinsieme di marcatori per i collegamenti</desc>
+  <attList>
+    <attDef ident="corresp" usage="opt">
+      <gloss versionDate="2007-07-04" xml:lang="en">corresponds</gloss>
+      <gloss versionDate="2007-12-20" xml:lang="ko">일치</gloss>
+      <gloss versionDate="2008-04-06" xml:lang="es">correspondencia</gloss>
+      <gloss versionDate="2008-03-30" xml:lang="fr">correspond</gloss>
+      <gloss versionDate="2007-11-06" xml:lang="it">corrispondente</gloss>
+      <gloss versionDate="2019-07-21" xml:lang="ja">対応</gloss>
+      <desc versionDate="2005-10-10" xml:lang="en">points to elements that correspond to the current
+      element in some way.</desc>
+      <desc versionDate="2007-12-20" xml:lang="ko">어떤 식으로든 현 요소와 일치하는 요소를 가리킨다.</desc>
+      <desc versionDate="2007-05-02" xml:lang="zh-TW">連結到的元素在某方面符合現有元素。</desc>
+      <desc versionDate="2008-04-05" xml:lang="ja">当該要素と対応する要素を示す。</desc>
+      <desc versionDate="2007-06-12" xml:lang="fr">pointe vers des éléments qui ont une
+          correspondance avec l'élément en question.</desc>
+      <desc versionDate="2007-05-04" xml:lang="es">señala los elementos que presentan una correspondencia con el elemento corriente.</desc>
+      <desc versionDate="2007-01-21" xml:lang="it">punta a elementi che hanno una qualche corrispondenza con l'elemento corrente</desc>
+      <datatype maxOccurs="unbounded"><dataRef key="teidata.pointer"/></datatype>
+
+      <exemplum xml:lang="en" versionDate="2017-05-11">
+        <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
+          <group>
+            <text xml:id="t1-g1-t1" xml:lang="mi">
+              <body xml:id="t1-g1-t1-body1">
+                <div type="chapter">
+                  <head>He Whakamaramatanga mo te Ture Hoko, Riihi hoki, i nga Whenua Maori, 1876.</head>
+                  <p>…</p>
+                </div>
+              </body>
+            </text>
+            <text xml:id="t1-g1-t2" xml:lang="en">
+              <body xml:id="t1-g1-t2-body1" corresp="#t1-g1-t1-body1">
+                <div type="chapter">
+                  <head>An Act to regulate the Sale, Letting, and Disposal of Native Lands, 1876.</head>
+                  <p>…</p>
+                </div>
+              </body>
+            </text>
+          </group>
+        </egXML>
+        <p>In this example a <gi>group</gi> contains two <gi>text</gi>s, each containing the same document in a different language. The correspondence is indicated using <att>corresp</att>. The language is indicated using <att>xml:lang</att>, whose value is inherited; both the tag with the <att>corresp</att> and the tag pointed to by the <att>corresp</att> inherit the value from their immediate parent.  </p>
+      </exemplum>
+      
+      <exemplum xml:lang="en" versionDate="2017-05-25">
+        <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
+          
+        <!-- In a placeography called "places.xml" -->
+        <place xml:id="LOND1" corresp="people.xml#LOND2 people.xml#GENI1">
+          <placeName>London</placeName>
+          <desc>The city of London...</desc>
+        </place>
+        
+        <!-- In a literary personography called "people.xml" -->
+        <person xml:id="LOND2" corresp="places.xml#LOND1 #GENI1">
+          <persName type="lit">London</persName>
+          <note>
+            <p>Allegorical character representing the city of <placeName ref="places.xml#LOND1">London</placeName>.</p>
+          </note>
+        </person>
+        <person xml:id="GENI1" corresp="places.xml#LOND1 #LOND2">
+          <persName type="lit">London’s Genius</persName>
+          <note>
+            <p>Personification of London’s genius. Appears as an 
+              allegorical character in mayoral shows.
+            </p>
+          </note>
+        </person>
+      </egXML>
+        <p>In this example, a <gi>place</gi> element containing information about the city of 
+           London is linked with two <gi>person</gi> elements in a literary personography. 
+           This correspondence represents a slightly looser relationship than the one in the 
+           preceding example; there is no sense in which an allegorical character could be 
+           substituted for the physical city, or vice versa, but there is obviously a correspondence 
+           between them.</p>
+      </exemplum>
+      
+    </attDef>
+    <attDef ident="synch" usage="opt">
+      <gloss versionDate="2007-07-04" xml:lang="en">synchronous</gloss>
+      <gloss versionDate="2007-12-20" xml:lang="ko">동시발생</gloss>
+      <gloss versionDate="2008-04-06" xml:lang="es">sincrónico</gloss>
+      <gloss versionDate="2008-03-30" xml:lang="fr">synchrone</gloss>
+      <gloss versionDate="2007-11-06" xml:lang="it">sincrono</gloss>
+      <gloss versionDate="2019-07-21" xml:lang="ja">連動</gloss>
+      <desc versionDate="2005-10-10" xml:lang="en">points to elements that are synchronous with the current
+      element.</desc>
+      <desc versionDate="2007-12-20" xml:lang="ko">현 요소와 동시 발생하는 요소를 가리킨다.</desc>
+      <desc versionDate="2007-05-02" xml:lang="zh-TW">連結到的元素和現有元素同時出現。</desc>
+      <desc versionDate="2008-04-05" xml:lang="ja">当該要素と連動する要素を示す。</desc>
+      <desc versionDate="2007-06-12" xml:lang="fr">pointe vers des éléments qui sont synchrones avec l'élément en question.</desc>
+      <desc versionDate="2007-05-04" xml:lang="es">señala los elementos que son sincrónicos con el elemento corriente.</desc>
+      <desc versionDate="2007-01-21" xml:lang="it">punta a elementi sincroni rispetto all'elemento corrente</desc>
+      <datatype maxOccurs="unbounded"><dataRef key="teidata.pointer"/></datatype>
+    </attDef>
+    <attDef ident="sameAs" usage="opt">
+      <desc versionDate="2005-10-10" xml:lang="en">points to an element that is the same as the current
+      element.</desc>
+      <desc versionDate="2007-12-20" xml:lang="ko">현 요소와 동일한 요소를 가리킨다.</desc>
+      <desc versionDate="2007-05-02" xml:lang="zh-TW">連結到的元素和現有元素相同。</desc>
+      <desc versionDate="2008-04-05" xml:lang="ja">当該要素と同一の要素を示す。</desc>
+      <desc versionDate="2007-06-12" xml:lang="fr">pointe vers un élément identique à l'élément en question.</desc>
+      <desc versionDate="2007-05-04" xml:lang="es">señala el elementos que se corresponde exactamente con el elemento corriente.</desc>
+      <desc versionDate="2007-01-21" xml:lang="it">punta a un elemento che corrisponde esattamente all'elemento corrente</desc>
+      <datatype><dataRef key="teidata.pointer"/></datatype>
+    </attDef>
+    <attDef ident="copyOf" usage="opt">
+      <desc versionDate="2005-10-10" xml:lang="en">points to an element of which the current element is a
+	copy.</desc>
+      <desc versionDate="2007-12-20" xml:lang="ko">현 요소가 그 복사인 요소를 가리킨다.</desc>
+      <desc versionDate="2007-05-02" xml:lang="zh-TW">現有元素為所連結元素的複製本。</desc>
+      <desc versionDate="2008-04-05" xml:lang="ja">当該要素のコピー要素を示す。</desc>
+      <desc versionDate="2007-06-12" xml:lang="fr">pointe vers un élément dont l'élément en question
+          est une copie.</desc>
+      <desc versionDate="2007-05-04" xml:lang="es">señala un elemento del que el elemento corriente es una copia.</desc>
+      <desc versionDate="2007-01-21" xml:lang="it">punta a un elemento di cui l'elemento corrente è una copia</desc>
+      <datatype><dataRef key="teidata.pointer"/></datatype>
+      <remarks versionDate="2005-10-10" xml:lang="en">
+        <p>Any content of the current element should be ignored. Its
+	true content is that of the element being pointed at.</p>
+      </remarks>
+      <remarks xml:lang="fr" versionDate="2007-06-12">
+        <p>Tout contenu appartenant à l'élément en cours doit être ignoré. Le vrai
+                        contenu est celui de l'élément cible du pointeur.</p>
+      </remarks>
+      <remarks xml:lang="ja" versionDate="2008-04-05">
+        <p>
+        当該要素の内容は無視されるべき。本当の内容は、参照先の要素の内
+        容になる。
+        </p>
+      </remarks>
+    </attDef>
+    <attDef ident="next" usage="opt">
+      <desc versionDate="2005-10-10" xml:lang="en">points to the next element of a virtual aggregate of which
+      the current element is part.</desc>
+      <desc versionDate="2007-12-20" xml:lang="ko">현 요소가 그 부분인 가상 집합의 다음 요소를 가리킨다.</desc>
+      <desc versionDate="2007-05-02" xml:lang="zh-TW">連結到現有元素所屬虛擬集合中的下一個元素。</desc>
+      <desc versionDate="2008-04-06" xml:lang="es">indica el elemento siguiente de un agregado virtual del cual elemento actual es una parte.</desc>
+      <desc versionDate="2008-04-05" xml:lang="ja">当該要素も所属する仮想集合における次の要素を示す。</desc>
+      <desc versionDate="2007-06-12" xml:lang="fr">pointe vers l'élément suivant d'un ensemble
+          virtuel dont l'élément en question est une partie.</desc>
+      <desc versionDate="2007-01-21" xml:lang="it">punta all'elemento
+      seguente all'interno di un aggregazione virtuale di cui l'elemento corrente fa parte</desc>
+      <datatype><dataRef key="teidata.pointer"/></datatype>
+      <remarks versionDate="2017-05-02" xml:lang="en"><p>It is recommended that the element indicated be of the same type as the element bearing this attribute.</p></remarks>
+      <remarks xml:lang="ja" versionDate="2019-09-16">
+        <p>指定された要素も、この属性を持つ要素と同じ型であることが推奨される。</p>
+      </remarks>
+    </attDef>
+    <attDef ident="prev" usage="opt">
+      <gloss versionDate="2007-07-04" xml:lang="en">previous</gloss>
+      <gloss versionDate="2007-12-20" xml:lang="ko">이전</gloss>
+      <gloss versionDate="2008-04-06" xml:lang="es">anterior</gloss>
+      <gloss versionDate="2008-03-30" xml:lang="fr"> précédent</gloss>
+      <gloss versionDate="2007-11-06" xml:lang="it">precedente</gloss>
+      <gloss versionDate="2019-07-21" xml:lang="ja">前の</gloss>
+      <desc versionDate="2005-10-10" xml:lang="en">points to the previous element of a virtual aggregate of
+      which the current element is part.</desc>
+      <desc versionDate="2007-12-20" xml:lang="ko">현 요소가 그 부분인 가상 집합의 이전 요소를 가리킨다.</desc>
+      <desc versionDate="2007-05-02" xml:lang="zh-TW">連結到現有元素所屬虛擬集合中的上一個元素。</desc>
+      <desc versionDate="2008-04-05" xml:lang="ja">当該要素も所属する仮想集合における前の要素を示す。</desc>
+      <desc versionDate="2007-06-12" xml:lang="fr">pointe vers l'élément précédent d'un ensemble
+          virtuel auquel appartient l'élément en question.</desc>
+      <desc versionDate="2007-05-04" xml:lang="es">señala al elemento precedente de una adición virtual, de la cual el elemento corriente forma parte.</desc>
+      <desc versionDate="2007-01-21" xml:lang="it">punta all'elemento
+      precedente all'interno di un aggregazione virtuale di cui l'elemento corrente fa parte</desc>
+      <datatype><dataRef key="teidata.pointer"/></datatype>
+      <remarks versionDate="2017-05-02" xml:lang="en"><p>It is recommended that the element indicated be of the same type as the element bearing this attribute.</p></remarks>
+      <remarks xml:lang="ja" versionDate="2019-09-16">
+        <p>指定された要素も、この属性を持つ要素と同じ型であることが推奨される。</p>
+      </remarks>
+    </attDef>
+    <attDef ident="exclude" usage="opt">
+      <desc versionDate="2005-10-10" xml:lang="en">points to elements that are in exclusive alternation
+      with the current element.</desc>
+      <desc versionDate="2007-12-20" xml:lang="ko">현 요소와 배타적 교체인 요소를 가리킨다.</desc>
+      <desc versionDate="2007-05-02" xml:lang="zh-TW">連結到的元素是現有元素的專有替換元素。</desc>
+      <desc versionDate="2008-04-05" xml:lang="ja">当該要素の代替要素を示す。</desc>
+      <desc versionDate="2007-06-12" xml:lang="fr">pointe vers des éléments qui sont une alternative
+          exclusive à l'élément en question.</desc>
+      <desc versionDate="2007-05-04" xml:lang="es">señala los elementos que estan en relación de alternancia exclusiva con el elemento corriente.</desc>
+      <desc versionDate="2007-01-21" xml:lang="it">punta a elementi in relazione di alternanza esclusiva con l'elemento corrente</desc>
+      <datatype maxOccurs="unbounded"><dataRef key="teidata.pointer"/></datatype>
+    </attDef>
+    <attDef ident="select" usage="opt">
+      <desc versionDate="2005-10-10" xml:lang="en">selects one or more alternants; if one alternant is
+      selected, the ambiguity or uncertainty is marked as resolved. If
+      more than one alternant is selected, the degree of ambiguity or
+      uncertainty is marked as reduced by the number of alternants not
+      selected.</desc>
+      <desc versionDate="2007-12-20" xml:lang="ko">하나 이상의 교체형을 선택한다; 만약 하나의 교체형이 선택되면 중의성 또는 불활실성이 해결된 것으로 표시된다. 만약 둘 이상의 교체형이 선택되면, 중의성 또는 불확실성의 정도가, 선택되지 않은 교체형의 수로 감소된 것으로 표시된다.</desc>
+      <desc versionDate="2007-05-02" xml:lang="zh-TW">選擇一個或多個替換；若選擇一個替換，則疑惑或不明確被標記為已解決。若選擇的替換多於一個，則疑惑或不明確的程度因為未選擇的替換而被標記為減低。</desc>
+      <desc versionDate="2008-04-05" xml:lang="ja">ひとつ以上の選択肢を選ぶ。ひとつの選択肢が選ばれる場合、その曖昧
+      度や不確実度が示される。複数の選択肢が選ばれる場合、選ばれなかっ
+      た選択肢の数から還元される、曖昧度や不確実度が示される。</desc>
+      <desc versionDate="2007-06-12" xml:lang="fr">sélectionne une ou plusieurs valeurs alternatives
+          ; si une seule valeur est sélectionnée, l'ambiguïté ou l'incertitude est marquée comme
+          résolue. Si plus d'une valeur alternative est sélectionnée, le degré d'ambiguïté ou
+          d'incertitude est marqué comme réduit par le nombre de valeurs alternatives non
+          sélectionnées.</desc>
+      <desc versionDate="2007-05-04" xml:lang="es">selecciona una o más alternativas; si se selecciona una de las alternativas, la ambigüidad o la incerteza se indica como resuelta; si se selecciona más de una alternativa, el grado de ambigüidad o incerteza se indica como reducido del número de las alternativas no seleccionadas.</desc>
+      <desc versionDate="2007-01-21" xml:lang="it">seleziona una o più alternative; se viene selezionata una delle alternative, l'ambiguità o incertezza è indicata come risolta; se viene selezionata più di un'alternativa, il grado di ambiguità o incertezza è indicato come ridotto dal numero delle alternative non selezionate</desc>
+      <datatype maxOccurs="unbounded"><dataRef key="teidata.pointer"/></datatype>
+      <remarks versionDate="2005-10-10" xml:lang="en">
+        <p>This attribute should be placed on an element which is
+	superordinate to all of the alternants from which the
+	selection is being made.</p>
+      </remarks>
+      <remarks xml:lang="fr" versionDate="2007-06-12">
+        <p>Cet attribut doit être placé dans un élément hiérarchiquement supérieur à
+                        tous les éléments possibles parmi lesquelles la sélection est faite.</p>
+      </remarks>
+      <remarks xml:lang="ja" versionDate="2008-04-05">
+        <p>
+        当該属性は、選択対象となる全ての要素の上位に位置する要素に付与
+        されるべきである。
+        </p>
+      </remarks>
+    </attDef>
+  </attList>
+  <listRef>
+    <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SA">16. Linking, Segmentation, and Alignment</ref>
+  </listRef>
 </classSpec><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="ST" xml:id="DSTTEI2" ident="tei" type="core"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="CO" xml:id="DCO" ident="core"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="CE" xml:id="DCE" ident="certainty"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="DI" xml:id="DDIBO" ident="dictionaries"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="HD" xml:id="DHD" ident="header"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="SA" xml:id="DSA" ident="linking"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="MS" xml:id="DMSD2" ident="msdescription"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="ND" xml:id="DND" ident="namesdates"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="TD" xml:id="DTDDTD" ident="tagdocs"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="TC" xml:id="DTC" ident="textcrit"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="PH" xml:id="DPH" ident="transcr"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="DS" xml:id="DDS" ident="textstructure"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="AI" xml:id="DAI" ident="analysis"/></schemaSpec>
     </body>
   </text>
