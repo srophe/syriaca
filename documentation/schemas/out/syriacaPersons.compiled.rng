@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-09-05T16:34:11Z. .
+Schema generated from ODD source 2023-09-06T16:03:18Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -51,34 +51,6 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
             <ref name="tei_model.global"/>
          </choice>
       </zeroOrMore>
-   </define>
-   <define name="tei_att.anchoring.attributes">
-      <ref name="tei_att.anchoring.attribute.anchored"/>
-      <ref name="tei_att.anchoring.attribute.targetEnd"/>
-   </define>
-   <define name="tei_att.anchoring.attribute.anchored">
-      <optional>
-         <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
-                    name="anchored"
-                    a:defaultValue="true">
-            <a:documentation>(anchored) indicates whether the copy text shows the exact place of reference for the note.</a:documentation>
-            <data type="boolean"/>
-         </attribute>
-      </optional>
-   </define>
-   <define name="tei_att.anchoring.attribute.targetEnd">
-      <optional>
-         <attribute name="targetEnd">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(target end) points to the end of the span to which the note is attached, if the note is not embedded in the text at that point.</a:documentation>
-            <list>
-               <oneOrMore>
-                  <data type="anyURI">
-                     <param name="pattern">\S+</param>
-                  </data>
-               </oneOrMore>
-            </list>
-         </attribute>
-      </optional>
    </define>
    <define name="tei_att.canonical.attributes">
       <ref name="tei_att.canonical.attribute.ref"/>
@@ -533,28 +505,7 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
       </optional>
    </define>
    <define name="tei_att.global.responsibility.attributes">
-      <ref name="tei_att.global.responsibility.attribute.cert"/>
       <ref name="tei_att.global.responsibility.attribute.resp"/>
-   </define>
-   <define name="tei_att.global.responsibility.attribute.cert">
-      <optional>
-         <attribute name="cert">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(certainty) signifies the degree of certainty associated with the intervention or interpretation.</a:documentation>
-            <choice>
-               <data type="double"/>
-               <choice>
-                  <value>high</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                  <value>medium</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                  <value>low</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                  <value>unknown</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-               </choice>
-            </choice>
-         </attribute>
-      </optional>
    </define>
    <define name="tei_att.global.responsibility.attribute.resp">
       <optional>
@@ -654,86 +605,11 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(language) indicates the language of the element content using a tag generated according to <a xmlns="http://www.w3.org/1999/xhtml"
                   href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</a>.</a:documentation>
             <choice>
-               <value>ar</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic) Arabic of any variety or period</a:documentation>
-               <value>ar-Syrc</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni) Arabic Garshuni in unvocalized or undetermined Syriac script</a:documentation>
-               <value>ar-Syre</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni—Estrangela) Arabic Garshuni in Estrangela Syriac script</a:documentation>
-               <value>ar-Syrj</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni—West Syriac) Arabic Garshuni in vocalized West Syriac script</a:documentation>
-               <value>ar-Syrn</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni—East Syriac) Arabic Garshuni in vocalized East Syriac script</a:documentation>
-               <value>cop</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Coptic) Coptic of any variety or period</a:documentation>
-               <value>cu</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Slavonic—Old Church) Old Church Slavonic</a:documentation>
-               <value>de</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(German) German of any variety or period</a:documentation>
-               <value>de-x-baumstrk</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(German—Baumstark Romanization) Names or terms Romanized into German according to the standards adopted by Anton Baumstark's Geschichte der syrischen Literatur.</a:documentation>
-               <value>fr-x-zanetti</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French—Zanetti) Names or terms Romanized into French according to the standards adopted by Ugo Zanetti.</a:documentation>
-               <value>el</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Greek—Modern) Modern Greek after A.D. 1453</a:documentation>
-               <value>en</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English) English of any variety or period</a:documentation>
-               <value>en-x-gedsh</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English—GEDSH Romanization) Names or terms Romanized into English according to the standards adopted by the Gorgias Encyclopedic Dictionary of the Syriac Heritage</a:documentation>
-               <value>en-x-lah</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English—LAH Romanization) Names or terms Romanized into English according to the standards adopted by the Late Antique Historiography project.</a:documentation>
-               <value>en-x-srp1</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English—Syriaca.org Alternate Romanization) Names or terms Romanized into English by Syriaca.org using alternate methods for indexing purposes.</a:documentation>
-               <value>es</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Spanish) Spanish</a:documentation>
-               <value>fr</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French) French of any variety or period</a:documentation>
-               <value>fr-x-bhs</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French—BHS Romanization) Names or terms Romanized into French according to the standards adopted by the Bibliotheca Hagiographica Syriaca</a:documentation>
-               <value>fr-x-fiey</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French—Fiey Romanization) Names or terms Romanized into French according to the standards adopted by Fiey, Saints Syriaques</a:documentation>
-               <value>gez</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Ge'ez) Ge'ez</a:documentation>
-               <value>grc</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Greek—Ancient) Ancient Greek to A.D. 1453</a:documentation>
-               <value>hy</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Armenian) Classical or Modern Armenian</a:documentation>
-               <value>it</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Italian) Italian</a:documentation>
-               <value>ka</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Georgian) Classical or Modern Georgian</a:documentation>
-               <value>la</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Latin) Latin of any variety or period</a:documentation>
-               <value>mal</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam) Malayalam of any variety or period</a:documentation>
-               <value>mal-Syrc</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni) Malayalam Garshuni in unvocalized or undetermined Syriac script</a:documentation>
-               <value>mal-Syre</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni—Estrangela) Malayalam Garshuni in Estrangela Syriac script</a:documentation>
-               <value>mal-Syrj</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni—West Syriac) Malayalam Garshuni in vocalized West Syriac script</a:documentation>
-               <value>mal-Syrn</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni—East Syriac) Malayalam Garshuni in vocalized East Syriac script</a:documentation>
-               <value>nl</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Dutch) Dutch</a:documentation>
-               <value>pt</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Portuguese) Portuguese</a:documentation>
-               <value>ru</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Russian) Russian</a:documentation>
-               <value>syr</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac) Syriac of any variety or period</a:documentation>
-               <value>syr-Syre</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—Estrangela script) Syriac in Estrangela script</a:documentation>
-               <value>syr-Syrj</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—West) Syriac in vocalized West Syriac script</a:documentation>
-               <value>syr-Syrn</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—East) Syriac in vocalized East Syriac script</a:documentation>
-               <value>syr-x-syrm</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—Melkite script) Syriac in Melkite script. Note: This is not an ISO code but a private use code for Melkite employed by Syriaca.org until an ISO code is created</a:documentation>
-               <value>sog</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Sogdian) Sogdian</a:documentation>
-               <value>tr</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Turkish) Turkish</a:documentation>
+               <data type="language"/>
+               <choice>
+                  <value/>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               </choice>
             </choice>
          </attribute>
       </optional>
@@ -809,36 +685,8 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
       </sch:rule>
    </pattern>
    <define name="tei_att.pointing.attributes">
-      <ref name="tei_att.pointing.attribute.targetLang"/>
       <ref name="tei_att.pointing.attribute.target"/>
-      <ref name="tei_att.pointing.attribute.evaluate"/>
    </define>
-   <define name="tei_att.pointing.attribute.targetLang">
-      <optional>
-         <attribute name="targetLang">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the language of the content to be found at the destination referenced by <code xmlns="http://www.w3.org/1999/xhtml">@target</code>, using a language tag generated according to <a xmlns="http://www.w3.org/1999/xhtml"
-                  href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</a>.</a:documentation>
-            <choice>
-               <data type="language"/>
-               <choice>
-                  <value/>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-               </choice>
-            </choice>
-         </attribute>
-      </optional>
-   </define>
-   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="syriacaPersons-att.pointing-targetLang-targetLang-constraint-rule-12">
-      <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
-                xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                xmlns:srophe="https://srophe.app"
-                xmlns:xi="http://www.w3.org/2001/XInclude"
-                context="tei:*[not(self::tei:schemaSpec)][@targetLang]">
-         <sch:assert test="@target">@targetLang should only be used on <sch:name/> if @target is specified.</sch:assert>
-      </sch:rule>
-   </pattern>
    <define name="tei_att.pointing.attribute.target">
       <optional>
          <attribute name="target">
@@ -853,18 +701,27 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
          </attribute>
       </optional>
    </define>
-   <define name="tei_att.pointing.attribute.evaluate">
+   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+            id="syriacaPersons-att.pointing-targetLang-constraint-rule-12">
+      <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                xmlns:srophe="https://srophe.app"
+                xmlns:xi="http://www.w3.org/2001/XInclude"
+                context="tei:*[not(self::tei:schemaSpec)][@targetLang]">
+         <sch:assert test="@target">@targetLang should only be used on <sch:name/> if @target is specified.</sch:assert>
+      </sch:rule>
+   </pattern>
+   <define name="tei_att.sortable.attributes">
+      <ref name="tei_att.sortable.attribute.sortKey"/>
+   </define>
+   <define name="tei_att.sortable.attribute.sortKey">
       <optional>
-         <attribute name="evaluate">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(evaluate) specifies the intended meaning when the target of a pointer is itself a pointer.</a:documentation>
-            <choice>
-               <value>all</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">if the element pointed to is itself a pointer, then the target of that pointer will be taken, and so on, until an element is found which is not a pointer.</a:documentation>
-               <value>one</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">if the element pointed to is itself a pointer, then its target (whether a pointer or not) is taken as the target of this pointer.</a:documentation>
-               <value>none</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">no further evaluation of targets is carried out beyond that needed to find the element specified in the pointer's target.</a:documentation>
-            </choice>
+         <attribute name="sortKey">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">supplies the sort key for this element in an index, list or group which contains it.</a:documentation>
+            <data type="token">
+               <param name="pattern">[^\p{C}\p{Z}]+</param>
+            </data>
          </attribute>
       </optional>
    </define>
@@ -1811,23 +1668,6 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
          <ref name="tei_model.quoteLike_sequenceRepeatable"/>
       </oneOrMore>
    </define>
-   <define name="tei_model.divWrapper">
-      <notAllowed/>
-   </define>
-   <define name="tei_model.frontPart.drama">
-      <notAllowed/>
-   </define>
-   <define name="tei_model.divBottomPart">
-      <notAllowed/>
-   </define>
-   <define name="tei_model.choicePart">
-      <choice>
-         <ref name="tei_sic"/>
-         <ref name="tei_corr"/>
-         <ref name="tei_reg"/>
-         <ref name="tei_orig"/>
-      </choice>
-   </define>
    <define name="tei_model.catDescPart">
       <notAllowed/>
    </define>
@@ -2042,23 +1882,6 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
          <ref name="tei_model.pPart.data"/>
       </choice>
    </define>
-   <define name="tei_att.locatable.attributes">
-      <ref name="tei_att.locatable.attribute.where"/>
-   </define>
-   <define name="tei_att.locatable.attribute.where">
-      <optional>
-         <attribute name="where">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates one or more locations by pointing to a <code xmlns="http://www.w3.org/1999/xhtml">&lt;place&gt;</code> element or other canonical description.</a:documentation>
-            <list>
-               <oneOrMore>
-                  <data type="anyURI">
-                     <param name="pattern">\S+</param>
-                  </data>
-               </oneOrMore>
-            </list>
-         </attribute>
-      </optional>
-   </define>
    <define name="tei_model.resource">
       <choice>
          <ref name="tei_text"/>
@@ -2130,8 +1953,7 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
                       context="//tei:text//tei:p">
-               <sch:assert test="./@xml:lang">A &lt;p&gt; element in the text body must have an
-                  @xml:lang attribute.</sch:assert>
+               <sch:assert test="./@xml:lang">A &lt;p&gt; element in the text body must have an @xml:lang attribute.</sch:assert>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
@@ -2158,22 +1980,7 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
       </sch:report>
             </rule>
          </pattern>
-         <ref name="tei_att.global.attribute.xmlid"/>
          <ref name="tei_att.global.attribute.xmllang"/>
-         <ref name="tei_att.global.rendition.attribute.rend"/>
-         <ref name="tei_att.global.linking.attribute.corresp"/>
-         <ref name="tei_att.global.linking.attribute.synch"/>
-         <ref name="tei_att.global.linking.attribute.sameAs"/>
-         <ref name="tei_att.global.linking.attribute.copyOf"/>
-         <ref name="tei_att.global.linking.attribute.next"/>
-         <ref name="tei_att.global.linking.attribute.prev"/>
-         <ref name="tei_att.global.linking.attribute.exclude"/>
-         <ref name="tei_att.global.linking.attribute.select"/>
-         <ref name="tei_att.global.analytic.attribute.ana"/>
-         <ref name="tei_att.global.change.attribute.change"/>
-         <ref name="tei_att.global.responsibility.attribute.cert"/>
-         <ref name="tei_att.global.responsibility.attribute.resp"/>
-         <ref name="tei_att.global.source.attribute.source"/>
          <empty/>
       </element>
    </define>
@@ -2181,106 +1988,8 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
       <element name="foreign">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(foreign) identifies a word or phrase as belonging to some language other than that of the surrounding text. [3.3.2.1. Foreign Words or Expressions]</a:documentation>
          <text/>
+         <ref name="tei_att.global.attribute.xmllang"/>
          <ref name="tei_att.global.rendition.attribute.rend"/>
-         <ref name="tei_att.global.linking.attribute.corresp"/>
-         <ref name="tei_att.global.linking.attribute.synch"/>
-         <ref name="tei_att.global.linking.attribute.sameAs"/>
-         <ref name="tei_att.global.linking.attribute.copyOf"/>
-         <ref name="tei_att.global.linking.attribute.next"/>
-         <ref name="tei_att.global.linking.attribute.prev"/>
-         <ref name="tei_att.global.linking.attribute.exclude"/>
-         <ref name="tei_att.global.linking.attribute.select"/>
-         <ref name="tei_att.global.analytic.attribute.ana"/>
-         <ref name="tei_att.global.change.attribute.change"/>
-         <ref name="tei_att.global.responsibility.attribute.cert"/>
-         <ref name="tei_att.global.responsibility.attribute.resp"/>
-         <ref name="tei_att.global.source.attribute.source"/>
-         <attribute name="xml:lang">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(language) indicates the language of the element content using a tag generated according to <a xmlns="http://www.w3.org/1999/xhtml"
-                  href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</a>.</a:documentation>
-            <choice>
-               <value>ar</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic) Arabic of any variety or period</a:documentation>
-               <value>ar-Syrc</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni) Arabic Garshuni in unvocalized or undetermined Syriac script</a:documentation>
-               <value>ar-Syre</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni—Estrangela) Arabic Garshuni in Estrangela Syriac script</a:documentation>
-               <value>ar-Syrj</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni—West Syriac) Arabic Garshuni in vocalized West Syriac script</a:documentation>
-               <value>ar-Syrn</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni—East Syriac) Arabic Garshuni in vocalized East Syriac script</a:documentation>
-               <value>cop</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Coptic) Coptic of any variety or period</a:documentation>
-               <value>cu</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Slavonic—Old Church) Old Church Slavonic</a:documentation>
-               <value>de</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(German) German of any variety or period</a:documentation>
-               <value>de-x-baumstrk</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(German—Baumstark Romanization) Names or terms Romanized into German according to the standards adopted by Anton Baumstark's Geschichte der syrischen Literatur.</a:documentation>
-               <value>fr-x-zanetti</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French—Zanetti) Names or terms Romanized into French according to the standards adopted by Ugo Zanetti.</a:documentation>
-               <value>el</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Greek—Modern) Modern Greek after A.D. 1453</a:documentation>
-               <value>en</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English) English of any variety or period</a:documentation>
-               <value>en-x-gedsh</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English—GEDSH Romanization) Names or terms Romanized into English according to the standards adopted by the Gorgias Encyclopedic Dictionary of the Syriac Heritage</a:documentation>
-               <value>en-x-lah</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English—LAH Romanization) Names or terms Romanized into English according to the standards adopted by the Late Antique Historiography project.</a:documentation>
-               <value>en-x-srp1</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English—Syriaca.org Alternate Romanization) Names or terms Romanized into English by Syriaca.org using alternate methods for indexing purposes.</a:documentation>
-               <value>es</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Spanish) Spanish</a:documentation>
-               <value>fr</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French) French of any variety or period</a:documentation>
-               <value>fr-x-bhs</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French—BHS Romanization) Names or terms Romanized into French according to the standards adopted by the Bibliotheca Hagiographica Syriaca</a:documentation>
-               <value>fr-x-fiey</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French—Fiey Romanization) Names or terms Romanized into French according to the standards adopted by Fiey, Saints Syriaques</a:documentation>
-               <value>gez</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Ge'ez) Ge'ez</a:documentation>
-               <value>grc</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Greek—Ancient) Ancient Greek to A.D. 1453</a:documentation>
-               <value>hy</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Armenian) Classical or Modern Armenian</a:documentation>
-               <value>it</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Italian) Italian</a:documentation>
-               <value>ka</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Georgian) Classical or Modern Georgian</a:documentation>
-               <value>la</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Latin) Latin of any variety or period</a:documentation>
-               <value>mal</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam) Malayalam of any variety or period</a:documentation>
-               <value>mal-Syrc</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni) Malayalam Garshuni in unvocalized or undetermined Syriac script</a:documentation>
-               <value>mal-Syre</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni—Estrangela) Malayalam Garshuni in Estrangela Syriac script</a:documentation>
-               <value>mal-Syrj</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni—West Syriac) Malayalam Garshuni in vocalized West Syriac script</a:documentation>
-               <value>mal-Syrn</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni—East Syriac) Malayalam Garshuni in vocalized East Syriac script</a:documentation>
-               <value>nl</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Dutch) Dutch</a:documentation>
-               <value>pt</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Portuguese) Portuguese</a:documentation>
-               <value>ru</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Russian) Russian</a:documentation>
-               <value>syr</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac) Syriac of any variety or period</a:documentation>
-               <value>syr-Syre</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—Estrangela script) Syriac in Estrangela script</a:documentation>
-               <value>syr-Syrj</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—West) Syriac in vocalized West Syriac script</a:documentation>
-               <value>syr-Syrn</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—East) Syriac in vocalized East Syriac script</a:documentation>
-               <value>syr-x-syrm</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—Melkite script) Syriac in Melkite script. Note: This is not an ISO code but a private use code for Melkite employed by Syriaca.org until an ISO code is created</a:documentation>
-               <value>sog</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Sogdian) Sogdian</a:documentation>
-               <value>tr</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Turkish) Turkish</a:documentation>
-            </choice>
-         </attribute>
          <empty/>
       </element>
    </define>
@@ -2309,19 +2018,6 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
             <text/>
          </interleave>
          <ref name="tei_att.global.attribute.xmllang"/>
-         <ref name="tei_att.global.rendition.attribute.rend"/>
-         <ref name="tei_att.global.linking.attribute.corresp"/>
-         <ref name="tei_att.global.linking.attribute.synch"/>
-         <ref name="tei_att.global.linking.attribute.sameAs"/>
-         <ref name="tei_att.global.linking.attribute.copyOf"/>
-         <ref name="tei_att.global.linking.attribute.next"/>
-         <ref name="tei_att.global.linking.attribute.prev"/>
-         <ref name="tei_att.global.linking.attribute.exclude"/>
-         <ref name="tei_att.global.linking.attribute.select"/>
-         <ref name="tei_att.global.analytic.attribute.ana"/>
-         <ref name="tei_att.global.change.attribute.change"/>
-         <ref name="tei_att.global.responsibility.attribute.cert"/>
-         <ref name="tei_att.global.responsibility.attribute.resp"/>
          <ref name="tei_att.typed.attributes"/>
          <attribute name="source">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the source from which some aspect of this element is drawn.</a:documentation>
@@ -2393,19 +2089,6 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
         type="deprecationInfo"&gt;.</sch:assert>
             </sch:rule>
          </pattern>
-         <ref name="tei_att.global.attribute.n"/>
-         <ref name="tei_att.global.rendition.attribute.rend"/>
-         <ref name="tei_att.global.linking.attribute.corresp"/>
-         <ref name="tei_att.global.linking.attribute.synch"/>
-         <ref name="tei_att.global.linking.attribute.sameAs"/>
-         <ref name="tei_att.global.linking.attribute.copyOf"/>
-         <ref name="tei_att.global.linking.attribute.next"/>
-         <ref name="tei_att.global.linking.attribute.prev"/>
-         <ref name="tei_att.global.linking.attribute.exclude"/>
-         <ref name="tei_att.global.linking.attribute.select"/>
-         <ref name="tei_att.global.analytic.attribute.ana"/>
-         <ref name="tei_att.global.change.attribute.change"/>
-         <ref name="tei_att.global.responsibility.attribute.cert"/>
          <ref name="tei_att.global.responsibility.attribute.resp"/>
          <ref name="tei_att.global.source.attribute.source"/>
          <optional>
@@ -2432,86 +2115,11 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(language) indicates the language of the element content using a tag generated according to <a xmlns="http://www.w3.org/1999/xhtml"
                      href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</a>.</a:documentation>
                <choice>
-                  <value>ar</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic) Arabic of any variety or period</a:documentation>
-                  <value>ar-Syrc</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni) Arabic Garshuni in unvocalized or undetermined Syriac script</a:documentation>
-                  <value>ar-Syre</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni—Estrangela) Arabic Garshuni in Estrangela Syriac script</a:documentation>
-                  <value>ar-Syrj</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni—West Syriac) Arabic Garshuni in vocalized West Syriac script</a:documentation>
-                  <value>ar-Syrn</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni—East Syriac) Arabic Garshuni in vocalized East Syriac script</a:documentation>
-                  <value>cop</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Coptic) Coptic of any variety or period</a:documentation>
-                  <value>cu</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Slavonic—Old Church) Old Church Slavonic</a:documentation>
-                  <value>de</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(German) German of any variety or period</a:documentation>
-                  <value>de-x-baumstrk</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(German—Baumstark Romanization) Names or terms Romanized into German according to the standards adopted by Anton Baumstark's Geschichte der syrischen Literatur.</a:documentation>
-                  <value>fr-x-zanetti</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French—Zanetti) Names or terms Romanized into French according to the standards adopted by Ugo Zanetti.</a:documentation>
-                  <value>el</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Greek—Modern) Modern Greek after A.D. 1453</a:documentation>
-                  <value>en</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English) English of any variety or period</a:documentation>
-                  <value>en-x-gedsh</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English—GEDSH Romanization) Names or terms Romanized into English according to the standards adopted by the Gorgias Encyclopedic Dictionary of the Syriac Heritage</a:documentation>
-                  <value>en-x-lah</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English—LAH Romanization) Names or terms Romanized into English according to the standards adopted by the Late Antique Historiography project.</a:documentation>
-                  <value>en-x-srp1</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English—Syriaca.org Alternate Romanization) Names or terms Romanized into English by Syriaca.org using alternate methods for indexing purposes.</a:documentation>
-                  <value>es</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Spanish) Spanish</a:documentation>
-                  <value>fr</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French) French of any variety or period</a:documentation>
-                  <value>fr-x-bhs</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French—BHS Romanization) Names or terms Romanized into French according to the standards adopted by the Bibliotheca Hagiographica Syriaca</a:documentation>
-                  <value>fr-x-fiey</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French—Fiey Romanization) Names or terms Romanized into French according to the standards adopted by Fiey, Saints Syriaques</a:documentation>
-                  <value>gez</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Ge'ez) Ge'ez</a:documentation>
-                  <value>grc</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Greek—Ancient) Ancient Greek to A.D. 1453</a:documentation>
-                  <value>hy</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Armenian) Classical or Modern Armenian</a:documentation>
-                  <value>it</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Italian) Italian</a:documentation>
-                  <value>ka</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Georgian) Classical or Modern Georgian</a:documentation>
-                  <value>la</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Latin) Latin of any variety or period</a:documentation>
-                  <value>mal</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam) Malayalam of any variety or period</a:documentation>
-                  <value>mal-Syrc</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni) Malayalam Garshuni in unvocalized or undetermined Syriac script</a:documentation>
-                  <value>mal-Syre</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni—Estrangela) Malayalam Garshuni in Estrangela Syriac script</a:documentation>
-                  <value>mal-Syrj</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni—West Syriac) Malayalam Garshuni in vocalized West Syriac script</a:documentation>
-                  <value>mal-Syrn</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni—East Syriac) Malayalam Garshuni in vocalized East Syriac script</a:documentation>
-                  <value>nl</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Dutch) Dutch</a:documentation>
-                  <value>pt</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Portuguese) Portuguese</a:documentation>
-                  <value>ru</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Russian) Russian</a:documentation>
-                  <value>syr</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac) Syriac of any variety or period</a:documentation>
-                  <value>syr-Syre</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—Estrangela script) Syriac in Estrangela script</a:documentation>
-                  <value>syr-Syrj</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—West) Syriac in vocalized West Syriac script</a:documentation>
-                  <value>syr-Syrn</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—East) Syriac in vocalized East Syriac script</a:documentation>
-                  <value>syr-x-syrm</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—Melkite script) Syriac in Melkite script. Note: This is not an ISO code but a private use code for Melkite employed by Syriaca.org until an ISO code is created</a:documentation>
-                  <value>sog</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Sogdian) Sogdian</a:documentation>
-                  <value>tr</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Turkish) Turkish</a:documentation>
+                  <data type="language"/>
+                  <choice>
+                     <value/>
+                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                  </choice>
                </choice>
             </attribute>
          </optional>
@@ -2540,10 +2148,15 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
          </pattern>
          <optional>
             <attribute name="type">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">characterizes the element in some sense, using any convenient classification scheme or typology.
+Suggested values include: 1] deprecationInfo (deprecation information)</a:documentation>
                <choice>
-                  <value>abstract</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+                  <value>deprecationInfo</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(deprecation
+          information) This element describes why or how its parent element is being deprecated, typically including recommendations for alternate encoding.</a:documentation>
+                  <data type="token">
+                     <param name="pattern">[^\p{C}\p{Z}]+</param>
+                  </data>
                </choice>
             </attribute>
          </optional>
@@ -2554,30 +2167,27 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
       <element name="sic">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Latin for thus or so) contains text reproduced although apparently incorrect or inaccurate. [3.5.1. Apparent Errors]</a:documentation>
          <ref name="tei_macro.paraContent"/>
-         <ref name="tei_att.global.attributes"/>
-         <empty/>
       </element>
    </define>
    <define name="tei_corr">
       <element name="corr">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(correction) contains the correct form of a passage apparently erroneous in the copy text. [3.5.1. Apparent Errors]</a:documentation>
          <ref name="tei_macro.paraContent"/>
-         <ref name="tei_att.global.attributes"/>
-         <ref name="tei_att.typed.attributes"/>
-         <empty/>
       </element>
    </define>
    <define name="tei_choice">
       <element name="choice">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(choice) groups a number of alternative encodings for the same point in a text. [3.5. Simple Editorial Changes]</a:documentation>
-         <oneOrMore>
-            <choice>
-               <ref name="tei_model.choicePart"/>
-               <ref name="tei_choice"/>
-            </choice>
-         </oneOrMore>
-         <ref name="tei_att.global.attributes"/>
-         <empty/>
+         <choice>
+            <interleave>
+               <ref name="tei_orig"/>
+               <ref name="tei_reg"/>
+            </interleave>
+            <interleave>
+               <ref name="tei_sic"/>
+               <ref name="tei_corr"/>
+            </interleave>
+         </choice>
       </element>
    </define>
    <define name="tei_reg">
@@ -2585,9 +2195,6 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(regularization) contains a reading which has been regularized or normalized in some sense. [3.5.2. Regularization and
 Normalization 12. Critical Apparatus]</a:documentation>
          <ref name="tei_macro.paraContent"/>
-         <ref name="tei_att.global.attributes"/>
-         <ref name="tei_att.typed.attributes"/>
-         <empty/>
       </element>
    </define>
    <define name="tei_orig">
@@ -2595,8 +2202,6 @@ Normalization 12. Critical Apparatus]</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(original form) contains a reading which is marked as following the original, rather than being normalized or corrected. [3.5.2. Regularization and
 Normalization 12. Critical Apparatus]</a:documentation>
          <ref name="tei_macro.paraContent"/>
-         <ref name="tei_att.global.attributes"/>
-         <empty/>
       </element>
    </define>
    <define name="tei_name">
@@ -2631,10 +2236,7 @@ Normalization 12. Critical Apparatus]</a:documentation>
                   inside &lt;teiHeader&gt;.</sch:assert>
             </sch:rule>
          </pattern>
-         <ref name="tei_att.global.attributes"/>
          <ref name="tei_att.personal.attributes"/>
-         <ref name="tei_att.datable.attributes"/>
-         <ref name="tei_att.typed.attributes"/>
          <empty/>
       </element>
    </define>
@@ -2643,19 +2245,6 @@ Normalization 12. Critical Apparatus]</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(date) contains a date in any format. [3.6.4. Dates and Times 2.2.4. Publication, Distribution, Licensing, etc. 2.6. The Revision Description 3.12.2.4. Imprint, Size of a Document, and Reprint Information 15.2.3. The Setting Description 13.4. Dates]</a:documentation>
          <text/>
          <ref name="tei_att.global.attribute.xmllang"/>
-         <ref name="tei_att.global.rendition.attribute.rend"/>
-         <ref name="tei_att.global.linking.attribute.corresp"/>
-         <ref name="tei_att.global.linking.attribute.synch"/>
-         <ref name="tei_att.global.linking.attribute.sameAs"/>
-         <ref name="tei_att.global.linking.attribute.copyOf"/>
-         <ref name="tei_att.global.linking.attribute.next"/>
-         <ref name="tei_att.global.linking.attribute.prev"/>
-         <ref name="tei_att.global.linking.attribute.exclude"/>
-         <ref name="tei_att.global.linking.attribute.select"/>
-         <ref name="tei_att.global.analytic.attribute.ana"/>
-         <ref name="tei_att.global.change.attribute.change"/>
-         <ref name="tei_att.global.responsibility.attribute.cert"/>
-         <ref name="tei_att.global.responsibility.attribute.resp"/>
          <ref name="tei_att.global.source.attribute.source"/>
          <ref name="tei_att.datable.attribute.srophecomputed-start"/>
          <ref name="tei_att.datable.attribute.srophecomputed-end"/>
@@ -2823,22 +2412,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
          </pattern>
          <ref name="tei_att.global.attribute.xmlid"/>
          <ref name="tei_att.global.attribute.xmllang"/>
-         <ref name="tei_att.global.rendition.attribute.rend"/>
-         <ref name="tei_att.global.linking.attribute.corresp"/>
-         <ref name="tei_att.global.linking.attribute.synch"/>
-         <ref name="tei_att.global.linking.attribute.sameAs"/>
-         <ref name="tei_att.global.linking.attribute.copyOf"/>
-         <ref name="tei_att.global.linking.attribute.next"/>
-         <ref name="tei_att.global.linking.attribute.prev"/>
-         <ref name="tei_att.global.linking.attribute.exclude"/>
-         <ref name="tei_att.global.linking.attribute.select"/>
-         <ref name="tei_att.global.analytic.attribute.ana"/>
-         <ref name="tei_att.global.change.attribute.change"/>
-         <ref name="tei_att.global.responsibility.attribute.cert"/>
-         <ref name="tei_att.global.responsibility.attribute.resp"/>
-         <ref name="tei_att.global.source.attribute.source"/>
-         <ref name="tei_att.pointing.attribute.target"/>
-         <ref name="tei_att.anchoring.attributes"/>
+         <ref name="tei_att.pointing.attributes"/>
          <attribute name="type">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Describes the function of the note. This attribute is recommended and determines how the note is displayed on the page.</a:documentation>
             <choice>
@@ -3114,10 +2688,10 @@ attributes @target and @cRef may be supplied on <name/>.</report>
                 </sch:assert>
             </sch:rule>
          </pattern>
-         <ref name="tei_att.global.attributes"/>
+         <ref name="tei_att.global.attribute.xmllang"/>
+         <ref name="tei_att.global.rendition.attribute.rend"/>
          <ref name="tei_att.typed.attribute.subtype"/>
          <ref name="tei_att.canonical.attributes"/>
-         <ref name="tei_att.datable.attributes"/>
          <optional>
             <attribute name="type">
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Describes the function of the title. This attribute is optional. Certain non-blank values (such as "final-rubric") may cause the title to be moved to a different section of the page.
@@ -3161,7 +2735,7 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
       <element name="citedRange">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(cited range) defines the range of cited content, often represented by pages or other units [3.12.2.5. Scopes and Ranges in Bibliographic Citations]</a:documentation>
          <text/>
-         <ref name="tei_att.pointing.attribute.target"/>
+         <ref name="tei_att.pointing.attributes"/>
          <ref name="tei_att.citing.attribute.from"/>
          <ref name="tei_att.citing.attribute.to"/>
          <attribute name="unit">
@@ -3239,26 +2813,10 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
                   @type="syriaca:Manuscript".</sch:assert>
             </sch:rule>
          </pattern>
-         <ref name="tei_att.global.attribute.n"/>
-         <ref name="tei_att.global.attribute.xmllang"/>
-         <ref name="tei_att.global.rendition.attribute.rend"/>
-         <ref name="tei_att.global.linking.attribute.corresp"/>
-         <ref name="tei_att.global.linking.attribute.synch"/>
-         <ref name="tei_att.global.linking.attribute.sameAs"/>
-         <ref name="tei_att.global.linking.attribute.copyOf"/>
-         <ref name="tei_att.global.linking.attribute.next"/>
-         <ref name="tei_att.global.linking.attribute.prev"/>
-         <ref name="tei_att.global.linking.attribute.exclude"/>
-         <ref name="tei_att.global.linking.attribute.select"/>
-         <ref name="tei_att.global.analytic.attribute.ana"/>
-         <ref name="tei_att.global.change.attribute.change"/>
-         <ref name="tei_att.global.responsibility.attribute.cert"/>
-         <ref name="tei_att.global.responsibility.attribute.resp"/>
-         <ref name="tei_att.global.source.attribute.source"/>
+         <ref name="tei_att.global.linking.attribute.previous"/>
          <optional>
             <attribute name="xml:id">
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(identifier) provides a unique identifier for the element bearing the attribute.</a:documentation>
-               <data type="ID"/>
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
@@ -3305,16 +2863,17 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
                 </sch:assert>
             </sch:rule>
          </pattern>
-         <ref name="tei_att.global.attributes"/>
-         <empty/>
       </element>
    </define>
    <define name="tei_precision">
       <element name="precision">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the numerical accuracy or precision associated with some aspect of the text markup. [21.2. Indications of Precision]</a:documentation>
          <empty/>
-         <ref name="tei_att.global.attributes"/>
-         <ref name="tei_att.datable.attributes"/>
+         <ref name="tei_att.datable.attribute.srophecomputed-start"/>
+         <ref name="tei_att.datable.attribute.srophecomputed-end"/>
+         <ref name="tei_att.datable.w3c.attribute.when"/>
+         <ref name="tei_att.datable.w3c.attribute.notBefore"/>
+         <ref name="tei_att.datable.w3c.attribute.notAfter"/>
          <attribute name="match">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">supplies an XPath selection pattern using the syntax defined in  which identifies a set of nodes, selected within the context identified by the <code xmlns="http://www.w3.org/1999/xhtml">@target</code> attribute if this is supplied, or within the context of the parent element if it is not.</a:documentation>
             <text/>
@@ -3441,9 +3000,6 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
                 </sch:assert>
             </sch:rule>
          </pattern>
-         <ref name="tei_att.global.attributes"/>
-         <ref name="tei_att.canonical.attributes"/>
-         <empty/>
       </element>
    </define>
    <define name="tei_idno">
@@ -3484,7 +3040,7 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
                     </sch:report>
             </sch:rule>
          </pattern>
-         <ref name="tei_att.global.source.attributes"/>
+         <ref name="tei_att.global.source.attribute.source"/>
          <optional>
             <attribute name="change">
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">points to one or more <code xmlns="http://www.w3.org/1999/xhtml">&lt;change&gt;</code> elements documenting a state or revision campaign to which the element bearing this attribute and its children have been assigned by the encoder.</a:documentation>
@@ -3736,7 +3292,11 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
    <define name="tei_langUsage">
       <element name="langUsage">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(language usage) describes the languages, sublanguages, registers, dialects, etc. represented within a text. [2.4.2. Language Usage 2.4. The Profile Description 15.3.2. Declarable Elements]</a:documentation>
-         <ref name="tei_p"/>
+         <choice>
+            <oneOrMore>
+               <ref name="tei_model.pLike"/>
+            </oneOrMore>
+         </choice>
          <ref name="tei_att.global.attributes"/>
          <empty/>
       </element>
@@ -3768,55 +3328,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
       <element name="change">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(change) documents a change or set of changes made during the production of a source document, or during the revision of an electronic file. [2.6. The Revision Description 2.4.1. Creation 11.7. Identifying Changes and Revisions]</a:documentation>
          <ref name="tei_macro.specialPara"/>
-         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-change-who-on-change-constraint-rule-47">
-            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:srophe="https://srophe.app"
-                      context="//tei:revisionDesc//tei:change/@who">
-               <sch:let name="edsDoc"
-                        value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/editors.xml')"/>
-               <sch:let name="eds"
-                        value="$edsDoc//tei:text/tei:body/tei:listPerson/tei:person/@xml:id"/>
-               <sch:let name="refValues"
-                        value="for $i in $eds return concat('http://syriaca.org/documentation/editors.xml#', $i)"/>
-               <sch:assert test="                   every $i in .                   satisfies $i = $refValues">
-                  Acceptable values for the @who attribute on a &lt;change&gt; element inside the &lt;revisionDesc&gt; include: 
-                  <sch:value-of select="string-join($refValues, ' | ')"/>.
-                </sch:assert>
-            </sch:rule>
-         </pattern>
-         <ref name="tei_att.datable.attribute.srophecomputed-start"/>
-         <ref name="tei_att.datable.attribute.srophecomputed-end"/>
-         <ref name="tei_att.datable.attribute.calendar"/>
-         <ref name="tei_att.datable.w3c.attribute.notBefore"/>
-         <ref name="tei_att.datable.w3c.attribute.notAfter"/>
-         <ref name="tei_att.datable.w3c.attribute.from"/>
-         <ref name="tei_att.datable.w3c.attribute.to"/>
-         <ref name="tei_att.datable.custom.attribute.when-custom"/>
-         <ref name="tei_att.datable.custom.attribute.notBefore-custom"/>
-         <ref name="tei_att.datable.custom.attribute.notAfter-custom"/>
-         <ref name="tei_att.datable.custom.attribute.from-custom"/>
-         <ref name="tei_att.datable.custom.attribute.to-custom"/>
-         <ref name="tei_att.datable.custom.attribute.datingPoint"/>
-         <ref name="tei_att.datable.custom.attribute.datingMethod"/>
          <ref name="tei_att.docStatus.attributes"/>
-         <ref name="tei_att.global.attribute.xmlid"/>
-         <ref name="tei_att.global.attribute.xmllang"/>
-         <ref name="tei_att.global.rendition.attribute.rend"/>
-         <ref name="tei_att.global.linking.attribute.corresp"/>
-         <ref name="tei_att.global.linking.attribute.synch"/>
-         <ref name="tei_att.global.linking.attribute.sameAs"/>
-         <ref name="tei_att.global.linking.attribute.copyOf"/>
-         <ref name="tei_att.global.linking.attribute.next"/>
-         <ref name="tei_att.global.linking.attribute.prev"/>
-         <ref name="tei_att.global.linking.attribute.exclude"/>
-         <ref name="tei_att.global.linking.attribute.select"/>
-         <ref name="tei_att.global.analytic.attribute.ana"/>
-         <ref name="tei_att.global.change.attribute.change"/>
-         <ref name="tei_att.global.responsibility.attribute.cert"/>
-         <ref name="tei_att.global.responsibility.attribute.resp"/>
-         <ref name="tei_att.global.source.attribute.source"/>
          <ref name="tei_att.typed.attributes"/>
          <attribute name="who">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the person, or group of people, to whom the element content is ascribed.</a:documentation>
@@ -3828,8 +3340,31 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                </oneOrMore>
             </list>
          </attribute>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="syriacaPersons-change-who-who-on-change-constraint-rule-47">
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="//tei:revisionDesc//tei:change/@who">
+               <sch:let name="edsDoc"
+                        value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/editors.xml')"/>
+               <sch:let name="eds"
+                        value="$edsDoc//tei:text/tei:body/tei:listPerson/tei:person/@xml:id"/>
+               <sch:let name="refValues"
+                        value="for $i in $eds return concat('http://syriaca.org/documentation/editors.xml#', $i)"/>
+               <sch:assert test="                   every $i in .                   satisfies $i = $refValues">
+                      Acceptable values for the @who attribute on a &lt;change&gt; element inside the &lt;revisionDesc&gt; include: 
+                      <sch:value-of select="string-join($refValues, ' | ')"/>.
+                    </sch:assert>
+            </sch:rule>
+         </pattern>
+         <optional>
+            <attribute name="xml:id">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            </attribute>
+         </optional>
          <attribute name="when">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">supplies the value of the date or time in a standard form, e.g. yyyy-mm-dd.</a:documentation>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
             <choice>
                <data type="date"/>
                <data type="gYear"/>
@@ -3841,36 +3376,19 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                <data type="dateTime"/>
             </choice>
          </attribute>
-         <optional>
-            <attribute name="n">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(number) gives a number (or other label) for an element, which is not necessarily unique within the document.</a:documentation>
-               <data type="string"/>
-            </attribute>
-         </optional>
-         <optional>
-            <attribute name="target">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(target) points to one or more elements that belong to this change.</a:documentation>
-               <list>
-                  <oneOrMore>
-                     <data type="anyURI">
-                        <param name="pattern">\S+</param>
-                     </data>
-                  </oneOrMore>
-               </list>
-            </attribute>
-         </optional>
          <empty/>
       </element>
    </define>
    <define name="tei_att.global.linking.attributes">
       <ref name="tei_att.global.linking.attribute.corresp"/>
-      <ref name="tei_att.global.linking.attribute.synch"/>
-      <ref name="tei_att.global.linking.attribute.sameAs"/>
-      <ref name="tei_att.global.linking.attribute.copyOf"/>
-      <ref name="tei_att.global.linking.attribute.next"/>
-      <ref name="tei_att.global.linking.attribute.prev"/>
-      <ref name="tei_att.global.linking.attribute.exclude"/>
-      <ref name="tei_att.global.linking.attribute.select"/>
+   </define>
+   <define name="tei_att.global.linking.attribute.previous">
+      <optional>
+         <attribute name="previous">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <text/>
+         </attribute>
+      </optional>
    </define>
    <define name="tei_att.global.linking.attribute.corresp">
       <optional>
@@ -3886,109 +3404,12 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
          </attribute>
       </optional>
    </define>
-   <define name="tei_att.global.linking.attribute.synch">
-      <optional>
-         <attribute name="synch">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(synchronous) points to elements that are synchronous with the current element.</a:documentation>
-            <list>
-               <oneOrMore>
-                  <data type="anyURI">
-                     <param name="pattern">\S+</param>
-                  </data>
-               </oneOrMore>
-            </list>
-         </attribute>
-      </optional>
-   </define>
-   <define name="tei_att.global.linking.attribute.sameAs">
-      <optional>
-         <attribute name="sameAs">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">points to an element that is the same as the current element.</a:documentation>
-            <data type="anyURI">
-               <param name="pattern">\S+</param>
-            </data>
-         </attribute>
-      </optional>
-   </define>
-   <define name="tei_att.global.linking.attribute.copyOf">
-      <optional>
-         <attribute name="copyOf">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">points to an element of which the current element is a copy.</a:documentation>
-            <data type="anyURI">
-               <param name="pattern">\S+</param>
-            </data>
-         </attribute>
-      </optional>
-   </define>
-   <define name="tei_att.global.linking.attribute.next">
-      <optional>
-         <attribute name="next">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">points to the next element of a virtual aggregate of which the current element is part.</a:documentation>
-            <data type="anyURI">
-               <param name="pattern">\S+</param>
-            </data>
-         </attribute>
-      </optional>
-   </define>
-   <define name="tei_att.global.linking.attribute.prev">
-      <optional>
-         <attribute name="prev">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(previous) points to the previous element of a virtual aggregate of which the current element is part.</a:documentation>
-            <data type="anyURI">
-               <param name="pattern">\S+</param>
-            </data>
-         </attribute>
-      </optional>
-   </define>
-   <define name="tei_att.global.linking.attribute.exclude">
-      <optional>
-         <attribute name="exclude">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">points to elements that are in exclusive alternation with the current element.</a:documentation>
-            <list>
-               <oneOrMore>
-                  <data type="anyURI">
-                     <param name="pattern">\S+</param>
-                  </data>
-               </oneOrMore>
-            </list>
-         </attribute>
-      </optional>
-   </define>
-   <define name="tei_att.global.linking.attribute.select">
-      <optional>
-         <attribute name="select">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">selects one or more alternants; if one alternant is selected, the ambiguity or uncertainty is marked as resolved. If more than one alternant is selected, the degree of ambiguity or uncertainty is marked as reduced by the number of alternants not selected.</a:documentation>
-            <list>
-               <oneOrMore>
-                  <data type="anyURI">
-                     <param name="pattern">\S+</param>
-                  </data>
-               </oneOrMore>
-            </list>
-         </attribute>
-      </optional>
-   </define>
    <define name="tei_link">
       <element name="link">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(link) defines an association or hypertextual link among elements or passages, of some type not more precisely specifiable by other elements. [16.1. Links]</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-link-target-on-link-constraint-rule-48">
-            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:srophe="https://srophe.app"
-                      xmlns:xi="http://www.w3.org/2001/XInclude"
-                      context="//tei:link/@target">
-               <sch:let name="allIDs" value="//@xml:id"/>
-               <sch:let name="targetVals" value="for $i in $allIDs return concat('#', $i)"/>
-               <sch:assert test="                   every $i in (tokenize(., ' '))                   satisfies $i = $targetVals">A &lt;link&gt; element takes a @target attribute with two or more of the
-                  following values: <sch:value-of select="string-join($targetVals, ' | ')"/>.
-                </sch:assert>
-            </sch:rule>
-         </pattern>
-         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-link-linkTargets3-constraint-assert-39">
+                  id="syriacaPersons-link-linkTargets3-constraint-assert-38">
             <rule context="tei:link">
                <sch:assert xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -3999,9 +3420,33 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                </sch:assert>
             </rule>
          </pattern>
-         <ref name="tei_att.global.change.attributes"/>
-         <ref name="tei_att.global.responsibility.attributes"/>
-         <ref name="tei_att.pointing.attribute.target"/>
+         <optional>
+            <attribute name="target">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the destination of the reference by supplying one or more URI References</a:documentation>
+               <list>
+                  <oneOrMore>
+                     <data type="anyURI">
+                        <param name="pattern">\S+</param>
+                     </data>
+                  </oneOrMore>
+               </list>
+            </attribute>
+         </optional>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="syriacaPersons-link-target-target-on-link-constraint-rule-48">
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      xmlns:xi="http://www.w3.org/2001/XInclude"
+                      context="//tei:link/@target">
+               <sch:let name="allIDs" value="//@xml:id"/>
+               <sch:let name="targetVals" value="for $i in $allIDs return concat('#', $i)"/>
+               <sch:assert test="                   every $i in (tokenize(., ' '))                   satisfies $i = $targetVals">A &lt;link&gt; element takes a @target attribute with two or more of the
+                      following values: <sch:value-of select="string-join($targetVals, ' | ')"/>.
+                    </sch:assert>
+            </sch:rule>
+         </pattern>
          <empty/>
       </element>
    </define>
@@ -4180,19 +3625,10 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
             </zeroOrMore>
             <text/>
          </interleave>
-         <optional>
-            <attribute name="xml:id">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-            </attribute>
-         </optional>
-         <optional>
-            <attribute name="ref">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-               <data type="anyURI">
-                  <param name="pattern">\S+</param>
-               </data>
-            </attribute>
-         </optional>
+         <ref name="tei_att.global.attributes"/>
+         <ref name="tei_att.datable.attributes"/>
+         <ref name="tei_att.personal.attributes"/>
+         <ref name="tei_att.typed.attributes"/>
          <empty/>
       </element>
    </define>
@@ -4222,23 +3658,11 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
          </interleave>
          <ref name="tei_att.global.attribute.xmlid"/>
          <ref name="tei_att.global.attribute.xmllang"/>
-         <ref name="tei_att.global.rendition.attribute.rend"/>
          <ref name="tei_att.global.linking.attribute.corresp"/>
-         <ref name="tei_att.global.linking.attribute.synch"/>
-         <ref name="tei_att.global.linking.attribute.sameAs"/>
-         <ref name="tei_att.global.linking.attribute.copyOf"/>
-         <ref name="tei_att.global.linking.attribute.next"/>
-         <ref name="tei_att.global.linking.attribute.prev"/>
-         <ref name="tei_att.global.linking.attribute.exclude"/>
-         <ref name="tei_att.global.linking.attribute.select"/>
-         <ref name="tei_att.global.analytic.attribute.ana"/>
          <ref name="tei_att.global.change.attribute.change"/>
-         <ref name="tei_att.global.responsibility.attribute.cert"/>
          <ref name="tei_att.global.responsibility.attribute.resp"/>
          <ref name="tei_att.global.source.attribute.source"/>
-         <ref name="tei_att.datable.attributes"/>
          <ref name="tei_att.personal.attributes"/>
-         <ref name="tei_att.typed.attributes"/>
          <empty/>
       </element>
    </define>
@@ -4294,23 +3718,11 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
             </zeroOrMore>
             <text/>
          </interleave>
-         <ref name="tei_att.canonical.attributes"/>
-         <optional>
-            <attribute name="resp">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-               <data type="anyURI">
-                  <param name="pattern">\S+</param>
-               </data>
-            </attribute>
-         </optional>
-         <optional>
-            <attribute name="source">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-               <data type="anyURI">
-                  <param name="pattern">\S+</param>
-               </data>
-            </attribute>
-         </optional>
+         <ref name="tei_att.global.attribute.xmlid"/>
+         <ref name="tei_att.global.attribute.xmllang"/>
+         <ref name="tei_att.global.responsibility.attribute.resp"/>
+         <ref name="tei_att.global.source.attribute.source"/>
+         <ref name="tei_att.personal.attributes"/>
          <empty/>
       </element>
    </define>
@@ -4325,6 +3737,21 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                <ref name="tei_placeName"/>
             </zeroOrMore>
          </group>
+         <ref name="tei_att.global.attributes"/>
+         <ref name="tei_att.datable.attributes"/>
+         <ref name="tei_att.dimensions.attributes"/>
+         <ref name="tei_att.naming.attributes"/>
+         <ref name="tei_att.typed.attribute.subtype"/>
+         <optional>
+            <attribute name="type">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">characterizes the element in some sense, using any convenient classification scheme or typology.
+Sample values include: 1] caesarean (caesarean section); 2] vaginal (vaginal delivery); 3] exNihilo (ex nihilo); 4] incorporated; 5] founded; 6] established</a:documentation>
+               <data type="token">
+                  <param name="pattern">[^\p{C}\p{Z}]+</param>
+               </data>
+            </attribute>
+         </optional>
+         <empty/>
       </element>
    </define>
    <define name="tei_death">
@@ -4338,6 +3765,21 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                <ref name="tei_placeName"/>
             </zeroOrMore>
          </group>
+         <ref name="tei_att.datable.attributes"/>
+         <ref name="tei_att.dimensions.attributes"/>
+         <ref name="tei_att.global.attributes"/>
+         <ref name="tei_att.naming.attributes"/>
+         <ref name="tei_att.typed.attribute.subtype"/>
+         <optional>
+            <attribute name="type">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">characterizes the element in some sense, using any convenient classification scheme or typology.
+Sample values include: 1] proclaimed; 2] assumed; 3] verified; 4] clinical; 5] brain; 6] natural; 7] unnatural; 8] fragmentation; 9] dissolution</a:documentation>
+               <data type="token">
+                  <param name="pattern">[^\p{C}\p{Z}]+</param>
+               </data>
+            </attribute>
+         </optional>
+         <empty/>
       </element>
    </define>
    <define name="tei_event">
@@ -4352,25 +3794,9 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                <ref name="tei_precision"/>
             </zeroOrMore>
          </interleave>
-         <ref name="tei_att.global.attribute.xmlid"/>
-         <ref name="tei_att.global.attribute.n"/>
          <ref name="tei_att.global.attribute.xmllang"/>
-         <ref name="tei_att.global.rendition.attribute.rend"/>
-         <ref name="tei_att.global.linking.attribute.corresp"/>
-         <ref name="tei_att.global.linking.attribute.synch"/>
-         <ref name="tei_att.global.linking.attribute.sameAs"/>
-         <ref name="tei_att.global.linking.attribute.copyOf"/>
-         <ref name="tei_att.global.linking.attribute.next"/>
-         <ref name="tei_att.global.linking.attribute.prev"/>
-         <ref name="tei_att.global.linking.attribute.exclude"/>
-         <ref name="tei_att.global.linking.attribute.select"/>
-         <ref name="tei_att.global.analytic.attribute.ana"/>
-         <ref name="tei_att.global.change.attribute.change"/>
-         <ref name="tei_att.global.responsibility.attribute.cert"/>
-         <ref name="tei_att.global.responsibility.attribute.resp"/>
          <ref name="tei_att.datable.attributes"/>
-         <ref name="tei_att.typed.attributes"/>
-         <ref name="tei_att.locatable.attributes"/>
+         <ref name="tei_att.typed.attribute.type"/>
          <attribute name="source">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The <code xmlns="http://www.w3.org/1999/xhtml">&lt;event&gt;</code> element requires a <code xmlns="http://www.w3.org/1999/xhtml">@source</code> attribute.</a:documentation>
             <list>
@@ -4412,22 +3838,9 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
             </optional>
             <text/>
          </interleave>
-         <ref name="tei_att.global.attribute.xmllang"/>
-         <ref name="tei_att.global.rendition.attribute.rend"/>
-         <ref name="tei_att.global.linking.attribute.corresp"/>
-         <ref name="tei_att.global.linking.attribute.synch"/>
-         <ref name="tei_att.global.linking.attribute.sameAs"/>
-         <ref name="tei_att.global.linking.attribute.copyOf"/>
-         <ref name="tei_att.global.linking.attribute.next"/>
-         <ref name="tei_att.global.linking.attribute.prev"/>
-         <ref name="tei_att.global.linking.attribute.exclude"/>
-         <ref name="tei_att.global.linking.attribute.select"/>
-         <ref name="tei_att.global.analytic.attribute.ana"/>
-         <ref name="tei_att.global.change.attribute.change"/>
-         <ref name="tei_att.global.responsibility.attribute.cert"/>
-         <ref name="tei_att.global.responsibility.attribute.resp"/>
-         <ref name="tei_att.global.source.attribute.source"/>
+         <ref name="tei_att.global.attributes"/>
          <ref name="tei_att.datable.attributes"/>
+         <ref name="tei_att.dimensions.attributes"/>
          <empty/>
       </element>
    </define>
@@ -4435,21 +3848,19 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
       <element name="gender">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(gender) specifies the gender identity of a person, persona, or character. [13.3.2.1. Personal Characteristics]</a:documentation>
          <text/>
-         <ref name="tei_att.global.source.attributes"/>
+         <ref name="tei_att.global.attributes"/>
+         <ref name="tei_att.datable.attributes"/>
+         <ref name="tei_att.typed.attributes"/>
          <optional>
-            <attribute name="ana">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-               <data type="anyURI">
-                  <param name="pattern">\S+</param>
-               </data>
-            </attribute>
-         </optional>
-         <optional>
-            <attribute name="resp">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-               <data type="anyURI">
-                  <param name="pattern">\S+</param>
-               </data>
+            <attribute name="value">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">supplies a coded value for gender identity</a:documentation>
+               <list>
+                  <oneOrMore>
+                     <data type="token">
+                        <param name="pattern">[^\p{C}\p{Z}]+</param>
+                     </data>
+                  </oneOrMore>
+               </list>
             </attribute>
          </optional>
          <empty/>
@@ -4467,9 +3878,9 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                <ref name="tei_listRelation"/>
             </optional>
          </interleave>
-         <ref name="tei_att.global.change.attributes"/>
-         <ref name="tei_att.global.responsibility.attributes"/>
+         <ref name="tei_att.global.attributes"/>
          <ref name="tei_att.typed.attributes"/>
+         <ref name="tei_att.sortable.attributes"/>
          <empty/>
       </element>
    </define>
@@ -4522,21 +3933,8 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                <ref name="tei_bibl"/>
             </oneOrMore>
          </group>
-         <ref name="tei_att.global.attribute.xmlid"/>
-         <ref name="tei_att.global.rendition.attribute.rend"/>
-         <ref name="tei_att.global.linking.attribute.corresp"/>
-         <ref name="tei_att.global.linking.attribute.synch"/>
-         <ref name="tei_att.global.linking.attribute.sameAs"/>
-         <ref name="tei_att.global.linking.attribute.copyOf"/>
-         <ref name="tei_att.global.linking.attribute.next"/>
-         <ref name="tei_att.global.linking.attribute.prev"/>
-         <ref name="tei_att.global.linking.attribute.exclude"/>
-         <ref name="tei_att.global.linking.attribute.select"/>
-         <ref name="tei_att.global.analytic.attribute.ana"/>
-         <ref name="tei_att.global.change.attribute.change"/>
-         <ref name="tei_att.global.responsibility.attribute.cert"/>
-         <ref name="tei_att.global.responsibility.attribute.resp"/>
-         <ref name="tei_att.global.source.attribute.source"/>
+         <ref name="tei_att.global.attributes"/>
+         <ref name="tei_att.sortable.attributes"/>
          <optional>
             <attribute name="role">
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies a primary role or classification for the person.</a:documentation>
@@ -4625,21 +4023,8 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                <ref name="tei_bibl"/>
             </oneOrMore>
          </group>
-         <ref name="tei_att.global.attribute.xmlid"/>
-         <ref name="tei_att.global.rendition.attribute.rend"/>
-         <ref name="tei_att.global.linking.attribute.corresp"/>
-         <ref name="tei_att.global.linking.attribute.synch"/>
-         <ref name="tei_att.global.linking.attribute.sameAs"/>
-         <ref name="tei_att.global.linking.attribute.copyOf"/>
-         <ref name="tei_att.global.linking.attribute.next"/>
-         <ref name="tei_att.global.linking.attribute.prev"/>
-         <ref name="tei_att.global.linking.attribute.exclude"/>
-         <ref name="tei_att.global.linking.attribute.select"/>
-         <ref name="tei_att.global.analytic.attribute.ana"/>
-         <ref name="tei_att.global.change.attribute.change"/>
-         <ref name="tei_att.global.responsibility.attribute.cert"/>
-         <ref name="tei_att.global.responsibility.attribute.resp"/>
-         <ref name="tei_att.global.source.attribute.source"/>
+         <ref name="tei_att.global.attributes"/>
+         <ref name="tei_att.sortable.attributes"/>
          <optional>
             <attribute name="role">
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the role of this group of participants in the interaction.</a:documentation>
@@ -4729,9 +4114,8 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                        test="@passive and not(@active)">the attribute 'passive' may be supplied only if the attribute 'active' is supplied</report>
             </rule>
          </pattern>
-         <ref name="tei_att.global.responsibility.attributes"/>
          <ref name="tei_att.typed.attributes"/>
-         <ref name="tei_att.global.source.attributes"/>
+         <ref name="tei_att.global.attributes"/>
          <ref name="tei_att.datable.attributes"/>
          <ref name="tei_att.canonical.attributes"/>
          <optional>
@@ -4792,11 +4176,11 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                <ref name="tei_precision"/>
             </zeroOrMore>
          </interleave>
-         <ref name="tei_att.global.attributes"/>
+         <ref name="tei_att.global.attribute.xmlid"/>
+         <ref name="tei_att.global.responsibility.attribute.resp"/>
+         <ref name="tei_att.global.source.attribute.source"/>
          <ref name="tei_att.datable.attributes"/>
          <ref name="tei_att.typed.attributes"/>
-         <ref name="tei_att.naming.attributes"/>
-         <ref name="tei_att.dimensions.attributes"/>
          <empty/>
       </element>
    </define>
