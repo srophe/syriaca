@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-09-06T17:06:23Z. .
+Schema generated from ODD source 2023-09-07T18:06:58Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -250,17 +250,6 @@ Sample values include: 1] all; 2] most; 3] range</a:documentation>
          </attribute>
       </optional>
    </define>
-   <define name="tei_att.cReferencing.attributes">
-      <ref name="tei_att.cReferencing.attribute.cRef"/>
-   </define>
-   <define name="tei_att.cReferencing.attribute.cRef">
-      <optional>
-         <attribute name="cRef">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(canonical reference) specifies the destination of the pointer by supplying a canonical reference expressed using the scheme defined in a <code xmlns="http://www.w3.org/1999/xhtml">&lt;refsDecl&gt;</code> element in the TEI header</a:documentation>
-            <data type="string"/>
-         </attribute>
-      </optional>
-   </define>
    <define name="tei_att.datable.w3c.attributes">
       <ref name="tei_att.datable.w3c.attribute.when"/>
       <ref name="tei_att.datable.w3c.attribute.notBefore"/>
@@ -488,22 +477,6 @@ Sample values include: 1] all; 2] most; 3] range</a:documentation>
             but this <sch:name/> element has no textual content.</sch:assert>
       </sch:rule>
    </pattern>
-   <define name="tei_att.docStatus.attributes">
-      <ref name="tei_att.docStatus.attribute.status"/>
-   </define>
-   <define name="tei_att.docStatus.attribute.status">
-      <optional>
-         <attribute xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"
-                    name="status"
-                    a:defaultValue="draft">
-            <a:documentation>describes the status of a document either currently or, when associated with a dated element, at the time indicated.
-Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] draft; 6] embargoed; 7] expired; 8] frozen; 9] galley; 10] proposed; 11] published; 12] recommendation; 13] submitted; 14] unfinished; 15] withdrawn</a:documentation>
-            <data type="token">
-               <param name="pattern">[^\p{C}\p{Z}]+</param>
-            </data>
-         </attribute>
-      </optional>
-   </define>
    <define name="tei_att.global.responsibility.attributes">
       <ref name="tei_att.global.responsibility.attribute.resp"/>
    </define>
@@ -605,29 +578,87 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(language) indicates the language of the element content using a tag generated according to <a xmlns="http://www.w3.org/1999/xhtml"
                   href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</a>.</a:documentation>
             <choice>
-               <data type="language"/>
-               <choice>
-                  <value/>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-               </choice>
+               <value>ar</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic) Arabic of any variety or period</a:documentation>
+               <value>ar-Syrc</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni) Arabic Garshuni in unvocalized or undetermined Syriac script</a:documentation>
+               <value>ar-Syre</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni—Estrangela) Arabic Garshuni in Estrangela Syriac script</a:documentation>
+               <value>ar-Syrj</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni—West Syriac) Arabic Garshuni in vocalized West Syriac script</a:documentation>
+               <value>ar-Syrn</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni—East Syriac) Arabic Garshuni in vocalized East Syriac script</a:documentation>
+               <value>cop</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Coptic) Coptic of any variety or period</a:documentation>
+               <value>cu</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Slavonic—Old Church) Old Church Slavonic</a:documentation>
+               <value>de</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(German) German of any variety or period</a:documentation>
+               <value>de-x-baumstrk</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(German—Baumstark Romanization) Names or terms Romanized into German according to the standards adopted by Anton Baumstark's Geschichte der syrischen Literatur.</a:documentation>
+               <value>fr-x-zanetti</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French—Zanetti) Names or terms Romanized into French according to the standards adopted by Ugo Zanetti.</a:documentation>
+               <value>el</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Greek—Modern) Modern Greek after A.D. 1453</a:documentation>
+               <value>en</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English) English of any variety or period</a:documentation>
+               <value>en-x-gedsh</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English—GEDSH Romanization) Names or terms Romanized into English according to the standards adopted by the Gorgias Encyclopedic Dictionary of the Syriac Heritage</a:documentation>
+               <value>en-x-lah</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English—LAH Romanization) Names or terms Romanized into English according to the standards adopted by the Late Antique Historiography project.</a:documentation>
+               <value>en-x-srp1</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English—Syriaca.org Alternate Romanization) Names or terms Romanized into English by Syriaca.org using alternate methods for indexing purposes.</a:documentation>
+               <value>es</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Spanish) Spanish</a:documentation>
+               <value>fr</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French) French of any variety or period</a:documentation>
+               <value>fr-x-bhs</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French—BHS Romanization) Names or terms Romanized into French according to the standards adopted by the Bibliotheca Hagiographica Syriaca</a:documentation>
+               <value>fr-x-fiey</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French—Fiey Romanization) Names or terms Romanized into French according to the standards adopted by Fiey, Saints Syriaques</a:documentation>
+               <value>gez</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Ge'ez) Ge'ez</a:documentation>
+               <value>grc</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Greek—Ancient) Ancient Greek to A.D. 1453</a:documentation>
+               <value>hy</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Armenian) Classical or Modern Armenian</a:documentation>
+               <value>it</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Italian) Italian</a:documentation>
+               <value>ka</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Georgian) Classical or Modern Georgian</a:documentation>
+               <value>la</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Latin) Latin of any variety or period</a:documentation>
+               <value>mal</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam) Malayalam of any variety or period</a:documentation>
+               <value>mal-Syrc</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni) Malayalam Garshuni in unvocalized or undetermined Syriac script</a:documentation>
+               <value>mal-Syre</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni—Estrangela) Malayalam Garshuni in Estrangela Syriac script</a:documentation>
+               <value>mal-Syrj</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni—West Syriac) Malayalam Garshuni in vocalized West Syriac script</a:documentation>
+               <value>mal-Syrn</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni—East Syriac) Malayalam Garshuni in vocalized East Syriac script</a:documentation>
+               <value>nl</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Dutch) Dutch</a:documentation>
+               <value>pt</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Portuguese) Portuguese</a:documentation>
+               <value>ru</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Russian) Russian</a:documentation>
+               <value>syr</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac) Syriac of any variety or period</a:documentation>
+               <value>syr-Syre</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—Estrangela script) Syriac in Estrangela script</a:documentation>
+               <value>syr-Syrj</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—West) Syriac in vocalized West Syriac script</a:documentation>
+               <value>syr-Syrn</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—East) Syriac in vocalized East Syriac script</a:documentation>
+               <value>syr-x-syrm</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—Melkite script) Syriac in Melkite script. Note: This is not an ISO code but a private use code for Melkite employed by Syriaca.org until an ISO code is created</a:documentation>
+               <value>sog</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Sogdian) Sogdian</a:documentation>
+               <value>tr</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Turkish) Turkish</a:documentation>
             </choice>
-         </attribute>
-      </optional>
-   </define>
-   <define name="tei_att.internetMedia.attributes">
-      <ref name="tei_att.internetMedia.attribute.mimeType"/>
-   </define>
-   <define name="tei_att.internetMedia.attribute.mimeType">
-      <optional>
-         <attribute name="mimeType">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(MIME media type) specifies the applicable multimedia internet mail extension (MIME) media type</a:documentation>
-            <list>
-               <oneOrMore>
-                  <data type="token">
-                     <param name="pattern">[^\p{C}\p{Z}]+</param>
-                  </data>
-               </oneOrMore>
-            </list>
          </attribute>
       </optional>
    </define>
@@ -818,19 +849,6 @@ Suggested values include: 1] m (metre); 2] kg (kilogram); 3] s (second); 4] Hz (
          <sch:assert test="@target">@targetLang should only be used on <sch:name/> if @target is specified.</sch:assert>
       </sch:rule>
    </pattern>
-   <define name="tei_att.sortable.attributes">
-      <ref name="tei_att.sortable.attribute.sortKey"/>
-   </define>
-   <define name="tei_att.sortable.attribute.sortKey">
-      <optional>
-         <attribute name="sortKey">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">supplies the sort key for this element in an index, list or group which contains it.</a:documentation>
-            <data type="token">
-               <param name="pattern">[^\p{C}\p{Z}]+</param>
-            </data>
-         </attribute>
-      </optional>
-   </define>
    <define name="tei_att.citing.attribute.from">
       <optional>
          <attribute name="from">
@@ -1211,33 +1229,21 @@ Suggested values include: 1] m (metre); 2] kg (kilogram); 3] s (second); 4] Hz (
    </define>
    <define name="tei_model.pPart.transcriptional">
       <choice>
-         <ref name="tei_sic"/>
-         <ref name="tei_corr"/>
          <ref name="tei_reg"/>
          <ref name="tei_orig"/>
       </choice>
    </define>
    <define name="tei_model.pPart.transcriptional_alternation">
       <choice>
-         <ref name="tei_sic"/>
-         <ref name="tei_corr"/>
          <ref name="tei_reg"/>
          <ref name="tei_orig"/>
       </choice>
    </define>
    <define name="tei_model.pPart.transcriptional_sequence">
-      <ref name="tei_sic"/>
-      <ref name="tei_corr"/>
       <ref name="tei_reg"/>
       <ref name="tei_orig"/>
    </define>
    <define name="tei_model.pPart.transcriptional_sequenceOptional">
-      <optional>
-         <ref name="tei_sic"/>
-      </optional>
-      <optional>
-         <ref name="tei_corr"/>
-      </optional>
       <optional>
          <ref name="tei_reg"/>
       </optional>
@@ -1247,12 +1253,6 @@ Suggested values include: 1] m (metre); 2] kg (kilogram); 3] s (second); 4] Hz (
    </define>
    <define name="tei_model.pPart.transcriptional_sequenceOptionalRepeatable">
       <zeroOrMore>
-         <ref name="tei_sic"/>
-      </zeroOrMore>
-      <zeroOrMore>
-         <ref name="tei_corr"/>
-      </zeroOrMore>
-      <zeroOrMore>
          <ref name="tei_reg"/>
       </zeroOrMore>
       <zeroOrMore>
@@ -1260,12 +1260,6 @@ Suggested values include: 1] m (metre); 2] kg (kilogram); 3] s (second); 4] Hz (
       </zeroOrMore>
    </define>
    <define name="tei_model.pPart.transcriptional_sequenceRepeatable">
-      <oneOrMore>
-         <ref name="tei_sic"/>
-      </oneOrMore>
-      <oneOrMore>
-         <ref name="tei_corr"/>
-      </oneOrMore>
       <oneOrMore>
          <ref name="tei_reg"/>
       </oneOrMore>
@@ -2396,11 +2390,86 @@ Suggested values include: 1] m (metre); 2] kg (kilogram); 3] s (second); 4] Hz (
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(language) indicates the language of the element content using a tag generated according to <a xmlns="http://www.w3.org/1999/xhtml"
                      href="http://www.rfc-editor.org/rfc/bcp/bcp47.txt">BCP 47</a>.</a:documentation>
                <choice>
-                  <data type="language"/>
-                  <choice>
-                     <value/>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                  </choice>
+                  <value>ar</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic) Arabic of any variety or period</a:documentation>
+                  <value>ar-Syrc</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni) Arabic Garshuni in unvocalized or undetermined Syriac script</a:documentation>
+                  <value>ar-Syre</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni—Estrangela) Arabic Garshuni in Estrangela Syriac script</a:documentation>
+                  <value>ar-Syrj</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni—West Syriac) Arabic Garshuni in vocalized West Syriac script</a:documentation>
+                  <value>ar-Syrn</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni—East Syriac) Arabic Garshuni in vocalized East Syriac script</a:documentation>
+                  <value>cop</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Coptic) Coptic of any variety or period</a:documentation>
+                  <value>cu</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Slavonic—Old Church) Old Church Slavonic</a:documentation>
+                  <value>de</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(German) German of any variety or period</a:documentation>
+                  <value>de-x-baumstrk</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(German—Baumstark Romanization) Names or terms Romanized into German according to the standards adopted by Anton Baumstark's Geschichte der syrischen Literatur.</a:documentation>
+                  <value>fr-x-zanetti</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French—Zanetti) Names or terms Romanized into French according to the standards adopted by Ugo Zanetti.</a:documentation>
+                  <value>el</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Greek—Modern) Modern Greek after A.D. 1453</a:documentation>
+                  <value>en</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English) English of any variety or period</a:documentation>
+                  <value>en-x-gedsh</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English—GEDSH Romanization) Names or terms Romanized into English according to the standards adopted by the Gorgias Encyclopedic Dictionary of the Syriac Heritage</a:documentation>
+                  <value>en-x-lah</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English—LAH Romanization) Names or terms Romanized into English according to the standards adopted by the Late Antique Historiography project.</a:documentation>
+                  <value>en-x-srp1</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English—Syriaca.org Alternate Romanization) Names or terms Romanized into English by Syriaca.org using alternate methods for indexing purposes.</a:documentation>
+                  <value>es</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Spanish) Spanish</a:documentation>
+                  <value>fr</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French) French of any variety or period</a:documentation>
+                  <value>fr-x-bhs</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French—BHS Romanization) Names or terms Romanized into French according to the standards adopted by the Bibliotheca Hagiographica Syriaca</a:documentation>
+                  <value>fr-x-fiey</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French—Fiey Romanization) Names or terms Romanized into French according to the standards adopted by Fiey, Saints Syriaques</a:documentation>
+                  <value>gez</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Ge'ez) Ge'ez</a:documentation>
+                  <value>grc</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Greek—Ancient) Ancient Greek to A.D. 1453</a:documentation>
+                  <value>hy</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Armenian) Classical or Modern Armenian</a:documentation>
+                  <value>it</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Italian) Italian</a:documentation>
+                  <value>ka</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Georgian) Classical or Modern Georgian</a:documentation>
+                  <value>la</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Latin) Latin of any variety or period</a:documentation>
+                  <value>mal</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam) Malayalam of any variety or period</a:documentation>
+                  <value>mal-Syrc</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni) Malayalam Garshuni in unvocalized or undetermined Syriac script</a:documentation>
+                  <value>mal-Syre</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni—Estrangela) Malayalam Garshuni in Estrangela Syriac script</a:documentation>
+                  <value>mal-Syrj</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni—West Syriac) Malayalam Garshuni in vocalized West Syriac script</a:documentation>
+                  <value>mal-Syrn</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni—East Syriac) Malayalam Garshuni in vocalized East Syriac script</a:documentation>
+                  <value>nl</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Dutch) Dutch</a:documentation>
+                  <value>pt</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Portuguese) Portuguese</a:documentation>
+                  <value>ru</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Russian) Russian</a:documentation>
+                  <value>syr</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac) Syriac of any variety or period</a:documentation>
+                  <value>syr-Syre</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—Estrangela script) Syriac in Estrangela script</a:documentation>
+                  <value>syr-Syrj</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—West) Syriac in vocalized West Syriac script</a:documentation>
+                  <value>syr-Syrn</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—East) Syriac in vocalized East Syriac script</a:documentation>
+                  <value>syr-x-syrm</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—Melkite script) Syriac in Melkite script. Note: This is not an ISO code but a private use code for Melkite employed by Syriaca.org until an ISO code is created</a:documentation>
+                  <value>sog</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Sogdian) Sogdian</a:documentation>
+                  <value>tr</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Turkish) Turkish</a:documentation>
                </choice>
             </attribute>
          </optional>
@@ -2444,45 +2513,27 @@ Suggested values include: 1] deprecationInfo (deprecation information)</a:docume
          <empty/>
       </element>
    </define>
-   <define name="tei_sic">
-      <element name="sic">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Latin for thus or so) contains text reproduced although apparently incorrect or inaccurate. [3.5.1. Apparent Errors]</a:documentation>
-         <ref name="tei_macro.paraContent"/>
-      </element>
-   </define>
-   <define name="tei_corr">
-      <element name="corr">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(correction) contains the correct form of a passage apparently erroneous in the copy text. [3.5.1. Apparent Errors]</a:documentation>
-         <ref name="tei_macro.paraContent"/>
-      </element>
-   </define>
    <define name="tei_choice">
       <element name="choice">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(choice) groups a number of alternative encodings for the same point in a text. [3.5. Simple Editorial Changes]</a:documentation>
-         <choice>
-            <interleave>
-               <ref name="tei_orig"/>
-               <ref name="tei_reg"/>
-            </interleave>
-            <interleave>
-               <ref name="tei_sic"/>
-               <ref name="tei_corr"/>
-            </interleave>
-         </choice>
+         <group>
+            <ref name="tei_orig"/>
+            <ref name="tei_reg"/>
+         </group>
       </element>
    </define>
    <define name="tei_reg">
       <element name="reg">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(regularization) contains a reading which has been regularized or normalized in some sense. [3.5.2. Regularization and
 Normalization 12. Critical Apparatus]</a:documentation>
-         <ref name="tei_macro.paraContent"/>
+         <ref name="tei_date"/>
       </element>
    </define>
    <define name="tei_orig">
       <element name="orig">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(original form) contains a reading which is marked as following the original, rather than being normalized or corrected. [3.5.2. Regularization and
 Normalization 12. Critical Apparatus]</a:documentation>
-         <ref name="tei_macro.paraContent"/>
+         <ref name="tei_date"/>
       </element>
    </define>
    <define name="tei_name">
@@ -2627,18 +2678,16 @@ Sample values include: 1] suspension (suspension); 2] contraction (contraction);
 attributes @target and @cRef may be supplied on <name/>.</report>
             </rule>
          </pattern>
-         <optional>
-            <attribute name="target">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the destination of the reference by supplying one or more URI References</a:documentation>
-               <list>
-                  <oneOrMore>
-                     <data type="anyURI">
-                        <param name="pattern">\S+</param>
-                     </data>
-                  </oneOrMore>
-               </list>
-            </attribute>
-         </optional>
+         <attribute name="target">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the destination of the reference by supplying one or more URI References</a:documentation>
+            <list>
+               <oneOrMore>
+                  <data type="anyURI">
+                     <param name="pattern">\S+</param>
+                  </data>
+               </oneOrMore>
+            </list>
+         </attribute>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="syriacaPlaces-ptr-target-target-in-ptr-constraint-rule-26">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
@@ -2659,7 +2708,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
    <define name="tei_ref">
       <element name="ref">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(reference) defines a reference to another location, possibly modified by additional text or comment. [3.7. Simple Links and Cross-References 16.1. Links]</a:documentation>
-         <ref name="tei_macro.paraContent"/>
+         <text/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="syriacaPlaces-ref-refAtts-constraint-report-11">
             <rule context="tei:ref">
@@ -2671,11 +2720,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
                </report>
             </rule>
          </pattern>
-         <ref name="tei_att.cReferencing.attributes"/>
-         <ref name="tei_att.global.attributes"/>
-         <ref name="tei_att.internetMedia.attributes"/>
          <ref name="tei_att.pointing.attributes"/>
-         <ref name="tei_att.typed.attributes"/>
          <empty/>
       </element>
    </define>
@@ -3013,23 +3058,18 @@ attributes @target and @cRef may be supplied on <name/>.</report>
          </pattern>
          <ref name="tei_att.global.attribute.xmllang"/>
          <ref name="tei_att.global.rendition.attribute.rend"/>
-         <ref name="tei_att.typed.attribute.subtype"/>
          <ref name="tei_att.canonical.attributes"/>
          <optional>
             <attribute name="type">
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Describes the function of the title. This attribute is optional. Certain non-blank values (such as "final-rubric") may cause the title to be moved to a different section of the page.
-Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] short; 5] desc (descriptive)</a:documentation>
+Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (Final Rubric); 3] abbreviation (Abbreviation)</a:documentation>
                <choice>
-                  <value>main</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">main title</a:documentation>
-                  <value>sub</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(subordinate) subtitle, title of part</a:documentation>
-                  <value>alt</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(alternate) alternate title, often in another language, by which the work is also known</a:documentation>
-                  <value>short</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">abbreviated form of title</a:documentation>
-                  <value>desc</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(descriptive) descriptive paraphrase of the work functioning as a title</a:documentation>
+                  <value>initial-rubric</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Initial Rubric) Text denoting the beginning of a work, usually derived from a manuscript exemplar. This may include a title of the work, but should be distinguished from other titles because it also includes non-title text.</a:documentation>
+                  <value>final-rubric</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Final Rubric) Text denoting the end of a work, usually derived from a manuscript exemplar. This may include a title of the work, but should be distinguished from other titles because it also includes non-title text.</a:documentation>
+                  <value>abbreviation</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Abbreviation) An abbreviation of a work's title.</a:documentation>
                   <data type="token">
                      <param name="pattern">[^\p{C}\p{Z}]+</param>
                   </data>
@@ -3412,6 +3452,8 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
             <choice>
                <value>URI</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A Uniform Resource Identifier.</a:documentation>
+               <value>deprecated</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">For URIs that are no longer in use.</a:documentation>
             </choice>
          </attribute>
          <empty/>
@@ -3673,8 +3715,6 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
       <element name="change">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(change) documents a change or set of changes made during the production of a source document, or during the revision of an electronic file. [2.6. The Revision Description 2.4.1. Creation 11.7. Identifying Changes and Revisions]</a:documentation>
          <ref name="tei_macro.specialPara"/>
-         <ref name="tei_att.docStatus.attributes"/>
-         <ref name="tei_att.typed.attributes"/>
          <attribute name="who">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the person, or group of people, to whom the element content is ascribed.</a:documentation>
             <list>
@@ -3727,18 +3767,6 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
                <data type="dateTime"/>
             </choice>
          </attribute>
-         <optional>
-            <attribute name="target">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(target) points to one or more elements that belong to this change.</a:documentation>
-               <list>
-                  <oneOrMore>
-                     <data type="anyURI">
-                        <param name="pattern">\S+</param>
-                     </data>
-                  </oneOrMore>
-               </list>
-            </attribute>
-         </optional>
          <empty/>
       </element>
    </define>
@@ -3942,14 +3970,6 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
             </zeroOrMore>
             <text/>
          </interleave>
-         <ref name="tei_att.global.attribute.xmlid"/>
-         <ref name="tei_att.global.attribute.xmllang"/>
-         <ref name="tei_att.global.linking.attribute.corresp"/>
-         <ref name="tei_att.global.change.attribute.change"/>
-         <ref name="tei_att.global.responsibility.attribute.resp"/>
-         <ref name="tei_att.global.source.attribute.source"/>
-         <ref name="tei_att.personal.attributes"/>
-         <empty/>
       </element>
    </define>
    <define name="tei_placeName">
@@ -3989,7 +4009,9 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
          </pattern>
          <ref name="tei_att.global.responsibility.attribute.resp"/>
          <ref name="tei_att.global.source.attribute.source"/>
-         <ref name="tei_att.personal.attributes"/>
+         <ref name="tei_att.personal.attribute.srophetags"/>
+         <ref name="tei_att.personal.attribute.sort"/>
+         <ref name="tei_att.canonical.attribute.ref"/>
          <optional>
             <attribute name="xml:id">
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(identifier) The <code xmlns="http://www.w3.org/1999/xhtml">&lt;placeName&gt;</code> element requires an <code xmlns="http://www.w3.org/1999/xhtml">@xml:id</code> attribute whose value is the concatenation of "name", the Syriaca.org ID number of this place (i.e. the last element of the URI), a ‘-’, and the number of this name element in order.</a:documentation>
@@ -4014,11 +4036,86 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(language) The language of the name should be indicated in an <code xmlns="http://www.w3.org/1999/xhtml">@xml:lang</code> attribute of the <code xmlns="http://www.w3.org/1999/xhtml">&lt;placeName&gt;</code> element, whose value is derived from the the <a xmlns="http://www.w3.org/1999/xhtml"
                      href="http://www.loc.gov/standards/iso639-2/php/code_list.php">ISO-639-1 or ISO-639-2 standards</a>. In particular, "en" should be used for "English", "ar" for "Arabic", and "syr" for Syriac. Syriaca.org is not using "syc" for Syriac to avoid the judgment of what constitutes "classical." In the case of vocalized Syriac, the <code xmlns="http://www.w3.org/1999/xhtml">@xml:lang</code> attribute should be augmented with a script indication: either "-Syrj" to indicate West Syrian vocalization or "-Syrn" to indicate East Syrian vocalization. Thus the <code xmlns="http://www.w3.org/1999/xhtml">@xml:lang</code> attribute will have a value of "syr-Syrj" for vocalized Western Syriac and "syr-Syrn" for vocalized Eastern Syriac. The <code xmlns="http://www.w3.org/1999/xhtml">@xml:lang</code> attribute for an unvocalized Syriac name form, such as Syriaca.org’s headword form, should be simply "syr".</a:documentation>
                <choice>
-                  <data type="language"/>
-                  <choice>
-                     <value/>
-                     <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                  </choice>
+                  <value>ar</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic) Arabic of any variety or period</a:documentation>
+                  <value>ar-Syrc</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni) Arabic Garshuni in unvocalized or undetermined Syriac script</a:documentation>
+                  <value>ar-Syre</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni—Estrangela) Arabic Garshuni in Estrangela Syriac script</a:documentation>
+                  <value>ar-Syrj</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni—West Syriac) Arabic Garshuni in vocalized West Syriac script</a:documentation>
+                  <value>ar-Syrn</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Arabic—Garshuni—East Syriac) Arabic Garshuni in vocalized East Syriac script</a:documentation>
+                  <value>cop</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Coptic) Coptic of any variety or period</a:documentation>
+                  <value>cu</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Slavonic—Old Church) Old Church Slavonic</a:documentation>
+                  <value>de</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(German) German of any variety or period</a:documentation>
+                  <value>de-x-baumstrk</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(German—Baumstark Romanization) Names or terms Romanized into German according to the standards adopted by Anton Baumstark's Geschichte der syrischen Literatur.</a:documentation>
+                  <value>fr-x-zanetti</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French—Zanetti) Names or terms Romanized into French according to the standards adopted by Ugo Zanetti.</a:documentation>
+                  <value>el</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Greek—Modern) Modern Greek after A.D. 1453</a:documentation>
+                  <value>en</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English) English of any variety or period</a:documentation>
+                  <value>en-x-gedsh</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English—GEDSH Romanization) Names or terms Romanized into English according to the standards adopted by the Gorgias Encyclopedic Dictionary of the Syriac Heritage</a:documentation>
+                  <value>en-x-lah</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English—LAH Romanization) Names or terms Romanized into English according to the standards adopted by the Late Antique Historiography project.</a:documentation>
+                  <value>en-x-srp1</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(English—Syriaca.org Alternate Romanization) Names or terms Romanized into English by Syriaca.org using alternate methods for indexing purposes.</a:documentation>
+                  <value>es</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Spanish) Spanish</a:documentation>
+                  <value>fr</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French) French of any variety or period</a:documentation>
+                  <value>fr-x-bhs</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French—BHS Romanization) Names or terms Romanized into French according to the standards adopted by the Bibliotheca Hagiographica Syriaca</a:documentation>
+                  <value>fr-x-fiey</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(French—Fiey Romanization) Names or terms Romanized into French according to the standards adopted by Fiey, Saints Syriaques</a:documentation>
+                  <value>gez</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Ge'ez) Ge'ez</a:documentation>
+                  <value>grc</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Greek—Ancient) Ancient Greek to A.D. 1453</a:documentation>
+                  <value>hy</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Armenian) Classical or Modern Armenian</a:documentation>
+                  <value>it</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Italian) Italian</a:documentation>
+                  <value>ka</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Georgian) Classical or Modern Georgian</a:documentation>
+                  <value>la</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Latin) Latin of any variety or period</a:documentation>
+                  <value>mal</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam) Malayalam of any variety or period</a:documentation>
+                  <value>mal-Syrc</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni) Malayalam Garshuni in unvocalized or undetermined Syriac script</a:documentation>
+                  <value>mal-Syre</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni—Estrangela) Malayalam Garshuni in Estrangela Syriac script</a:documentation>
+                  <value>mal-Syrj</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni—West Syriac) Malayalam Garshuni in vocalized West Syriac script</a:documentation>
+                  <value>mal-Syrn</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Malayalam—Garshuni—East Syriac) Malayalam Garshuni in vocalized East Syriac script</a:documentation>
+                  <value>nl</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Dutch) Dutch</a:documentation>
+                  <value>pt</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Portuguese) Portuguese</a:documentation>
+                  <value>ru</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Russian) Russian</a:documentation>
+                  <value>syr</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac) Syriac of any variety or period</a:documentation>
+                  <value>syr-Syre</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—Estrangela script) Syriac in Estrangela script</a:documentation>
+                  <value>syr-Syrj</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—West) Syriac in vocalized West Syriac script</a:documentation>
+                  <value>syr-Syrn</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—East) Syriac in vocalized East Syriac script</a:documentation>
+                  <value>syr-x-syrm</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Syriac—Melkite script) Syriac in Melkite script. Note: This is not an ISO code but a private use code for Melkite employed by Syriaca.org until an ISO code is created</a:documentation>
+                  <value>sog</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Sogdian) Sogdian</a:documentation>
+                  <value>tr</value>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(Turkish) Turkish</a:documentation>
                </choice>
             </attribute>
          </optional>
@@ -4340,10 +4437,6 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
          <optional>
             <ref name="tei_listRelation"/>
          </optional>
-         <ref name="tei_att.global.attributes"/>
-         <ref name="tei_att.typed.attributes"/>
-         <ref name="tei_att.sortable.attributes"/>
-         <empty/>
       </element>
    </define>
    <define name="tei_listRelation">
@@ -4543,8 +4636,6 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
                 </sch:report>
             </sch:rule>
          </pattern>
-         <ref name="tei_att.global.attributes"/>
-         <ref name="tei_att.sortable.attributes"/>
          <attribute name="type">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
             <choice>
@@ -4770,7 +4861,6 @@ Suggested values include: 1] main; 2] sub (subordinate); 3] alt (alternate); 4] 
          <ref name="tei_att.global.responsibility.attribute.resp"/>
          <ref name="tei_att.global.source.attribute.source"/>
          <ref name="tei_att.datable.attributes"/>
-         <ref name="tei_att.typed.attribute.subtype"/>
          <attribute name="type">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">characterizes the element in some sense, using any convenient classification scheme or typology.</a:documentation>
             <choice>

@@ -3,13 +3,33 @@
   <teiHeader>
     <fileDesc>
       <titleStmt>
-        <title>Title</title>
+        <title>TEI Customization for Syriaca.org Persons Data</title>
       </titleStmt>
+      <editionStmt>
+        <edition n="0.9"/>
+      </editionStmt>
       <publicationStmt>
-        <p>Publication Information</p>
+        <authority>Syriaca.org: The Syriac Reference Portal</authority>
+        <availability>
+          <licence target="http://creativecommons.org/licenses/by/3.0/">
+            <p>Distributed under a Creative Commons Attribution 3.0 Unported License.</p>
+            <p>The code examples contained in <gi>exemplum</gi> elements below come from 
+              Syriaca.org projects that have been distributed under a Creative Commons Attribution 
+              3.0 Unported License. Used by permission.</p>
+            <p>The comments on element and attribute use contained in <gi>remarks</gi> elements below 
+              share some text with other Syriaca.org documentation distributed under a Creative Commons 
+              Attributiion 3.0 Unported License. This documentation can be found at various links available here:
+              <ref target="http://syriaca.org/documentation/index.html">http://syriaca.org/documentation/index.html</ref>
+              Used by permission.
+            </p>
+          </licence>
+        </availability>
       </publicationStmt>
       <sourceDesc>
-        <p>Information about the source</p>
+        <p>This ODD provides a customization of the TEI P5 All. It is the second link in an ODD chain
+          that uses the <title ref="https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/schemas/srophe.compiled.odd">
+            TEI Customization for Syriaca.org</title> as its source. 
+        </p>
       </sourceDesc>
     </fileDesc>
   </teiHeader>
@@ -18,7 +38,7 @@
       <schemaSpec ident="syriacaPersons" prefix="tei_" source="syriacaAll.compiled.odd" xml:lang="en" defaultExceptions="http://www.tei-c.org/ns/1.0 teix:egXML​ http://www.example.org/ns/">
         <moduleRef key="tei"/>
         <moduleRef key="certainty" include="precision"/>
-        <moduleRef key="core" include="author bibl choice citedRange corr date desc editor foreign listBibl name note orig p ptr quote reg ref resp respStmt sic title"/>
+        <moduleRef key="core" include="author bibl choice citedRange date desc editor foreign listBibl name note orig p ptr quote reg ref resp respStmt title"/>
         <moduleRef key="header" include="authority availability catDesc category change classDecl edition editionStmt editorialDecl encodingDesc fileDesc funder idno interpretation langUsage licence principal profileDesc publicationStmt revisionDesc seriesStmt sourceDesc sponsor taxonomy teiHeader titleStmt"/>
         <moduleRef key="linking" include="link"/>
         <moduleRef key="namesdates" include="addName birth death event floruit forename gender listPerson listRelation orgName persName person personGrp placeName relation roleName state surname trait"/>
@@ -31,42 +51,28 @@
         
         
         <elementSpec ident="birth" module="namesdates" mode="change">
-          <!--<classes mode="change">
+          <classes mode="change">
             <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.analytic" mode="delete"/>
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
             <memberOf key="att.datable" mode="delete"/>
-            <memberOf key="att.datable.w3c" mode="delete"/>
-            <memberOf key="att.datable.custom" mode="delete"/>
             <memberOf key="att.dimensions" mode="delete"/>
-            <memberOf key="att.rangign" mode="delete"/>
+            <memberOf key="att.ranging" mode="delete"/>
             <memberOf key="att.naming" mode="delete"/>
             <memberOf key="att.canonical" mode="delete"/>
             <memberOf key="att.typed" mode="delete"/>
-          </classes>-->
+          </classes>
           <content>
-            <sequence preserveOrder="true">
+            <sequence preserveOrder="true" minOccurs="1">
               <elementRef key="date" minOccurs="0" maxOccurs="unbounded"/>
               <elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/>
             </sequence>
           </content>
+          <attList>
+            <attDef ident="type" mode="delete"/>
+          </attList>
         </elementSpec>
         
         
         <elementSpec ident="body" module="textstructure" mode="change">
-          <!--<classes mode="change"><!-\- all deleted -\->
-            <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.analytic" mode="delete"/>
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
-          </classes>-->
           <content>
             <elementRef key="listPerson" minOccurs="1" maxOccurs="1"/>
           </content>
@@ -79,28 +85,24 @@
         
         
         <elementSpec ident="death" module="namesdates" mode="change">
-          <!--<classes mode="change">
+          <classes mode="change">
             <memberOf key="att.datable" mode="delete"/>
-            <memberOf key="att.datable.w3c" mode="delete"/>
-            <memberOf key="att.datable.custom" mode="delete"/>
             <memberOf key="att.dimensions" mode="delete"/>
+            <memberOf key="att.ranging" mode="delete"/>
             <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.analytic" mode="delete"/>
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
             <memberOf key="att.naming" mode="delete"/>
             <memberOf key="att.canonical" mode="delete"/>
             <memberOf key="att.typed" mode="delete"/>
-          </classes>-->
+          </classes>
           <content>
             <sequence preserveOrder="true">
               <elementRef key="date" minOccurs="0" maxOccurs="unbounded"/>
               <elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/>
             </sequence>
           </content>
+          <attList>
+            <attDef ident="type" mode="delete"/>
+          </attList>
         </elementSpec>
         
         
@@ -111,14 +113,10 @@
         
         
         <elementSpec ident="floruit" module="namesdates" mode="change">
-          <!--<classes mode="change">
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.analytic" mode="delete"/>
-            <memberOf key="att.global.change" mode="delete"/>
+          <classes mode="change">
             <memberOf key="att.dimensions" mode="delete"/>
             <memberOf key="att.ranging" mode="delete"/>
-          </classes>-->
+          </classes>
           <content>
             <sequence preserveOrder="false">
               <elementRef key="date" minOccurs="0" maxOccurs="unbounded"/>
@@ -127,28 +125,35 @@
             </sequence>
           </content>
           <attList>
-            
+            <attDef ident="xml:id" mode="delete"/>
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="ana" mode="delete"/>
+            <attDef ident="change" mode="delete"/>
+            <attDef ident="rend" mode="delete"/>
+            <attDef ident="corresp" mode="delete"/>
+            <attDef ident="previous" mode="delete"/>
           </attList>
         </elementSpec>
         
         
        <elementSpec ident="gender" module="namesdates" mode="change">
-         <!--<classes mode="change">
-           <memberOf key="att.global" mode="delete"/>
-           <memberOf key="att.global.rendition" mode="delete"/>
-           <memberOf key="att.global.linking" mode="delete"/>
-           <memberOf key="att.global.change" mode="delete"/>
-           <memberOf key="att.global.source" mode="add"/>
+         <classes mode="change">
            <memberOf key="att.datable" mode="delete"/>
-           <memberOf key="att.datable.w3c" mode="delete"/>
-           <memberOf key="att.datable.custom" mode="delete"/>
            <memberOf key="att.typed" mode="delete"/>
-         </classes>-->
+         </classes>
          <content>
            <textNode/>
          </content>
          <attList>
-           
+           <attDef ident="xml:id" mode="delete"/>
+           <attDef ident="n" mode="delete"/>
+           <attDef ident="xml:lang" mode="delete"/>
+           <attDef ident="change" mode="delete"/>
+           <attDef ident="resp" mode="delete"/>
+           <attDef ident="source" mode="delete"/>
+           <attDef ident="rend" mode="delete"/>
+           <attDef ident="corresp" mode="delete"/>
+           <attDef ident="previous" mode="delete"/>
          </attList>
         </elementSpec>
         
@@ -160,16 +165,12 @@
         
         
         <elementSpec ident="listPerson" module="namesdates" mode="change">
-          <!--<classes mode="change">
+          <classes mode="change">
             <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.analytic" mode="delete"/>
-            <memberOf key="att.global.change" mode="add"/>
-            <memberOf key="att.global.responsibility" mode="add"/>
-            <memberOf key="att.global.source" mode="delete"/>
+            <memberOf key="att.typed" mode="delete"/>
+            <memberOf key="att.declarable" mode="delete"/>
             <memberOf key="att.sortable" mode="delete"/>
-          </classes>-->
+          </classes>
           <content>
             <sequence preserveOrder="false">
               <alternate>
@@ -188,15 +189,12 @@
         
         
         <elementSpec ident="orgName" module="core" mode="change">
-          <!--<classes mode="change">
-            <memberOf key="att.global" mode="delete"/>
+          <classes mode="change">
             <memberOf key="att.datable" mode="delete"/>
-            <memberOf key="att.datable.w3c" mode="delete"/>
-            <memberOf key="att.datable.custom" mode="delete"/>
             <memberOf key="att.personal" mode="delete"/>
             <memberOf key="att.naming" mode="delete"/>
             <memberOf key="att.typed" mode="delete"/>
-          </classes>-->
+          </classes>
           <content>
             <sequence preserveOrder="false">
               <elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/>
@@ -205,20 +203,23 @@
             </sequence>
           </content>
           <attList>
-            
+            <attDef ident="key" mode="delete"/>
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="xml:lang" mode="delete"/>
+            <attDef ident="ana" mode="delete"/>
+            <attDef ident="change" mode="delete"/>
+            <attDef ident="resp" mode="delete"/>
+            <attDef ident="source" mode="delete"/>
+            <attDef ident="rend" mode="delete"/>
+            <attDef ident="corresp" mode="delete"/>
           </attList>
         </elementSpec>
         
         
         <elementSpec ident="person" module="namesdates" mode="change">
-          <!--<classes mode="change">
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
+          <classes mode="change">
             <memberOf key="att.sortable" mode="delete"/>
-          </classes>-->
+          </classes>
           <content>
             <sequence minOccurs="1" maxOccurs="1" preserveOrder="true">
               <elementRef key="persName" minOccurs="1" maxOccurs="unbounded"/>
@@ -236,7 +237,18 @@
             </sequence>
           </content>
           <attList>
-            
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="xml:lang" mode="delete"/>
+            <attDef ident="change" mode="delete"/>
+            <attDef ident="resp" mode="delete"/>
+            <attDef ident="source" mode="delete"/>
+            <attDef ident="rend" mode="delete"/>
+            <attDef ident="previous" mode="delete"/>
+            <attDef ident="corresp" mode="delete"/>
+            <attDef ident="role" mode="delete"/>
+            <attDef ident="sex" mode="delete"/>
+            <attDef ident="gender" mode="delete"/>
+            <attDef ident="age" mode="delete"/>
           </attList>
          </elementSpec>
         
@@ -244,14 +256,9 @@
         
         
         <elementSpec ident="personGrp" module="namesdates" mode="change">
-          <!--<classes mode="change">
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
+          <classes mode="change">
             <memberOf key="att.sortable" mode="delete"/>
-          </classes>-->
+          </classes>
           <content>
             <sequence minOccurs="1" maxOccurs="1" preserveOrder="true">
               <elementRef key="persName" minOccurs="1" maxOccurs="unbounded"/>
@@ -269,23 +276,30 @@
             </sequence>
           </content>
           <attList>
-            
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="xml:lang" mode="delete"/>
+            <attDef ident="change" mode="delete"/>
+            <attDef ident="resp" mode="delete"/>
+            <attDef ident="source" mode="delete"/>
+            <attDef ident="rend" mode="delete"/>
+            <attDef ident="previous" mode="delete"/>
+            <attDef ident="corresp" mode="delete"/>
+            <attDef ident="role" mode="delete"/>
+            <attDef ident="sex" mode="delete"/>
+            <attDef ident="gender" mode="delete"/>
+            <attDef ident="age" mode="delete"/>
+            <attDef ident="size" mode="delete"/>
           </attList>
         </elementSpec>
         
         
         <elementSpec ident="placeName" module="core" mode="change">
-          <!--<classes mode="change">
-            <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.datable" mode="delete"/>
+          <classes mode="change">
             <memberOf key="att.personal" mode="delete"/>
-            <memberOf key="att.naming" mode="delete"/>
-            <memberOf key="att.typed" mode="delete"/>
-            <memberOf key="att.canonical" mode="add"/>
-            <memberOf key="att.global.source" mode="delete"/>
-          </classes>-->
+          </classes>
           <attList>
-            
+            <attDef ident="xml:id" mode="delete"/>
+            <attDef ident="xml:lang" mode="delete"/>
           </attList>
         </elementSpec>
         
@@ -305,32 +319,42 @@
         
         
         
+        <elementSpec ident="seriesStmt" module="header" mode="change">
+          <!-- see places for development ideas -->
+        </elementSpec>
+        
+        
         
         <elementSpec ident="state" module="namesdates" mode="change">
-          <content>
-            <sequence preserveOrder="false">
-              <elementRef key="desc" minOccurs="1" maxOccurs="1"/>
-              <elementRef key="precision" minOccurs="0" maxOccurs="unbounded"/>
-            </sequence>
-          </content>
+          
         </elementSpec>
         
         
         <elementSpec ident="title" module="core" mode="change">
-          <content>
-            <sequence preserveOrder="false">
-              <elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/><!-- only in tei:header -->
-              <elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/>
-              <textNode/>
-            </sequence>
-          </content>
+          
         </elementSpec>
         
         
         <elementSpec ident="trait" module="namesdates" mode="change">
+          <classes mode="change">
+            <memberOf key="att.naming" mode="delete"/>
+            <memberOf key="att.dimensions" mode="delete"/>
+            <memberOf key="att.ranging" mode="delete"/>
+          </classes>
           <content>
             <elementRef key="desc" minOccurs="1" maxOccurs="1"/>
           </content>
+          <attList>
+            <attDef ident="subtype" mode="delete"/>
+            <attDef ident="xml:id" mode="delete"/>
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="xml:lang" mode="delete"/>
+            <attDef ident="ana" mode="delete"/>
+            <attDef ident="change" mode="delete"/>
+            <attDef ident="resp" mode="delete"/>
+            <attDef ident="rend" mode="delete"/>
+            <attDef ident="corresp" mode="delete"/>
+          </attList>
         </elementSpec>
         
         

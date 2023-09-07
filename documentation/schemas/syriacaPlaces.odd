@@ -42,7 +42,7 @@
       <schemaSpec ident="syriacaPlaces" prefix="tei_" source="syriacaAll.compiled.odd" xml:lang="en" defaultExceptions="http://www.tei-c.org/ns/1.0 teix:egXML​ http://www.example.org/ns/">
         <moduleRef key="tei"/>
         <moduleRef key="certainty" include="precision"/>
-        <moduleRef key="core" include="abbr author bibl biblScope choice citedRange corr date desc editor expan foreign listBibl measure name note orig p ptr quote reg ref resp respStmt sic title"/>
+        <moduleRef key="core" include="abbr author bibl biblScope choice citedRange date desc editor expan foreign listBibl measure name note orig p ptr quote reg ref resp respStmt title"/>
         <moduleRef key="header" include="authority availability catDesc category change classDecl edition editionStmt editorialDecl encodingDesc fileDesc funder idno langUsage licence principal profileDesc publicationStmt revisionDesc seriesStmt sourceDesc sponsor taxonomy teiHeader titleStmt"/>
         <moduleRef key="linking" include="link"/>
         <moduleRef key="namesdates" include="bloc country district event geo listPlace listRelation location offset persName place placeName region relation settlement state"/>
@@ -99,22 +99,11 @@
         
         
         <elementSpec ident="body" module="textstructure" mode="change">
-          <!--<classes mode="change"><!-\- all deleted -\->
-            <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.analytic" mode="delete"/>
-            
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
-            
-          </classes>-->
           <content>
             <elementRef key="listPlace" minOccurs="1" maxOccurs="1"/>
           </content>
           <remarks mode="replace">
-            <p>The <gi>body</gi> element of a place record must contain a <gi>listPlace</gi> element.
+            <p>The <gi>body</gi> element of a Syriaca.org place record must contain a <gi>listPlace</gi> element.
             </p>
           </remarks>
         </elementSpec>
@@ -264,6 +253,9 @@
                 <valItem ident="URI">
                   <desc>A Uniform Resource Identifier.</desc>
                 </valItem>
+                <valItem ident="deprecated">
+                  <desc>For URIs that are no longer in use.</desc>
+                </valItem>
               </valList>
             </attDef>
           </attList>
@@ -272,19 +264,11 @@
         
         
         <elementSpec ident="listPlace" module="namesdates" mode="change">
-          <!--<classes mode="change"><!-\- all deleted -\->
+          <classes mode="change">
             <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.analytic" mode="delete"/>
-            
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
             <memberOf key="att.typed" mode="delete"/>
-            
             <memberOf key="att.sortable" mode="delete"/>
-          </classes>-->
+          </classes>
           <content>
             <elementRef key="place" minOccurs="1" maxOccurs="1"/>
             <elementRef key="listRelation" minOccurs="0" maxOccurs="1"/>
@@ -471,24 +455,20 @@
         
         
         <elementSpec ident="persName" module="namesdates" mode="change">
-          
+          <classes mode="change">
+            <memberOf key="att.global" mode="delete"/>
+            <memberOf key="att.personal" mode="delete"/>
+            <memberOf key="att.naming" mode="delete"/>
+          </classes>
         </elementSpec>
         
         
         
         <elementSpec ident="place" module="namesdates" mode="change">
-          <!--<classes mode="change"><!-\- all deleted -\->
+          <classes mode="change">
             <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.analytic" mode="delete"/>
-            
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
-            
             <memberOf key="att.sortable" mode="delete"/>
-          </classes>-->
+          </classes>
           <content>
             <elementRef key="placeName" minOccurs="1" maxOccurs="unbounded"/>
             <elementRef key="desc" minOccurs="1" maxOccurs="unbounded"/>

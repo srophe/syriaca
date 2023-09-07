@@ -2,13 +2,33 @@
   <teiHeader>
     <fileDesc>
       <titleStmt>
-        <title>Title</title>
+        <title>TEI Customization for Syriaca.org Persons Data</title>
       </titleStmt>
+      <editionStmt>
+        <edition n="0.9"/>
+      </editionStmt>
       <publicationStmt>
-        <p>Publication Information</p>
+        <authority>Syriaca.org: The Syriac Reference Portal</authority>
+        <availability>
+          <licence target="http://creativecommons.org/licenses/by/3.0/">
+            <p>Distributed under a Creative Commons Attribution 3.0 Unported License.</p>
+            <p>The code examples contained in <gi>exemplum</gi> elements below come from 
+              Syriaca.org projects that have been distributed under a Creative Commons Attribution 
+              3.0 Unported License. Used by permission.</p>
+            <p>The comments on element and attribute use contained in <gi>remarks</gi> elements below 
+              share some text with other Syriaca.org documentation distributed under a Creative Commons 
+              Attributiion 3.0 Unported License. This documentation can be found at various links available here:
+              <ref target="http://syriaca.org/documentation/index.html">http://syriaca.org/documentation/index.html</ref>
+              Used by permission.
+            </p>
+          </licence>
+        </availability>
       </publicationStmt>
       <sourceDesc>
-        <p>Information about the source</p>
+        <p>This ODD provides a customization of the TEI P5 All. It is the second link in an ODD chain
+          that uses the <title ref="https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/schemas/srophe.compiled.odd">
+            TEI Customization for Syriaca.org</title> as its source. 
+        </p>
       </sourceDesc>
     </fileDesc>
   </teiHeader>
@@ -102,261 +122,7 @@
 <p>The value must point directly to one or more XML elements or other resources by means of one or more URIs, separated by whitespace. If more than one is supplied the implication is that the name identifies several distinct entities.</p>
       </remarks><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-05-25" xml:lang="fr">
         <p>La valeur doit pointer directement vers un ou plusieurs éléments XML au moyen d'un ou plusieurs URIs, séparés par un espace. Si plus d'un URI est fourni, cela implique que le nom identifie plusieurs entités distinctes.</p>
-      </remarks><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2018-12-31"><p>値は1つまたは複数のXML要素あるいは、空白によって区切られた1つまたは複数のURIを指し示すものでなければならない。1つ以上の値が与えられているときは、その名前が複数の異るエンティティに対応することを示唆する。</p></remarks></attDef></attList></classSpec><classSpec rend="add" module="tei" type="atts" ident="att.ranging">
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-06-05" xml:lang="en">provides attributes for describing numerical ranges.</desc>
-  <attList xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <attDef ident="atLeast">
-      <desc versionDate="2009-06-29" xml:lang="en">gives a minimum estimated value for the approximate measurement.</desc>
-      <desc versionDate="2009-05-25" xml:lang="fr">donne une estimation de la valeur minimum pour la
-        mesure.</desc>
-      <datatype><dataRef key="teidata.numeric"/></datatype>
-    </attDef>
-    <attDef ident="atMost">
-      <desc versionDate="2009-06-29" xml:lang="en">gives a maximum estimated value for the approximate measurement.</desc>
-      <desc versionDate="2009-05-25" xml:lang="fr">donne une estimation de la valeur maximum pour la
-        mesure.</desc>
-      <datatype><dataRef key="teidata.numeric"/></datatype>
-    </attDef>
-    <attDef ident="min">
-      <desc versionDate="2009-06-29" xml:lang="en">where the measurement summarizes more than one observation
-      or a range, supplies the minimum value
-        observed.</desc>
-      <desc versionDate="2009-05-25" xml:lang="fr">lorsque la mesure résume plus d'une observation,
-        fournit la valeur minimum observée.</desc>
-      <datatype><dataRef key="teidata.numeric"/></datatype>
-    </attDef>
-    <attDef ident="max">
-      <desc versionDate="2009-06-29" xml:lang="en">where the measurement summarizes more than one observation
-        or a range, supplies the maximum value
-        observed.</desc>
-      <desc versionDate="2009-05-25" xml:lang="fr">lorsque la mesure résume plus d'une observation,
-        fournit la valeur maximum observée.</desc>
-      <datatype><dataRef key="teidata.numeric"/></datatype>
-    </attDef>
-    <attDef ident="confidence">
-      <desc versionDate="2012-12-27" xml:lang="en">specifies the degree of statistical confidence (between zero and one) that a value falls within the range
-        specified by <att>min</att> and <att>max</att>, or the proportion of observed values that fall within that range.</desc>
-      <datatype><dataRef key="teidata.probability"/></datatype>
-    </attDef>
-  </attList>
-  <exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
-    <egXML xmlns="http://www.tei-c.org/ns/Examples">
-The MS. was lost in transmission by mail from <del rend="overstrike"><gap reason="illegible" extent="one or two letters" atLeast="1" atMost="2" unit="chars"/></del> Philadelphia to the Graphic office, New York.
-    </egXML>
-  </exemplum>
-  <exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2022-09-13">
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#URF-UBSGlobal">
-      Americares has been supporting the health sector in Eastern
-      Europe since 1986, and since 1992 has provided <measure atLeast="120000000" unit="USD" commodity="currency">more than
-      $120m</measure> in aid to Ukrainians.
-    </egXML>
-  </exemplum>
-</classSpec><classSpec rend="add" module="tei" type="atts" ident="att.dimensions">
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-08-05" xml:lang="en">provides attributes for describing the size of physical objects.</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">물리적 대상의 크기를 기술하는 속성을 제공한다.</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">提供符合某種度量值的屬性值。</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">物理的対象の大きさを表す属性を示す。 </desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-05-25" xml:lang="fr">fournit des attributs
-  pour décrire la taille des objets    physiques</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-11-06" xml:lang="it">assegna degli attributi che descrivono la grandezza di
-    oggetti fisici</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">proporciona atributos que califican una determinata
-    medición.</desc>
-  <classes xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <memberOf key="att.ranging"/>
-  </classes>
-  <attList xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <attDef ident="unit" usage="opt">
-      <desc versionDate="2007-08-02" xml:lang="en">names the unit used for the measurement</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">측정 단위의 이름을 기술한다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">度量單位的名稱。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">当該大きさの単位を示す。</desc>
-      <desc versionDate="2007-06-12" xml:lang="fr">noms des unités utilisées pour la mesure.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">especifica las unidades usadas para la medición.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">specifica le unità usate per la misurazione</desc>
-      <datatype><dataRef key="teidata.enumerated"/></datatype>
-      <valList type="semi">
-        <valItem ident="cm">
-          <gloss versionDate="2007-08-02" xml:lang="en">centimetres</gloss>
-          <gloss versionDate="2019-04-08" xml:lang="ja">センチメートル</gloss>
-          <gloss versionDate="2007-06-12" xml:lang="fr">centimètres</gloss>
-          <gloss versionDate="2007-05-04" xml:lang="es">centímetros</gloss>
-          <gloss versionDate="2007-01-21" xml:lang="it">centimetri</gloss>
-        </valItem>
-        <valItem ident="mm">
-          <gloss versionDate="2007-08-02" xml:lang="en">millimetres</gloss>
-          <gloss versionDate="2019-04-08" xml:lang="ja">ミリメートル</gloss>
-          <gloss versionDate="2007-06-12" xml:lang="fr">millimètres</gloss>
-          <gloss versionDate="2007-05-04" xml:lang="es">milímetros</gloss>
-          <gloss versionDate="2007-01-21" xml:lang="it">millimetri</gloss>
-        </valItem>
-        <valItem ident="in">
-          <gloss versionDate="2007-08-02" xml:lang="en">inches</gloss>
-          <gloss versionDate="2019-04-08" xml:lang="ja">インチ</gloss>
-          <gloss versionDate="2007-06-12" xml:lang="fr">pouces</gloss>
-          <gloss versionDate="2007-05-04" xml:lang="es">pulgadas</gloss>
-          <gloss versionDate="2007-01-21" xml:lang="it">pollici</gloss>
-        </valItem>
-        <valItem ident="line">
-          <desc versionDate="2007-08-02" xml:lang="en">lines of text</desc>
-          <desc versionDate="2007-12-20" xml:lang="ko">텍스트의 행</desc>
-          <desc versionDate="2008-04-06" xml:lang="es">líneas de texto</desc>
-          <desc versionDate="2008-04-05" xml:lang="ja">テキスト行</desc>
-          <desc versionDate="2008-03-30" xml:lang="fr">lignes de texte</desc>
-          <desc versionDate="2007-11-06" xml:lang="it">righe di testo</desc>
-        </valItem>
-        <valItem ident="char">
-          <gloss versionDate="2007-08-02" xml:lang="en">characters</gloss>
-          <gloss versionDate="2019-04-08" xml:lang="ja">文字</gloss>
-          <gloss versionDate="2007-12-20" xml:lang="ko">문자</gloss>
-          <gloss versionDate="2008-04-06" xml:lang="es">caracteres</gloss>
-          <gloss versionDate="2007-11-06" xml:lang="it">caratteri</gloss>
-          <desc versionDate="2007-08-02" xml:lang="en">characters of text</desc>
-          <desc versionDate="2007-12-20" xml:lang="ko">텍스트의 문자</desc>
-          <desc versionDate="2008-04-06" xml:lang="es">caracteres del texto</desc>
-          <desc versionDate="2008-04-05" xml:lang="ja">文字列</desc>
-          <desc versionDate="2008-03-30" xml:lang="fr">caractères du texte</desc>
-          <desc versionDate="2007-11-06" xml:lang="it">caratteri di testo</desc>
-        </valItem>
-      </valList>
-    </attDef>
-    <attDef ident="quantity">
-      <desc versionDate="2007-08-02" xml:lang="en">specifies the length in the units specified</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">명시된 단위의 길이를 명시한다.</desc>
-      <desc versionDate="2008-04-06" xml:lang="es">especifica la longitud en las unidades especificadas</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">当該単位の大きさを示す。</desc>
-      <desc versionDate="2008-03-30" xml:lang="fr">spécifie la longueur dans les unités indiquées</desc>
-      <desc versionDate="2007-11-06" xml:lang="it">specifica la lunghezza nelle unità indicate</desc>
-      <datatype><dataRef key="teidata.numeric"/></datatype>
-    </attDef>
-    <attDef ident="extent" usage="opt">
-      <desc versionDate="2008-09-10" xml:lang="en">indicates the size of the object concerned using a project-specific vocabulary combining
-        quantity and units in a single string of words.</desc>
-      <desc versionDate="2009-05-25" xml:lang="fr">indique la dimension de l'objet en utilisant
-        un vocabulaire spécifique à un projet qui combine la quantité et
-	l'unité dans une chaîne seule de mots.</desc>
-      <desc versionDate="2019-04-08" xml:lang="ja">単一の文字列の数量と単位を組み合わせたプロジェクト固有の語彙を使用して、関連するオブジェクトのサイズを示す。</desc>
-      <datatype><dataRef key="teidata.text"/></datatype>
-      <exemplum xml:lang="en">
-        <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#UND">
-          <gap extent="5 words"/>
-        </egXML>
-      </exemplum>
-      <exemplum xml:lang="en">
-        <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#UND">
-          <height extent="half the page"/>
-        </egXML>
-      </exemplum>
-    </attDef>
-    <attDef ident="precision">
-      <desc versionDate="2008-09-10" xml:lang="en">characterizes the precision of the values specified by the other attributes.</desc>
-      <desc versionDate="2009-05-25" xml:lang="fr">caractérise la précision des valeurs spécifiées par les autres attributs.</desc>
-      <desc versionDate="2019-04-08" xml:lang="ja">他の属性によって指定された値の精度を特徴付ける。</desc>
-      <datatype><dataRef key="teidata.certainty"/></datatype>
-    </attDef>
-    <attDef ident="scope" usage="opt">
-      <desc versionDate="2008-09-10" xml:lang="en">where the measurement summarizes more than one observation, specifies the applicability
-        of this measurement.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">측정의 적용가능성을 명시하며, 하나 이상의 대상이 측정된다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">測量多個物件時，標明此度量的可應用範圍。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">対象物が複数あった場合に、当該数値の適応範囲を示す。</desc>
-      <desc versionDate="2007-06-12" xml:lang="fr">spécifie l'applicabilité de cette mesure, là où plus
-        d'un objet est mesuré.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">especifica la aplicabilidad de esta medición, en los
-        casos en que se mida más de un objeto.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">indica l'applicabilità della misurazione, laddove
-        venga misurato più di un oggetto</desc>
-      <datatype><dataRef key="teidata.enumerated"/></datatype>
-      <valList type="open">
-        <valItem ident="all">
-          <desc versionDate="2007-08-02" xml:lang="en">measurement applies to all instances.</desc>
-          <desc versionDate="2007-12-20" xml:lang="ko">측정은 모두 사례에 적용된다.</desc>
-          <desc versionDate="2007-05-02" xml:lang="zh-TW">度量可應用於所有實例。</desc>
-          <desc versionDate="2008-04-06" xml:lang="es">la medida se aplica a todos los casos.</desc>
-          <desc versionDate="2008-04-05" xml:lang="ja">全インスタンスに当てはまる単位。</desc>
-          <desc versionDate="2008-03-30" xml:lang="fr">la mesure s'applique à tous les cas.</desc>
-          <desc versionDate="2007-01-21" xml:lang="it">la misurazione fa riferimento a tutti i
-          casi</desc>
-        </valItem>
-        <valItem ident="most">
-          <desc versionDate="2007-08-02" xml:lang="en">measurement applies to most of the instances inspected.</desc>
-          <desc versionDate="2007-12-20" xml:lang="ko">측정은 대부분의 사례에 적용된다.</desc>
-          <desc versionDate="2007-05-02" xml:lang="zh-TW">度量可應用於大部分實例。</desc>
-          <desc versionDate="2008-04-06" xml:lang="es">la medida se aplica a la mayoría de los casos
-            examinados.</desc>
-          <desc versionDate="2008-04-05" xml:lang="ja">計測インスタンスの殆どに当てはまる単位。</desc>
-          <desc versionDate="2008-03-30" xml:lang="fr">la mesure s'applique à la plupart des cas
-            examinés</desc>
-          <desc versionDate="2007-01-21" xml:lang="it">la misurazione fa riferimento alla maggior parte
-            dei casi esaminati</desc>
-        </valItem>
-        <valItem ident="range">
-          <desc versionDate="2007-08-02" xml:lang="en">measurement applies to only the specified range of instances.</desc>
-          <desc versionDate="2007-12-20" xml:lang="ko">측정이 사례의 명시적 범위에 한정하여 적용된다.</desc>
-          <desc versionDate="2007-05-02" xml:lang="zh-TW">度量僅應用於特定範圍的實例。</desc>
-          <desc versionDate="2008-04-06" xml:lang="es">la medida se aplica solamente a los casos
-            especificados</desc>
-          <desc versionDate="2008-04-05" xml:lang="ja">特定インスタンスにのみ当てはまる単位。</desc>
-          <desc versionDate="2008-03-30" xml:lang="fr">la mesure s'applique seulement à l'ensemble des
-            exemples indiqués.</desc>
-          <desc versionDate="2007-01-21" xml:lang="it">la misurazione fa riferimento solo ai casi
-            specificati</desc>
-        </valItem>
-      </valList>
-    </attDef>
-  </attList>
-</classSpec><classSpec rend="add" module="tei" type="atts" ident="att.cReferencing">
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2021-08-22" xml:lang="en">provides attributes that may be used to supply a
-  <term>canonical reference</term> as a means of identifying the
-  target of a pointer.</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2018-12-31">ポインタのターゲットを識別する手段として<term>canonical reference</term>を提供するために使用される属性を提供する。</desc>
-  <attList xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <attDef ident="cRef">
-      <gloss versionDate="2012-09-23" xml:lang="en">canonical reference</gloss>
-      <gloss versionDate="2007-12-20" xml:lang="ko">표준 참조</gloss>
-      <gloss versionDate="2008-04-06" xml:lang="es">referencia canónica</gloss>
-      <gloss versionDate="2008-03-30" xml:lang="fr">référence canonique</gloss>
-      <gloss versionDate="2007-11-06" xml:lang="it">riferimento canonico</gloss>
-      <gloss xml:lang="ja" versionDate="2022-08-26">基準的形式の参照</gloss>
-      <desc versionDate="2013-11-22" xml:lang="en">specifies the destination of the pointer by supplying a canonical reference expressed using the
-        scheme defined in a <gi>refsDecl</gi> element in the TEI header</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">TEI 헤더의 <gi>refsDecl</gi> 요소에서 정의된 체계의 표준 참조를 이용하여
-        포인터의 목적지를 명시한다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">用元素<gi>refsDecl</gi>在TEI標頭內所定義的標準參照來說明指標所指位置。</desc>
-      <desc xml:lang="ja" versionDate="2022-08-26">TEIヘダー内の要素<gi>refsDecl</gi>で定義されているスキームにある、基準的参照形式により、当該ポインタの参照場所を示す。</desc>
-      <desc versionDate="2009-01-06" xml:lang="fr">précise la cible du pointeur en fournissant une
-        référence canonique issue d'un modèle défini par un élément <gi>refsDecl</gi>dans l'En-tête
-        TEI.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">especifica la destinación de un señalizador
-        proporcionando una referencia canónica de un esquema definido en un elemento
-        <gi>refsDecl</gi> en el encabezado TEI.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">specifica la destinazione di un puntatore usando un
-        riferimento canonico a partire da uno schema definito in un elemento <gi>refsDecl</gi>
-        nell'intestazione TEI</desc>
-      <datatype maxOccurs="1"><dataRef key="teidata.text"/></datatype>
-          <remarks versionDate="2012-09-23" xml:lang="en">
-        <p>The value of <att>cRef</att> should be constructed so
-      that when the algorithm for the resolution of canonical
-      references (described in section <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SACR">16.2.5. Canonical References</ref>) is
-      applied to it the result is a valid URI reference to the
-      intended target.</p>
-<p>The <gi>refsDecl</gi> to use may be indicated with the <att>decls</att> attribute.</p>
-        <p>Currently these Guidelines only provide for a single canonical reference to be encoded on
-          any given <gi>ptr</gi> element.</p>
-      </remarks>
-      <remarks xml:lang="fr" versionDate="2007-06-12">
-<p>Le résultat de l’application de l'algorithme pour la résolution des
-        références canoniques (décrit à la section <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SACR">16.2.5. Canonical References</ref>). Ce sera une référence URI
-        valide pour la cible prévue.</p>        <p>La <gi>refsDecl</gi> à utiliser peut être indiquée à l'aide
-        de l'attribut <att>decls</att>.  Actuellement ces Principes
-        directeurs ne permettent que l'encodage d'une unique référence
-        canonique pour tout élément <gi>ptr</gi> donné.</p>
-      </remarks>
-
-      <remarks xml:lang="ja" versionDate="2018-12-31"><p><ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SACR">16.2.5. Canonical References</ref> 節での正規化参照を解決するためのアルゴリズムが適用される時にその結果が対象への正しいURI参照となるように、 <att>cRef</att> の値は作られるべきである</p> <p> <gi>refsDecl</gi> は <att>decls</att> 属性とともに示されてもよい。現行のガイドラインが <gi>ptr</gi> 要素に渡すのは、単一の符号化された正規化参照のみである。</p></remarks>
-    </attDef>
-  </attList>
-</classSpec><classSpec rend="add" module="tei" type="atts" ident="att.datable.w3c" xml:id="DATABLEW3C">
+      </remarks><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2018-12-31"><p>値は1つまたは複数のXML要素あるいは、空白によって区切られた1つまたは複数のURIを指し示すものでなければならない。1つ以上の値が与えられているときは、その名前が複数の異るエンティティに対応することを示唆する。</p></remarks></attDef></attList></classSpec><classSpec rend="add" module="tei" type="atts" ident="att.datable.w3c" xml:id="DATABLEW3C">
   <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2013-11-22" xml:lang="en">provides attributes for normalization of elements that contain
   datable events  conforming to the W3C
     <ref target="#XSD2">XML Schema Part 2: Datatypes Second Edition</ref>.</desc>
@@ -995,7 +761,134 @@ associated with a dated element, at the time indicated.</desc>
          </desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">indica la lingua del contenuto dell'elemento
         utilizzando i codici tratti da <ref target="http://www.ietf.org/rfc/rfc3066.txt">RFC
         3066</ref>
-         </desc><datatype xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude"><dataRef key="teidata.language"/></datatype><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+         </desc><datatype xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude"><dataRef key="teidata.language"/></datatype><valList type="closed"><valItem ident="ar">
+                  <gloss>Arabic</gloss>
+                  <desc>Arabic of any variety or period</desc>
+                </valItem><valItem ident="ar-Syrc">
+                  <gloss>Arabic—Garshuni</gloss>
+                  <desc>Arabic Garshuni in unvocalized or undetermined Syriac script</desc>
+                </valItem><valItem ident="ar-Syre">
+                  <gloss>Arabic—Garshuni—Estrangela</gloss>
+                  <desc>Arabic Garshuni in Estrangela Syriac script</desc>
+                </valItem><valItem ident="ar-Syrj">
+                  <gloss>Arabic—Garshuni—West Syriac</gloss>
+                  <desc>Arabic Garshuni in vocalized West Syriac script</desc>
+                </valItem><valItem ident="ar-Syrn">
+                  <gloss>Arabic—Garshuni—East Syriac</gloss>
+                  <desc>Arabic Garshuni in vocalized East Syriac script</desc>
+                </valItem><valItem ident="cop">
+                  <gloss>Coptic</gloss>
+                  <desc>Coptic of any variety or period</desc>
+                </valItem><valItem ident="cu">
+                  <gloss>Slavonic—Old Church</gloss>
+                  <desc>Old Church Slavonic</desc>
+                </valItem><valItem ident="de">
+                  <gloss>German</gloss>
+                  <desc>German of any variety or period</desc>
+                </valItem><valItem ident="de-x-baumstrk">
+                  <gloss>German—Baumstark Romanization</gloss>
+                  <desc>Names or terms Romanized into German according to the standards adopted by
+                    Anton Baumstark's Geschichte der syrischen Literatur.</desc>
+                </valItem><valItem ident="fr-x-zanetti">
+                  <gloss>French—Zanetti</gloss>
+                  <desc>Names or terms Romanized into French according to the standards adopted by Ugo Zanetti.</desc>
+                </valItem><valItem ident="el">
+                  <gloss>Greek—Modern</gloss>
+                  <desc>Modern Greek after A.D. 1453</desc>
+                </valItem><valItem ident="en">
+                  <gloss>English</gloss>
+                  <desc>English of any variety or period</desc>
+                </valItem><valItem ident="en-x-gedsh">
+                  <gloss>English—GEDSH Romanization</gloss>
+                  <desc>Names or terms Romanized into English according to the standards adopted by
+                    the Gorgias Encyclopedic Dictionary of the Syriac Heritage</desc>
+                </valItem><valItem ident="en-x-lah">
+                  <gloss>English—LAH Romanization</gloss>
+                  <desc>Names or terms Romanized into English according to the standards adopted by
+                    the Late Antique Historiography project.</desc>
+                </valItem><valItem ident="en-x-srp1">
+                  <gloss>English—Syriaca.org Alternate Romanization</gloss>
+                  <desc>Names or terms Romanized into English by Syriaca.org using alternate methods
+                    for indexing purposes.</desc>
+                </valItem><valItem ident="es">
+                  <gloss>Spanish</gloss>
+                  <desc>Spanish</desc>
+                </valItem><valItem ident="fr">
+                  <gloss>French</gloss>
+                  <desc>French of any variety or period</desc>
+                </valItem><valItem ident="fr-x-bhs">
+                  <gloss>French—BHS Romanization</gloss>
+                  <desc>Names or terms Romanized into French according to the standards adopted by
+                    the Bibliotheca Hagiographica Syriaca</desc>
+                </valItem><valItem ident="fr-x-fiey">
+                  <gloss>French—Fiey Romanization</gloss>
+                  <desc>Names or terms Romanized into French according to the standards adopted by
+                    Fiey, Saints Syriaques</desc>
+                </valItem><valItem ident="gez">
+                  <gloss>Ge'ez</gloss>
+                  <desc>Ge'ez</desc>
+                </valItem><valItem ident="grc">
+                  <gloss>Greek—Ancient</gloss>
+                  <desc>Ancient Greek to A.D. 1453</desc>
+                </valItem><valItem ident="hy">
+                  <gloss>Armenian</gloss>
+                  <desc>Classical or Modern Armenian</desc>
+                </valItem><valItem ident="it">
+                  <gloss>Italian</gloss>
+                  <desc>Italian</desc>
+                </valItem><valItem ident="ka">
+                  <gloss>Georgian</gloss>
+                  <desc>Classical or Modern Georgian</desc>
+                </valItem><valItem ident="la">
+                  <gloss>Latin</gloss>
+                  <desc>Latin of any variety or period</desc>
+                </valItem><valItem ident="mal">
+                  <gloss>Malayalam</gloss>
+                  <desc>Malayalam of any variety or period</desc>
+                </valItem><valItem ident="mal-Syrc">
+                  <gloss>Malayalam—Garshuni</gloss>
+                  <desc>Malayalam Garshuni in unvocalized or undetermined Syriac script</desc>
+                </valItem><valItem ident="mal-Syre">
+                  <gloss>Malayalam—Garshuni—Estrangela</gloss>
+                  <desc>Malayalam Garshuni in Estrangela Syriac script</desc>
+                </valItem><valItem ident="mal-Syrj">
+                  <gloss>Malayalam—Garshuni—West Syriac</gloss>
+                  <desc>Malayalam Garshuni in vocalized West Syriac script</desc>
+                </valItem><valItem ident="mal-Syrn">
+                  <gloss>Malayalam—Garshuni—East Syriac</gloss>
+                  <desc>Malayalam Garshuni in vocalized East Syriac script</desc>
+                </valItem><valItem ident="nl">
+                  <gloss>Dutch</gloss>
+                  <desc>Dutch</desc>
+                </valItem><valItem ident="pt">
+                  <gloss>Portuguese</gloss>
+                  <desc>Portuguese</desc>
+                </valItem><valItem ident="ru">
+                  <gloss>Russian</gloss>
+                  <desc>Russian</desc>
+                </valItem><valItem ident="syr">
+                  <gloss>Syriac</gloss>
+                  <desc>Syriac of any variety or period</desc>
+                </valItem><valItem ident="syr-Syre">
+                  <gloss>Syriac—Estrangela script</gloss>
+                  <desc>Syriac in Estrangela script</desc>
+                </valItem><valItem ident="syr-Syrj">
+                  <gloss>Syriac—West</gloss>
+                  <desc>Syriac in vocalized West Syriac script</desc>
+                </valItem><valItem ident="syr-Syrn">
+                  <gloss>Syriac—East</gloss>
+                  <desc>Syriac in vocalized East Syriac script</desc>
+                </valItem><valItem ident="syr-x-syrm">
+                  <gloss>Syriac—Melkite script</gloss>
+                  <desc>Syriac in Melkite script. Note: This is not an ISO code but a private use
+                    code for Melkite employed by Syriaca.org until an ISO code is created</desc>
+                </valItem><valItem ident="sog">
+                  <gloss>Sogdian</gloss>
+                  <desc>Sogdian</desc>
+                </valItem><valItem ident="tr">
+                  <gloss>Turkish</gloss>
+                  <desc>Turkish</desc>
+                </valItem></valList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
         <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
           <p> … The consequences of
 	  this rapid depopulation were the loss of the last
@@ -1037,69 +930,7 @@ associated with a dated element, at the time indicated.</desc>
       </remarks><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="es" versionDate="2008-04-06">
         <p>Si no se especifica ningún valor para <att>xml:lang</att>, el valor de <att>xml:lang</att> para el elemento inmediatamente englobado, se hereda; por esta razón, un valor
           se debe especificar siempre en el elemento exterior (<gi>TEI</gi>).</p>
-      </remarks><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2019-06-16"><p>xml:lang の値は、直接の親要素、そのまた親要素からというように、文書の上位階層から継承されてくる。できるだけ高い適切な階層に xml:lang を指定するのが一般には望ましいが、teiHeader には関連するリソース要素と異なるデフォルト値が必要となったり、一つのTEI文書が多くの言語のテキストを含みうることには注意されたい。登録された言語タグの正式なリストはIANAが管理しており、<ptr target="http://www.iana.org/assignments/language-subtag-registry"/> から確認できる。言語タグの構造についての良い概説は <ptr target="https://www.w3.org/International/articles/language-tags/"/> を、手順を追った実用的なガイドは <ptr target="https://www.w3.org/International/questions/qa-choosing-language-tags.en.php"/> を参照されたい。利用する値は、BCP 47 に準拠しなければならない。もし値が私用コード（<val>x-</val> から始まったり <val>-x-</val> を含む）ならば、その <att>ident</att> 属性と一致する値を持つ <gi>language</gi> 要素をTEIヘッダ内に追加して内容を説明すべきである。この説明は私用コード以外にも任意で追加できるが、<choice><abbr>IETF</abbr><expan>Internet Engineering Task Force</expan></choice> による定義と整合していなければならない。</p></remarks></attDef></attList></classSpec><classSpec rend="add" module="tei" type="atts" ident="att.internetMedia">
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-10-18" xml:lang="en">provides attributes for specifying the type of a computer
-  resource using a standard taxonomy.</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">표준 분류법을 사용하는 컴퓨터 자원의 유형을 명시하는 속성을 제시한다.</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">標準的な用語による計算機資源の種類を表す属性を示す。
-</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-05-27" xml:lang="fr">fournit des attributs pour spécifier le type de
-ressource informatique selon une taxinomie normalisée.</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-11-06" xml:lang="it">indica degli attributi che specificano il tipo di risorsa informatica utilizzando una tassonomia standard</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">atributos para registrar un periodo temporal normalizado</desc>
-  <attList xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <attDef ident="mimeType" usage="opt">
-      <gloss versionDate="2007-07-02" xml:lang="en">MIME media type</gloss>
-      <gloss versionDate="2007-12-20" xml:lang="ko">MIME 매체 유형</gloss>
-      <gloss versionDate="2008-04-06" xml:lang="es">Tipo de media del MIME</gloss>
-      <gloss versionDate="2008-03-30" xml:lang="fr">type de média MIME</gloss>
-      <gloss versionDate="2022-05-09" xml:lang="ja">MIMEメディアタイプ</gloss>
-      <desc versionDate="2007-06-14" xml:lang="en">specifies the applicable multimedia internet mail extension (MIME) media type</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">적용 가능한 다중매체 인터넷 메일 확장자(MIME) 매체 유형을 명시한다.</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">当該データのMIMEタイプ。</desc>
-      <desc versionDate="2008-03-30" xml:lang="fr">spécifie le type MIME (multipurpose internet mail extension) applicable.</desc>
-      <desc versionDate="2007-11-06" xml:lang="it">specifica il tipo MIME appropriato</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">El tipo de MIME</desc>
-      <desc versionDate="2006-06-05" xml:lang="zh-TW">MIME協定種類</desc>
-      <datatype minOccurs="1" maxOccurs="unbounded"><dataRef key="teidata.word"/></datatype>
-    </attDef>
-  </attList>
-  <exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
-    <p>In this example <att>mimeType</att> is used to indicate that the URL points to a TEI XML file encoded in UTF-8.</p>
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#UND">
-      <ref mimeType="application/tei+xml; charset=UTF-8" target="https://raw.githubusercontent.com/TEIC/TEI/dev/P5/Source/guidelines-en.xml"/>
-    </egXML>
-  </exemplum>
-  <remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2013-12-06" xml:lang="en">
-    <p>This attribute class provides an attribute for describing a
-    computer resource, typically available over the internet,
-    using a value taken from a standard taxonomy. At present only a single
-    taxonomy is supported, the Multipurpose Internet Mail Extensions
-    (MIME) Media Type system. This typology of media types is
-    defined by the Internet Engineering Task Force in <ref target="http://www.ietf.org/rfc/rfc2046.txt">RFC 2046</ref>. The
-    <ref target="http://www.iana.org/assignments/media-types/">list of
-    types</ref> is maintained by the Internet Assigned Numbers
-    Authority (IANA). The <att>mimeType</att> attribute must have a value taken from this list.</p>
-  </remarks>
-  <remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="fr" versionDate="2007-06-12">
-    <p>Cette classe d'attributs fournit des attributs pour décrire une ressource
-                informatique, en général disponible sur internet, selon les taxinomies normalisées.
-                Actuellement une seule taxinomie est reconnue : le système "Multipurpose Internet
-                Mail Extensions Media Type". Ce système de typologie des types de média est définie
-                par l'Internet Engineering Task Force dans<ref target="http://www.ietf.org/rfc/rfc2046.txt">RFC 2046</ref>. La <ref target="http://www.iana.org/assignments/media-types/">liste des types</ref>
-                est maintenue par l'Internet Assigned Numbers Authority. </p>
-  </remarks>
-  <remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="es" versionDate="2008-04-06">
-    <p>Esta clase de atributo proporciona los atributos para describir un recurso del ordenador, típicamente disponibles en Internet, según las taxonomías estándar. Solamente una única taxonomía se utiliza actualmente, el sistema Multipurpose Internet Mail Extensions
-    Media Type. Este sistema de tipología de los tipos de media es definido por el Internet Engineering Task Force <ref target="http://www.ietf.org/rfc/rfc2046.txt">RFC 2046</ref>. 
-    . La <ref target="http://www.iana.org/assignments/media-types/">lista de tipos</ref> es mantenida por el Internet Assigned Numbers Authority.</p>
-  </remarks>
-  <remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2022-05-09">
-    <p>
-当該属性クラスは、コンピューターリソースを示すためのもので、通常、インターネット上にあるリソースを標準的な用語で示す。現時点では、MIME（Multipurpose Internet Mail Extensions）タイプのみが標準的な用語として使用可能である。このMIMEタイプについては、IETF（Internet Engineering Task Force）の<ref target="http://www.ietf.org/rfc/rfc2046.txt">RFC 2046</ref>で規定されている。<ref target="http://www.iana.org/assignments/media-types/">使用できるタイプ名のリスト</ref>の管理は、IANA（Internet Assigned Numbers Authority）によって行われている。<att>mimeType</att>属性は上記のタイプ名リストにより定義された値を含んでいなくてはならない。
-    </p>
-  </remarks>
-</classSpec><classSpec rend="add" module="tei" xml:id="NAMES" type="atts" ident="att.naming"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2006-01-05" xml:lang="en">provides attributes common to elements which refer to named persons, places, organizations etc.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">사람, 장소, 조직 등의 이름을 지시하는 요소에 공통적 속성을 제공한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">提供屬性，通用於參照到人物、地點、組織等的元素。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">名前、人物、場所、組織を示す要素に付与される属性を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-05-28" xml:lang="fr">fournit des attributs communs aux éléments qui font référence à des personnes, lieux, organismes, etc., nommés.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">identifica los atributos comunes a los elementos que se refieren a personas, lugares, organizaciones, etc. indicados por nombre</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">identifica degli attributi comuni a elementi che si riferiscono a persone, luoghi, organizzazioni, ecc. indicati per nome</desc><classes><memberOf key="att.canonical"/></classes><attList><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="role" usage="opt">
+      </remarks><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2019-06-16"><p>xml:lang の値は、直接の親要素、そのまた親要素からというように、文書の上位階層から継承されてくる。できるだけ高い適切な階層に xml:lang を指定するのが一般には望ましいが、teiHeader には関連するリソース要素と異なるデフォルト値が必要となったり、一つのTEI文書が多くの言語のテキストを含みうることには注意されたい。登録された言語タグの正式なリストはIANAが管理しており、<ptr target="http://www.iana.org/assignments/language-subtag-registry"/> から確認できる。言語タグの構造についての良い概説は <ptr target="https://www.w3.org/International/articles/language-tags/"/> を、手順を追った実用的なガイドは <ptr target="https://www.w3.org/International/questions/qa-choosing-language-tags.en.php"/> を参照されたい。利用する値は、BCP 47 に準拠しなければならない。もし値が私用コード（<val>x-</val> から始まったり <val>-x-</val> を含む）ならば、その <att>ident</att> 属性と一致する値を持つ <gi>language</gi> 要素をTEIヘッダ内に追加して内容を説明すべきである。この説明は私用コード以外にも任意で追加できるが、<choice><abbr>IETF</abbr><expan>Internet Engineering Task Force</expan></choice> による定義と整合していなければならない。</p></remarks></attDef></attList></classSpec><classSpec rend="add" module="tei" xml:id="NAMES" type="atts" ident="att.naming"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2006-01-05" xml:lang="en">provides attributes common to elements which refer to named persons, places, organizations etc.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">사람, 장소, 조직 등의 이름을 지시하는 요소에 공통적 속성을 제공한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">提供屬性，通用於參照到人物、地點、組織等的元素。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">名前、人物、場所、組織を示す要素に付与される属性を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-05-28" xml:lang="fr">fournit des attributs communs aux éléments qui font référence à des personnes, lieux, organismes, etc., nommés.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">identifica los atributos comunes a los elementos que se refieren a personas, lugares, organizaciones, etc. indicados por nombre</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">identifica degli attributi comuni a elementi che si riferiscono a persone, luoghi, organizzazioni, ecc. indicati per nome</desc><classes><memberOf key="att.canonical"/></classes><attList><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="role" usage="opt">
       <desc versionDate="2009-10-12" xml:lang="en">may be used to specify further information about the entity referenced by
 this name in the form of a set of whitespace-separated values, for example the occupation of a person, or the status of a place.</desc>
       <desc versionDate="2022-08-26" xml:lang="ja">この属性名によって参照されるエンティティに関する詳細な情報（例えば人物の職業や場所のステータスなど）を示すために用いられる。この値は空白文字で区切られる。</desc>
@@ -1269,62 +1100,6 @@ sub-classification for the element additional to that provided by its
     <p>Note that the value of the <att>target</att> attribute may include an XPointer expression
       including an XPath expression (see <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SATS">16.2.4. TEI XPointer Schemes</ref>). </p>
   </remarks>
-</classSpec><classSpec rend="add" module="tei" type="atts" ident="att.sortable">
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2011-11-06" xml:lang="en">provides attributes for elements in lists or groups that are sortable, but whose sorting key cannot be derived mechanically from the element content.</desc>
-  <attList xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <attDef ident="sortKey" usage="opt">
-      <desc versionDate="2011-11-06" xml:lang="en">supplies the sort key for this element in an index, list or group which contains it.</desc>
-      <datatype><dataRef key="teidata.word"/></datatype>
-      <exemplum xml:lang="en">
-        <egXML xmlns="http://www.tei-c.org/ns/Examples">David's other principal backer, Josiah
-            ha-Kohen <index indexName="NAMES"><term sortKey="Azarya_Josiah_Kohen">Josiah ha-Kohen b. Azarya</term></index> b. Azarya, son of one of the last gaons of Sura was David's own first
-            cousin.</egXML>
-      </exemplum>
-      <exemplum versionDate="2008-04-06" xml:lang="fr">
-        <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Verne_Vingt"> Je me suis
-            procuré une <term>clef anglaise</term> pour dévisser les écrous qui attachent le canot à
-            la coque du Nautilus. Ainsi tout est prêt.</egXML>
-      </exemplum>
-      <remarks versionDate="2013-12-09" xml:lang="en">
-        <p>The sort key is used to determine the sequence and grouping of entries in an index. It provides a sequence of characters which, when sorted with the other values, will produced
-          the desired order; specifics of sort key construction are application-dependent</p>
-        <p>Dictionary order often differs from the collation sequence of machine-readable character
-            sets; in English-language dictionaries, an entry for <mentioned>4-H</mentioned> will often
-            appear alphabetized under <q>fourh</q>, and <mentioned>McCoy</mentioned> may be
-            alphabetized under <q>maccoy</q>, while <mentioned>A1</mentioned>,
-            <mentioned>A4</mentioned>, and <mentioned>A5</mentioned> may all appear in numeric order
-            <soCalled>alphabetized</soCalled> between <q>a-</q> and <q>AA</q>. The sort key is
-            required if the orthography of the dictionary entry does not suffice to determine its
-            location.</p>
-      </remarks>
-      <remarks xml:lang="fr" versionDate="2013-12-09">
-        <p>La clé de tri est utilisée pour déterminer la séquence et le groupement d'entrées dans un
-          index. Elle fournit une séquence de caractères qui, lorsqu'ils sont triés avec les autres valeurs, produisent l'ordre souhaité ; les détails de construction d'une clé de tri
-          dépendent des applications.
-.</p>
-        <p>La structure d'un dictionnaire diffère souvent de l'ordre de collation des jeux de
-            caractères lisibles par la machine ; dans des dictionnaires de langue anglaise, une entrée
-            pour <mentioned>4-H</mentioned> apparaîtra souvent alphabétiquement sous <q>fourh</q>, et
-            <mentioned>McCoy</mentioned>peut être classé alphabétiquement sous <q>maccoy</q>, tandis que <mentioned>A1</mentioned>, <mentioned>A4</mentioned> et <mentioned>A5</mentioned>
-            apparaîtront tous dans un ordre alphanumérique entre <q>a-</q> et <q>AA</q>. La clef de
-            tri est exigée si l'orthographe de l'entrée du dictionnaire n'est pas suffisante pour
-            déterminer son emplacement.</p>
-      </remarks>
-      <remarks xml:lang="es" versionDate="2008-04-06">
-        <p>La clave de ordenación se utiliza para determinar la secuencia y agrupar las entradas en
-            un índice.</p>
-      </remarks>
-      <remarks xml:lang="ja" versionDate="2008-04-05">
-        <p> 当該属性は、索引中の項目の一連やグループを決めるために使用され る。当該属性がない場合、当該要素の内容が、並び替えのために使用 される。 </p>
-        <p> 辞書順序は、機械可読文字集合の照合順序とは、多くの場合異なって いる。例えば、英語の場合、辞書項目<mentioned>4-H</mentioned>は、
-              文字化された<q>fourh</q>の所に出てくる。また、項目 <mentioned>McCoy</mentioned>は、<q>maccoy</q>の所に出てくるだ
-              ろう。しかし、項目<mentioned>A1</mentioned>, <mentioned>A4</mentioned>,
-              <mentioned>A5</mentioned>らは、文字 順の<q>a-</q>と<q>AA</q>との間で、数字順で出てくる。
-              当該並び替えキーは、当該辞書が採る正書法では、場所の特定が十分 に行えない場合に、必要となる。 </p>
-      </remarks>
-    </attDef>
-  </attList>
-  
 </classSpec><classSpec rend="add" module="tei" type="atts" ident="att.citing">
   <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2014-01-10" xml:lang="en">provides attributes for specifying the specific part of a bibliographic item being cited.</desc>
   <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2019-01-04">引用された書誌の特定箇所を指示するための属性を提供する。</desc>
@@ -2951,28 +2726,6 @@ which contain an XPath expression.</desc>
     <p>Values for this datatype should not be used to encode morphological gender (cf. <gi>gen</gi>,
         <att>msd</att> as defined in <ident type="class">att.linguistic</ident>, and <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/DI.html#DITPFO">9.3.1. Information on Written and Spoken Forms</ref>).</p>
   </remarks>
-</dataSpec><dataSpec rend="add" module="tei" ident="teidata.sex">
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-10" xml:lang="en">defines the range of attribute values used to identify
-    the sex of an organism.</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">인간 또는 동물의 성을 식별하는 속성 값 범위를 정의한다.</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">定義的屬性值範圍用以識別人類或動物的性別</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">人間または動物の性を示す属性値の範囲を定義する。 </desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-10" xml:lang="fr">définit la gamme des valeurs d'attributs employés
-    pour identifier le sexe d’un organisme.</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-10" xml:lang="es">define la gama de valores de atributos usados para
-    identificar el sexo de un organismo.</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-10" xml:lang="it">definisce una gamma di valori di attributi usati per
-    identificare il sesso di un organismo.</desc>
-  <content xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <dataRef key="teidata.enumerated"/>
-  </content>
-  <remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-08-27" xml:lang="en">
-    <p>Values for attributes using this datatype may be defined locally by a project, or they may refer to an external standard.</p>
-  </remarks>
-  <remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-03" xml:lang="fr">
-    <p>Les valeurs de cet attribut peuvent être définies localement par un projet ou peuvent faire
-      référence à un standard externe.</p>
-  </remarks>
 </dataSpec><dataSpec rend="add" module="tei" ident="teidata.probCert">
   <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-10-18" xml:lang="en">defines a range of attribute values which can be expressed either as a numeric probability or as a coded certainty value.</desc>
 <content xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">  
@@ -3280,118 +3033,9 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
       Satz ausgedrückt wird, der mit einem Verb im Aktiv beginnt.</p>
   </remarks><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0">
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/TD.html#TDcrystalsCEdc">22.4.1. Description of Components</ref>
-  </listRef></elementSpec><elementSpec rend="add" module="core" ident="sic"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2012-03-15" xml:lang="en">Latin for <mentioned>thus</mentioned> or <mentioned>so</mentioned></gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-03-17" xml:lang="fr">du latin, <mentioned>ainsi</mentioned></gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">原文照錄</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2016-11-24" xml:lang="de">Lateinisch für 'auf diese Weise', 'so'</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2006-03-20" xml:lang="en">contains text reproduced although apparently incorrect or inaccurate.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">contient du texte reproduit quoiqu'il est apparemment
-    incorrect ou inexact</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">contiene texto reproducido aparentemente icorrecto o
-    inexacto.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">包含看似錯誤但仍照實轉錄的文字 。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">contiene un frammento di testo riprodotto anche se
-    apparentemente errato o impreciso.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2006-10-28" xml:lang="ja">明らかに間違い、不正確ではあるが、そのまま収録してあるテキスト。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2016-11-24" xml:lang="de">enthält Text, wie er in der Vorlage steht, obwohl er offensichtlich fehlerhaft ist.</desc><classes><memberOf key="model.pPart.transcriptional"/></classes><content><macroRef xmlns:rng="http://relaxng.org/ns/structure/1.0" key="macro.paraContent"/></content><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#FHENRY5">for his nose was as sharp as
-      a pen, and <sic>a Table</sic> of green fields.</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-06" xml:lang="fr">
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Verne_Chasse">Des nuages, des
-          <sic>cyrrhus</sic>, des nimbus, des cumulus, tant qu'on en veut, et assurément plus que
-        n'en voulaient le maître et le serviteur.</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-06" xml:lang="fr">
-    <p xmlns:teix="http://www.tei-c.org/ns/Examples">Si on veut seulement attirer l'attention sur ce qui paraît être un problème dans la copie
-        du texte, <gi>sic</gi> est utilisé seul :</p>
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Mauss_Sociologie">Tel est le
-        chat Rutterkin des sorcières Margaret et Filippa Flower, qui furent
-        <sic>prûlées</sic>brûlées à Lincoln, le 11 mars 1619, pour avoir envoûté un parent du comte
-        de Rutland.</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-06" xml:lang="fr">
-    <p xmlns:teix="http://www.tei-c.org/ns/Examples">Il est également possible, en utilisant les éléments <gi>choice</gi> et <gi>corr</gi>, de
-        proposer une lecture corrigée :</p>
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Mauss_Sociologie">Tel est le
-        chat Rutterkin des sorcières Margaret et Filippa Flower, qui furent<choice><sic>prûlées</sic><corr>brûlées</corr></choice> à Lincoln, le 11 mars 1619, pour avoir envoûté un parent du comte de
-      Rutland.</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-06" xml:lang="fr">
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Roubaud_Boucle">Ouvrage très
-        véridique et mirifique du Sieur Marcus Publius Dataficus du digne fils du seigneur comte,
-        vicomte, duc et archiduc Johannus de Bessinguya<choice><sic> Percepteur</sic><corr>Precepteur</corr></choice> du digne fils du seigneur comte, vicomte, duc et archiduc Johannus de
-      Bessinguya.</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="zh-TW">
-    <egXML xmlns="http://www.tei-c.org/ns/Examples">
-    賣饅頭的老頭，背著木箱子，裡邊裝著熱<sic>鰻魚</sic>，太陽一出來，就在街上叫喚。</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="zh-TW">
-    <egXML xmlns="http://www.tei-c.org/ns/Examples"> 人們走起路來是快的，嘴裡邊的呼吸，一遇到了<sic>嚴肅</sic>好像冒著煙似的。
-    </egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="zh-TW">
-    <egXML xmlns="http://www.tei-c.org/ns/Examples"> 人們走起路來是快的，嘴裡邊的呼吸，一遇到了<choice><sic>嚴肅</sic><corr>嚴寒</corr></choice> 好像冒著煙似的。</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="zh-TW">
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#biblzh-tw_n21"> 賣饅頭的老頭，背著木箱子，裡邊裝著熱<choice><sic>鰻魚</sic><corr>饅頭</corr></choice>，太陽一出來，就在街上叫喚。</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
-    <p>If all that is desired is to call attention to the apparent problem in the copy text,
-      <gi>sic</gi> may be used alone:</p>
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#VINGE">I don't know, Juan. It's so far in the past now
-      — how <sic>we can</sic> prove or disprove anyone's theories?</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="de" versionDate="2017-06-25">
-    <p>Wenn es nur darum geht, auf das offensichtliche Problem in der Textvorlage hinzuweisen, kann das
-      <gi>sic</gi>-Element auch allein verwendet werden:</p>
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#VINGE">I don't know, Juan. It's so far in the past now
-      — how <sic>we can</sic> prove or disprove anyone's theories?</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
-    <p>It is also possible, using the <gi>choice</gi> and <gi>corr</gi> elements, to provide a
-      corrected reading:</p>
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#VINGE">I don't know, Juan. It's so far in the past now
-      — how <choice><sic>we can</sic><corr>can we</corr></choice> prove or disprove anyone's theories?</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="de" versionDate="2017-06-25">
-    <p>Es ist auch möglich, zusätzlich die Elemente <gi>choice</gi> und <gi>corr</gi> zu verwenden, um
-      eine korrigierte Lesart anzubieten:</p>
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#VINGE">I don't know, Juan. It's so far in the past now
-      — how <choice><sic>we can</sic><corr>can we</corr></choice> prove or disprove anyone's theories?</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#THENRY5">for his nose was as sharp as
-      a pen, and <choice><sic>a Table</sic><corr>a' babbld</corr></choice> of green fields.</egXML>
-  </exemplum><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0">
-    <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#COEDCOR">3.5.1. Apparent Errors</ref>
-  </listRef></elementSpec><elementSpec rend="add" module="core" ident="corr"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2006-03-20" xml:lang="en">correction</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">정정</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">更正</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">corrección</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">correzione</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2016-11-24" xml:lang="de">Korrektur</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2006-03-20" xml:lang="en">contains the correct form of a passage apparently erroneous in the copy text.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">복사된 텍스트에서 오류로 보이는 단락의 정정 형식을 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">包含文本中看似錯誤並加以更正過後的文字。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-05" xml:lang="ja">元資料中の明らかな間違いを正したものを示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-06-12" xml:lang="fr">contient la forme correcte d'un passage
-    qui est considéré erroné dans la copie du texte.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">contiene la forma correcta de un pasaje aparentemente erróneo en el texto de copia.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2016-11-24" xml:lang="de">enthält die korrekte Form einer offenbar fehlerhaften Textstelle in der Vorlage.</desc><classes><memberOf key="model.pPart.transcriptional"/></classes><content><macroRef xmlns:rng="http://relaxng.org/ns/structure/1.0" key="macro.paraContent"/></content><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
-    <p>If all that is desired is to call attention to the
-      fact that the copy text has been corrected, <gi>corr</gi> may be used alone:</p>
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#VINGE">I don't know,
-      Juan. It's so far in the past now — how <corr>can we</corr> prove
-      or disprove anyone's theories?</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="de" versionDate="2017-06-25">
-    <p>Wenn es nur darum geht, darauf hinzuweisen, dass die Textvorlage korrigiert wurde, kann das
-      <gi>corr</gi>-Element auch allein verwendet werden:</p>
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#VINGE">I don't know,
-      Juan. It's so far in the past now — how <corr>can we</corr> prove
-      or disprove anyone's theories?</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-06" xml:lang="fr">
-    <p xmlns:teix="http://www.tei-c.org/ns/Examples">Si l'on veut mettre l'accent sur le fait que le texte a été corrigé, <gi>corr</gi> seul
-        sera employé:</p>
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Mauss_Sociologie">Tel est le
-        chat Rutterkin des sorcières Margaret et Filippa Flower, qui
-	furent <corr>brûlées</corr> à Lincoln, le 11 mars 1619, pour avoir envoûté un parent du comte de
-      Rutland.</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-06" xml:lang="fr">
-    <p xmlns:teix="http://www.tei-c.org/ns/Examples">Il est aussi possible d'associer <gi>choice</gi> et<gi>sic</gi>, pour donner une lecture
-        incorrecte : </p>
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Mauss_Sociologie">Tel est le
-        chat Rutterkin des sorcières Margaret et Filippa Flower, qui furent<choice><sic>prûlées</sic><corr>brûlées</corr></choice> à Lincoln, le 11 mars 1619, pour avoir envoûté un parent du comte de
-      Rutland.</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="zh-TW">
-    <egXML xmlns="http://www.tei-c.org/ns/Examples">
-      不怨天，不尤人。下學而上達。<corr>知我</corr> 者，其天乎！</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="zh-TW">
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#biblzh-tw_n2">
-      不怨天，不尤人。下學而上達。<choice><sic>我知</sic><corr>知我</corr></choice>者，其天乎！</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
-    <p>It is also possible, using the <gi>choice</gi> and
-      <gi>sic</gi> elements, to provide an uncorrected reading:</p>
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#VINGE">I don't know, Juan. It's so far in the past now —
-      how <choice><sic>we can</sic><corr>can we</corr></choice> prove or
-      disprove anyone's theories?</egXML>
-  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="de" versionDate="2017-06-25">
-    <p>Es ist auch möglich, zusätzlich die Elemente <gi>choice</gi> und <gi>sic</gi> zu verwenden, um
-      eine nicht korrigierte Lesart anzubieten:</p>
-    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#VINGE">I don't know, Juan. It's so far in the past now —
-      how <choice><sic>we can</sic><corr>can we</corr></choice> prove or
-      disprove anyone's theories?</egXML>
-  </exemplum><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0">
-    <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#COEDCOR">3.5.1. Apparent Errors</ref>
   </listRef></elementSpec><elementSpec rend="add" module="core" ident="choice"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en" versionDate="2009-01-06">choice</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">choix</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2016-11-25" xml:lang="de">Alternative</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2005-01-14" xml:lang="en">groups a number of alternative encodings for the same point in
         a text.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">텍스트 동일 지점에서 대체 가능한 부호화를 모아 놓는다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">匯集文件中對於同一部分文字所有可供替換的不同標記。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-05" xml:lang="ja">テキスト中の同じ場所で、異なる符号化記述をまとめる。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">regroupe un certain nombre de balisages alternatifs possibles
-        pour un même endroit  dans un texte.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">agrupa un número de codificaciones alternativas para el mismo punto en un texto.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">raggruppa un numero di codifiche alternative per la stessa porzione di testo.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2016-11-24" xml:lang="de">gruppiert alternative Kodierungen für eine Stelle im Text.</desc><classes><memberOf key="model.pPart.editorial"/></classes><content><alternate minOccurs="1" maxOccurs="1"><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="orig" minOccurs="1" maxOccurs="1"/><elementRef key="reg" minOccurs="1" maxOccurs="1"/></sequence><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="sic" minOccurs="1" maxOccurs="1"/><elementRef key="corr" minOccurs="1" maxOccurs="1"/></sequence></alternate></content><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
+        pour un même endroit  dans un texte.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">agrupa un número de codificaciones alternativas para el mismo punto en un texto.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">raggruppa un numero di codifiche alternative per la stessa porzione di testo.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2016-11-24" xml:lang="de">gruppiert alternative Kodierungen für eine Stelle im Text.</desc><classes><memberOf key="model.pPart.editorial"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="true"><elementRef key="orig" minOccurs="1" maxOccurs="1"/><elementRef key="reg" minOccurs="1" maxOccurs="1"/></sequence></content><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
     <p>An American encoding of <title>Gulliver's Travels</title> which
             retains the British spelling but also provides a version
             regularized to American spelling might be encoded as follows.</p>
@@ -3481,7 +3125,7 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
   </listRef></elementSpec><elementSpec rend="add" module="core" ident="reg"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2005-01-14" xml:lang="en">regularization</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">정규화</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">一般化</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-06" xml:lang="ja"/><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">régularisation</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">regularización</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">regolarizzazione</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2016-11-25" xml:lang="de">Normalisierung</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2005-01-14" xml:lang="en">contains a reading which has been regularized or normalized in some sense.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">어떤 면에서 정규화 또는 표준화된 해석을 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">標誌一般化或規格化處理過的文字。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-06" xml:lang="ja">正規化された読みを示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">contient une partie qui a été régularisée ou normalisée
         de façon quelconque</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">contiene una lectura que ha sido regularizada o
         normalizada en algún sentido.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">contiene una lettura è stata regolarizzata o
-        normalizzata in qualche modo.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2016-11-24" xml:lang="de">enthält eine normalisierte Schreibweise einer Textstelle. </desc><classes><memberOf key="model.pPart.transcriptional"/></classes><content><macroRef xmlns:rng="http://relaxng.org/ns/structure/1.0" key="macro.paraContent"/></content><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
+        normalizzata in qualche modo.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2016-11-24" xml:lang="de">enthält eine normalisierte Schreibweise einer Textstelle. </desc><classes><memberOf key="model.pPart.transcriptional"/></classes><content><elementRef key="date" minOccurs="1" maxOccurs="1"/></content><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
     <p>If all that is desired is to call attention to the fact that the copy text has been
             regularized, <gi>reg</gi> may be used alone:</p>
     <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#COHQHE-eg-11">
@@ -3545,7 +3189,7 @@ Normalization</ref>
         or corrected.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">표준화 또는 수정된 것이 아닌 원형식을 따르는 해석을 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">標誌原文中呈現的文字，並且未經過任何修改或規格化處理。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-05" xml:lang="ja">正規化または校正は施されていない、元の形のまま符号化されている読みを 示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">contient une partie notée comme étant fidèle à
         l'original et non pas normalisée ou corrigée.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">contiene una lectura que se marca como fiel al
         original.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">contiene una lettura codificata come conforme
-        all'originale piuttosto che ad una versione normalizzata o corretta</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2016-11-24" xml:lang="de">enthält jene Schreibweise, die der Vorlage folgt und nicht normalisiert oder korrigiert ist.</desc><classes><memberOf key="model.pPart.transcriptional"/></classes><content><macroRef xmlns:rng="http://relaxng.org/ns/structure/1.0" key="macro.paraContent"/></content><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
+        all'originale piuttosto che ad una versione normalizzata o corretta</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2016-11-24" xml:lang="de">enthält jene Schreibweise, die der Vorlage folgt und nicht normalisiert oder korrigiert ist.</desc><classes><memberOf key="model.pPart.transcriptional"/></classes><content><elementRef key="date" minOccurs="1" maxOccurs="1"/></content><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
     <p>If all that is desired is to call attention to the original version in the copy text,
                 <gi>orig</gi> may be used alone:</p>
     <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#KYD">
@@ -3707,7 +3351,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
                     </sch:assert>
                   </sch:rule>
                 </constraint>
-              </constraintSpec><attList><attDef ident="target" mode="change">
+              </constraintSpec><attList><attDef ident="target" mode="change" usage="req">
               <constraintSpec ident="target-in-ptr" scheme="schematron">
                 <constraint>
                   <sch:rule context="//tei:body//tei:bibl/tei:ptr/@target" role="warning">
@@ -3735,24 +3379,13 @@ attributes @target and @cRef may be supplied on <name/>.</report>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SAPT">16.1. Links</ref>
   </listRef></elementSpec><elementSpec rend="add" module="core" ident="ref"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-07-04" xml:lang="en">reference</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">참조</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW"/><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-06" xml:lang="es">referencia</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">référence</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-11-06" xml:lang="it">riferimento</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2016-11-25" xml:lang="de">Referenz</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2006-01-11" xml:lang="en">defines a reference to another location, possibly modified by additional text or comment.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">부가적인 텍스트 또는 해설로 수정될 수 있는, 다른 위치로 참조를 정의한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">標明與其他位置互相參照的符號，或許包含附加的文字或註解。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-05" xml:lang="ja">他の場所への参照を定義する。多くは、追加テキストまたはコメントを含む。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">définit une référence vers un autre emplacement, la référence étant éventuellement modifiée ou complétée par un texte ou un commentaire.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">define una referencia a otra localización, posiblemente
     modificada por un texto o comentario adicional.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">definisce un riferimento ad un'altra posizione, può
-    essere modificata da un commento o testo ulteriore</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2016-11-25" xml:lang="de">definiert einen externen oder internen Verweis, der auch durch einen zusätzlichen Text oder Kommentar ergänzt werden kann.</desc><classes xmlns:rng="http://relaxng.org/ns/structure/1.0">
-    <memberOf key="att.cReferencing"/>
-    
-    <memberOf key="att.global"/>
-    <memberOf key="att.internetMedia"/>
-    <memberOf key="att.pointing"/>
-    <memberOf key="att.typed"/>
-    
-    <memberOf key="model.ptrLike"/>
-  </classes><content xmlns:rng="http://relaxng.org/ns/structure/1.0">
-    <macroRef key="macro.paraContent"/>
-  </content><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" scheme="schematron" ident="refAtts">
+    essere modificata da un commento o testo ulteriore</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2016-11-25" xml:lang="de">definiert einen externen oder internen Verweis, der auch durch einen zusätzlichen Text oder Kommentar ergänzt werden kann.</desc><classes><memberOf key="att.pointing"/><memberOf key="model.ptrLike"/></classes><content><textNode/></content><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" scheme="schematron" ident="refAtts">
     <constraint>
       <report xmlns="http://purl.oclc.org/dsdl/schematron" test="@target and @cRef">Only one of the
 	attributes @target' and @cRef' may be supplied on <name/>
          </report>
     </constraint>
-  </constraintSpec><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
+  </constraintSpec><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">See especially <ref target="http://www.natcorp.ox.ac.uk/Texts/A02.xml#s2">the second
       sentence</ref> 
       </egXML>
@@ -4276,7 +3909,7 @@ autor/a/es, ya sea una persona o una institución, de una obra; por ejemplo, en 
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD26">2.2.5. The Series Statement</ref>
   </listRef></elementSpec><elementSpec rend="add" module="core" ident="title"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en" versionDate="2007-06-12">title</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-06-12" xml:lang="fr">titre</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-04" xml:lang="de">Titel</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-10-25" xml:lang="en">contains a title for any kind of work.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">다양한 종류의 작업에 대한 전체 제목을 제공한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">包含任何種類作品的完整題名
                     。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-05" xml:lang="ja">作品の完全なタイトルを示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-06-12" xml:lang="fr">contient le titre complet d'une oeuvre quelconque</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">contiene el título completo de una obra de
-                    cualquier tipo.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">contiene il titolo completo di una qualsiaisi                    opera.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-04" xml:lang="de">beinhaltet einen Titel eines beliebigen Werks.</desc><classes><memberOf key="att.global"/><memberOf key="att.typed"/><memberOf key="model.emphLike"/><memberOf key="att.canonical"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><constraintSpec ident="lang-on-title-in-body" scheme="schematron">
+                    cualquier tipo.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">contiene il titolo completo di una qualsiaisi                    opera.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-04" xml:lang="de">beinhaltet einen Titel eines beliebigen Werks.</desc><classes><memberOf key="att.global"/><memberOf key="att.typed"/><memberOf key="model.emphLike"/><memberOf key="att.canonical"/></classes><content><macroRef xmlns:rng="http://relaxng.org/ns/structure/1.0" key="macro.paraContent"/></content><constraintSpec ident="lang-on-title-in-body" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:text//tei:bibl/tei:title">
                 <sch:assert test="./@xml:lang or ./contains(., 'http://') or ./contains(., 'https://')">A &lt;title&gt; element in a &lt;bibl&gt; 
@@ -4300,7 +3933,32 @@ autor/a/es, ya sea una persona o una institución, de una obra; por ejemplo, en 
                 </sch:assert>
               </sch:rule>
             </constraint>
-          </constraintSpec><attList><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="source" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="level" usage="opt"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2005-03-05" xml:lang="en">indicates the bibliographic level for a title, that is, whether
+          </constraintSpec><attList><attDef ident="type" mode="replace" usage="opt">
+              <desc>Describes the function of the title. This attribute is optional. Certain
+                non-blank values (such as "final-rubric") may cause the title to be moved to a
+                different section of the page.</desc>
+              <datatype>
+                <dataRef key="teidata.enumerated"/>
+              </datatype>
+              <valList mode="change" type="semi">
+                <valItem ident="initial-rubric">
+                  <gloss>Initial Rubric</gloss>
+                  <desc>Text denoting the beginning of a work, usually derived from a manuscript
+                    exemplar. This may include a title of the work, but should be distinguished from
+                    other titles because it also includes non-title text.</desc>
+                </valItem>
+                <valItem ident="final-rubric">
+                  <gloss>Final Rubric</gloss>
+                  <desc>Text denoting the end of a work, usually derived from a manuscript exemplar.
+                    This may include a title of the work, but should be distinguished from other
+                    titles because it also includes non-title text.</desc>
+                </valItem>
+                <valItem ident="abbreviation">
+                  <gloss>Abbreviation</gloss>
+                  <desc>An abbreviation of a work's title.</desc>
+                </valItem>
+              </valList>
+            </attDef><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="source" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="subtype" mode="delete"/><attDef ident="level" usage="opt"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2005-03-05" xml:lang="en">indicates the bibliographic level for a title, that is, whether
                                         it identifies an article, book, journal, series, or
                                         unpublished material.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">제목에 대한 서지적 층위를 나타내어, 논문, 책,
                                         학술지, 총서, 미간행의 여부를 식별한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">指出題名的書目層次，即該題名之所指可以是文章、書籍、期刊、叢書或未出版的項目。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-05" xml:lang="ja">タイトルの書誌情報のレベルを示す。例えば、論文、書籍、雑誌、叢書、 非刊行物など。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-06-12" xml:lang="fr">indique le niveau
@@ -4378,129 +4036,6 @@ doit pas être utilisé.</p>
           erschlossen werden kann. Wenn es in derartigen Kontexten dennoch gesetzt wird, sollte der
           Attributwert dem impliziten Wert des Eltern-Elements nicht widersprechen. 
         </p>
-      </remarks></attDef><attDef ident="type" mode="change" rend="change" usage="opt"><desc rend="replace">Describes the function of the title. This attribute is optional. Certain
-                non-blank values (such as "final-rubric") may cause the title to be moved to a
-                different section of the page.</desc><datatype xmlns:rng="http://relaxng.org/ns/structure/1.0"><dataRef key="teidata.enumerated"/></datatype><valList mode="change" type="semi"><valItem xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="main">
-          <desc versionDate="2007-06-27" xml:lang="en">main title</desc>
-          <desc versionDate="2007-12-20" xml:lang="ko">(주)제목</desc>
-          <desc versionDate="2007-05-02" xml:lang="zh-TW">主要題名</desc>
-          <desc versionDate="2008-04-06" xml:lang="es">título
-principal</desc>
-          <desc versionDate="2008-04-05" xml:lang="ja">主タイトル。</desc>
-          <desc versionDate="2008-03-30" xml:lang="fr">titre
-principal</desc>
-          <desc versionDate="2007-01-21" xml:lang="it">titolo</desc>
-          <desc versionDate="2017-06-04" xml:lang="de">Haupttitel</desc>
-          
-        </valItem><valItem xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="sub">
-          <gloss versionDate="2007-07-04" xml:lang="en">subordinate</gloss>
-          <gloss versionDate="2007-12-20" xml:lang="ko">부</gloss>
-          <gloss versionDate="2007-06-12" xml:lang="fr">titre de
-niveau inférieur, titre de partie</gloss>
-          <gloss versionDate="2007-11-06" xml:lang="it">subordinato</gloss>
-          <gloss versionDate="2007-05-04" xml:lang="es">subtítulo, título de una parte</gloss>
-          <gloss versionDate="2017-06-04" xml:lang="de">untergeordnet</gloss>
-          <desc versionDate="2007-06-27" xml:lang="en">subtitle, title of part</desc>
-          <desc versionDate="2007-12-20" xml:lang="ko">부분의 제목인
-부제목</desc>
-          <desc versionDate="2007-05-02" xml:lang="zh-TW">副題名、部分題名</desc>
-          <desc versionDate="2008-04-06" xml:lang="es">subtítulo, título de una parte</desc>
-          <desc versionDate="2008-04-05" xml:lang="ja">副タイトル、部分タイトル。</desc>
-          <desc versionDate="2008-03-30" xml:lang="fr">sous-titre, titre de partie.</desc>
-          <desc versionDate="2007-01-21" xml:lang="it">sottotitolo, titolo di una parte</desc>
-          <desc versionDate="2017-06-04" xml:lang="de">Untertitel oder Titel eines Teilbereichs</desc>
-        </valItem><valItem xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="alt">
-          <gloss versionDate="2007-07-04" xml:lang="en">alternate</gloss>
-          <gloss versionDate="2007-12-20" xml:lang="ko">이명</gloss>
-          <gloss versionDate="2007-06-12" xml:lang="fr">titre
-alternatif, souvent dans une autre
-langue, par lequel l'oeuvre est
-également connu</gloss>
-          <gloss versionDate="2007-11-06" xml:lang="it">alternativo</gloss>
-          <gloss versionDate="2007-05-04" xml:lang="es">título
-alternativo, a menudo en otra lengua por
-la cual la obra es también conocida.</gloss>
-          <gloss versionDate="2017-06-04" xml:lang="de">alternativ</gloss>
-          <desc versionDate="2007-06-27" xml:lang="en">alternate title, often in another language,
-by which the work is also known</desc>
-          <desc versionDate="2007-12-20" xml:lang="ko">다른 언어에서
-알려진 작품의 다른 이름</desc>
-          <desc versionDate="2007-05-02" xml:lang="zh-TW">替代題名，通常以該作品著名的另一種語言呈現</desc>
-          <desc versionDate="2008-04-06" xml:lang="es">título
-alternativo, a menudo en otro idioma,
-por el cual el trabajo también es
-conocido</desc>
-          <desc versionDate="2008-04-05" xml:lang="ja">別タイトル。多くは他言語によるタイトル。当該作品は、このタイ
-トルで知られている。</desc>
-          <desc versionDate="2008-03-30" xml:lang="fr">autre
-titre, souvent exprimé dans une autre
-langue, par lequel l'ouvrage est aussi
-connu</desc>
-          <desc versionDate="2007-01-21" xml:lang="it">titolo
-alternativo, spesso in altra lingua, con
-il quale è anche conosciuta
-l'opera</desc>
-          <desc versionDate="2017-06-04" xml:lang="de">alternativer Titel, oft in einer anderen Sprache, unter dem das Werk auch bekannt ist.</desc>
-        </valItem><valItem xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="short">
-          <desc versionDate="2007-06-27" xml:lang="en">abbreviated form of title</desc>
-          <desc versionDate="2007-12-20" xml:lang="ko">제목의 축약형</desc>
-          <desc versionDate="2007-05-02" xml:lang="zh-TW">題名的縮寫形式</desc>
-          <desc versionDate="2008-04-06" xml:lang="es">forma
-abreviada del título</desc>
-          <desc versionDate="2008-04-05" xml:lang="ja">タイトルの省略形。</desc>
-          <desc versionDate="2008-03-30" xml:lang="fr">forme
-abrégée du titre</desc>
-          <desc versionDate="2007-01-21" xml:lang="it">abbreviazione del titolo</desc>
-          <desc versionDate="2017-06-04" xml:lang="de">Kurztitel</desc>
-        </valItem><valItem xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="desc">
-          <gloss versionDate="2007-07-04" xml:lang="en">descriptive</gloss>
-          <gloss versionDate="2007-12-20" xml:lang="ko">기술적</gloss>
-          <gloss versionDate="2007-06-12" xml:lang="fr">paraphrase descriptive de l'oeuvre
-ayant les fonctions d'un titre</gloss>
-          <gloss versionDate="2007-11-06" xml:lang="it">descrittivo</gloss>
-          <gloss versionDate="2007-05-04" xml:lang="es">paráfrasis descriptiva que funciona
-como el título de una obra.</gloss>
-          <gloss versionDate="2017-06-04" xml:lang="de">beschreibend</gloss>
-          <desc versionDate="2007-06-27" xml:lang="en">descriptive paraphrase of the work
-functioning as a title</desc>
-          <desc versionDate="2007-12-20" xml:lang="ko">제목으로 기능하는
-작품의 기술적 바꿔쓰기</desc>
-          <desc versionDate="2007-05-02" xml:lang="zh-TW">該作品的描述性改述，可作為題名</desc>
-          <desc versionDate="2008-04-06" xml:lang="es">paráfrasis descriptiva del trabajo que
-funciona como título</desc>
-          <desc versionDate="2008-04-05" xml:lang="ja">タイトルのように当該作品を解説する言い換え。</desc>
-          <desc versionDate="2008-03-30" xml:lang="fr">paraphrase descriptive de l'oeuvre
-fonctionnant comme un titre</desc>
-          <desc versionDate="2007-01-21" xml:lang="it">parafrasi
-descrittiva dell'opera che funge da
-titolo</desc>
-          <desc versionDate="2017-06-04" xml:lang="de">Umschreibung des Werks, die als Titel fungiert.</desc>
-        </valItem></valList><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2005-01-14" xml:lang="en">
-        <p>This attribute is provided for convenience in analysing
-        titles and processing them according to their type; where such
-        specialized processing is not necessary, there is no need for
-        such analysis, and the entire title, including subtitles and
-        any parallel titles, may be enclosed within a single
-        <gi>title</gi> element.</p>
-      </remarks><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="fr" versionDate="2007-06-12">
-        <p>Cet attribut est utile pour analyser les titres et les
-traiter en fonction de leur type ; lorsqu'un tel
-traitement spécifique n'est pas nécessaire, il
-n'est pas utile de donner une telle analyse, et le
-titre entier, sous-titres et titres parallèles
-inclus, peuvent être encodés dans un élément
-<gi>title</gi>.</p>
-      </remarks><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="ja" versionDate="2008-04-05">
-        <p> 当該属性は、タイトルを分析し、処理する際に使用されるものである。
-このような処理を必要としない場合、タイトルを分析する必要はなく、
-副タイトルなどは全て要素<gi>title</gi>の中に入れてしまうことが
-できる。 </p>
-      </remarks><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-04" xml:lang="de">
-        <p>Dieses Attribut wird bereitgestellt, um die Analyse und die Verarbeitung von Titeln auf
-          Basis ihres Typs zu vereinfachen; in Fällen, bei denen ein derart spezielles Vorgehen nicht
-          notwendig ist, ist auch eine entsprechende Analyse nicht notwendig, und der gesamte Titel, inkl.
-          Untertitel und allfälligen parallelen Titeln, kann mit einem einzigen <gi>title</gi>-Element
-          ausgezeichnet werden.</p>
       </remarks></attDef></attList><exemplum versionDate="2017-03-23">
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
               <title xml:id="name1-1" xml:lang="en" srophe:tags="#syriaca-headword">Genesis
@@ -6034,7 +5569,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
     Basisdokuments oder während der Überarbeitung einer elektronischen Datei.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">resume un cambio o corrección determinada llevada a cabo
     en una versión dada de un texto electrónico en el que trabajan diversos investigadores.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">sintetizza un particolare cambiamento o correzione
     effettuato ad una particolare versione di un documento elettronico, condivisa da più
-    ricercatori.</desc><classes><memberOf key="att.ascribed"/><memberOf key="att.docStatus"/><memberOf key="att.typed"/></classes><content><macroRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" key="macro.specialPara"/></content><attList><attDef ident="n">
+    ricercatori.</desc><classes><memberOf key="att.ascribed"/></classes><content><macroRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" key="macro.specialPara"/></content><attList><attDef ident="n">
               <datatype>
                 <dataRef key="teidata.text"/>
               </datatype>
@@ -6058,13 +5593,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                     </sch:assert>
                   </sch:rule>
                 </constraint>
-              </constraintSpec></attDef><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="n" mode="change" usage="opt"/><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="target">
-      <gloss xml:lang="en" versionDate="2016-11-25">target</gloss>
-      <gloss versionDate="2016-11-25" xml:lang="de">Ziel</gloss>
-      <desc versionDate="2011-10-31" xml:lang="en">points to one or more elements that belong to this change.</desc>
-      <desc versionDate="2016-11-25" xml:lang="de">verweist auf ein oder mehrere Elemente, die zu dieser Änderung gehören.  </desc>
-      <datatype minOccurs="1" maxOccurs="unbounded"><dataRef key="teidata.pointer"/></datatype>
-    </attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+              </constraintSpec></attDef><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="n" mode="change" usage="opt"/><attDef ident="target" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
               <revisionDesc>
                 <change when="2013-04-15" who="http://syriaca.org/documentation/editors.xml#ngibson" n="1.1"> ADDED: Pleiades coordinates</change>
@@ -6322,7 +5851,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
     <memberOf key="model.nameLike"/>
   </classes>
   
-</classSpec><elementSpec rend="add" module="namesdates" ident="orgName"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">organization name</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">조직명</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">組織名稱</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">nom d'organisation</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">nombre de una organización</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">nome di organizzazione</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">contains an organizational name.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">조직명을 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">包含一個組織名稱。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">組織の名前を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">contient le nom d'une organisation.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">contiene el nombre de una organización.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">contiene il nome proprio di un'organizzazione</desc><classes><memberOf key="att.global"/><memberOf key="model.nameLike.agent"/><memberOf key="att.datable"/><memberOf key="att.personal"/><memberOf key="att.typed"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+</classSpec><elementSpec rend="add" module="namesdates" ident="orgName"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">organization name</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">조직명</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">組織名稱</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">nom d'organisation</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">nombre de una organización</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">nome di organizzazione</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">contains an organizational name.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">조직명을 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">包含一個組織名稱。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">組織の名前を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">contient le nom d'une organisation.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">contiene el nombre de una organización.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">contiene il nome proprio di un'organizzazione</desc><classes><memberOf key="att.global"/><memberOf key="model.nameLike.agent"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><attList><attDef ident="key" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="source" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">About a year back, a question of considerable interest was agitated in the <orgName key="PAS1" type="voluntary"><placeName key="PEN">Pennsyla.</placeName> Abolition Society</orgName> [...]</egXML>
   </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-06" xml:lang="fr">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
@@ -6512,7 +6041,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
     <p> 要素<gi>roleName</gi>は、役職名などはその当事者とは独立してあるも のであることから、要素<gi>addName</gi>とは異なっている。 </p>
   </remarks><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html#NDPER">13.2.1. Personal Names</ref>
-  </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="placeName"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2020-12-20">place name</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">nom de lieu</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">contains an absolute or relative place name.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">절대적 또는 상대적 위치명을 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">包含一個確切位置或相對位置的名稱。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">絶対的、相対的場所名を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">contient un nom de lieu absolu ou relatif.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">contiene la indicación absoluta o relativa de un nombre de lugar.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">contiene l'indicazione assoluta o relativa di un nome di luogo</desc><classes><memberOf key="att.global"/><memberOf key="att.personal"/><memberOf key="model.placeNamePart"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><attList><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+  </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="placeName"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2020-12-20">place name</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">nom de lieu</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">contains an absolute or relative place name.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">절대적 또는 상대적 위치명을 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">包含一個確切位置或相對位置的名稱。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">絶対的、相対的場所名を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">contient un nom de lieu absolu ou relatif.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">contiene la indicación absoluta o relativa de un nombre de lugar.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">contiene l'indicazione assoluta o relativa di un nome di luogo</desc><classes><memberOf key="att.global"/><memberOf key="model.placeNamePart"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><attList><attDef ident="xml:id" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="role" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
       <placeName>
         <settlement>Rochester</settlement>
@@ -6583,25 +6112,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
   </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="birth"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2008-12-09">birth</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">naissance</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">contains information about a person's birth, such as its date and place.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">날짜, 장소와 같이 개인의 출생에 관한 정보를 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">包含個人的出生資訊，例如日期及地點等。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">人物の出生に関する情報を示す。例えば、日時や場所など。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">contient des informations sur la naissance d'une
     personne, comme la date et le lieu</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">contiene información relativa al nacimiento de una
     persona, p.ej. fecha y lugar de nacimiento.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">contiene informazioni relative al luogo e alla data di
-    nascita di una persona</desc><classes><memberOf key="att.global"/><memberOf key="att.datable"/><memberOf key="att.dimensions"/><memberOf key="att.naming"/><memberOf key="att.typed"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="true"><elementRef key="date" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/></sequence></content><attList><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="type" usage="opt" mode="change">
-      <datatype>
-	<dataRef key="teidata.enumerated"/>
-      </datatype>
-      <valList type="open" mode="add">
-	<valItem ident="caesarean">
-	  <gloss xml:lang="en" versionDate="2017-06-23">caesarean section</gloss>
-	</valItem>
-	<valItem ident="vaginal">
-	  <gloss xml:lang="en" versionDate="2017-06-23">vaginal delivery</gloss>
-	</valItem>
-	<valItem ident="exNihilo">
-	  <gloss xml:lang="en" versionDate="2017-06-23">ex nihilo</gloss>
-	</valItem>
-	<valItem ident="incorporated"/>
-	<valItem ident="founded"/>
-	<valItem ident="established"/>
-      </valList>
-    </attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+    nascita di una persona</desc><classes/><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="true"><elementRef key="date" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/></sequence></content><attList><attDef ident="type" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
       <birth>Before 1920, Midlands region.</birth>
     </egXML>
@@ -6630,25 +6141,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
     </egXML>
   </exemplum><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CC.html#CCAHPA">15.2.2. The Participant Description</ref>
-  </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="death"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2008-12-09">death</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">décès</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-12-13" xml:lang="en">contains information about a person's death, such as its date and place.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">날짜, 장소와 같이 개인의 죽음과 관련된 정보를 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">包含個人的死亡資訊，例如日期及地點等。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">人物の死亡に関する情報を示す。例えば、日付や場所など。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">contient des informations sur le décès d'une personne, comme la date et le lieu.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">contiene informaciones relativas a la defunción de una persona, del tipo lugar y fecha.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">contiene informazioni relative al luogo e alla data di morte di una persona</desc><classes><memberOf key="att.datable"/><memberOf key="att.dimensions"/><memberOf key="att.global"/><memberOf key="att.naming"/><memberOf key="att.typed"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="true"><elementRef key="date" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/></sequence></content><attList><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="type" usage="opt" mode="change">
-      <datatype>
-	<dataRef key="teidata.enumerated"/>
-      </datatype>
-      <valList type="open" mode="add">
-	<valItem ident="proclaimed"/>
-	<valItem ident="assumed"/>
-	<valItem ident="verified"/>
-	<valItem ident="clinical"/>
-	<valItem ident="brain"/>
-	<valItem ident="natural"/>
-	<valItem ident="unnatural"/>
-	<valItem ident="fragmentation"/>
-	<valItem ident="dissolution"/>
-      </valList>
-      <remarks xml:lang="en" versionDate="2017-06-23">
-	<p>This attribute is not intended to express the cause of death.</p>
-      </remarks>
-    </attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="und">
+  </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="death"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2008-12-09">death</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">décès</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-12-13" xml:lang="en">contains information about a person's death, such as its date and place.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">날짜, 장소와 같이 개인의 죽음과 관련된 정보를 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">包含個人的死亡資訊，例如日期及地點等。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">人物の死亡に関する情報を示す。例えば、日付や場所など。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">contient des informations sur le décès d'une personne, comme la date et le lieu.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">contiene informaciones relativas a la defunción de una persona, del tipo lugar y fecha.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">contiene informazioni relative al luogo e alla data di morte di una persona</desc><classes/><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="true"><elementRef key="date" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/></sequence></content><attList><attDef ident="type" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="und">
     <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#UND">
       <death when="1902-10-01"/>
     </egXML>
@@ -6710,7 +6203,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
     </egXML>
   </exemplum><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html#NDPERSbp">13.3.1. Basic Principles</ref>
-  </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="floruit"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2008-12-09">floruit</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">période d'activité</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2006-06-21" xml:lang="en">contains information about a person's period of activity.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">개인의 활동 기간에 대한 정보를 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">包含個人活動時期的相關資訊。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">人物が活躍した時期に関する情報を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">contient des informations sur la période d'activité d'une personne.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">contiene información relativa al periodo de actividad de una persona.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">contiene informazioni relative al periodod di attività di una persona</desc><classes><memberOf key="att.global"/><memberOf key="att.datable"/><memberOf key="att.dimensions"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="date" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="1"/><textNode/></sequence></content><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="und">
+  </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="floruit"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2008-12-09">floruit</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">période d'activité</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2006-06-21" xml:lang="en">contains information about a person's period of activity.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">개인의 활동 기간에 대한 정보를 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">包含個人活動時期的相關資訊。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">人物が活躍した時期に関する情報を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">contient des informations sur la période d'activité d'une personne.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">contiene información relativa al periodo de actividad de una persona.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">contiene informazioni relative al periodod di attività di una persona</desc><classes><memberOf key="att.global"/><memberOf key="att.datable"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="date" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="1"/><textNode/></sequence></content><attList><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="previous" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="und">
     <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#UND">
       <floruit notBefore="1066" notAfter="1100"/>
     </egXML>
@@ -6723,7 +6216,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
     </egXML>
   </exemplum><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html#NDPERSEpc">13.3.2.1. Personal Characteristics</ref>
-  </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="gender"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2022-05-03">gender</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-17" xml:lang="en">specifies the gender identity of a person, persona, or character.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-03" xml:lang="es">especifica la identidad de género de una persona.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-03" xml:lang="it">specifica l'identità di genere di una persona.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-09-21" xml:lang="ja">人、ペルソナ、あるいはキャラクターのジェンダーを示す。</desc><classes><memberOf key="att.global"/><memberOf key="att.datable"/><memberOf key="att.typed"/></classes><content><textNode/></content><attList><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="value" usage="opt">
+  </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="gender"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2022-05-03">gender</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-17" xml:lang="en">specifies the gender identity of a person, persona, or character.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-03" xml:lang="es">especifica la identidad de género de una persona.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-03" xml:lang="it">specifica l'identità di genere di una persona.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-09-21" xml:lang="ja">人、ペルソナ、あるいはキャラクターのジェンダーを示す。</desc><classes><memberOf key="att.global"/></classes><content><textNode/></content><attList><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="source" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="previous" mode="delete"/><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="value" usage="opt">
       <desc versionDate="2022-05-03" xml:lang="en">supplies a coded value for gender identity</desc>
       <datatype minOccurs="1" maxOccurs="unbounded"><dataRef key="teidata.gender"/></datatype>
       <remarks versionDate="2022-08-27" xml:lang="en">
@@ -6762,7 +6255,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
     cuales proporciona información relativa a una persona específica o a un grupo de personas, p.ej,
     los participantes de una interacción verbal o las personas referidas en una fuente histórica.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">contiene una lista di descrizioni, ciascuna delle quali
     fornisce informazioni relative a una persona specifica o a un gruppo di persone, per esempio i
-    partecipanti a un'interazione verbale o le persone identificate da una fonte storica</desc><classes><memberOf key="att.global"/><memberOf key="att.typed"/><memberOf key="att.sortable"/><memberOf key="model.listLike"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><alternate minOccurs="1" maxOccurs="1"><elementRef key="person" minOccurs="1" maxOccurs="1"/><elementRef key="personGrp" minOccurs="1" maxOccurs="1"/></alternate><elementRef key="listRelation" minOccurs="0" maxOccurs="1"/></sequence></content><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+    partecipanti a un'interazione verbale o le persone identificate da una fonte storica</desc><classes><memberOf key="model.listLike"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><alternate minOccurs="1" maxOccurs="1"><elementRef key="person" minOccurs="1" maxOccurs="1"/><elementRef key="personGrp" minOccurs="1" maxOccurs="1"/></alternate><elementRef key="listRelation" minOccurs="0" maxOccurs="1"/></sequence></content><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#UND">
       <listPerson type="respondents">
         <personGrp xml:id="PXXX"/>
@@ -6897,59 +6390,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
         historical source.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">예를 들어 언어 상호작용의 참여자 또는 역사적 문헌에서 언급된 사람과 같이 식별가능한 개인에 관한 정보를 제공한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">提供一個已知人物的相關資料，例如語言互動中的參與者、或是歷史來源中提及的人物。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">特定可能な個人の情報を示す。例えば、言語交流の参加者、歴史資料中で参 照される人物など。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">fournit des informations sur un individu identifiable, par exemple un participant à une interaction
         linguistique, ou une personne citée dans une source historique.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">proporciona información relativa a un individuo específico, p.ej. un participante de una interacción
         verbal o una persona identificada por una fuente histórica.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">fornisce informazioni relative a un soggetto specifico, come i partecipanti a un'interazione verbale o le
-        persone identificate da una fonte storica</desc><classes><memberOf key="att.global"/><memberOf key="att.sortable"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="true"><elementRef key="persName" minOccurs="1" maxOccurs="unbounded"/><elementRef key="link" minOccurs="0" maxOccurs="unbounded"/><elementRef key="idno" minOccurs="1" maxOccurs="unbounded"/><elementRef key="note" minOccurs="0" maxOccurs="unbounded"/><elementRef key="floruit" minOccurs="0" maxOccurs="unbounded"/><elementRef key="birth" minOccurs="0" maxOccurs="unbounded"/><elementRef key="death" minOccurs="0" maxOccurs="unbounded"/><elementRef key="gender" minOccurs="0" maxOccurs="unbounded"/><elementRef key="state" minOccurs="0" maxOccurs="unbounded"/><elementRef key="trait" minOccurs="0" maxOccurs="unbounded"/><elementRef key="event" minOccurs="0" maxOccurs="unbounded"/><elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/></sequence></content><attList><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="role" usage="opt">
-      <desc versionDate="2005-12-14" xml:lang="en">specifies a primary role or classification for the person.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">사람에 대한 주요 역할 또는 분류를 명시한다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">說明該人物的主要角色或分類。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">当該人物の第一位の役割や分類を示す。</desc>
-      <desc versionDate="2009-03-19" xml:lang="fr">précise un rôle principal ou une classification principale pour cette personne.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">establece el rol o la clasificación primaria de una persona.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">stabilisce il ruolo o la classificazione primaria di una persona</desc>
-      <datatype maxOccurs="unbounded"><dataRef key="teidata.enumerated"/></datatype>
-<remarks versionDate="2013-12-21" xml:lang="en">
-        <p>Values for this attribute may be locally defined by a
-	project, using arbitrary keywords such as <val>artist</val>,
-	<val>employer</val>, <val>author</val>, <val>relative</val>, or
-	<val>servant</val>, each of which should be associated with a
-	definition. Such local definitions will typically be provided by a
-	<gi>valList</gi> element in the project schema
-specification.</p></remarks>
-    </attDef><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="sex" usage="opt">
-      <desc versionDate="2005-12-14" xml:lang="en">specifies the sex of the person.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">사람의 성을 명시한다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">指出該人物的性別。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">当該人物の性別を示す。</desc>
-      <desc versionDate="2009-03-19" xml:lang="fr">précise le sexe de la personne.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">especifica el sexo de una persona.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">indica il sesso di una persona</desc>
-      <datatype minOccurs="1" maxOccurs="unbounded"><dataRef key="teidata.sex"/></datatype>
-      <remarks versionDate="2022-08-27" xml:lang="en">
-        <p>Values for this attribute may be defined locally by a project, or they may refer to an external standard.</p>
-      </remarks>
-    </attDef><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="gender" usage="opt">
-      <desc versionDate="2022-05-18" xml:lang="en">specifies the gender of the person.</desc>
-      <datatype minOccurs="1" maxOccurs="unbounded"><dataRef key="teidata.gender"/></datatype>
-      <remarks versionDate="2022-08-27" xml:lang="en">
-        <p>Values for this attribute may be defined locally by a project, or they may refer to an external standard.</p>
-      </remarks>
-    </attDef><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="age" usage="opt">
-      <desc versionDate="2005-12-14" xml:lang="en">specifies an age group for the person.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">사람의 연령군을 명시한다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">指出該人物所屬的年齡層。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">当該人物の年齢層を示す。</desc>
-      <desc versionDate="2009-03-19" xml:lang="fr">précise une tranche d'âge pour la personne.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">especifica un intervalo de edad para una persona.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">indica la fascia di età di una persona</desc>
-      <datatype><dataRef key="teidata.enumerated"/></datatype>
-<remarks versionDate="2013-12-21" xml:lang="en">
-        <p>Values for this attribute may be locally defined by a
-	project, using arbitrary keywords such as <val>infant</val>,
-	<val>child</val>, <val>teen</val>, <val>adult</val>, or
-	<val>senior</val>, each of which should be associated with a
-	definition. Such local definitions will typically be provided by a
-	<gi>valList</gi> element in the project schema
-specification.</p></remarks>
-    </attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+        persone identificate da una fonte storica</desc><classes><memberOf key="att.global"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="true"><elementRef key="persName" minOccurs="1" maxOccurs="unbounded"/><elementRef key="link" minOccurs="0" maxOccurs="unbounded"/><elementRef key="idno" minOccurs="1" maxOccurs="unbounded"/><elementRef key="note" minOccurs="0" maxOccurs="unbounded"/><elementRef key="floruit" minOccurs="0" maxOccurs="unbounded"/><elementRef key="birth" minOccurs="0" maxOccurs="unbounded"/><elementRef key="death" minOccurs="0" maxOccurs="unbounded"/><elementRef key="gender" minOccurs="0" maxOccurs="unbounded"/><elementRef key="state" minOccurs="0" maxOccurs="unbounded"/><elementRef key="trait" minOccurs="0" maxOccurs="unbounded"/><elementRef key="event" minOccurs="0" maxOccurs="unbounded"/><elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/></sequence></content><attList><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="source" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="role" mode="delete"/><attDef ident="sex" mode="delete"/><attDef ident="gender" mode="delete"/><attDef ident="age" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
       <person sex="F" age="adult">
         <p>Female respondent, well-educated, born in Shropshire UK, 12 Jan 1950, of unknown occupation. Speaks French fluently. Socio-Economic
@@ -7029,71 +6470,7 @@ specification.</p></remarks>
   </remarks><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html#NDPERSE">13.3.2. The Person Element</ref>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CC.html#CCAHPA">15.2.2. The Participant Description</ref>
-  </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="personGrp"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">personal group</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">개인군</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">人物團體</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">groupe de personnes</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">grupo de personas</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">gruppo di persone</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">describes a group of individuals treated as a single person for analytic purposes.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">분석적 목적을 위해 하나의 개인으로 처리된 개인군을 기술한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">描述一個為分析目的而被視為單一個人的團體。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">分析上、ひとりの人物として扱われる、個人のグループを示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">décrit un groupe d'individus traité comme une personne unique à des fins d'analyse.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">describe a un grupo de individuos considerados como una única persona para fines analíticos.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">descrive un gruppo di soggetti considerati come unica persona a fini analitici</desc><classes><memberOf key="att.global"/><memberOf key="att.sortable"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="true"><elementRef key="persName" minOccurs="1" maxOccurs="unbounded"/><elementRef key="link" minOccurs="0" maxOccurs="unbounded"/><elementRef key="idno" minOccurs="1" maxOccurs="unbounded"/><elementRef key="note" minOccurs="0" maxOccurs="unbounded"/><elementRef key="floruit" minOccurs="0" maxOccurs="unbounded"/><elementRef key="birth" minOccurs="0" maxOccurs="unbounded"/><elementRef key="death" minOccurs="0" maxOccurs="unbounded"/><elementRef key="gender" minOccurs="0" maxOccurs="unbounded"/><elementRef key="state" minOccurs="0" maxOccurs="unbounded"/><elementRef key="trait" minOccurs="0" maxOccurs="unbounded"/><elementRef key="event" minOccurs="0" maxOccurs="unbounded"/><elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/></sequence></content><attList><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="role" usage="opt">
-      <desc versionDate="2005-01-14" xml:lang="en">specifies the role of this group of participants in the interaction.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">상호작용에서 참여자군의 역할을 명시한다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">說明該團體在互動中所扮演的角色。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">交流の参加者から成る当該グループの役割を示す。</desc>
-      <desc versionDate="2008-12-09" xml:lang="fr">précise le rôle joué par ce groupe de personnes dans l'interaction.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">especifica el role de ese grupo de participantes en la interacción.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">specifica il ruolo del gruppo di partecipanti all'interazione</desc>
-      <datatype><dataRef key="teidata.enumerated"/></datatype>
-
-<remarks versionDate="2013-12-21" xml:lang="en">
-        <p>Values for this attribute may be locally defined by a
-	project, using arbitrary keywords such as <val>movement</val>,
-	<val>employers</val>, <val>relatives</val>, or
-	<val>servants</val>, each of which should be associated with a
-	definition. Such local definitions will typically be provided by a
-	<gi>valList</gi> element in the project schema
-specification.</p></remarks>
-    </attDef><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="sex" usage="opt">
-      <desc versionDate="2005-01-14" xml:lang="en">specifies the sex of the participant group.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">참여자군의 성을 명시한다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">指出該參與團體的性別。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">参加者グループの性別を示す。</desc>
-      <desc versionDate="2009-03-19" xml:lang="fr">précise le sexe du groupe participant.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">especifica el sexo del grupo de participantes.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">indica il sesso del gruppo di partecipanti</desc>
-      <datatype minOccurs="1" maxOccurs="unbounded"><dataRef key="teidata.sex"/></datatype>
-      <remarks versionDate="2022-08-27" xml:lang="en">
-        <p>Values for this attribute may be defined locally by a project, or they may refer to an external standard.</p>
-      </remarks>
-    </attDef><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="gender" usage="opt">
-      <desc versionDate="2022-05-18" xml:lang="en">specifies the gender of the participant group.</desc>
-      <datatype minOccurs="1" maxOccurs="unbounded"><dataRef key="teidata.gender"/></datatype>
-      <remarks versionDate="2022-08-27" xml:lang="en">
-        <p>Values for this attribute may be defined locally by a project, or they may refer to an external standard.</p>
-      </remarks>
-    </attDef><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="age" usage="opt">
-      <desc versionDate="2005-01-14" xml:lang="en">specifies the age group of the participants.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">참여자의 연령군을 명시한다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">指出該參與者所屬的年齡層。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">当該参加者の年齢層を示す。</desc>
-      <desc versionDate="2009-03-19" xml:lang="fr">précise la tranche d'âge des participants.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">especifica el intervalo de edad del grupo de partecipantes.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">indica la fascia di età del gruppo di partecipanti</desc>
-      <datatype><dataRef key="teidata.enumerated"/></datatype>
-<remarks versionDate="2013-12-21" xml:lang="en">
-        <p>Values for this attribute may be locally defined by a
-	project, using arbitrary keywords such as <val>infant</val>,
-	<val>child</val>, <val>teen</val>, <val>adult</val>, or
-	<val>senior</val>, each of which should be associated with a
-	definition. Such local definitions will typically be provided by a
-	<gi>valList</gi> element in the project schema
-specification.</p></remarks>
-    </attDef><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="size" usage="opt">
-      <desc versionDate="2013-12-21" xml:lang="en">describes
-      informally the size or approximate size of the group for example
-      by means of a number and an indication of accuracy e.g. <val>approx 200</val>.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">해당 그룹의 크기 또는 대략적 크기를 명시한다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">提供該團體的 (約略) 大小。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">当該グループのおよその大きさを示す。</desc>
-      <desc versionDate="2009-03-19" xml:lang="fr">précise la taille exacte ou approximative du groupe.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">especifica la dimensión o dimensiones aproximadas del grupo.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">indica le dimensioni (anche approssimative) del gruppo</desc>
-      <datatype maxOccurs="unbounded"><dataRef key="teidata.word"/></datatype>
-    </attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+  </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="personGrp"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">personal group</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">개인군</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">人物團體</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">groupe de personnes</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">grupo de personas</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">gruppo di persone</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">describes a group of individuals treated as a single person for analytic purposes.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">분석적 목적을 위해 하나의 개인으로 처리된 개인군을 기술한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">描述一個為分析目的而被視為單一個人的團體。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">分析上、ひとりの人物として扱われる、個人のグループを示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">décrit un groupe d'individus traité comme une personne unique à des fins d'analyse.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">describe a un grupo de individuos considerados como una única persona para fines analíticos.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">descrive un gruppo di soggetti considerati come unica persona a fini analitici</desc><classes><memberOf key="att.global"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="true"><elementRef key="persName" minOccurs="1" maxOccurs="unbounded"/><elementRef key="link" minOccurs="0" maxOccurs="unbounded"/><elementRef key="idno" minOccurs="1" maxOccurs="unbounded"/><elementRef key="note" minOccurs="0" maxOccurs="unbounded"/><elementRef key="floruit" minOccurs="0" maxOccurs="unbounded"/><elementRef key="birth" minOccurs="0" maxOccurs="unbounded"/><elementRef key="death" minOccurs="0" maxOccurs="unbounded"/><elementRef key="gender" minOccurs="0" maxOccurs="unbounded"/><elementRef key="state" minOccurs="0" maxOccurs="unbounded"/><elementRef key="trait" minOccurs="0" maxOccurs="unbounded"/><elementRef key="event" minOccurs="0" maxOccurs="unbounded"/><elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/></sequence></content><attList><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="source" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="role" mode="delete"/><attDef ident="sex" mode="delete"/><attDef ident="gender" mode="delete"/><attDef ident="age" mode="delete"/><attDef ident="size" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#UND">
       <personGrp xml:id="pg1" role="audience" sex="mixed" size="approx 50"/>
     </egXML>
@@ -7213,7 +6590,7 @@ specification.</p></remarks>
     
   </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="state"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2009-03-19">state</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">statut</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2011-12-01" xml:lang="en">contains a description of some status or quality attributed to a person, place, or organization often at some specific time or for a specific date range.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">contient la description d'un statut ou d'une qualité actuels attribués à une personne, un lieu ou une
         organisation.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">개인, 장소, 또는 조직에 관련한 현재 지위 또는 특성 기술을 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">標明分界方法所定義的權威參照標準裡其中ㄧ個組件。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">人物、場所、組織などの、現在の社会的状態や地位を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2018-07-18" xml:lang="de">enthält eine Beschreibung eines Status oder einer Qualität, die einer Person, einem Ort oder einer Organisation 
-    oft zu einem bestimmten Zeitpunkt oder für einen bestimmten Zeitraum zugeordnet wird.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">especifica un componente de una referencia canónica definida por el método milestone (hito).</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">specifica un componente di un riferimento canonico definito dal metodo milestone.</desc><classes><memberOf key="att.canonical"/><memberOf key="att.global"/><memberOf key="att.datable"/><memberOf key="att.typed"/><memberOf key="model.placeStateLike"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="desc" minOccurs="1" maxOccurs="1"/><elementRef key="precision" minOccurs="0" maxOccurs="unbounded"/></sequence></content><attList><attDef ident="key" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+    oft zu einem bestimmten Zeitpunkt oder für einen bestimmten Zeitraum zugeordnet wird.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">especifica un componente de una referencia canónica definida por el método milestone (hito).</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">specifica un componente di un riferimento canonico definito dal metodo milestone.</desc><classes><memberOf key="att.canonical"/><memberOf key="att.global"/><memberOf key="att.datable"/><memberOf key="att.typed"/><memberOf key="model.placeStateLike"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="desc" minOccurs="0" maxOccurs="1"/><elementRef key="precision" minOccurs="0" maxOccurs="unbounded"/></sequence></content><attList><attDef ident="key" mode="delete"/><attDef ident="subtype" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
         <state ref="#SCHOL" type="status">
           <label>scholar</label>
@@ -7272,7 +6649,7 @@ specification.</p></remarks>
     independent of the volition or action of the holder and usually not at some specific time or for a specific date range.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-01-05" xml:lang="fr">contient la description d'une caractéristique culturelle
     et en principe permanente, attribuée à une personne ou à un lieu.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">사람 또는 장소에 관한, 문화적으로 결정된 특성 기술을 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">人物や場所の文化的な特性を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">contiene la descripción de una característica personal o
     cultural determinada atribuida a una persona.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">contiene la descrizione di una caratteristica personale o
-    legata alla cultura di appartenenza di una determinata persona</desc><classes><memberOf key="att.global"/><memberOf key="att.datable"/><memberOf key="att.naming"/><memberOf key="att.typed"/><memberOf key="model.placeStateLike"/><memberOf key="att.dimensions"/></classes><content><elementRef key="desc" minOccurs="1" maxOccurs="1"/></content><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="zh-TW">
+    legata alla cultura di appartenenza di una determinata persona</desc><classes><memberOf key="att.global"/><memberOf key="att.datable"/><memberOf key="att.typed"/><memberOf key="model.placeStateLike"/></classes><content><elementRef key="desc" minOccurs="1" maxOccurs="1"/></content><attList><attDef ident="subtype" mode="delete"/><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="zh-TW">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
       <trait type="physical">
         <label>眼珠顏色</label>

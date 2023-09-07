@@ -42,7 +42,7 @@
       <schemaSpec ident="syriacaAll" prefix="tei_" source="srophe.compiled.odd" xml:lang="en" defaultExceptions="http://www.tei-c.org/ns/1.0 teix:egXML​ http://www.example.org/ns/">
         <moduleRef key="tei"/>
         <moduleRef key="certainty" include="precision"/>
-        <moduleRef key="core" include="abbr author bibl biblScope choice citedRange corr date desc editor expan foreign listBibl measure name note orig p ptr quote reg ref resp respStmt sic title"/>
+        <moduleRef key="core" include="abbr author bibl biblScope choice citedRange date desc editor expan foreign listBibl measure name note orig p ptr quote reg ref resp respStmt title"/>
         <moduleRef key="dictionaries" include="entryFree"/>
         <moduleRef key="header" include="authority availability catDesc category change classDecl edition editionStmt editorialDecl encodingDesc fileDesc funder idno interpretation langUsage licence principal profileDesc publicationStmt revisionDesc seriesStmt sourceDesc sponsor taxonomy teiHeader titleStmt"/>
         <moduleRef key="linking" include="link"/>
@@ -87,186 +87,13 @@
         </classSpec>
         
         
-        <!--<dataSpec ident="teidata.language" mode="change" module="tei">
-          <!-\- Should this be ingested into the Taxonomy? We could we use keyword URIs instead of these. -\->
-          <valList type="closed">
-            <valItem ident="ar">
-              <gloss>Arabic</gloss>
-              <desc>Arabic of any variety or period</desc>
-            </valItem>
-            <valItem ident="ar-Syrc">
-              <gloss>Arabic—Garshuni</gloss>
-              <desc>Arabic Garshuni in unvocalized or undetermined Syriac script</desc>
-            </valItem>
-            <valItem ident="ar-Syre">
-              <gloss>Arabic—Garshuni—Estrangela</gloss>
-              <desc>Arabic Garshuni in Estrangela Syriac script</desc>
-            </valItem>
-            <valItem ident="ar-Syrj">
-              <gloss>Arabic—Garshuni—West Syriac</gloss>
-              <desc>Arabic Garshuni in vocalized West Syriac script</desc>
-            </valItem>
-            <valItem ident="ar-Syrn">
-              <gloss>Arabic—Garshuni—East Syriac</gloss>
-              <desc>Arabic Garshuni in vocalized East Syriac script</desc>
-            </valItem>
-            <valItem ident="cop">
-              <gloss>Coptic</gloss>
-              <desc>Coptic of any variety or period</desc>
-            </valItem>
-            <valItem ident="cu">
-              <gloss>Slavonic—Old Church</gloss>
-              <desc>Old Church Slavonic</desc>
-            </valItem>
-            <valItem ident="de">
-              <gloss>German</gloss>
-              <desc>German of any variety or period</desc>
-            </valItem>
-            <valItem ident="de-x-baumstrk">
-              <gloss>German—Baumstark Romanization</gloss>
-              <desc>Names or terms Romanized into German according to the standards adopted by
-                Anton Baumstark's Geschichte der syrischen Literatur.</desc>
-            </valItem>
-            <valItem ident="fr-x-zanetti">
-              <gloss>French—Zanetti</gloss>
-              <desc>Names or terms Romanized into French according to the standards adopted by Ugo Zanetti.</desc>
-            </valItem>
-            <valItem ident="el">
-              <gloss>Greek—Modern</gloss>
-              <desc>Modern Greek after A.D. 1453</desc>
-            </valItem>
-            <valItem ident="en">
-              <gloss>English</gloss>
-              <desc>English of any variety or period</desc>
-            </valItem>
-            <valItem ident="en-x-gedsh">
-              <gloss>English—GEDSH Romanization</gloss>
-              <desc>Names or terms Romanized into English according to the standards adopted by
-                the Gorgias Encyclopedic Dictionary of the Syriac Heritage</desc>
-            </valItem>
-            <valItem ident="en-x-lah">
-              <gloss>English—LAH Romanization</gloss>
-              <desc>Names or terms Romanized into English according to the standards adopted by
-                the Late Antique Historiography project.</desc>
-            </valItem>
-            <valItem ident="en-x-srp1">
-              <gloss>English—Syriaca.org Alternate Romanization</gloss>
-              <desc>Names or terms Romanized into English by Syriaca.org using alternate methods
-                for indexing purposes.</desc>
-            </valItem>
-            <valItem ident="es">
-              <gloss>Spanish</gloss>
-              <desc>Spanish</desc>
-            </valItem>
-            <valItem ident="fr">
-              <gloss>French</gloss>
-              <desc>French of any variety or period</desc>
-            </valItem>
-            <valItem ident="fr-x-bhs">
-              <gloss>French—BHS Romanization</gloss>
-              <desc>Names or terms Romanized into French according to the standards adopted by
-                the Bibliotheca Hagiographica Syriaca</desc>
-            </valItem>
-            <valItem ident="fr-x-fiey">
-              <gloss>French—Fiey Romanization</gloss>
-              <desc>Names or terms Romanized into French according to the standards adopted by
-                Fiey, Saints Syriaques</desc>
-            </valItem>
-            <valItem ident="gez">
-              <gloss>Ge'ez</gloss>
-              <desc>Ge'ez</desc>
-            </valItem>
-            <valItem ident="grc">
-              <gloss>Greek—Ancient</gloss>
-              <desc>Ancient Greek to A.D. 1453</desc>
-            </valItem>
-            <valItem ident="hy">
-              <gloss>Armenian</gloss>
-              <desc>Classical or Modern Armenian</desc>
-            </valItem>
-            <valItem ident="it">
-              <gloss>Italian</gloss>
-              <desc>Italian</desc>
-            </valItem>
-            <valItem ident="ka">
-              <gloss>Georgian</gloss>
-              <desc>Classical or Modern Georgian</desc>
-            </valItem>
-            <valItem ident="la">
-              <gloss>Latin</gloss>
-              <desc>Latin of any variety or period</desc>
-            </valItem>
-            <valItem ident="mal">
-              <gloss>Malayalam</gloss>
-              <desc>Malayalam of any variety or period</desc>
-            </valItem>
-            <valItem ident="mal-Syrc">
-              <gloss>Malayalam—Garshuni</gloss>
-              <desc>Malayalam Garshuni in unvocalized or undetermined Syriac script</desc>
-            </valItem>
-            <valItem ident="mal-Syre">
-              <gloss>Malayalam—Garshuni—Estrangela</gloss>
-              <desc>Malayalam Garshuni in Estrangela Syriac script</desc>
-            </valItem>
-            <valItem ident="mal-Syrj">
-              <gloss>Malayalam—Garshuni—West Syriac</gloss>
-              <desc>Malayalam Garshuni in vocalized West Syriac script</desc>
-            </valItem>
-            <valItem ident="mal-Syrn">
-              <gloss>Malayalam—Garshuni—East Syriac</gloss>
-              <desc>Malayalam Garshuni in vocalized East Syriac script</desc>
-            </valItem>
-            <valItem ident="nl">
-              <gloss>Dutch</gloss>
-              <desc>Dutch</desc>
-            </valItem>
-            <valItem ident="pt">
-              <gloss>Portuguese</gloss>
-              <desc>Portuguese</desc>
-            </valItem>
-            <valItem ident="ru">
-              <gloss>Russian</gloss>
-              <desc>Russian</desc>
-            </valItem>
-            <valItem ident="syr">
-              <gloss>Syriac</gloss>
-              <desc>Syriac of any variety or period</desc>
-            </valItem>
-            <valItem ident="syr-Syre">
-              <gloss>Syriac—Estrangela script</gloss>
-              <desc>Syriac in Estrangela script</desc>
-            </valItem>
-            <valItem ident="syr-Syrj">
-              <gloss>Syriac—West</gloss>
-              <desc>Syriac in vocalized West Syriac script</desc>
-            </valItem>
-            <valItem ident="syr-Syrn">
-              <gloss>Syriac—East</gloss>
-              <desc>Syriac in vocalized East Syriac script</desc>
-            </valItem>
-            <valItem ident="syr-x-syrm">
-              <gloss>Syriac—Melkite script</gloss>
-              <desc>Syriac in Melkite script. Note: This is not an ISO code but a private use
-                code for Melkite employed by Syriaca.org until an ISO code is created</desc>
-            </valItem>
-            <valItem ident="sog">
-              <gloss>Sogdian</gloss>
-              <desc>Sogdian</desc>
-            </valItem>
-            <valItem ident="tr">
-              <gloss>Turkish</gloss>
-              <desc>Turkish</desc>
-            </valItem>
-          </valList>
-        </dataSpec>-->
-        
-        
+               
         <classSpec ident="att.global" mode="change" module="tei" type="atts">
           <attList>
             <attDef ident="xml:base" mode="delete"/>
             <attDef ident="xml:space" mode="delete"/>
             <attDef ident="xml:lang" mode="change">
-              <valList type="closed">
+              <valList type="closed" mode="replace">
                 <!-- Should this be ingested into the Taxonomy? We could we use keyword URIs instead of these. -->
                 <valItem ident="ar">
                   <gloss>Arabic</gloss>
@@ -669,8 +496,11 @@
             <memberOf key="att.datable" mode="delete"/>
             <memberOf key="att.global" mode="delete"/>
             <memberOf key="att.pointing" mode="delete"/>
+            <memberOf key="att.typed" mode="delete"/>
+            <memberOf key="att.docStatus" mode="delete"/>
           </classes>
           <attList>
+            <attDef ident="target" mode="delete"/>
             <attDef ident="n" mode="add">
               <datatype>
                 <dataRef key="teidata.text"/>
@@ -711,16 +541,10 @@
             <memberOf key="att.global" mode="delete"/>
           </classes>
           <content>
-            <alternate>
-              <sequence preserveOrder="false">
-                <elementRef key="orig" minOccurs="1" maxOccurs="1"/>
-                <elementRef key="reg" minOccurs="1" maxOccurs="1"/>
-              </sequence>
-              <sequence preserveOrder="false">
-                <elementRef key="sic" minOccurs="1" maxOccurs="1"/>
-                <elementRef key="corr" minOccurs="1" maxOccurs="1"/>
-              </sequence>
-            </alternate>
+            <sequence preserveOrder="true">
+              <elementRef key="orig" minOccurs="1" maxOccurs="1"/>
+              <elementRef key="reg" minOccurs="1" maxOccurs="1"/>
+            </sequence>
           </content>
         </elementSpec>
         
@@ -733,16 +557,6 @@
           <content>
             <textNode/>
           </content>
-        </elementSpec>
-        
-        
-        
-        <elementSpec ident="corr" module="core" mode="change">
-          <classes mode="change">
-            <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.editLike" mode="delete"/>
-            <memberOf key="att.typed" mode="delete"/>
-          </classes>
         </elementSpec>
         
         
@@ -1116,6 +930,9 @@
           <classes mode="change">
             <memberOf key="att.global" mode="delete"/>
           </classes>
+          <content>
+            <elementRef key="date" minOccurs="1" maxOccurs="1"/>
+          </content>
         </elementSpec>
         
         
@@ -1215,6 +1032,7 @@
             <attDef ident="n" mode="delete"/>
             <attDef ident="ana" mode="delete"/>
             <attDef ident="change" mode="delete"/>
+            <attDef ident="role" mode="delete"/>
             <attDef ident="previous" mode="delete"/>
             <attDef ident="rend" mode="delete"/>
             <attDef ident="corresp" mode="delete"/>
@@ -1298,7 +1116,7 @@
             <memberOf key="att.cReferencing" mode="delete"/>
           </classes>
           <attList>
-            <attDef ident="target" mode="change">
+            <attDef ident="target" mode="change" usage="req">
               <constraintSpec ident="target-in-ptr" scheme="schematron">
                 <constraint>
                   <sch:rule context="//tei:body//tei:bibl/tei:ptr/@target" role="warning">
@@ -1355,12 +1173,29 @@
         
         
         
+        <elementSpec ident="ref" module="core" mode="change">
+          <classes mode="change">
+            <memberOf key="att.global" mode="delete"/>
+            <memberOf key="att.cReferencing" mode="delete"/>
+            <memberOf key="att.internetMedia" mode="delete"/>
+            <memberOf key="att.typed" mode="delete"/>
+          </classes>
+          <content>
+            <textNode/>
+          </content>
+        </elementSpec>
+        
+        
+        
         <elementSpec ident="reg" module="core" mode="change">
           <classes mode="change">
             <memberOf key="att.global" mode="delete"/>
             <memberOf key="att.editLike" mode="delete"/>
             <memberOf key="att.typed" mode="delete"/>
           </classes>
+          <content>
+            <elementRef key="date" minOccurs="1" maxOccurs="1"/>
+          </content>
         </elementSpec>
         
         
@@ -1416,14 +1251,6 @@
         
         
         
-        <elementSpec ident="sic" module="core" mode="change">
-          <classes mode="change">
-            <memberOf key="att.global" mode="delete"/>
-          </classes>
-        </elementSpec>
-        
-        
-        
         <elementSpec ident="sourceDesc" module="header" mode="change">
           <content>
             <elementRef key="p" minOccurs="1" maxOccurs="1"/>
@@ -1455,7 +1282,6 @@
         
         <elementSpec ident="state" module="namesdates" mode="change">
           <classes mode="change">
-            <memberOf key="att.editLike" mode="delete"/>
             <memberOf key="att.naming" mode="delete"/>
             <memberOf key="att.dimensions" mode="delete"/>
             <memberOf key="att.ranging" mode="delete"/>
@@ -1469,6 +1295,7 @@
           </content>
           <attList>
             <attDef ident="key" mode="delete"/>
+            <attDef ident="subtype" mode="delete"/>
             <attDef ident="n" mode="delete"/>
             <attDef ident="xml:lang" mode="delete"/>
             <attDef ident="ana" mode="delete"/>
@@ -1542,10 +1369,14 @@
             <attDef ident="resp" mode="delete"/>
             <attDef ident="source" mode="delete"/>
             <attDef ident="corresp" mode="delete"/>
-            <attDef ident="type" mode="change" usage="opt">
+            <attDef ident="subtype" mode="delete"/>
+            <attDef ident="type" mode="replace" usage="opt">
               <desc>Describes the function of the title. This attribute is optional. Certain
                 non-blank values (such as "final-rubric") may cause the title to be moved to a
                 different section of the page.</desc>
+              <datatype>
+                <dataRef key="teidata.enumerated"/>
+              </datatype>
               <valList mode="change" type="semi">
                 <valItem ident="initial-rubric">
                   <gloss>Initial Rubric</gloss>
