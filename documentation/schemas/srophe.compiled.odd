@@ -12018,23 +12018,21 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD6">2.6. The Revision Description</ref>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD4C">2.4.1. Creation</ref>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/PH.html#PH-changes">11.7. Identifying Changes and Revisions</ref>
-  </listRef></elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" rend="change" module="linking" ident="link"><gloss xml:lang="en" versionDate="2007-06-12">link</gloss><gloss versionDate="2007-06-12" xml:lang="fr"> lien</gloss><desc versionDate="2005-01-14" xml:lang="en">defines an association or hypertextual link among elements or passages, of some type not more precisely specifiable by other elements.</desc><desc versionDate="2007-12-20" xml:lang="ko">다른 요소들에 의해 좀 더 명확하게 명시되지 않는 유형의 요소 또는 단락들의 연관 또는 하이퍼텍스트 연결을 정의한다.</desc><desc versionDate="2007-05-02" xml:lang="zh-TW">定義元素或段落之間的關連或超文字連結，其他元素無法將此連結類型作更詳細說明。</desc><desc versionDate="2008-04-05" xml:lang="ja">他の要素では上手く示せない、要素や一節間にある関連性やハイパーテキス トリンクを定義する。</desc><desc versionDate="2007-06-12" xml:lang="fr">définit une association ou un lien hypertextuel entre des éléments ou des passages, lien dont le type ne peut être spécifié précisément par d'autres éléments.</desc><desc versionDate="2007-05-04" xml:lang="es">define una asociación o vínculo hipertextual entre elementos o fragmentos de texto que no es especificable por otros elementos.</desc><desc versionDate="2007-01-21" xml:lang="it">definisce tra elementi o porzioni di testo un'associazione o legame ipertestuale non meglio specificabile da altri elementi</desc><classes><memberOf key="att.pointing"/><memberOf key="model.global.meta"/></classes><content><empty/></content><constraintSpec ident="linkTargets3" scheme="schematron">
+  </listRef></elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" rend="change" module="linking" ident="link"><gloss xml:lang="en" versionDate="2007-06-12">link</gloss><gloss versionDate="2007-06-12" xml:lang="fr"> lien</gloss><desc versionDate="2005-01-14" xml:lang="en">defines an association or hypertextual link among elements or passages, of some type not more precisely specifiable by other elements.</desc><desc versionDate="2007-12-20" xml:lang="ko">다른 요소들에 의해 좀 더 명확하게 명시되지 않는 유형의 요소 또는 단락들의 연관 또는 하이퍼텍스트 연결을 정의한다.</desc><desc versionDate="2007-05-02" xml:lang="zh-TW">定義元素或段落之間的關連或超文字連結，其他元素無法將此連結類型作更詳細說明。</desc><desc versionDate="2008-04-05" xml:lang="ja">他の要素では上手く示せない、要素や一節間にある関連性やハイパーテキス トリンクを定義する。</desc><desc versionDate="2007-06-12" xml:lang="fr">définit une association ou un lien hypertextuel entre des éléments ou des passages, lien dont le type ne peut être spécifié précisément par d'autres éléments.</desc><desc versionDate="2007-05-04" xml:lang="es">define una asociación o vínculo hipertextual entre elementos o fragmentos de texto que no es especificable por otros elementos.</desc><desc versionDate="2007-01-21" xml:lang="it">definisce tra elementi o porzioni di testo un'associazione o legame ipertestuale non meglio specificabile da altri elementi</desc><classes><memberOf key="att.pointing"/><memberOf key="model.global.meta"/></classes><content><empty/></content><constraintSpec ident="target-on-link" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:link/@target">
+                <sch:let name="allIDs" value="//@xml:id"/>
+                <sch:let name="targetVals" value="for $i in $allIDs return concat('#', $i)"/>
+                <sch:assert test="                   every $i in (tokenize(., ' '))                   satisfies $i = $targetVals">A &lt;link&gt; element takes a @target attribute with two or more of the
+                  following values: <sch:value-of select="string-join($targetVals, ' | ')"/>.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="linkTargets3" scheme="schematron">
     <constraint>
       <sch:assert test="contains(normalize-space(@target),' ')">You must supply at least two values for @target or  on <sch:name/></sch:assert>
     </constraint>
-  </constraintSpec><attList><attDef ident="targetLang" mode="delete"/><attDef ident="evaluate" mode="delete"/><attDef ident="target" mode="change">
-              <constraintSpec ident="target-on-link" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//tei:link/@target">
-                    <sch:let name="allIDs" value="//@xml:id"/>
-                    <sch:let name="targetVals" value="for $i in $allIDs return concat('#', $i)"/>
-                    <sch:assert test="                   every $i in (tokenize(., ' '))                   satisfies $i = $targetVals">A &lt;link&gt; element takes a @target attribute with two or more of the
-                      following values: <sch:value-of select="string-join($targetVals, ' | ')"/>.
-                    </sch:assert>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec>
-            </attDef></attList><exemplum>
+  </constraintSpec><attList><attDef ident="targetLang" mode="delete"/><attDef ident="evaluate" mode="delete"/></attList><exemplum>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
               <event type="attestation" xml:id="attestation2567-2" when="0473" srophe:computed-start="0473-01-01" srophe:computed-end="0473-12-31" source="#bib2567-4">
                 <p xml:lang="en">Attestation of name <foreign xml:lang="syr">ܬܠܢܫܝܢ</foreign> in <title>Vatican Syriac 160</title>.</p>

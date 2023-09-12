@@ -444,6 +444,16 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
+          <constraintSpec ident="xmlID-on-bibl" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:body/tei:listPlace/tei:place/tei:bibl">
+                <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
+                <sch:assert test="matches(./@xml:id, concat('bib', $docURIno, '-', '\d+$'))">
+                  The required @xml:id must be 'bib<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
           <attList>
             <attDef ident="subtype" mode="delete"/>
             <attDef ident="n" mode="delete"/>
@@ -462,21 +472,6 @@
                   <desc>used for bibliographic citation of a manuscript</desc>
                 </valItem>
               </valList>
-            </attDef>
-            <attDef ident="xml:id" mode="change">
-              <datatype>
-                <dataRef key="ID"/>
-              </datatype>
-              <constraintSpec ident="xmlID-on-bibl" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//tei:body/tei:listPlace/tei:place/tei:bibl">
-                    <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
-                    <sch:assert test="matches(./@xml:id, concat('bib', $docURIno, '-', '\d+$'))">
-                      The required @xml:id must be 'bib<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
-                    </sch:assert>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec>
             </attDef>
           </attList>
         </elementSpec>
@@ -499,6 +494,19 @@
             <memberOf key="att.typed" mode="delete"/>
             <memberOf key="att.docStatus" mode="delete"/>
           </classes>
+          <constraintSpec ident="who-on-change" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:revisionDesc//tei:change/@who">
+                <sch:let name="edsDoc" value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/editors.xml')"/>
+                <sch:let name="eds" value="$edsDoc//tei:text/tei:body/tei:listPerson/tei:person/@xml:id"/>
+                <sch:let name="refValues" value="for $i in $eds return concat('http://syriaca.org/documentation/editors.xml#', $i)"/>
+                <sch:assert test="                   every $i in .                   satisfies $i = $refValues">
+                  Acceptable values for the @who attribute on a &lt;change&gt; element inside the &lt;revisionDesc&gt; include: 
+                  <sch:value-of select="string-join($refValues, ' | ')"/>.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
           <attList>
             <attDef ident="target" mode="delete"/>
             <attDef ident="n" mode="add">
@@ -516,21 +524,7 @@
                 <dataRef key="teidata.temporal.w3c"/>
               </datatype>
             </attDef>
-            <attDef ident="who" mode="change" usage="req">
-              <constraintSpec ident="who-on-change" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//tei:revisionDesc//tei:change/@who">
-                    <sch:let name="edsDoc" value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/editors.xml')"/>
-                    <sch:let name="eds" value="$edsDoc//tei:text/tei:body/tei:listPerson/tei:person/@xml:id"/>
-                    <sch:let name="refValues" value="for $i in $eds return concat('http://syriaca.org/documentation/editors.xml#', $i)"/>
-                    <sch:assert test="                   every $i in .                   satisfies $i = $refValues">
-                      Acceptable values for the @who attribute on a &lt;change&gt; element inside the &lt;revisionDesc&gt; include: 
-                      <sch:value-of select="string-join($refValues, ' | ')"/>.
-                    </sch:assert>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec>
-            </attDef>
+            <attDef ident="who" mode="change" usage="req"/>
           </attList>
         </elementSpec>
         
@@ -639,6 +633,33 @@
               <textNode/>
             </sequence>
           </content>
+          <constraintSpec ident="lang-on-desc" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:body//tei:desc">
+                <sch:assert test="./@xml:lang">
+                  All &lt;desc&gt; elements must have an @xml:lang attribute.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:text//tei:desc[@type='abstract']">
+                <sch:let name="countAbs" value="count(//tei:text//tei:desc[@type='abstract'])"/>
+                <sch:let name="countLangs" value="count(distinct-values(//tei:text//tei:desc[@type='abstract']/@xml:lang))"/>
+                <sch:assert test="$countAbs = $countLangs">
+                  There can only be one abstract in a given language. 
+                  Each abstract (&lt;desc&gt; element of @type="abstract") must have a unique @xml:lang attribute.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="xmlID-on-desc" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:text//tei:desc[@type='abstract']">
+                <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
+                <sch:assert test="matches(./@xml:id, concat('abstract', $docURIno, '-', '\d+$'))">
+                  The required @xml:id must be 'abstract<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
           <attList>
             <attDef ident="subtype" mode="delete"/>
             <attDef ident="n" mode="delete"/>
@@ -652,37 +673,7 @@
                 <valItem ident="abstract"/>
               </valList>
             </attDef>
-            <attDef ident="xml:lang" mode="change" usage="rec">
-              <constraintSpec ident="lang-on-desc" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//tei:body//tei:desc">
-                    <sch:assert test="./@xml:lang">
-                      All &lt;desc&gt; elements must have an @xml:lang attribute.
-                    </sch:assert>
-                  </sch:rule>
-                  <sch:rule context="//tei:text//tei:desc[@type='abstract']">
-                    <sch:let name="countAbs" value="count(//tei:text//tei:desc[@type='abstract'])"/>
-                    <sch:let name="countLangs" value="count(distinct-values(//tei:text//tei:desc[@type='abstract']/@xml:lang))"/>
-                    <sch:assert test="$countAbs = $countLangs">
-                      There can only be one abstract in a given language. 
-                      Each abstract (&lt;desc&gt; element of @type="abstract") must have a unique @xml:lang attribute.
-                    </sch:assert>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec>
-            </attDef>
-            <attDef ident="xml:id" mode="change">
-              <constraintSpec ident="xmlID-on-desc" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//tei:text//tei:desc[@type='abstract']">
-                    <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
-                    <sch:assert test="matches(./@xml:id, concat('abstract', $docURIno, '-', '\d+$'))">
-                      The required @xml:id must be 'abstract<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
-                    </sch:assert>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec>
-            </attDef>
+            <attDef ident="xml:lang" mode="change" usage="rec"/>
           </attList>
         </elementSpec>
         
@@ -792,6 +783,20 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
+          <constraintSpec ident="change-on-idno" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:idno[@type='deprecated']">
+                <sch:assert test="@change">
+                  An &lt;idno&gt; element with a @type attribute of "deprecation" must have a @change attribute.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:idno[not(@type='deprecated')]">
+                <sch:report test="@change">
+                  Only an &lt;idno&gt; element with a @type attribute of "deprecation" may have a @change attribute.
+                </sch:report>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
           <attList>
             <attDef ident="subtype" mode="delete"/>
             <attDef ident="xml:id" mode="delete"/>
@@ -802,22 +807,6 @@
             <attDef ident="resp" mode="delete"/>
             <attDef ident="rend" mode="delete"/>
             <attDef ident="corresp" mode="delete"/>
-            <attDef ident="change" mode="change">
-              <constraintSpec ident="change-on-idno" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//tei:idno[@type='deprecated']">
-                    <sch:assert test="@change">
-                      An &lt;idno&gt; element with a @type attribute of "deprecation" must have a @change attribute.
-                    </sch:assert>
-                  </sch:rule>
-                  <sch:rule context="//tei:idno[not(@type='deprecated')]">
-                    <sch:report test="@change">
-                      Only an &lt;idno&gt; element with a @type attribute of "deprecation" may have a @change attribute.
-                    </sch:report>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec>
-            </attDef>
           </attList>
         </elementSpec>
         
@@ -1115,20 +1104,19 @@
             <memberOf key="att.typed" mode="delete"/>
             <memberOf key="att.cReferencing" mode="delete"/>
           </classes>
+          <constraintSpec ident="target-in-ptr" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:body//tei:bibl/tei:ptr/@target" role="warning">
+                <sch:assert test="starts-with(., 'http://syriaca.org/bibl/')">
+                  Under most circumstances, the @target attribute on a &lt;ptr&gt; element should be a properly formatted Syriaca.org bibliography URI 
+                  which starts with 'http://syriaca.org/bibl/' followed by a numerical or alpha-numerical string. However, when the &lt;ptr&gt; element indicates an external web address 
+                  (i.e. http://pleiades.stoa.org/places/922698), the @target should indicate the correct URL for that resource and this warning message should be ignored.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
           <attList>
-            <attDef ident="target" mode="change" usage="req">
-              <constraintSpec ident="target-in-ptr" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//tei:body//tei:bibl/tei:ptr/@target" role="warning">
-                    <sch:assert test="starts-with(., 'http://syriaca.org/bibl/')">
-                      Under most circumstances, the @target attribute on a &lt;ptr&gt; element should be a properly formatted Syriaca.org bibliography URI 
-                      which starts with 'http://syriaca.org/bibl/' followed by a numerical or alpha-numerical string. However, when the &lt;ptr&gt; element indicates an external web address 
-                      (i.e. http://pleiades.stoa.org/places/922698), the @target should indicate the correct URL for that resource and this warning message should be ignored.
-                    </sch:assert>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec>
-            </attDef>
+            <attDef ident="target" mode="change" usage="req"/>
           </attList>
           <remarks mode="add">
             <p>
@@ -1201,10 +1189,38 @@
         
         
         <elementSpec ident="relation" module="namesdates" mode="change">
-          <classes mode="change"><!-- WORK ON THIS -->
+          <classes mode="change">
             <memberOf key="att.sortable" mode="delete"/>
-            <memberOf key="att.typed" mode="add"/>
           </classes>
+          <content>
+            <elementRef key="desc" minOccurs="1" maxOccurs="1"/>
+          </content>
+          <!-- constraintSpec limiting @mutual values to 2 -->
+          <constraintSpec ident="active-count" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:relation/@active">
+                <sch:report test="contains(., ' ')">Space not allowed. This @active attribute can only take one value.</sch:report>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="passive-count" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:relation/@passive">
+                <sch:report test="contains(., ' ')">Space not allowed. This @passive attribute can only take one value.</sch:report>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <attList>
+            <attDef ident="xml:id" mode="delete"/>
+            <attDef ident="n" mode="delete"/>
+            <attDef ident="xml:lang" mode="delete"/>
+            <attDef ident="rend" mode="delete"/>
+            <attDef ident="corresp" mode="delete"/>
+            <attDef ident="change" mode="delete"/>
+            <attDef ident="previous" mode="delete"/>
+            <attDef ident="subtype" mode="delete"/>
+            <attDef ident="name" mode="delete"/>
+          </attList>
         </elementSpec>
         
         

@@ -1062,22 +1062,20 @@
           <content>
             <empty/>
           </content>
+          <constraintSpec ident="target-on-link" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:link/@target">
+                <sch:let name="allIDs" value="//@xml:id"/>
+                <sch:let name="targetVals" value="for $i in $allIDs return concat('#', $i)"/>
+                <sch:assert test="                   every $i in (tokenize(., ' '))                   satisfies $i = $targetVals">A &lt;link&gt; element takes a @target attribute with two or more of the
+                  following values: <sch:value-of select="string-join($targetVals, ' | ')"/>.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
           <attList>
             <attDef ident="targetLang" mode="delete"/>
             <attDef ident="evaluate" mode="delete"/>
-            <attDef ident="target" mode="change">
-              <constraintSpec ident="target-on-link" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//tei:link/@target">
-                    <sch:let name="allIDs" value="//@xml:id"/>
-                    <sch:let name="targetVals" value="for $i in $allIDs return concat('#', $i)"/>
-                    <sch:assert test="                   every $i in (tokenize(., ' '))                   satisfies $i = $targetVals">A &lt;link&gt; element takes a @target attribute with two or more of the
-                      following values: <sch:value-of select="string-join($targetVals, ' | ')"/>.
-                    </sch:assert>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec>
-            </attDef>
           </attList>
           <exemplum>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">

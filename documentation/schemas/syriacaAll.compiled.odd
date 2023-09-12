@@ -5216,7 +5216,32 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
     dell'applicazione di un elemento, attributo, o valore di attributo.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-04" xml:lang="de">enthält eine kurze
   Beschreibung des Objekts, das von seinem übergeordneten Element
   annotiert wird, üblicherweise einem Dokumentationselement oder einer
-  Einheit.</desc><classes><memberOf key="att.global"/><memberOf key="model.descLike"/><memberOf key="att.typed"/><memberOf key="model.labelLike"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="choice" minOccurs="0" maxOccurs="unbounded"/><elementRef key="date" minOccurs="0" maxOccurs="unbounded"/><elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="quote" minOccurs="0" maxOccurs="unbounded"/><elementRef key="title" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="deprecationInfo-only-in-deprecated" scheme="schematron">
+  Einheit.</desc><classes><memberOf key="att.global"/><memberOf key="model.descLike"/><memberOf key="att.typed"/><memberOf key="model.labelLike"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="choice" minOccurs="0" maxOccurs="unbounded"/><elementRef key="date" minOccurs="0" maxOccurs="unbounded"/><elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="quote" minOccurs="0" maxOccurs="unbounded"/><elementRef key="title" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><constraintSpec ident="lang-on-desc" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:body//tei:desc">
+                <sch:assert test="./@xml:lang">
+                  All &lt;desc&gt; elements must have an @xml:lang attribute.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:text//tei:desc[@type='abstract']">
+                <sch:let name="countAbs" value="count(//tei:text//tei:desc[@type='abstract'])"/>
+                <sch:let name="countLangs" value="count(distinct-values(//tei:text//tei:desc[@type='abstract']/@xml:lang))"/>
+                <sch:assert test="$countAbs = $countLangs">
+                  There can only be one abstract in a given language. 
+                  Each abstract (&lt;desc&gt; element of @type="abstract") must have a unique @xml:lang attribute.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="xmlID-on-desc" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:text//tei:desc[@type='abstract']">
+                <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
+                <sch:assert test="matches(./@xml:id, concat('abstract', $docURIno, '-', '\d+$'))">
+                  The required @xml:id must be 'abstract<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="deprecationInfo-only-in-deprecated" scheme="schematron">
     <desc versionDate="2018-09-13" xml:lang="en">A <gi>desc</gi> with
     a <att>type</att> of <val>deprecationInfo</val> should only occur
     when its parent element is being deprecated. Furthermore, it
@@ -5231,36 +5256,7 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
         type="deprecationInfo"&gt;.</sch:assert>
       </sch:rule>
     </constraint>
-  </constraintSpec><attList><attDef ident="subtype" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="xml:lang" mode="change" usage="rec">
-              <constraintSpec ident="lang-on-desc" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//tei:body//tei:desc">
-                    <sch:assert test="./@xml:lang">
-                      All &lt;desc&gt; elements must have an @xml:lang attribute.
-                    </sch:assert>
-                  </sch:rule>
-                  <sch:rule context="//tei:text//tei:desc[@type='abstract']">
-                    <sch:let name="countAbs" value="count(//tei:text//tei:desc[@type='abstract'])"/>
-                    <sch:let name="countLangs" value="count(distinct-values(//tei:text//tei:desc[@type='abstract']/@xml:lang))"/>
-                    <sch:assert test="$countAbs = $countLangs">
-                      There can only be one abstract in a given language. 
-                      Each abstract (&lt;desc&gt; element of @type="abstract") must have a unique @xml:lang attribute.
-                    </sch:assert>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec>
-            </attDef><attDef ident="xml:id" mode="change">
-              <constraintSpec ident="xmlID-on-desc" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//tei:text//tei:desc[@type='abstract']">
-                    <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
-                    <sch:assert test="matches(./@xml:id, concat('abstract', $docURIno, '-', '\d+$'))">
-                      The required @xml:id must be 'abstract<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
-                    </sch:assert>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec>
-            </attDef><attDef ident="type" mode="change" rend="change"><valList xmlns:rng="http://relaxng.org/ns/structure/1.0" type="semi" mode="add">
+  </constraintSpec><attList><attDef ident="subtype" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="xml:lang" mode="change" usage="rec"/><attDef ident="type" mode="change" rend="change"><valList xmlns:rng="http://relaxng.org/ns/structure/1.0" type="semi" mode="add">
         <valItem ident="deprecationInfo">
           <gloss versionDate="2018-09-14" xml:lang="en">deprecation
           information</gloss>
@@ -6020,24 +6016,22 @@ Measures</ref>
       entweder in einem <gi>normalization</gi>- oder einem <gi>p</gi>-Element.</p>
   </remarks><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0">
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#CONAAB">3.6.5. Abbreviations and Their Expansions</ref>
-  </listRef></elementSpec><elementSpec rend="add" module="core" ident="ptr"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-07-04" xml:lang="en">pointer</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">포인터</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW"/><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-06" xml:lang="es">puntero</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">pointeur</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-11-06" xml:lang="it">puntatore</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2006-01-11" xml:lang="en">defines a pointer to another location.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">다른 위치로의 포인터를 정의한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">標明一個與其他位置相連結的指標。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-05" xml:lang="ja">他の場所を示すポインターを定義する。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">définit un pointeur vers un autre emplacement.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">define un señalizador a otra localización.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">definisce un puntatore ad un'altra posizione.</desc><classes><memberOf key="att.pointing"/><memberOf key="model.ptrLike"/></classes><content><empty xmlns:rng="http://relaxng.org/ns/structure/1.0"/></content><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" scheme="schematron" ident="ptrAtts">
+  </listRef></elementSpec><elementSpec rend="add" module="core" ident="ptr"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-07-04" xml:lang="en">pointer</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">포인터</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW"/><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-06" xml:lang="es">puntero</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">pointeur</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-11-06" xml:lang="it">puntatore</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2006-01-11" xml:lang="en">defines a pointer to another location.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">다른 위치로의 포인터를 정의한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">標明一個與其他位置相連結的指標。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-05" xml:lang="ja">他の場所を示すポインターを定義する。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">définit un pointeur vers un autre emplacement.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">define un señalizador a otra localización.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">definisce un puntatore ad un'altra posizione.</desc><classes><memberOf key="att.pointing"/><memberOf key="model.ptrLike"/></classes><content><empty xmlns:rng="http://relaxng.org/ns/structure/1.0"/></content><constraintSpec ident="target-in-ptr" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:body//tei:bibl/tei:ptr/@target" role="warning">
+                <sch:assert test="starts-with(., 'http://syriaca.org/bibl/')">
+                  Under most circumstances, the @target attribute on a &lt;ptr&gt; element should be a properly formatted Syriaca.org bibliography URI 
+                  which starts with 'http://syriaca.org/bibl/' followed by a numerical or alpha-numerical string. However, when the &lt;ptr&gt; element indicates an external web address 
+                  (i.e. http://pleiades.stoa.org/places/922698), the @target should indicate the correct URL for that resource and this warning message should be ignored.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" scheme="schematron" ident="ptrAtts">
     <constraint>
       <report xmlns="http://purl.oclc.org/dsdl/schematron" test="@target and @cRef">Only one of the
 attributes @target and @cRef may be supplied on <name/>.</report>
     </constraint>
-  </constraintSpec><attList><attDef ident="target" mode="change" usage="req">
-              <constraintSpec ident="target-in-ptr" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//tei:body//tei:bibl/tei:ptr/@target" role="warning">
-                    <sch:assert test="starts-with(., 'http://syriaca.org/bibl/')">
-                      Under most circumstances, the @target attribute on a &lt;ptr&gt; element should be a properly formatted Syriaca.org bibliography URI 
-                      which starts with 'http://syriaca.org/bibl/' followed by a numerical or alpha-numerical string. However, when the &lt;ptr&gt; element indicates an external web address 
-                      (i.e. http://pleiades.stoa.org/places/922698), the @target should indicate the correct URL for that resource and this warning message should be ignored.
-                    </sch:assert>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec>
-            </attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="und">
+  </constraintSpec><attList><attDef ident="target" mode="change" usage="req"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="und">
     <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#UND">
       <ptr target="#p143 #p144"/>
       <ptr target="http://www.tei-c.org"/>
@@ -6886,6 +6880,15 @@ doit pas être utilisé.</p>
                   @type="syriaca:Manuscript".</sch:assert>
               </sch:rule>
             </constraint>
+          </constraintSpec><constraintSpec ident="xmlID-on-bibl" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:body/tei:listPlace/tei:place/tei:bibl">
+                <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
+                <sch:assert test="matches(./@xml:id, concat('bib', $docURIno, '-', '\d+$'))">
+                  The required @xml:id must be 'bib<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
+                </sch:assert>
+              </sch:rule>
+            </constraint>
           </constraintSpec><attList><attDef ident="subtype" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="source" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="type" mode="change" usage="opt">
               
               <valList mode="change" type="closed">
@@ -6893,20 +6896,6 @@ doit pas être utilisé.</p>
                   <desc>used for bibliographic citation of a manuscript</desc>
                 </valItem>
               </valList>
-            </attDef><attDef ident="xml:id" mode="change">
-              <datatype>
-                <dataRef key="ID"/>
-              </datatype>
-              <constraintSpec ident="xmlID-on-bibl" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//tei:body/tei:listPlace/tei:place/tei:bibl">
-                    <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
-                    <sch:assert test="matches(./@xml:id, concat('bib', $docURIno, '-', '\d+$'))">
-                      The required @xml:id must be 'bib<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
-                    </sch:assert>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec>
             </attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
       <bibl>Blain, Clements and Grundy: Feminist Companion to Literature in English (Yale,
@@ -7843,22 +7832,20 @@ creation of an electronic text.</desc><desc xmlns:rng="http://relaxng.org/ns/str
                 </sch:assert>
               </sch:rule>
             </constraint>
-          </constraintSpec><attList><attDef ident="subtype" mode="delete"/><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="change" mode="change">
-              <constraintSpec ident="change-on-idno" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//tei:idno[@type='deprecated']">
-                    <sch:assert test="@change">
-                      An &lt;idno&gt; element with a @type attribute of "deprecation" must have a @change attribute.
-                    </sch:assert>
-                  </sch:rule>
-                  <sch:rule context="//tei:idno[not(@type='deprecated')]">
-                    <sch:report test="@change">
-                      Only an &lt;idno&gt; element with a @type attribute of "deprecation" may have a @change attribute.
-                    </sch:report>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec>
-            </attDef><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="type" usage="opt" mode="change">
+          </constraintSpec><constraintSpec ident="change-on-idno" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:idno[@type='deprecated']">
+                <sch:assert test="@change">
+                  An &lt;idno&gt; element with a @type attribute of "deprecation" must have a @change attribute.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:idno[not(@type='deprecated')]">
+                <sch:report test="@change">
+                  Only an &lt;idno&gt; element with a @type attribute of "deprecation" may have a @change attribute.
+                </sch:report>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><attList><attDef ident="subtype" mode="delete"/><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="type" usage="opt" mode="change">
       <desc versionDate="2010-04-30" xml:lang="en">categorizes the identifier, for example as an
         ISBN, Social Security number, etc.</desc>
       <desc versionDate="2009-01-05" xml:lang="fr">classe un numéro dans une catégorie, par exemple
@@ -8645,7 +8632,19 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
     Basisdokuments oder während der Überarbeitung einer elektronischen Datei.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">resume un cambio o corrección determinada llevada a cabo
     en una versión dada de un texto electrónico en el que trabajan diversos investigadores.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">sintetizza un particolare cambiamento o correzione
     effettuato ad una particolare versione di un documento elettronico, condivisa da più
-    ricercatori.</desc><classes><memberOf key="att.ascribed"/></classes><content><macroRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" key="macro.specialPara"/></content><attList><attDef ident="n">
+    ricercatori.</desc><classes><memberOf key="att.ascribed"/></classes><content><macroRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" key="macro.specialPara"/></content><constraintSpec ident="who-on-change" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:revisionDesc//tei:change/@who">
+                <sch:let name="edsDoc" value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/editors.xml')"/>
+                <sch:let name="eds" value="$edsDoc//tei:text/tei:body/tei:listPerson/tei:person/@xml:id"/>
+                <sch:let name="refValues" value="for $i in $eds return concat('http://syriaca.org/documentation/editors.xml#', $i)"/>
+                <sch:assert test="                   every $i in .                   satisfies $i = $refValues">
+                  Acceptable values for the @who attribute on a &lt;change&gt; element inside the &lt;revisionDesc&gt; include: 
+                  <sch:value-of select="string-join($refValues, ' | ')"/>.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><attList><attDef ident="n">
               <datatype>
                 <dataRef key="teidata.text"/>
               </datatype>
@@ -8657,19 +8656,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
               <datatype>
                 <dataRef key="teidata.temporal.w3c"/>
               </datatype>
-            </attDef><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="when" mode="change" usage="req"/><attDef ident="who" mode="change" rend="change" usage="req"><constraintSpec ident="who-on-change" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//tei:revisionDesc//tei:change/@who">
-                    <sch:let name="edsDoc" value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/editors.xml')"/>
-                    <sch:let name="eds" value="$edsDoc//tei:text/tei:body/tei:listPerson/tei:person/@xml:id"/>
-                    <sch:let name="refValues" value="for $i in $eds return concat('http://syriaca.org/documentation/editors.xml#', $i)"/>
-                    <sch:assert test="                   every $i in .                   satisfies $i = $refValues">
-                      Acceptable values for the @who attribute on a &lt;change&gt; element inside the &lt;revisionDesc&gt; include: 
-                      <sch:value-of select="string-join($refValues, ' | ')"/>.
-                    </sch:assert>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec></attDef><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="n" mode="change" usage="opt"/><attDef ident="target" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+            </attDef><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="when" mode="change" usage="req"/><attDef ident="who" mode="change" rend="change" usage="req"/><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="n" mode="change" usage="opt"/><attDef ident="target" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
               <revisionDesc>
                 <change when="2013-04-15" who="http://syriaca.org/documentation/editors.xml#ngibson" n="1.1"> ADDED: Pleiades coordinates</change>
@@ -8697,23 +8684,21 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD6">2.6. The Revision Description</ref>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD4C">2.4.1. Creation</ref>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/PH.html#PH-changes">11.7. Identifying Changes and Revisions</ref>
-  </listRef></elementSpec><elementSpec rend="change" module="linking" ident="link"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2007-06-12">link</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-06-12" xml:lang="fr"> lien</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">defines an association or hypertextual link among elements or passages, of some type not more precisely specifiable by other elements.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">다른 요소들에 의해 좀 더 명확하게 명시되지 않는 유형의 요소 또는 단락들의 연관 또는 하이퍼텍스트 연결을 정의한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">定義元素或段落之間的關連或超文字連結，其他元素無法將此連結類型作更詳細說明。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">他の要素では上手く示せない、要素や一節間にある関連性やハイパーテキス トリンクを定義する。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-06-12" xml:lang="fr">définit une association ou un lien hypertextuel entre des éléments ou des passages, lien dont le type ne peut être spécifié précisément par d'autres éléments.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">define una asociación o vínculo hipertextual entre elementos o fragmentos de texto que no es especificable por otros elementos.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">definisce tra elementi o porzioni di testo un'associazione o legame ipertestuale non meglio specificabile da altri elementi</desc><classes xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude"><memberOf key="att.pointing"/><memberOf key="model.global.meta"/></classes><content xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude"><empty/></content><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="linkTargets3" scheme="schematron">
+  </listRef></elementSpec><elementSpec rend="change" module="linking" ident="link"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2007-06-12">link</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-06-12" xml:lang="fr"> lien</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">defines an association or hypertextual link among elements or passages, of some type not more precisely specifiable by other elements.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">다른 요소들에 의해 좀 더 명확하게 명시되지 않는 유형의 요소 또는 단락들의 연관 또는 하이퍼텍스트 연결을 정의한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">定義元素或段落之間的關連或超文字連結，其他元素無法將此連結類型作更詳細說明。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">他の要素では上手く示せない、要素や一節間にある関連性やハイパーテキス トリンクを定義する。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-06-12" xml:lang="fr">définit une association ou un lien hypertextuel entre des éléments ou des passages, lien dont le type ne peut être spécifié précisément par d'autres éléments.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">define una asociación o vínculo hipertextual entre elementos o fragmentos de texto que no es especificable por otros elementos.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">definisce tra elementi o porzioni di testo un'associazione o legame ipertestuale non meglio specificabile da altri elementi</desc><classes xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude"><memberOf key="att.pointing"/><memberOf key="model.global.meta"/></classes><content xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude"><empty/></content><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="target-on-link" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:link/@target">
+                <sch:let name="allIDs" value="//@xml:id"/>
+                <sch:let name="targetVals" value="for $i in $allIDs return concat('#', $i)"/>
+                <sch:assert test="                   every $i in (tokenize(., ' '))                   satisfies $i = $targetVals">A &lt;link&gt; element takes a @target attribute with two or more of the
+                  following values: <sch:value-of select="string-join($targetVals, ' | ')"/>.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="linkTargets3" scheme="schematron">
     <constraint>
       <sch:assert test="contains(normalize-space(@target),' ')">You must supply at least two values for @target or  on <sch:name/></sch:assert>
     </constraint>
-  </constraintSpec><attList><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="targetLang" mode="delete"/><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="evaluate" mode="delete"/><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="target" mode="change">
-              <constraintSpec ident="target-on-link" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//tei:link/@target">
-                    <sch:let name="allIDs" value="//@xml:id"/>
-                    <sch:let name="targetVals" value="for $i in $allIDs return concat('#', $i)"/>
-                    <sch:assert test="                   every $i in (tokenize(., ' '))                   satisfies $i = $targetVals">A &lt;link&gt; element takes a @target attribute with two or more of the
-                      following values: <sch:value-of select="string-join($targetVals, ' | ')"/>.
-                    </sch:assert>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec>
-            </attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+  </constraintSpec><attList><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="targetLang" mode="delete"/><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="evaluate" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
               <event type="attestation" xml:id="attestation2567-2" when="0473" srophe:computed-start="0473-01-01" srophe:computed-end="0473-12-31" source="#bib2567-4">
                 <p xml:lang="en">Attestation of name <foreign xml:lang="syr">ܬܠܢܫܝܢ</foreign> in <title>Vatican Syriac 160</title>.</p>
@@ -13801,7 +13786,19 @@ specification.</p></remarks>
   </exemplum><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html#NDGEOG">13.3.4. Places</ref>
   </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="relation"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">relationship</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">관련성</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">人際關係</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-06-12" xml:lang="fr">relation</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">relación</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">relazione</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2013-04-12" xml:lang="en">describes any kind of relationship or linkage amongst a
-  specified group of places, events, persons, objects or other items.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">명시된 참여자군 사이에 관련성 또는 연결 종류를 기술한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">描述在特定團體中，參與者彼此之間的關係或關聯。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">指定された参加者グループ間の関連性の種類を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">décrit tout type de relation ou de lien à l'intérieur d'un groupe donné de participants.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">describe cualquier tipo de relación o vínculo entre un determinato grupo de personas.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">descrive una qualsiasi relazione o legame all'interno di un determinato gruppo di persone</desc><classes><memberOf key="att.typed"/><memberOf key="att.global"/><memberOf key="att.datable"/><memberOf key="att.canonical"/></classes><content><elementRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" key="desc" minOccurs="0"/></content><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="reforkeyorname" scheme="schematron">
+  specified group of places, events, persons, objects or other items.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">명시된 참여자군 사이에 관련성 또는 연결 종류를 기술한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">描述在特定團體中，參與者彼此之間的關係或關聯。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">指定された参加者グループ間の関連性の種類を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">décrit tout type de relation ou de lien à l'intérieur d'un groupe donné de participants.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">describe cualquier tipo de relación o vínculo entre un determinato grupo de personas.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">descrive una qualsiasi relazione o legame all'interno di un determinato gruppo di persone</desc><classes><memberOf key="att.global"/><memberOf key="att.datable"/><memberOf key="att.canonical"/><memberOf key="att.typed"/></classes><content><elementRef key="desc" minOccurs="1" maxOccurs="1"/></content><constraintSpec ident="active-count" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:relation/@active">
+                <sch:report test="contains(., ' ')">Space not allowed. This @active attribute can only take one value.</sch:report>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="passive-count" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:relation/@passive">
+                <sch:report test="contains(., ' ')">Space not allowed. This @passive attribute can only take one value.</sch:report>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="reforkeyorname" scheme="schematron">
     <constraint>
       <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="@ref or @key or @name">One of the attributes  'name', 'ref' or 'key' must be supplied</assert>
     </constraint>
@@ -13814,7 +13811,7 @@ specification.</p></remarks>
     <constraint>
       <report xmlns="http://purl.oclc.org/dsdl/schematron" test="@passive and not(@active)">the attribute 'passive' may be supplied only if the attribute 'active' is supplied</report>
     </constraint>
-  </constraintSpec><attList><attList org="choice"><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="active">
+  </constraintSpec><attList><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="subtype" mode="delete"/><attList org="choice"><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="active">
         <desc versionDate="2005-07-24" xml:lang="en">identifies the <soCalled>active</soCalled> participants in a non-mutual relationship, or all the participants in a mutual
                     one.</desc>
         <desc versionDate="2008-04-06" xml:lang="es">identifica los participantes activos en una relación no-mutua, o todos los participantes de
@@ -13831,16 +13828,7 @@ specification.</p></remarks>
         <desc versionDate="2009-03-19" xml:lang="fr">fournit une liste de participants entre lesquels la relation est réciproque.</desc>
         <desc versionDate="2007-11-06" xml:lang="it">fornisce una lista di partecipanti tra i quali c'è una relazione paritaria</desc>
         <datatype maxOccurs="unbounded"><dataRef key="teidata.pointer"/></datatype>
-      </attDef></attList><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="name">
-      <desc versionDate="2005-10-27" xml:lang="en">supplies a name for the kind of relationship of which this is an instance.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">이것이 실례인 관련성 종류에 대한 이름을 제공한다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">提供該關係的確切名稱。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">当該関係の種類名を示す。</desc>
-      <desc versionDate="2007-06-12" xml:lang="fr">fournit un nom pour le type de relation dont elle est une instance.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">proporciona un nombre para elipo de relación que representan.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">assegna un nome al tipo di relazione che rappresenta</desc>
-      <datatype><dataRef key="teidata.enumerated"/></datatype>
-    </attDef><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="passive" usage="opt">
+      </attDef></attList><attDef ident="name" mode="delete"/><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="passive" usage="opt">
       <desc versionDate="2005-01-14" xml:lang="en">identifies the <soCalled>passive</soCalled> participants in a non-mutual relationship.</desc>
       <desc versionDate="2007-12-20" xml:lang="ko">비상호적 관련성에서 <soCalled>passive</soCalled> 참여자를 식별한다.</desc>
       <desc versionDate="2007-05-02" xml:lang="zh-TW">指出非對等關係中的<q>被動</q>關係人。</desc>
