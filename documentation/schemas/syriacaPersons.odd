@@ -316,7 +316,65 @@
         
         
         <elementSpec ident="relation" module="namesdates" mode="change">
-          
+          <constraintSpec ident="person-disambiguation-atts" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:listPerson//tei:relation[@type = 'disambiguation']">
+                <sch:assert test="@mutual">
+                  A &lt;relation&gt; with @type="disambiguation" must have a @mutual attribute.</sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:listPerson//tei:relation[@type = 'disambiguation']/@ref">
+                <sch:assert test=". = 'http://syriaca.org/keyword/distinct-entity' or . = 'http://syriaca.org/keyword/possibility-identical'">
+                  A &lt;relation&gt; with @type="disambiguation" must have @ref="http://syriaca.org/keyword/distinct-entity" or @ref="http://syriaca.org/keyword/possibility-identical".</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="pseudonymity-atts" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:listPerson//tei:relation[@type = 'pseudonymity']/@ref">
+                <sch:assert test=". = 'http://syriaca.org/keyword/possibility-identical' or . = 'http://syriaca.org/keyword/shares-attribution-with' or . = 'skos:broader'">
+                  The @ref attribute on &lt;relation&gt; with @type="pseudonymity" can only be one of the following "http://syriaca.org/keyword/distinct-entity", "http://syriaca.org/keyword/shares-attribution-with", or "skos:broader".</sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:listPerson//tei:listRelation[tei:relation[@type = 'pseudonymity']]">
+                <sch:assert test="tei:relation/@ref = 'http://syriaca.org/keyword/possibility-identical'">
+                  There must be a &lt;relation&gt; element with @ref="http://syriaca.org/keyword/possibility-identical".</sch:assert>
+                <sch:assert test="tei:relation/@ref = 'http://syriaca.org/keyword/shares-attribution-with'">
+                  There must be a &lt;relation&gt; element with @ref="http://syriaca.org/keyword/shares-attribution-with".</sch:assert>
+                <sch:assert test="tei:relation/@ref = 'skos:broader'">
+                  There must be a &lt;relation&gt; element with @ref="skos:broader".</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <!-- USE SPEAR ODD to build personal-relations-atts -->
+          <constraintSpec ident="person-place-relation-atts" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:listPerson//tei:relation[@type = 'place']">
+                <sch:assert test="@active">
+                  A &lt;relation&gt; with @type="place" must have an @active attribute.</sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:listPerson//tei:relation[@type = 'place']/@ref">
+                <sch:assert test=". = 'http://syriaca.org/keyword/has-relation-to-place' or . = 'http://syriaca.org/keyword/has-literary-relation-to-place'">
+                  The @ref attribute on &lt;relation&gt; with @type="place" can only be one of the following "http://syriaca.org/keyword/has-relation-to-place" or "http://syriaca.org/keyword/has-literary-relation-to-place".</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <attList>
+            <attDef ident="type" mode="change" usage="req">
+              <valList type="closed">
+                <valItem ident="disambiguation">
+                  <desc>Used for relationships that disambiguate between people with similar names or who have been confused in the scholarship</desc>
+                </valItem>
+                <valItem ident="pseudonymity">
+                  <desc>Used to describe relationships between persons variously identified in a situation of pseudonymous authorship</desc>
+                </valItem>
+                <valItem ident="personal">
+                  <desc>Used for person and professional relationships</desc>
+                </valItem>
+                <valItem ident="place">
+                  <desc>Used for relationships between a person and a place other than birth and death</desc>
+                </valItem>
+              </valList>
+            </attDef>
+          </attList>
         </elementSpec>
         
         

@@ -1195,7 +1195,6 @@
           <content>
             <elementRef key="desc" minOccurs="1" maxOccurs="1"/>
           </content>
-          <!-- constraintSpec limiting @mutual values to 2 -->
           <constraintSpec ident="active-count" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:relation/@active">
@@ -1210,6 +1209,13 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
+          <constraintSpec ident="mutual-count" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:relation/@mutual">
+                <sch:assert test="count(tokenize(., ' ')) = 2">This @mutual attribute must have two values separated by a comma.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
           <attList>
             <attDef ident="xml:id" mode="delete"/>
             <attDef ident="n" mode="delete"/>
@@ -1220,6 +1226,8 @@
             <attDef ident="previous" mode="delete"/>
             <attDef ident="subtype" mode="delete"/>
             <attDef ident="name" mode="delete"/>
+            <attDef ident="type" mode="change" usage="req"/>
+            <attDef ident="ref" mode="change" usage="req"/>
           </attList>
         </elementSpec>
         
