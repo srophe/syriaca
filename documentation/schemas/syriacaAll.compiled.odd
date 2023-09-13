@@ -100,25 +100,9 @@
     associer une représentation telle qu'un nom ou un titre à l'information canonique concernant
     l'objet nommé ou auquel il est fait référence.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2018-12-31">名前やタイトルのような表現を参照対象についての典拠情報と関連付けるのに利用する属性を提供する。</desc><classes/><attList><attDef ident="ref" usage="opt"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-09-05" xml:lang="en">reference</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-05-25" xml:lang="fr">référence</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2018-12-31">参照</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-09-05" xml:lang="en">provides an explicit means of locating a full definition or identity for the entity being named by
         means of one or more URIs.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-05-25" xml:lang="fr">fournit un moyen explicite de localiser une
-        définition complète de l'entité nommée au moyen d'un ou plusieurs URIs.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2018-12-31">一つ以上のURIを用いて、名付けられたエンティティの完全な定義かIDを参照するための明確な手段を提供する。</desc><constraintSpec ident="syriaca-ref" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//@ref">
-                    <sch:report test="contains(., ' ')" role="error">The Syriaca.org data model only allows one value on a @ref attribute.</sch:report>
-                  </sch:rule>
-                  <sch:rule context="//tei:persName/@ref">
-                    <sch:assert test="matches(., concat('http://syriaca.org/person/', '\d+'))" role="error">
-                      The @ref attribute on &lt;persName&gt; must take a Syriaca.org person URI which reqires 
-                      the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
-                    </sch:assert>
-                  </sch:rule>
-                  <sch:rule context="//tei:placeName/@ref">
-                    <sch:assert test="matches(., concat('http://syriaca.org/place/', '\d+'))" role="error">
-                      The @ref attribute on &lt;placeName&gt; must take a Syriaca.org person URI which reqires 
-                      the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
-                    </sch:assert>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec><datatype xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" minOccurs="1" maxOccurs="unbounded"><dataRef key="teidata.pointer"/></datatype><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+        définition complète de l'entité nommée au moyen d'un ou plusieurs URIs.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2018-12-31">一つ以上のURIを用いて、名付けられたエンティティの完全な定義かIDを参照するための明確な手段を提供する。</desc><datatype minOccurs="1" maxOccurs="1">
+                <dataRef key="teidata.pointer"/>
+              </datatype><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
           <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
             <name ref="http://viaf.org/viaf/109557338" type="person">Seamus Heaney</name>
             </egXML>
@@ -12509,7 +12493,17 @@ deprecated.
     como un nombre propio, que se refiere a una persona y puede incluir cualquier o todos los
     nombres de pila, apellidos, títulos honoríficos, o nombres añadidos de la persona en cuestión.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">contiene un nome proprio o un sintagma identificabile
     come nome proprio, che si riferisce a una persona e può includere qualsiasi o tutti i prenomi,
-    cognomi, titoli onorifici, o nomi aggiunti della persona in questione</desc><classes><memberOf key="att.global"/><memberOf key="model.persStateLike"/><memberOf key="model.nameLike.agent"/><memberOf key="att.personal"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="addName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="forename" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="roleName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="surname" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><attList><attDef ident="key" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+    cognomi, titoli onorifici, o nomi aggiunti della persona in questione</desc><classes><memberOf key="att.global"/><memberOf key="model.persStateLike"/><memberOf key="model.nameLike.agent"/><memberOf key="att.personal"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="addName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="forename" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="roleName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="surname" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><constraintSpec ident="person-ref" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:persName/@ref">
+                <sch:assert test="matches(., concat('http://syriaca.org/person/', '\d+'))" role="error">
+                  The @ref attribute on &lt;persName&gt; must take a Syriaca.org person URI which reqires 
+                  the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
+                </sch:assert>
+              </sch:rule>
+              
+            </constraint>
+          </constraintSpec><attList><attDef ident="key" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
       <persName><forename>Edward</forename><forename>George</forename><surname type="linked">Bulwer-Lytton</surname>, <roleName>Baron Lytton of
         <placeName>Knebworth</placeName>
@@ -12679,7 +12673,17 @@ deprecated.
     <p> 要素<gi>roleName</gi>は、役職名などはその当事者とは独立してあるも のであることから、要素<gi>addName</gi>とは異なっている。 </p>
   </remarks><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html#NDPER">13.2.1. Personal Names</ref>
-  </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="placeName"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2020-12-20">place name</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">nom de lieu</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">contains an absolute or relative place name.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">절대적 또는 상대적 위치명을 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">包含一個確切位置或相對位置的名稱。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">絶対的、相対的場所名を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">contient un nom de lieu absolu ou relatif.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">contiene la indicación absoluta o relativa de un nombre de lugar.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">contiene l'indicazione assoluta o relativa di un nome di luogo</desc><classes><memberOf key="att.global"/><memberOf key="att.personal"/><memberOf key="model.placeNamePart"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><attList><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="role" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+  </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="placeName"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2020-12-20">place name</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">nom de lieu</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">contains an absolute or relative place name.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">절대적 또는 상대적 위치명을 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">包含一個確切位置或相對位置的名稱。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">絶対的、相対的場所名を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">contient un nom de lieu absolu ou relatif.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">contiene la indicación absoluta o relativa de un nombre de lugar.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">contiene l'indicazione assoluta o relativa di un nome di luogo</desc><classes><memberOf key="att.global"/><memberOf key="att.personal"/><memberOf key="model.placeNamePart"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><constraintSpec ident="place-ref" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:placeName/@ref">
+                <sch:assert test="matches(., concat('http://syriaca.org/place/', '\d+'))" role="error">
+                  The @ref attribute on &lt;placeName&gt; must take a Syriaca.org person URI which reqires 
+                  the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
+                </sch:assert>
+              </sch:rule>
+              
+            </constraint>
+          </constraintSpec><attList><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="role" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
       <placeName>
         <settlement>Rochester</settlement>
@@ -13786,25 +13790,7 @@ specification.</p></remarks>
   </exemplum><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html#NDGEOG">13.3.4. Places</ref>
   </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="relation"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">relationship</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">관련성</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">人際關係</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-06-12" xml:lang="fr">relation</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">relación</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">relazione</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2013-04-12" xml:lang="en">describes any kind of relationship or linkage amongst a
-  specified group of places, events, persons, objects or other items.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">명시된 참여자군 사이에 관련성 또는 연결 종류를 기술한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">描述在特定團體中，參與者彼此之間的關係或關聯。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">指定された参加者グループ間の関連性の種類を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">décrit tout type de relation ou de lien à l'intérieur d'un groupe donné de participants.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">describe cualquier tipo de relación o vínculo entre un determinato grupo de personas.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">descrive una qualsiasi relazione o legame all'interno di un determinato gruppo di persone</desc><classes><memberOf key="att.global"/><memberOf key="att.datable"/><memberOf key="att.canonical"/><memberOf key="att.typed"/></classes><content><elementRef key="desc" minOccurs="1" maxOccurs="1"/></content><constraintSpec ident="active-count" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:relation/@active">
-                <sch:report test="contains(., ' ')">Space not allowed. This @active attribute can only take one value.</sch:report>
-              </sch:rule>
-            </constraint>
-          </constraintSpec><constraintSpec ident="passive-count" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:relation/@passive">
-                <sch:report test="contains(., ' ')">Space not allowed. This @passive attribute can only take one value.</sch:report>
-              </sch:rule>
-            </constraint>
-          </constraintSpec><constraintSpec ident="mutual-count" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:relation/@mutual">
-                <sch:assert test="count(tokenize(., ' ')) = 2">This @mutual attribute must have two values separated by a comma.</sch:assert>
-              </sch:rule>
-            </constraint>
-          </constraintSpec><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="reforkeyorname" scheme="schematron">
+  specified group of places, events, persons, objects or other items.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">명시된 참여자군 사이에 관련성 또는 연결 종류를 기술한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">描述在特定團體中，參與者彼此之間的關係或關聯。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">指定された参加者グループ間の関連性の種類を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">décrit tout type de relation ou de lien à l'intérieur d'un groupe donné de participants.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">describe cualquier tipo de relación o vínculo entre un determinato grupo de personas.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">descrive una qualsiasi relazione o legame all'interno di un determinato gruppo di persone</desc><classes><memberOf key="att.global"/><memberOf key="att.datable"/><memberOf key="att.canonical"/><memberOf key="att.typed"/></classes><content><elementRef key="desc" minOccurs="1" maxOccurs="1"/></content><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="reforkeyorname" scheme="schematron">
     <constraint>
       <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="@ref or @key or @name">One of the attributes  'name', 'ref' or 'key' must be supplied</assert>
     </constraint>
@@ -13817,33 +13803,18 @@ specification.</p></remarks>
     <constraint>
       <report xmlns="http://purl.oclc.org/dsdl/schematron" test="@passive and not(@active)">the attribute 'passive' may be supplied only if the attribute 'active' is supplied</report>
     </constraint>
-  </constraintSpec><attList><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="subtype" mode="delete"/><attDef ident="type" mode="change" usage="req"/><attDef ident="ref" mode="change" usage="req"/><attList org="choice"><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="active">
-        <desc versionDate="2005-07-24" xml:lang="en">identifies the <soCalled>active</soCalled> participants in a non-mutual relationship, or all the participants in a mutual
-                    one.</desc>
-        <desc versionDate="2008-04-06" xml:lang="es">identifica los participantes activos en una relación no-mutua, o todos los participantes de
-                    una mutua.</desc>
-        <desc versionDate="2008-03-30" xml:lang="fr">identifie les participants actifs dans une relation à sens unique, ou tous les participants
-                    dans une relation réciproque.</desc>
-        <desc versionDate="2007-11-06" xml:lang="it">identifica i partecipanti attivi in una relazione di non reciprocità, oppure tutti i
-                    partecipanti in una relazione di reciprocità</desc>
-        <datatype maxOccurs="unbounded"><dataRef key="teidata.pointer"/></datatype>
-      </attDef><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="mutual" usage="opt">
-        <desc versionDate="2005-07-24" xml:lang="en">supplies a list of participants amongst all of whom the relationship holds equally.</desc>
-        <desc versionDate="2008-04-06" xml:lang="es">proporciona una lista de participantes entre los cuales se establece una idéntica
-                    relación</desc>
-        <desc versionDate="2009-03-19" xml:lang="fr">fournit une liste de participants entre lesquels la relation est réciproque.</desc>
-        <desc versionDate="2007-11-06" xml:lang="it">fornisce una lista di partecipanti tra i quali c'è una relazione paritaria</desc>
-        <datatype maxOccurs="unbounded"><dataRef key="teidata.pointer"/></datatype>
-      </attDef></attList><attDef ident="name" mode="delete"/><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="passive" usage="opt">
-      <desc versionDate="2005-01-14" xml:lang="en">identifies the <soCalled>passive</soCalled> participants in a non-mutual relationship.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">비상호적 관련성에서 <soCalled>passive</soCalled> 참여자를 식별한다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">指出非對等關係中的<q>被動</q>關係人。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">一方向の関係における<soCalled>受動的な</soCalled>参加者を指定す る。</desc>
-      <desc versionDate="2009-03-19" xml:lang="fr">identifie les participants <q>passifs</q> dans une relation non mutuelle.</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">identifica los participantes <q>pasivos</q> en una relación de no reciprocidad.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">identifica i partecipanti <q>passivi</q>all'interno di una relazione di non reciprocità.</desc>
-      <datatype maxOccurs="unbounded"><dataRef key="teidata.pointer"/></datatype>
-    </attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+  </constraintSpec><attList><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="subtype" mode="delete"/><attDef ident="type" mode="change" usage="req"/><attDef ident="ref" mode="change" usage="req"/><attList org="choice"><attDef ident="active"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-07-24" xml:lang="en">identifies the <soCalled>active</soCalled> participants in a non-mutual relationship, or all the participants in a mutual
+                    one.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-06" xml:lang="es">identifica los participantes activos en una relación no-mutua, o todos los participantes de
+                    una mutua.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-03-30" xml:lang="fr">identifie les participants actifs dans une relation à sens unique, ou tous les participants
+                    dans une relation réciproque.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-11-06" xml:lang="it">identifica i partecipanti attivi in una relazione di non reciprocità, oppure tutti i
+                    partecipanti in una relazione di reciprocità</desc><datatype minOccurs="1" maxOccurs="1">
+                <dataRef key="teidata.pointer"/>
+              </datatype></attDef><attDef ident="mutual" usage="opt"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-07-24" xml:lang="en">supplies a list of participants amongst all of whom the relationship holds equally.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-06" xml:lang="es">proporciona una lista de participantes entre los cuales se establece una idéntica
+                    relación</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">fournit une liste de participants entre lesquels la relation est réciproque.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-11-06" xml:lang="it">fornisce una lista di partecipanti tra i quali c'è una relazione paritaria</desc><datatype minOccurs="2" maxOccurs="2">
+                <dataRef key="teidata.pointer"/>
+              </datatype></attDef></attList><attDef ident="name" mode="delete"/><attDef ident="passive" usage="opt"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">identifies the <soCalled>passive</soCalled> participants in a non-mutual relationship.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">비상호적 관련성에서 <soCalled>passive</soCalled> 참여자를 식별한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">指出非對等關係中的<q>被動</q>關係人。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">一方向の関係における<soCalled>受動的な</soCalled>参加者を指定す る。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">identifie les participants <q>passifs</q> dans une relation non mutuelle.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">identifica los participantes <q>pasivos</q> en una relación de no reciprocidad.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">identifica i partecipanti <q>passivi</q>all'interno di una relazione di non reciprocità.</desc><datatype minOccurs="1" maxOccurs="1">
+                <dataRef key="teidata.pointer"/>
+              </datatype></attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#UND">
       <relation type="social" name="supervisor" active="#p1" passive="#p2 #p3 #p4"/>
     </egXML>

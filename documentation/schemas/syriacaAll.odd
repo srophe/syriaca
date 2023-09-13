@@ -63,25 +63,9 @@
           <attList>
             <attDef ident="key" mode="delete"/>
             <attDef ident="ref" mode="change">
-              <constraintSpec ident="syriaca-ref" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//@ref">
-                    <sch:report test="contains(., ' ')" role="error">The Syriaca.org data model only allows one value on a @ref attribute.</sch:report>
-                  </sch:rule>
-                  <sch:rule context="//tei:persName/@ref">
-                    <sch:assert test="matches(., concat('http://syriaca.org/person/', '\d+'))" role="error">
-                      The @ref attribute on &lt;persName&gt; must take a Syriaca.org person URI which reqires 
-                      the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
-                    </sch:assert>
-                  </sch:rule>
-                  <sch:rule context="//tei:placeName/@ref">
-                    <sch:assert test="matches(., concat('http://syriaca.org/place/', '\d+'))" role="error">
-                      The @ref attribute on &lt;placeName&gt; must take a Syriaca.org person URI which reqires 
-                      the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
-                    </sch:assert>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec>
+              <datatype minOccurs="1" maxOccurs="1">
+                <dataRef key="teidata.pointer"/>
+              </datatype>
             </attDef>
           </attList>
         </classSpec>
@@ -978,26 +962,29 @@
               <textNode/>
             </sequence>
           </content>
+          <constraintSpec ident="person-ref" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:persName/@ref">
+                <sch:assert test="matches(., concat('http://syriaca.org/person/', '\d+'))" role="error">
+                  The @ref attribute on &lt;persName&gt; must take a Syriaca.org person URI which reqires 
+                  the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
+                </sch:assert>
+              </sch:rule>
+              <!--<sch:rule context="//tei:text//tei:listPerson//tei:persName/@ref">
+                <sch:let name="personIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/persons.xml')"/>
+                <sch:let name="personURIs" value="$personIndex//tei:person/@ref"/>
+                <sch:assert test="                   every $i in .                   satisfies $i = $personURIs">
+                  This @ref attribute is not a person URI in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
+                </sch:assert>
+              </sch:rule>-->
+            </constraint>
+          </constraintSpec>
           <attList>
             <attDef ident="key" mode="delete"/>
             <attDef ident="n" mode="delete"/>
             <attDef ident="ana" mode="delete"/>
             <attDef ident="previous" mode="delete"/>
             <attDef ident="rend" mode="delete"/>
-            <!--<attDef ident="ref" mode="change">
-              <constraintSpec ident="ref-on-person" scheme="schematron"> <!-\- ONLY WHEN NOT CHILD OF PERSON or PERSONGRP! -\->
-                <constraint>
-                  <sch:rule context="//tei:text//tei:persName/@ref">
-                    <sch:let name="personIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/persons.xml')"/>
-                    <sch:let name="personURIs" value="$personIndex//tei:person/@ref"/>
-                    <sch:assert test="                   every $i in .                   satisfies $i = $personURIs">
-                      This @ref attribute is not a person URI in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
-                    </sch:assert>
-                    <sch:report test="contains(., ' ')">This @ref may contain only one URI.</sch:report>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec>
-            </attDef>-->
           </attList>
         </elementSpec>
         
@@ -1017,6 +1004,23 @@
               <textNode/>
             </sequence>
           </content>
+          <constraintSpec ident="place-ref" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:placeName/@ref">
+                <sch:assert test="matches(., concat('http://syriaca.org/place/', '\d+'))" role="error">
+                  The @ref attribute on &lt;placeName&gt; must take a Syriaca.org person URI which reqires 
+                  the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
+                </sch:assert>
+              </sch:rule>
+              <!--<sch:rule context="//tei:text//tei:listPlace/tei:placeName/@ref">
+                <sch:let name="placeIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
+                <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
+                <sch:assert test="                   every $i in .                   satisfies $i = $placeURIs">
+                  This @ref attribute is not a place URI in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+}' (where {\d+} is a number).
+                </sch:assert>
+              </sch:rule>-->
+            </constraint>
+          </constraintSpec>
           <attList>
             <attDef ident="n" mode="delete"/>
             <attDef ident="ana" mode="delete"/>
@@ -1025,20 +1029,6 @@
             <attDef ident="previous" mode="delete"/>
             <attDef ident="rend" mode="delete"/>
             <attDef ident="corresp" mode="delete"/>
-            <!--<attDef ident="ref" mode="change">
-              <constraintSpec ident="ref-on-placeName" scheme="schematron"> <!-\- ONLY WHEN NOT CHILD OF PLACE -\->
-                <constraint>
-                  <sch:rule context="//tei:text//tei:placeName/@ref">
-                    <sch:let name="placeIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
-                    <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
-                    <sch:assert test="                   every $i in .                   satisfies $i = $placeURIs">
-                      This @ref attribute is not a place URI in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+}' (where {\d+} is a number).
-                    </sch:assert>
-                    <sch:report test="contains(., ' ')">This @ref may contain only one URI.</sch:report>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec>
-            </attDef>-->
           </attList>
         </elementSpec>
         
@@ -1195,7 +1185,7 @@
           <content>
             <elementRef key="desc" minOccurs="1" maxOccurs="1"/>
           </content>
-          <constraintSpec ident="active-count" scheme="schematron">
+          <!--<constraintSpec ident="active-count" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:relation/@active">
                 <sch:report test="contains(., ' ')">Space not allowed. This @active attribute can only take one value.</sch:report>
@@ -1215,7 +1205,7 @@
                 <sch:assert test="count(tokenize(., ' ')) = 2">This @mutual attribute must have two values separated by a comma.</sch:assert>
               </sch:rule>
             </constraint>
-          </constraintSpec>
+          </constraintSpec>-->
           <attList>
             <attDef ident="xml:id" mode="delete"/>
             <attDef ident="n" mode="delete"/>
@@ -1228,6 +1218,22 @@
             <attDef ident="name" mode="delete"/>
             <attDef ident="type" mode="change" usage="req"/>
             <attDef ident="ref" mode="change" usage="req"/>
+            <attDef ident="mutual" mode="change">
+              <datatype minOccurs="2" maxOccurs="2">
+                <dataRef key="teidata.pointer"/>
+              </datatype>
+            </attDef>
+            <attDef ident="active" mode="change">
+              <datatype minOccurs="1" maxOccurs="1">
+                <dataRef key="teidata.pointer"/>
+              </datatype>
+            </attDef>
+            <attDef ident="passive" mode="change">
+              <datatype minOccurs="1" maxOccurs="1">
+                <dataRef key="teidata.pointer"/>
+              </datatype>
+            </attDef>
+            
           </attList>
         </elementSpec>
         
