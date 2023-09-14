@@ -614,7 +614,7 @@
           <constraintSpec ident="xmlID-on-placeName" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:text/tei:place/tei:placeName">
-                <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
+                <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno[@type='URI']/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
                 <sch:assert test="matches(./@xml:id, concat('name', $docURIno, '-', '\d+$'))">
                   The required @xml:id must be 'name<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
                 </sch:assert>

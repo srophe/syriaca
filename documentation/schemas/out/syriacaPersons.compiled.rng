@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-09-14T20:14:45Z. .
+Schema generated from ODD source 2023-09-14T21:07:12Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -3441,7 +3441,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                       xmlns:srophe="https://srophe.app"
                       context="//tei:text//tei:person/tei:persName | //tei:text//tei:personGrp/tei:persName">
                <sch:let name="docURIno"
-                        value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
+                        value="//tei:publicationStmt/tei:idno[@type='URI']/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
                <sch:assert test="matches(./@xml:id, concat('name', $docURIno, '-', '\d+$'))">
                   The required @xml:id must be 'name<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
                 </sch:assert>
