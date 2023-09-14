@@ -218,6 +218,81 @@
         </elementSpec>
         
         
+        
+        <elementSpec ident="persName" module="namesdates" mode="change">
+          <constraintSpec ident="source-on-persName" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:text//tei:person/tei:persName | //tei:text//tei:personGrp/tei:persName">
+                <sch:assert test="attribute::source or attribute::resp">
+                  This &lt;placeName&gt; element must have either a @source attribute (preferred when available) or a @resp attribute.
+                </sch:assert>
+                <sch:report test="attribute::source and attribute::resp">
+                  This &lt;placeName&gt; element may not have both a @source attribute (the preferred when available) and a @resp attribute.
+                </sch:report>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="persName-content" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:persName">
+                <sch:assert test="string-length(.) gt 0">The &lt;placeName&gt; element cannot be empty.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <!-- This works in the schematron but not when placed into the ODD and converted to RelaxNG. There is a namespace issue I will try to troubleshoot.
+            <constraintSpec ident="langHeadword" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:place/tei:placeName">
+                <sch:let name="langsOfHW" value="//tei:place/tei:placeName[@srophe:tags='#syriaca-headword']/@xml:lang"/>
+                <sch:assert test="count(./parent::tei:place/tei:placeName[@xml:lang='en' and @srophe:tags='#syriaca-headword']) = 1">
+                  There can be one and only one &lt;placeName&gt; element with the combination of @srophe:tags="#syriaca-headword" and @xml:lang="en".
+                </sch:assert>
+                <sch:assert test="count(distinct-values($langsOfHW)) = count($langsOfHW)">
+                  There cannot be more than one headword (@srophe:tags="#syriaca-headword") per &lt;placeName&gt; with the same language (@xml:lang).
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>-->
+          <constraintSpec ident="xmlID-on-persName" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:text//tei:person/tei:persName | //tei:text//tei:personGrp/tei:persName">
+                <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
+                <sch:assert test="matches(./@xml:id, concat('name', $docURIno, '-', '\d+$'))">
+                  The required @xml:id must be 'name<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="xmlLang-on-placeName" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:text//tei:person/tei:persName | //tei:text//tei:personGrp/tei:persName">
+                <sch:assert test="./@xml:lang">A &lt;placeName&gt; element that is the direct child of the &lt;place&gt; element must have an @xml:lang attribute.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <attList>
+            <attDef ident="xml:id" mode="change">
+              <desc>
+                The <gi>persName</gi> element requires an <att>xml:id</att> attribute whose value is the concatenation of "name", 
+                the Syriaca.org ID number of this place (i.e. the last element of the URI), a ‘-’, and the number of this name element in order.
+              </desc>
+            </attDef>
+            <attDef ident="xml:lang" mode="change">
+              <desc>
+                The language of the name should be indicated in an <att>xml:lang</att> attribute of the <gi>persName</gi> element, 
+                whose value is derived from the the <ref target="http://www.loc.gov/standards/iso639-2/php/code_list.php">ISO-639-1 or ISO-639-2 standards</ref>. 
+                In particular, "en" should be used for "English", "ar" for "Arabic", and "syr" for Syriac. Syriaca.org is not using "syc" for 
+                Syriac to avoid the judgment of what constitutes "classical." In the case of vocalized Syriac, the <att>xml:lang</att> attribute 
+                should be augmented with a script indication: either "-Syrj" to indicate West Syrian vocalization or "-Syrn" to indicate East Syrian 
+                vocalization. Thus the <att>xml:lang</att> attribute will have a value of "syr-Syrj" for vocalized Western Syriac and "syr-Syrn" 
+                for vocalized Eastern Syriac. The <att>xml:lang</att> attribute for an unvocalized Syriac name form, such as Syriaca.org’s headword 
+                form, should be simply "syr".
+              </desc>
+            </attDef>
+          </attList>
+        </elementSpec>
+        
+        
         <elementSpec ident="person" module="namesdates" mode="change">
           <classes mode="change">
             <memberOf key="att.sortable" mode="delete"/>

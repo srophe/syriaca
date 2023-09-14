@@ -5806,7 +5806,39 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
     como un nombre propio, que se refiere a una persona y puede incluir cualquier o todos los
     nombres de pila, apellidos, títulos honoríficos, o nombres añadidos de la persona en cuestión.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">contiene un nome proprio o un sintagma identificabile
     come nome proprio, che si riferisce a una persona e può includere qualsiasi o tutti i prenomi,
-    cognomi, titoli onorifici, o nomi aggiunti della persona in questione</desc><classes><memberOf key="att.global"/><memberOf key="model.nameLike.agent"/><memberOf key="att.personal"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="addName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="forename" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="roleName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="surname" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><constraintSpec ident="person-ref" scheme="schematron">
+    cognomi, titoli onorifici, o nomi aggiunti della persona in questione</desc><classes><memberOf key="att.global"/><memberOf key="model.nameLike.agent"/><memberOf key="att.personal"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="addName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="forename" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="roleName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="surname" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><constraintSpec ident="source-on-persName" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:text//tei:person/tei:persName | //tei:text//tei:personGrp/tei:persName">
+                <sch:assert test="attribute::source or attribute::resp">
+                  This &lt;placeName&gt; element must have either a @source attribute (preferred when available) or a @resp attribute.
+                </sch:assert>
+                <sch:report test="attribute::source and attribute::resp">
+                  This &lt;placeName&gt; element may not have both a @source attribute (the preferred when available) and a @resp attribute.
+                </sch:report>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="persName-content" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:persName">
+                <sch:assert test="string-length(.) gt 0">The &lt;placeName&gt; element cannot be empty.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="xmlID-on-persName" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:text//tei:person/tei:persName | //tei:text//tei:personGrp/tei:persName">
+                <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
+                <sch:assert test="matches(./@xml:id, concat('name', $docURIno, '-', '\d+$'))">
+                  The required @xml:id must be 'name<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="xmlLang-on-placeName" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:text//tei:person/tei:persName | //tei:text//tei:personGrp/tei:persName">
+                <sch:assert test="./@xml:lang">A &lt;placeName&gt; element that is the direct child of the &lt;place&gt; element must have an @xml:lang attribute.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="person-ref" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:persName/@ref">
                 <sch:assert test="matches(., concat('http://syriaca.org/person/', '\d+'))" role="error">
@@ -5816,7 +5848,23 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
               </sch:rule>
               
             </constraint>
-          </constraintSpec><attList><attDef ident="key" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+          </constraintSpec><attList><attDef ident="xml:id" mode="change">
+              <desc>
+                The <gi>persName</gi> element requires an <att>xml:id</att> attribute whose value is the concatenation of "name", 
+                the Syriaca.org ID number of this place (i.e. the last element of the URI), a ‘-’, and the number of this name element in order.
+              </desc>
+            </attDef><attDef ident="xml:lang" mode="change">
+              <desc>
+                The language of the name should be indicated in an <att>xml:lang</att> attribute of the <gi>persName</gi> element, 
+                whose value is derived from the the <ref target="http://www.loc.gov/standards/iso639-2/php/code_list.php">ISO-639-1 or ISO-639-2 standards</ref>. 
+                In particular, "en" should be used for "English", "ar" for "Arabic", and "syr" for Syriac. Syriaca.org is not using "syc" for 
+                Syriac to avoid the judgment of what constitutes "classical." In the case of vocalized Syriac, the <att>xml:lang</att> attribute 
+                should be augmented with a script indication: either "-Syrj" to indicate West Syrian vocalization or "-Syrn" to indicate East Syrian 
+                vocalization. Thus the <att>xml:lang</att> attribute will have a value of "syr-Syrj" for vocalized Western Syriac and "syr-Syrn" 
+                for vocalized Eastern Syriac. The <att>xml:lang</att> attribute for an unvocalized Syriac name form, such as Syriaca.org’s headword 
+                form, should be simply "syr".
+              </desc>
+            </attDef><attDef ident="key" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
       <persName><forename>Edward</forename><forename>George</forename><surname type="linked">Bulwer-Lytton</surname>, <roleName>Baron Lytton of
         <placeName>Knebworth</placeName>
