@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-09-13T19:56:45Z. .
+Schema generated from ODD source 2023-09-14T13:42:26Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -3740,8 +3740,8 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
                       context="//tei:listPerson//tei:relation[@type = 'disambiguation']/@ref">
-               <sch:assert test=". = 'http://syriaca.org/keyword/distinct-entity' or . = 'http://syriaca.org/keyword/possibility-identical'">
-                  A &lt;relation&gt; with @type="disambiguation" must have @ref="http://syriaca.org/keyword/distinct-entity" or @ref="http://syriaca.org/keyword/possibility-identical".</sch:assert>
+               <sch:assert test=". = 'http://syriaca.org/keyword/distinct-entities' or . = 'http://syriaca.org/keyword/possibly-identical'">
+                  A &lt;relation&gt; with @type="disambiguation" must have @ref="http://syriaca.org/keyword/distinct-entities" or @ref="http://syriaca.org/keyword/possibly-identical".</sch:assert>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
@@ -3750,15 +3750,15 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
                       context="//tei:listPerson//tei:relation[@type = 'pseudonymity']/@ref">
-               <sch:assert test=". = 'http://syriaca.org/keyword/possibility-identical' or . = 'http://syriaca.org/keyword/shares-attribution-with' or . = 'skos:broader'">
-                  The @ref attribute on &lt;relation&gt; with @type="pseudonymity" can only be one of the following "http://syriaca.org/keyword/distinct-entity", "http://syriaca.org/keyword/shares-attribution-with", or "skos:broader".</sch:assert>
+               <sch:assert test=". = 'http://syriaca.org/keyword/possibly-identical' or . = 'http://syriaca.org/keyword/shares-attribution-with' or . = 'skos:broader'">
+                  The @ref attribute on &lt;relation&gt; with @type="pseudonymity" can only be one of the following "http://syriaca.org/keyword/distinct-entities", "http://syriaca.org/keyword/shares-attribution-with", or "skos:broader".</sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
                       context="//tei:listPerson//tei:listRelation[tei:relation[@type = 'pseudonymity']]">
-               <sch:assert test="tei:relation/@ref = 'http://syriaca.org/keyword/possibility-identical'">
-                  There must be a &lt;relation&gt; element with @ref="http://syriaca.org/keyword/possibility-identical".</sch:assert>
+               <sch:assert test="tei:relation/@ref = 'http://syriaca.org/keyword/possibly-identical'">
+                  There must be a &lt;relation&gt; element with @ref="http://syriaca.org/keyword/possibly-identical".</sch:assert>
                <sch:assert test="tei:relation/@ref = 'http://syriaca.org/keyword/shares-attribution-with'">
                   There must be a &lt;relation&gt; element with @ref="http://syriaca.org/keyword/shares-attribution-with".</sch:assert>
                <sch:assert test="tei:relation/@ref = 'skos:broader'">

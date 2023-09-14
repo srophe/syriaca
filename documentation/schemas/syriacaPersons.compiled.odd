@@ -6449,19 +6449,19 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                   A &lt;relation&gt; with @type="disambiguation" must have a @mutual attribute.</sch:assert>
               </sch:rule>
               <sch:rule context="//tei:listPerson//tei:relation[@type = 'disambiguation']/@ref">
-                <sch:assert test=". = 'http://syriaca.org/keyword/distinct-entity' or . = 'http://syriaca.org/keyword/possibility-identical'">
-                  A &lt;relation&gt; with @type="disambiguation" must have @ref="http://syriaca.org/keyword/distinct-entity" or @ref="http://syriaca.org/keyword/possibility-identical".</sch:assert>
+                <sch:assert test=". = 'http://syriaca.org/keyword/distinct-entities' or . = 'http://syriaca.org/keyword/possibly-identical'">
+                  A &lt;relation&gt; with @type="disambiguation" must have @ref="http://syriaca.org/keyword/distinct-entities" or @ref="http://syriaca.org/keyword/possibly-identical".</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec><constraintSpec ident="pseudonymity-atts" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:listPerson//tei:relation[@type = 'pseudonymity']/@ref">
-                <sch:assert test=". = 'http://syriaca.org/keyword/possibility-identical' or . = 'http://syriaca.org/keyword/shares-attribution-with' or . = 'skos:broader'">
-                  The @ref attribute on &lt;relation&gt; with @type="pseudonymity" can only be one of the following "http://syriaca.org/keyword/distinct-entity", "http://syriaca.org/keyword/shares-attribution-with", or "skos:broader".</sch:assert>
+                <sch:assert test=". = 'http://syriaca.org/keyword/possibly-identical' or . = 'http://syriaca.org/keyword/shares-attribution-with' or . = 'skos:broader'">
+                  The @ref attribute on &lt;relation&gt; with @type="pseudonymity" can only be one of the following "http://syriaca.org/keyword/distinct-entities", "http://syriaca.org/keyword/shares-attribution-with", or "skos:broader".</sch:assert>
               </sch:rule>
               <sch:rule context="//tei:listPerson//tei:listRelation[tei:relation[@type = 'pseudonymity']]">
-                <sch:assert test="tei:relation/@ref = 'http://syriaca.org/keyword/possibility-identical'">
-                  There must be a &lt;relation&gt; element with @ref="http://syriaca.org/keyword/possibility-identical".</sch:assert>
+                <sch:assert test="tei:relation/@ref = 'http://syriaca.org/keyword/possibly-identical'">
+                  There must be a &lt;relation&gt; element with @ref="http://syriaca.org/keyword/possibly-identical".</sch:assert>
                 <sch:assert test="tei:relation/@ref = 'http://syriaca.org/keyword/shares-attribution-with'">
                   There must be a &lt;relation&gt; element with @ref="http://syriaca.org/keyword/shares-attribution-with".</sch:assert>
                 <sch:assert test="tei:relation/@ref = 'skos:broader'">
