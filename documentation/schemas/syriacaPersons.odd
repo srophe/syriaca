@@ -224,10 +224,10 @@
             <constraint>
               <sch:rule context="//tei:text//tei:person/tei:persName | //tei:text//tei:personGrp/tei:persName">
                 <sch:assert test="attribute::source or attribute::resp">
-                  This &lt;placeName&gt; element must have either a @source attribute (preferred when available) or a @resp attribute.
+                  This &lt;persName&gt; element must have either a @source attribute (preferred when available) or a @resp attribute.
                 </sch:assert>
                 <sch:report test="attribute::source and attribute::resp">
-                  This &lt;placeName&gt; element may not have both a @source attribute (the preferred when available) and a @resp attribute.
+                  This &lt;persName&gt; element may not have both a @source attribute (the preferred when available) and a @resp attribute.
                 </sch:report>
               </sch:rule>
             </constraint>
@@ -235,7 +235,7 @@
           <constraintSpec ident="persName-content" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:persName">
-                <sch:assert test="string-length(.) gt 0">The &lt;placeName&gt; element cannot be empty.</sch:assert>
+                <sch:assert test="string-length(.) gt 0">The &lt;persName&gt; element cannot be empty.</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>
@@ -266,7 +266,7 @@
           <constraintSpec ident="xmlLang-on-placeName" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:text//tei:person/tei:persName | //tei:text//tei:personGrp/tei:persName">
-                <sch:assert test="./@xml:lang">A &lt;placeName&gt; element that is the direct child of the &lt;place&gt; element must have an @xml:lang attribute.</sch:assert>
+                <sch:assert test="./@xml:lang">A &lt;persName&gt; element that is the direct child of &lt;person&gt; or &lt;personGrp&gt; must have an @xml:lang attribute.</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>
