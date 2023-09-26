@@ -100,25 +100,9 @@
     associer une représentation telle qu'un nom ou un titre à l'information canonique concernant
     l'objet nommé ou auquel il est fait référence.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2018-12-31">名前やタイトルのような表現を参照対象についての典拠情報と関連付けるのに利用する属性を提供する。</desc><classes/><attList><attDef ident="ref" usage="opt"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-09-05" xml:lang="en">reference</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-05-25" xml:lang="fr">référence</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2018-12-31">参照</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-09-05" xml:lang="en">provides an explicit means of locating a full definition or identity for the entity being named by
         means of one or more URIs.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-05-25" xml:lang="fr">fournit un moyen explicite de localiser une
-        définition complète de l'entité nommée au moyen d'un ou plusieurs URIs.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2018-12-31">一つ以上のURIを用いて、名付けられたエンティティの完全な定義かIDを参照するための明確な手段を提供する。</desc><constraintSpec ident="syriaca-ref" scheme="schematron">
-                <constraint>
-                  <sch:rule context="//@ref">
-                    <sch:report test="contains(., ' ')" role="error">The Syriaca.org data model only allows one value on a @ref attribute.</sch:report>
-                  </sch:rule>
-                  <sch:rule context="//tei:persName/@ref">
-                    <sch:assert test="matches(., concat('http://syriaca.org/person/', '\d+'))" role="error">
-                      The @ref attribute on &lt;persName&gt; must take a Syriaca.org person URI which reqires 
-                      the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
-                    </sch:assert>
-                  </sch:rule>
-                  <sch:rule context="//tei:placeName/@ref">
-                    <sch:assert test="matches(., concat('http://syriaca.org/place/', '\d+'))" role="error">
-                      The @ref attribute on &lt;placeName&gt; must take a Syriaca.org person URI which reqires 
-                      the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
-                    </sch:assert>
-                  </sch:rule>
-                </constraint>
-              </constraintSpec><datatype xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" minOccurs="1" maxOccurs="unbounded"><dataRef key="teidata.pointer"/></datatype><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+        définition complète de l'entité nommée au moyen d'un ou plusieurs URIs.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2018-12-31">一つ以上のURIを用いて、名付けられたエンティティの完全な定義かIDを参照するための明確な手段を提供する。</desc><datatype minOccurs="1" maxOccurs="1">
+                <dataRef key="teidata.pointer"/>
+              </datatype><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
           <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en" source="#NONE">
             <name ref="http://viaf.org/viaf/109557338" type="person">Seamus Heaney</name>
             </egXML>
@@ -6889,7 +6873,17 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
     como un nombre propio, que se refiere a una persona y puede incluir cualquier o todos los
     nombres de pila, apellidos, títulos honoríficos, o nombres añadidos de la persona en cuestión.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">contiene un nome proprio o un sintagma identificabile
     come nome proprio, che si riferisce a una persona e può includere qualsiasi o tutti i prenomi,
-    cognomi, titoli onorifici, o nomi aggiunti della persona in questione</desc><classes><memberOf key="model.nameLike.agent"/><memberOf key="att.personal"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="addName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="forename" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="roleName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="surname" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><attList><attDef ident="sort" mode="delete"/><attDef ident="role" mode="delete"/><attDef ident="srophe:tags" mode="delete"/><attDef ident="key" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+    cognomi, titoli onorifici, o nomi aggiunti della persona in questione</desc><classes><memberOf key="model.nameLike.agent"/><memberOf key="att.personal"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="addName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="forename" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="roleName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="surname" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><constraintSpec ident="person-ref" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:persName/@ref">
+                <sch:assert test="matches(., concat('http://syriaca.org/person/', '\d+'))" role="error">
+                  The @ref attribute on &lt;persName&gt; must take a Syriaca.org person URI which reqires 
+                  the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
+                </sch:assert>
+              </sch:rule>
+              
+            </constraint>
+          </constraintSpec><attList><attDef ident="sort" mode="delete"/><attDef ident="role" mode="delete"/><attDef ident="srophe:tags" mode="delete"/><attDef ident="key" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
       <persName><forename>Edward</forename><forename>George</forename><surname type="linked">Bulwer-Lytton</surname>, <roleName>Baron Lytton of
         <placeName>Knebworth</placeName>
@@ -6934,7 +6928,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
           </constraintSpec><constraintSpec ident="xmlID-on-placeName" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:text/tei:place/tei:placeName">
-                <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
+                <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno[@type='URI']/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
                 <sch:assert test="matches(./@xml:id, concat('name', $docURIno, '-', '\d+$'))">
                   The required @xml:id must be 'name<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
                 </sch:assert>
@@ -6945,6 +6939,16 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
               <sch:rule context="//tei:text//tei:place/tei:placeName">
                 <sch:assert test="./@xml:lang">A &lt;placeName&gt; element that is the direct child of the &lt;place&gt; element must have an @xml:lang attribute.</sch:assert>
               </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="place-ref" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:placeName/@ref">
+                <sch:assert test="matches(., concat('http://syriaca.org/place/', '\d+'))" role="error">
+                  The @ref attribute on &lt;placeName&gt; must take a Syriaca.org person URI which reqires 
+                  the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
+                </sch:assert>
+              </sch:rule>
+              
             </constraint>
           </constraintSpec><attList><attDef ident="xml:id" mode="change">
               <desc>
@@ -7699,18 +7703,6 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                 </sch:assert>
               </sch:rule>
             </constraint>
-          </constraintSpec><constraintSpec ident="active-count" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:relation/@active">
-                <sch:report test="contains(., ' ')">Space not allowed. This @active attribute can only take one value.</sch:report>
-              </sch:rule>
-            </constraint>
-          </constraintSpec><constraintSpec ident="passive-count" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:relation/@passive">
-                <sch:report test="contains(., ' ')">Space not allowed. This @passive attribute can only take one value.</sch:report>
-              </sch:rule>
-            </constraint>
           </constraintSpec><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="reforkeyorname" scheme="schematron">
     <constraint>
       <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="@ref or @key or @name">One of the attributes  'name', 'ref' or 'key' must be supplied</assert>
@@ -7724,14 +7716,10 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
     <constraint>
       <report xmlns="http://purl.oclc.org/dsdl/schematron" test="@passive and not(@active)">the attribute 'passive' may be supplied only if the attribute 'active' is supplied</report>
     </constraint>
-  </constraintSpec><attList><attList org="choice"><attDef ident="active" mode="delete"/><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="mutual" usage="opt">
-        <desc versionDate="2005-07-24" xml:lang="en">supplies a list of participants amongst all of whom the relationship holds equally.</desc>
-        <desc versionDate="2008-04-06" xml:lang="es">proporciona una lista de participantes entre los cuales se establece una idéntica
-                    relación</desc>
-        <desc versionDate="2009-03-19" xml:lang="fr">fournit une liste de participants entre lesquels la relation est réciproque.</desc>
-        <desc versionDate="2007-11-06" xml:lang="it">fornisce una lista di partecipanti tra i quali c'è una relazione paritaria</desc>
-        <datatype maxOccurs="unbounded"><dataRef key="teidata.pointer"/></datatype>
-      </attDef></attList><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="subtype" mode="delete"/><attDef ident="name" mode="delete" rend="delete" usage="req"><valList type="closed"><valItem ident="share-a-name"/><valItem ident="see-also"/></valList></attDef><attDef ident="passive" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+  </constraintSpec><attList><attList org="choice"><attDef ident="active" mode="delete"/><attDef ident="mutual" usage="opt"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-07-24" xml:lang="en">supplies a list of participants amongst all of whom the relationship holds equally.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-06" xml:lang="es">proporciona una lista de participantes entre los cuales se establece una idéntica
+                    relación</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">fournit une liste de participants entre lesquels la relation est réciproque.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-11-06" xml:lang="it">fornisce una lista di partecipanti tra i quali c'è una relazione paritaria</desc><datatype minOccurs="2" maxOccurs="unbounded">
+                <dataRef key="teidata.pointer"/>
+              </datatype></attDef></attList><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="subtype" mode="delete"/><attDef ident="type" mode="change" usage="req"/><attDef ident="ref" mode="change" usage="req"/><attDef ident="name" mode="delete" rend="delete" usage="req"><valList type="closed"><valItem ident="share-a-name"/><valItem ident="see-also"/></valList></attDef><attDef ident="passive" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#UND">
       <relation type="social" name="supervisor" active="#p1" passive="#p2 #p3 #p4"/>
     </egXML>
