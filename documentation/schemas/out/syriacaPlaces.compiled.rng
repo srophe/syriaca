@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-09-26T15:21:48Z. .
+Schema generated from ODD source 2023-09-28T14:05:03Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -1646,89 +1646,29 @@ Suggested values include: 1] m (metre); 2] kg (kilogram); 3] s (second); 4] Hz (
    <define name="tei_model.placeNamePart">
       <choice>
          <ref name="tei_placeName"/>
-         <ref name="tei_bloc"/>
-         <ref name="tei_country"/>
-         <ref name="tei_region"/>
-         <ref name="tei_settlement"/>
-         <ref name="tei_district"/>
       </choice>
    </define>
    <define name="tei_model.placeNamePart_alternation">
       <choice>
          <ref name="tei_placeName"/>
-         <ref name="tei_bloc"/>
-         <ref name="tei_country"/>
-         <ref name="tei_region"/>
-         <ref name="tei_settlement"/>
-         <ref name="tei_district"/>
       </choice>
    </define>
    <define name="tei_model.placeNamePart_sequence">
       <ref name="tei_placeName"/>
-      <ref name="tei_bloc"/>
-      <ref name="tei_country"/>
-      <ref name="tei_region"/>
-      <ref name="tei_settlement"/>
-      <ref name="tei_district"/>
    </define>
    <define name="tei_model.placeNamePart_sequenceOptional">
       <optional>
          <ref name="tei_placeName"/>
-      </optional>
-      <optional>
-         <ref name="tei_bloc"/>
-      </optional>
-      <optional>
-         <ref name="tei_country"/>
-      </optional>
-      <optional>
-         <ref name="tei_region"/>
-      </optional>
-      <optional>
-         <ref name="tei_settlement"/>
-      </optional>
-      <optional>
-         <ref name="tei_district"/>
       </optional>
    </define>
    <define name="tei_model.placeNamePart_sequenceOptionalRepeatable">
       <zeroOrMore>
          <ref name="tei_placeName"/>
       </zeroOrMore>
-      <zeroOrMore>
-         <ref name="tei_bloc"/>
-      </zeroOrMore>
-      <zeroOrMore>
-         <ref name="tei_country"/>
-      </zeroOrMore>
-      <zeroOrMore>
-         <ref name="tei_region"/>
-      </zeroOrMore>
-      <zeroOrMore>
-         <ref name="tei_settlement"/>
-      </zeroOrMore>
-      <zeroOrMore>
-         <ref name="tei_district"/>
-      </zeroOrMore>
    </define>
    <define name="tei_model.placeNamePart_sequenceRepeatable">
       <oneOrMore>
          <ref name="tei_placeName"/>
-      </oneOrMore>
-      <oneOrMore>
-         <ref name="tei_bloc"/>
-      </oneOrMore>
-      <oneOrMore>
-         <ref name="tei_country"/>
-      </oneOrMore>
-      <oneOrMore>
-         <ref name="tei_region"/>
-      </oneOrMore>
-      <oneOrMore>
-         <ref name="tei_settlement"/>
-      </oneOrMore>
-      <oneOrMore>
-         <ref name="tei_district"/>
       </oneOrMore>
    </define>
    <define name="tei_model.placeStateLike">
@@ -2200,16 +2140,18 @@ Suggested values include: 1] m (metre); 2] kg (kilogram); 3] s (second); 4] Hz (
          </interleave>
          <ref name="tei_att.global.attribute.xmllang"/>
          <ref name="tei_att.typed.attributes"/>
-         <attribute name="source">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the source from which some aspect of this element is drawn.</a:documentation>
-            <list>
-               <oneOrMore>
-                  <data type="anyURI">
-                     <param name="pattern">\S+</param>
-                  </data>
-               </oneOrMore>
-            </list>
-         </attribute>
+         <optional>
+            <attribute name="source">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the source from which some aspect of this element is drawn.</a:documentation>
+               <list>
+                  <oneOrMore>
+                     <data type="anyURI">
+                        <param name="pattern">\S+</param>
+                     </data>
+                  </oneOrMore>
+               </list>
+            </attribute>
+         </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="syriacaPlaces-quote-source-only_1_ODD_source-constraint-rule-12">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
@@ -2243,14 +2185,20 @@ Suggested values include: 1] m (metre); 2] kg (kilogram); 3] s (second); 4] Hz (
                <ref name="tei_foreign"/>
             </zeroOrMore>
             <zeroOrMore>
+               <ref name="tei_measure"/>
+            </zeroOrMore>
+            <zeroOrMore>
+               <ref name="tei_offset"/>
+            </zeroOrMore>
+            <zeroOrMore>
                <ref name="tei_persName"/>
             </zeroOrMore>
             <zeroOrMore>
                <ref name="tei_placeName"/>
             </zeroOrMore>
-            <zeroOrMore>
+            <optional>
                <ref name="tei_quote"/>
-            </zeroOrMore>
+            </optional>
             <zeroOrMore>
                <ref name="tei_title"/>
             </zeroOrMore>
@@ -2666,9 +2614,9 @@ attributes @target and @cRef may be supplied on <name/>.</report>
             <zeroOrMore>
                <ref name="tei_placeName"/>
             </zeroOrMore>
-            <zeroOrMore>
+            <optional>
                <ref name="tei_quote"/>
-            </zeroOrMore>
+            </optional>
             <zeroOrMore>
                <ref name="tei_ref"/>
             </zeroOrMore>
@@ -3994,166 +3942,6 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <empty/>
       </element>
    </define>
-   <define name="tei_bloc">
-      <element name="bloc">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(bloc) contains the name of a geo-political unit consisting of two or more nation states or countries. [13.2.3. Place Names]</a:documentation>
-         <ref name="tei_macro.phraseSeq"/>
-         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-bloc-ref-on-bloc-constraint-rule-55">
-            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:bloc/@ref">
-               <sch:let name="placeIndex"
-                        value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
-               <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
-               <sch:assert test="                   every $i in .                   satisfies $i = $placeURIs">
-                  This @ref attribute is not a place URI in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+}' (where {\d+} is a number).
-                </sch:assert>
-               <sch:report test="contains(., ' ')">This @ref may contain only one URI.</sch:report>
-            </sch:rule>
-         </pattern>
-         <ref name="tei_att.global.attributes"/>
-         <ref name="tei_att.naming.attribute.role"/>
-         <ref name="tei_att.typed.attributes"/>
-         <ref name="tei_att.datable.attributes"/>
-         <attribute name="ref">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(reference) provides an explicit means of locating a full definition or identity for the entity being named by means of one or more URIs.</a:documentation>
-            <data type="anyURI">
-               <param name="pattern">\S+</param>
-            </data>
-         </attribute>
-         <empty/>
-      </element>
-   </define>
-   <define name="tei_country">
-      <element name="country">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(country) contains the name of a geo-political unit, such as a nation, country, colony, or commonwealth, larger than or administratively superior to a region and smaller than a bloc. [13.2.3. Place Names]</a:documentation>
-         <ref name="tei_macro.phraseSeq"/>
-         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-country-ref-on-country-constraint-rule-56">
-            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:country/@ref">
-               <sch:let name="placeIndex"
-                        value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
-               <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
-               <sch:assert test="                   every $i in .                   satisfies $i = $placeURIs">
-                  This @ref attribute is not a place URI in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+}' (where {\d+} is a number).
-                </sch:assert>
-               <sch:report test="contains(., ' ')">This @ref may contain only one URI.</sch:report>
-            </sch:rule>
-         </pattern>
-         <ref name="tei_att.global.attributes"/>
-         <ref name="tei_att.naming.attribute.role"/>
-         <ref name="tei_att.typed.attributes"/>
-         <ref name="tei_att.datable.attributes"/>
-         <attribute name="ref">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(reference) provides an explicit means of locating a full definition or identity for the entity being named by means of one or more URIs.</a:documentation>
-            <data type="anyURI">
-               <param name="pattern">\S+</param>
-            </data>
-         </attribute>
-         <empty/>
-      </element>
-   </define>
-   <define name="tei_region">
-      <element name="region">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(region) contains the name of an administrative unit such as a state, province, or county, larger than a settlement, but smaller than a country. [13.2.3. Place Names]</a:documentation>
-         <ref name="tei_macro.phraseSeq"/>
-         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-region-ref-on-region-constraint-rule-57">
-            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:region/@ref">
-               <sch:let name="placeIndex"
-                        value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
-               <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
-               <sch:assert test="                   every $i in .                   satisfies $i = $placeURIs">
-                  This @ref attribute is not a place URI in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+}' (where {\d+} is a number).
-                </sch:assert>
-               <sch:report test="contains(., ' ')">This @ref may contain only one URI.</sch:report>
-            </sch:rule>
-         </pattern>
-         <ref name="tei_att.global.attributes"/>
-         <ref name="tei_att.naming.attribute.role"/>
-         <ref name="tei_att.typed.attributes"/>
-         <ref name="tei_att.datable.attributes"/>
-         <attribute name="ref">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(reference) provides an explicit means of locating a full definition or identity for the entity being named by means of one or more URIs.</a:documentation>
-            <data type="anyURI">
-               <param name="pattern">\S+</param>
-            </data>
-         </attribute>
-         <empty/>
-      </element>
-   </define>
-   <define name="tei_settlement">
-      <element name="settlement">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(settlement) contains the name of a settlement such as a city, town, or village identified as a single geo-political or administrative unit. [13.2.3. Place Names]</a:documentation>
-         <ref name="tei_macro.phraseSeq"/>
-         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-settlement-ref-on-settlement-constraint-rule-58">
-            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:settlement/@ref">
-               <sch:let name="placeIndex"
-                        value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
-               <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
-               <sch:assert test="                   every $i in .                   satisfies $i = $placeURIs">
-                  This @ref attribute is not a place URI in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+}' (where {\d+} is a number).
-                </sch:assert>
-               <sch:report test="contains(., ' ')">This @ref may contain only one URI.</sch:report>
-            </sch:rule>
-         </pattern>
-         <ref name="tei_att.global.attributes"/>
-         <ref name="tei_att.naming.attribute.role"/>
-         <ref name="tei_att.typed.attributes"/>
-         <ref name="tei_att.datable.attributes"/>
-         <attribute name="ref">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(reference) provides an explicit means of locating a full definition or identity for the entity being named by means of one or more URIs.</a:documentation>
-            <data type="anyURI">
-               <param name="pattern">\S+</param>
-            </data>
-         </attribute>
-         <empty/>
-      </element>
-   </define>
-   <define name="tei_district">
-      <element name="district">
-         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(district) contains the name of any kind of subdivision of a settlement, such as a parish, ward, or other administrative or geographic unit. [13.2.3. Place Names]</a:documentation>
-         <ref name="tei_macro.phraseSeq"/>
-         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-district-ref-on-district-constraint-rule-59">
-            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:district/@ref">
-               <sch:let name="placeIndex"
-                        value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
-               <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
-               <sch:assert test="                   every $i in .                   satisfies $i = $placeURIs">
-                  This @ref attribute is not a place URI in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+}' (where {\d+} is a number).
-                </sch:assert>
-               <sch:report test="contains(., ' ')">This @ref may contain only one URI.</sch:report>
-            </sch:rule>
-         </pattern>
-         <ref name="tei_att.global.attributes"/>
-         <ref name="tei_att.naming.attribute.role"/>
-         <ref name="tei_att.typed.attributes"/>
-         <ref name="tei_att.datable.attributes"/>
-         <attribute name="ref">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(reference) provides an explicit means of locating a full definition or identity for the entity being named by means of one or more URIs.</a:documentation>
-            <data type="anyURI">
-               <param name="pattern">\S+</param>
-            </data>
-         </attribute>
-         <empty/>
-      </element>
-   </define>
    <define name="tei_offset">
       <element name="offset">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(offset) marks that part of a relative temporal or spatial expression which indicates the direction of the offset between the two place names, dates, or times involved in the expression. [13.2.3. Place Names]</a:documentation>
@@ -4179,7 +3967,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </zeroOrMore>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-event-xmlID-on-event-constraint-rule-60">
+                  id="syriacaPlaces-event-xmlID-on-event-constraint-rule-55">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4204,7 +3992,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </list>
          </attribute>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-event-source-only_1_ODD_source-constraint-rule-61">
+                  id="syriacaPlaces-event-source-only_1_ODD_source-constraint-rule-56">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4261,40 +4049,10 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(location) defines the location of a place as a set of geographical coordinates, in terms of other named geo-political entities, or as an address. [13.3.4. Places]</a:documentation>
          <choice>
             <ref name="tei_geo"/>
-            <oneOrMore>
-               <choice>
-                  <text/>
-                  <zeroOrMore>
-                     <ref name="tei_placeName"/>
-                  </zeroOrMore>
-                  <zeroOrMore>
-                     <ref name="tei_measure"/>
-                  </zeroOrMore>
-                  <zeroOrMore>
-                     <ref name="tei_offset"/>
-                  </zeroOrMore>
-               </choice>
-            </oneOrMore>
-            <group>
-               <zeroOrMore>
-                  <ref name="tei_district"/>
-               </zeroOrMore>
-               <optional>
-                  <ref name="tei_settlement"/>
-               </optional>
-               <zeroOrMore>
-                  <ref name="tei_region"/>
-               </zeroOrMore>
-               <zeroOrMore>
-                  <ref name="tei_country"/>
-               </zeroOrMore>
-               <zeroOrMore>
-                  <ref name="tei_bloc"/>
-               </zeroOrMore>
-            </group>
+            <ref name="tei_desc"/>
          </choice>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-location-location-children-constraint-rule-62">
+                  id="syriacaPlaces-location-location-children-constraint-rule-57">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4329,7 +4087,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-location-atts-on-location-constraint-rule-66">
+                  id="syriacaPlaces-location-atts-on-location-constraint-rule-61">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4343,7 +4101,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-location-source-on-location-constraint-rule-67">
+                  id="syriacaPlaces-location-source-on-location-constraint-rule-62">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4379,7 +4137,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-location-source-only_1_ODD_source-constraint-rule-68">
+                  id="syriacaPlaces-location-source-only_1_ODD_source-constraint-rule-63">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4399,27 +4157,10 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <choice>
                <value>gps</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-               <value>nested</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
                <value>relative</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
             </choice>
          </attribute>
-         <optional>
-            <attribute name="subtype">
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(subtype) provides a sub-categorization of the element, if needed</a:documentation>
-               <choice>
-                  <value>alternate</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                  <value>preferred</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                  <value>quote</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                  <value>representative</value>
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-               </choice>
-            </attribute>
-         </optional>
          <empty/>
       </element>
    </define>
@@ -4451,7 +4192,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <ref name="tei_bibl"/>
          </oneOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-place-abstract-in-place-constraint-rule-69">
+                  id="syriacaPlaces-place-abstract-in-place-constraint-rule-64">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4524,7 +4265,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(relationship) describes any kind of relationship or linkage amongst a specified group of places, events, persons, objects or other items. [13.3.2.3. Personal Relationships]</a:documentation>
          <ref name="tei_desc"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-relation-atts-on-relation-constraint-rule-70">
+                  id="syriacaPlaces-relation-atts-on-relation-constraint-rule-65">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4546,7 +4287,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-relation-reforkeyorname-constraint-assert-62">
+                  id="syriacaPlaces-relation-reforkeyorname-constraint-assert-57">
             <rule context="tei:relation">
                <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4556,7 +4297,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-relation-activemutual-constraint-report-27">
+                  id="syriacaPlaces-relation-activemutual-constraint-report-22">
             <rule context="tei:relation">
                <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4566,7 +4307,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-relation-activepassive-constraint-report-28">
+                  id="syriacaPlaces-relation-activepassive-constraint-report-23">
             <rule context="tei:relation">
                <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4591,29 +4332,33 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                <param name="pattern">[^\p{C}\p{Z}]+</param>
             </data>
          </attribute>
+         <optional>
+            <attribute name="passive">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">identifies the passive participants in a non-mutual relationship.</a:documentation>
+               <list>
+                  <oneOrMore>
+                     <data type="anyURI">
+                        <param name="pattern">\S+</param>
+                     </data>
+                  </oneOrMore>
+               </list>
+            </attribute>
+         </optional>
          <choice>
             <optional>
                <attribute name="active">
-                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
-                  <text/>
+                  <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">identifies the active participants in a non-mutual relationship, or all the participants in a mutual one.</a:documentation>
+                  <data type="anyURI">
+                     <param name="pattern">\S+</param>
+                  </data>
                </attribute>
             </optional>
             <optional>
                <attribute name="mutual">
                   <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">supplies a list of participants amongst all of whom the relationship holds equally.</a:documentation>
-                  <list>
-                     <data type="anyURI">
-                        <param name="pattern">\S+</param>
-                     </data>
-                     <data type="anyURI">
-                        <param name="pattern">\S+</param>
-                     </data>
-                     <zeroOrMore>
-                        <data type="anyURI">
-                           <param name="pattern">\S+</param>
-                        </data>
-                     </zeroOrMore>
-                  </list>
+                  <data type="anyURI">
+                     <param name="pattern">\S+</param>
+                  </data>
                </attribute>
             </optional>
          </choice>
@@ -4632,7 +4377,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </zeroOrMore>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-state-xmlID-on-state-constraint-rule-71">
+                  id="syriacaPlaces-state-xmlID-on-state-constraint-rule-66">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4645,7 +4390,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-state-state-type-existence-constraint-rule-72">
+                  id="syriacaPlaces-state-state-type-existence-constraint-rule-67">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4662,7 +4407,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-state-state-type-confession-constraint-rule-73">
+                  id="syriacaPlaces-state-state-type-confession-constraint-rule-68">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4785,7 +4530,7 @@ Sample values include: 1] TEI; 2] DBK (docbook); 3] XX (unknown); 4] Schematron;
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(text) contains a single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample. [4. Default Text Structure 15.1. Varieties of Composite Text]</a:documentation>
          <ref name="tei_body"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-text-source-within-test-constraint-rule-75">
+                  id="syriacaPlaces-text-source-within-test-constraint-rule-70">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4794,7 +4539,7 @@ Sample values include: 1] TEI; 2] DBK (docbook); 3] XX (unknown); 4] Schematron;
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-text-source-in-text-constraint-rule-76">
+                  id="syriacaPlaces-text-source-in-text-constraint-rule-71">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"

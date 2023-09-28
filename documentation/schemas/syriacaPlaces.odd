@@ -45,7 +45,7 @@
         <moduleRef key="core" include="abbr author bibl biblScope choice citedRange date desc editor expan foreign listBibl measure name note orig p ptr quote reg ref resp respStmt title"/>
         <moduleRef key="header" include="authority availability catDesc category change classDecl edition editionStmt editorialDecl encodingDesc fileDesc funder idno langUsage licence principal profileDesc publicationStmt revisionDesc seriesStmt sourceDesc sponsor taxonomy teiHeader titleStmt"/>
         <moduleRef key="linking" include="link"/>
-        <moduleRef key="namesdates" include="bloc country district event geo listPlace listRelation location offset persName place placeName region relation settlement state"/>
+        <moduleRef key="namesdates" include="event geo listPlace listRelation location offset persName place placeName relation state"/>
         <moduleRef key="tagdocs" include="gi"/>
         <moduleRef key="textstructure" include="TEI body text"/>
         <classRef key="att.global.analytic"/>
@@ -286,19 +286,7 @@
           <content>
             <alternate>
               <elementRef key="geo"/>
-              <alternate maxOccurs="unbounded">
-                <textNode/>
-                <elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="measure" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="offset" minOccurs="0" maxOccurs="unbounded"/>
-              </alternate>
-              <sequence preserveOrder="true">
-                <elementRef key="district" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="settlement" minOccurs="0" maxOccurs="1"/>
-                <elementRef key="region" minOccurs="0" maxOccurs="unbounded"/>   
-                <elementRef key="country" minOccurs="0" maxOccurs="unbounded"/>
-                <elementRef key="bloc" minOccurs="0" maxOccurs="unbounded"/>
-              </sequence>
+              <elementRef key="desc"/>
             </alternate>
           </content>
           <constraintSpec ident="location-children" scheme="schematron">
@@ -353,18 +341,10 @@
             <attDef ident="type" mode="change" usage="req">
               <valList mode="replace" type="closed">
                 <valItem ident="gps"/>
-                <valItem ident="nested"/>
                 <valItem ident="relative"/>
               </valList>
             </attDef>
-            <attDef ident="subtype" mode="change">
-              <valList mode="replace" type="closed">
-                <valItem ident="alternate"/>
-                <valItem ident="preferred"/>
-                <valItem ident="quote"/>
-                <valItem ident="representative"/>
-              </valList>
-            </attDef>
+            <attDef ident="subtype" mode="delete"/>
             <attDef ident="source" mode="change">
               <desc>
                 In most cases the <gi>location</gi> element will have a <att>source</att> attribute pointing to the <gi>bibl</gi> element that is the 
@@ -716,19 +696,19 @@
             </constraint>
           </constraintSpec>
           <attList>
-            <attDef ident="active" mode="delete"/>
-            <attDef ident="passive" mode="delete"/>
-            <attDef ident="name" mode="change" usage="req">
+            <attDef ident="type" mode="change" usage="req">
               <valList type="closed" mode="replace">
-                <valItem ident="share-a-name"/>
+                <valItem ident="disambiguation"/>
+                <valItem ident="nested-location"/>
+                <valItem ident="place-types"/>
                 <valItem ident="see-also"/>
               </valList>
             </attDef>
-            <!--<attDef ident="mutual" mode="change">
+            <attDef ident="mutual" mode="change">
               <datatype>
                 <dataRef key="teidata.pointer"/>
               </datatype>
-            </attDef>-->
+            </attDef>
           </attList>
         </elementSpec>
         

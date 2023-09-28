@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-09-26T15:20:48Z. .
+Schema generated from ODD source 2023-09-28T14:01:51Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -1828,16 +1828,18 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
          </interleave>
          <ref name="tei_att.global.attribute.xmllang"/>
          <ref name="tei_att.typed.attributes"/>
-         <attribute name="source">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the source from which some aspect of this element is drawn.</a:documentation>
-            <list>
-               <oneOrMore>
-                  <data type="anyURI">
-                     <param name="pattern">\S+</param>
-                  </data>
-               </oneOrMore>
-            </list>
-         </attribute>
+         <optional>
+            <attribute name="source">
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">specifies the source from which some aspect of this element is drawn.</a:documentation>
+               <list>
+                  <oneOrMore>
+                     <data type="anyURI">
+                        <param name="pattern">\S+</param>
+                     </data>
+                  </oneOrMore>
+               </list>
+            </attribute>
+         </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="syriacaPersons-quote-source-only_1_ODD_source-constraint-rule-11">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
@@ -1876,9 +1878,9 @@ TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
             <zeroOrMore>
                <ref name="tei_placeName"/>
             </zeroOrMore>
-            <zeroOrMore>
+            <optional>
                <ref name="tei_quote"/>
-            </zeroOrMore>
+            </optional>
             <zeroOrMore>
                <ref name="tei_title"/>
             </zeroOrMore>
@@ -2231,9 +2233,9 @@ attributes @target and @cRef may be supplied on <name/>.</report>
             <zeroOrMore>
                <ref name="tei_placeName"/>
             </zeroOrMore>
-            <zeroOrMore>
+            <optional>
                <ref name="tei_quote"/>
-            </zeroOrMore>
+            </optional>
             <zeroOrMore>
                <ref name="tei_ref"/>
             </zeroOrMore>
