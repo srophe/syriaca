@@ -3610,6 +3610,15 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
                 </sch:assert>
               </sch:rule>
             </constraint>
+          </constraintSpec><constraintSpec ident="desc-documentation" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:desc[descendant::tei:quote]">
+                <sch:assert test="./@source">
+                  Since this &lt;desc&gt; contains a &lt;quote&gt;, it requires a @source attribute 
+                  pointing to the &lt;bibl&gt; that is the source for this quotation. 
+                </sch:assert>
+              </sch:rule>
+            </constraint>
           </constraintSpec><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="deprecationInfo-only-in-deprecated" scheme="schematron">
     <desc versionDate="2018-09-13" xml:lang="en">A <gi>desc</gi> with
     a <att>type</att> of <val>deprecationInfo</val> should only occur
@@ -4441,6 +4450,15 @@ attributes @target and @cRef may be supplied on <name/>.</report>
                   This @target attribute on &lt;note&gt; of @type="deprecation" can take one or more of the following value 
                   separated by a space: 
                   <sch:value-of select="string-join($IDvalues, ' | ')"/>.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="note-documentation" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:note[descendant::tei:quote]">
+                <sch:assert test="./@source">
+                  Since this &lt;note&gt; contains a &lt;quote&gt;, it requires a @source attribute 
+                  pointing to the &lt;bibl&gt; that is the source for this quotation. 
                 </sch:assert>
               </sch:rule>
             </constraint>

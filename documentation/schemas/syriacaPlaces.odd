@@ -57,43 +57,7 @@
           
         </elementSpec>
         
-        
-        
-        <elementSpec ident="bloc" module="namesdates" mode="change">
-          <!--<classes mode="change"><!-\- all deleted -\->
-            <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.analytic" mode="delete"/>
-            
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
-            <memberOf key="att.naming" mode="delete"/>
-            <memberOf key="att.typed" mode="delete"/>
-            <memberOf key="att.datable" mode="delete"/>
-            <memberOf key="att.datable.w3c" mode="delete"/>
-            
-            <memberOf key="att.datable.custom" mode="delete"/>
-            <memberOf key="att.canonical" mode="add"/>
-          </classes>-->
-          <constraintSpec ident="ref-on-bloc" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:text//tei:bloc/@ref">
-                <sch:let name="placeIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
-                <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
-                <sch:assert test="                   every $i in .                   satisfies $i = $placeURIs">
-                  This @ref attribute is not a place URI in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+}' (where {\d+} is a number).
-                </sch:assert>
-                <sch:report test="contains(., ' ')">This @ref may contain only one URI.</sch:report>
-              </sch:rule>
-            </constraint>
-          </constraintSpec>
-          <attList>
-            <attDef ident="ref" mode="change" usage="req"/>
-          </attList>
-        </elementSpec>
-        
+             
         
         
         <elementSpec ident="body" module="textstructure" mode="change">
@@ -106,42 +70,6 @@
           </remarks>
         </elementSpec>
         
-        
-        
-        <elementSpec ident="country" module="namesdates" mode="change">
-          <!--<classes mode="change"><!-\- all deleted -\->
-            <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.analytic" mode="delete"/>
-            
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
-            <memberOf key="att.naming" mode="delete"/>
-            <memberOf key="att.typed" mode="delete"/>
-            <memberOf key="att.datable" mode="delete"/>
-            <memberOf key="att.datable.w3c" mode="delete"/>
-            
-            <memberOf key="att.datable.custom" mode="delete"/>
-            <memberOf key="att.canonical" mode="add"/>
-          </classes>-->
-          <constraintSpec ident="ref-on-country" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:text//tei:country/@ref">
-                <sch:let name="placeIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
-                <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
-                <sch:assert test="                   every $i in .                   satisfies $i = $placeURIs">
-                  This @ref attribute is not a place URI in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+}' (where {\d+} is a number).
-                </sch:assert>
-                <sch:report test="contains(., ' ')">This @ref may contain only one URI.</sch:report>
-              </sch:rule>
-            </constraint>
-          </constraintSpec>
-          <attList>
-            <attDef ident="ref" mode="change" usage="req"/>
-          </attList>
-        </elementSpec>
         
         
         
@@ -169,42 +97,6 @@
           </constraintSpec>
         </elementSpec>
         
-        
-        
-        <elementSpec ident="district" module="namesdates" mode="change">
-          <!--<classes mode="change"><!-\- all deleted -\->
-            <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.analytic" mode="delete"/>
-            
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
-            <memberOf key="att.naming" mode="delete"/>
-            <memberOf key="att.typed" mode="delete"/>
-            <memberOf key="att.datable" mode="delete"/>
-            <memberOf key="att.datable.w3c" mode="delete"/>
-            
-            <memberOf key="att.datable.custom" mode="delete"/>
-            <memberOf key="att.canonical" mode="add"/>
-          </classes>-->
-          <constraintSpec ident="ref-on-district" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:text//tei:district/@ref">
-                <sch:let name="placeIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
-                <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
-                <sch:assert test="                   every $i in .                   satisfies $i = $placeURIs">
-                  This @ref attribute is not a place URI in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+}' (where {\d+} is a number).
-                </sch:assert>
-                <sch:report test="contains(., ' ')">This @ref may contain only one URI.</sch:report>
-              </sch:rule>
-            </constraint>
-          </constraintSpec>
-          <attList>
-            <attDef ident="ref" mode="change" usage="req"/>
-          </attList>
-        </elementSpec>
         
         
         
@@ -632,48 +524,6 @@
         
         
         
-        <elementSpec ident="region" module="namesdates" mode="change">
-          <!--<classes mode="change"><!-\- all deleted -\->
-            <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.analytic" mode="delete"/>
-            
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
-            <memberOf key="att.naming" mode="delete"/>
-            <memberOf key="att.typed" mode="delete"/>
-            <memberOf key="att.datable" mode="delete"/>
-            <memberOf key="att.datable.w3c" mode="delete"/>
-            
-            <memberOf key="att.datable.custom" mode="delete"/>
-            <memberOf key="att.canonical" mode="add"/>
-          </classes>-->
-          <attList>
-            
-            <attDef ident="ref" mode="change" usage="req"/>
-          </attList>
-        </elementSpec>
-        
-        
-        
-        
-        <elementSpec ident="region" module="namesdates" mode="change">
-          <constraintSpec ident="ref-on-region" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:text//tei:region/@ref">
-                <sch:let name="placeIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
-                <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
-                <sch:assert test="                   every $i in .                   satisfies $i = $placeURIs">
-                  This @ref attribute is not a place URI in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+}' (where {\d+} is a number).
-                </sch:assert>
-                <sch:report test="contains(., ' ')">This @ref may contain only one URI.</sch:report>
-              </sch:rule>
-            </constraint>
-          </constraintSpec>
-        </elementSpec>
-        
         
         
         <elementSpec ident="relation" module="namesdates" mode="change">
@@ -751,42 +601,6 @@
           </constraintSpec>
         </elementSpec>
         
-        
-        
-        <elementSpec ident="settlement" module="namesdates" mode="change">
-          <!--<classes mode="change"><!-\- all deleted -\->
-            <memberOf key="att.global" mode="delete"/>
-            <memberOf key="att.global.rendition" mode="delete"/>
-            <memberOf key="att.global.linking" mode="delete"/>
-            <memberOf key="att.global.analytic" mode="delete"/>
-            
-            <memberOf key="att.global.change" mode="delete"/>
-            <memberOf key="att.global.responsibility" mode="delete"/>
-            <memberOf key="att.global.source" mode="delete"/>
-            <memberOf key="att.naming" mode="delete"/>
-            <memberOf key="att.typed" mode="delete"/>
-            <memberOf key="att.datable" mode="delete"/>
-            <memberOf key="att.datable.w3c" mode="delete"/>
-            
-            <memberOf key="att.datable.custom" mode="delete"/>
-            <memberOf key="att.canonical" mode="add"/>
-          </classes>-->
-          <constraintSpec ident="ref-on-settlement" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:text//tei:settlement/@ref">
-                <sch:let name="placeIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
-                <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
-                <sch:assert test="                   every $i in .                   satisfies $i = $placeURIs">
-                  This @ref attribute is not a place URI in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+}' (where {\d+} is a number).
-                </sch:assert>
-                <sch:report test="contains(., ' ')">This @ref may contain only one URI.</sch:report>
-              </sch:rule>
-            </constraint>
-          </constraintSpec>
-          <attList>
-            <attDef ident="ref" mode="change" usage="req"/>
-          </attList>
-        </elementSpec>
         
         
         
