@@ -72,6 +72,15 @@
         
         
         
+        <elementSpec ident="date" module="namesdates" mode="change">
+          <attList>
+            <attDef ident="resp" mode="delete"/>
+            <attDef ident="source" mode="delete"/>
+          </attList>
+        </elementSpec>
+        
+        
+        
         
         <elementSpec ident="desc" module="core" mode="change">
           <constraintSpec ident="documentation-on-desc" scheme="schematron">
@@ -127,6 +136,16 @@
                 <sch:assert test="matches(./@xml:id, concat('attestation', $docURIno, '-', '\d+$'))">
                   The required @xml:id must be 'attestation<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
                 </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="documentation-on-event" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:place/tei:event">
+                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:place/tei:event[not(tei:quote)]">
+                <sch:assert test="@source">A @source attribute must be supplied.</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>
@@ -207,44 +226,20 @@
                   A &lt;location&gt; element of @type="gps" requires a child element &lt;geo&gt;.
                 </sch:assert>
               </sch:rule>
-              <sch:rule context="//tei:location[@type='nested']">
-                <sch:report test="./tei:placeName or ./tei:measure or ./tei:offset or ./tei:geo">
-                  A &lt;location&gt; element of @type="nested" may only contain a child elements &lt;district&gt;, &lt;settlement&gt;, &lt;region&gt;, &lt;country&gt; or &lt;bloc&gt;.
-                </sch:report>
-              </sch:rule>
               <sch:rule context="//tei:location[@type='relative']">
-                <sch:report test="./tei:district or ./tei:settlement or ./tei:region or ./tei:country or ./tei:geo or ./bloc">
-                  A &lt;location&gt; element of @type="relative" may only contain text and child elements: &lt;placeName&gt;, &lt;measure&gt;, or &lt;offset&gt;.
-                </sch:report>
-              </sch:rule>
-              <sch:rule context="//tei:location/tei:placeName">
-                <sch:report test="./@calendar or ./@period or ./@when or ./@notBefore or ./@notAfter or ./@from or ./@to or ./@when-iso or ./@notBefore-iso or ./@notAfter-iso or ./@from-iso or ./@to-iso or ./@when-custom or ./@notBefore-custom or ./@notAfter-custom or ./@from-custom or ./@to-custom or ./@datingPoint or ./@datingMethod">
-                  Date attributes in this context should go on the &lt;location&gt; element and not on the &lt;persName&gt; element.
-                </sch:report>
+                <sch:assert test="./tei:desc">
+                  A &lt;location&gt; element of @type="relative" requires a child elements: &lt;desc&gt;.
+                </sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>
-          <constraintSpec ident="atts-on-location" scheme="schematron">
+          <constraintSpec ident="documentation-on-location" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:place/tei:location">
-                <sch:assert test="attribute::source or attribute::resp">
-                  The &lt;location&gt; element must have either a @source attribute (preferred when available) or a @resp attribute.
-                </sch:assert>
-                <sch:report test="attribute::source and attribute::resp">
-                  The &lt;location&gt; element may not have both a @source attribute (the preferred when available) and a @resp attribute.
-                </sch:report>
+                <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
               </sch:rule>
-            </constraint>
-          </constraintSpec>
-          <constraintSpec ident="source-on-location" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:text//tei:place/tei:location">
-                <sch:assert test="attribute::source or attribute::resp">
-                  The &lt;location&gt; element must have either a @source attribute (preferred when available) or a @resp attribute.
-                </sch:assert>
-                <sch:report test="attribute::source and attribute::resp">
-                  The &lt;location&gt; element may not have both a @source attribute (the preferred when available) and a @resp attribute.
-                </sch:report>
+              <sch:rule context="tei:place/tei:location[not(tei:quote)]">
+                <sch:assert test="@resp or @source">One of the attributes @resp and @source must be supplied.</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>
@@ -287,6 +282,16 @@
         
         
         <elementSpec ident="note" module="core" mode="change">
+          <constraintSpec ident="documentation-on-note" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:place/tei:note">
+                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:place/tei:note[not(tei:quote)]">
+                <sch:assert test="@resp or @source">One of the attributes @resp and @source must be supplied.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
           <constraintSpec ident="note-type-deprecation" scheme="schematron"> <!-- Changes to relation elements will require this to change. -->
             <constraint>
               <sch:rule context="//tei:body//tei:note[@type='deprecation']">
@@ -469,15 +474,14 @@
         
         
         <elementSpec ident="placeName" module="namesdates" mode="change">
-          <constraintSpec ident="source-on-placeName" scheme="schematron">
+          <constraintSpec ident="documentation-on-placeName" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:text/tei:place/tei:placeName">
-                <sch:assert test="attribute::source or attribute::resp">
-                  The &lt;placeName&gt; element must have either a @source attribute (preferred when available) or a @resp attribute.
-                </sch:assert>
-                <sch:report test="attribute::source and attribute::resp">
-                  The &lt;placeName&gt; element may not have both a @source attribute (the preferred when available) and a @resp attribute.
-                </sch:report>
+              <sch:rule context="//tei:place/tei:placeName">
+                <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
+                <sch:assert test="@resp or @source">One of the attributes @resp and @source must be supplied.</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:place//tei:placeName[not(parent::tei:place)]">
+                <sch:report test="@source and @resp">Neither of the attributes @resp and @source may be supplied.</sch:report>
               </sch:rule>
             </constraint>
           </constraintSpec>
@@ -546,6 +550,14 @@
         
         
         <elementSpec ident="relation" module="namesdates" mode="change">
+          <constraintSpec ident="documentation-on-relation" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:place/tei:relation">
+                <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
+                <sch:assert test="@resp or @source">One of the attributes @resp and @source must be supplied.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
           <constraintSpec ident="atts-on-relation" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:body//tei:relation/@mutual">
@@ -631,6 +643,14 @@
                 <sch:assert test="matches(./@xml:id, concat('confession', $docURIno, '-', '\d+$'))">
                   The required @xml:id must be 'confession<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
                 </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="documentation-on-state" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:place/tei:state">
+                <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
+                <sch:assert test="@resp or @source">One of the attributes @resp and @source must be supplied.</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>
