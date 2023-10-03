@@ -647,16 +647,6 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
-          <constraintSpec ident="desc-documentation" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:desc[descendant::tei:quote]">
-                <sch:assert test="./@source">
-                  Since this &lt;desc&gt; contains a &lt;quote&gt;, it requires a @source attribute 
-                  pointing to the &lt;bibl&gt; that is the source for this quotation. 
-                </sch:assert>
-              </sch:rule>
-            </constraint>
-          </constraintSpec>
           <attList>
             <attDef ident="subtype" mode="delete"/>
             <attDef ident="n" mode="delete"/>
@@ -1167,7 +1157,7 @@
             <attDef ident="resp" mode="delete"/>
             <attDef ident="rend" mode="delete"/>
             <attDef ident="corresp" mode="delete"/>
-            <attDef ident="source" mode="change" usage="opt">
+            <attDef ident="source" mode="change" usage="req">
               <!-- write a schematron rule in syriacaAll.odd that requires the @source value to point to an xml:id in the doc. -->
             </attDef>
           </attList>
