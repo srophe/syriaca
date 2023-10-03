@@ -552,7 +552,7 @@
         <elementSpec ident="relation" module="namesdates" mode="change">
           <constraintSpec ident="documentation-on-relation" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:place/tei:relation">
+              <sch:rule context="//tei:place/tei:listRelation/tei:relation">
                 <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
                 <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
               </sch:rule>
@@ -577,10 +577,29 @@
             </constraint>
           </constraintSpec>
           <attList>
+            <attDef ident="ref" mode="change" usage="req">
+              <valList type="closed" mode="replace">
+                <valItem ident="syriaca:distinct-entity">
+                  <desc>Used to distinguish between places that have been confused in the scholarly literature or might be confused by users.</desc>
+                </valItem>
+                <valItem ident="syriaca:possibly-identical">
+                  <desc>Used to indicate that even though Syriaca.org has identified this location as a distinct entity, it is possible that this place is the same an another entity.</desc>
+                </valItem>
+                <valItem ident="syriaca:related-place">
+                  <desc>Used to indicate when closely related entities share a name but remain distinct; i.e. when a settlement, region, and diocese are distinct but share a name.</desc>
+                </valItem>
+                <valItem ident="skos:related">
+                  <desc>Used for a "see-also" relationship.</desc>
+                </valItem>
+                <valItem ident="skos:broader">
+                  <desc>Used for a nesting relationship and indicates when are larger entity contains the subject of an authority file.</desc>
+                </valItem>
+              </valList>
+            </attDef>
             <attDef ident="type" mode="change" usage="req">
               <valList type="closed" mode="replace">
                 <valItem ident="disambiguation"/>
-                <valItem ident="nested-location"/>
+                <valItem ident="nested-within"/>
                 <valItem ident="place-types"/>
                 <valItem ident="see-also"/>
               </valList>
