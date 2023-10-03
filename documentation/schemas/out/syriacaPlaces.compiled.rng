@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-03T16:38:38Z. .
+Schema generated from ODD source 2023-10-03T17:24:37Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -2220,7 +2220,7 @@ Suggested values include: 1] m (metre); 2] kg (kilogram); 3] s (second); 4] Hz (
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
                       context="tei:place/tei:desc[not(tei:quote)]">
-               <sch:assert test="@resp or @source">One of the attributes @resp and @source must be supplied.</sch:assert>
+               <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -2672,7 +2672,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
                       context="tei:place/tei:note[not(tei:quote)]">
-               <sch:assert test="@resp or @source">One of the attributes @resp and @source must be supplied.</sch:assert>
+               <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
@@ -3839,7 +3839,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                       xmlns:srophe="https://srophe.app"
                       context="//tei:place/tei:placeName">
                <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
-               <sch:assert test="@resp or @source">One of the attributes @resp and @source must be supplied.</sch:assert>
+               <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4149,7 +4149,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
                       context="tei:place/tei:location[not(tei:quote)]">
-               <sch:assert test="@resp or @source">One of the attributes @resp and @source must be supplied.</sch:assert>
+               <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
             </sch:rule>
          </pattern>
          <ref name="tei_att.global.attribute.xmlid"/>
@@ -4309,7 +4309,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                       xmlns:srophe="https://srophe.app"
                       context="//tei:place/tei:relation">
                <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
-               <sch:assert test="@resp or @source">One of the attributes @resp and @source must be supplied.</sch:assert>
+               <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
@@ -4404,9 +4404,19 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <optional>
                <attribute name="mutual">
                   <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">supplies a list of participants amongst all of whom the relationship holds equally.</a:documentation>
-                  <data type="anyURI">
-                     <param name="pattern">\S+</param>
-                  </data>
+                  <list>
+                     <data type="anyURI">
+                        <param name="pattern">\S+</param>
+                     </data>
+                     <data type="anyURI">
+                        <param name="pattern">\S+</param>
+                     </data>
+                     <zeroOrMore>
+                        <data type="anyURI">
+                           <param name="pattern">\S+</param>
+                        </data>
+                     </zeroOrMore>
+                  </list>
                </attribute>
             </optional>
          </choice>
@@ -4444,7 +4454,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                       xmlns:srophe="https://srophe.app"
                       context="//tei:place/tei:state">
                <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
-               <sch:assert test="@resp or @source">One of the attributes @resp and @source must be supplied.</sch:assert>
+               <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"

@@ -3572,7 +3572,7 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
                 <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
               </sch:rule>
               <sch:rule context="tei:place/tei:desc[not(tei:quote)]">
-                <sch:assert test="@resp or @source">One of the attributes @resp and @source must be supplied.</sch:assert>
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
               </sch:rule>
               <sch:rule context="tei:event/tei:desc">
                 <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;event&gt; element.</sch:report>
@@ -4451,7 +4451,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
                 <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
               </sch:rule>
               <sch:rule context="tei:place/tei:note[not(tei:quote)]">
-                <sch:assert test="@resp or @source">One of the attributes @resp and @source must be supplied.</sch:assert>
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec><constraintSpec ident="note-type-deprecation" scheme="schematron"> 
@@ -6939,7 +6939,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
             <constraint>
               <sch:rule context="//tei:place/tei:placeName">
                 <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
-                <sch:assert test="@resp or @source">One of the attributes @resp and @source must be supplied.</sch:assert>
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
               </sch:rule>
               <sch:rule context="tei:place//tei:placeName[not(parent::tei:place)]">
                 <sch:report test="@source and @resp">Neither of the attributes @resp and @source may be supplied.</sch:report>
@@ -7329,7 +7329,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                 <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
               </sch:rule>
               <sch:rule context="tei:place/tei:location[not(tei:quote)]">
-                <sch:assert test="@resp or @source">One of the attributes @resp and @source must be supplied.</sch:assert>
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec><attList><attDef ident="type" mode="change" usage="req">
@@ -7491,7 +7491,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
             <constraint>
               <sch:rule context="//tei:place/tei:relation">
                 <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
-                <sch:assert test="@resp or @source">One of the attributes @resp and @source must be supplied.</sch:assert>
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec><constraintSpec ident="atts-on-relation" scheme="schematron">
@@ -7531,7 +7531,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                     partecipanti in una relazione di reciprocità</desc><datatype minOccurs="1" maxOccurs="1">
                 <dataRef key="teidata.pointer"/>
               </datatype></attDef><attDef ident="mutual" usage="opt"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-07-24" xml:lang="en">supplies a list of participants amongst all of whom the relationship holds equally.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-06" xml:lang="es">proporciona una lista de participantes entre los cuales se establece una idéntica
-                    relación</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">fournit une liste de participants entre lesquels la relation est réciproque.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-11-06" xml:lang="it">fornisce una lista di partecipanti tra i quali c'è una relazione paritaria</desc><datatype>
+                    relación</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">fournit une liste de participants entre lesquels la relation est réciproque.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-11-06" xml:lang="it">fornisce una lista di partecipanti tra i quali c'è una relazione paritaria</desc><datatype minOccurs="2" maxOccurs="unbounded">
                 <dataRef key="teidata.pointer"/>
               </datatype></attDef></attList><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="subtype" mode="delete"/><attDef ident="type" mode="change" rend="change" usage="req"><valList type="closed"><valItem ident="disambiguation"/><valItem ident="nested-location"/><valItem ident="place-types"/><valItem ident="see-also"/></valList></attDef><attDef ident="ref" mode="change" usage="req"/><attDef ident="name" mode="delete"/><attDef ident="passive" usage="opt"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">identifies the <soCalled>passive</soCalled> participants in a non-mutual relationship.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">비상호적 관련성에서 <soCalled>passive</soCalled> 참여자를 식별한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">指出非對等關係中的<q>被動</q>關係人。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">一方向の関係における<soCalled>受動的な</soCalled>参加者を指定す る。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">identifie les participants <q>passifs</q> dans une relation non mutuelle.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">identifica los participantes <q>pasivos</q> en una relación de no reciprocidad.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">identifica i partecipanti <q>passivi</q>all'interno di una relazione di non reciprocità.</desc><datatype minOccurs="1" maxOccurs="unbounded">
                 <dataRef key="teidata.pointer"/>
@@ -7597,7 +7597,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
             <constraint>
               <sch:rule context="//tei:place/tei:state">
                 <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
-                <sch:assert test="@resp or @source">One of the attributes @resp and @source must be supplied.</sch:assert>
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec><constraintSpec ident="state-type-existence" scheme="schematron">
