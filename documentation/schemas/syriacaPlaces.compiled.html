@@ -7544,7 +7544,7 @@ element reg { tei_date }<a href="#index.xml-eg-d31e14537" class="anchorlink">⚓
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td>
                         <td class="wovenodd-col2">
                            <div class="pre">
-                              &lt;sch:rule context="//tei:place/tei:listRelation/tei:relation"&gt;
+                              &lt;sch:rule context="//tei:text//tei:relation"&gt;
                               &lt;sch:report test="@source and @resp"&gt;Only one of the attributes @resp and @source
                               may be supplied.&lt;/sch:report&gt;
                               &lt;sch:assert test="@resp or @source"&gt;One of the attributes @resp or @source must be
@@ -7556,7 +7556,7 @@ element reg { tei_date }<a href="#index.xml-eg-d31e14537" class="anchorlink">⚓
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td>
                         <td class="wovenodd-col2">
                            <div class="pre">
-                              &lt;sch:rule context="//tei:body//tei:relation/@mutual"&gt;
+                              &lt;sch:rule context="//tei:text//tei:relation/@mutual"&gt;
                               &lt;sch:let name="docURI"
                                value="//tei:publicationStmt/tei:idno/substring-before(., '/tei')"/&gt;
                               &lt;sch:let name="placeIndex"
@@ -7581,11 +7581,11 @@ element reg { tei_date }<a href="#index.xml-eg-d31e14537" class="anchorlink">⚓
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td>
                         <td class="wovenodd-col2">
                            <div class="pre">
-                              &lt;sch:rule context="//tei:body//tei:relation[@ref='skos:broader'] | //tei:body//tei:relation[@ref='syriaca:distinct-entity']"&gt;
+                              &lt;sch:rule context="//tei:text//tei:relation[@ref='skos:broader'] | //tei:body//tei:relation[@ref='syriaca:distinct-entity']"&gt;
                               &lt;sch:assert test="tei:desc"&gt; A &lt;desc&gt; is required as child of &lt;relation&gt;.
                               &lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
-                              &lt;sch:rule context="//tei:body//tei:relation[@ref='skos:related'] | //tei:body//tei:relation[@ref='syriaca:share-a-name']
+                              &lt;sch:rule context="//tei:text//tei:relation[@ref='skos:related'] | //tei:body//tei:relation[@ref='syriaca:share-a-name']
                               
                               | //tei:body//tei:relation[@ref='syriaca:share-a-name-search-together']"&gt;
                               &lt;sch:report test="tei:desc"&gt; A &lt;desc&gt; may not appear here.
@@ -13060,7 +13060,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e26761" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-10-04T16:40:30Z.
+	       on 2023-10-04T17:16:08Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>

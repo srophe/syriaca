@@ -552,7 +552,7 @@
         <elementSpec ident="relation" module="namesdates" mode="change">
           <constraintSpec ident="documentation-on-relation" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:place/tei:listRelation/tei:relation">
+              <sch:rule context="//tei:text//tei:relation">
                 <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
                 <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
               </sch:rule>
@@ -560,7 +560,7 @@
           </constraintSpec>
           <constraintSpec ident="atts-on-relation" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:body//tei:relation/@mutual">
+              <sch:rule context="//tei:text//tei:relation/@mutual">
                 <sch:let name="docURI" value="//tei:publicationStmt/tei:idno/substring-before(., '/tei')"/>
                 <sch:let name="placeIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
                 <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
@@ -578,12 +578,12 @@
           </constraintSpec>
           <constraintSpec ident="relation-children" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:body//tei:relation[@ref='skos:broader'] | //tei:body//tei:relation[@ref='syriaca:distinct-entity']">
+              <sch:rule context="//tei:text//tei:relation[@ref='skos:broader'] | //tei:body//tei:relation[@ref='syriaca:distinct-entity']">
                 <sch:assert test="tei:desc">
                   A &lt;desc&gt; is required as child of &lt;relation&gt;.
                 </sch:assert>
               </sch:rule>
-              <sch:rule context="//tei:body//tei:relation[@ref='skos:related'] | //tei:body//tei:relation[@ref='syriaca:share-a-name'] | //tei:body//tei:relation[@ref='syriaca:share-a-name-search-together']">
+              <sch:rule context="//tei:text//tei:relation[@ref='skos:related'] | //tei:body//tei:relation[@ref='syriaca:share-a-name'] | //tei:body//tei:relation[@ref='syriaca:share-a-name-search-together']">
                 <sch:report test="tei:desc">
                   A &lt;desc&gt; may not appear here.
                 </sch:report>
