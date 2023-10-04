@@ -7511,6 +7511,19 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                 </sch:assert>
               </sch:rule>
             </constraint>
+          </constraintSpec><constraintSpec ident="relation-children" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:body//tei:relation[@ref='skos:broader'] | //tei:body//tei:relation[@ref='syriaca:distinct-entity']">
+                <sch:assert test="tei:desc">
+                  A &lt;desc&gt; is required as child of &lt;relation&gt;.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:body//tei:relation[@ref='skos:related'] | //tei:body//tei:relation[@ref='syriaca:share-a-name'] | //tei:body//tei:relation[@ref='syriaca:share-a-name-search-together']">
+                <sch:report test="tei:desc">
+                  A &lt;desc&gt; may not appear here.
+                </sch:report>
+              </sch:rule>
+            </constraint>
           </constraintSpec><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="reforkeyorname" scheme="schematron">
     <constraint>
       <assert xmlns="http://purl.oclc.org/dsdl/schematron" test="@ref or @key or @name">One of the attributes  'name', 'ref' or 'key' must be supplied</assert>
@@ -7533,12 +7546,14 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
               </datatype></attDef><attDef ident="mutual" usage="opt"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-07-24" xml:lang="en">supplies a list of participants amongst all of whom the relationship holds equally.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-06" xml:lang="es">proporciona una lista de participantes entre los cuales se establece una idéntica
                     relación</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">fournit une liste de participants entre lesquels la relation est réciproque.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-11-06" xml:lang="it">fornisce una lista di partecipanti tra i quali c'è una relazione paritaria</desc><datatype minOccurs="2" maxOccurs="unbounded">
                 <dataRef key="teidata.pointer"/>
-              </datatype></attDef></attList><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="subtype" mode="delete"/><attDef ident="type" mode="change" rend="change" usage="req"><valList type="closed"><valItem ident="disambiguation"/><valItem ident="contained-within"/><valItem ident="place-types"/><valItem ident="see-also"/></valList></attDef><attDef ident="ref" mode="change" rend="change" usage="req"><valList type="closed"><valItem ident="syriaca:distinct-entity">
+              </datatype></attDef></attList><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="subtype" mode="delete" rend="delete"/><attDef ident="type" mode="change" rend="change" usage="req"><valList type="closed"><valItem ident="disambiguation"/><valItem ident="contained-within"/><valItem ident="place-types"/><valItem ident="see-also"/></valList></attDef><attDef ident="ref" mode="change" rend="change" usage="req"><valList type="closed"><valItem ident="syriaca:distinct-entity">
                   <desc>Used to distinguish between places that have been confused in the scholarly literature or might be confused by users.</desc>
                 </valItem><valItem ident="syriaca:possibly-identical">
                   <desc>Used to indicate that even though Syriaca.org has identified this location as a distinct entity, it is possible that this place is the same an another entity.</desc>
-                </valItem><valItem ident="syriaca:related-place">
-                  <desc>Used to indicate when closely related entities share a name but remain distinct; i.e. when a settlement, region, and diocese are distinct but share a name.</desc>
+                </valItem><valItem ident="syriaca:share-a-name">
+                  <desc>Used to indicate when entities share a name but remain distinct; i.e. when different settlements or churches share a name.</desc>
+                </valItem><valItem ident="syriaca:share-a-name-search-together">
+                  <desc>Used to indicate when closely related entities share a name but remain distinct and when ancient sources sometimes conflate them; i.e. when a settlement, region, and diocese bear the same name.</desc>
                 </valItem><valItem ident="skos:related">
                   <desc>Used for a "see-also" relationship.</desc>
                 </valItem><valItem ident="skos:broader">

@@ -576,6 +576,20 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
+          <constraintSpec ident="relation-children" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:body//tei:relation[@ref='skos:broader'] | //tei:body//tei:relation[@ref='syriaca:distinct-entity']">
+                <sch:assert test="tei:desc">
+                  A &lt;desc&gt; is required as child of &lt;relation&gt;.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:body//tei:relation[@ref='skos:related'] | //tei:body//tei:relation[@ref='syriaca:share-a-name'] | //tei:body//tei:relation[@ref='syriaca:share-a-name-search-together']">
+                <sch:report test="tei:desc">
+                  A &lt;desc&gt; may not appear here.
+                </sch:report>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
           <attList>
             <attDef ident="ref" mode="change" usage="req">
               <valList type="closed" mode="replace">
@@ -585,10 +599,12 @@
                 <valItem ident="syriaca:possibly-identical">
                   <desc>Used to indicate that even though Syriaca.org has identified this location as a distinct entity, it is possible that this place is the same an another entity.</desc>
                 </valItem>
-                <valItem ident="syriaca:related-place">
-                  <desc>Used to indicate when closely related entities share a name but remain distinct; i.e. when a settlement, region, and diocese are distinct but share a name.</desc>
+                <valItem ident="syriaca:share-a-name">
+                  <desc>Used to indicate when entities share a name but remain distinct; i.e. when different settlements or churches share a name.</desc>
                 </valItem>
-                <valItem ident="skos:related">
+                <valItem ident="syriaca:share-a-name-search-together">
+                  <desc>Used to indicate when closely related entities share a name but remain distinct and when ancient sources sometimes conflate them; i.e. when a settlement, region, and diocese bear the same name.</desc>
+                </valItem><valItem ident="skos:related">
                   <desc>Used for a "see-also" relationship.</desc>
                 </valItem>
                 <valItem ident="skos:broader">
@@ -602,6 +618,11 @@
                 <valItem ident="contained-within"/>
                 <valItem ident="place-types"/>
                 <valItem ident="see-also"/>
+              </valList>
+            </attDef>
+            <attDef ident="subtype" mode="change">
+              <valList type="closed">
+                <valItem ident="share-a-name"/>
               </valList>
             </attDef>
           </attList>
