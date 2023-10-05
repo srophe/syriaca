@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-05T15:06:23Z. .
+Schema generated from ODD source 2023-10-05T15:09:55Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -4322,7 +4322,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:relation/@mutual and //tei:text//tei:relation/@active and //tei:text//tei:relation/@passive">
+                      context="//tei:text//tei:relation/@mutual | //tei:text//tei:relation/@active | //tei:text//tei:relation/@passive">
                <sch:let name="placeIndex"
                         value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
                <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
@@ -4333,7 +4333,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:relation/@mutual and //tei:text//tei:relation/@active">
+                      context="//tei:text//tei:relation/@mutual | //tei:text//tei:relation/@active">
                <sch:let name="docURI"
                         value="//tei:publicationStmt/tei:idno/substring-before(., '/tei')"/>
                <sch:assert test="contains(., $docURI)">

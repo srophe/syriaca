@@ -7576,9 +7576,9 @@ element reg { tei_date }<a href="#index.xml-eg-d31e14537" class="anchorlink">⚓
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td>
                         <td class="wovenodd-col2">
                            <div class="pre">
-                              &lt;sch:rule context="//tei:text//tei:relation/@mutual and //tei:text//tei:relation/@active
+                              &lt;sch:rule context="//tei:text//tei:relation/@mutual | //tei:text//tei:relation/@active
                               
-                              and //tei:text//tei:relation/@passive"&gt;
+                              | //tei:text//tei:relation/@passive"&gt;
                               &lt;sch:let name="placeIndex"
                                value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/&gt;
                               &lt;sch:let name="placeURIs"
@@ -7588,7 +7588,7 @@ element reg { tei_date }<a href="#index.xml-eg-d31e14537" class="anchorlink">⚓
                               URIs take the form 'http://syriaca.org/place/{\d+?}' (where {\d+?} is a number).
                               &lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
-                              &lt;sch:rule context="//tei:text//tei:relation/@mutual and //tei:text//tei:relation/@active"&gt;
+                              &lt;sch:rule context="//tei:text//tei:relation/@mutual | //tei:text//tei:relation/@active"&gt;
                               &lt;sch:let name="docURI"
                                value="//tei:publicationStmt/tei:idno/substring-before(., '/tei')"/&gt;
                               &lt;sch:assert test="contains(., $docURI)"&gt; One of the values of the @mutual attribute
@@ -13122,7 +13122,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e26768" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-10-05T15:06:20Z.
+	       on 2023-10-05T15:09:51Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>
