@@ -3589,7 +3589,7 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
               <sch:rule context="//tei:state/tei:desc">
                 
                 <sch:let name="confessionDoc" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/>
-                <sch:let name="confessionLabels" value="$confessionDoctei:text//tei:item/tei:label"/>
+                <sch:let name="confessionLabels" value="$confessionDoc//tei:text//tei:item/tei:label"/>
                 <sch:let name="stateRefPart" value="substring-after(parent::tei:state/@ref, '#')"/>
                 <sch:let name="spaceTo-" value="for $i in . return(replace($i, ' ', '-'))"/>
                 <sch:let name="labelToRef" value="for $i in $spaceTo- return lower-case($spaceTo-)"/>
@@ -7712,7 +7712,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
               </sch:rule>
               <sch:rule context="//tei:state/@ref">
                 <sch:let name="confessionDoc" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/>
-                <sch:let name="confessionIDs" value="$confessionDoctei:text//tei:item/@xml:id"/>
+                <sch:let name="confessionIDs" value="$confessionDoc//tei:text//tei:item/@xml:id"/>
                 <sch:let name="confessionPtrs" value="for $i in $confessionIDs return concat('#', $i)"/>
                 <sch:let name="confessionRefValues" value="for $i in $confessionPtrs return concat('http://syriaca.org/documentation/confessions.xml', $i)"/>
                 <sch:assert test="                   every $i in .                   satisfies $i = $confessionRefValues">
