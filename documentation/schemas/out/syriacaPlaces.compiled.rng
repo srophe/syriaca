@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-05T14:03:48Z. .
+Schema generated from ODD source 2023-10-05T14:21:10Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -4447,10 +4447,21 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <ref name="tei_att.global.source.attribute.source"/>
          <ref name="tei_att.datable.attributes"/>
          <attribute name="ref">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(reference) provides an explicit means of locating a full definition or identity for the entity being named by means of one or more URIs.</a:documentation>
-            <data type="anyURI">
-               <param name="pattern">\S+</param>
-            </data>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <choice>
+               <value>syriaca:distinct-entity</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to distinguish between places that have been confused in the scholarly literature or might be confused by users.</a:documentation>
+               <value>syriaca:possibly-identical</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to indicate that even though Syriaca.org has identified this location as a distinct entity, it is possible that this place is the same an another entity.</a:documentation>
+               <value>syriaca:share-a-name</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to indicate when entities share a name but remain distinct; i.e. when different settlements or churches share a name.</a:documentation>
+               <value>syriaca:share-a-name-search-together</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to indicate when closely related entities share a name but remain distinct and when ancient sources sometimes conflate them; i.e. when a settlement, region, and diocese bear the same name.</a:documentation>
+               <value>skos:related</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used for a "see-also" relationship.</a:documentation>
+               <value>skos:broader</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used for a nesting relationship and indicates when are larger entity contains the subject of an authority file.</a:documentation>
+            </choice>
          </attribute>
          <attribute name="type">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
