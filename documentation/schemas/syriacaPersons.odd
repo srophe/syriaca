@@ -391,67 +391,81 @@
         
         
         <elementSpec ident="relation" module="namesdates" mode="change">
-          <constraintSpec ident="person-disambiguation-atts" scheme="schematron">
+          <constraintSpec ident="documentation-on-relation" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:listPerson//tei:relation[@type = 'disambiguation']">
-                <sch:assert test="@mutual">
-                  A &lt;relation&gt; with @type="disambiguation" must have a @mutual attribute.</sch:assert>
-              </sch:rule>
-              <sch:rule context="//tei:listPerson//tei:relation[@type = 'disambiguation']/@ref">
-                <sch:assert test=". = 'http://syriaca.org/keyword/distinct-entities' or . = 'http://syriaca.org/keyword/possibly-identical'">
-                  A &lt;relation&gt; with @type="disambiguation" must have @ref="http://syriaca.org/keyword/distinct-entities" or @ref="http://syriaca.org/keyword/possibly-identical".</sch:assert>
+              <sch:rule context="//tei:text//tei:relation">
+                <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>
-          <constraintSpec ident="pseudonymity-atts" scheme="schematron">
+          <constraintSpec ident="atts-on-relation" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:listPerson//tei:relation[@type = 'pseudonymity']/@ref">
-                <sch:assert test=". = 'http://syriaca.org/keyword/possibly-identical' or . = 'http://syriaca.org/keyword/shares-attribution-with' or . = 'skos:broader'">
-                  The @ref attribute on &lt;relation&gt; with @type="pseudonymity" can only be one of the following "http://syriaca.org/keyword/distinct-entities", "http://syriaca.org/keyword/shares-attribution-with", or "skos:broader".</sch:assert>
+              <sch:rule context="tei:text//tei:relation/@mutual | tei:text//tei:relation/@active | tei:text//tei:relation/@passive">
+                <sch:let name="personIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/persons.xml')"/>
+                <sch:let name="personURIs" value="$personIndex//tei:place/@ref"/>
+                <sch:assert test="                   every $i in tokenize(., ' ')                   satisfies $i = $personURIs">
+                  This attribute contains one or more person URIs not in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+?}' (where {\d+?} is a number).
+                </sch:assert>
               </sch:rule>
-              <sch:rule context="//tei:listPerson//tei:listRelation[tei:relation[@type = 'pseudonymity']]">
-                <sch:assert test="tei:relation/@ref = 'http://syriaca.org/keyword/possibly-identical'">
-                  There must be a &lt;relation&gt; element with @ref="http://syriaca.org/keyword/possibly-identical".</sch:assert>
-                <sch:assert test="tei:relation/@ref = 'http://syriaca.org/keyword/shares-attribution-with'">
-                  There must be a &lt;relation&gt; element with @ref="http://syriaca.org/keyword/shares-attribution-with".</sch:assert>
-                <sch:assert test="tei:relation/@ref = 'skos:broader'">
-                  There must be a &lt;relation&gt; element with @ref="skos:broader".</sch:assert>
+              <sch:rule context="tei:text//tei:relation/@mutual | tei:text//tei:relation/@active"><!-- This doesn't seem to be working even though in works in the schematron test document -->
+                <sch:let name="docURI" value="//tei:publicationStmt/tei:idno/substring-before(., '/tei')"/>
+                <sch:assert test="contains(., $docURI)">
+                  This attribute must contain the URI for this document's place: <sch:value-of select="$docURI"/>.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text//tei:relation[@type='place']/@passive">
+                <sch:let name="placeIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
+                <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
+                <sch:assert test=". = $placeURIs"></sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text//tei:relation[@ref='syriaca:distinct-entity']">
+                <sch:assert test="@type='disambiguation' and @mutual and not(@ana)">
+                  For a 'distinct entity' relationship use @type="disambiguation", and a @mutual, and not @ana.</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text//tei:relation[@ref='syriaca:possibly-identical']">
+                <sch:assert test="@type='disambiguation' or @type='pseudonymity' and @mutual and not(@ana)">
+                  For a 'possibly identical' relationship use either @type="disambiguation" or @type="pseudonymity", and a @mutual, and not @ana.</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text//tei:relation[@ref='syriaca:shares-attribution-with']">
+                <sch:assert test="@type='pseudonymity' and @mutual and not(@ana)">
+                  For a 'share-attribution-with' relationship, use @type="pseudonymity" and a @mutual attribute.</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text//tei:relation[@ref='skos:broader']">
+                <sch:assert test="@type='pseudonymity' and @active and not(@ana)">
+                  For a 'broader' relationship, use @type="pseudonymity" and @active/@passive attributes.</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text//tei:relation[@ref='syriaca:has-relation-to-place']">
+                <sch:assert test="@type='place' and @active">
+                  For a 'has-relation-to-place' relationship, use @type="place" and @active/@passive attributes.</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text//tei:relation[@ref='syriaca:has-literary-relation-to-place']">
+                <sch:assert test="@type='place' and @active">
+                  For a 'has-literary-relation-to-place' relationship, use @type="place" and @active/@passive attributes.</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>
-          <constraintSpec ident="personal-relations-atts" scheme="schematron">
+          <constraintSpec ident="personal-relations-ref" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:listPerson//tei:relation[@type = 'personal']/@ref">
+              <sch:rule context="tei:listPerson//tei:relation[@type = 'personal']/@ref">
                 <sch:let name="ti" value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex-old.xml')"/>
                 <sch:assert test=". = $ti//listURI[@type = 'relationships']//uri">Value must be one of the following from the Syriaca.org taxonomy:
                   <sch:value-of select="string-join($ti//listURI[@type = 'relationships']//uri, ';  ')"/>.</sch:assert>
               </sch:rule>
-              <sch:rule context="tei:ab/tei:listRelation/tei:relation/@ana">
+              <sch:rule context="tei:listPerson//tei:relation[@type = 'personal']/@ana">
                 <sch:let name="ti" value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex-old.xml')"/>
                 <sch:let name="qrURI" value="$ti//listURI[@type = 'qualifier-relationship']//uri"/>
                 <sch:let name="error" value="."/>
                 <sch:assert test="
                   every $i in (tokenize(., ' '))
                   satisfies $i = $qrURI">
-                  <sch:value-of select="$error"/> is not currently in use. The value of this @ana attribute must be one of the following: <sch:value-of select="string-join($qrURI, ';  ')"/>.</sch:assert>
-              </sch:rule>
-            </constraint>
-          </constraintSpec>
-          <constraintSpec ident="person-place-relation-atts" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:listPerson//tei:relation[@type = 'place']">
-                <sch:assert test="@active">
-                  A &lt;relation&gt; with @type="place" must have an @active attribute.</sch:assert>
-              </sch:rule>
-              <sch:rule context="//tei:listPerson//tei:relation[@type = 'place']/@ref">
-                <sch:assert test=". = 'http://syriaca.org/keyword/has-relation-to-place' or . = 'http://syriaca.org/keyword/has-literary-relation-to-place'">
-                  The @ref attribute on &lt;relation&gt; with @type="place" can only be one of the following "http://syriaca.org/keyword/has-relation-to-place" or "http://syriaca.org/keyword/has-literary-relation-to-place".</sch:assert>
+                  <sch:value-of select="$error"/> is not currently in use. The value of this @ref attribute must be one of the following: <sch:value-of select="string-join($qrURI, ';  ')"/>.</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>
           <attList>
-            <attDef ident="type" mode="change" usage="req">
-              <valList type="closed">
+            <attDef ident="type" mode="replace" usage="req">
+              <valList type="closed" mode="replace">
                 <valItem ident="disambiguation">
                   <desc>Used for relationships that disambiguate between people with similar names or who have been confused in the scholarship</desc>
                 </valItem>
@@ -463,6 +477,30 @@
                 </valItem>
                 <valItem ident="place">
                   <desc>Used for relationships between a person and a place other than birth and death</desc>
+                </valItem>
+              </valList>
+            </attDef>
+            <attDef ident="subtype" mode="delete"/>
+            <attDef ident="ref" mode="replace" usage="req">
+              <datatype maxOccurs="1" minOccurs="1">
+                <dataRef key="teidata.pointer"/>
+              </datatype>
+              <valList type="semi" mode="replace">
+                <valItem ident="syriaca:distinct-entity">
+                  <desc>Used to distinguish between entities that have been confused in the scholarly literature or might be 
+                    confused by users.</desc>
+                </valItem>
+                <valItem ident="syriaca:possibly-identical">
+                  <desc>Used to indicate that even though Syriaca.org has identified this location as a distinct entity, it 
+                    is possible that this entity is the same an another entity with a Syriaca.org URI.</desc>
+                </valItem>
+                <valItem ident="syriaca:shares-attribution-with">
+                  <desc>Used for pseudonymous authorship to indicate the relationship between the supposed author (i.e. Ephrem) and the 
+                    otherwise unknown "pseudo" author (i.e. Pseudo-Ephrem).</desc>
+                </valItem>
+                <valItem ident="skos:broader">
+                  <desc>Used for pseudonymous authorship to indicate the relationship between the unknown author of a specific work and the 
+                    scholarly composite used to refer to author of multiple texts (i.e. Pseudo-Ephrem).</desc>
                 </valItem>
               </valList>
             </attDef>

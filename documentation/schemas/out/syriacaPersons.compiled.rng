@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-03T16:38:03Z. .
+Schema generated from ODD source 2023-10-05T17:12:31Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -2229,14 +2229,17 @@ attributes @target and @cRef may be supplied on <name/>.</report>
                <ref name="tei_foreign"/>
             </zeroOrMore>
             <zeroOrMore>
+               <ref name="tei_idno"/>
+            </zeroOrMore>
+            <zeroOrMore>
                <ref name="tei_persName"/>
             </zeroOrMore>
             <zeroOrMore>
                <ref name="tei_placeName"/>
             </zeroOrMore>
-            <optional>
+            <zeroOrMore>
                <ref name="tei_quote"/>
-            </optional>
+            </zeroOrMore>
             <zeroOrMore>
                <ref name="tei_ref"/>
             </zeroOrMore>
@@ -3866,51 +3869,100 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
    <define name="tei_relation">
       <element name="relation">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(relationship) describes any kind of relationship or linkage amongst a specified group of places, events, persons, objects or other items. [13.3.2.3. Personal Relationships]</a:documentation>
-         <ref name="tei_desc"/>
+         <optional>
+            <ref name="tei_desc"/>
+         </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-person-disambiguation-atts-constraint-rule-47">
+                  id="syriacaPersons-relation-documentation-on-relation-constraint-rule-47">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:listPerson//tei:relation[@type = 'disambiguation']">
-               <sch:assert test="@mutual">
-                  A &lt;relation&gt; with @type="disambiguation" must have a @mutual attribute.</sch:assert>
-            </sch:rule>
-            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:srophe="https://srophe.app"
-                      context="//tei:listPerson//tei:relation[@type = 'disambiguation']/@ref">
-               <sch:assert test=". = 'http://syriaca.org/keyword/distinct-entities' or . = 'http://syriaca.org/keyword/possibly-identical'">
-                  A &lt;relation&gt; with @type="disambiguation" must have @ref="http://syriaca.org/keyword/distinct-entities" or @ref="http://syriaca.org/keyword/possibly-identical".</sch:assert>
+                      context="//tei:text//tei:relation">
+               <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
+               <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-pseudonymity-atts-constraint-rule-49">
+                  id="syriacaPersons-relation-atts-on-relation-constraint-rule-48">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:listPerson//tei:relation[@type = 'pseudonymity']/@ref">
-               <sch:assert test=". = 'http://syriaca.org/keyword/possibly-identical' or . = 'http://syriaca.org/keyword/shares-attribution-with' or . = 'skos:broader'">
-                  The @ref attribute on &lt;relation&gt; with @type="pseudonymity" can only be one of the following "http://syriaca.org/keyword/distinct-entities", "http://syriaca.org/keyword/shares-attribution-with", or "skos:broader".</sch:assert>
+                      context="tei:text//tei:relation/@mutual | tei:text//tei:relation/@active | tei:text//tei:relation/@passive">
+               <sch:let name="personIndex"
+                        value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/persons.xml')"/>
+               <sch:let name="personURIs" value="$personIndex//tei:place/@ref"/>
+               <sch:assert test="                   every $i in tokenize(., ' ')                   satisfies $i = $personURIs">
+                  This attribute contains one or more person URIs not in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+?}' (where {\d+?} is a number).
+                </sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:listPerson//tei:listRelation[tei:relation[@type = 'pseudonymity']]">
-               <sch:assert test="tei:relation/@ref = 'http://syriaca.org/keyword/possibly-identical'">
-                  There must be a &lt;relation&gt; element with @ref="http://syriaca.org/keyword/possibly-identical".</sch:assert>
-               <sch:assert test="tei:relation/@ref = 'http://syriaca.org/keyword/shares-attribution-with'">
-                  There must be a &lt;relation&gt; element with @ref="http://syriaca.org/keyword/shares-attribution-with".</sch:assert>
-               <sch:assert test="tei:relation/@ref = 'skos:broader'">
-                  There must be a &lt;relation&gt; element with @ref="skos:broader".</sch:assert>
+                      context="tei:text//tei:relation/@mutual | tei:text//tei:relation/@active">
+               <sch:let name="docURI"
+                        value="//tei:publicationStmt/tei:idno/substring-before(., '/tei')"/>
+               <sch:assert test="contains(., $docURI)">
+                  This attribute must contain the URI for this document's place: <sch:value-of select="$docURI"/>.
+                </sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:text//tei:relation[@type='place']/@passive">
+               <sch:let name="placeIndex"
+                        value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
+               <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
+               <sch:assert test=". = $placeURIs"/>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:text//tei:relation[@ref='syriaca:distinct-entity']">
+               <sch:assert test="@type='disambiguation' and @mutual and not(@ana)">
+                  For a 'distinct entity' relationship use @type="disambiguation", and a @mutual, and not @ana.</sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:text//tei:relation[@ref='syriaca:possibly-identical']">
+               <sch:assert test="@type='disambiguation' or @type='pseudonymity' and @mutual and not(@ana)">
+                  For a 'possibly identical' relationship use either @type="disambiguation" or @type="pseudonymity", and a @mutual, and not @ana.</sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:text//tei:relation[@ref='syriaca:shares-attribution-with']">
+               <sch:assert test="@type='pseudonymity' and @mutual and not(@ana)">
+                  For a 'share-attribution-with' relationship, use @type="pseudonymity" and a @mutual attribute.</sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:text//tei:relation[@ref='skos:broader']">
+               <sch:assert test="@type='pseudonymity' and @active and not(@ana)">
+                  For a 'broader' relationship, use @type="pseudonymity" and @active/@passive attributes.</sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:text//tei:relation[@ref='syriaca:has-relation-to-place']">
+               <sch:assert test="@type='place' and @active">
+                  For a 'has-relation-to-place' relationship, use @type="place" and @active/@passive attributes.</sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:text//tei:relation[@ref='syriaca:has-literary-relation-to-place']">
+               <sch:assert test="@type='place' and @active">
+                  For a 'has-literary-relation-to-place' relationship, use @type="place" and @active/@passive attributes.</sch:assert>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-personal-relations-atts-constraint-rule-51">
+                  id="syriacaPersons-relation-personal-relations-ref-constraint-rule-57">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:listPerson//tei:relation[@type = 'personal']/@ref">
+                      context="tei:listPerson//tei:relation[@type = 'personal']/@ref">
                <sch:let name="ti"
                         value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex-old.xml')"/>
                <sch:assert test=". = $ti//listURI[@type = 'relationships']//uri">Value must be one of the following from the Syriaca.org taxonomy:
@@ -3919,35 +3971,18 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="tei:ab/tei:listRelation/tei:relation/@ana">
+                      context="tei:listPerson//tei:relation[@type = 'personal']/@ana">
                <sch:let name="ti"
                         value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex-old.xml')"/>
                <sch:let name="qrURI"
                         value="$ti//listURI[@type = 'qualifier-relationship']//uri"/>
                <sch:let name="error" value="."/>
                <sch:assert test="                   every $i in (tokenize(., ' '))                   satisfies $i = $qrURI">
-                  <sch:value-of select="$error"/> is not currently in use. The value of this @ana attribute must be one of the following: <sch:value-of select="string-join($qrURI, ';  ')"/>.</sch:assert>
+                  <sch:value-of select="$error"/> is not currently in use. The value of this @ref attribute must be one of the following: <sch:value-of select="string-join($qrURI, ';  ')"/>.</sch:assert>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-person-place-relation-atts-constraint-rule-53">
-            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:srophe="https://srophe.app"
-                      context="//tei:listPerson//tei:relation[@type = 'place']">
-               <sch:assert test="@active">
-                  A &lt;relation&gt; with @type="place" must have an @active attribute.</sch:assert>
-            </sch:rule>
-            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:srophe="https://srophe.app"
-                      context="//tei:listPerson//tei:relation[@type = 'place']/@ref">
-               <sch:assert test=". = 'http://syriaca.org/keyword/has-relation-to-place' or . = 'http://syriaca.org/keyword/has-literary-relation-to-place'">
-                  The @ref attribute on &lt;relation&gt; with @type="place" can only be one of the following "http://syriaca.org/keyword/has-relation-to-place" or "http://syriaca.org/keyword/has-literary-relation-to-place".</sch:assert>
-            </sch:rule>
-         </pattern>
-         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-reforkeyorname-constraint-assert-50">
+                  id="syriacaPersons-relation-reforkeyorname-constraint-assert-52">
             <rule context="tei:relation">
                <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3957,7 +3992,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-activemutual-constraint-report-14">
+                  id="syriacaPersons-relation-activemutual-constraint-report-15">
             <rule context="tei:relation">
                <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3967,7 +4002,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-activepassive-constraint-report-15">
+                  id="syriacaPersons-relation-activepassive-constraint-report-16">
             <rule context="tei:relation">
                <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3981,16 +4016,34 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
          <ref name="tei_att.global.source.attribute.source"/>
          <ref name="tei_att.datable.attributes"/>
          <attribute name="ref">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(reference) provides an explicit means of locating a full definition or identity for the entity being named by means of one or more URIs.</a:documentation>
-            <data type="anyURI">
-               <param name="pattern">\S+</param>
-            </data>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
+Suggested values include: 1] syriaca:distinct-entity; 2] syriaca:possibly-identical; 3] syriaca:shares-attribution-with; 4] skos:broader</a:documentation>
+            <choice>
+               <value>syriaca:distinct-entity</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to distinguish between entities that have been confused in the scholarly literature or might be confused by users.</a:documentation>
+               <value>syriaca:possibly-identical</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to indicate that even though Syriaca.org has identified this location as a distinct entity, it is possible that this entity is the same an another entity with a Syriaca.org URI.</a:documentation>
+               <value>syriaca:shares-attribution-with</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used for pseudonymous authorship to indicate the relationship between the supposed author (i.e. Ephrem) and the otherwise unknown "pseudo" author (i.e. Pseudo-Ephrem).</a:documentation>
+               <value>skos:broader</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used for pseudonymous authorship to indicate the relationship between the unknown author of a specific work and the scholarly composite used to refer to author of multiple texts (i.e. Pseudo-Ephrem).</a:documentation>
+               <data type="anyURI">
+                  <param name="pattern">\S+</param>
+               </data>
+            </choice>
          </attribute>
          <attribute name="type">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">characterizes the element in some sense, using any convenient classification scheme or typology.</a:documentation>
-            <data type="token">
-               <param name="pattern">[^\p{C}\p{Z}]+</param>
-            </data>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+            <choice>
+               <value>disambiguation</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used for relationships that disambiguate between people with similar names or who have been confused in the scholarship</a:documentation>
+               <value>pseudonymity</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to describe relationships between persons variously identified in a situation of pseudonymous authorship</a:documentation>
+               <value>personal</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used for person and professional relationships</a:documentation>
+               <value>place</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used for relationships between a person and a place other than birth and death</a:documentation>
+            </choice>
          </attribute>
          <optional>
             <attribute name="passive">
@@ -4127,7 +4180,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(text) contains a single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample. [4. Default Text Structure 15.1. Varieties of Composite Text]</a:documentation>
          <ref name="tei_body"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-text-source-within-test-constraint-rule-55">
+                  id="syriacaPersons-text-source-within-test-constraint-rule-59">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4136,7 +4189,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-text-source-in-text-constraint-rule-56">
+                  id="syriacaPersons-text-source-in-text-constraint-rule-60">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
