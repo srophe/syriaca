@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-05T15:09:55Z. .
+Schema generated from ODD source 2023-10-05T16:01:36Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -2250,7 +2250,7 @@ Suggested values include: 1] m (metre); 2] kg (kilogram); 3] s (second); 4] Hz (
                <sch:let name="confessionDoc"
                         value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/>
                <sch:let name="confessionLabels"
-                        value="$confessionDoc//tei:text//tei:item/tei:label"/>
+                        value="$confessionDoctei:text//tei:item/tei:label"/>
                <sch:let name="stateRefPart"
                         value="substring-after(parent::tei:state/@ref, '#')"/>
                <sch:let name="spaceTo-" value="for $i in . return(replace($i, ' ', '-'))"/>
@@ -3856,7 +3856,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:place/tei:placeName">
+                      context="tei:text//tei:place/tei:placeName">
                <sch:assert test="string-length(.) gt 0">The &lt;placeName&gt; element cannot be empty.</sch:assert>
             </sch:rule>
          </pattern>
@@ -3865,7 +3865,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text/tei:place/tei:placeName">
+                      context="tei:text/tei:place/tei:placeName">
                <sch:let name="docURIno"
                         value="//tei:publicationStmt/tei:idno[@type='URI']/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
                <sch:assert test="matches(./@xml:id, concat('name', $docURIno, '-', '\d+$'))">
@@ -3878,7 +3878,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:place/tei:placeName">
+                      context="tei:text//tei:place/tei:placeName">
                <sch:assert test="./@xml:lang">A &lt;placeName&gt; element that is the direct child of the &lt;place&gt; element must have an @xml:lang attribute.</sch:assert>
             </sch:rule>
          </pattern>
@@ -4312,7 +4312,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:relation">
+                      context="tei:text//tei:relation">
                <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
             </sch:rule>
@@ -4322,7 +4322,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:relation/@mutual | //tei:text//tei:relation/@active | //tei:text//tei:relation/@passive">
+                      context="tei:text//tei:relation/@mutual | tei:text//tei:relation/@active | tei:text//tei:relation/@passive">
                <sch:let name="placeIndex"
                         value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
                <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
@@ -4333,17 +4333,17 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:relation/@mutual | //tei:text//tei:relation/@active">
+                      context="tei:text//tei:relation/@mutual | tei:text//tei:relation/@active">
                <sch:let name="docURI"
                         value="//tei:publicationStmt/tei:idno/substring-before(., '/tei')"/>
                <sch:assert test="contains(., $docURI)">
-                  One of the values of the @mutual attribute must be the URI for this document's place: <sch:value-of select="$docURI"/>.
+                  This attribute must contain the URI for this document's place: <sch:value-of select="$docURI"/>.
                 </sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:relation[@ref='syriaca:distinct-entity']">
+                      context="tei:text//tei:relation[@ref='syriaca:distinct-entity']">
                <sch:assert test="@type='disambiguation' and @mutual and not(@subtype)">
                   For a 'distinct entity' relationship use @type="disambiguation", no @subtype, and a @mutual attribute.</sch:assert>
                <sch:report test="@type='see-also' or @type='contained-within'">
@@ -4352,7 +4352,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:relation[@ref='syriaca:possibly-identical']">
+                      context="tei:text//tei:relation[@ref='syriaca:possibly-identical']">
                <sch:assert test="@type='disambiguation' and @mutual and not(@subtype)">
                   For a 'possibly identical' relationship use @type="disambiguation", no @subtype, and a @mutual attribute.</sch:assert>
                <sch:report test="@type='see-also' or @type='contained-within'">
@@ -4361,7 +4361,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:relation[@ref='syriaca:share-a-name']">
+                      context="tei:text//tei:relation[@ref='syriaca:share-a-name']">
                <sch:assert test="@type='disambiguation' and @subtype='share-a-name' and @mutual">
                   For a 'share-a-name' relationship, use @type="disambiguation", @subtype="share-a-name", and a @mutual attribute.</sch:assert>
                <sch:report test="@type='see-also' or @type='contained-within'">
@@ -4370,7 +4370,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:relation[@ref='syriaca:share-a-name-search-together']">
+                      context="tei:text//tei:relation[@ref='syriaca:share-a-name-search-together']">
                <sch:assert test="@type='disambiguation' and @subtype='share-a-name' and @mutual">
                   For a 'share-a-name-search-together' relationship, use @type="disambiguation", @subtype="share-a-name", and a @mutual attribute.</sch:assert>
                <sch:report test="@type='see-also' or @type='contained-within'">
@@ -4379,7 +4379,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:relation[@ref='skos:related']">
+                      context="tei:text//tei:relation[@ref='skos:related']">
                <sch:assert test="@type='see-also' and @mutual and not(@subtype)">
                   For a 'related' relationship, use @type="see-also", no @subtype, and a @mutual attribute.</sch:assert>
                <sch:report test="@type='disambiguation' or @type='contained-within'">
@@ -4388,7 +4388,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:relation[@ref='skos:broader']">
+                      context="tei:text//tei:relation[@ref='skos:broader']">
                <sch:assert test="@type='contained-within' and @active and not(@subtype)">
                   For a 'broader' relationship, use @type="contained-within", no @subtype, and @active/@passive attributes.</sch:assert>
                <sch:report test="@type='see-also' or @type='disambiguation'">
@@ -4400,7 +4400,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:relation[@ref='skos:broader'] | //tei:body//tei:relation[@ref='syriaca:distinct-entity']">
+                      context="tei:text//tei:relation[@ref='skos:broader'] | //tei:body//tei:relation[@ref='syriaca:distinct-entity']">
                <sch:assert test="tei:desc">
                   A &lt;desc&gt; is required as child of &lt;relation&gt;.
                 </sch:assert>
@@ -4408,7 +4408,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:relation[@ref='skos:related'] | //tei:body//tei:relation[@ref='syriaca:share-a-name'] | //tei:body//tei:relation[@ref='syriaca:share-a-name-search-together']">
+                      context="tei:text//tei:relation[@ref='skos:related'] | //tei:body//tei:relation[@ref='syriaca:share-a-name'] | //tei:body//tei:relation[@ref='syriaca:share-a-name-search-together']">
                <sch:report test="tei:desc">
                   A &lt;desc&gt; may not appear here.
                 </sch:report>
@@ -4544,7 +4544,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:state[@type='confession']">
+                      context="tei:text//tei:state[@type='confession']">
                <sch:let name="docURIno"
                         value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
                <sch:assert test="matches(./@xml:id, concat('confession', $docURIno, '-', '\d+$'))">
@@ -4595,7 +4595,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                       context="//tei:state/@ref">
                <sch:let name="confessionDoc"
                         value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/>
-               <sch:let name="confessionIDs" value="$confessionDoc//tei:text//tei:item/@xml:id"/>
+               <sch:let name="confessionIDs" value="$confessionDoctei:text//tei:item/@xml:id"/>
                <sch:let name="confessionPtrs"
                         value="for $i in $confessionIDs return concat('#', $i)"/>
                <sch:let name="confessionRefValues"

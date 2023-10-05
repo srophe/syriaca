@@ -108,7 +108,7 @@
                 <!-- Revisit this. It works but it is inelegent. 
             The problem is that it is difficult to combine regex and schematron functions to move between lowercase w/ hypens to uppercase without.-->
                 <sch:let name="confessionDoc" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/>
-                <sch:let name="confessionLabels" value="$confessionDoc//tei:text//tei:item/tei:label"/>
+                <sch:let name="confessionLabels" value="$confessionDoctei:text//tei:item/tei:label"/>
                 <sch:let name="stateRefPart" value="substring-after(parent::tei:state/@ref, '#')"/>
                 <sch:let name="spaceTo-" value="for $i in . return(replace($i, ' ', '-'))"/>
                 <sch:let name="labelToRef" value="for $i in $spaceTo- return lower-case($spaceTo-)"/>
@@ -487,7 +487,7 @@
           </constraintSpec>
           <constraintSpec ident="placeName-content" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:text//tei:place/tei:placeName">
+              <sch:rule context="tei:text//tei:place/tei:placeName">
                 <sch:assert test="string-length(.) gt 0">The &lt;placeName&gt; element cannot be empty.</sch:assert>
               </sch:rule>
             </constraint>
@@ -508,7 +508,7 @@
           </constraintSpec>-->
           <constraintSpec ident="xmlID-on-placeName" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:text/tei:place/tei:placeName">
+              <sch:rule context="tei:text/tei:place/tei:placeName">
                 <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno[@type='URI']/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
                 <sch:assert test="matches(./@xml:id, concat('name', $docURIno, '-', '\d+$'))">
                   The required @xml:id must be 'name<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
@@ -518,7 +518,7 @@
           </constraintSpec>
           <constraintSpec ident="xmlLang-on-placeName" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:text//tei:place/tei:placeName">
+              <sch:rule context="tei:text//tei:place/tei:placeName">
                 <sch:assert test="./@xml:lang">A &lt;placeName&gt; element that is the direct child of the &lt;place&gt; element must have an @xml:lang attribute.</sch:assert>
               </sch:rule>
             </constraint>
@@ -552,7 +552,7 @@
         <elementSpec ident="relation" module="namesdates" mode="change">
           <constraintSpec ident="documentation-on-relation" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:text//tei:relation">
+              <sch:rule context="tei:text//tei:relation">
                 <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
                 <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
               </sch:rule>
@@ -560,50 +560,50 @@
           </constraintSpec>
           <constraintSpec ident="atts-on-relation" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:text//tei:relation/@mutual | //tei:text//tei:relation/@active | //tei:text//tei:relation/@passive">
+              <sch:rule context="tei:text//tei:relation/@mutual | tei:text//tei:relation/@active | tei:text//tei:relation/@passive">
                 <sch:let name="placeIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
                 <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
                 <sch:assert test="                   every $i in tokenize(., ' ')                   satisfies $i = $placeURIs">
                   This attribute contains one or more place URIs not in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+?}' (where {\d+?} is a number).
                 </sch:assert>
               </sch:rule>
-              <sch:rule context="//tei:text//tei:relation/@mutual | //tei:text//tei:relation/@active">
+              <sch:rule context="tei:text//tei:relation/@mutual | tei:text//tei:relation/@active">
                 <sch:let name="docURI" value="//tei:publicationStmt/tei:idno/substring-before(., '/tei')"/>
                 <sch:assert test="contains(., $docURI)">
-                  One of the values of the @mutual attribute must be the URI for this document's place: <sch:value-of select="$docURI"/>.
+                  This attribute must contain the URI for this document's place: <sch:value-of select="$docURI"/>.
                 </sch:assert>
               </sch:rule>
-              <sch:rule context="//tei:text//tei:relation[@ref='syriaca:distinct-entity']">
+              <sch:rule context="tei:text//tei:relation[@ref='syriaca:distinct-entity']">
                 <sch:assert test="@type='disambiguation' and @mutual and not(@subtype)">
                   For a 'distinct entity' relationship use @type="disambiguation", no @subtype, and a @mutual attribute.</sch:assert>
                 <sch:report test="@type='see-also' or @type='contained-within'">
                   With a 'distinct entity' relationship, @type="see-also" and @type="contained-within" not allowed.</sch:report>
               </sch:rule>
-              <sch:rule context="//tei:text//tei:relation[@ref='syriaca:possibly-identical']">
+              <sch:rule context="tei:text//tei:relation[@ref='syriaca:possibly-identical']">
                 <sch:assert test="@type='disambiguation' and @mutual and not(@subtype)">
                   For a 'possibly identical' relationship use @type="disambiguation", no @subtype, and a @mutual attribute.</sch:assert>
                 <sch:report test="@type='see-also' or @type='contained-within'">
                   With a 'possibly identical' relationship, @type="see-also" and @type="contained-within" are not allowed.</sch:report>
               </sch:rule>
-              <sch:rule context="//tei:text//tei:relation[@ref='syriaca:share-a-name']">
+              <sch:rule context="tei:text//tei:relation[@ref='syriaca:share-a-name']">
                 <sch:assert test="@type='disambiguation' and @subtype='share-a-name' and @mutual">
                   For a 'share-a-name' relationship, use @type="disambiguation", @subtype="share-a-name", and a @mutual attribute.</sch:assert>
                 <sch:report test="@type='see-also' or @type='contained-within'">
                   With a 'share-a-name' relationship, @type="see-also" and @type="contained-within" are  not allowed.</sch:report>
               </sch:rule>
-              <sch:rule context="//tei:text//tei:relation[@ref='syriaca:share-a-name-search-together']">
+              <sch:rule context="tei:text//tei:relation[@ref='syriaca:share-a-name-search-together']">
                 <sch:assert test="@type='disambiguation' and @subtype='share-a-name' and @mutual">
                   For a 'share-a-name-search-together' relationship, use @type="disambiguation", @subtype="share-a-name", and a @mutual attribute.</sch:assert>
                 <sch:report test="@type='see-also' or @type='contained-within'">
                   With a 'share-a-name-search-together' relationship, @type="see-also" and @type="contained-within" are not allowed.</sch:report>
               </sch:rule>
-              <sch:rule context="//tei:text//tei:relation[@ref='skos:related']">
+              <sch:rule context="tei:text//tei:relation[@ref='skos:related']">
                 <sch:assert test="@type='see-also' and @mutual and not(@subtype)">
                   For a 'related' relationship, use @type="see-also", no @subtype, and a @mutual attribute.</sch:assert>
                 <sch:report test="@type='disambiguation' or @type='contained-within'">
                   With a 'related' relationship, @type="disambiguation" and @type="contained-within" not allowed.</sch:report>
               </sch:rule>
-              <sch:rule context="//tei:text//tei:relation[@ref='skos:broader']">
+              <sch:rule context="tei:text//tei:relation[@ref='skos:broader']">
                 <sch:assert test="@type='contained-within' and @active and not(@subtype)">
                   For a 'broader' relationship, use @type="contained-within", no @subtype, and @active/@passive attributes.</sch:assert>
                 <sch:report test="@type='see-also' or @type='disambiguation'">
@@ -613,12 +613,12 @@
           </constraintSpec>
           <constraintSpec ident="relation-children" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:text//tei:relation[@ref='skos:broader'] | //tei:body//tei:relation[@ref='syriaca:distinct-entity']">
+              <sch:rule context="tei:text//tei:relation[@ref='skos:broader'] | //tei:body//tei:relation[@ref='syriaca:distinct-entity']">
                 <sch:assert test="tei:desc">
                   A &lt;desc&gt; is required as child of &lt;relation&gt;.
                 </sch:assert>
               </sch:rule>
-              <sch:rule context="//tei:text//tei:relation[@ref='skos:related'] | //tei:body//tei:relation[@ref='syriaca:share-a-name'] | //tei:body//tei:relation[@ref='syriaca:share-a-name-search-together']">
+              <sch:rule context="tei:text//tei:relation[@ref='skos:related'] | //tei:body//tei:relation[@ref='syriaca:share-a-name'] | //tei:body//tei:relation[@ref='syriaca:share-a-name-search-together']">
                 <sch:report test="tei:desc">
                   A &lt;desc&gt; may not appear here.
                 </sch:report>
@@ -719,7 +719,7 @@
         <elementSpec ident="state" module="namesdates" mode="change">
           <constraintSpec ident="xmlID-on-state" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:text//tei:state[@type='confession']">
+              <sch:rule context="tei:text//tei:state[@type='confession']">
                 <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
                 <sch:assert test="matches(./@xml:id, concat('confession', $docURIno, '-', '\d+$'))">
                   The required @xml:id must be 'confession<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
@@ -758,7 +758,7 @@
               </sch:rule>
               <sch:rule context="//tei:state/@ref">
                 <sch:let name="confessionDoc" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/>
-                <sch:let name="confessionIDs" value="$confessionDoc//tei:text//tei:item/@xml:id"/>
+                <sch:let name="confessionIDs" value="$confessionDoctei:text//tei:item/@xml:id"/>
                 <sch:let name="confessionPtrs" value="for $i in $confessionIDs return concat('#', $i)"/>
                 <sch:let name="confessionRefValues" value="for $i in $confessionPtrs return concat('http://syriaca.org/documentation/confessions.xml', $i)"/>
                 <sch:assert test="                   every $i in .                   satisfies $i = $confessionRefValues">
