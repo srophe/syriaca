@@ -7574,6 +7574,44 @@ element reg { tei_date }<a href="#index.xml-eg-d31e14537" class="anchorlink">⚓
                               &lt;sch:assert test="contains(., $docURI)"&gt; One of the values of the @mutual attribute
                               must be the URI for this document's place: &lt;sch:value-of select="$docURI"/&gt;.
                               &lt;/sch:assert&gt;
+                              &lt;/sch:rule&gt;
+                              &lt;sch:rule context="//tei:text//tei:relation[@ref='syriaca:distinct-entity']"&gt;
+                              &lt;sch:assert test="@type='disambiguation' and @mutual and not(@subtype)"&gt; For a 'distinct
+                              entity' relationship use @type="disambiguation", no @subtype, and a @mutual attribute.&lt;/sch:assert&gt;
+                              &lt;sch:report test="@type='see-also' or @type='contained-within'"&gt; With a 'distinct
+                              entity' relationship, @type="see-also" and @type="contained-within" not allowed.&lt;/sch:report&gt;
+                              &lt;/sch:rule&gt;
+                              &lt;sch:rule context="//tei:text//tei:relation[@ref='syriaca:possibly-identical']"&gt;
+                              &lt;sch:assert test="@type='disambiguation' and @mutual and not(@subtype)"&gt; For a 'possibly
+                              identical' relationship use @type="disambiguation", no @subtype, and a @mutual attribute.&lt;/sch:assert&gt;
+                              &lt;sch:report test="@type='see-also' or @type='contained-within'"&gt; With a 'possibly
+                              identical' relationship, @type="see-also" and @type="contained-within" are not allowed.&lt;/sch:report&gt;
+                              &lt;/sch:rule&gt;
+                              &lt;sch:rule context="//tei:text//tei:relation[@ref='syriaca:share-a-name']"&gt;
+                              &lt;sch:assert test="@type='disambiguation' and @subtype='share-a-name' and @mutual"&gt;
+                              For a 'share-a-name' relationship, use @type="disambiguation", @subtype="share-a-name",
+                              and a @mutual attribute.&lt;/sch:assert&gt;
+                              &lt;sch:report test="@type='see-also' or @type='contained-within'"&gt; With a 'share-a-name'
+                              relationship, @type="see-also" and @type="contained-within" are not allowed.&lt;/sch:report&gt;
+                              &lt;/sch:rule&gt;
+                              &lt;sch:rule context="//tei:text//tei:relation[@ref='syriaca:share-a-name-search-together']"&gt;
+                              &lt;sch:assert test="@type='disambiguation' and @subtype='share-a-name' and @mutual"&gt;
+                              For a 'share-a-name-search-together' relationship, use @type="disambiguation", @subtype="share-a-name",
+                              and a @mutual attribute.&lt;/sch:assert&gt;
+                              &lt;sch:report test="@type='see-also' or @type='contained-within'"&gt; With a 'share-a-name-search-together'
+                              relationship, @type="see-also" and @type="contained-within" are not allowed.&lt;/sch:report&gt;
+                              &lt;/sch:rule&gt;
+                              &lt;sch:rule context="//tei:text//tei:relation[@ref='skos:related']"&gt;
+                              &lt;sch:assert test="@type='see-also' and @mutual and not(@subtype)"&gt; For a 'related'
+                              relationship, use @type="see-also", no @subtype, and a @mutual attribute.&lt;/sch:assert&gt;
+                              &lt;sch:report test="@type='disambiguation' or @type='contained-within'"&gt; With a 'related'
+                              relationship, @type="disambiguation" and @type="contained-within" not allowed.&lt;/sch:report&gt;
+                              &lt;/sch:rule&gt;
+                              &lt;sch:rule context="//tei:text//tei:relation[@ref='skos:broader']"&gt;
+                              &lt;sch:assert test="@type='contained-within' and @active and not(@subtype)"&gt; For a 'broader'
+                              relationship, use @type="contained-within", no @subtype, and @active/@passive attributes.&lt;/sch:assert&gt;
+                              &lt;sch:report test="@type='see-also' or @type='disambiguation'"&gt; With a 'broader' relationship,
+                              @type="see-also" and @type="disambiguation" not allowed.&lt;/sch:report&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
                      </tr>
@@ -13060,7 +13098,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e26761" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-10-04T17:16:08Z.
+	       on 2023-10-05T14:03:45Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>
