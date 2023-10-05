@@ -7120,6 +7120,22 @@ element reg { tei_date }<a href="#index.xml-eg-d31e13328" class="anchorlink">⚓
                               &lt;sch:rule context="tei:text//tei:relation[@ref='syriaca:has-literary-relation-to-place']"&gt;
                               &lt;sch:assert test="@type='place' and @active"&gt; For a 'has-literary-relation-to-place'
                               relationship, use @type="place" and @active/@passive attributes.&lt;/sch:assert&gt;
+                              &lt;/sch:rule&gt;
+                              &lt;sch:rule context="tei:text//tei:relation[@type='disambiguation']"&gt;
+                              &lt;sch:assert test="@ref='syriaca:distinct-entity' or @ref='syriaca:possibly-identical'"&gt;
+                              With @type="disambiguation", the @ref attribute must be either "syriaca:distinct-entity"
+                              or "syriaca:possibly-identical".&lt;/sch:assert&gt;
+                              &lt;/sch:rule&gt;
+                              &lt;sch:rule context="tei:text//tei:relation[@type='pseudonymity'"&gt;
+                              &lt;sch:assert test="@ref='syriaca:possibly-identical' or @ref='syriaca:shares-attribution-with'
+                              
+                              or @ref='skos:broader'"&gt; With @type="pseudonymity", the @ref attribute must be either
+                              "syriaca:possibly-identical", "syriaca:shares-attribution-with", or "skos:broader".&lt;/sch:assert&gt;
+                              &lt;/sch:rule&gt;
+                              &lt;sch:rule context="tei:text//tei:relation[@type='place']"&gt;
+                              &lt;sch:assert test="@ref='syriaca:has-relation-to-place' or @ref='syriaca:has-literary-relation-to-place'"&gt;
+                              With @type="place", the @ref attribute must be either "syriaca:has-relation-to-place"
+                              or "syriaca:has-literary-relation-to-place".&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
                      </tr>
@@ -12127,7 +12143,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e25584" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-10-05T17:12:28Z.
+	       on 2023-10-05T17:58:20Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>

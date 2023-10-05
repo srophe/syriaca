@@ -7620,6 +7620,21 @@ element reg { tei_date }<a href="#index.xml-eg-d31e14537" class="anchorlink">⚓
                               &lt;sch:rule context="tei:text//tei:relation[@ref='skos:broader']"&gt;
                               &lt;sch:assert test="@type='contained-within' and @active and not(@subtype)"&gt; For a 'broader'
                               relationship, use @type="contained-within", no @subtype, and @active/@passive attributes.&lt;/sch:assert&gt;
+                              &lt;/sch:rule&gt;
+                              &lt;sch:rule context="tei:text//tei:relation[@type='disambiguation']"&gt;
+                              &lt;sch:assert test="@ref='syriaca:distinct-entity' or @ref='syriaca:possibly-identical'
+                              
+                              or @ref='syriaca:share-a-name' or @ref='syriaca:share-a-name-search-together'"&gt; With
+                              @type="disambiguation", the @ref attribute must be either "syriaca:possibly-identical",
+                              "syriaca:distinct-entity", or "syriaca:share-a-name", or "syriaca:share-a-name-search-together".&lt;/sch:assert&gt;
+                              &lt;/sch:rule&gt;
+                              &lt;sch:rule context="tei:text//tei:relation[@type='see-also']"&gt;
+                              &lt;sch:assert test="@ref='skos:related'"&gt; With @type="see-also", the @ref attribute
+                              must be "skos:related".&lt;/sch:assert&gt;
+                              &lt;/sch:rule&gt;
+                              &lt;sch:rule context="tei:text//tei:relation[@type='contained-within']"&gt;
+                              &lt;sch:assert test="@ref='skos:broader'"&gt; With @type="contained-within", the @ref attribute
+                              must be "skos:broader".&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
                      </tr>
@@ -13110,7 +13125,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e26768" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-10-05T17:14:35Z.
+	       on 2023-10-05T17:58:47Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>

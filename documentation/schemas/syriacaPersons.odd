@@ -443,6 +443,18 @@
                 <sch:assert test="@type='place' and @active">
                   For a 'has-literary-relation-to-place' relationship, use @type="place" and @active/@passive attributes.</sch:assert>
               </sch:rule>
+              <sch:rule context="tei:text//tei:relation[@type='disambiguation']">
+                <sch:assert test="@ref='syriaca:distinct-entity' or @ref='syriaca:possibly-identical'">
+                  With @type="disambiguation", the @ref attribute must be either "syriaca:distinct-entity" or "syriaca:possibly-identical".</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text//tei:relation[@type='pseudonymity'">
+                <sch:assert test="@ref='syriaca:possibly-identical' or @ref='syriaca:shares-attribution-with' or @ref='skos:broader'">
+                  With @type="pseudonymity", the @ref attribute must be either "syriaca:possibly-identical", "syriaca:shares-attribution-with", or "skos:broader".</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text//tei:relation[@type='place']">
+                <sch:assert test="@ref='syriaca:has-relation-to-place' or @ref='syriaca:has-literary-relation-to-place'">
+                  With @type="place", the @ref attribute must be either "syriaca:has-relation-to-place" or "syriaca:has-literary-relation-to-place".</sch:assert>
+              </sch:rule>
             </constraint>
           </constraintSpec>
           <constraintSpec ident="personal-relations-ref" scheme="schematron">

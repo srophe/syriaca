@@ -597,6 +597,18 @@
                 <sch:assert test="@type='contained-within' and @active and not(@subtype)">
                   For a 'broader' relationship, use @type="contained-within", no @subtype, and @active/@passive attributes.</sch:assert>
               </sch:rule>
+              <sch:rule context="tei:text//tei:relation[@type='disambiguation']">
+                <sch:assert test="@ref='syriaca:distinct-entity' or @ref='syriaca:possibly-identical' or @ref='syriaca:share-a-name' or @ref='syriaca:share-a-name-search-together'">
+                  With @type="disambiguation", the @ref attribute must be either "syriaca:possibly-identical", "syriaca:distinct-entity", or "syriaca:share-a-name", or "syriaca:share-a-name-search-together".</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text//tei:relation[@type='see-also']">
+                <sch:assert test="@ref='skos:related'">
+                  With @type="see-also", the @ref attribute must be "skos:related".</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text//tei:relation[@type='contained-within']">
+                <sch:assert test="@ref='skos:broader'">
+                  With @type="contained-within", the @ref attribute must be "skos:broader".</sch:assert>
+              </sch:rule>
             </constraint>
           </constraintSpec>
           <constraintSpec ident="relation-children" scheme="schematron">
