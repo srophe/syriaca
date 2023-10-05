@@ -6502,35 +6502,37 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
               <sch:rule context="tei:text//tei:relation/@mutual">
                 <sch:let name="personIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/persons.xml')"/>
                 <sch:let name="personURIs" value="$personIndex//tei:person/@ref"/>
+                <sch:let name="docURI" value="//tei:publicationStmt/tei:idno/substring-before(., '/tei')"/>
                 <sch:assert test="                   every $i in tokenize(., ' ')                   satisfies $i = $personURIs">
-                  This attribute contains one or more person URIs not in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+?}' (where {\d+?} is a number).
+                  The @mutual attribute contains one or more person URIs not in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+?}' (where {\d+?} is a number).
+                </sch:assert>
+                <sch:assert test="contains(., $docURI)">
+                  The @mutual attribute must contain the URI for this document's place: <sch:value-of select="$docURI"/>.
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:text//tei:relation/@active">
                 <sch:let name="personIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/persons.xml')"/>
                 <sch:let name="personURIs" value="$personIndex//tei:person/@ref"/>
-                <sch:assert test="                   every $i in tokenize(., ' ')                   satisfies $i = $personURIs">
-                  This attribute contains one or more person URIs not in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+?}' (where {\d+?} is a number).
+                <sch:let name="docURI" value="//tei:publicationStmt/tei:idno/substring-before(., '/tei')"/>
+                <sch:assert test=". = $personURIs">
+                  The @active attribute a person URIs not in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+?}' (where {\d+?} is a number).
+                </sch:assert>
+                <sch:assert test="contains(., $docURI)">
+                  The @active attribute must contain the URI for this document's place: <sch:value-of select="$docURI"/>.
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:text//tei:relation[@type='pseudonymity']/@passive">
                 <sch:let name="personIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/persons.xml')"/>
                 <sch:let name="personURIs" value="$personIndex//tei:person/@ref"/>
-                <sch:assert test="                   every $i in tokenize(., ' ')                   satisfies $i = $personURIs">
-                  This attribute contains one or more person URIs not in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+?}' (where {\d+?} is a number).
+                <sch:assert test=". = $personURIs">
+                  The @passive attribute a person URIs not in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+?}' (where {\d+?} is a number).
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:text//tei:relation[@type='place']/@passive">
                 <sch:let name="placeIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
                 <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
                 <sch:assert test=". = $placeURIs">
-                  This attribute contains one or more place URIs not in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+?}' (where {\d+?} is a number).
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:text//tei:relation/@mutual | tei:text//tei:relation/@active">
-                <sch:let name="docURI" value="//tei:publicationStmt/tei:idno/substring-before(., '/tei')"/>
-                <sch:assert test="contains(., $docURI)">
-                  This attribute must contain the URI for this document's place: <sch:value-of select="$docURI"/>.
+                  The @passive attribute contains one or more place URIs not in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+?}' (where {\d+?} is a number).
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/distinct-entity']">

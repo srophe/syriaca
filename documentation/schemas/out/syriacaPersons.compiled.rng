@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-05T21:48:03Z. .
+Schema generated from ODD source 2023-10-05T22:01:34Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -3891,8 +3891,13 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                <sch:let name="personIndex"
                         value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/persons.xml')"/>
                <sch:let name="personURIs" value="$personIndex//tei:person/@ref"/>
+               <sch:let name="docURI"
+                        value="//tei:publicationStmt/tei:idno/substring-before(., '/tei')"/>
                <sch:assert test="                   every $i in tokenize(., ' ')                   satisfies $i = $personURIs">
-                  This attribute contains one or more person URIs not in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+?}' (where {\d+?} is a number).
+                  The @mutual attribute contains one or more person URIs not in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+?}' (where {\d+?} is a number).
+                </sch:assert>
+               <sch:assert test="contains(., $docURI)">
+                  The @mutual attribute must contain the URI for this document's place: <sch:value-of select="$docURI"/>.
                 </sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
@@ -3902,8 +3907,13 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                <sch:let name="personIndex"
                         value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/persons.xml')"/>
                <sch:let name="personURIs" value="$personIndex//tei:person/@ref"/>
-               <sch:assert test="                   every $i in tokenize(., ' ')                   satisfies $i = $personURIs">
-                  This attribute contains one or more person URIs not in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+?}' (where {\d+?} is a number).
+               <sch:let name="docURI"
+                        value="//tei:publicationStmt/tei:idno/substring-before(., '/tei')"/>
+               <sch:assert test=". = $personURIs">
+                  The @active attribute a person URIs not in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+?}' (where {\d+?} is a number).
+                </sch:assert>
+               <sch:assert test="contains(., $docURI)">
+                  The @active attribute must contain the URI for this document's place: <sch:value-of select="$docURI"/>.
                 </sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
@@ -3913,8 +3923,8 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                <sch:let name="personIndex"
                         value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/persons.xml')"/>
                <sch:let name="personURIs" value="$personIndex//tei:person/@ref"/>
-               <sch:assert test="                   every $i in tokenize(., ' ')                   satisfies $i = $personURIs">
-                  This attribute contains one or more person URIs not in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+?}' (where {\d+?} is a number).
+               <sch:assert test=". = $personURIs">
+                  The @passive attribute a person URIs not in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+?}' (where {\d+?} is a number).
                 </sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
@@ -3925,17 +3935,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                         value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
                <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
                <sch:assert test=". = $placeURIs">
-                  This attribute contains one or more place URIs not in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+?}' (where {\d+?} is a number).
-                </sch:assert>
-            </sch:rule>
-            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:srophe="https://srophe.app"
-                      context="tei:text//tei:relation/@mutual | tei:text//tei:relation/@active">
-               <sch:let name="docURI"
-                        value="//tei:publicationStmt/tei:idno/substring-before(., '/tei')"/>
-               <sch:assert test="contains(., $docURI)">
-                  This attribute must contain the URI for this document's place: <sch:value-of select="$docURI"/>.
+                  The @passive attribute contains one or more place URIs not in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+?}' (where {\d+?} is a number).
                 </sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
@@ -4003,7 +4003,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-personal-relations-ref-constraint-rule-62">
+                  id="syriacaPersons-relation-personal-relations-ref-constraint-rule-61">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4027,7 +4027,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-reforkeyorname-constraint-assert-57">
+                  id="syriacaPersons-relation-reforkeyorname-constraint-assert-58">
             <rule context="tei:relation">
                <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4225,7 +4225,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(text) contains a single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample. [4. Default Text Structure 15.1. Varieties of Composite Text]</a:documentation>
          <ref name="tei_body"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-text-source-within-test-constraint-rule-64">
+                  id="syriacaPersons-text-source-within-test-constraint-rule-63">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4234,7 +4234,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-text-source-in-text-constraint-rule-65">
+                  id="syriacaPersons-text-source-in-text-constraint-rule-64">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
