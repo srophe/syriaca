@@ -7075,7 +7075,9 @@ element reg { tei_date }<a href="#index.xml-eg-d31e13328" class="anchorlink">⚓
                               &lt;sch:let name="personURIs"
                                value="$personIndex//tei:person/@ref"/&gt;
                               &lt;sch:let name="docURI"
-                               value="//tei:publicationStmt/tei:idno/substring-before(., '/tei')"/&gt;
+                               value="//tei:publicationStmt/tei:idno[not(@type='deprecated')]/substring-before(.,
+                              
+                              '/tei')"/&gt;
                               &lt;sch:assert test=" every $i in tokenize(., ' ') satisfies $i = $personURIs"&gt; The @mutual
                               attribute contains one or more person URIs not in use in Syriaca.org data. Note that
                               all person URIs take the form 'http://syriaca.org/person/{\d+?}' (where {\d+?} is
@@ -12169,7 +12171,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e25584" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-10-05T22:10:17Z.
+	       on 2023-10-06T15:52:52Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>
