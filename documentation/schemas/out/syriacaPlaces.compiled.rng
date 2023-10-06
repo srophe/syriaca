@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-05T17:58:51Z. .
+Schema generated from ODD source 2023-10-06T16:03:49Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -3867,7 +3867,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                       xmlns:srophe="https://srophe.app"
                       context="tei:text/tei:place/tei:placeName">
                <sch:let name="docURIno"
-                        value="//tei:publicationStmt/tei:idno[@type='URI']/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
+                        value="//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
                <sch:assert test="matches(./@xml:id, concat('name', $docURIno, '-', '\d+$'))">
                   The required @xml:id must be 'name<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
                 </sch:assert>
@@ -4028,7 +4028,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                       xmlns:srophe="https://srophe.app"
                       context="//tei:place/tei:event[@type='attestation']">
                <sch:let name="docURIno"
-                        value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
+                        value="//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
                <sch:assert test="matches(./@xml:id, concat('attestation', $docURIno, '-', '\d+$'))">
                   The required @xml:id must be 'attestation<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
                 </sch:assert>
@@ -4335,7 +4335,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                       xmlns:srophe="https://srophe.app"
                       context="tei:text//tei:relation/@mutual | tei:text//tei:relation/@active">
                <sch:let name="docURI"
-                        value="//tei:publicationStmt/tei:idno/substring-before(., '/tei')"/>
+                        value="//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/substring-before(., '/tei')"/>
                <sch:assert test="contains(., $docURI)">
                   This attribute must contain the URI for this document's place: <sch:value-of select="$docURI"/>.
                 </sch:assert>
@@ -4555,7 +4555,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                       xmlns:srophe="https://srophe.app"
                       context="tei:text//tei:state[@type='confession']">
                <sch:let name="docURIno"
-                        value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
+                        value="//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
                <sch:assert test="matches(./@xml:id, concat('confession', $docURIno, '-', '\d+$'))">
                   The required @xml:id must be 'confession<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
                 </sch:assert>
@@ -4595,7 +4595,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                       xmlns:srophe="https://srophe.app"
                       context="//tei:state[@type='confession']">
                <sch:let name="docURIno"
-                        value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
+                        value="//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
                <sch:assert test="@ref">A &lt;state&gt; element with @type="confession" must have a @ref attribute.</sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
