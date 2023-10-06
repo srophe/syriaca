@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-06T15:52:50Z. .
+Schema generated from ODD source 2023-10-06T16:00:18Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -3447,7 +3447,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                       xmlns:srophe="https://srophe.app"
                       context="//tei:text//tei:person/tei:persName | //tei:text//tei:personGrp/tei:persName">
                <sch:let name="docURIno"
-                        value="//tei:publicationStmt/tei:idno[@type='URI']/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
+                        value="//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
                <sch:assert test="matches(./@xml:id, concat('name', $docURIno, '-', '\d+$'))">
                   The required @xml:id must be 'name<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
                 </sch:assert>
@@ -3892,7 +3892,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                         value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/persons.xml')"/>
                <sch:let name="personURIs" value="$personIndex//tei:person/@ref"/>
                <sch:let name="docURI"
-                        value="//tei:publicationStmt/tei:idno[not(@type='deprecated')]/substring-before(., '/tei')"/>
+                        value="//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/substring-before(., '/tei')"/>
                <sch:assert test="                   every $i in tokenize(., ' ')                   satisfies $i = $personURIs">
                   The @mutual attribute contains one or more person URIs not in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+?}' (where {\d+?} is a number).
                 </sch:assert>
@@ -3908,7 +3908,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
                         value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/persons.xml')"/>
                <sch:let name="personURIs" value="$personIndex//tei:person/@ref"/>
                <sch:let name="docURI"
-                        value="//tei:publicationStmt/tei:idno/substring-before(., '/tei')"/>
+                        value="//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/substring-before(., '/tei')"/>
                <sch:assert test=". = $personURIs">
                   The @active attribute a person URIs not in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+?}' (where {\d+?} is a number).
                 </sch:assert>
