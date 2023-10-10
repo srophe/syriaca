@@ -7366,19 +7366,20 @@ element reg { tei_date }<a href="#index.xml-eg-d31e14537" class="anchorlink">⚓
                                                 <td class="odd_label"><span xml:lang="en" lang="en" class="label">Legal values are:</span></td>
                                                 <td class="odd_value">
                                                    <dl class="valList">
-                                                      <dt><span class="odd_label">syriaca:distinct-entity</span></dt>
+                                                      <dt><span class="odd_label">http://syriaca.org/keyword/distinct-entity</span></dt>
                                                       <dd><span>Used to distinguish between entities that have been confused in the scholarly literature
                                                             or might be confused by users.</span></dd>
-                                                      <dt><span class="odd_label">syriaca:possibly-identical</span></dt>
+                                                      <dt><span class="odd_label">http://syriaca.org/keyword/possibly-identical</span></dt>
                                                       <dd><span>Used to indicate that even though Syriaca.org has identified this location as a distinct
                                                             entity, it is possible that this place is the same an another entity.</span></dd>
-                                                      <dt><span class="odd_label">syriaca:share-a-name</span></dt>
+                                                      <dt><span class="odd_label">http://syriaca.org/keyword/share-a-name</span></dt>
                                                       <dd><span>Used to indicate when entities share a name but remain distinct; i.e. when different
                                                             settlements or churches share a name.</span></dd>
-                                                      <dt><span class="odd_label">syriaca:share-a-name-co-located</span></dt>
-                                                      <dd><span>Used to indicate when closely related entities share a name but remain distinct and
-                                                            when ancient sources sometimes conflate them; i.e. when a settlement, region, and
-                                                            diocese bear the same name.</span></dd>
+                                                      <dt><span class="odd_label">http://syriaca.org/keyword/share-a-name-co-located</span></dt>
+                                                      <dd><span>Used to indicate when distinct entities with overlapping locations share a name. Though
+                                                            distinct entities ancient sources sometimes conflate them; i.e. when a settlement,
+                                                            region, and diocese bear the same name. This relationship is designed to allow a single
+                                                            search across all relevant locations.</span></dd>
                                                       <dt><span class="odd_label">skos:related</span></dt>
                                                       <dd><span>Used for a "see-also" relationship.</span></dd>
                                                       <dt><span class="odd_label">skos:broader</span></dt>
@@ -7597,20 +7598,20 @@ element reg { tei_date }<a href="#index.xml-eg-d31e14537" class="anchorlink">⚓
                               document's place: &lt;sch:value-of select="$docURI"/&gt;.
                               &lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
-                              &lt;sch:rule context="tei:text//tei:relation[@ref='syriaca:distinct-entity']"&gt;
+                              &lt;sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/distinct-entity']"&gt;
                               &lt;sch:assert test="@type='disambiguation' and @mutual and not(@subtype)"&gt; For a 'distinct
                               entity' relationship use @type="disambiguation", no @subtype, and a @mutual attribute.&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
-                              &lt;sch:rule context="tei:text//tei:relation[@ref='syriaca:possibly-identical']"&gt;
+                              &lt;sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/possibly-identical']"&gt;
                               &lt;sch:assert test="@type='disambiguation' and @mutual and not(@subtype)"&gt; For a 'possibly
                               identical' relationship use @type="disambiguation", no @subtype, and a @mutual attribute.&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
-                              &lt;sch:rule context="tei:text//tei:relation[@ref='syriaca:share-a-name']"&gt;
+                              &lt;sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/share-a-name']"&gt;
                               &lt;sch:assert test="@type='disambiguation' and @subtype='share-a-name' and @mutual"&gt;
                               For a 'share-a-name' relationship, use @type="disambiguation", @subtype="share-a-name",
                               and a @mutual attribute.&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
-                              &lt;sch:rule context="tei:text//tei:relation[@ref='syriaca:share-a-name-co-located']"&gt;
+                              &lt;sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/share-a-name-co-located']"&gt;
                               &lt;sch:assert test="@type='disambiguation' and @subtype='share-a-name' and @mutual"&gt;
                               For a 'share-a-name-co-located' relationship, use @type="disambiguation", @subtype="share-a-name",
                               and a @mutual attribute.&lt;/sch:assert&gt;
@@ -7624,11 +7625,12 @@ element reg { tei_date }<a href="#index.xml-eg-d31e14537" class="anchorlink">⚓
                               relationship, use @type="contained-within", no @subtype, and @active/@passive attributes.&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
                               &lt;sch:rule context="tei:text//tei:relation[@type='disambiguation']"&gt;
-                              &lt;sch:assert test="@ref='syriaca:distinct-entity' or @ref='syriaca:possibly-identical'
+                              &lt;sch:assert test="@ref='http://syriaca.org/keyword/distinct-entity' or @ref='http://syriaca.org/keyword/possibly-identical'
                               
-                              or @ref='syriaca:share-a-name' or @ref='syriaca:share-a-name-co-located'"&gt; With @type="disambiguation",
-                              the @ref attribute must be either "syriaca:possibly-identical", "syriaca:distinct-entity",
-                              or "syriaca:share-a-name", or "syriaca:share-a-name-co-located".&lt;/sch:assert&gt;
+                              or @ref='http://syriaca.org/keyword/share-a-name' or @ref='http://syriaca.org/keyword/share-a-name-co-located'"&gt;
+                              With @type="disambiguation", the @ref attribute must be either "http://syriaca.org/keyword/possibly-identical",
+                              "http://syriaca.org/keyword/distinct-entity", or "http://syriaca.org/keyword/share-a-name",
+                              or "http://syriaca.org/keyword/share-a-name-co-located".&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
                               &lt;sch:rule context="tei:text//tei:relation[@type='see-also']"&gt;
                               &lt;sch:assert test="@ref='skos:related'"&gt; With @type="see-also", the @ref attribute
@@ -7687,10 +7689,10 @@ element relation
    tei_att.datable.attributes,
    attribute ref
    {
-      "syriaca:distinct-entity"
-    | "syriaca:possibly-identical"
-    | "syriaca:share-a-name"
-    | "syriaca:share-a-name-co-located"
+      "http://syriaca.org/keyword/distinct-entity"
+    | "http://syriaca.org/keyword/possibly-identical"
+    | "http://syriaca.org/keyword/share-a-name"
+    | "http://syriaca.org/keyword/share-a-name-co-located"
     | "skos:related"
     | "skos:broader"
    },
@@ -13111,7 +13113,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e26761" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-10-10T18:49:39Z.
+	       on 2023-10-10T19:07:34Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>

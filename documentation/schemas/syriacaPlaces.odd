@@ -573,19 +573,19 @@
                   This attribute must contain the URI for this document's place: <sch:value-of select="$docURI"/>.
                 </sch:assert>
               </sch:rule>
-              <sch:rule context="tei:text//tei:relation[@ref='syriaca:distinct-entity']">
+              <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/distinct-entity']">
                 <sch:assert test="@type='disambiguation' and @mutual and not(@subtype)">
                   For a 'distinct entity' relationship use @type="disambiguation", no @subtype, and a @mutual attribute.</sch:assert>
               </sch:rule>
-              <sch:rule context="tei:text//tei:relation[@ref='syriaca:possibly-identical']">
+              <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/possibly-identical']">
                 <sch:assert test="@type='disambiguation' and @mutual and not(@subtype)">
                   For a 'possibly identical' relationship use @type="disambiguation", no @subtype, and a @mutual attribute.</sch:assert>
               </sch:rule>
-              <sch:rule context="tei:text//tei:relation[@ref='syriaca:share-a-name']">
+              <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/share-a-name']">
                 <sch:assert test="@type='disambiguation' and @subtype='share-a-name' and @mutual">
                   For a 'share-a-name' relationship, use @type="disambiguation", @subtype="share-a-name", and a @mutual attribute.</sch:assert>
               </sch:rule>
-              <sch:rule context="tei:text//tei:relation[@ref='syriaca:share-a-name-co-located']">
+              <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/share-a-name-co-located']">
                 <sch:assert test="@type='disambiguation' and @subtype='share-a-name' and @mutual">
                   For a 'share-a-name-co-located' relationship, use @type="disambiguation", @subtype="share-a-name", and a @mutual attribute.</sch:assert>
               </sch:rule>
@@ -598,8 +598,8 @@
                   For a 'broader' relationship, use @type="contained-within", no @subtype, and @active/@passive attributes.</sch:assert>
               </sch:rule>
               <sch:rule context="tei:text//tei:relation[@type='disambiguation']">
-                <sch:assert test="@ref='syriaca:distinct-entity' or @ref='syriaca:possibly-identical' or @ref='syriaca:share-a-name' or @ref='syriaca:share-a-name-co-located'">
-                  With @type="disambiguation", the @ref attribute must be either "syriaca:possibly-identical", "syriaca:distinct-entity", or "syriaca:share-a-name", or "syriaca:share-a-name-co-located".</sch:assert>
+                <sch:assert test="@ref='http://syriaca.org/keyword/distinct-entity' or @ref='http://syriaca.org/keyword/possibly-identical' or @ref='http://syriaca.org/keyword/share-a-name' or @ref='http://syriaca.org/keyword/share-a-name-co-located'">
+                  With @type="disambiguation", the @ref attribute must be either "http://syriaca.org/keyword/possibly-identical", "http://syriaca.org/keyword/distinct-entity", or "http://syriaca.org/keyword/share-a-name", or "http://syriaca.org/keyword/share-a-name-co-located".</sch:assert>
               </sch:rule>
               <sch:rule context="tei:text//tei:relation[@type='see-also']">
                 <sch:assert test="@ref='skos:related'">
@@ -638,16 +638,16 @@
             </attDef>
             <attDef ident="ref" mode="replace" usage="req">
               <valList type="closed">
-                <valItem ident="syriaca:distinct-entity">
+                <valItem ident="http://syriaca.org/keyword/distinct-entity">
                   <desc>Used to distinguish between entities that have been confused in the scholarly literature or might be confused by users.</desc>
                 </valItem>
-                <valItem ident="syriaca:possibly-identical">
+                <valItem ident="http://syriaca.org/keyword/possibly-identical">
                   <desc>Used to indicate that even though Syriaca.org has identified this location as a distinct entity, it is possible that this place is the same an another entity.</desc>
                 </valItem>
-                <valItem ident="syriaca:share-a-name">
+                <valItem ident="http://syriaca.org/keyword/share-a-name">
                   <desc>Used to indicate when entities share a name but remain distinct; i.e. when different settlements or churches share a name.</desc>
                 </valItem>
-                <valItem ident="syriaca:share-a-name-co-located">
+                <valItem ident="http://syriaca.org/keyword/share-a-name-co-located">
                   <desc>Used to indicate when distinct entities with overlapping locations share a name. Though distinct entities ancient sources sometimes conflate them; i.e. when a settlement, region, and diocese bear the same name. This relationship is designed to allow a single search across all relevant locations.</desc>
                 </valItem><valItem ident="skos:related">
                   <desc>Used for a "see-also" relationship.</desc>

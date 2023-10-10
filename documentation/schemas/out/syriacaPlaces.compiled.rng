@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-10T18:49:37Z. .
+Schema generated from ODD source 2023-10-10T19:07:37Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -4341,28 +4341,28 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="tei:text//tei:relation[@ref='syriaca:distinct-entity']">
+                      context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/distinct-entity']">
                <sch:assert test="@type='disambiguation' and @mutual and not(@subtype)">
                   For a 'distinct entity' relationship use @type="disambiguation", no @subtype, and a @mutual attribute.</sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="tei:text//tei:relation[@ref='syriaca:possibly-identical']">
+                      context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/possibly-identical']">
                <sch:assert test="@type='disambiguation' and @mutual and not(@subtype)">
                   For a 'possibly identical' relationship use @type="disambiguation", no @subtype, and a @mutual attribute.</sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="tei:text//tei:relation[@ref='syriaca:share-a-name']">
+                      context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/share-a-name']">
                <sch:assert test="@type='disambiguation' and @subtype='share-a-name' and @mutual">
                   For a 'share-a-name' relationship, use @type="disambiguation", @subtype="share-a-name", and a @mutual attribute.</sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="tei:text//tei:relation[@ref='syriaca:share-a-name-co-located']">
+                      context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/share-a-name-co-located']">
                <sch:assert test="@type='disambiguation' and @subtype='share-a-name' and @mutual">
                   For a 'share-a-name-co-located' relationship, use @type="disambiguation", @subtype="share-a-name", and a @mutual attribute.</sch:assert>
             </sch:rule>
@@ -4384,8 +4384,8 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
                       context="tei:text//tei:relation[@type='disambiguation']">
-               <sch:assert test="@ref='syriaca:distinct-entity' or @ref='syriaca:possibly-identical' or @ref='syriaca:share-a-name' or @ref='syriaca:share-a-name-co-located'">
-                  With @type="disambiguation", the @ref attribute must be either "syriaca:possibly-identical", "syriaca:distinct-entity", or "syriaca:share-a-name", or "syriaca:share-a-name-co-located".</sch:assert>
+               <sch:assert test="@ref='http://syriaca.org/keyword/distinct-entity' or @ref='http://syriaca.org/keyword/possibly-identical' or @ref='http://syriaca.org/keyword/share-a-name' or @ref='http://syriaca.org/keyword/share-a-name-co-located'">
+                  With @type="disambiguation", the @ref attribute must be either "http://syriaca.org/keyword/possibly-identical", "http://syriaca.org/keyword/distinct-entity", or "http://syriaca.org/keyword/share-a-name", or "http://syriaca.org/keyword/share-a-name-co-located".</sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4439,14 +4439,14 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <attribute name="ref">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
             <choice>
-               <value>syriaca:distinct-entity</value>
+               <value>http://syriaca.org/keyword/distinct-entity</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to distinguish between entities that have been confused in the scholarly literature or might be confused by users.</a:documentation>
-               <value>syriaca:possibly-identical</value>
+               <value>http://syriaca.org/keyword/possibly-identical</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to indicate that even though Syriaca.org has identified this location as a distinct entity, it is possible that this place is the same an another entity.</a:documentation>
-               <value>syriaca:share-a-name</value>
+               <value>http://syriaca.org/keyword/share-a-name</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to indicate when entities share a name but remain distinct; i.e. when different settlements or churches share a name.</a:documentation>
-               <value>syriaca:share-a-name-co-located</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to indicate when closely related entities share a name but remain distinct and when ancient sources sometimes conflate them; i.e. when a settlement, region, and diocese bear the same name.</a:documentation>
+               <value>http://syriaca.org/keyword/share-a-name-co-located</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to indicate when distinct entities with overlapping locations share a name. Though distinct entities ancient sources sometimes conflate them; i.e. when a settlement, region, and diocese bear the same name. This relationship is designed to allow a single search across all relevant locations.</a:documentation>
                <value>skos:related</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used for a "see-also" relationship.</a:documentation>
                <value>skos:broader</value>
