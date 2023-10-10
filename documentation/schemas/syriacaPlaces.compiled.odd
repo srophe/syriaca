@@ -4479,9 +4479,9 @@ attributes @target and @cRef may be supplied on <name/>.</report>
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:text//tei:note[@type='disambiguation']/tei:idno">
-                <sch:assert test="contains(., 'syriaca.org')">
-                  This &lt;idno&gt; element cannot point to a Syriaca.org URI. It is used to disambiguate an entity with a Syriaca.org URI from an external entity. 
-                </sch:assert>
+                <sch:report test="contains(., 'syriaca.org')">
+                  This &lt;idno&gt; element cannot contain a Syriaca.org URI. It is used to disambiguate an entity with a Syriaca.org URI from an external entity. 
+                </sch:report>
               </sch:rule>
               <sch:rule context="//tei:body//tei:note[@type='deprecation']/@target">
                 <sch:let name="nameIDs" value="//tei:place/tei:placeName/@xml:id"/>
