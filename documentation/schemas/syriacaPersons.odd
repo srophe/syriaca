@@ -182,8 +182,29 @@
         </elementSpec>
         
         
-        <elementSpec ident="note" module="core" mode="change">
-          
+        <elementSpec ident="note" module="core" mode="change"><!-- Look further into customization -->
+          <constraintSpec ident="note-type-disambiguation" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:text//tei:note[@type='disambiguation']">
+                <sch:assert test="./tei:idno">
+                  A &lt;note&gt; element of @type="disambiguation" must have an &lt;idno&gt; element pointing to an identifier in a dataset external to Syriaca.org.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:text//tei:note[@type='disambiguation']/tei:idno">
+                <sch:report test="contains(., 'syriaca.org')">
+                  This &lt;idno&gt; element cannot contain a Syriaca.org URI. It is used to disambiguate an entity with a Syriaca.org URI from an external entity. 
+                </sch:report>
+              </sch:rule>
+              <sch:rule context="//tei:body//tei:note[@type='deprecation']/@target"><!-- I carried this over from places, test -->
+                <sch:let name="nameIDs" value="//tei:person/tei:persName/@xml:id"/>
+                <sch:let name="IDvalues" value="for $i in $nameIDs return concat('#', $i)"/>
+                <sch:assert test="                   every $i in tokenize(., ' ')                   satisfies $i = $IDvalues">
+                  This @target attribute on &lt;note&gt; of @type="deprecation" can take one or more of the following value separated by a space: 
+                  <sch:value-of select="string-join($IDvalues, ' | ')"/>.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
         </elementSpec>
         
         
