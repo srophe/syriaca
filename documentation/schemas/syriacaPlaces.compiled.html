@@ -960,15 +960,18 @@ element availability
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td>
                         <td class="wovenodd-col2">
                            <div class="pre">
-                              &lt;sch:rule context="//tei:body/tei:listPlace/tei:place/tei:bibl"&gt;
+                              &lt;sch:rule context="//tei:body//tei:bibl"&gt;
                               &lt;sch:let name="docURIno"
-                               value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(.,
+                               value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(),
                               
-                              'http://syriaca.org/'), '/'), '/tei')"/&gt;
+                              '.+?(\d+).+', '$1')"/&gt;
+                              &lt;sch:let name="id" value="@xml:id"/&gt;
                               &lt;sch:assert test="matches(./@xml:id, concat('bib', $docURIno, '-', '\d+$'))"&gt; The
-                              required @xml:id must be 'bib&lt;sch:value-of select="$docURIno"/&gt;-{\d+$}' (where {\d+$}
+                              required @xml:id must be 'bib&lt;sch:value-of select="$docURIno"/&gt;-{\d+}' (where {\d+}
                               is a number).
                               &lt;/sch:assert&gt;
+                              &lt;sch:report test="preceding-sibling::element()[@xml:id = $id]"&gt;This @xml:id is already
+                              in use.&lt;/sch:report&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
                      </tr>
@@ -2340,6 +2343,25 @@ element date
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td>
                         <td class="wovenodd-col2">
                            <div class="pre">
+                              &lt;sch:rule context="//tei:text//tei:desc[@type='abstract']"&gt;
+                              &lt;sch:let name="docURIno"
+                               value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(),
+                              
+                              '.+?(\d+).+', '$1')"/&gt;
+                              &lt;sch:let name="id" value="@xml:id"/&gt;
+                              &lt;sch:assert test="matches(./@xml:id, concat('abstract', $docURIno, '-', '\d+$'))"&gt;
+                              The required @xml:id must be 'abstract&lt;sch:value-of select="$docURIno"/&gt;-{\d+}' (where
+                              {\d+} is a number).
+                              &lt;/sch:assert&gt;
+                              &lt;sch:report test="preceding-sibling::element()[@xml:id = $id]"&gt;This @xml:id is already
+                              in use.&lt;/sch:report&gt;
+                              &lt;/sch:rule&gt;</div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td>
+                        <td class="wovenodd-col2">
+                           <div class="pre">
                               &lt;sch:rule context="tei:place/tei:desc"&gt;
                               &lt;sch:report test="@resp and @source"&gt;Only one of the attributes @resp and @source
                               may be supplied.&lt;/sch:report&gt;
@@ -2406,22 +2428,6 @@ element date
                               &lt;sch:assert test="$countAbs = $countLangs"&gt; There can only be one abstract in a given
                               language.
                               Each abstract (&lt;desc&gt; element of @type="abstract") must have a unique @xml:lang attribute.
-                              &lt;/sch:assert&gt;
-                              &lt;/sch:rule&gt;</div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td>
-                        <td class="wovenodd-col2">
-                           <div class="pre">
-                              &lt;sch:rule context="//tei:text//tei:desc[@type='abstract']"&gt;
-                              &lt;sch:let name="docURIno"
-                               value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(.,
-                              
-                              'http://syriaca.org/'), '/'), '/tei')"/&gt;
-                              &lt;sch:assert test="matches(./@xml:id, concat('abstract', $docURIno, '-', '\d+$'))"&gt;
-                              The required @xml:id must be 'abstract&lt;sch:value-of select="$docURIno"/&gt;-{\d+$}' (where
-                              {\d+$} is a number).
                               &lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
@@ -3411,13 +3417,16 @@ element encodingDesc
                            <div class="pre">
                               &lt;sch:rule context="//tei:place/tei:event[@type='attestation']"&gt;
                               &lt;sch:let name="docURIno"
-                               value="//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/substring-before(substring-after(substring-after(.,
+                               value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(),
                               
-                              'http://syriaca.org/'), '/'), '/tei')"/&gt;
+                              '.+?(\d+).+', '$1')"/&gt;
+                              &lt;sch:let name="id" value="@xml:id"/&gt;
                               &lt;sch:assert test="matches(./@xml:id, concat('attestation', $docURIno, '-', '\d+$'))"&gt;
                               The required @xml:id must be 'attestation&lt;sch:value-of select="$docURIno"/&gt;-{\d+$}'
                               (where {\d+$} is a number).
                               &lt;/sch:assert&gt;
+                              &lt;sch:report test="preceding-sibling::element()[@xml:id = $id]"&gt;This @xml:id is already
+                              in use.&lt;/sch:report&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
                      </tr>
@@ -4132,9 +4141,12 @@ element gi
                                value="replace(document-uri(/), '.*?(\d{1,5}).xml', '$1')"/&gt;
                               &lt;sch:let name="docURIno"
                                value="replace(., '.+?(\d+).+', '$1')"/&gt;
+                              &lt;sch:let name="id" value="@xml:id"/&gt;
                               &lt;sch:assert test="$fileNo = $docURIno"&gt; The number portion of the &lt;idno&gt; element must
                               be the same as the URI number in the file name: &lt;sch:value-of select="$fileNo"/&gt;
                               &lt;/sch:assert&gt;
+                              &lt;sch:report test="preceding-sibling::element()[@xml:id = $id]"&gt;This @xml:id is already
+                              in use.&lt;/sch:report&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
                      </tr>
@@ -4542,13 +4554,16 @@ element link { tei_att.pointing.attributes, empty }<a href="#index.xml-eg-d31e86
                            <div class="pre">
                               &lt;sch:rule context="//tei:body/tei:listPlace/tei:place/tei:listBibl"&gt;
                               &lt;sch:let name="docURIno"
-                               value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(.,
+                               value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(),
                               
-                              'http://syriaca.org/'), '/'), '/tei')"/&gt;
+                              '.+?(\d+).+', '$1')"/&gt;
+                              &lt;sch:let name="id" value="@xml:id"/&gt;
                               &lt;sch:assert test="matches(./@xml:id, concat('bib', $docURIno, '-', '\d+$'))"&gt; The
-                              required @xml:id must be 'bib&lt;sch:value-of select="$docURIno"/&gt;-{\d+$}' (where {\d+$}
+                              required @xml:id must be 'bib&lt;sch:value-of select="$docURIno"/&gt;-{\d+}' (where {\d+}
                               is a number).
                               &lt;/sch:assert&gt;
+                              &lt;sch:report test="preceding-sibling::element()[@xml:id = $id]"&gt;This @xml:id is already
+                              in use.&lt;/sch:report&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
                      </tr>
@@ -6437,13 +6452,16 @@ element place
                            <div class="pre">
                               &lt;sch:rule context="tei:text/tei:place/tei:placeName"&gt;
                               &lt;sch:let name="docURIno"
-                               value="//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/substring-before(substring-after(substring-after(.,
+                               value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(),
                               
-                              'http://syriaca.org/'), '/'), '/tei')"/&gt;
+                              '.+?(\d+).+', '$1')"/&gt;
+                              &lt;sch:let name="id" value="@xml:id"/&gt;
                               &lt;sch:assert test="matches(./@xml:id, concat('name', $docURIno, '-', '\d+$'))"&gt; The
                               required @xml:id must be 'name&lt;sch:value-of select="$docURIno"/&gt;-{\d+$}' (where {\d+$}
                               is a number).
                               &lt;/sch:assert&gt;
+                              &lt;sch:report test="preceding-sibling::element()[@xml:id = $id]"&gt;This @xml:id is already
+                              in use.&lt;/sch:report&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
                      </tr>
@@ -8509,13 +8527,16 @@ element sponsor
                            <div class="pre">
                               &lt;sch:rule context="tei:text//tei:state[@type='confession']"&gt;
                               &lt;sch:let name="docURIno"
-                               value="//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/substring-before(substring-after(substring-after(.,
+                               value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(),
                               
-                              'http://syriaca.org/'), '/'), '/tei')"/&gt;
+                              '.+?(\d+).+', '$1')"/&gt;
+                              &lt;sch:let name="id" value="@xml:id"/&gt;
                               &lt;sch:assert test="matches(./@xml:id, concat('confession', $docURIno, '-', '\d+$'))"&gt;
                               The required @xml:id must be 'confession&lt;sch:value-of select="$docURIno"/&gt;-{\d+$}'
                               (where {\d+$} is a number).
                               &lt;/sch:assert&gt;
+                              &lt;sch:report test="preceding-sibling::element()[@xml:id = $id]"&gt;This @xml:id is already
+                              in use.&lt;/sch:report&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
                      </tr>
@@ -8553,10 +8574,6 @@ element sponsor
                         <td class="wovenodd-col2">
                            <div class="pre">
                               &lt;sch:rule context="//tei:state[@type='confession']"&gt;
-                              &lt;sch:let name="docURIno"
-                               value="//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/substring-before(substring-after(substring-after(.,
-                              
-                              'http://syriaca.org/'), '/'), '/tei')"/&gt;
                               &lt;sch:assert test="@ref"&gt;A &lt;state&gt; element with @type="confession" must have a @ref
                               attribute.&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
@@ -13143,7 +13160,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e26772" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-10-16T20:49:42Z.
+	       on 2023-10-16T22:28:13Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>

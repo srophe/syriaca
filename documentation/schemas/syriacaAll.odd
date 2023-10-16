@@ -430,11 +430,13 @@
           </constraintSpec>
           <constraintSpec ident="xmlID-on-bibl" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:body/tei:listPlace/tei:place/tei:bibl">
-                <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
+              <sch:rule context="//tei:body//tei:bibl">
+                <sch:let name="docURIno" value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(), '.+?(\d+).+', '$1')"/>
+                <sch:let name="id" value="@xml:id"/>
                 <sch:assert test="matches(./@xml:id, concat('bib', $docURIno, '-', '\d+$'))">
-                  The required @xml:id must be 'bib<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
+                  The required @xml:id must be 'bib<sch:value-of select="$docURIno"/>-{\d+}' (where {\d+} is a number).
                 </sch:assert>
+                <sch:report test="preceding-sibling::element()[@xml:id = $id]">This @xml:id is already in use.</sch:report>
               </sch:rule>
             </constraint>
           </constraintSpec>
@@ -498,7 +500,7 @@
                 <dataRef key="teidata.text"/>
               </datatype>
             </attDef>
-            <attDef ident="xml:id" mode="add">
+            <attDef ident="xml:id" mode="add"><!-- I should be doing this with classes and only deleting here. -->
               <datatype>
                 <dataRef key="ID"/>
               </datatype>
@@ -637,16 +639,6 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
-          <constraintSpec ident="xmlID-on-desc" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:text//tei:desc[@type='abstract']">
-                <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
-                <sch:assert test="matches(./@xml:id, concat('abstract', $docURIno, '-', '\d+$'))">
-                  The required @xml:id must be 'abstract<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
-                </sch:assert>
-              </sch:rule>
-            </constraint>
-          </constraintSpec>
           <attList>
             <attDef ident="subtype" mode="delete"/>
             <attDef ident="n" mode="delete"/>
@@ -764,10 +756,11 @@
               <sch:rule context="//tei:publicationStmt/tei:idno[@type='URI']/text()">
                 <sch:let name="fileNo" value="replace(document-uri(/), '.*?(\d{1,5}).xml', '$1')"/>
                 <sch:let name="docURIno" value="replace(., '.+?(\d+).+', '$1')"/>
-                <!--<sch:let name="docURIno" value="//tei:publicationStmt/tei:idno[@type='URI']/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>-->
+                <sch:let name="id" value="@xml:id"/>
                 <sch:assert test="$fileNo = $docURIno">
                   The number portion of the &lt;idno&gt; element must be the same as the URI number in the file name: <sch:value-of select="$fileNo"/>
                 </sch:assert>
+                <sch:report test="preceding-sibling::element()[@xml:id = $id]">This @xml:id is already in use.</sch:report>
               </sch:rule>
             </constraint>
           </constraintSpec>
@@ -817,13 +810,15 @@
           <content>
             <elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/>
           </content>
-          <constraintSpec ident="xmlID-on-listBibl" scheme="schematron">
+          <constraintSpec ident="xmlID-on-listBibl" scheme="schematron"><!-- belongs in places? -->
             <constraint>
               <sch:rule context="//tei:body/tei:listPlace/tei:place/tei:listBibl">
-                <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
+                <sch:let name="docURIno" value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(), '.+?(\d+).+', '$1')"/>
+                <sch:let name="id" value="@xml:id"/>
                 <sch:assert test="matches(./@xml:id, concat('bib', $docURIno, '-', '\d+$'))">
-                  The required @xml:id must be 'bib<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
+                  The required @xml:id must be 'bib<sch:value-of select="$docURIno"/>-{\d+}' (where {\d+} is a number).
                 </sch:assert>
+                <sch:report test="preceding-sibling::element()[@xml:id = $id]">This @xml:id is already in use.</sch:report>
               </sch:rule>
             </constraint>
           </constraintSpec>
