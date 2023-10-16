@@ -5859,9 +5859,11 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
             <constraint>
               <sch:rule context="//tei:text//tei:person/tei:persName | //tei:text//tei:personGrp/tei:persName">
                 <sch:let name="docURIno" value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(), '.+?(\d+).+', '$1')"/>
+                <sch:let name="id" value="@xml:id"/>
                 <sch:assert test="matches(./@xml:id, concat('name', $docURIno, '-', '\d+$'))">
                   The required @xml:id must be 'name<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
                 </sch:assert>
+                <sch:report test="preceding-sibling::element()[@xml:id = $id]">This @xml:id is already in use.</sch:report>
               </sch:rule>
             </constraint>
           </constraintSpec><constraintSpec ident="xmlLang-on-placeName" scheme="schematron">

@@ -5545,10 +5545,13 @@ element p
                                value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(),
                               
                               '.+?(\d+).+', '$1')"/&gt;
+                              &lt;sch:let name="id" value="@xml:id"/&gt;
                               &lt;sch:assert test="matches(./@xml:id, concat('name', $docURIno, '-', '\d+$'))"&gt; The
                               required @xml:id must be 'name&lt;sch:value-of select="$docURIno"/&gt;-{\d+$}' (where {\d+$}
                               is a number).
                               &lt;/sch:assert&gt;
+                              &lt;sch:report test="preceding-sibling::element()[@xml:id = $id]"&gt;This @xml:id is already
+                              in use.&lt;/sch:report&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
                      </tr>
@@ -12213,7 +12216,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e25571" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-10-16T22:27:41Z.
+	       on 2023-10-16T22:38:49Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>
