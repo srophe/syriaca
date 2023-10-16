@@ -4724,7 +4724,8 @@ creation of an electronic text.</desc><desc xmlns:rng="http://relaxng.org/ns/str
             <constraint>
               <sch:rule context="//tei:publicationStmt/tei:idno[@type='URI']">
                 <sch:let name="fileNo" value="replace(document-uri(/), '.*?(\d{1,5}).xml', '$1')"/>
-                <sch:let name="docURIno" value="//tei:publicationStmt/tei:idno[@type='URI']/substring-before(substring-after(substring-after(., 'http://syriaca.org/'), '/'), '/tei')"/>
+                <sch:let name="docURIno" value="replace(., '.+?(/d[1,5}))/tei, '$1'"/>
+                
                 <sch:assert test="$fileNo eq $docURIno">
                   The number portion of the &lt;idno&gt; element must be the same as the URI number in the file name: <sch:value-of select="$fileNo"/>
                 </sch:assert>
@@ -5870,7 +5871,6 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                   the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
                 </sch:assert>
               </sch:rule>
-              
             </constraint>
           </constraintSpec><attList><attDef ident="xml:id" mode="change">
               <desc>
@@ -6066,7 +6066,6 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                   the form 'http://syriaca.org/place/{\d+}' (where {\d+} is a number).
                 </sch:assert>
               </sch:rule>
-              
             </constraint>
           </constraintSpec><attList><attDef ident="xml:id" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="sort" mode="delete"/><attDef ident="key" mode="delete"/><attDef ident="ref" mode="change" usage="req"/><attDef ident="srophe:tags" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="role" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
