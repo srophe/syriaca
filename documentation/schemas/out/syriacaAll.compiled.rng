@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-16T20:39:29Z. .
+Schema generated from ODD source 2023-10-16T20:48:40Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -4551,12 +4551,11 @@ Suggested values include: 1] main; 2] hom (homograph); 3] xref (cross reference)
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:publicationStmt/tei:idno[@type='URI']">
+                      context="//tei:publicationStmt/tei:idno[@type='URI']/text()">
                <sch:let name="fileNo"
                         value="replace(document-uri(/), '.*?(\d{1,5}).xml', '$1')"/>
-               <sch:let name="docURIno"
-                        value="replace(//tei:publicationStmt/tei:idno[@type='URI']/text(), '.+?(\d+)/tei', '$1')"/>
-               <sch:assert test="$fileNo eq $docURIno">
+               <sch:let name="docURIno" value="replace(., '.+?(\d+).+', '$1')"/>
+               <sch:assert test="$fileNo = $docURIno">
                   The number portion of the &lt;idno&gt; element must be the same as the URI number in the file name: <sch:value-of select="$fileNo"/>
                </sch:assert>
             </sch:rule>

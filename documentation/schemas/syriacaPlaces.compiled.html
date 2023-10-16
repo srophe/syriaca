@@ -4127,15 +4127,13 @@ element gi
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td>
                         <td class="wovenodd-col2">
                            <div class="pre">
-                              &lt;sch:rule context="//tei:publicationStmt/tei:idno[@type='URI']"&gt;
+                              &lt;sch:rule context="//tei:publicationStmt/tei:idno[@type='URI']/text()"&gt;
                               &lt;sch:let name="fileNo"
                                value="replace(document-uri(/), '.*?(\d{1,5}).xml', '$1')"/&gt;
                               &lt;sch:let name="docURIno"
-                               value="replace(//tei:publicationStmt/tei:idno[@type='URI']/text(), '.+?(\d+)/tei',
-                              
-                              '$1')"/&gt;
-                              &lt;sch:assert test="$fileNo eq $docURIno"&gt; The number portion of the &lt;idno&gt; element
-                              must be the same as the URI number in the file name: &lt;sch:value-of select="$fileNo"/&gt;
+                               value="replace(., '.+?(\d+).+', '$1')"/&gt;
+                              &lt;sch:assert test="$fileNo = $docURIno"&gt; The number portion of the &lt;idno&gt; element must
+                              be the same as the URI number in the file name: &lt;sch:value-of select="$fileNo"/&gt;
                               &lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
@@ -13145,7 +13143,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e26772" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-10-16T20:40:24Z.
+	       on 2023-10-16T20:49:42Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>
