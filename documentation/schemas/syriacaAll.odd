@@ -252,6 +252,21 @@
         </classSpec>
         
         
+        <classSpec type="atts" ident="att.global.change" module="tei" mode="change">
+          <constraintSpec ident="change-att-values" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:text//@change">
+                <sch:let name="changeIDs" value="//tei:teiHeader//tei:change/@xml:id"/>
+                <sch:let name="changeIDpointers" value="for $i in $changeIDs return concat('#', $i)"/>
+                <sch:assert test="                  every $i in tokenize(., ' ')                  satisfies $i = $nameIDpointers">
+                  This @change attribute can contain one or more of the following <sch:value-of select="$changeIDpointers"/>.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+        </classSpec>
+        
+        
         <classSpec type="atts" ident="att.global.facs" module="transcr" mode="delete"/>
         
         

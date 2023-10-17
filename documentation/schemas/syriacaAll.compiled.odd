@@ -17216,22 +17216,25 @@ contexts.</p>
     </attDef>
   </attList>
   
-</classSpec><classSpec rend="add" ident="att.global.change" predeclare="true" module="transcr" type="atts">
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2021-08-22" xml:lang="en">provides attributes allowing its member
+</classSpec><classSpec rend="add" ident="att.global.change" predeclare="true" module="transcr" type="atts"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2021-08-22" xml:lang="en">provides attributes allowing its member
 elements to specify one or more states or revision campaigns with which they are
-associated.</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2019-06-08">そのメンバ要素が関連する1つ以上の状態または改定を指定できるように、<att>change</att>属性を提供する。</desc>
-  <attList xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <attDef ident="change">
+associated.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="ja" versionDate="2019-06-08">そのメンバ要素が関連する1つ以上の状態または改定を指定できるように、<att>change</att>属性を提供する。</desc><classes/><constraintSpec ident="change-att-values" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:text//@change">
+                <sch:let name="changeIDs" value="//tei:teiHeader//tei:change/@xml:id"/>
+                <sch:let name="changeIDpointers" value="for $i in $changeIDs return concat('#', $i)"/>
+                <sch:assert test="                  every $i in tokenize(., ' ')                  satisfies $i = $nameIDpointers">
+                  This @change attribute can contain one or more of the following <sch:value-of select="$changeIDpointers"/>.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><attList><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="change">
       <desc versionDate="2011-10-31" xml:lang="en">points to one or more <gi>change</gi> elements documenting
       a state or revision campaign to which the element bearing this
       attribute and its children have been assigned by the encoder.</desc>
       <desc xml:lang="ja" versionDate="2019-07-21">この属性とその子を持つ要素が符号化する人によって割り当てられた状態または改定を記述する1つまたは複数の<gi>change</gi>要素を示す。</desc>
       <datatype minOccurs="1" maxOccurs="unbounded"><dataRef key="teidata.pointer"/></datatype>
-    </attDef>
-  </attList>
-  
-</classSpec><classSpec rend="add" predeclare="true" module="linking" xml:id="CLLINK" type="atts" ident="att.global.linking"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2016-02-16" xml:lang="en">provides a set of attributes for hypertextual linking.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">하이퍼텍스트와 다른 연결에 대한 속성의 집합을 정의한다. 이것은 연결에 대한 부가적 태그 집합이 선택될 때 모든 요소에 가능해야 한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">定義一組用於超文字連結及其他連結的屬性，當連結的附加標籤組被選擇時，這些屬性可用於所有元素。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2019-07-21" xml:lang="ja">ハイパーテキストリンクの属性セットを提供する。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2016-02-16" xml:lang="fr">fournit un ensemble d'attributs pour décrire les
+    </attDef></attList></classSpec><classSpec rend="add" predeclare="true" module="linking" xml:id="CLLINK" type="atts" ident="att.global.linking"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2016-02-16" xml:lang="en">provides a set of attributes for hypertextual linking.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">하이퍼텍스트와 다른 연결에 대한 속성의 집합을 정의한다. 이것은 연결에 대한 부가적 태그 집합이 선택될 때 모든 요소에 가능해야 한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">定義一組用於超文字連結及其他連結的屬性，當連結的附加標籤組被選擇時，這些屬性可用於所有元素。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2019-07-21" xml:lang="ja">ハイパーテキストリンクの属性セットを提供する。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2016-02-16" xml:lang="fr">fournit un ensemble d'attributs pour décrire les
       liens hypertextuels.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">define un conjunto de atributos para hipertexto u otro vínculo habilitado para todos los elementos cuando se selecciona la etiqueta adicional para los enlaces.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">definisce un insieme di attributi per ipertesto o altro legame abilitati per tutti gli elementi quando è selezionato il sottoinsieme di marcatori per i collegamenti</desc><classes/><attList><attDef ident="previous" mode="delete"/><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="corresp" usage="opt">
       <gloss versionDate="2007-07-04" xml:lang="en">corresponds</gloss>
       <gloss versionDate="2007-12-20" xml:lang="ko">일치</gloss>

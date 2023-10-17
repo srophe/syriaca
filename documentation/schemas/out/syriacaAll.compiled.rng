@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-17T14:11:10Z. .
+Schema generated from ODD source 2023-10-17T21:31:16Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -8805,6 +8805,20 @@ Sample values include: 1] header; 2] footer; 3] pageNum (page number); 4] lineNu
          </attribute>
       </optional>
    </define>
+   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+            id="syriacaAll-att.global.change-change-att-values-constraint-rule-47">
+      <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                xmlns:srophe="https://srophe.app"
+                context="//tei:text//@change">
+         <sch:let name="changeIDs" value="//tei:teiHeader//tei:change/@xml:id"/>
+         <sch:let name="changeIDpointers"
+                  value="for $i in $changeIDs return concat('#', $i)"/>
+         <sch:assert test="                  every $i in tokenize(., ' ')                  satisfies $i = $nameIDpointers">
+                  This @change attribute can contain one or more of the following <sch:value-of select="$changeIDpointers"/>.
+                </sch:assert>
+      </sch:rule>
+   </pattern>
    <define name="tei_att.global.linking.attributes">
       <ref name="tei_att.global.linking.attribute.corresp"/>
    </define>
