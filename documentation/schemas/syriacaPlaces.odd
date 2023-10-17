@@ -54,7 +54,18 @@
         
         
         <elementSpec ident="bibl" module="core" mode="change">
-          
+          <constraintSpec ident="xmlID-on-bibl" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:text//tei:place/child::tei:bibl">
+                <sch:let name="docURIno" value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(), '.+?(\d+).+', '$1')"/>
+                <sch:let name="id" value="@xml:id"/>
+                <sch:assert test="matches(./@xml:id, concat('bib', $docURIno, '-', '\d+$'))">
+                  The required @xml:id must be 'bib<sch:value-of select="$docURIno"/>-{\d+}' (where {\d+} is a number).
+                </sch:assert>
+                <sch:report test="preceding-sibling::element()[@xml:id = $id]">This @xml:id is already in use.</sch:report>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
         </elementSpec>
         
              
