@@ -18,6 +18,8 @@ password_change() {
     echo "ran password change"
 }
 
+touch startup.log
+
 server_startup &
 password_change
 wait
