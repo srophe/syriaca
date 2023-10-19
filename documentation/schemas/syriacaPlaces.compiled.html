@@ -3413,7 +3413,20 @@ element encodingDesc
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td>
                         <td class="wovenodd-col2">
                            <div class="pre">
-                              &lt;sch:rule context="//tei:place/tei:event[@type='attestation']"&gt;
+                              &lt;sch:rule context="tei:place/tei:event"&gt;
+                              &lt;sch:report test="@resp and @source"&gt;Only one of the attributes @resp and @source
+                              may be supplied.&lt;/sch:report&gt;
+                              &lt;/sch:rule&gt;
+                              &lt;sch:rule context="tei:place/tei:event[not(tei:quote)]"&gt;
+                              &lt;sch:assert test="@source"&gt;A @source attribute must be supplied.&lt;/sch:assert&gt;
+                              &lt;/sch:rule&gt;</div>
+                        </td>
+                     </tr>
+                     <tr>
+                        <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td>
+                        <td class="wovenodd-col2">
+                           <div class="pre">
+                              &lt;sch:rule context="//tei:text//tei:event[@type='attestation']"&gt;
                               &lt;sch:let name="docURIno"
                                value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(),
                               
@@ -3425,19 +3438,6 @@ element encodingDesc
                               &lt;/sch:assert&gt;
                               &lt;sch:report test="preceding-sibling::element()[@xml:id = $id]"&gt;This @xml:id is already
                               in use.&lt;/sch:report&gt;
-                              &lt;/sch:rule&gt;</div>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td>
-                        <td class="wovenodd-col2">
-                           <div class="pre">
-                              &lt;sch:rule context="tei:place/tei:event"&gt;
-                              &lt;sch:report test="@resp and @source"&gt;Only one of the attributes @resp and @source
-                              may be supplied.&lt;/sch:report&gt;
-                              &lt;/sch:rule&gt;
-                              &lt;sch:rule context="tei:place/tei:event[not(tei:quote)]"&gt;
-                              &lt;sch:assert test="@source"&gt;A @source attribute must be supplied.&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
                      </tr>
@@ -13180,7 +13180,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e26797" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-10-19T19:19:28Z.
+	       on 2023-10-19T19:26:48Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>
