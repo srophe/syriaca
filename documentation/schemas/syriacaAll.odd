@@ -496,6 +496,17 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
+          <constraintSpec ident="xmlID-on-change" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:change/@xml:id">
+                <sch:let name="docURIno" value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(), '.+?(\d+).+', '$1')"/>
+                <sch:assert test="matches(., concat('change', $docURIno, '-', '\d+$'))">
+                  The required @xml:id must be 'change<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
+                </sch:assert>
+                <sch:report test="preceding-sibling::element()[@xml:id = .]">This @xml:id is already in use.</sch:report>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
           <attList>
             <attDef ident="target" mode="delete"/>
             <attDef ident="n" mode="add">
