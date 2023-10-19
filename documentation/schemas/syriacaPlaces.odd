@@ -64,6 +64,9 @@
                 </sch:assert>
                 <sch:report test="preceding-sibling::element()[@xml:id = $id]">This @xml:id is already in use.</sch:report>
               </sch:rule>
+              <sch:rule context="tei:text//tei:bibl[not(parent::tei:place)]">
+                <sch:report test="@xml:id">This &lt;bibl&gt; cannot contain an @xml:id.</sch:report>
+              </sch:rule>
             </constraint>
           </constraintSpec>
         </elementSpec>

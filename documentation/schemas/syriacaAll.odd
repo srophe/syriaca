@@ -310,6 +310,23 @@
         </classSpec>
         
         
+        
+        <classSpec type="atts" ident="att.global.source" module="tei" mode="change">
+          <constraintSpec ident="source-att-values" scheme="schematron">
+            <constraint>
+              <sch:rule context="//@source">
+                <sch:let name="biblIDs" value="//tei:text//tei:bibl/@xml:id"/>
+                <sch:let name="biblIDpointers" value="for $i in $biblIDs return concat('#', $i)"/>
+                <sch:assert test="                  every $i in tokenize(., ' ')                  satisfies $i = $biblIDpointers">
+                  This @change attribute can contain one or more of the following <sch:value-of select="$biblIDpointers"/>.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+        </classSpec>
+        
+        
+        
         <classSpec type="atts" ident="att.datable" module="tei" mode="change">
           <attList>
             <attDef ident="period" mode="delete"/>

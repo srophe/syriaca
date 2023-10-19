@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-19T19:25:31Z. .
+Schema generated from ODD source 2023-10-19T19:56:36Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -692,7 +692,36 @@ Sample values include: 1] approved; 2] candidate; 3] cleared; 4] deprecated; 5] 
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="syriacaAll-att.global.source-source-only_1_ODD_source-constraint-rule-7">
+            id="syriacaAll-att.global.source-source-only_1_ODD_source-constraint-rule-9">
+      <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:rng="http://relaxng.org/ns/structure/1.0"
+                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                xmlns:srophe="https://srophe.app"
+                xmlns:xi="http://www.w3.org/2001/XInclude"
+                context="tei:*[@source]">
+         <sch:let name="srcs" value="tokenize( normalize-space(@source),' ')"/>
+         <sch:report test="( self::tei:classRef               | self::tei:dataRef               | self::tei:elementRef               | self::tei:macroRef               | self::tei:moduleRef               | self::tei:schemaSpec )               and               $srcs[2]">
+              When used on a schema description element (like
+              <sch:value-of select="name(.)"/>), the @source attribute
+              should have only 1 value. (This one has <sch:value-of select="count($srcs)"/>.)
+            </sch:report>
+      </sch:rule>
+   </pattern>
+   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+            id="syriacaAll-att.global.source-source-att-values-constraint-rule-7">
+      <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                xmlns:srophe="https://srophe.app"
+                context="//@source">
+         <sch:let name="biblIDs" value="//tei:text//tei:bibl/@xml:id"/>
+         <sch:let name="biblIDpointers" value="for $i in $biblIDs return concat('#', $i)"/>
+         <sch:assert test="                  every $i in tokenize(., ' ')                  satisfies $i = $biblIDpointers">
+                  This @change attribute can contain one or more of the following <sch:value-of select="$biblIDpointers"/>.
+                </sch:assert>
+      </sch:rule>
+   </pattern>
+   <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+            id="syriacaAll-att.global.source-only_1_ODD_source-constraint-rule-8">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -1005,7 +1034,7 @@ Suggested values include: 1] m (metre); 2] kg (kilogram); 3] s (second); 4] Hz (
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="syriacaAll-att.measurement-att-measurement-unitRef-constraint-rule-8">
+            id="syriacaAll-att.measurement-att-measurement-unitRef-constraint-rule-10">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -1102,7 +1131,7 @@ Suggested values include: 1] top; 2] bottom; 3] margin; 4] opposite; 5] overleaf
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="syriacaAll-att.typed-subtypeTyped-constraint-rule-9">
+            id="syriacaAll-att.typed-subtypeTyped-constraint-rule-11">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -1130,7 +1159,7 @@ Suggested values include: 1] top; 2] bottom; 3] margin; 4] opposite; 5] overleaf
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="syriacaAll-att.pointing-targetLang-constraint-rule-10">
+            id="syriacaAll-att.pointing-targetLang-constraint-rule-12">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -1167,7 +1196,7 @@ Suggested values include: 1] top; 2] bottom; 3] margin; 4] opposite; 5] overleaf
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="syriacaAll-att.spanning-spanTo-spanTo-points-to-following-constraint-rule-11">
+            id="syriacaAll-att.spanning-spanTo-spanTo-points-to-following-constraint-rule-13">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:rng="http://relaxng.org/ns/structure/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3282,7 +3311,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
             <text/>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-p-lang-on-p-in-body-constraint-rule-12">
+                  id="syriacaAll-p-lang-on-p-in-body-constraint-rule-14">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3292,7 +3321,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-p-abstractModel-structure-p-in-ab-or-p-constraint-report-6">
+                  id="syriacaAll-p-abstractModel-structure-p-in-ab-or-p-constraint-report-7">
             <rule context="tei:p">
                <sch:report xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -3304,7 +3333,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-p-abstractModel-structure-p-in-l-or-lg-constraint-report-7">
+                  id="syriacaAll-p-abstractModel-structure-p-in-l-or-lg-constraint-report-8">
             <rule context="tei:p">
                <sch:report xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -3372,7 +3401,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
             </list>
          </attribute>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-quote-source-only_1_ODD_source-constraint-rule-13">
+                  id="syriacaAll-quote-source-only_1_ODD_source-constraint-rule-15">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3427,7 +3456,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
             <text/>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-desc-lang-on-desc-constraint-rule-14">
+                  id="syriacaAll-desc-lang-on-desc-constraint-rule-16">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3450,7 +3479,7 @@ Sample values include: 1] duplicate; 2] duplicate-partial; 3] excessStart; 4] ex
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-desc-deprecationInfo-only-in-deprecated-constraint-rule-16">
+                  id="syriacaAll-desc-deprecationInfo-only-in-deprecated-constraint-rule-18">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3598,7 +3627,7 @@ Normalization 12. Critical Apparatus]</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(name, proper noun) contains a proper noun or noun phrase. [3.6.1. Referring Strings]</a:documentation>
          <ref name="tei_macro.phraseSeq"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-name-ref-on-name-constraint-rule-17">
+                  id="syriacaAll-name-ref-on-name-constraint-rule-19">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3615,7 +3644,7 @@ Normalization 12. Critical Apparatus]</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-name-ref-on-name-constraint-rule-18">
+                  id="syriacaAll-name-ref-on-name-constraint-rule-20">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3734,7 +3763,7 @@ Sample values include: 1] suspension (suspension); 2] contraction (contraction);
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(pointer) defines a pointer to another location. [3.7. Simple Links and Cross-References 16.1. Links]</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-ptr-target-in-ptr-constraint-rule-19">
+                  id="syriacaAll-ptr-target-in-ptr-constraint-rule-21">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3748,7 +3777,7 @@ Sample values include: 1] suspension (suspension); 2] contraction (contraction);
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-ptr-ptrAtts-constraint-report-9">
+                  id="syriacaAll-ptr-ptrAtts-constraint-report-10">
             <rule context="tei:ptr">
                <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3775,7 +3804,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(reference) defines a reference to another location, possibly modified by additional text or comment. [3.7. Simple Links and Cross-References 16.1. Links]</a:documentation>
          <text/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-ref-refAtts-constraint-report-10">
+                  id="syriacaAll-ref-refAtts-constraint-report-11">
             <rule context="tei:ref">
                <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3820,7 +3849,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
             <text/>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-note-xmlLang-in-note-constraint-rule-20">
+                  id="syriacaAll-note-xmlLang-in-note-constraint-rule-22">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3881,7 +3910,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
             <text/>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-editor-role-on-editor-constraint-rule-21">
+                  id="syriacaAll-editor-role-on-editor-constraint-rule-23">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3919,7 +3948,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-editor-date-past-editor-constraint-rule-25">
+                  id="syriacaAll-editor-date-past-editor-constraint-rule-27">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3929,7 +3958,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-editor-ref-on-editor-constraint-rule-26">
+                  id="syriacaAll-editor-ref-on-editor-constraint-rule-28">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4038,7 +4067,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(title) contains a title for any kind of work. [3.12.2.2. Titles, Authors, and Editors 2.2.1. The Title Statement 2.2.5. The Series Statement]</a:documentation>
          <ref name="tei_macro.paraContent"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-title-lang-on-title-in-body-constraint-rule-29">
+                  id="syriacaAll-title-lang-on-title-in-body-constraint-rule-31">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4050,7 +4079,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-title-title-in-titleStmt-constraint-rule-30">
+                  id="syriacaAll-title-title-in-titleStmt-constraint-rule-32">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4060,7 +4089,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-title-title-in-seriesStmt-constraint-rule-31">
+                  id="syriacaAll-title-title-in-seriesStmt-constraint-rule-33">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4179,7 +4208,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <text/>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-bibl-mssCitation-constraint-rule-32">
+                  id="syriacaAll-bibl-mssCitation-constraint-rule-34">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4489,7 +4518,7 @@ Suggested values include: 1] main; 2] hom (homograph); 3] xref (cross reference)
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(release authority) supplies the name of a person or other agency responsible for making a work available, other than a publisher or distributor. [2.2.4. Publication, Distribution, Licensing, etc.]</a:documentation>
          <text/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-authority-authorityText-constraint-rule-33">
+                  id="syriacaAll-authority-authorityText-constraint-rule-35">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4506,7 +4535,7 @@ Suggested values include: 1] main; 2] hom (homograph); 3] xref (cross reference)
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(identifier) supplies any form of identifier used to identify some object, such as a bibliographic item, a person, a title, an organization, etc. in a standardized way. [13.3.1. Basic Principles 2.2.4. Publication, Distribution, Licensing, etc. 2.2.5. The Series Statement 3.12.2.4. Imprint, Size of a Document, and Reprint Information]</a:documentation>
          <text/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-idno-idno-uri-constraint-rule-34">
+                  id="syriacaAll-idno-idno-uri-constraint-rule-36">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4522,7 +4551,7 @@ Suggested values include: 1] main; 2] hom (homograph); 3] xref (cross reference)
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-idno-change-on-idno-constraint-rule-35">
+                  id="syriacaAll-idno-change-on-idno-constraint-rule-37">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4799,7 +4828,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(change) documents a change or set of changes made during the production of a source document, or during the revision of an electronic file. [2.6. The Revision Description 2.4.1. Creation 11.7. Identifying Changes and Revisions]</a:documentation>
          <ref name="tei_macro.specialPara"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-change-who-on-change-constraint-rule-37">
+                  id="syriacaAll-change-who-on-change-constraint-rule-39">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4817,7 +4846,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-change-xmlID-on-change-constraint-rule-38">
+                  id="syriacaAll-change-xmlID-on-change-constraint-rule-40">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4872,7 +4901,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(link) defines an association or hypertextual link among elements or passages, of some type not more precisely specifiable by other elements. [16.1. Links]</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-link-target-on-link-constraint-rule-39">
+                  id="syriacaAll-link-target-on-link-constraint-rule-41">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4887,7 +4916,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-link-linkTargets3-constraint-assert-32">
+                  id="syriacaAll-link-linkTargets3-constraint-assert-33">
             <rule context="tei:link">
                <sch:assert xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -4986,7 +5015,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(catchwords) describes the system used to ensure correct ordering of the quires or similar making up a codex, incunable, or other object typically by means of annotations at the foot of the page. [10.3.7. Catchwords, Signatures, Secundo Folio]</a:documentation>
          <ref name="tei_macro.phraseSeq"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-catchwords-catchword_in_msDesc-constraint-assert-33">
+                  id="syriacaAll-catchwords-catchword_in_msDesc-constraint-assert-34">
             <rule context="tei:catchwords">
                <sch:assert xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -5009,7 +5038,7 @@ Suggested values include: 1] ISBN; 2] ISSN; 3] DOI; 4] URI; 5] VIAF; 6] ESTC; 7]
             </choice>
          </zeroOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-dimensions-duplicateDim-constraint-report-15">
+                  id="syriacaAll-dimensions-duplicateDim-constraint-report-16">
             <rule context="tei:dimensions">
                <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5223,7 +5252,7 @@ Sample values include: 1] binding; 2] endband; 3] slipcase; 4] support; 5] tie</
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(second folio) marks the word or words taken from a fixed point in a codex (typically the beginning of the second leaf) in order to provide a unique identifier for it.  [10.3.7. Catchwords, Signatures, Secundo Folio]</a:documentation>
          <ref name="tei_macro.phraseSeq"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-secFol-secFol_in_msDesc-constraint-assert-34">
+                  id="syriacaAll-secFol-secFol_in_msDesc-constraint-assert-35">
             <rule context="tei:secFol">
                <sch:assert xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -5241,7 +5270,7 @@ Sample values include: 1] binding; 2] endband; 3] slipcase; 4] support; 5] tie</
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(signatures) contains discussion of the leaf or quire signatures found within a codex or similar object. [10.3.7. Catchwords, Signatures, Secundo Folio]</a:documentation>
          <ref name="tei_macro.specialPara"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-signatures-signatures_in_msDesc-constraint-assert-35">
+                  id="syriacaAll-signatures-signatures_in_msDesc-constraint-assert-36">
             <rule context="tei:signatures">
                <sch:assert xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -5316,7 +5345,7 @@ Sample values include: 1] binding; 2] endband; 3] slipcase; 4] support; 5] tie</
             </zeroOrMore>
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-msIdentifier-msId_minimal-constraint-report-18">
+                  id="syriacaAll-msIdentifier-msId_minimal-constraint-report-19">
             <rule context="tei:msIdentifier">
                <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -6465,7 +6494,7 @@ Suggested values include: 1] paper; 2] parch (parchment); 3] mixed</a:documentat
             <text/>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-persName-person-ref-constraint-rule-40">
+                  id="syriacaAll-persName-person-ref-constraint-rule-42">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -6540,7 +6569,7 @@ Suggested values include: 1] paper; 2] parch (parchment); 3] mixed</a:documentat
             <text/>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-placeName-place-ref-constraint-rule-41">
+                  id="syriacaAll-placeName-place-ref-constraint-rule-43">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -6684,7 +6713,7 @@ Sample values include: 1] proclaimed; 2] assumed; 3] verified; 4] clinical; 5] b
             </zeroOrMore>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-event-xmlID-on-event-constraint-rule-42">
+                  id="syriacaAll-event-xmlID-on-event-constraint-rule-44">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -6712,7 +6741,7 @@ Sample values include: 1] proclaimed; 2] assumed; 3] verified; 4] clinical; 5] b
             </list>
          </attribute>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-event-source-only_1_ODD_source-constraint-rule-43">
+                  id="syriacaAll-event-source-only_1_ODD_source-constraint-rule-45">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -7095,7 +7124,7 @@ Sample values include: 1] primary; 2] other; 3] paid; 4] unpaid</a:documentation
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(relationship) describes any kind of relationship or linkage amongst a specified group of places, events, persons, objects or other items. [13.3.2.3. Personal Relationships]</a:documentation>
          <ref name="tei_desc"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-relation-reforkeyorname-constraint-assert-39">
+                  id="syriacaAll-relation-reforkeyorname-constraint-assert-40">
             <rule context="tei:relation">
                <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -7105,7 +7134,7 @@ Sample values include: 1] primary; 2] other; 3] paid; 4] unpaid</a:documentation
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-relation-activemutual-constraint-report-21">
+                  id="syriacaAll-relation-activemutual-constraint-report-22">
             <rule context="tei:relation">
                <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -7115,7 +7144,7 @@ Sample values include: 1] primary; 2] other; 3] paid; 4] unpaid</a:documentation
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-relation-activepassive-constraint-report-22">
+                  id="syriacaAll-relation-activepassive-constraint-report-23">
             <rule context="tei:relation">
                <report xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -7506,7 +7535,7 @@ Sample values include: 1] homeoteleuton; 2] homeoarchy; 3] paleographicConfusion
             </zeroOrMore>
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-rdgGrp-only1lem-constraint-assert-40">
+                  id="syriacaAll-rdgGrp-only1lem-constraint-assert-41">
             <rule context="tei:rdgGrp">
                <sch:assert xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -7756,7 +7785,7 @@ Sample values include: 1] homeoteleuton; 2] homeoarchy; 3] paleographicConfusion
             </optional>
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-facsimile-no_facsimile_text_nodes-constraint-rule-45">
+                  id="syriacaAll-facsimile-no_facsimile_text_nodes-constraint-rule-47">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -7883,7 +7912,7 @@ Sample values include: 1] glued; 2] pinned; 3] sewn</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(path) defines any line passing through two or more points within a <code xmlns="http://www.w3.org/1999/xhtml">&lt;surface&gt;</code> element. [11.1. Digital Facsimiles 11.2.2. Embedded Transcription]</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-path-pathmustnotbeclosed-constraint-rule-46">
+                  id="syriacaAll-path-pathmustnotbeclosed-constraint-rule-48">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -7936,7 +7965,7 @@ Sample values include: 1] glued; 2] pinned; 3] sewn</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(added span of text) marks the beginning of a longer sequence of text added by an author, scribe, annotator or corrector (see also <code xmlns="http://www.w3.org/1999/xhtml">&lt;add&gt;</code>). [11.3.1.4. Additions and Deletions]</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-addSpan-addSpan-requires-spanTo-constraint-assert-41">
+                  id="syriacaAll-addSpan-addSpan-requires-spanTo-constraint-assert-42">
             <rule context="tei:addSpan">
                <sch:assert xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -7947,7 +7976,7 @@ Sample values include: 1] glued; 2] pinned; 3] sewn</a:documentation>
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-addSpan-addSpan-requires-spanTo-fr-constraint-assert-42">
+                  id="syriacaAll-addSpan-addSpan-requires-spanTo-fr-constraint-assert-43">
             <rule context="tei:addSpan">
                <sch:assert xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -7981,7 +8010,7 @@ Sample values include: 1] glued; 2] pinned; 3] sewn</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(damaged span of text) marks the beginning of a longer sequence of text which is damaged in some way but still legible. [11.3.3.1. Damage, Illegibility, and Supplied Text]</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-damageSpan-damageSpan-requires-spanTo-constraint-assert-43">
+                  id="syriacaAll-damageSpan-damageSpan-requires-spanTo-constraint-assert-44">
             <rule context="tei:damageSpan">
                <sch:assert xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -7992,7 +8021,7 @@ Sample values include: 1] glued; 2] pinned; 3] sewn</a:documentation>
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-damageSpan-damageSpan-requires-spanTo-fr-constraint-assert-44">
+                  id="syriacaAll-damageSpan-damageSpan-requires-spanTo-fr-constraint-assert-45">
             <rule context="tei:damageSpan">
                <sch:assert xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -8014,7 +8043,7 @@ Sample values include: 1] glued; 2] pinned; 3] sewn</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(deleted span of text) marks the beginning of a longer sequence of text deleted, marked as deleted, or otherwise signaled as superfluous or spurious by an author, scribe, annotator, or corrector. [11.3.1.4. Additions and Deletions]</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-delSpan-delSpan-requires-spanTo-constraint-assert-45">
+                  id="syriacaAll-delSpan-delSpan-requires-spanTo-constraint-assert-46">
             <rule context="tei:delSpan">
                <sch:assert xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -8025,7 +8054,7 @@ Sample values include: 1] glued; 2] pinned; 3] sewn</a:documentation>
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-delSpan-delSpan-requires-spanTo-fr-constraint-assert-46">
+                  id="syriacaAll-delSpan-delSpan-requires-spanTo-fr-constraint-assert-47">
             <rule context="tei:delSpan">
                <sch:assert xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -8172,7 +8201,7 @@ Sample values include: 1] header; 2] footer; 3] pageNum (page number); 4] lineNu
             </choice>
          </oneOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-subst-substContents1-constraint-assert-47">
+                  id="syriacaAll-subst-substContents1-constraint-assert-48">
             <rule context="tei:subst">
                <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -8474,7 +8503,7 @@ Sample values include: 1] header; 2] footer; 3] pageNum (page number); 4] lineNu
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(text) contains a single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample. [4. Default Text Structure 15.1. Varieties of Composite Text]</a:documentation>
          <ref name="tei_body"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-text-source-within-test-constraint-rule-47">
+                  id="syriacaAll-text-source-within-test-constraint-rule-49">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -8483,7 +8512,7 @@ Sample values include: 1] header; 2] footer; 3] pageNum (page number); 4] lineNu
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-text-source-in-text-constraint-rule-48">
+                  id="syriacaAll-text-source-in-text-constraint-rule-50">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -8661,7 +8690,7 @@ Sample values include: 1] header; 2] footer; 3] pageNum (page number); 4] lineNu
             </optional>
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-div-abstractModel-structure-div-in-l-or-lg-constraint-report-26">
+                  id="syriacaAll-div-abstractModel-structure-div-in-l-or-lg-constraint-report-27">
             <rule context="tei:div">
                <sch:report xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -8673,7 +8702,7 @@ Sample values include: 1] header; 2] footer; 3] pageNum (page number); 4] lineNu
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-div-abstractModel-structure-div-in-ab-or-p-constraint-report-27">
+                  id="syriacaAll-div-abstractModel-structure-div-in-ab-or-p-constraint-report-28">
             <rule context="tei:div">
                <sch:report xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -8833,7 +8862,7 @@ Sample values include: 1] header; 2] footer; 3] pageNum (page number); 4] lineNu
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="syriacaAll-att.global.change-change-att-values-constraint-rule-49">
+            id="syriacaAll-att.global.change-change-att-values-constraint-rule-51">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:srophe="https://srophe.app"

@@ -567,12 +567,29 @@ associated with a dated element, at the time indicated.</desc>
           útiles en los puntos indicados en las guías de consulta.</p>
       </remarks>
       <remarks versionDate="2019-07-21" xml:lang="ja"><p>本ガイドラインでは、当該属性<att>rend</att>の値として推奨するものはない。活字化の特徴は様々であり、それらのどれを採用するかはプロジェクトごとでおそろしく異なるからである。当ガイドラインでは、有用な記述法があれば、その都度示すことになっている。<att>rend</att>属性の値は、空白によって区切られる順序不定の個々のトークンの集合である。</p></remarks>
-    </attDef></attList></classSpec><classSpec rend="add" predeclare="true" xml:id="GBLSRC" module="tei" type="atts" ident="att.global.source">
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2021-08-22" xml:lang="en">provides attributes used by elements to point to an
-    external source.</desc>
-  <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2019-09-18" xml:lang="ja">外部ソースを参照する要素によって用いられる属性を示す。</desc>
-  <attList xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
-    <attDef ident="source" usage="opt">
+    </attDef></attList></classSpec><classSpec rend="add" predeclare="true" xml:id="GBLSRC" module="tei" type="atts" ident="att.global.source"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2021-08-22" xml:lang="en">provides attributes used by elements to point to an
+    external source.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2019-09-18" xml:lang="ja">外部ソースを参照する要素によって用いられる属性を示す。</desc><classes/><constraintSpec ident="source-att-values" scheme="schematron">
+            <constraint>
+              <sch:rule context="//@source">
+                <sch:let name="biblIDs" value="//tei:text//tei:bibl/@xml:id"/>
+                <sch:let name="biblIDpointers" value="for $i in $biblIDs return concat('#', $i)"/>
+                <sch:assert test="                  every $i in tokenize(., ' ')                  satisfies $i = $biblIDpointers">
+                  This @change attribute can contain one or more of the following <sch:value-of select="$biblIDpointers"/>.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" scheme="schematron" ident="only_1_ODD_source">
+        <constraint>
+          <sch:rule context="tei:*[@source]">
+            <sch:let name="srcs" value="tokenize( normalize-space(@source),' ')"/>
+            <sch:report test="( self::tei:classRef               | self::tei:dataRef               | self::tei:elementRef               | self::tei:macroRef               | self::tei:moduleRef               | self::tei:schemaSpec )               and               $srcs[2]">
+              When used on a schema description element (like
+              <sch:value-of select="name(.)"/>), the @source attribute
+              should have only 1 value. (This one has <sch:value-of select="count($srcs)"/>.)
+            </sch:report>
+          </sch:rule>
+        </constraint>
+      </constraintSpec><attList><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="source" usage="opt">
       <desc versionDate="2010-05-09" xml:lang="en">specifies the source from which some aspect of
         this element is drawn.</desc>
       <desc versionDate="2019-09-18" xml:lang="ja">この要素の何らかの側面を示すソースを指定する。</desc>
@@ -623,17 +640,14 @@ associated with a dated element, at the time indicated.</desc>
           に定められた方法で絶対 URI に展開できる私用形式の URI で与えることができる。
           複数の場所が指定された場合、デフォルトでは要求されたソースがそれらのリソースの組み合わせによって得られるものと想定される。</p>
         </remarks>
-    </attDef>
-  </attList>
-  <exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+    </attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#SOURCE-eg-01">
       <p> As Willard McCarty (<bibl xml:id="mcc_2012">2012, p.2</bibl>) tells us, <quote source="#mcc_2012">‘Collaboration’ is a problematic and should be a contested
           term.</quote>
         
       </p>
     </egXML>
-  </exemplum>
-  <exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
       <p>
         
@@ -647,24 +661,20 @@ associated with a dated element, at the time indicated.</desc>
           Chicago Press</publisher> (<date>2003</date>), <biblScope unit="page">p.147</biblScope>.
       </bibl>
     </egXML>
-  </exemplum>
-  <exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#UND">
       <elementRef key="p" source="tei:2.0.1"/>
     </egXML>
     <p>Include in the schema an element named <gi>p</gi> available from the TEI P5 2.0.1
       release.</p>
-  </exemplum>
-  <exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#UND">
       <schemaSpec ident="myODD" source="mycompiledODD.xml">
         
       </schemaSpec>
     </egXML>
     <p>Create a schema using components taken from the file <ident>mycompiledODD.xml</ident>.</p>
-  </exemplum>
-  
-</classSpec><classSpec rend="add" module="tei" xml:id="GLOBAL" type="atts" ident="att.global"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-10-02" xml:lang="en">provides attributes common to all elements in the TEI encoding scheme.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">TEI 부호화 스키마의 모든 요소에 공통 속성을 제공한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">提供一組屬性，通用於TEI編碼標準中的所有元素。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">TEI符号化スキーム中の全要素に共通する属性を示す。 </desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-06-12" xml:lang="fr">fournit un jeu d'attributs communs à tous les éléments
+  </exemplum></classSpec><classSpec rend="add" module="tei" xml:id="GLOBAL" type="atts" ident="att.global"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-10-02" xml:lang="en">provides attributes common to all elements in the TEI encoding scheme.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">TEI 부호화 스키마의 모든 요소에 공통 속성을 제공한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">提供一組屬性，通用於TEI編碼標準中的所有元素。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">TEI符号化スキーム中の全要素に共通する属性を示す。 </desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-06-12" xml:lang="fr">fournit un jeu d'attributs communs à tous les éléments
     dans le système de codage TEI.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">proporciona un conjunto de atributos común a todos los
     elementos del esquema de codificación TEI.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">stabilisce un insieme di attributi comuni a tutti gli
     elementi dello schema di codifica TEI</desc><classes><memberOf key="att.global.rendition"/><memberOf key="att.global.linking"/><memberOf key="att.global.analytic"/><memberOf key="att.global.change"/><memberOf key="att.global.responsibility"/><memberOf key="att.global.source"/></classes><attList><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="xml:id" usage="opt">
@@ -4145,6 +4155,9 @@ doit pas être utilisé.</p>
                   The required @xml:id must be 'bib<sch:value-of select="$docURIno"/>-{\d+}' (where {\d+} is a number).
                 </sch:assert>
                 <sch:report test="preceding-sibling::element()[@xml:id = $id]">This @xml:id is already in use.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:text//tei:bibl[not(parent::tei:person)][not(parent::tei:personGrp)]">
+                <sch:report test="@xml:id">This &lt;bibl&gt; cannot contain an @xml:id.</sch:report>
               </sch:rule>
             </constraint>
           </constraintSpec><constraintSpec ident="mssCitation" scheme="schematron">
