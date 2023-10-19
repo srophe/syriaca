@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-19T20:54:17Z. .
+Schema generated from ODD source 2023-10-19T20:58:08Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -6633,9 +6633,12 @@ Suggested values include: 1] paper; 2] parch (parchment); 3] mixed</a:documentat
                   The @ref attribute on &lt;placeName&gt; must take a Syriaca.org place URI which reqires 
                   the form 'http://syriaca.org/place/{\d+}' (where {\d+} is a number).
                 </sch:assert>
-               <sch:rule context="//tei:placeName[ancestor::tei:desc][ancestor::tei:note]">
-                  <sch:assert test="@ref">This &lt;placeName&gt; requires a @ref attribute.</sch:assert>
-               </sch:rule>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="//tei:placeName[ancestor::tei:desc][ancestor::tei:note]">
+               <sch:assert test="@ref">This &lt;placeName&gt; requires a @ref attribute.</sch:assert>
             </sch:rule>
          </pattern>
          <ref name="tei_att.global.attribute.xmlid"/>
