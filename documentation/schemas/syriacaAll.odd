@@ -253,9 +253,9 @@
         
         
         <classSpec type="atts" ident="att.global.change" module="tei" mode="change">
-          <constraintSpec ident="change-att-values" scheme="schematron">
+          <constraintSpec ident="change-att-values" scheme="schematron"><!-- NOT WORKING -->
             <constraint>
-              <sch:rule context="//tei:text//@change">
+              <sch:rule context="//@change">
                 <sch:let name="changeIDs" value="//tei:teiHeader//tei:change/@xml:id"/>
                 <sch:let name="changeIDpointers" value="for $i in $changeIDs return concat('#', $i)"/>
                 <sch:assert test="                  every $i in tokenize(., ' ')                  satisfies $i = $changeIDpointers">
