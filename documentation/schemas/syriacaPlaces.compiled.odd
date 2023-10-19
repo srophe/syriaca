@@ -5895,13 +5895,16 @@ creation of an electronic text.</desc><desc xmlns:rng="http://relaxng.org/ns/str
                 </sch:report>
               </sch:rule>
             </constraint>
-          </constraintSpec><attList><attDef ident="subtype" mode="delete"/><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="type" mode="change" rend="change" usage="req"><desc rend="replace">The <att>type</att> attribute on <gi>idno</gi> defines the kind of identifier
-                contained in the text value. In the Gazetteer, the only type of <gi>idno</gi> used is "URI".</desc><datatype xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
+          </constraintSpec><attList><attDef ident="subtype" mode="delete"/><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="type" mode="change" rend="change" usage="req"><desc rend="replace">The <att>type</att> attribute on <gi>idno</gi> defines the kind of identifier contained in the text value.</desc><datatype xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
         <dataRef key="teidata.enumerated"/>
-      </datatype><valList type="closed" mode="add"><valItem ident="URI">
-                  <desc>A Uniform Resource Identifier.</desc>
-                </valItem><valItem ident="deprecated">
+      </datatype><valList type="closed" mode="add"><valItem ident="deprecated">
                   <desc>For URIs that are no longer in use.</desc>
+                </valItem><valItem ident="FIEY">
+                  <desc>For identifiers from Fiey.</desc>
+                </valItem><valItem ident="PLRE">
+                  <desc>For identifiers from the Prosopography of the Later Roman Empire.</desc>
+                </valItem><valItem ident="URI">
+                  <desc>A Uniform Resource Identifier.</desc>
                 </valItem></valList></attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="und">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
       <idno type="ISBN">978-1-906964-22-1</idno>
@@ -7712,13 +7715,6 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                 <sch:report test="preceding-sibling::element()[@xml:id = $id]">This @xml:id is already in use.</sch:report>
               </sch:rule>
             </constraint>
-          </constraintSpec><constraintSpec ident="documentation-on-state" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:place/tei:state">
-                <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
-                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
-              </sch:rule>
-            </constraint>
           </constraintSpec><constraintSpec ident="state-type-existence" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:place/tei:state[@type='existence']">
@@ -7747,6 +7743,13 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                   The acceptable values of @ref are 'http://syriaca.org/documentation/confessions.xml' followed by one of the following:
                   <sch:value-of select="string-join($confessionPtrs, '; ')"/>
                 </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="documentation-on-state" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:text//tei:state">
+                <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec><attList><attDef ident="type" mode="change" usage="req">
@@ -8093,7 +8096,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
     unitario o combinado, p.ej. un texto en verso o teatral, una recopilación de ensayos, una
     novela, un diccionario, o una fragmento de corpus.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">contiene un unico testo di qualsiasi tipo, sia esso
     unitario o composito, per esempio un testo in versi o teatrale, una raccolta di saggi, un
-    romanzo, un dizionario, o una porzione di corpus</desc><classes><memberOf key="model.resource"/></classes><content><elementRef key="body" minOccurs="1" maxOccurs="1"/></content><constraintSpec ident="source-within-test" scheme="schematron">
+    romanzo, un dizionario, o una porzione di corpus</desc><classes><memberOf key="model.resource"/></classes><content><elementRef key="body" minOccurs="1" maxOccurs="1"/></content><constraintSpec ident="source-within-text" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:text">
                 <sch:assert test="count(.//@source) ge 1">At least one descendent element of &lt;text&gt; must have a @source attribute (@source attributes point to the @xml:id on a &lt;bibl&gt; or &lt;listBibl&gt;).</sch:assert>

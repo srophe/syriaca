@@ -7844,59 +7844,17 @@ creation of an electronic text.</desc><desc xmlns:rng="http://relaxng.org/ns/str
                 </sch:report>
               </sch:rule>
             </constraint>
-          </constraintSpec><attList><attDef ident="subtype" mode="delete"/><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" ident="type" usage="opt" mode="change">
-      <desc versionDate="2010-04-30" xml:lang="en">categorizes the identifier, for example as an
-        ISBN, Social Security number, etc.</desc>
-      <desc versionDate="2009-01-05" xml:lang="fr">classe un numéro dans une catégorie, par exemple
-        comme étant un numéro ISBN ou comme appartenant une autre série normalisée.</desc>
-      <desc versionDate="2007-12-20" xml:lang="ko">예를 들어 ISBN 또는 기타 표준 일련번호로, 숫자를 범주화한다.</desc>
-      <desc versionDate="2007-05-02" xml:lang="zh-TW">表明編碼的種類，例如國際標準書號 (ISBN) 或其他標準系列編碼。</desc>
-      <desc versionDate="2008-04-05" xml:lang="ja">当該数値の分類を示す。例えば、ISBNなど。</desc>
-      <desc versionDate="2016-11-17" xml:lang="de">bestimmt die Art des Identifikators (z. B. ISBN,
-        Sozialversicherungsnummer, URI)</desc>
-      <desc versionDate="2007-05-04" xml:lang="es">clasifica el número, por ejemplo como un ISBN o
-        cualquier otro número estándard.</desc>
-      <desc versionDate="2007-01-21" xml:lang="it">classifica l'identificatore, ad esempio come
-        codice ISBN o altri generi di identificatori standard.</desc>
-      <datatype>
+          </constraintSpec><attList><attDef ident="subtype" mode="delete"/><attDef ident="xml:id" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="type" mode="change" rend="change" usage="req"><desc rend="replace">The <att>type</att> attribute on <gi>idno</gi> defines the kind of identifier contained in the text value.</desc><datatype xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
         <dataRef key="teidata.enumerated"/>
-      </datatype>
-      <valList type="semi" mode="add">
-        <valItem ident="ISBN">
-          <desc versionDate="2016-07-02" xml:lang="en">International Standard Book Number: a 13- or
-            (if assigned prior to 2007) 10-digit identifying number assigned by the publishing
-            industry to a published book or similar item, registered with the <ref target="https://www.isbn-international.org"> International ISBN Agency.</ref>
-          </desc>
-        </valItem>
-        <valItem ident="ISSN">
-          <desc versionDate="2016-07-02" xml:lang="en">International Standard Serial Number: an
-            eight-digit number to uniquely identify a serial publication.</desc>
-        </valItem>
-        <valItem ident="DOI">
-          <desc versionDate="2016-07-02" xml:lang="en">Digital Object Identifier: a unique string of
-            letters and numbers assigned to an electronic document.</desc>
-        </valItem>
-        <valItem ident="URI">
-          <desc versionDate="2022-02-23" xml:lang="en">Uniform Resource Identifier: a string of
-            characters to uniquely identify a resource, following the syntax of <ref target="https://datatracker.ietf.org/doc/html/rfc3986">RFC 3986</ref>.</desc>
-        </valItem>
-        <valItem ident="VIAF">
-          <desc versionDate="2016-07-02" xml:lang="en">A data number in the Virtual Internet
-            Authority File assigned to link different names in catalogs around the world for the
-            same entity.</desc>
-        </valItem>
-        <valItem ident="ESTC">
-          <desc versionDate="2016-07-02" xml:lang="en">English Short-Title Catalogue number: an
-            identifying number assigned to a document in English printed in the British Isles or
-            North America before 1801.</desc>
-        </valItem>
-        <valItem ident="OCLC">
-          <desc versionDate="2016-07-02" xml:lang="en">OCLC control number (record number) for the
-            union catalog record in WorldCat, a union catalog for member libraries in the Online
-            Computer Library Center global cooperative.</desc>
-        </valItem>
-      </valList>
-    </attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="und">
+      </datatype><valList type="closed" mode="add"><valItem ident="deprecated">
+                  <desc>For URIs that are no longer in use.</desc>
+                </valItem><valItem ident="FIEY">
+                  <desc>For identifiers from Fiey.</desc>
+                </valItem><valItem ident="PLRE">
+                  <desc>For identifiers from the Prosopography of the Later Roman Empire.</desc>
+                </valItem><valItem ident="URI">
+                  <desc>A Uniform Resource Identifier.</desc>
+                </valItem></valList></attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="und">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
       <idno type="ISBN">978-1-906964-22-1</idno>
       <idno type="ISSN">0143-3385</idno>
@@ -13910,7 +13868,14 @@ specification.</p></remarks>
     
   </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="state"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2009-03-19">state</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">statut</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2011-12-01" xml:lang="en">contains a description of some status or quality attributed to a person, place, or organization often at some specific time or for a specific date range.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">contient la description d'un statut ou d'une qualité actuels attribués à une personne, un lieu ou une
         organisation.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">개인, 장소, 또는 조직에 관련한 현재 지위 또는 특성 기술을 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">標明分界方法所定義的權威參照標準裡其中ㄧ個組件。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">人物、場所、組織などの、現在の社会的状態や地位を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2018-07-18" xml:lang="de">enthält eine Beschreibung eines Status oder einer Qualität, die einer Person, einem Ort oder einer Organisation 
-    oft zu einem bestimmten Zeitpunkt oder für einen bestimmten Zeitraum zugeordnet wird.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">especifica un componente de una referencia canónica definida por el método milestone (hito).</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">specifica un componente di un riferimento canonico definito dal metodo milestone.</desc><classes><memberOf key="att.canonical"/><memberOf key="att.global"/><memberOf key="att.datable"/><memberOf key="att.typed"/><memberOf key="model.persStateLike"/><memberOf key="model.placeStateLike"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="desc" minOccurs="0" maxOccurs="1"/><elementRef key="precision" minOccurs="0" maxOccurs="unbounded"/></sequence></content><attList><attDef ident="key" mode="delete"/><attDef ident="subtype" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+    oft zu einem bestimmten Zeitpunkt oder für einen bestimmten Zeitraum zugeordnet wird.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">especifica un componente de una referencia canónica definida por el método milestone (hito).</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">specifica un componente di un riferimento canonico definito dal metodo milestone.</desc><classes><memberOf key="att.canonical"/><memberOf key="att.global"/><memberOf key="att.datable"/><memberOf key="att.typed"/><memberOf key="model.persStateLike"/><memberOf key="model.placeStateLike"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="desc" minOccurs="0" maxOccurs="1"/><elementRef key="precision" minOccurs="0" maxOccurs="unbounded"/></sequence></content><constraintSpec ident="documentation-on-state" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:text//tei:state">
+                <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><attList><attDef ident="key" mode="delete"/><attDef ident="subtype" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
         <state ref="#SCHOL" type="status">
           <label>scholar</label>
@@ -16768,7 +16733,7 @@ underdotting, thus reinstating the words "just some" and
     unitario o combinado, p.ej. un texto en verso o teatral, una recopilación de ensayos, una
     novela, un diccionario, o una fragmento de corpus.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">contiene un unico testo di qualsiasi tipo, sia esso
     unitario o composito, per esempio un testo in versi o teatrale, una raccolta di saggi, un
-    romanzo, un dizionario, o una porzione di corpus</desc><classes><memberOf key="model.resource"/></classes><content><elementRef key="body" minOccurs="1" maxOccurs="1"/></content><constraintSpec ident="source-within-test" scheme="schematron">
+    romanzo, un dizionario, o una porzione di corpus</desc><classes><memberOf key="model.resource"/></classes><content><elementRef key="body" minOccurs="1" maxOccurs="1"/></content><constraintSpec ident="source-within-text" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:text">
                 <sch:assert test="count(.//@source) ge 1">At least one descendent element of &lt;text&gt; must have a @source attribute (@source attributes point to the @xml:id on a &lt;bibl&gt; or &lt;listBibl&gt;).</sch:assert>

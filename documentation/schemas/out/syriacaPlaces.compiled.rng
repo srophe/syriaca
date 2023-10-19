@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-19T20:59:00Z. .
+Schema generated from ODD source 2023-10-19T22:25:03Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -3338,12 +3338,16 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <ref name="tei_att.global.change.attribute.change"/>
          <ref name="tei_att.global.source.attribute.source"/>
          <attribute name="type">
-            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The <code xmlns="http://www.w3.org/1999/xhtml">@type</code> attribute on <code xmlns="http://www.w3.org/1999/xhtml">&lt;idno&gt;</code> defines the kind of identifier contained in the text value. In the Gazetteer, the only type of <code xmlns="http://www.w3.org/1999/xhtml">&lt;idno&gt;</code> used is "URI".</a:documentation>
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">The <code xmlns="http://www.w3.org/1999/xhtml">@type</code> attribute on <code xmlns="http://www.w3.org/1999/xhtml">&lt;idno&gt;</code> defines the kind of identifier contained in the text value.</a:documentation>
             <choice>
-               <value>URI</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A Uniform Resource Identifier.</a:documentation>
                <value>deprecated</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">For URIs that are no longer in use.</a:documentation>
+               <value>FIEY</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">For identifiers from Fiey.</a:documentation>
+               <value>PLRE</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">For identifiers from the Prosopography of the Later Roman Empire.</a:documentation>
+               <value>URI</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A Uniform Resource Identifier.</a:documentation>
             </choice>
          </attribute>
          <empty/>
@@ -4591,17 +4595,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-state-documentation-on-state-constraint-rule-92">
-            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:srophe="https://srophe.app"
-                      context="//tei:place/tei:state">
-               <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
-               <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
-            </sch:rule>
-         </pattern>
-         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-state-state-type-existence-constraint-rule-93">
+                  id="syriacaPlaces-state-state-type-existence-constraint-rule-92">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4618,7 +4612,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-state-state-type-confession-constraint-rule-94">
+                  id="syriacaPlaces-state-state-type-confession-constraint-rule-93">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4640,6 +4634,16 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                   The acceptable values of @ref are 'http://syriaca.org/documentation/confessions.xml' followed by one of the following:
                   <sch:value-of select="string-join($confessionPtrs, '; ')"/>
                </sch:assert>
+            </sch:rule>
+         </pattern>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="syriacaPlaces-state-documentation-on-state-constraint-rule-95">
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="//tei:text//tei:state">
+               <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
+               <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
             </sch:rule>
          </pattern>
          <ref name="tei_att.canonical.attributes"/>
@@ -4739,7 +4743,7 @@ Sample values include: 1] TEI; 2] DBK (docbook); 3] XX (unknown); 4] Schematron;
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(text) contains a single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample. [4. Default Text Structure 15.1. Varieties of Composite Text]</a:documentation>
          <ref name="tei_body"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-text-source-within-test-constraint-rule-96">
+                  id="syriacaPlaces-text-source-within-text-constraint-rule-96">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"

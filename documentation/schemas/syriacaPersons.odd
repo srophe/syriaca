@@ -127,7 +127,18 @@
         
         
         <elementSpec ident="event" module="namesdates" mode="change">
-          <!-- compare syriacaPlaces.odd for possible development -->
+          <attList>
+            <attDef ident="type" mode="change" usage="req">
+              <valList type="semi" mode="replace">
+                <valItem ident="attestation">
+                  <desc>Used for events that attest to something about the person.</desc>
+                </valItem>
+                <valItem ident="veneration">
+                  <desc>Used for events that indicate the veneration of a person.</desc>
+                </valItem>
+              </valList>
+            </attDef>
+          </attList>
           
         </elementSpec>
         
@@ -144,6 +155,14 @@
               <textNode/>
             </sequence>
           </content>
+          <constraintSpec ident="documentation-on-floruit" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:text//tei:floruit">
+                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
           <attList>
             <attDef ident="xml:id" mode="delete"/>
             <attDef ident="n" mode="delete"/>
@@ -164,6 +183,14 @@
          <content>
            <textNode/>
          </content>
+         <constraintSpec ident="documentation-on-gender" scheme="schematron">
+           <constraint>
+             <sch:rule context="tei:text//tei:floruit">
+               <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
+               <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
+             </sch:rule>
+           </constraint>
+         </constraintSpec>
          <attList>
            <attDef ident="xml:id" mode="delete"/>
            <attDef ident="n" mode="delete"/>
@@ -252,6 +279,33 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
+          <attList>
+            <attDef ident="type" mode="change" usage="req">
+              <valList type="closed" mode="replace">
+                <valItem ident="abstract">
+                  <desc>Used for the abstract of the entity.</desc>
+                </valItem>
+                <valItem ident="corrigenda">
+                  <desc>Used to correct a piece of data.</desc>
+                </valItem>
+                <valItem ident="deprecation">
+                  <desc>Used to indicate the deprecation of a piece of data.</desc>
+                </valItem>
+                <valItem ident="disambiguation">
+                  <desc>Used to disambiguate between two similar entities.</desc>
+                </valItem>
+                <valItem ident="discursive">
+                  <desc>Used to discuss some aspect of the record, often with reference to scholarly debates.</desc>
+                </valItem>
+                <valItem ident="incerta">
+                  <desc>Used to indicate that the content of a note is uncertain.</desc>
+                </valItem>
+                <valItem ident="misc">
+                  <desc>Used for notes that do not fit into another category.</desc>
+                </valItem>
+              </valList>
+            </attDef>
+          </attList>
         </elementSpec>
         
         
@@ -658,7 +712,21 @@
         
         
         <elementSpec ident="state" module="namesdates" mode="change">
-          
+          <attList>
+            <attDef ident="type" mode="replace" usage="req">
+              <valList type="closed" mode="replace">
+                <valItem ident="occupation">
+                  <desc>Used to indicate an occupation ascribed to a person.</desc>
+                </valItem>
+                <valItem ident="religious-affiliation">
+                  <desc>Used to indicate a religious affiliation ascribed to a person.</desc>
+                </valItem>
+                <valItem ident="status">
+                  <desc>Used to indicate a socio-economic status ascribed to a person.</desc>
+                </valItem>
+              </valList>
+            </attDef>
+          </attList>
         </elementSpec>
         
         

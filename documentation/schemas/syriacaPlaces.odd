@@ -142,20 +142,7 @@
         
         
         <elementSpec ident="idno" module="header" mode="change">
-          <attList>
-            <attDef ident="type" mode="change" usage="req">
-              <desc>The <att>type</att> attribute on <gi>idno</gi> defines the kind of identifier
-                contained in the text value. In the Gazetteer, the only type of <gi>idno</gi> used is "URI".</desc>
-              <valList mode="replace" type="closed">
-                <valItem ident="URI">
-                  <desc>A Uniform Resource Identifier.</desc>
-                </valItem>
-                <valItem ident="deprecated">
-                  <desc>For URIs that are no longer in use.</desc>
-                </valItem>
-              </valList>
-            </attDef>
-          </attList>
+          
         </elementSpec>
         
         
@@ -702,14 +689,6 @@
                   The required @xml:id must be 'confession<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
                 </sch:assert>
                 <sch:report test="preceding-sibling::element()[@xml:id = $id]">This @xml:id is already in use.</sch:report>
-              </sch:rule>
-            </constraint>
-          </constraintSpec>
-          <constraintSpec ident="documentation-on-state" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:place/tei:state">
-                <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
-                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>

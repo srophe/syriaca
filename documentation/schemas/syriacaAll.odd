@@ -859,6 +859,24 @@
             <attDef ident="resp" mode="delete"/>
             <attDef ident="rend" mode="delete"/>
             <attDef ident="corresp" mode="delete"/>
+            <attDef ident="type" mode="change" usage="req">
+              <desc>The <att>type</att> attribute on <gi>idno</gi> defines the kind of identifier contained in the text value.</desc>
+              <valList mode="replace" type="closed">
+                <valItem ident="deprecated">
+                  <desc>For URIs that are no longer in use.</desc>
+                </valItem>
+                <valItem ident="FIEY">
+                  <desc>For identifiers from Fiey.</desc>
+                </valItem>
+                <valItem ident="PLRE">
+                  <desc>For identifiers from the Prosopography of the Later Roman Empire.</desc>
+                </valItem>
+                <valItem ident="URI">
+                  <desc>A Uniform Resource Identifier.</desc>
+                </valItem>
+                
+              </valList>
+            </attDef>
           </attList>
         </elementSpec>
         
@@ -1365,6 +1383,14 @@
               <elementRef key="precision" minOccurs="0" maxOccurs="unbounded"/>
             </sequence>
           </content>
+          <constraintSpec ident="documentation-on-state" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:text//tei:state">
+                <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
           <attList>
             <attDef ident="key" mode="delete"/>
             <attDef ident="subtype" mode="delete"/>
@@ -1390,7 +1416,7 @@
           <content>
             <elementRef key="body" minOccurs="1" maxOccurs="1"/>
           </content>
-          <constraintSpec ident="source-within-test" scheme="schematron">
+          <constraintSpec ident="source-within-text" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:text">
                 <sch:assert test="count(.//@source) ge 1">At least one descendent element of &lt;text&gt; must have a @source attribute (@source attributes point to the @xml:id on a &lt;bibl&gt; or &lt;listBibl&gt;).</sch:assert>
