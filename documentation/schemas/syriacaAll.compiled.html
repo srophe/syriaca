@@ -15825,6 +15825,9 @@ element path
                               which reqires
                               the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
                               &lt;/sch:assert&gt;
+                              &lt;/sch:rule&gt;
+                              &lt;sch:rule context="//tei:persName[ancestor::tei:desc][ancestor::tei:note]"&gt;
+                              &lt;sch:assert test="@ref"&gt;This &lt;persName&gt; requires a @ref attribute.&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
                      </tr>
@@ -16660,6 +16663,9 @@ element place
                               which reqires
                               the form 'http://syriaca.org/place/{\d+}' (where {\d+} is a number).
                               &lt;/sch:assert&gt;
+                              &lt;sch:rule context="//tei:placeName[ancestor::tei:desc][ancestor::tei:note]"&gt;
+                               &lt;sch:assert test="@ref"&gt;This &lt;placeName&gt; requires a @ref attribute.&lt;/sch:assert&gt;
+                              &lt;/sch:rule&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
                      </tr>
@@ -30684,7 +30690,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e123177" class="anchorlink">�
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-10-19T20:24:27Z.
+	       on 2023-10-19T20:54:20Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>
