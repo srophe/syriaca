@@ -951,17 +951,6 @@
             <memberOf key="att.typed" mode="delete"/>
             <memberOf key="att.written" mode="delete"/>
           </classes>
-          <constraintSpec ident="source-in-text" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:text//@source">
-                <sch:let name="biblIDs" value="//tei:body//tei:bibl/@xml:id | //tei:body//tei:listBibl/@xml:id"/>
-                <sch:let name="sourceValues" value="for $i in $biblIDs return concat('#', $i)"/>
-                <sch:assert test="                   every $i in (tokenize(., ' '))                   satisfies $i = $sourceValues"> A @source attribute must point to an @xml:id attribute on a &lt;bibl&gt;
-                  element or a &lt;listBibl&gt; element. Multiple values are allowed and must be separated by a blank space.
-                  Acceptable values include: <sch:value-of select="string-join($sourceValues, ' | ')"/>. </sch:assert>
-              </sch:rule>
-            </constraint>
-          </constraintSpec>
           <exemplum>
             <egXML xmlns="http://www.tei-c.org/ns/Examples">
               <text>

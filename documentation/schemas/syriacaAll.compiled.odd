@@ -1383,7 +1383,7 @@ associated with a dated element, at the time indicated.</desc>
                 <sch:let name="biblIDs" value="//tei:text//tei:bibl/@xml:id"/>
                 <sch:let name="biblIDpointers" value="for $i in $biblIDs return concat('#', $i)"/>
                 <sch:assert test="                  every $i in tokenize(., ' ')                  satisfies $i = $biblIDpointers">
-                  This @change attribute can contain one or more of the following <sch:value-of select="$biblIDpointers"/>.
+                  This @source attribute can contain one or more of the following <sch:value-of select="$biblIDpointers"/>.
                 </sch:assert>
               </sch:rule>
             </constraint>
@@ -5226,6 +5226,24 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
                 </sch:assert>
               </sch:rule>
             </constraint>
+          </constraintSpec><constraintSpec ident="documentation-on-desc" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:place/tei:desc">
+                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:place/tei:desc[not(tei:quote)]">
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:event/tei:desc">
+                <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;event&gt; element.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:location/tei:desc">
+                <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;location&gt; element.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:state/tei:desc">
+                <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;state&gt; element.</sch:report>
+              </sch:rule>
+            </constraint>
           </constraintSpec><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="deprecationInfo-only-in-deprecated" scheme="schematron">
     <desc versionDate="2018-09-13" xml:lang="en">A <gi>desc</gi> with
     a <att>type</att> of <val>deprecationInfo</val> should only occur
@@ -6066,7 +6084,16 @@ attributes @target and @cRef may be supplied on <name/>.</report>
   </remarks><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0">
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#COXR">3.7. Simple Links and Cross-References</ref>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SAPT">16.1. Links</ref>
-  </listRef></elementSpec><elementSpec rend="change" module="core" ident="note"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en" versionDate="2017-06-25">note</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-25" xml:lang="de">Anmerkung</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2005-01-14" xml:lang="en">contains a note or annotation.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">contient une note ou une annotation</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">contiene una nota o aclaración</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">包含附註或註釋。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">contiene una nota o un'annotazione</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2006-10-28" xml:lang="ja">注釈・コメント。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-25" xml:lang="de">enthält eine Anmerkung oder Annotation.</desc><classes><memberOf key="att.global"/><memberOf key="model.noteLike"/><memberOf key="att.pointing"/><memberOf key="att.typed"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="bibl" minOccurs="0" maxOccurs="unbounded"/><elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/><elementRef key="idno" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="quote" minOccurs="0" maxOccurs="unbounded"/><elementRef key="ref" minOccurs="0" maxOccurs="unbounded"/><elementRef key="title" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="xmlLang-in-note" scheme="schematron">
+  </listRef></elementSpec><elementSpec rend="change" module="core" ident="note"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en" versionDate="2017-06-25">note</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-25" xml:lang="de">Anmerkung</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2005-01-14" xml:lang="en">contains a note or annotation.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">contient une note ou une annotation</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">contiene una nota o aclaración</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">包含附註或註釋。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">contiene una nota o un'annotazione</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2006-10-28" xml:lang="ja">注釈・コメント。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-25" xml:lang="de">enthält eine Anmerkung oder Annotation.</desc><classes><memberOf key="att.global"/><memberOf key="model.noteLike"/><memberOf key="att.pointing"/><memberOf key="att.typed"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="bibl" minOccurs="0" maxOccurs="unbounded"/><elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/><elementRef key="idno" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="quote" minOccurs="0" maxOccurs="unbounded"/><elementRef key="ref" minOccurs="0" maxOccurs="unbounded"/><elementRef key="title" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><constraintSpec ident="documentation-on-note" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:place/tei:note">
+                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:place/tei:note[not(tei:quote)]">
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="xmlLang-in-note" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:body//tei:note">
                 <sch:assert test="./@xml:lang"> All &lt;note&gt; elements in the &lt;body&gt; must
@@ -13085,9 +13112,16 @@ deprecated.
                 <sch:report test="preceding-sibling::element()[@xml:id = $id]">This @xml:id is already in use.</sch:report>
               </sch:rule>
             </constraint>
-          </constraintSpec><attList><attDef ident="subtype" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="source" mode="change" usage="req">
-              <desc>The <gi>event</gi> element requires a <att>source</att> attribute.</desc>
-            </attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+          </constraintSpec><constraintSpec ident="documentation-on-event" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:place/tei:event">
+                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:place/tei:event[not(tei:quote)]">
+                <sch:assert test="@source">A @source attribute must be supplied.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><attList><attDef ident="subtype" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
       <person>
         <event type="mat" when="1972-10-12">

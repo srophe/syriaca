@@ -318,7 +318,7 @@
                 <sch:let name="biblIDs" value="//tei:text//tei:bibl/@xml:id"/>
                 <sch:let name="biblIDpointers" value="for $i in $biblIDs return concat('#', $i)"/>
                 <sch:assert test="                  every $i in tokenize(., ' ')                  satisfies $i = $biblIDpointers">
-                  This @change attribute can contain one or more of the following <sch:value-of select="$biblIDpointers"/>.
+                  This @source attribute can contain one or more of the following <sch:value-of select="$biblIDpointers"/>.
                 </sch:assert>
               </sch:rule>
             </constraint>
@@ -670,6 +670,26 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
+          <constraintSpec ident="documentation-on-desc" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:place/tei:desc">
+                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:place/tei:desc[not(tei:quote)]">
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:event/tei:desc">
+                <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;event&gt; element.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:location/tei:desc">
+                <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;location&gt; element.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:state/tei:desc">
+                <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;state&gt; element.</sch:report>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          
           <attList>
             <attDef ident="subtype" mode="delete"/>
             <attDef ident="n" mode="delete"/>
@@ -731,6 +751,16 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
+          <constraintSpec ident="documentation-on-event" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:place/tei:event">
+                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:place/tei:event[not(tei:quote)]">
+                <sch:assert test="@source">A @source attribute must be supplied.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
           <attList>
             <attDef ident="subtype" mode="delete"/>
             <attDef ident="xml:lang" mode="delete"/>
@@ -741,9 +771,6 @@
             <attDef ident="resp" mode="delete"/>
             <attDef ident="rend" mode="delete"/>
             <attDef ident="corresp" mode="delete"/>
-            <attDef ident="source" mode="change" usage="req">
-              <desc>The <gi>event</gi> element requires a <att>source</att> attribute.</desc>
-            </attDef>
           </attList>
         </elementSpec>
         
@@ -918,6 +945,16 @@
               <textNode/>
             </sequence>
           </content>
+          <constraintSpec ident="documentation-on-note" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:place/tei:note">
+                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:place/tei:note[not(tei:quote)]">
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
           <attList>
             <attDef ident="subtype" mode="delete"/>
             <attDef ident="n" mode="delete"/>

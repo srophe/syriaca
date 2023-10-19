@@ -781,7 +781,7 @@ associated with a dated element, at the time indicated.</desc>
                 <sch:let name="biblIDs" value="//tei:text//tei:bibl/@xml:id"/>
                 <sch:let name="biblIDpointers" value="for $i in $biblIDs return concat('#', $i)"/>
                 <sch:assert test="                  every $i in tokenize(., ' ')                  satisfies $i = $biblIDpointers">
-                  This @change attribute can contain one or more of the following <sch:value-of select="$biblIDpointers"/>.
+                  This @source attribute can contain one or more of the following <sch:value-of select="$biblIDpointers"/>.
                 </sch:assert>
               </sch:rule>
             </constraint>
@@ -3576,25 +3576,7 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
     dell'applicazione di un elemento, attributo, o valore di attributo.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-04" xml:lang="de">enthält eine kurze
   Beschreibung des Objekts, das von seinem übergeordneten Element
   annotiert wird, üblicherweise einem Dokumentationselement oder einer
-  Einheit.</desc><classes><memberOf key="att.global"/><memberOf key="model.descLike"/><memberOf key="att.typed"/><memberOf key="model.labelLike"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="choice" minOccurs="0" maxOccurs="unbounded"/><elementRef key="date" minOccurs="0" maxOccurs="unbounded"/><elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/><elementRef key="measure" minOccurs="0" maxOccurs="unbounded"/><elementRef key="offset" minOccurs="0" maxOccurs="unbounded"/><elementRef key="orgName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="quote" minOccurs="0" maxOccurs="1"/><elementRef key="title" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><constraintSpec ident="documentation-on-desc" scheme="schematron">
-            <constraint>
-              <sch:rule context="tei:place/tei:desc">
-                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
-              </sch:rule>
-              <sch:rule context="tei:place/tei:desc[not(tei:quote)]">
-                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:event/tei:desc">
-                <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;event&gt; element.</sch:report>
-              </sch:rule>
-              <sch:rule context="tei:location/tei:desc">
-                <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;location&gt; element.</sch:report>
-              </sch:rule>
-              <sch:rule context="tei:state/tei:desc">
-                <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;state&gt; element.</sch:report>
-              </sch:rule>
-            </constraint>
-          </constraintSpec><constraintSpec ident="confession-desc" scheme="schematron">
+  Einheit.</desc><classes><memberOf key="att.global"/><memberOf key="model.descLike"/><memberOf key="att.typed"/><memberOf key="model.labelLike"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="choice" minOccurs="0" maxOccurs="unbounded"/><elementRef key="date" minOccurs="0" maxOccurs="unbounded"/><elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/><elementRef key="measure" minOccurs="0" maxOccurs="unbounded"/><elementRef key="offset" minOccurs="0" maxOccurs="unbounded"/><elementRef key="orgName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="quote" minOccurs="0" maxOccurs="1"/><elementRef key="title" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><constraintSpec ident="confession-desc" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:state/tei:desc">
                 
@@ -3627,6 +3609,24 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
                   There can only be one abstract in a given language. 
                   Each abstract (&lt;desc&gt; element of @type="abstract") must have a unique @xml:lang attribute.
                 </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="documentation-on-desc" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:place/tei:desc">
+                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:place/tei:desc[not(tei:quote)]">
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:event/tei:desc">
+                <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;event&gt; element.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:location/tei:desc">
+                <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;location&gt; element.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:state/tei:desc">
+                <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;state&gt; element.</sch:report>
               </sch:rule>
             </constraint>
           </constraintSpec><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="deprecationInfo-only-in-deprecated" scheme="schematron">
@@ -4446,16 +4446,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
   </remarks><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0">
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#COXR">3.7. Simple Links and Cross-References</ref>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SAPT">16.1. Links</ref>
-  </listRef></elementSpec><elementSpec rend="change" module="core" ident="note"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en" versionDate="2017-06-25">note</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-25" xml:lang="de">Anmerkung</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2005-01-14" xml:lang="en">contains a note or annotation.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">contient une note ou une annotation</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">contiene una nota o aclaración</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">包含附註或註釋。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">contiene una nota o un'annotazione</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2006-10-28" xml:lang="ja">注釈・コメント。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-25" xml:lang="de">enthält eine Anmerkung oder Annotation.</desc><classes><memberOf key="att.global"/><memberOf key="model.noteLike"/><memberOf key="att.pointing"/><memberOf key="att.typed"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="bibl" minOccurs="0" maxOccurs="unbounded"/><elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/><elementRef key="idno" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="quote" minOccurs="0" maxOccurs="unbounded"/><elementRef key="ref" minOccurs="0" maxOccurs="unbounded"/><elementRef key="title" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><constraintSpec ident="documentation-on-note" scheme="schematron">
-            <constraint>
-              <sch:rule context="tei:place/tei:note">
-                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
-              </sch:rule>
-              <sch:rule context="tei:place/tei:note[not(tei:quote)]">
-                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
-              </sch:rule>
-            </constraint>
-          </constraintSpec><constraintSpec ident="note-type-deprecation" scheme="schematron"> 
+  </listRef></elementSpec><elementSpec rend="change" module="core" ident="note"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en" versionDate="2017-06-25">note</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-25" xml:lang="de">Anmerkung</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2005-01-14" xml:lang="en">contains a note or annotation.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">contient une note ou une annotation</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">contiene una nota o aclaración</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">包含附註或註釋。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">contiene una nota o un'annotazione</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2006-10-28" xml:lang="ja">注釈・コメント。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-25" xml:lang="de">enthält eine Anmerkung oder Annotation.</desc><classes><memberOf key="att.global"/><memberOf key="model.noteLike"/><memberOf key="att.pointing"/><memberOf key="att.typed"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="bibl" minOccurs="0" maxOccurs="unbounded"/><elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/><elementRef key="idno" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="quote" minOccurs="0" maxOccurs="unbounded"/><elementRef key="ref" minOccurs="0" maxOccurs="unbounded"/><elementRef key="title" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><constraintSpec ident="note-type-deprecation" scheme="schematron"> 
             <constraint>
               <sch:rule context="//tei:body//tei:note[@type='deprecation']">
                 <sch:assert test="./@target">
@@ -4492,6 +4483,15 @@ attributes @target and @cRef may be supplied on <name/>.</report>
                   separated by a space: 
                   <sch:value-of select="string-join($IDvalues, ' | ')"/>.
                 </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="documentation-on-note" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:place/tei:note">
+                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:place/tei:note[not(tei:quote)]">
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="xmlLang-in-note" scheme="schematron">
@@ -7113,16 +7113,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
   </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="event"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2008-12-09">event</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">évènement</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-08-01" xml:lang="en">contains data relating to any kind of significant event associated with a person, place, or organization.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">개인, 장소, 또는 조직과 관련된 중요한 사건에 해당하는 데이터를 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">任何未必是口說的或溝通上的現象或發生情況，例如偶然的噪音或其他影響溝通的事件。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">人生における特定の重要事象の解説を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">contient des données liées à tout type d'évènement significatif dans l'existence d'une personne, d'un
         lieu ou d'une organisation.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">cualquier fenómeno o evento no necesariamente vocal o comunicativo, como ruidos accidentales u otros
         fenómenos que inciden en la comunicación en acto.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">qualsiasi fenomeno o evento non necessariamente vocale o comunicativo, come rumori accidentali o altri
-        fenomeni che incidano sulla comunicazione in atto</desc><classes><memberOf key="att.global"/><memberOf key="att.datable"/><memberOf key="att.typed"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="desc" minOccurs="1" maxOccurs="1"/><elementRef key="link" minOccurs="0" maxOccurs="unbounded"/><elementRef key="precision" minOccurs="0" maxOccurs="unbounded"/></sequence></content><constraintSpec ident="documentation-on-event" scheme="schematron">
-            <constraint>
-              <sch:rule context="tei:place/tei:event">
-                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
-              </sch:rule>
-              <sch:rule context="tei:place/tei:event[not(tei:quote)]">
-                <sch:assert test="@source">A @source attribute must be supplied.</sch:assert>
-              </sch:rule>
-            </constraint>
-          </constraintSpec><constraintSpec ident="xmlID-on-event" scheme="schematron">
+        fenomeni che incidano sulla comunicazione in atto</desc><classes><memberOf key="att.global"/><memberOf key="att.datable"/><memberOf key="att.typed"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="desc" minOccurs="1" maxOccurs="1"/><elementRef key="link" minOccurs="0" maxOccurs="unbounded"/><elementRef key="precision" minOccurs="0" maxOccurs="unbounded"/></sequence></content><constraintSpec ident="xmlID-on-event" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:text//tei:event[@type='attestation']">
                 <sch:let name="docURIno" value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(), '.+?(\d+).+', '$1')"/>
@@ -7131,6 +7122,15 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                   The required @xml:id must be 'attestation<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
                 </sch:assert>
                 <sch:report test="preceding-sibling::element()[@xml:id = $id]">This @xml:id is already in use.</sch:report>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="documentation-on-event" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:place/tei:event">
+                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:place/tei:event[not(tei:quote)]">
+                <sch:assert test="@source">A @source attribute must be supplied.</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec><attList><attDef ident="type" mode="change" usage="req">
@@ -7143,9 +7143,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                   <desc>Any event that does something other than attest to the entity described in the document</desc>
                 </valItem>
               </valList>
-            </attDef><attDef ident="subtype" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="source" mode="change" usage="req">
-              <desc>The <gi>event</gi> element requires a <att>source</att> attribute.</desc>
-            </attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+            </attDef><attDef ident="subtype" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
       <person>
         <event type="mat" when="1972-10-12">

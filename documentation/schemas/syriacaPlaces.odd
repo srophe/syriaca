@@ -97,25 +97,6 @@
         
         
         <elementSpec ident="desc" module="core" mode="change">
-          <constraintSpec ident="documentation-on-desc" scheme="schematron">
-            <constraint>
-              <sch:rule context="tei:place/tei:desc">
-                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
-              </sch:rule>
-              <sch:rule context="tei:place/tei:desc[not(tei:quote)]">
-                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:event/tei:desc">
-                <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;event&gt; element.</sch:report>
-              </sch:rule>
-              <sch:rule context="tei:location/tei:desc">
-                <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;location&gt; element.</sch:report>
-              </sch:rule>
-              <sch:rule context="tei:state/tei:desc">
-                <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;state&gt; element.</sch:report>
-              </sch:rule>
-            </constraint>
-          </constraintSpec>
           <constraintSpec ident="confession-desc" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:state/tei:desc">
@@ -143,16 +124,6 @@
         
         
         <elementSpec ident="event" module="namesdates" mode="change">
-          <constraintSpec ident="documentation-on-event" scheme="schematron">
-            <constraint>
-              <sch:rule context="tei:place/tei:event">
-                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
-              </sch:rule>
-              <sch:rule context="tei:place/tei:event[not(tei:quote)]">
-                <sch:assert test="@source">A @source attribute must be supplied.</sch:assert>
-              </sch:rule>
-            </constraint>
-          </constraintSpec>
           <attList>
             <attDef ident="type" mode="change" usage="req">
               <desc>The <gi>event</gi> element requires a <att>type</att> attribute.</desc>
@@ -286,16 +257,6 @@
         
         
         <elementSpec ident="note" module="core" mode="change">
-          <constraintSpec ident="documentation-on-note" scheme="schematron">
-            <constraint>
-              <sch:rule context="tei:place/tei:note">
-                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
-              </sch:rule>
-              <sch:rule context="tei:place/tei:note[not(tei:quote)]">
-                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
-              </sch:rule>
-            </constraint>
-          </constraintSpec>
           <constraintSpec ident="note-type-deprecation" scheme="schematron"> <!-- Changes to relation elements will require this to change. -->
             <constraint>
               <sch:rule context="//tei:body//tei:note[@type='deprecation']">
