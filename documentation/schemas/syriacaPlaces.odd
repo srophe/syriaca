@@ -94,18 +94,7 @@
         
         
         <elementSpec ident="desc" module="core" mode="change">
-          <constraintSpec ident="xmlID-on-desc-abstract" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:text//tei:desc[@type='abstract']">
-                <sch:let name="docURIno" value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(), '.+?(\d+).+', '$1')"/>
-                <sch:let name="id" value="@xml:id"/>
-                <sch:assert test="matches(./@xml:id, concat('abstract', $docURIno, '-', '\d+$'))">
-                  The required @xml:id must be 'abstract<sch:value-of select="$docURIno"/>-{\d+}' (where {\d+} is a number).
-                </sch:assert>
-                <sch:report test="preceding-sibling::element()[@xml:id = $id]">This @xml:id is already in use.</sch:report>
-              </sch:rule>
-            </constraint>
-          </constraintSpec><constraintSpec ident="documentation-on-desc" scheme="schematron">
+          <constraintSpec ident="documentation-on-desc" scheme="schematron">
             <constraint>
               <sch:rule context="tei:place/tei:desc">
                 <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
