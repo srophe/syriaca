@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-20T14:23:28Z. .
+Schema generated from ODD source 2023-10-20T14:47:58Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -2156,7 +2156,15 @@ Normalization 12. Critical Apparatus]</a:documentation>
    <define name="tei_date">
       <element name="date">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(date) contains a date in any format. [3.6.4. Dates and Times 2.2.4. Publication, Distribution, Licensing, etc. 2.6. The Revision Description 3.12.2.4. Imprint, Size of a Document, and Reprint Information 15.2.3. The Setting Description 13.4. Dates]</a:documentation>
-         <text/>
+         <interleave>
+            <zeroOrMore>
+               <ref name="tei_persName"/>
+            </zeroOrMore>
+            <zeroOrMore>
+               <ref name="tei_placeName"/>
+            </zeroOrMore>
+            <text/>
+         </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="syriacaPersons-date-documentation-on-date-constraint-rule-24">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
