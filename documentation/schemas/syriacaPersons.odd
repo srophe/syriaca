@@ -104,6 +104,21 @@
         
         
         
+        <elementSpec ident="date" module="namesdates" mode="change">
+          <constraintSpec ident="documentation-on-date" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:floruit/tei:date">
+                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:floruit/tei:date">
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+        </elementSpec>
+        
+        
+        
         <elementSpec ident="death" module="namesdates" mode="change">
           <classes mode="change">
             <memberOf key="att.datable" mode="delete"/>
@@ -145,6 +160,15 @@
         
         <elementSpec ident="floruit" module="namesdates" mode="change">
           <classes mode="change">
+            <memberOf key="att.global" mode="delete"/>
+            <memberOf key="att.global.rendition" mode="delete"/>
+            <memberOf key="att.global.linking" mode="delete"/>
+            <memberOf key="att.global.analytic" mode="delete"/>
+            <memberOf key="att.global.responsibility" mode="delete"/>
+            <memberOf key="att.global.source" mode="delete"/>
+            <memberOf key="att.datable" mode="delete"/>
+            <memberOf key="att.datable.w3c" mode="delete"/>
+            <memberOf key="att.datable.custom" mode="delete"/>
             <memberOf key="att.dimensions" mode="delete"/>
             <memberOf key="att.ranging" mode="delete"/>
           </classes>
@@ -155,23 +179,6 @@
               <textNode/>
             </sequence>
           </content>
-          <constraintSpec ident="documentation-on-floruit" scheme="schematron">
-            <constraint>
-              <sch:rule context="tei:text//tei:floruit">
-                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
-                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
-              </sch:rule>
-            </constraint>
-          </constraintSpec>
-          <attList>
-            <attDef ident="xml:id" mode="delete"/>
-            <attDef ident="n" mode="delete"/>
-            <attDef ident="ana" mode="delete"/>
-            <attDef ident="change" mode="delete"/>
-            <attDef ident="rend" mode="delete"/>
-            <attDef ident="corresp" mode="delete"/>
-            <attDef ident="previous" mode="delete"/>
-          </attList>
         </elementSpec>
         
         
