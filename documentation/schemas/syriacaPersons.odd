@@ -38,7 +38,7 @@
       <schemaSpec ident="syriacaPersons" prefix="tei_" source="syriacaAll.compiled.odd" xml:lang="en" defaultExceptions="http://www.tei-c.org/ns/1.0 teix:egXML​ http://www.example.org/ns/">
         <moduleRef key="tei"/>
         <moduleRef key="certainty" include="precision"/>
-        <moduleRef key="core" include="author bibl choice citedRange date desc editor foreign listBibl name note orig p ptr quote reg ref resp respStmt title"/>
+        <moduleRef key="core" include="author bibl biblScope choice citedRange date desc editor foreign listBibl name note orig p ptr quote reg ref resp respStmt title"/>
         <moduleRef key="header" include="authority availability catDesc category change classDecl edition editionStmt editorialDecl encodingDesc fileDesc funder idno interpretation langUsage licence principal profileDesc publicationStmt revisionDesc seriesStmt sourceDesc sponsor taxonomy teiHeader titleStmt"/>
         <moduleRef key="linking" include="link"/>
         <moduleRef key="namesdates" include="addName birth death event floruit forename gender listPerson listRelation orgName persName person personGrp placeName relation roleName state surname trait"/>
@@ -65,7 +65,22 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
-        </elementSpec>        
+        </elementSpec>
+        
+        
+        
+        <elementSpec ident="biblScope" module="core" mode="change">
+          <constraintSpec ident="biblScope-in-seriesStmt" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:seriesStmt/tei:biblScope/@unit">
+                <sch:assert test=". = 'volume'">The @unit must be "volume".</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <attList>
+            <attDef ident="unit" mode="change" usage="req"/>
+          </attList>
+        </elementSpec>
         
         
         

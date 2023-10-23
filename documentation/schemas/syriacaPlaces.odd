@@ -71,6 +71,20 @@
           </constraintSpec>
         </elementSpec>
         
+        
+        
+        <elementSpec ident="biblScope" module="core" mode="change">
+          <constraintSpec ident="biblScope-in-seriesStmt" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:seriesStmt/tei:biblScope/@unit">
+                <sch:assert test=". = 'volume'">The @unit must be "volume".</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <attList>
+            <attDef ident="unit" mode="change" usage="req"/>
+          </attList>
+        </elementSpec>
              
         
         
