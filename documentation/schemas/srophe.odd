@@ -695,17 +695,10 @@
 
         <elementSpec ident="biblScope" module="core" mode="change">
           <content>
-            <elementRef key="title"/>
-            <elementRef key="idno"/>
+            <elementRef key="title" minOccurs="0" maxOccurs="unbounded"/>
+            <elementRef key="idno" minOccurs="0" maxOccurs="unbounded"/>
+            <textNode/>
           </content>
-          <attList>
-            <attDef ident="unit" mode="change" usage="req">
-              <valList type="closed" mode="replace">
-                <valItem ident="volume"/>
-              </valList>
-            </attDef>
-            <attDef ident="n" mode="change" usage="req"/>
-          </attList>
         </elementSpec>
 
         <elementSpec ident="sourceDesc" module="header" mode="change">

@@ -6770,11 +6770,7 @@ doit pas être utilisé.</p>
     como por ejemplo los números de página u otra subdivisión numerada en la obra mayor.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">definisce l'estensione di un riferimento
     bibliografico, per esempio mediante una lista di numeri di pagina, o il titolo di una parte di
     un'opera più ampia.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-13" xml:lang="de">grenzt den Geltungsbereich einer bibliografischen Referenz ein, zum Beispiel in Form von
-    Seitenangaben oder benannten Unterabschnitten eines umfangreicheren Werks.</desc><classes xmlns:rng="http://relaxng.org/ns/structure/1.0"><memberOf key="att.global"/><memberOf key="att.citing"/></classes><content xmlns:rng="http://relaxng.org/ns/structure/1.0"><elementRef key="title"/><elementRef key="idno"/></content><attList><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="unit" mode="change" usage="req">
-              <valList type="closed" mode="replace">
-                <valItem ident="volume"/>
-              </valList>
-            </attDef><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="n" mode="change" usage="req"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
+    Seitenangaben oder benannten Unterabschnitten eines umfangreicheren Werks.</desc><classes xmlns:rng="http://relaxng.org/ns/structure/1.0"><memberOf key="att.global"/><memberOf key="att.citing"/></classes><content xmlns:rng="http://relaxng.org/ns/structure/1.0"><elementRef key="title" minOccurs="0" maxOccurs="unbounded"/><elementRef key="idno" minOccurs="0" maxOccurs="unbounded"/><textNode/></content><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
       <biblScope>pp 12–34</biblScope>
       <biblScope unit="page" from="12" to="34"/>
@@ -16737,16 +16733,6 @@ underdotting, thus reinstating the words "just some" and
             <constraint>
               <sch:rule context="//tei:text">
                 <sch:assert test="count(.//@source) ge 1">At least one descendent element of &lt;text&gt; must have a @source attribute (@source attributes point to the @xml:id on a &lt;bibl&gt; or &lt;listBibl&gt;).</sch:assert>
-              </sch:rule>
-            </constraint>
-          </constraintSpec><constraintSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="source-in-text" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:text//@source">
-                <sch:let name="biblIDs" value="//tei:body//tei:bibl/@xml:id | //tei:body//tei:listBibl/@xml:id"/>
-                <sch:let name="sourceValues" value="for $i in $biblIDs return concat('#', $i)"/>
-                <sch:assert test="                   every $i in (tokenize(., ' '))                   satisfies $i = $sourceValues"> A @source attribute must point to an @xml:id attribute on a &lt;bibl&gt;
-                  element or a &lt;listBibl&gt; element. Multiple values are allowed and must be separated by a blank space.
-                  Acceptable values include: <sch:value-of select="string-join($sourceValues, ' | ')"/>. </sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0">

@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-23T21:19:48Z. .
+Schema generated from ODD source 2023-10-23T21:27:34Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -3046,8 +3046,13 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
    <define name="tei_biblScope">
       <element name="biblScope">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(scope of bibliographic reference) defines the scope of a bibliographic reference, for example as a list of page numbers, or a named subdivision of a larger work. [3.12.2.5. Scopes and Ranges in Bibliographic Citations]</a:documentation>
-         <ref name="tei_title"/>
-         <ref name="tei_idno"/>
+         <zeroOrMore>
+            <ref name="tei_title"/>
+         </zeroOrMore>
+         <zeroOrMore>
+            <ref name="tei_idno"/>
+         </zeroOrMore>
+         <text/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="syriacaPlaces-biblScope-biblScope-in-seriesStmt-constraint-rule-46">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
@@ -4801,21 +4806,6 @@ Sample values include: 1] TEI; 2] DBK (docbook); 3] XX (unknown); 4] Schematron;
                <sch:assert test="count(.//@source) ge 1">At least one descendent element of &lt;text&gt; must have a @source attribute (@source attributes point to the @xml:id on a &lt;bibl&gt; or &lt;listBibl&gt;).</sch:assert>
             </sch:rule>
          </pattern>
-         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-text-source-in-text-constraint-rule-98">
-            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
-                      xmlns:rng="http://relaxng.org/ns/structure/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:srophe="https://srophe.app"
-                      context="//tei:text//@source">
-               <sch:let name="biblIDs"
-                        value="//tei:body//tei:bibl/@xml:id | //tei:body//tei:listBibl/@xml:id"/>
-               <sch:let name="sourceValues" value="for $i in $biblIDs return concat('#', $i)"/>
-               <sch:assert test="                   every $i in (tokenize(., ' '))                   satisfies $i = $sourceValues"> A @source attribute must point to an @xml:id attribute on a &lt;bibl&gt;
-                  element or a &lt;listBibl&gt; element. Multiple values are allowed and must be separated by a blank space.
-                  Acceptable values include: <sch:value-of select="string-join($sourceValues, ' | ')"/>. </sch:assert>
-            </sch:rule>
-         </pattern>
       </element>
    </define>
    <define name="tei_body">
@@ -4859,7 +4849,7 @@ Sample values include: 1] TEI; 2] DBK (docbook); 3] XX (unknown); 4] Schematron;
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="syriacaPlaces-att.global.change-change-att-values-constraint-rule-99">
+            id="syriacaPlaces-att.global.change-change-att-values-constraint-rule-98">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:srophe="https://srophe.app"
