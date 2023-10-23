@@ -666,10 +666,10 @@
                   The text node of this &lt;idno&gt; element must be "http://syriaca.org/bethqatraye'. 
                 </sch:assert>
               </sch:rule>
-              <sch:rule context="//tei:seriesStmt[tei:title='Beth Qaṭraye Gazetteer']/tei:biblScope/@n">
+              <sch:rule context="//tei:seriesStmt[tei:title='Beth Qaṭraye Gazetteer']">
                 <!-- Add an additional rule with appropriate context/assert if there are multiple monographs. -->
-                <sch:assert test=". = '1'">
-                  The @n attribute must be "1" since the Beth Qaṭraye Gazetteer is volume 1 of The Syriac Gazetteer.
+                <sch:assert test="tei:biblScope/@n = '1'">
+                  Requires a &lt;biblScope&gt; element with @n="1" since the "Beth Qaṭraye Gazetteer" is volume 1 of "The Syriac Gazetteer".
                 </sch:assert>
               </sch:rule>
             </constraint>

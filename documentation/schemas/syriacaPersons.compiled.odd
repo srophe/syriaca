@@ -5011,38 +5011,38 @@ définissant les droits d'utilisation.</desc><desc xmlns:rng="http://relaxng.org
             <constraint>
               <sch:rule context="//tei:seriesStmt//tei:title[@level='s']">
                 
-                <sch:assert test="matches(., 'The Syriac Biographical Dictionary') | matches(., 'Gateway to the Syriac Saints')">
-                  The text node of this &lt;title&gt; element must be "The Syriac Biographical Dictionary" or "Gateway to the Syriac Saints". 
+                <sch:assert test="./node() = 'The Syriac Biographical Dictionary' or ./node() = 'Gateway to the Syriac Saints'"> 
+                  The text node of this &lt;idno&gt; element must be "The Syriac Biographical Dictionary" or "Gateway to the Syriac Saints". 
                 </sch:assert>
               </sch:rule>
-              <sch:rule context="//tei:seriesStmt//tei:title[node() = 'The Syriac Biographical Dictionary']">
+              <sch:rule context="//tei:seriesStmt[tei:title = 'The Syriac Biographical Dictionary']/tei:idno">
                 
-                <sch:assert test="./following-sibling::tei:idno/node() = 'http://syriaca.org/persons'">
-                  A &lt;title&gt; containing "The Syriac Gazetteer" requires a following sibling &lt;idno&gt; element containing "http://syriaca.org/persons'. 
+                <sch:assert test="matches(., 'http://syriaca.org/persons')">
+                  A &lt;title&gt; containing "The Syriac Biographical Dictionary" requires a following sibling &lt;idno&gt; element containing "http://syriaca.org/persons'. 
                 </sch:assert>
               </sch:rule>
-              <sch:rule context="//tei:seriesStmt//tei:title[node() = 'Gateway to the Syriac Saints']">
+              <sch:rule context="//tei:seriesStmt[tei:title = 'Gateway to the Syriac Saints']/tei:idno">
                 
-                <sch:assert test="./following-sibling::tei:idno/node() = 'http://syriaca.org/saints'">
+                <sch:assert test="matches(., 'http://syriaca.org/saints')">
                   A &lt;title&gt; containing "Gateway to the Syriac Saints" requires a following sibling &lt;idno&gt; element containing "http://syriaca.org/saints'. 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt/tei:title[@level='m']">
-                <sch:assert test="matches(., 'Qadishe: A Guide to the Syriac Saints') | matches(., 'A Guide to Syriac Authors')">
+                <sch:assert test="./node() = 'Qadishe: A Guide to the Syriac Saints' or ./node() = 'A Guide to Syriac Authors'">
                   
-                  The text node of this &lt;title&gt; element must be "Qadishe: A Guide to the Syriac Saints" or "A Guide to Syriac Authors". 
+                  The text node of this &lt;idno&gt; element must be "Qadishe: A Guide to the Syriac Saints" or "A Guide to Syriac Authors". 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title='Qadishe: A Guide to the Syriac Saints']/tei:idno">
                 
                 <sch:assert test="matches(., 'http://syriaca.org/q')">
-                  The text node of this &lt;idno&gt; element must be "http://syriaca.org/authors'. 
+                  The text node of this &lt;idno&gt; element must be "http://syriaca.org/q'. 
                 </sch:assert>
               </sch:rule>
-              <sch:rule context="//tei:seriesStmt[tei:title='Qadishe: A Guide to the Syriac Saints']/tei:biblScope/@n">
+              <sch:rule context="//tei:seriesStmt[tei:title='Qadishe: A Guide to the Syriac Saints']">
                 
-                <sch:assert test=". = '1'">
-                  The @n attribute must be "1" since "Qadishe: A Guide to the Syriac Saints" is volume 1 of "The Syriac Biographical Dictionary".
+                <sch:assert test="tei:biblScope/@n = '1'">
+                  Requires a &lt;biblScope&gt; element with @n="1" since "Qadishe: A Guide to the Syriac Saints" is volume 1 of "The Syriac Biographical Dictionary".
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title='A Guide to Syriac Authors']/tei:idno">
@@ -5051,10 +5051,10 @@ définissant les droits d'utilisation.</desc><desc xmlns:rng="http://relaxng.org
                   The text node of this &lt;idno&gt; element must be "http://syriaca.org/authors'. 
                 </sch:assert>
               </sch:rule>
-              <sch:rule context="//tei:seriesStmt[tei:title='A Guide to Syriac Authors']/tei:biblScope/@n">
+              <sch:rule context="//tei:seriesStmt[tei:title='A Guide to Syriac Authors']">
                 
-                <sch:assert test=". = '2'">
-                  The @n attribute must be "2" since "A Guide to Syriac Authors" is volume 2 of "The Syriac Biographical Dictionary".
+                <sch:assert test="tei:biblScope/@n = '2'">
+                  Requires a &lt;biblScope&gt; element with @n="2" since "A Guide to Syriac Authors" is volume 2 of "The Syriac Biographical Dictionary".
                 </sch:assert>
               </sch:rule>
             </constraint>
