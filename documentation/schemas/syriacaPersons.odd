@@ -719,7 +719,58 @@
         
         
         <elementSpec ident="seriesStmt" module="header" mode="change">
-          <!-- see places for development ideas -->
+          <constraintSpec ident="seriesStmt-content" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:seriesStmt//tei:title[@level='s']">
+                <!-- Add additional values with an "or" operator if there are multiple series levels associated with a document. -->
+                <sch:assert test="matches(., 'The Syriac Biographical Dictionary') | matches((., 'Gateway to the Syriac Saints'))">
+                  The text node of this &lt;title&gt; element must be "The Syriac Biographical Dictionary" or "Gateway to the Syriac Saints". 
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:seriesStmt//tei:title[node() = 'The Syriac Biographical Dictionary']">
+                <!-- Add additional rules with appropriate contexts when adding additional monograph values above. -->
+                <sch:assert test="./following-sibling::tei:idno/node() = 'http://syriaca.org/persons'">
+                  A &lt;title&gt; containing "The Syriac Gazetteer" requires a following sibling &lt;idno&gt; element containing "http://syriaca.org/persons'. 
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:seriesStmt//tei:title[node() = 'Gateway to the Syriac Saints']">
+                <!-- Add additional rules with appropriate contexts when adding additional monograph values above. -->
+                <sch:assert test="./following-sibling::tei:idno/node() = 'http://syriaca.org/saints'">
+                  A &lt;title&gt; containing "Gateway to the Syriac Saints" requires a following sibling &lt;idno&gt; element containing "http://syriaca.org/saints'. 
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:seriesStmt/tei:title[@level='m']">
+                <sch:assert test="matches(., 'Qadishe: A Guide to the Syriac Saints') | matches(., 'A Guide to Syriac Authors')">
+                  <!-- Add additional monograph values with an "or" operator as needed. -->
+                  The text node of this &lt;title&gt; element must be "Qadishe: A Guide to the Syriac Saints" or "A Guide to Syriac Authors". 
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:seriesStmt[tei:title='Qadishe: A Guide to the Syriac Saints']/tei:idno">
+                <!-- Add additional rules with appropriate contexts when adding additional monograph values above. -->
+                <sch:assert test="matches(., 'http://syriaca.org/q')">
+                  The text node of this &lt;idno&gt; element must be "http://syriaca.org/authors'. 
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:seriesStmt[tei:title='Qadishe: A Guide to the Syriac Saints']/tei:biblScope/@n">
+                <!-- Add an additional rule with appropriate context/assert if there are multiple monographs. -->
+                <sch:assert test=". = '1'">
+                  The @n attribute must be "1" since "Qadishe: A Guide to the Syriac Saints" is volume 1 of "The Syriac Biographical Dictionary".
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:seriesStmt[tei:title='A Guide to Syriac Authors']/tei:idno">
+                <!-- Add additional rules with appropriate contexts when adding additional monograph values above. -->
+                <sch:assert test="matches(., 'http://syriaca.org/authors')">
+                  The text node of this &lt;idno&gt; element must be "http://syriaca.org/authors'. 
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:seriesStmt[tei:title='A Guide to Syriac Authors']/tei:biblScope/@n">
+                <!-- Add an additional rule with appropriate context/assert if there are multiple monographs. -->
+                <sch:assert test=". = '2'">
+                  The @n attribute must be "2" since "A Guide to Syriac Authors" is volume 2 of "The Syriac Biographical Dictionary".
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
         </elementSpec>
         
         
