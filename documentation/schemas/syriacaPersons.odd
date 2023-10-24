@@ -486,6 +486,8 @@
                 <sch:assert test="//tei:seriesStmt/tei:title = 'A Guide to Syriac Authors'">
                   This person record must include a &lt;seriesStmt&gt; indicating that it is part of the volume "A Guide to Syriac Authors".
                 </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text//tei:person[contains(@ana, '#syriaca-author')][not(contains(@ana, '#syriaca-pseudonymous-authors'))]">
                 <sch:assert test="//tei:state[@ref='http://syriaca.org/keyword/writers']">
                   This element must contain a child &lt;state&gt; with @ref="http://syriaca.org/keyword/writers". 
                 </sch:assert>
@@ -494,6 +496,10 @@
                 <sch:assert test="//tei:seriesStmt/tei:title = 'A Guide to Syriac Authors'">
                   This person record must include a &lt;seriesStmt&gt; indicating that it is part of the volume "A Guide to Syriac Authors".
                 </sch:assert>
+                <sch:assert test="contains(@ana, '#syriaca-author'">
+                  The @ana attribute must also contain "#syriaca-author".
+                </sch:assert>
+                
                 <sch:assert test="//tei:state/@ref='http://syriaca.org/keyword/pseudonymous-authors'">
                   This element must contain a child &lt;state&gt; with @ref="http://syriaca.org/keyword/pseudonymous-authors". 
                 </sch:assert>
@@ -612,13 +618,18 @@
                 <sch:assert test="//tei:seriesStmt/tei:title = 'A Guide to Syriac Authors'">
                   This person record must include a &lt;seriesStmt&gt; indicating that it is part of the volume "A Guide to Syriac Authors".
                 </sch:assert>
-                <sch:assert test="//tei:state/@ref='http://syriaca.org/keyword/writers'">
+              </sch:rule>
+              <sch:rule context="tei:text//tei:personGrp[contains(@ana, '#syriaca-author')][not(contains(@ana, '#syriaca-pseudonymous-authors'))]">
+                <sch:assert test="//tei:state[@ref='http://syriaca.org/keyword/writers']">
                   This element must contain a child &lt;state&gt; with @ref="http://syriaca.org/keyword/writers". 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:text//tei:personGrp[contains(@ana, '#syriaca-pseudonymous')]">
                 <sch:assert test="//tei:seriesStmt/tei:title = 'A Guide to Syriac Authors'">
                   This person record must include a &lt;seriesStmt&gt; indicating that it is part of the volume "A Guide to Syriac Authors".
+                </sch:assert>
+                <sch:assert test="contains(@ana, '#syriaca-author'">
+                  The @ana attribute must also contain "#syriaca-author".
                 </sch:assert>
                 <sch:assert test="//tei:state/@ref='http://syriaca.org/keyword/pseudonymous-authors'">
                   This element must contain a child &lt;state&gt; with @ref="http://syriaca.org/keyword/pseudonymous-authors". 
