@@ -5067,51 +5067,77 @@ définissant les droits d'utilisation.</desc><desc xmlns:rng="http://relaxng.org
     eventualmente la pubblicazione appartiene.</desc><classes><memberOf key="att.global"/></classes><content><elementRef key="title" minOccurs="1" maxOccurs="1"/><elementRef key="editor" minOccurs="1" maxOccurs="unbounded"/><elementRef key="biblScope" minOccurs="0" maxOccurs="1"/><elementRef key="idno" minOccurs="1" maxOccurs="1"/></content><constraintSpec ident="seriesStmt-content" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:seriesStmt//tei:title[@level='s']">
-                
                 <sch:assert test="./node() = 'The Syriac Biographical Dictionary' or ./node() = 'Gateway to the Syriac Saints'"> 
                   The text node of this &lt;idno&gt; element must be "The Syriac Biographical Dictionary" or "Gateway to the Syriac Saints". 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title = 'The Syriac Biographical Dictionary']/tei:idno">
-                
                 <sch:assert test="matches(., 'http://syriaca.org/persons')">
                   A &lt;title&gt; containing "The Syriac Biographical Dictionary" requires a following sibling &lt;idno&gt; element containing "http://syriaca.org/persons'. 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title = 'Gateway to the Syriac Saints']/tei:idno">
-                
                 <sch:assert test="matches(., 'http://syriaca.org/saints')">
                   A &lt;title&gt; containing "Gateway to the Syriac Saints" requires a following sibling &lt;idno&gt; element containing "http://syriaca.org/saints'. 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt/tei:title[@level='m']">
-                <sch:assert test="./node() = 'Qadishe: A Guide to the Syriac Saints' or ./node() = 'A Guide to Syriac Authors'">
-                  
-                  The text node of this &lt;idno&gt; element must be "Qadishe: A Guide to the Syriac Saints" or "A Guide to Syriac Authors". 
+                <sch:assert test="./node() = 'Qadishe: A Guide to the Syriac Saints' or ./node() = 'A Guide to Syriac Authors' ./node() = 'Syriac Anonymi'">
+                  The text node of this &lt;title&gt; element must be "Qadishe: A Guide to the Syriac Saints", "A Guide to Syriac Authors", or "Syriac Anonymi". 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title='Qadishe: A Guide to the Syriac Saints']/tei:idno">
-                
                 <sch:assert test="matches(., 'http://syriaca.org/q')">
                   The text node of this &lt;idno&gt; element must be "http://syriaca.org/q'. 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title='Qadishe: A Guide to the Syriac Saints']">
-                
                 <sch:assert test="tei:biblScope/@n = '1'">
                   Requires a &lt;biblScope&gt; element with @n="1" since "Qadishe: A Guide to the Syriac Saints" is volume 1 of "The Syriac Biographical Dictionary".
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title='A Guide to Syriac Authors']/tei:idno">
-                
                 <sch:assert test="matches(., 'http://syriaca.org/authors')">
                   The text node of this &lt;idno&gt; element must be "http://syriaca.org/authors'. 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title='A Guide to Syriac Authors']">
-                
                 <sch:assert test="tei:biblScope/@n = '2'">
                   Requires a &lt;biblScope&gt; element with @n="2" since "A Guide to Syriac Authors" is volume 2 of "The Syriac Biographical Dictionary".
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:seriesStmt[tei:title='Syriac Anonymi']">
+                <sch:assert test="tei:biblScope/@n = '3'">
+                  Requires a &lt;biblScope&gt; element with @n="3" since "Syriac Anonymi" is volume 3 of "The Syriac Biographical Dictionary".
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="authors-series" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:seriesStmt[tei:title='A Guide to Syriac Authors']">
+                <sch:assert test="//tei:text//tei:person[@ana='#syriaca-author'] | //tei:text//tei:personGrp[@ana='#syriaca-author']">
+                  If a person record is part of "A Guide to Syriac Authors" it must have an @ana attribute with "#syriaca-author' on the &lt;person&gt; or &lt;personGrp&gt; element.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="saints-series" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:seriesStmt[tei:title='Qadishe: A Guide to the Syriac Saints']">
+                <sch:assert test="//tei:text//tei:person[@ana='#syriaca-saint'] | //tei:text//tei:personGrp[@ana='#syriaca-saint']">
+                  If a person record is part of "Qadishe: A Guide to the Syriac Saints" it must have an @ana attribute with "#syriaca-saint' on the &lt;person&gt; or &lt;personGrp&gt; element.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:seriesStmt[tei:title='Gateway to the Syriac Saints']">
+                <sch:assert test="//tei:text//tei:person[@ana='#syriaca-saint'] | //tei:text//tei:personGrp[@ana='#syriaca-saint']">
+                  If a person record is part of "Gateway to the Syriac Saints" it must have an @ana attribute with "#syriaca-saint' on the &lt;person&gt; or &lt;personGrp&gt; element.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="anonymi-series" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:seriesStmt[tei:title='Syriac Anonymi']">
+                <sch:assert test="//tei:text//tei:person[@ana='#syriaca-anonymous'] | //tei:text//tei:personGrp[@ana='#syriaca-anonymous']">
+                  If a person record is part of "Qadishe: A Guide to the Syriac Saints" it must have an @ana attribute with "#syriaca-anonymous' on the &lt;person&gt; or &lt;personGrp&gt; element.
                 </sch:assert>
               </sch:rule>
             </constraint>
@@ -6579,7 +6605,51 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
         historical source.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">예를 들어 언어 상호작용의 참여자 또는 역사적 문헌에서 언급된 사람과 같이 식별가능한 개인에 관한 정보를 제공한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">提供一個已知人物的相關資料，例如語言互動中的參與者、或是歷史來源中提及的人物。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">特定可能な個人の情報を示す。例えば、言語交流の参加者、歴史資料中で参 照される人物など。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">fournit des informations sur un individu identifiable, par exemple un participant à une interaction
         linguistique, ou une personne citée dans une source historique.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">proporciona información relativa a un individuo específico, p.ej. un participante de una interacción
         verbal o una persona identificada por una fuente histórica.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">fornisce informazioni relative a un soggetto specifico, come i partecipanti a un'interazione verbale o le
-        persone identificate da una fonte storica</desc><classes><memberOf key="att.global"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="true"><elementRef key="persName" minOccurs="1" maxOccurs="unbounded"/><elementRef key="idno" minOccurs="1" maxOccurs="unbounded"/><elementRef key="note" minOccurs="0" maxOccurs="unbounded"/><elementRef key="floruit" minOccurs="0" maxOccurs="unbounded"/><elementRef key="birth" minOccurs="0" maxOccurs="unbounded"/><elementRef key="death" minOccurs="0" maxOccurs="unbounded"/><elementRef key="gender" minOccurs="0" maxOccurs="unbounded"/><elementRef key="state" minOccurs="0" maxOccurs="unbounded"/><elementRef key="trait" minOccurs="0" maxOccurs="unbounded"/><elementRef key="event" minOccurs="0" maxOccurs="unbounded"/><elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/></sequence></content><attList><attDef ident="n" mode="delete"/><attDef ident="xml:id" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="source" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="ana" mode="change">
+        persone identificate da una fonte storica</desc><classes><memberOf key="att.global"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="true"><elementRef key="persName" minOccurs="1" maxOccurs="unbounded"/><elementRef key="idno" minOccurs="1" maxOccurs="unbounded"/><elementRef key="note" minOccurs="0" maxOccurs="unbounded"/><elementRef key="floruit" minOccurs="0" maxOccurs="unbounded"/><elementRef key="birth" minOccurs="0" maxOccurs="unbounded"/><elementRef key="death" minOccurs="0" maxOccurs="unbounded"/><elementRef key="gender" minOccurs="0" maxOccurs="unbounded"/><elementRef key="state" minOccurs="0" maxOccurs="unbounded"/><elementRef key="trait" minOccurs="0" maxOccurs="unbounded"/><elementRef key="event" minOccurs="0" maxOccurs="unbounded"/><elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/></sequence></content><constraintSpec ident="person-authors" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:text//tei:person[@ana='#syriaca-author']">
+                <sch:assert test="ancestor::tei/TEI//tei:seriesStmt/tei:title = 'A Guide to Syriac Authors'">
+                  This person record must include a &lt;seriesStmt&gt; indicating that it is part of the volume "A Guide to Syriac Authors".
+                </sch:assert>
+                <sch:assert test="//tei:state/@ref='http:syriaca.org/keyword/writers'">
+                  This element must contain a child &lt;state&gt; with @ref="http:syriaca.org/keyword/writers". 
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text//tei:person[@ana='#syriaca-pseudonymous']">
+                <sch:assert test="ancestor::tei/TEI//tei:seriesStmt/tei:title = 'A Guide to Syriac Authors'">
+                  This person record must include a &lt;seriesStmt&gt; indicating that it is part of the volume "A Guide to Syriac Authors".
+                </sch:assert>
+                <sch:assert test="//tei:state/@ref='http:syriaca.org/keyword/writers'">
+                  This element must contain a child &lt;state&gt; with @ref="http:syriaca.org/keyword/writers". 
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="person-saints" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:text//tei:person[@ana='#syriaca-saint']">
+                <sch:assert test="ancestor::tei/TEI//tei:seriesStmt/tei:title = 'Qadishe: A Guide to the Syriac Saints'">
+                  This person record must include a &lt;seriesStmt&gt; indicating that it is part of the volume "Qadishe: A Guide to the Syriac Saints".
+                </sch:assert>
+                <sch:assert test="ancestor::tei/TEI//tei:seriesStmt/tei:title = 'Gateway to the Syriac Saints'">
+                  This person record must include a &lt;seriesStmt&gt; indicating that it is part of the series "Gateway to the Syriac Saints".
+                </sch:assert>
+                <sch:assert test="//tei:state/@ref='http:syriaca.org/keyword/saints'">
+                  This element must contain a child &lt;state&gt; with @ref="http:syriaca.org/keyword/saints". 
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="person-anonymi" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:text//tei:person[@ana='#syriaca-anonymous']">
+                <sch:assert test="ancestor::tei/TEI//tei:seriesStmt/tei:title = 'Syriac Anonymi'">
+                  This person record must include a &lt;seriesStmt&gt; indicating that it is part of the volume "Syriac Anonymi".
+                </sch:assert>
+                <sch:assert test="//tei:state/@ref='http:syriaca.org/keyword/anonymous'">
+                  This element must contain a child &lt;state&gt; with @ref="http:syriaca.org/keyword/anonymous". 
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><attList><attDef ident="n" mode="delete"/><attDef ident="xml:id" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="source" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="ana" mode="change">
               <valList type="closed" mode="replace">
                 <valItem ident="#syriaca-anonymous">
                   <desc>Used to indentify an unnamed person or a group of persons.</desc>
@@ -6674,7 +6744,40 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
   </remarks><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html#NDPERSE">13.3.2. The Person Element</ref>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CC.html#CCAHPA">15.2.2. The Participant Description</ref>
-  </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="personGrp"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">personal group</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">개인군</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">人物團體</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">groupe de personnes</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">grupo de personas</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">gruppo di persone</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">describes a group of individuals treated as a single person for analytic purposes.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">분석적 목적을 위해 하나의 개인으로 처리된 개인군을 기술한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">描述一個為分析目的而被視為單一個人的團體。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">分析上、ひとりの人物として扱われる、個人のグループを示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">décrit un groupe d'individus traité comme une personne unique à des fins d'analyse.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">describe a un grupo de individuos considerados como una única persona para fines analíticos.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">descrive un gruppo di soggetti considerati come unica persona a fini analitici</desc><classes><memberOf key="att.global"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="true"><elementRef key="persName" minOccurs="1" maxOccurs="unbounded"/><elementRef key="idno" minOccurs="1" maxOccurs="unbounded"/><elementRef key="note" minOccurs="0" maxOccurs="unbounded"/><elementRef key="floruit" minOccurs="0" maxOccurs="unbounded"/><elementRef key="birth" minOccurs="0" maxOccurs="unbounded"/><elementRef key="death" minOccurs="0" maxOccurs="unbounded"/><elementRef key="gender" minOccurs="0" maxOccurs="unbounded"/><elementRef key="state" minOccurs="0" maxOccurs="unbounded"/><elementRef key="trait" minOccurs="0" maxOccurs="unbounded"/><elementRef key="event" minOccurs="0" maxOccurs="unbounded"/><elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/></sequence></content><attList><attDef ident="n" mode="delete"/><attDef ident="xml:id" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="source" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="ana" mode="change">
+  </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="personGrp"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">personal group</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">개인군</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">人物團體</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">groupe de personnes</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">grupo de personas</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">gruppo di persone</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">describes a group of individuals treated as a single person for analytic purposes.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">분석적 목적을 위해 하나의 개인으로 처리된 개인군을 기술한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">描述一個為分析目的而被視為單一個人的團體。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">分析上、ひとりの人物として扱われる、個人のグループを示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">décrit un groupe d'individus traité comme une personne unique à des fins d'analyse.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">describe a un grupo de individuos considerados como una única persona para fines analíticos.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">descrive un gruppo di soggetti considerati come unica persona a fini analitici</desc><classes><memberOf key="att.global"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="true"><elementRef key="persName" minOccurs="1" maxOccurs="unbounded"/><elementRef key="idno" minOccurs="1" maxOccurs="unbounded"/><elementRef key="note" minOccurs="0" maxOccurs="unbounded"/><elementRef key="floruit" minOccurs="0" maxOccurs="unbounded"/><elementRef key="birth" minOccurs="0" maxOccurs="unbounded"/><elementRef key="death" minOccurs="0" maxOccurs="unbounded"/><elementRef key="gender" minOccurs="0" maxOccurs="unbounded"/><elementRef key="state" minOccurs="0" maxOccurs="unbounded"/><elementRef key="trait" minOccurs="0" maxOccurs="unbounded"/><elementRef key="event" minOccurs="0" maxOccurs="unbounded"/><elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/></sequence></content><constraintSpec ident="personGrp-authors" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:text//tei:personGrp[@ana='#syriaca-author']">
+                <sch:assert test="ancestor::tei/TEI//tei:seriesStmt/tei:title = 'A Guide to Syriac Authors'">
+                  This person record must include a &lt;seriesStmt&gt; indicating that it is part of the volume "A Guide to Syriac Authors".
+                </sch:assert>
+                <sch:assert test="//tei:state/@ref='http:syriaca.org/keyword/writers'">
+                  This element must contain a child &lt;state&gt; with @ref="http:syriaca.org/keyword/writers". 
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text//tei:personGrp[@ana='#syriaca-pseudonymous']">
+                <sch:assert test="ancestor::tei/TEI//tei:seriesStmt/tei:title = 'A Guide to Syriac Authors'">
+                  This person record must include a &lt;seriesStmt&gt; indicating that it is part of the volume "A Guide to Syriac Authors".
+                </sch:assert>
+                <sch:assert test="//tei:state/@ref='http:syriaca.org/keyword/writers'">
+                  This element must contain a child &lt;state&gt; with @ref="http:syriaca.org/keyword/writers". 
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="personGrp-saints" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:text//tei:personGrp[@ana='#syriaca-saint']">
+                <sch:assert test="ancestor::tei/TEI//tei:seriesStmt/tei:title = 'Qadishe: A Guide to the Syriac Saints'">
+                  This person record must include a &lt;seriesStmt&gt; indicating that it is part of the volume "Qadishe: A Guide to the Syriac Saints".
+                </sch:assert>
+                <sch:assert test="ancestor::tei/TEI//tei:seriesStmt/tei:title = 'Gateway to the Syriac Saints'">
+                  This person record must include a &lt;seriesStmt&gt; indicating that it is part of the series "Gateway to the Syriac Saints".
+                </sch:assert>
+                <sch:assert test="//tei:state/@ref='http:syriaca.org/keyword/saints'">
+                  This element must contain a child &lt;state&gt; with @ref="http:syriaca.org/keyword/saints". 
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><attList><attDef ident="n" mode="delete"/><attDef ident="xml:id" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="source" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="ana" mode="change">
               <valList type="closed" mode="replace">
                 <valItem ident="#syriaca-anonymous">
                   <desc>Used to indentify an unnamed person or a group of persons.</desc>
@@ -6919,7 +7022,73 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
     
   </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="state"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2009-03-19">state</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">statut</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2011-12-01" xml:lang="en">contains a description of some status or quality attributed to a person, place, or organization often at some specific time or for a specific date range.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-03-19" xml:lang="fr">contient la description d'un statut ou d'une qualité actuels attribués à une personne, un lieu ou une
         organisation.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">개인, 장소, 또는 조직에 관련한 현재 지위 또는 특성 기술을 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">標明分界方法所定義的權威參照標準裡其中ㄧ個組件。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">人物、場所、組織などの、現在の社会的状態や地位を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2018-07-18" xml:lang="de">enthält eine Beschreibung eines Status oder einer Qualität, die einer Person, einem Ort oder einer Organisation 
-    oft zu einem bestimmten Zeitpunkt oder für einen bestimmten Zeitraum zugeordnet wird.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">especifica un componente de una referencia canónica definida por el método milestone (hito).</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">specifica un componente di un riferimento canonico definito dal metodo milestone.</desc><classes><memberOf key="att.canonical"/><memberOf key="att.global"/><memberOf key="att.datable"/><memberOf key="att.typed"/><memberOf key="model.placeStateLike"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="desc" minOccurs="0" maxOccurs="1"/><elementRef key="precision" minOccurs="0" maxOccurs="unbounded"/></sequence></content><constraintSpec ident="documentation-on-state" scheme="schematron">
+    oft zu einem bestimmten Zeitpunkt oder für einen bestimmten Zeitraum zugeordnet wird.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">especifica un componente de una referencia canónica definida por el método milestone (hito).</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">specifica un componente di un riferimento canonico definito dal metodo milestone.</desc><classes><memberOf key="att.canonical"/><memberOf key="att.global"/><memberOf key="att.datable"/><memberOf key="att.typed"/><memberOf key="model.placeStateLike"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="desc" minOccurs="0" maxOccurs="1"/><elementRef key="precision" minOccurs="0" maxOccurs="unbounded"/></sequence></content><constraintSpec ident="state-person-atts" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:person[tei:state/@ref='http://syriaca.org/keyword/writers']">
+                <sch:assert test="@ana='#syriaca-author'">Persons with a &lt;state&gt; element indicating an author require @ana="#syriaca-author".</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:personGrp[tei:state/@ref='http://syriaca.org/keyword/writers']">
+                <sch:assert test="@ana='#syriaca-author'">Person groups with a &lt;state&gt; element indicating an author require @ana="#syriaca-author".</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:person[tei:state/@ref='http://syriaca.org/keyword/pseudonymous-authors']">
+                <sch:assert test="@ana='#syriaca-author'">Persons with a &lt;state&gt; element indicating a pseudonymous author require @ana="#syriaca-pseudonymous".</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:personGrp[tei:state/@ref='http://syriaca.org/keyword/pseudonymous-authors']">
+                <sch:assert test="@ana='#syriaca-author'">Person groups with a &lt;state&gt; element indicating a psedonymous author require @ana="#syriaca-pseudonymous".</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:person[tei:state/@ref='http://syriaca.org/keyword/saints']">
+                <sch:assert test="@ana='#syriaca-author'">Persons with a &lt;state&gt; element indicating a saint require @ana="#syriaca-saint".</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:personGrp[tei:state/@ref='http://syriaca.org/keyword/saints']">
+                <sch:assert test="@ana='#syriaca-author'">Person groups with a &lt;state&gt; element indicating a saint require @ana="#syriaca-saint".</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:person[tei:state/@ref='http://syriaca.org/keyword/anonymous']">
+                <sch:assert test="@ana='#syriaca-author'">Persons with a &lt;state&gt; element indicating anonymous require @ana="#syriaca-anonymous".</sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:personGrp[tei:state/@ref='http://syriaca.org/keyword/anonymous']">
+                <sch:assert test="@ana='#syriaca-author'">Person groups with a &lt;state&gt; element indicating anonymous require @ana="#syriaca-anonymous".</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="type-ref-combinations" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:state[@type='occupation']/@ref">
+                <sch:report test="contains(., ' ')">
+                  Only one value allowed on @ref. If necessary, use a separate &lt;state&gt; element.
+                </sch:report>
+              </sch:rule>
+              <sch:rule context="tei:state[@type='occupation']/@ref">
+                <sch:let name="ti" value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex-old.xml')"/>
+                <sch:let name="occupations" value="$ti//listURI[@type = 'occupations']/uri"/>
+                <sch:let name="error" value="."/>
+                <sch:assert test=". = $occupations" role="warning">
+                  <sch:value-of select="$error"/> is not currently in use. Syriaca.org prefers the use of established 
+                  URIs when possible but appropriate URIs are not always available in the Syriaca.org taxonomy. Please
+                  consult the taxonomy. If no appropriate keyword exists in the following list, please use your own
+                  preferred descriptive term: <sch:value-of select="string-join($occupations, ';  ')"/>.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:state[@type='religious-affiliation']/@ref">
+                
+              </sch:rule>
+              <sch:rule context="tei:state[@type='socio-economic-status']/@ref">
+                <sch:let name="ti" value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex-old.xml')"/>
+                <sch:let name="socioeconomicStatus" value="$ti//listURI[@type = 'socioeconomic-status']/uri"/>
+                <sch:let name="error" value="."/>
+                <sch:assert test=". = $socioeconomicStatus" role="warning">
+                  <sch:value-of select="$error"/> is not currently in use. Syriaca.org prefers the use of established 
+                  URIs when possible but appropriate URIs are not always available in the Syriaca.org taxonomy. Please
+                  consult the taxonomy. If no appropriate keyword exists in the following list, please use your own
+                  preferred descriptive term: <sch:value-of select="string-join($socioeconomicStatus, ';  ')"/>.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:state[@type='status']/@ref">
+                <sch:let name="statuses" value="'http://syriaca.org/keyword/anonymous', 'http://syriaca.org/keyword/apostles', 'http://syriaca.org/keyword/fallen', 'http://syriaca.org/keyword/martyrs', 'http://syriaca.org/keyword/pseudonymous-authors', 'http://syriaca.org/keyword/saints', 'http://syriaca.org/keyword/writers'"/>
+                <sch:assert test=". = $statuses">
+                  Allowed values: <sch:value-of select="string-join($statuses, ';  ')"/>.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="documentation-on-state" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:text//tei:state">
                 <sch:report test="@source and @resp">Only one of the attributes @resp and @source may be supplied.</sch:report>
@@ -6934,11 +7103,14 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                 <valItem ident="religious-affiliation">
                   <desc>Used to indicate a religious affiliation ascribed to a person.</desc>
                 </valItem>
-                <valItem ident="status">
+                <valItem ident="socio-economic-status">
                   <desc>Used to indicate a socio-economic status ascribed to a person.</desc>
                 </valItem>
+                <valItem ident="status">
+                  <desc>Used to indicate a variety of statuses Syriaca.org ascribes to persons.</desc>
+                </valItem>
               </valList>
-            </attDef><attDef ident="key" mode="delete"/><attDef ident="subtype" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
+            </attDef><attDef ident="ref" mode="change" usage="req"/><attDef ident="key" mode="delete"/><attDef ident="subtype" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
         <state ref="#SCHOL" type="status">
           <label>scholar</label>

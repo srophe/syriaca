@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-23T21:26:59Z. .
+Schema generated from ODD source 2023-10-24T14:35:20Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -3109,9 +3109,8 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
                       context="//tei:seriesStmt/tei:title[@level='m']">
-               <sch:assert test="./node() = 'Qadishe: A Guide to the Syriac Saints' or ./node() = 'A Guide to Syriac Authors'">
-                  
-                  The text node of this &lt;idno&gt; element must be "Qadishe: A Guide to the Syriac Saints" or "A Guide to Syriac Authors". 
+               <sch:assert test="./node() = 'Qadishe: A Guide to the Syriac Saints' or ./node() = 'A Guide to Syriac Authors' ./node() = 'Syriac Anonymi'">
+                  The text node of this &lt;title&gt; element must be "Qadishe: A Guide to the Syriac Saints", "A Guide to Syriac Authors", or "Syriac Anonymi". 
                 </sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
@@ -3144,6 +3143,55 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                       context="//tei:seriesStmt[tei:title='A Guide to Syriac Authors']">
                <sch:assert test="tei:biblScope/@n = '2'">
                   Requires a &lt;biblScope&gt; element with @n="2" since "A Guide to Syriac Authors" is volume 2 of "The Syriac Biographical Dictionary".
+                </sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="//tei:seriesStmt[tei:title='Syriac Anonymi']">
+               <sch:assert test="tei:biblScope/@n = '3'">
+                  Requires a &lt;biblScope&gt; element with @n="3" since "Syriac Anonymi" is volume 3 of "The Syriac Biographical Dictionary".
+                </sch:assert>
+            </sch:rule>
+         </pattern>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="syriacaPersons-seriesStmt-authors-series-constraint-rule-63">
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:seriesStmt[tei:title='A Guide to Syriac Authors']">
+               <sch:assert test="//tei:text//tei:person[@ana='#syriaca-author'] | //tei:text//tei:personGrp[@ana='#syriaca-author']">
+                  If a person record is part of "A Guide to Syriac Authors" it must have an @ana attribute with "#syriaca-author' on the &lt;person&gt; or &lt;personGrp&gt; element.
+                </sch:assert>
+            </sch:rule>
+         </pattern>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="syriacaPersons-seriesStmt-saints-series-constraint-rule-64">
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:seriesStmt[tei:title='Qadishe: A Guide to the Syriac Saints']">
+               <sch:assert test="//tei:text//tei:person[@ana='#syriaca-saint'] | //tei:text//tei:personGrp[@ana='#syriaca-saint']">
+                  If a person record is part of "Qadishe: A Guide to the Syriac Saints" it must have an @ana attribute with "#syriaca-saint' on the &lt;person&gt; or &lt;personGrp&gt; element.
+                </sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:seriesStmt[tei:title='Gateway to the Syriac Saints']">
+               <sch:assert test="//tei:text//tei:person[@ana='#syriaca-saint'] | //tei:text//tei:personGrp[@ana='#syriaca-saint']">
+                  If a person record is part of "Gateway to the Syriac Saints" it must have an @ana attribute with "#syriaca-saint' on the &lt;person&gt; or &lt;personGrp&gt; element.
+                </sch:assert>
+            </sch:rule>
+         </pattern>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="syriacaPersons-seriesStmt-anonymi-series-constraint-rule-66">
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:seriesStmt[tei:title='Syriac Anonymi']">
+               <sch:assert test="//tei:text//tei:person[@ana='#syriaca-anonymous'] | //tei:text//tei:personGrp[@ana='#syriaca-anonymous']">
+                  If a person record is part of "Qadishe: A Guide to the Syriac Saints" it must have an @ana attribute with "#syriaca-anonymous' on the &lt;person&gt; or &lt;personGrp&gt; element.
                 </sch:assert>
             </sch:rule>
          </pattern>
@@ -3329,7 +3377,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(change) documents a change or set of changes made during the production of a source document, or during the revision of an electronic file. [2.6. The Revision Description 2.4.1. Creation 11.7. Identifying Changes and Revisions]</a:documentation>
          <ref name="tei_macro.specialPara"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-change-who-on-change-constraint-rule-62">
+                  id="syriacaPersons-change-who-on-change-constraint-rule-67">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3347,7 +3395,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-change-xmlID-on-change-constraint-rule-63">
+                  id="syriacaPersons-change-xmlID-on-change-constraint-rule-68">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3427,7 +3475,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(link) defines an association or hypertextual link among elements or passages, of some type not more precisely specifiable by other elements. [16.1. Links]</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-link-target-on-link-constraint-rule-64">
+                  id="syriacaPersons-link-target-on-link-constraint-rule-69">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3442,7 +3490,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-link-linkTargets3-constraint-assert-48">
+                  id="syriacaPersons-link-linkTargets3-constraint-assert-53">
             <rule context="tei:link">
                <sch:assert xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -3662,7 +3710,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <text/>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-persName-source-on-persName-constraint-rule-65">
+                  id="syriacaPersons-persName-source-on-persName-constraint-rule-70">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3676,7 +3724,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-persName-persName-content-constraint-rule-66">
+                  id="syriacaPersons-persName-persName-content-constraint-rule-71">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3685,7 +3733,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-persName-xmlID-on-persName-constraint-rule-67">
+                  id="syriacaPersons-persName-xmlID-on-persName-constraint-rule-72">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3700,7 +3748,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-persName-xmlLang-on-persName-constraint-rule-68">
+                  id="syriacaPersons-persName-xmlLang-on-persName-constraint-rule-73">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3709,7 +3757,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-persName-corresp-on-persName-constraint-rule-69">
+                  id="syriacaPersons-persName-corresp-on-persName-constraint-rule-74">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3722,7 +3770,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-persName-persName-ref-constraint-rule-70">
+                  id="syriacaPersons-persName-persName-ref-constraint-rule-75">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3895,7 +3943,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <text/>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-placeName-place-ref-constraint-rule-72">
+                  id="syriacaPersons-placeName-place-ref-constraint-rule-77">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3958,7 +4006,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </zeroOrMore>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-event-xmlID-on-event-constraint-rule-74">
+                  id="syriacaPersons-event-xmlID-on-event-constraint-rule-79">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3973,7 +4021,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-event-documentation-on-event-constraint-rule-75">
+                  id="syriacaPersons-event-documentation-on-event-constraint-rule-80">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4025,7 +4073,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(gender) specifies the gender identity of a person, persona, or character. [13.3.2.1. Personal Characteristics]</a:documentation>
          <text/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-gender-documentation-on-gender-constraint-rule-77">
+                  id="syriacaPersons-gender-documentation-on-gender-constraint-rule-82">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4116,6 +4164,62 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
                <ref name="tei_bibl"/>
             </oneOrMore>
          </group>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="syriacaPersons-person-person-authors-constraint-rule-83">
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:text//tei:person[@ana='#syriaca-author']">
+               <sch:assert test="ancestor::tei/TEI//tei:seriesStmt/tei:title = 'A Guide to Syriac Authors'">
+                  This person record must include a &lt;seriesStmt&gt; indicating that it is part of the volume "A Guide to Syriac Authors".
+                </sch:assert>
+               <sch:assert test="//tei:state/@ref='http:syriaca.org/keyword/writers'">
+                  This element must contain a child &lt;state&gt; with @ref="http:syriaca.org/keyword/writers". 
+                </sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:text//tei:person[@ana='#syriaca-pseudonymous']">
+               <sch:assert test="ancestor::tei/TEI//tei:seriesStmt/tei:title = 'A Guide to Syriac Authors'">
+                  This person record must include a &lt;seriesStmt&gt; indicating that it is part of the volume "A Guide to Syriac Authors".
+                </sch:assert>
+               <sch:assert test="//tei:state/@ref='http:syriaca.org/keyword/writers'">
+                  This element must contain a child &lt;state&gt; with @ref="http:syriaca.org/keyword/writers". 
+                </sch:assert>
+            </sch:rule>
+         </pattern>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="syriacaPersons-person-person-saints-constraint-rule-85">
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:text//tei:person[@ana='#syriaca-saint']">
+               <sch:assert test="ancestor::tei/TEI//tei:seriesStmt/tei:title = 'Qadishe: A Guide to the Syriac Saints'">
+                  This person record must include a &lt;seriesStmt&gt; indicating that it is part of the volume "Qadishe: A Guide to the Syriac Saints".
+                </sch:assert>
+               <sch:assert test="ancestor::tei/TEI//tei:seriesStmt/tei:title = 'Gateway to the Syriac Saints'">
+                  This person record must include a &lt;seriesStmt&gt; indicating that it is part of the series "Gateway to the Syriac Saints".
+                </sch:assert>
+               <sch:assert test="//tei:state/@ref='http:syriaca.org/keyword/saints'">
+                  This element must contain a child &lt;state&gt; with @ref="http:syriaca.org/keyword/saints". 
+                </sch:assert>
+            </sch:rule>
+         </pattern>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="syriacaPersons-person-person-anonymi-constraint-rule-86">
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:text//tei:person[@ana='#syriaca-anonymous']">
+               <sch:assert test="ancestor::tei/TEI//tei:seriesStmt/tei:title = 'Syriac Anonymi'">
+                  This person record must include a &lt;seriesStmt&gt; indicating that it is part of the volume "Syriac Anonymi".
+                </sch:assert>
+               <sch:assert test="//tei:state/@ref='http:syriaca.org/keyword/anonymous'">
+                  This element must contain a child &lt;state&gt; with @ref="http:syriaca.org/keyword/anonymous". 
+                </sch:assert>
+            </sch:rule>
+         </pattern>
          <optional>
             <attribute name="ana">
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(analysis) indicates one or more elements containing interpretations of the element on which the <code xmlns="http://www.w3.org/1999/xhtml">@ana</code> attribute appears.</a:documentation>
@@ -4176,6 +4280,48 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
                <ref name="tei_bibl"/>
             </oneOrMore>
          </group>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="syriacaPersons-personGrp-personGrp-authors-constraint-rule-87">
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:text//tei:personGrp[@ana='#syriaca-author']">
+               <sch:assert test="ancestor::tei/TEI//tei:seriesStmt/tei:title = 'A Guide to Syriac Authors'">
+                  This person record must include a &lt;seriesStmt&gt; indicating that it is part of the volume "A Guide to Syriac Authors".
+                </sch:assert>
+               <sch:assert test="//tei:state/@ref='http:syriaca.org/keyword/writers'">
+                  This element must contain a child &lt;state&gt; with @ref="http:syriaca.org/keyword/writers". 
+                </sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:text//tei:personGrp[@ana='#syriaca-pseudonymous']">
+               <sch:assert test="ancestor::tei/TEI//tei:seriesStmt/tei:title = 'A Guide to Syriac Authors'">
+                  This person record must include a &lt;seriesStmt&gt; indicating that it is part of the volume "A Guide to Syriac Authors".
+                </sch:assert>
+               <sch:assert test="//tei:state/@ref='http:syriaca.org/keyword/writers'">
+                  This element must contain a child &lt;state&gt; with @ref="http:syriaca.org/keyword/writers". 
+                </sch:assert>
+            </sch:rule>
+         </pattern>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="syriacaPersons-personGrp-personGrp-saints-constraint-rule-89">
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:text//tei:personGrp[@ana='#syriaca-saint']">
+               <sch:assert test="ancestor::tei/TEI//tei:seriesStmt/tei:title = 'Qadishe: A Guide to the Syriac Saints'">
+                  This person record must include a &lt;seriesStmt&gt; indicating that it is part of the volume "Qadishe: A Guide to the Syriac Saints".
+                </sch:assert>
+               <sch:assert test="ancestor::tei/TEI//tei:seriesStmt/tei:title = 'Gateway to the Syriac Saints'">
+                  This person record must include a &lt;seriesStmt&gt; indicating that it is part of the series "Gateway to the Syriac Saints".
+                </sch:assert>
+               <sch:assert test="//tei:state/@ref='http:syriaca.org/keyword/saints'">
+                  This element must contain a child &lt;state&gt; with @ref="http:syriaca.org/keyword/saints". 
+                </sch:assert>
+            </sch:rule>
+         </pattern>
          <optional>
             <attribute name="ana">
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(analysis) indicates one or more elements containing interpretations of the element on which the <code xmlns="http://www.w3.org/1999/xhtml">@ana</code> attribute appears.</a:documentation>
@@ -4203,7 +4349,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(relationship) describes any kind of relationship or linkage amongst a specified group of places, events, persons, objects or other items. [13.3.2.3. Personal Relationships]</a:documentation>
          <ref name="tei_desc"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-documentation-on-relation-constraint-rule-78">
+                  id="syriacaPersons-relation-documentation-on-relation-constraint-rule-90">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4213,7 +4359,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-atts-on-relation-constraint-rule-79">
+                  id="syriacaPersons-relation-atts-on-relation-constraint-rule-91">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4333,7 +4479,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-personal-relations-ref-constraint-rule-92">
+                  id="syriacaPersons-relation-personal-relations-ref-constraint-rule-104">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4357,7 +4503,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-reforkeyorname-constraint-assert-79">
+                  id="syriacaPersons-relation-reforkeyorname-constraint-assert-100">
             <rule context="tei:relation">
                <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4475,7 +4621,116 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
             </zeroOrMore>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-state-documentation-on-state-constraint-rule-94">
+                  id="syriacaPersons-state-state-person-atts-constraint-rule-106">
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:person[tei:state/@ref='http://syriaca.org/keyword/writers']">
+               <sch:assert test="@ana='#syriaca-author'">Persons with a &lt;state&gt; element indicating an author require @ana="#syriaca-author".</sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:personGrp[tei:state/@ref='http://syriaca.org/keyword/writers']">
+               <sch:assert test="@ana='#syriaca-author'">Person groups with a &lt;state&gt; element indicating an author require @ana="#syriaca-author".</sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:person[tei:state/@ref='http://syriaca.org/keyword/pseudonymous-authors']">
+               <sch:assert test="@ana='#syriaca-author'">Persons with a &lt;state&gt; element indicating a pseudonymous author require @ana="#syriaca-pseudonymous".</sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:personGrp[tei:state/@ref='http://syriaca.org/keyword/pseudonymous-authors']">
+               <sch:assert test="@ana='#syriaca-author'">Person groups with a &lt;state&gt; element indicating a psedonymous author require @ana="#syriaca-pseudonymous".</sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:person[tei:state/@ref='http://syriaca.org/keyword/saints']">
+               <sch:assert test="@ana='#syriaca-author'">Persons with a &lt;state&gt; element indicating a saint require @ana="#syriaca-saint".</sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:personGrp[tei:state/@ref='http://syriaca.org/keyword/saints']">
+               <sch:assert test="@ana='#syriaca-author'">Person groups with a &lt;state&gt; element indicating a saint require @ana="#syriaca-saint".</sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:person[tei:state/@ref='http://syriaca.org/keyword/anonymous']">
+               <sch:assert test="@ana='#syriaca-author'">Persons with a &lt;state&gt; element indicating anonymous require @ana="#syriaca-anonymous".</sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:personGrp[tei:state/@ref='http://syriaca.org/keyword/anonymous']">
+               <sch:assert test="@ana='#syriaca-author'">Person groups with a &lt;state&gt; element indicating anonymous require @ana="#syriaca-anonymous".</sch:assert>
+            </sch:rule>
+         </pattern>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="syriacaPersons-state-type-ref-combinations-constraint-rule-114">
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:state[@type='occupation']/@ref">
+               <sch:report test="contains(., ' ')">
+                  Only one value allowed on @ref. If necessary, use a separate &lt;state&gt; element.
+                </sch:report>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:state[@type='occupation']/@ref">
+               <sch:let name="ti"
+                        value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex-old.xml')"/>
+               <sch:let name="occupations" value="$ti//listURI[@type = 'occupations']/uri"/>
+               <sch:let name="error" value="."/>
+               <sch:assert test=". = $occupations" role="warning">
+                  <sch:value-of select="$error"/> is not currently in use. Syriaca.org prefers the use of established 
+                  URIs when possible but appropriate URIs are not always available in the Syriaca.org taxonomy. Please
+                  consult the taxonomy. If no appropriate keyword exists in the following list, please use your own
+                  preferred descriptive term: <sch:value-of select="string-join($occupations, ';  ')"/>.
+                </sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:state[@type='religious-affiliation']/@ref">
+                
+              </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:state[@type='socio-economic-status']/@ref">
+               <sch:let name="ti"
+                        value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex-old.xml')"/>
+               <sch:let name="socioeconomicStatus"
+                        value="$ti//listURI[@type = 'socioeconomic-status']/uri"/>
+               <sch:let name="error" value="."/>
+               <sch:assert test=". = $socioeconomicStatus" role="warning">
+                  <sch:value-of select="$error"/> is not currently in use. Syriaca.org prefers the use of established 
+                  URIs when possible but appropriate URIs are not always available in the Syriaca.org taxonomy. Please
+                  consult the taxonomy. If no appropriate keyword exists in the following list, please use your own
+                  preferred descriptive term: <sch:value-of select="string-join($socioeconomicStatus, ';  ')"/>.
+                </sch:assert>
+            </sch:rule>
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:state[@type='status']/@ref">
+               <sch:let name="statuses"
+                        value="'http://syriaca.org/keyword/anonymous', 'http://syriaca.org/keyword/apostles', 'http://syriaca.org/keyword/fallen', 'http://syriaca.org/keyword/martyrs', 'http://syriaca.org/keyword/pseudonymous-authors', 'http://syriaca.org/keyword/saints', 'http://syriaca.org/keyword/writers'"/>
+               <sch:assert test=". = $statuses">
+                  Allowed values: <sch:value-of select="string-join($statuses, ';  ')"/>.
+                </sch:assert>
+            </sch:rule>
+         </pattern>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="syriacaPersons-state-documentation-on-state-constraint-rule-119">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4484,11 +4739,16 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
             </sch:rule>
          </pattern>
-         <ref name="tei_att.canonical.attributes"/>
          <ref name="tei_att.global.attribute.xmlid"/>
          <ref name="tei_att.global.responsibility.attribute.resp"/>
          <ref name="tei_att.global.source.attribute.source"/>
          <ref name="tei_att.datable.attributes"/>
+         <attribute name="ref">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(reference) provides an explicit means of locating a full definition or identity for the entity being named by means of one or more URIs.</a:documentation>
+            <data type="anyURI">
+               <param name="pattern">\S+</param>
+            </data>
+         </attribute>
          <attribute name="type">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
             <choice>
@@ -4496,8 +4756,10 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to indicate an occupation ascribed to a person.</a:documentation>
                <value>religious-affiliation</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to indicate a religious affiliation ascribed to a person.</a:documentation>
-               <value>status</value>
+               <value>socio-economic-status</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to indicate a socio-economic status ascribed to a person.</a:documentation>
+               <value>status</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to indicate a variety of statuses Syriaca.org ascribes to persons.</a:documentation>
             </choice>
          </attribute>
          <empty/>
@@ -4575,7 +4837,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(text) contains a single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample. [4. Default Text Structure 15.1. Varieties of Composite Text]</a:documentation>
          <ref name="tei_body"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-text-source-within-text-constraint-rule-95">
+                  id="syriacaPersons-text-source-within-text-constraint-rule-120">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4626,7 +4888,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="syriacaPersons-att.global.change-change-att-values-constraint-rule-96">
+            id="syriacaPersons-att.global.change-change-att-values-constraint-rule-121">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:srophe="https://srophe.app"
