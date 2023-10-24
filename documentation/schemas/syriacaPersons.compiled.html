@@ -8326,9 +8326,11 @@ element roleName
                         <td class="wovenodd-col2">
                            <div class="pre">
                               &lt;sch:rule context="tei:seriesStmt[tei:title='A Guide to Syriac Authors']"&gt;
-                              &lt;sch:assert test="//tei:text//tei:person[@ana='#syriaca-author'] | //tei:text//tei:personGrp[@ana='#syriaca-author']"&gt;
-                              If a person record is part of "A Guide to Syriac Authors" it must have an @ana attribute
-                              with "#syriaca-author' on the &lt;person&gt; or &lt;personGrp&gt; element.
+                              &lt;sch:assert test="//tei:text//tei:person[contains(@ana, '#syriaca-author')] | //tei:text//tei:personGrp[contains(@ana,
+                              
+                              '#syriaca-author')]"&gt; If a person record is part of "A Guide to Syriac Authors" it
+                              must have an @ana attribute with "#syriaca-author' on the &lt;person&gt; or &lt;personGrp&gt;
+                              element.
                               &lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
@@ -8338,15 +8340,19 @@ element roleName
                         <td class="wovenodd-col2">
                            <div class="pre">
                               &lt;sch:rule context="tei:seriesStmt[tei:title='Qadishe: A Guide to the Syriac Saints']"&gt;
-                              &lt;sch:assert test="//tei:text//tei:person[@ana='#syriaca-saint'] | //tei:text//tei:personGrp[@ana='#syriaca-saint']"&gt;
-                              If a person record is part of "Qadishe: A Guide to the Syriac Saints" it must have
-                              an @ana attribute with "#syriaca-saint' on the &lt;person&gt; or &lt;personGrp&gt; element.
+                              &lt;sch:assert test="//tei:text//tei:person[contains(@ana, '#syriaca-saint')] | //tei:text//tei:personGrp[contains(@ana,
+                              
+                              '#syriaca-saint')]"&gt; If a person record is part of "Qadishe: A Guide to the Syriac
+                              Saints" it must have an @ana attribute with "#syriaca-saint' on the &lt;person&gt; or &lt;personGrp&gt;
+                              element.
                               &lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
                               &lt;sch:rule context="tei:seriesStmt[tei:title='Gateway to the Syriac Saints']"&gt;
-                              &lt;sch:assert test="//tei:text//tei:person[@ana='#syriaca-saint'] | //tei:text//tei:personGrp[@ana='#syriaca-saint']"&gt;
-                              If a person record is part of "Gateway to the Syriac Saints" it must have an @ana
-                              attribute with "#syriaca-saint' on the &lt;person&gt; or &lt;personGrp&gt; element.
+                              &lt;sch:assert test="//tei:text//tei:person[contains(@ana, '#syriaca-saint')] | //tei:text//tei:personGrp[contains(@ana,
+                              
+                              '#syriaca-saint')]"&gt; If a person record is part of "Gateway to the Syriac Saints"
+                              it must have an @ana attribute with "#syriaca-saint' on the &lt;person&gt; or &lt;personGrp&gt;
+                              element.
                               &lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
@@ -8356,9 +8362,11 @@ element roleName
                         <td class="wovenodd-col2">
                            <div class="pre">
                               &lt;sch:rule context="tei:seriesStmt[tei:title='Syriac Anonymi']"&gt;
-                              &lt;sch:assert test="//tei:text//tei:person[@ana='#syriaca-anonymous'] | //tei:text//tei:personGrp[@ana='#syriaca-anonymous']"&gt;
-                              If a person record is part of "Qadishe: A Guide to the Syriac Saints" it must have
-                              an @ana attribute with "#syriaca-anonymous' on the &lt;person&gt; or &lt;personGrp&gt; element.
+                              &lt;sch:assert test="//tei:text//tei:person[contains(@ana, '#syriaca-anonymous')] | //tei:text//tei:personGrp[contains(@ana,
+                              
+                              '#syriaca-anonymous')]"&gt; If a person record is part of "Qadishe: A Guide to the Syriac
+                              Saints" it must have an @ana attribute with "#syriaca-anonymous' on the &lt;person&gt; or
+                              &lt;personGrp&gt; element.
                               &lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
@@ -8748,36 +8756,36 @@ element sponsor
                         <td class="wovenodd-col2">
                            <div class="pre">
                               &lt;sch:rule context="tei:person[tei:state/@ref='http://syriaca.org/keyword/writers']"&gt;
-                              &lt;sch:assert test="@ana='#syriaca-author'"&gt;Persons with a &lt;state&gt; element indicating
-                              an author require @ana="#syriaca-author".&lt;/sch:assert&gt;
+                              &lt;sch:assert test="contains(@ana, '#syriaca-author')"&gt;Persons with a &lt;state&gt; element
+                              indicating an author require @ana="#syriaca-author".&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
                               &lt;sch:rule context="tei:personGrp[tei:state/@ref='http://syriaca.org/keyword/writers']"&gt;
-                              &lt;sch:assert test="@ana='#syriaca-author'"&gt;Person groups with a &lt;state&gt; element indicating
-                              an author require @ana="#syriaca-author".&lt;/sch:assert&gt;
+                              &lt;sch:assert test="contains(@ana, '#syriaca-author')"&gt;Person groups with a &lt;state&gt;
+                              element indicating an author require @ana="#syriaca-author".&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
                               &lt;sch:rule context="tei:person[tei:state/@ref='http://syriaca.org/keyword/pseudonymous-authors']"&gt;
-                              &lt;sch:assert test="@ana='#syriaca-author'"&gt;Persons with a &lt;state&gt; element indicating
-                              a pseudonymous author require @ana="#syriaca-pseudonymous".&lt;/sch:assert&gt;
+                              &lt;sch:assert test="contains(@ana, '#syriaca-author')"&gt;Persons with a &lt;state&gt; element
+                              indicating a pseudonymous author require @ana="#syriaca-pseudonymous".&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
                               &lt;sch:rule context="tei:personGrp[tei:state/@ref='http://syriaca.org/keyword/pseudonymous-authors']"&gt;
-                              &lt;sch:assert test="@ana='#syriaca-author'"&gt;Person groups with a &lt;state&gt; element indicating
-                              a psedonymous author require @ana="#syriaca-pseudonymous".&lt;/sch:assert&gt;
+                              &lt;sch:assert test="contains(@ana, '#syriaca-author')"&gt;Person groups with a &lt;state&gt;
+                              element indicating a psedonymous author require @ana="#syriaca-pseudonymous".&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
                               &lt;sch:rule context="tei:person[tei:state/@ref='http://syriaca.org/keyword/saints']"&gt;
-                              &lt;sch:assert test="@ana='#syriaca-author'"&gt;Persons with a &lt;state&gt; element indicating
-                              a saint require @ana="#syriaca-saint".&lt;/sch:assert&gt;
+                              &lt;sch:assert test="contains(@ana, '#syriaca-author')"&gt;Persons with a &lt;state&gt; element
+                              indicating a saint require @ana="#syriaca-saint".&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
                               &lt;sch:rule context="tei:personGrp[tei:state/@ref='http://syriaca.org/keyword/saints']"&gt;
-                              &lt;sch:assert test="@ana='#syriaca-author'"&gt;Person groups with a &lt;state&gt; element indicating
-                              a saint require @ana="#syriaca-saint".&lt;/sch:assert&gt;
+                              &lt;sch:assert test="contains(@ana, '#syriaca-author')"&gt;Person groups with a &lt;state&gt;
+                              element indicating a saint require @ana="#syriaca-saint".&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
                               &lt;sch:rule context="tei:person[tei:state/@ref='http://syriaca.org/keyword/anonymous']"&gt;
-                              &lt;sch:assert test="@ana='#syriaca-author'"&gt;Persons with a &lt;state&gt; element indicating
-                              anonymous require @ana="#syriaca-anonymous".&lt;/sch:assert&gt;
+                              &lt;sch:assert test="contains(@ana, '#syriaca-author')"&gt;Persons with a &lt;state&gt; element
+                              indicating anonymous require @ana="#syriaca-anonymous".&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
                               &lt;sch:rule context="tei:personGrp[tei:state/@ref='http://syriaca.org/keyword/anonymous']"&gt;
-                              &lt;sch:assert test="@ana='#syriaca-author'"&gt;Person groups with a &lt;state&gt; element indicating
-                              anonymous require @ana="#syriaca-anonymous".&lt;/sch:assert&gt;
+                              &lt;sch:assert test="contains(@ana, '#syriaca-author')"&gt;Person groups with a &lt;state&gt;
+                              element indicating anonymous require @ana="#syriaca-anonymous".&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
                      </tr>
@@ -13005,7 +13013,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e26104" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-10-24T14:41:04Z.
+	       on 2023-10-24T16:18:20Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>
