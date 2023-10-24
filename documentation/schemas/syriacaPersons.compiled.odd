@@ -5112,35 +5112,6 @@ définissant les droits d'utilisation.</desc><desc xmlns:rng="http://relaxng.org
                 </sch:assert>
               </sch:rule>
             </constraint>
-          </constraintSpec><constraintSpec ident="authors-series" scheme="schematron">
-            <constraint>
-              <sch:rule context="tei:seriesStmt[tei:title='A Guide to Syriac Authors']">
-                <sch:assert test="//tei:text//tei:person[contains(@ana, '#syriaca-author')] | //tei:text//tei:personGrp[contains(@ana, '#syriaca-author')]">
-                  If a person record is part of "A Guide to Syriac Authors" it must have an @ana attribute with "#syriaca-author' on the &lt;person&gt; or &lt;personGrp&gt; element.
-                </sch:assert>
-              </sch:rule>
-            </constraint>
-          </constraintSpec><constraintSpec ident="saints-series" scheme="schematron">
-            <constraint>
-              <sch:rule context="tei:seriesStmt[tei:title='Qadishe: A Guide to the Syriac Saints']">
-                <sch:assert test="//tei:text//tei:person[contains(@ana, '#syriaca-saint')] | //tei:text//tei:personGrp[contains(@ana, '#syriaca-saint')]">
-                  If a person record is part of "Qadishe: A Guide to the Syriac Saints" it must have an @ana attribute with "#syriaca-saint' on the &lt;person&gt; or &lt;personGrp&gt; element.
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:seriesStmt[tei:title='Gateway to the Syriac Saints']">
-                <sch:assert test="//tei:text//tei:person[contains(@ana, '#syriaca-saint')] | //tei:text//tei:personGrp[contains(@ana, '#syriaca-saint')]">
-                  If a person record is part of "Gateway to the Syriac Saints" it must have an @ana attribute with "#syriaca-saint' on the &lt;person&gt; or &lt;personGrp&gt; element.
-                </sch:assert>
-              </sch:rule>
-            </constraint>
-          </constraintSpec><constraintSpec ident="anonymi-series" scheme="schematron">
-            <constraint>
-              <sch:rule context="tei:seriesStmt[tei:title='Syriac Anonymi']">
-                <sch:assert test="//tei:text//tei:person[contains(@ana, '#syriaca-anonymous')] | //tei:text//tei:personGrp[contains(@ana, '#syriaca-anonymous')]">
-                  If a person record is part of "Qadishe: A Guide to the Syriac Saints" it must have an @ana attribute with "#syriaca-anonymous' on the &lt;person&gt; or &lt;personGrp&gt; element.
-                </sch:assert>
-              </sch:rule>
-            </constraint>
           </constraintSpec><attList/><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en">
     <egXML xmlns="http://www.tei-c.org/ns/Examples">
       <seriesStmt>
@@ -6649,6 +6620,29 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                 </sch:assert>
               </sch:rule>
             </constraint>
+          </constraintSpec><constraintSpec ident="person-series-agreement" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:text[//tei:seriesStmt[tei:title='A Guide to Syriac Authors']]//tei:person">
+                <sch:assert test="contains(@ana, '#syriaca-author')">
+                  If a person record is part of the series "A Guide to Syriac Authors" it must have an @ana attribute with "#syriaca-author" on the &lt;person&gt; element.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text[//tei:seriesStmt[tei:title='Qadishe: A Guide to the Syriac Saints']]//tei:person">
+                <sch:assert test="contains(@ana, '#syriaca-saint')">
+                  If a person record is part of the series "Qadishe: A Guide to the Syriac Saints" it must have an @ana attribute with "#syriaca-saint" on the &lt;person&gt; element.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text[//tei:seriesStmt[tei:title='Gateway to the Syriac Saints']]//tei:person">
+                <sch:assert test="contains(@ana, '#syriaca-saint')">
+                  If a person record is part of the series "Gateway to the Syriac Saints" it must have an @ana attribute with "#syriaca-saint" on the &lt;person&gt; element.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text[//tei:seriesStmt[tei:title='Syriac Anonymi']]//tei:person">
+                <sch:assert test="contains(@ana, '#syriaca-anonymous')">
+                  If a person record is part of the series "Syriac Anonymi" it must have an @ana attribute with "#syriaca-anonymous" on the &lt;person&gt; element.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
           </constraintSpec><attList><attDef ident="n" mode="delete"/><attDef ident="xml:id" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="source" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="ana" mode="change">
               <valList type="closed" mode="replace">
                 <valItem ident="#syriaca-anonymous">
@@ -6774,6 +6768,29 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                 </sch:assert>
                 <sch:assert test="//tei:state/@ref='http:syriaca.org/keyword/saints'">
                   This element must contain a child &lt;state&gt; with @ref="http:syriaca.org/keyword/saints". 
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="personGrp-series-agreement" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:text[//tei:seriesStmt[tei:title='A Guide to Syriac Authors']]//tei:personGrp">
+                <sch:assert test="contains(@ana, '#syriaca-author')">
+                  If a person record is part of the series "A Guide to Syriac Authors" it must have an @ana attribute with "#syriaca-author" on the &lt;personGrp&gt; element.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text[//tei:seriesStmt[tei:title='Qadishe: A Guide to the Syriac Saints']]//tei:personGrp">
+                <sch:assert test="contains(@ana, '#syriaca-saint')">
+                  If a person record is part of the series "Qadishe: A Guide to the Syriac Saints" it must have an @ana attribute with "#syriaca-saint" on the &lt;personGrp&gt; element.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text[//tei:seriesStmt[tei:title='Gateway to the Syriac Saints']]//tei:personGrp">
+                <sch:assert test="contains(@ana, '#syriaca-saint')">
+                  If a person record is part of the series "Gateway to the Syriac Saints" it must have an @ana attribute with "#syriaca-saint" on the &lt;personGrp&gt; element.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="tei:text[//tei:seriesStmt[tei:title='Syriac Anonymi']]//tei:personGrp">
+                <sch:assert test="contains(@ana, '#syriaca-anonymous')">
+                  If a person record is part of the series "Syriac Anonymi" it must have an @ana attribute with "#syriaca-anonymous" on the &lt;personGrp&gt; element.
                 </sch:assert>
               </sch:rule>
             </constraint>
