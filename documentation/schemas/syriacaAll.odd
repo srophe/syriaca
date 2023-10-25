@@ -1181,10 +1181,11 @@
           <constraintSpec ident="target-in-ptr" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:body//tei:bibl/tei:ptr/@target" role="warning">
+                <sch:let name="error" value="."/>
                 <sch:assert test="starts-with(., 'http://syriaca.org/bibl/')">
-                  Under most circumstances, the @target attribute on a &lt;ptr&gt; element should be a properly formatted Syriaca.org bibliography URI 
-                  which starts with 'http://syriaca.org/bibl/' followed by a numerical or alpha-numerical string. However, when the &lt;ptr&gt; element indicates an external web address 
-                  (i.e. http://pleiades.stoa.org/places/922698), the @target should indicate the correct URL for that resource and this warning message should be ignored.
+                  The @target value: "<sch:value-of select="$error"/>" is not a Syriaca.org URI. In circumstances where the &lt;ptr&gt; element 
+                  indicates an external web address (i.e. http://pleiades.stoa.org/places/922698), the @target should indicate the correct URL 
+                  for that resource and this warning message should be ignored.
                 </sch:assert>
               </sch:rule>
             </constraint>

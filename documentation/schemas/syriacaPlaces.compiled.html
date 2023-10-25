@@ -6911,13 +6911,13 @@ element profileDesc { tei_att.global.attributes, tei_langUsage }<a href="#index.
                            <div class="pre">
                               &lt;sch:rule context="//tei:body//tei:bibl/tei:ptr/@target"
                                role="warning"&gt;
-                              &lt;sch:assert test="starts-with(., 'http://syriaca.org/bibl/')"&gt; Under most circumstances,
-                              the @target attribute on a &lt;ptr&gt; element should be a properly formatted Syriaca.org
-                              bibliography URI
-                              which starts with 'http://syriaca.org/bibl/' followed by a numerical or alpha-numerical
-                              string. However, when the &lt;ptr&gt; element indicates an external web address
-                              (i.e. http://pleiades.stoa.org/places/922698), the @target should indicate the correct
-                              URL for that resource and this warning message should be ignored.
+                              &lt;sch:let name="error" value="."/&gt;
+                              &lt;sch:assert test="starts-with(., 'http://syriaca.org/bibl/')"&gt; The @target value:
+                              "&lt;sch:value-of select="$error"/&gt;" is not a Syriaca.org URI. In circumstances where
+                              the &lt;ptr&gt; element
+                              indicates an external web address (i.e. http://pleiades.stoa.org/places/922698), the
+                              @target should indicate the correct URL
+                              for that resource and this warning message should be ignored.
                               &lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
@@ -13172,7 +13172,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e26767" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-10-24T14:35:50Z.
+	       on 2023-10-25T15:08:20Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>
