@@ -725,23 +725,23 @@
           <constraintSpec ident="state-type-confession" scheme="schematron">
             <constraint>
               <sch:rule context="tei:text//tei:state[@type='confession']">
-                <sch:assert test="@ref">Must have a @ref attribute.</sch:assert>
-              </sch:rule>
-              <sch:rule context="//tei:state/@ref"><!-- Add rule pointing to Taxonomy when development allows. -->
-                <sch:let name="confessionDoc" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/>
-                <sch:let name="confessionIDs" value="$confessionDoc//tei:text//tei:item/@xml:id"/>
-                <sch:let name="confessionPtrs" value="for $i in $confessionIDs return concat('#', $i)"/>
-                <sch:let name="confessionRefValues" value="for $i in $confessionPtrs return concat('http://syriaca.org/documentation/confessions.xml', $i)"/>
                 <sch:let name="docURIno" value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(), '.+?(\d+).+', '$1')"/>
                 <sch:let name="id" value="@xml:id"/>
-                <sch:assert test="                   every $i in .                   satisfies $i = $confessionRefValues">
-                  The acceptable values of @ref are 'http://syriaca.org/documentation/confessions.xml' followed by one of the following:
-                  <sch:value-of select="string-join($confessionPtrs, '; ')"/>
-                </sch:assert>
+                <sch:assert test="@ref">Must have a @ref attribute.</sch:assert>
                 <sch:assert test="matches(./@xml:id, concat('confession', $docURIno, '-', '\d+$'))">
                   The required @xml:id must be 'confession<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
                 </sch:assert>
                 <sch:report test="preceding-sibling::element()[@xml:id = $id]">This @xml:id is already in use.</sch:report>
+              </sch:rule>
+              <sch:rule context="//tei:state[@type='confession']/@ref"><!-- Add rule pointing to Taxonomy when development allows. -->
+                <sch:let name="confessionDoc" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/>
+                <sch:let name="confessionIDs" value="$confessionDoc//tei:text//tei:item/@xml:id"/>
+                <sch:let name="confessionPtrs" value="for $i in $confessionIDs return concat('#', $i)"/>
+                <sch:let name="confessionRefValues" value="for $i in $confessionPtrs return concat('http://syriaca.org/documentation/confessions.xml', $i)"/>
+                <sch:assert test="                   every $i in .                   satisfies $i = $confessionRefValues">
+                  The acceptable values of @ref are 'http://syriaca.org/documentation/confessions.xml' followed by one of the following:
+                  <sch:value-of select="string-join($confessionPtrs, '; ')"/>
+                </sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>

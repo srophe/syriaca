@@ -8536,9 +8536,20 @@ element sponsor
                         <td class="wovenodd-col2">
                            <div class="pre">
                               &lt;sch:rule context="tei:text//tei:state[@type='confession']"&gt;
+                              &lt;sch:let name="docURIno"
+                               value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(),
+                              
+                              '.+?(\d+).+', '$1')"/&gt;
+                              &lt;sch:let name="id" value="@xml:id"/&gt;
                               &lt;sch:assert test="@ref"&gt;Must have a @ref attribute.&lt;/sch:assert&gt;
+                              &lt;sch:assert test="matches(./@xml:id, concat('confession', $docURIno, '-', '\d+$'))"&gt;
+                              The required @xml:id must be 'confession&lt;sch:value-of select="$docURIno"/&gt;-{\d+$}'
+                              (where {\d+$} is a number).
+                              &lt;/sch:assert&gt;
+                              &lt;sch:report test="preceding-sibling::element()[@xml:id = $id]"&gt;This @xml:id is already
+                              in use.&lt;/sch:report&gt;
                               &lt;/sch:rule&gt;
-                              &lt;sch:rule context="//tei:state/@ref"&gt;
+                              &lt;sch:rule context="//tei:state[@type='confession']/@ref"&gt;
                               &lt;sch:let name="confessionDoc"
                                value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/&gt;
                               &lt;sch:let name="confessionIDs"
@@ -8549,22 +8560,11 @@ element sponsor
                                value="for $i in $confessionPtrs return concat('http://syriaca.org/documentation/confessions.xml',
                               
                               $i)"/&gt;
-                              &lt;sch:let name="docURIno"
-                               value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(),
-                              
-                              '.+?(\d+).+', '$1')"/&gt;
-                              &lt;sch:let name="id" value="@xml:id"/&gt;
                               &lt;sch:assert test=" every $i in . satisfies $i = $confessionRefValues"&gt; The acceptable
                               values of @ref are 'http://syriaca.org/documentation/confessions.xml' followed by
                               one of the following:
                               &lt;sch:value-of select="string-join($confessionPtrs, '; ')"/&gt;
                               &lt;/sch:assert&gt;
-                              &lt;sch:assert test="matches(./@xml:id, concat('confession', $docURIno, '-', '\d+$'))"&gt;
-                              The required @xml:id must be 'confession&lt;sch:value-of select="$docURIno"/&gt;-{\d+$}'
-                              (where {\d+$} is a number).
-                              &lt;/sch:assert&gt;
-                              &lt;sch:report test="preceding-sibling::element()[@xml:id = $id]"&gt;This @xml:id is already
-                              in use.&lt;/sch:report&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
                      </tr>
@@ -13172,7 +13172,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e26767" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-10-25T15:08:20Z.
+	       on 2023-10-26T18:45:01Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>

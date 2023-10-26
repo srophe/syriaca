@@ -3,10 +3,9 @@
          xmlns:tei="http://www.tei-c.org/ns/1.0"
          xmlns:teix="http://www.tei-c.org/ns/Examples"
          xmlns:xlink="http://www.w3.org/1999/xlink"
-         xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-25T15:08:18Z. .
+Schema generated from ODD source 2023-10-26T18:45:05Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -4661,12 +4660,19 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
                       context="tei:text//tei:state[@type='confession']">
+               <sch:let name="docURIno"
+                        value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(), '.+?(\d+).+', '$1')"/>
+               <sch:let name="id" value="@xml:id"/>
                <sch:assert test="@ref">Must have a @ref attribute.</sch:assert>
+               <sch:assert test="matches(./@xml:id, concat('confession', $docURIno, '-', '\d+$'))">
+                  The required @xml:id must be 'confession<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
+                </sch:assert>
+               <sch:report test="preceding-sibling::element()[@xml:id = $id]">This @xml:id is already in use.</sch:report>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:state/@ref">
+                      context="//tei:state[@type='confession']/@ref">
                <sch:let name="confessionDoc"
                         value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/>
                <sch:let name="confessionIDs" value="$confessionDoc//tei:text//tei:item/@xml:id"/>
@@ -4674,17 +4680,10 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                         value="for $i in $confessionIDs return concat('#', $i)"/>
                <sch:let name="confessionRefValues"
                         value="for $i in $confessionPtrs return concat('http://syriaca.org/documentation/confessions.xml', $i)"/>
-               <sch:let name="docURIno"
-                        value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(), '.+?(\d+).+', '$1')"/>
-               <sch:let name="id" value="@xml:id"/>
                <sch:assert test="                   every $i in .                   satisfies $i = $confessionRefValues">
                   The acceptable values of @ref are 'http://syriaca.org/documentation/confessions.xml' followed by one of the following:
                   <sch:value-of select="string-join($confessionPtrs, '; ')"/>
                </sch:assert>
-               <sch:assert test="matches(./@xml:id, concat('confession', $docURIno, '-', '\d+$'))">
-                  The required @xml:id must be 'confession<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
-                </sch:assert>
-               <sch:report test="preceding-sibling::element()[@xml:id = $id]">This @xml:id is already in use.</sch:report>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
