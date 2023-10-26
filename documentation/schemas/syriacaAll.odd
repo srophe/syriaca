@@ -34,9 +34,31 @@
         </p>
       </sourceDesc>
     </fileDesc>
+    <profileDesc>
+      <creation>
+        <title>Instructions for processing the Syriaca.org chained ODD in oXygen.</title>
+        - First, be sure that schemaSpec/@source in this document points to "srophe.compiled.odd".
+        - Then process this ODD file into a compiled ODD using the transformation scenario "ODD to Compiled ODD".
+          - Save this as syriacaAll.compiled.odd and then delete the @start attribute from tei:schemaSpec.
+          - This compiled ODD (without a tei:schemaSpec/@start attribute) will be the starting point for the next step in the chained ODD.
+        - This compiled ODD can also be used to generate a .rng file against which you can validate a TEI document. 
+          - You generate this file using the transformation scenario "TEI ODD to RELAX NG XML".
+          - After you have generated the Relax NG, you need to add xmlns:srophe="https://srophe.app" to the grammar element at the top of that file.
+      </creation>
+    </profileDesc>
   </teiHeader>
   <text>
     <body>
+      
+      <!--Instructions for processing this chained ODD in oXygen.
+        First, be sure that schemaSpec/@source in this document points to "srophe.compiled.odd".
+        Then process this ODD file into a compiled ODD using the transformation scenario "ODD to Compiled ODD".
+        Save this as syriacaAll.compiled.odd and then delete the @start attribute from tei:schemaSpec.
+           - This compiled ODD (without a tei:schemaSpec/@start attribute) will be the starting point for the next step in the chained ODD.
+        This compiled ODD can also be used to generate a .rng file against which you can validate a TEI document. 
+           - You generate this file using the transformation scenario "TEI ODD to RELAX NG XML".
+           - After you have generated the Relax NG, you need to add xmlns:srophe="https://srophe.app" to the <grammar> element at the top of that file.
+      -->
       
       
       <schemaSpec ident="syriacaAll" prefix="tei_" source="srophe.compiled.odd" xml:lang="en" defaultExceptions="http://www.tei-c.org/ns/1.0 teix:egXML​ http://www.example.org/ns/">
