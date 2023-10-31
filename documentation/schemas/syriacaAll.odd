@@ -468,6 +468,16 @@
                   when citing a manuscript in which case this &lt;bibl&gt; should have
                   @type="syriaca:Manuscript".</sch:assert>
               </sch:rule>
+              <sch:rule context="//tei:text//tei:note/tei:bibl">
+                <sch:assert test="tei:ptr/@target">
+                  A &lt;ptr&gt; element with a @target attribute is required. 
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:text//tei:note/tei:bibl/tei:ptr/@target">
+                <sch:assert test="starts-with(., concat('http://syriaca.org/manuscript', '{\d+?}'))">
+                  This target must point to a Syriaca.org manuscript URI taking the form "http://syriaca.org/manuscript/{\d+?}} where {\d+?} is a number
+                </sch:assert>
+              </sch:rule>
             </constraint>
           </constraintSpec>
           <attList>
@@ -1470,6 +1480,15 @@
               <sch:rule context="//tei:seriesStmt//tei:title">
                 <sch:assert test="matches(@level, 'm') or matches(@level, 's')">Only &lt;title&gt; elements of @level="m" or "s"
                   are allowed in the &lt;seriesStmt&gt;.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="title-in-note" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:text//tei:note/tei:title/@ref">
+                <sch:assert test="starts-with(., concat('http://syriaca.org/work/', '{\d+?}'))">
+                  The @ref attribute may only take a Syriaca.org work URI in the form "http://syriaca.org/work/{\d+?}" where {\d+?} is a number.
                 </sch:assert>
               </sch:rule>
             </constraint>

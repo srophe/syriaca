@@ -33,11 +33,21 @@
         </p>
       </sourceDesc>
     </fileDesc>
+    <profileDesc>
+      <!--  Instructions for processing the Syriaca.org chained ODD in oXygen.
+        - First, be sure that schemaSpec/@source in this document points to "srophe.compiled.odd".
+        - Then process this ODD file into a compiled ODD using the transformation scenario "ODD to Compiled ODD".
+          - Save this as syriacaAll.compiled.odd and then delete the @start attribute from tei:schemaSpec.
+          - This compiled ODD (without a tei:schemaSpec/@start attribute) will be the starting point for the next step in the chained ODD.
+        - This compiled ODD can also be used to generate a .rng file against which you can validate a TEI document. 
+          - You generate this file using the transformation scenario "TEI ODD to RELAX NG XML".
+          - After you have generated the Relax NG, you need to add xmlns:srophe="https://srophe.app" to the grammar element at the top of that file. -->
+    </profileDesc>
   </teiHeader>
   <text>
     <body>
       
-      
+          
       <schemaSpec ident="syriacaAll" prefix="tei_" xml:lang="en" defaultExceptions="http://www.tei-c.org/ns/1.0 teix:egXML​ http://www.example.org/ns/"><classSpec rend="add" module="tei" type="atts" ident="att.ascribed">
   <desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2006-01-05" xml:lang="en">provides attributes for elements representing speech or action that can be ascribed to a
     specific individual.</desc>
@@ -6024,7 +6034,7 @@ Measures</ref>
               <sch:rule context="//tei:body//tei:bibl/tei:ptr/@target" role="warning">
                 <sch:let name="error" value="."/>
                 <sch:assert test="starts-with(., 'http://syriaca.org/bibl/')">
-                  The @target value: "<sch:value-of select="$error"/>" is not a Syriaca.org URI. In circumstances where the &lt;ptr&gt; element 
+                  The @target value: "<sch:value-of select="$error"/>" is not a Syriaca.org bibl URI. In circumstances where the &lt;ptr&gt; element 
                   indicates an external web address (i.e. http://pleiades.stoa.org/places/922698), the @target should indicate the correct URL 
                   for that resource and this warning message should be ignored.
                 </sch:assert>
@@ -6617,6 +6627,14 @@ autor/a/es, ya sea una persona o una institución, de una obra; por ejemplo, en 
                 </sch:assert>
               </sch:rule>
             </constraint>
+          </constraintSpec><constraintSpec ident="title-in-note" scheme="schematron">
+            <constraint>
+              <sch:rule context="//tei:text//tei:note/tei:title/@ref">
+                <sch:assert test="starts-with(., concat('http://syriaca.org/work/', '{\d+?}'))">
+                  The @ref attribute may only take a Syriaca.org work URI in the form "http://syriaca.org/work/{\d+?}" where {\d+?} is a number.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
           </constraintSpec><attList><attDef ident="type" mode="replace" usage="opt">
               <desc>Describes the function of the title. This attribute is optional. Certain
                 non-blank values (such as "final-rubric") may cause the title to be moved to a
@@ -6890,6 +6908,16 @@ doit pas être utilisé.</p>
                   indicating the URI or URL for the citation. The only exception is when 
                   when citing a manuscript in which case this &lt;bibl&gt; should have
                   @type="syriaca:Manuscript".</sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:text//tei:note/tei:bibl">
+                <sch:assert test="tei:ptr/@target">
+                  A &lt;ptr&gt; element with a @target attribute is required. 
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:text//tei:note/tei:bibl/tei:ptr/@target">
+                <sch:assert test="starts-with(., concat('http://syriaca.org/manuscript', '{\d+?}'))">
+                  This target must point to a Syriaca.org manuscript URI taking the form "http://syriaca.org/manuscript/{\d+?}} where {\d+?} is a number
+                </sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec><attList><attDef ident="subtype" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="xml:lang" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="resp" mode="delete"/><attDef ident="source" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="corresp" mode="delete"/><attDef ident="type" mode="change" usage="opt">

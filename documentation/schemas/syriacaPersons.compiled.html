@@ -895,6 +895,16 @@ element availability
                               indicating the URI or URL for the citation. The only exception is when
                               when citing a manuscript in which case this &lt;bibl&gt; should have
                               @type="syriaca:Manuscript".&lt;/sch:assert&gt;
+                              &lt;/sch:rule&gt;
+                              &lt;sch:rule context="//tei:text//tei:note/tei:bibl"&gt;
+                              &lt;sch:assert test="tei:ptr/@target"&gt; A &lt;ptr&gt; element with a @target attribute is required.
+                              &lt;/sch:assert&gt;
+                              &lt;/sch:rule&gt;
+                              &lt;sch:rule context="//tei:text//tei:note/tei:bibl/tei:ptr/@target"&gt;
+                              &lt;sch:assert test="starts-with(., concat('http://syriaca.org/manuscript', '{\d+?}'))"&gt;
+                              This target must point to a Syriaca.org manuscript URI taking the form "http://syriaca.org/manuscript/{\d+?}}
+                              where {\d+?} is a number
+                              &lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
                      </tr>
@@ -7072,8 +7082,8 @@ element profileDesc { tei_att.global.attributes, tei_langUsage }<a href="#index.
                                role="warning"&gt;
                               &lt;sch:let name="error" value="."/&gt;
                               &lt;sch:assert test="starts-with(., 'http://syriaca.org/bibl/')"&gt; The @target value:
-                              "&lt;sch:value-of select="$error"/&gt;" is not a Syriaca.org URI. In circumstances where
-                              the &lt;ptr&gt; element
+                              "&lt;sch:value-of select="$error"/&gt;" is not a Syriaca.org bibl URI. In circumstances
+                              where the &lt;ptr&gt; element
                               indicates an external web address (i.e. http://pleiades.stoa.org/places/922698), the
                               @target should indicate the correct URL
                               for that resource and this warning message should be ignored.
@@ -9662,19 +9672,31 @@ element text { tei_body }<a href="#index.xml-eg-d31e17447" class="anchorlink">�
                         </td>
                      </tr>
                      <tr>
+                        <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td>
+                        <td class="wovenodd-col2">
+                           <div class="pre">
+                              &lt;sch:rule context="//tei:text//tei:note/tei:title/@ref"&gt;
+                              &lt;sch:assert test="starts-with(., concat('http://syriaca.org/work/', '{\d+?}'))"&gt; The
+                              @ref attribute may only take a Syriaca.org work URI in the form "http://syriaca.org/work/{\d+?}"
+                              where {\d+?} is a number.
+                              &lt;/sch:assert&gt;
+                              &lt;/sch:rule&gt;</div>
+                        </td>
+                     </tr>
+                     <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e17979" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e17986" class="pre_eg cdata">
 &lt;content&gt;
  &lt;macroRef key="macro.paraContent"/&gt;
 &lt;/content&gt;
-    <a href="#index.xml-eg-d31e17979" class="anchorlink">⚓</a></pre>
+    <a href="#index.xml-eg-d31e17986" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schema Declaration</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e17986" class="pre_eg">
+                           <pre id="index.xml-eg-d31e17993" class="pre_eg">
 element title
 {
    tei_att.global.attribute.xmllang,
@@ -9683,7 +9705,7 @@ element title
    attribute type { "initial-rubric" | "final-rubric" | "abbreviation" }?,
    attribute level { "a" | "j" | "s" | "m" }?,
    tei_macro.paraContent
-}<a href="#index.xml-eg-d31e17986" class="anchorlink">⚓</a></pre>
+}<a href="#index.xml-eg-d31e17993" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                   </table>
@@ -9732,7 +9754,7 @@ element title
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Example</span></td>
                         <td class="wovenodd-col2">
-                           <div id="index.xml-egXML-d31e18168" class="pre egXML_valid"><span class="element">&lt;titleStmt&gt;</span>
+                           <div id="index.xml-egXML-d31e18175" class="pre egXML_valid"><span class="element">&lt;titleStmt&gt;</span>
                                <span class="element">&lt;title <span class="attribute">level</span>="<span class="attributevalue">a</span>" <span class="attribute">xml:lang</span>="<span class="attributevalue">en</span>"&gt;</span>Van<span class="element">&lt;/title&gt;</span>
                                <span class="element">&lt;sponsor&gt;</span>Syriaca.org: The Syriac Reference Portal<span class="element">&lt;/sponsor&gt;</span>
                                <span class="element">&lt;funder&gt;</span>The National Endowment for the Humanities<span class="element">&lt;/funder&gt;</span>
@@ -9755,7 +9777,7 @@ element title
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e18190" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e18197" class="pre_eg cdata">
 &lt;content&gt;
  &lt;sequence minOccurs="1" maxOccurs="1"
   preserveOrder="true"&gt;
@@ -9771,18 +9793,18 @@ element title
    maxOccurs="unbounded"/&gt;
  &lt;/sequence&gt;
 &lt;/content&gt;
-    <a href="#index.xml-eg-d31e18190" class="anchorlink">⚓</a></pre>
+    <a href="#index.xml-eg-d31e18197" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schema Declaration</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e18197" class="pre_eg">
+                           <pre id="index.xml-eg-d31e18204" class="pre_eg">
 element titleStmt
 {
    tei_att.global.attributes,
    ( tei_title+, tei_sponsor+, tei_funder*, tei_editor+, tei_respStmt+ )
-}<a href="#index.xml-eg-d31e18197" class="anchorlink">⚓</a></pre>
+}<a href="#index.xml-eg-d31e18204" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                   </table>
@@ -9845,7 +9867,7 @@ element titleStmt
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Example</span></td>
                         <td class="wovenodd-col2">
-                           <div id="index.xml-egXML-d31e18459" class="pre egXML_valid"><span class="element">&lt;trait <span class="attribute">type</span>="<span class="attributevalue">physical</span>"&gt;</span>
+                           <div id="index.xml-egXML-d31e18466" class="pre egXML_valid"><span class="element">&lt;trait <span class="attribute">type</span>="<span class="attributevalue">physical</span>"&gt;</span>
                                <span class="element">&lt;label&gt;</span>Eye colour<span class="element">&lt;/label&gt;</span>
                                <span class="element">&lt;desc&gt;</span>Blue<span class="element">&lt;/desc&gt;</span>
                               <span class="element">&lt;/trait&gt;</span></div>
@@ -9854,18 +9876,18 @@ element titleStmt
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e18468" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e18475" class="pre_eg cdata">
 &lt;content&gt;
  &lt;elementRef key="desc" minOccurs="1"
   maxOccurs="1"/&gt;
 &lt;/content&gt;
-    <a href="#index.xml-eg-d31e18468" class="anchorlink">⚓</a></pre>
+    <a href="#index.xml-eg-d31e18475" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schema Declaration</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e18475" class="pre_eg">
+                           <pre id="index.xml-eg-d31e18482" class="pre_eg">
 element trait
 {
    tei_att.global.linking.attribute.previous,
@@ -9873,7 +9895,7 @@ element trait
    tei_att.datable.attributes,
    tei_att.typed.attribute.type,
    tei_desc
-}<a href="#index.xml-eg-d31e18475" class="anchorlink">⚓</a></pre>
+}<a href="#index.xml-eg-d31e18482" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                   </table>
@@ -10688,7 +10710,7 @@ element trait
                                              </tr>
                                              <tr>
                                                 <td colspan="2">
-                                                   <div id="index.xml-egXML-d31e20727" class="pre egXML_valid"><span class="element">&lt;name <span class="attribute">ref</span>="<span class="attributevalue">http://viaf.org/viaf/109557338</span>"
+                                                   <div id="index.xml-egXML-d31e20734" class="pre egXML_valid"><span class="element">&lt;name <span class="attribute">ref</span>="<span class="attributevalue">http://viaf.org/viaf/109557338</span>"
                                                           <span class="attribute">type</span>="<span class="attributevalue">person</span>"&gt;</span>Seamus Heaney<span class="element">&lt;/name&gt;</span></div>
                                                 </td>
                                              </tr>
@@ -10792,7 +10814,7 @@ element trait
                                              </tr>
                                              <tr>
                                                 <td colspan="2">
-                                                   <div id="index.xml-egXML-d31e20965" class="pre egXML_valid">He was born on <span class="element">&lt;date <span class="attribute">calendar</span>="<span class="attributevalue">#gregorian</span>"&gt;</span>Feb. 22, 1732<span class="element">&lt;/date&gt;</span> (<span class="element">&lt;date <span class="attribute">calendar</span>="<span class="attributevalue">#julian</span>"
+                                                   <div id="index.xml-egXML-d31e20972" class="pre egXML_valid">He was born on <span class="element">&lt;date <span class="attribute">calendar</span>="<span class="attributevalue">#gregorian</span>"&gt;</span>Feb. 22, 1732<span class="element">&lt;/date&gt;</span> (<span class="element">&lt;date <span class="attribute">calendar</span>="<span class="attributevalue">#julian</span>"
                                                           <span class="attribute">when</span>="<span class="attributevalue">1732-02-22</span>"&gt;</span>Feb. 11, 1731/32,
                                                        O.S.<span class="element">&lt;/date&gt;</span>).
                                                       </div>
@@ -10800,7 +10822,7 @@ element trait
                                              </tr>
                                              <tr>
                                                 <td colspan="2">
-                                                   <div id="index.xml-egXML-d31e20975" class="pre egXML_valid"> He was born on <span class="element">&lt;date <span class="attribute">calendar</span>="<span class="attributevalue">#gregorian #julian</span>"
+                                                   <div id="index.xml-egXML-d31e20982" class="pre egXML_valid"> He was born on <span class="element">&lt;date <span class="attribute">calendar</span>="<span class="attributevalue">#gregorian #julian</span>"
                                                           <span class="attribute">when</span>="<span class="attributevalue">1732-02-22</span>"&gt;</span>Feb. 22, 1732
                                                        (Feb. 11, 1731/32, O.S.)<span class="element">&lt;/date&gt;</span>.
                                                       </div>
@@ -10896,7 +10918,7 @@ element trait
                                              </tr>
                                              <tr>
                                                 <td colspan="2">The following are examples of custom date or time formats that are <em>not</em> valid ISO or W3C format normalizations, normalized to a different dating system
-                                                   <div id="index.xml-egXML-d31e21167" class="pre egXML_valid"><span class="element">&lt;p&gt;</span>Alhazen died in Cairo on the
+                                                   <div id="index.xml-egXML-d31e21174" class="pre egXML_valid"><span class="element">&lt;p&gt;</span>Alhazen died in Cairo on the
                                                       <span class="element">&lt;date <span class="attribute">when</span>="<span class="attributevalue">1040-03-06</span>"
                                                            <span class="attribute">when-custom</span>="<span class="attributevalue">431-06-12</span>"&gt;</span> 12th day of Jumada t-Tania, 430 AH
                                                        <span class="element">&lt;/date&gt;</span>.<span class="element">&lt;/p&gt;</span>
@@ -10960,7 +10982,7 @@ element trait
                                              </tr>
                                              <tr>
                                                 <td colspan="2">
-                                                   <div id="index.xml-egXML-d31e21283" class="pre egXML_valid"><span class="element">&lt;event <span class="attribute">xml:id</span>="<span class="attributevalue">FIRE1</span>"
+                                                   <div id="index.xml-egXML-d31e21290" class="pre egXML_valid"><span class="element">&lt;event <span class="attribute">xml:id</span>="<span class="attributevalue">FIRE1</span>"
                                                           <span class="attribute">datingMethod</span>="<span class="attributevalue">#julian</span>"
                                                           <span class="attribute">from-custom</span>="<span class="attributevalue">1666-09-02</span>"
                                                           <span class="attribute">to-custom</span>="<span class="attributevalue">1666-09-05</span>"&gt;</span>
@@ -11021,7 +11043,7 @@ element trait
                                              </tr>
                                              <tr>
                                                 <td colspan="2">
-                                                   <div id="index.xml-egXML-d31e21367" class="pre egXML_valid">Contayning the Originall, Antiquity, Increaſe, Moderne
+                                                   <div id="index.xml-egXML-d31e21374" class="pre egXML_valid">Contayning the Originall, Antiquity, Increaſe, Moderne
                                                        eſtate, and deſcription of that Citie, written in the yeare
                                                       <span class="element">&lt;date <span class="attribute">when-custom</span>="<span class="attributevalue">1598</span>"
                                                           <span class="attribute">calendar</span>="<span class="attributevalue">#julian</span>"
@@ -11030,7 +11052,7 @@ element trait
                                              </tr>
                                              <tr>
                                                 <td colspan="2">
-                                                   <div id="index.xml-egXML-d31e21389" class="pre egXML_valid"><span class="element">&lt;date <span class="attribute">when</span>="<span class="attributevalue">1382-06-28</span>"
+                                                   <div id="index.xml-egXML-d31e21396" class="pre egXML_valid"><span class="element">&lt;date <span class="attribute">when</span>="<span class="attributevalue">1382-06-28</span>"
                                                           <span class="attribute">when-custom</span>="<span class="attributevalue">6890-06-20</span>"
                                                           <span class="attribute">datingMethod</span>="<span class="attributevalue">#creationOfWorld</span>"&gt;</span> μηνὶ Ἰουνίου εἰς <span class="element">&lt;num&gt;</span>κ<span class="element">&lt;/num&gt;</span> ἔτους <span class="element">&lt;num&gt;</span>ςωϞ<span class="element">&lt;/num&gt;</span>
                                                       <span class="element">&lt;/date&gt;</span></div>In this example, a date is given in a Mediaeval text measured <span class="q">‘from the creation of the world’</span>, which is normalized (in <span class="att">when</span>) to the Gregorian date, but is also normalized (in <span class="att">when-custom</span>) to a machine-actionable, numeric version of the date from the Creation.</td>
@@ -11088,7 +11110,7 @@ element trait
                                              </tr>
                                              <tr>
                                                 <td colspan="2">Examples of W3C date, time, and date &amp; time formats.
-                                                   <div id="index.xml-egXML-d31e21553" class="pre egXML_valid"><span class="element">&lt;p&gt;</span>
+                                                   <div id="index.xml-egXML-d31e21560" class="pre egXML_valid"><span class="element">&lt;p&gt;</span>
                                                        <span class="element">&lt;date <span class="attribute">when</span>="<span class="attributevalue">1945-10-24</span>"&gt;</span>24 Oct 45<span class="element">&lt;/date&gt;</span>
                                                        <span class="element">&lt;date <span class="attribute">when</span>="<span class="attributevalue">1996-09-24T07:25:00Z</span>"&gt;</span>September 24th, 1996 at 3:25 in the morning<span class="element">&lt;/date&gt;</span>
                                                        <span class="element">&lt;time <span class="attribute">when</span>="<span class="attributevalue">1999-01-04T20:42:00-05:00</span>"&gt;</span>Jan 4 1999 at 8 pm<span class="element">&lt;/time&gt;</span>
@@ -11105,7 +11127,7 @@ element trait
                                              </tr>
                                              <tr>
                                                 <td colspan="2">
-                                                   <div id="index.xml-egXML-d31e21579" class="pre egXML_valid">This list begins in
+                                                   <div id="index.xml-egXML-d31e21586" class="pre egXML_valid">This list begins in
                                                        the year 1632, more precisely on Trinity Sunday, i.e. the Sunday after
                                                        Pentecost, in that year the
                                                       <span class="element">&lt;date <span class="attribute">calendar</span>="<span class="attributevalue">#julian</span>"
@@ -11114,7 +11136,7 @@ element trait
                                              </tr>
                                              <tr>
                                                 <td colspan="2">
-                                                   <div id="index.xml-egXML-d31e21586" class="pre egXML_valid"><span class="element">&lt;opener&gt;</span>
+                                                   <div id="index.xml-egXML-d31e21593" class="pre egXML_valid"><span class="element">&lt;opener&gt;</span>
                                                        <span class="element">&lt;dateline&gt;</span>
                                                         <span class="element">&lt;placeName&gt;</span>Dorchester, Village,<span class="element">&lt;/placeName&gt;</span>
                                                         <span class="element">&lt;date <span class="attribute">when</span>="<span class="attributevalue">1828-03-02</span>"&gt;</span>March 2d. 1828.<span class="element">&lt;/date&gt;</span>
@@ -11230,7 +11252,7 @@ element trait
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Example</span></td>
                         <td class="wovenodd-col2">
-                           <div id="index.xml-egXML-d31e21714" class="pre egXML_valid"><span class="element">&lt;date <span class="attribute">from</span>="<span class="attributevalue">1863-05-28</span>" <span class="attribute">to</span>="<span class="attributevalue">1863-06-01</span>"&gt;</span>28 May through 1 June 1863<span class="element">&lt;/date&gt;</span></div>
+                           <div id="index.xml-egXML-d31e21721" class="pre egXML_valid"><span class="element">&lt;date <span class="attribute">from</span>="<span class="attributevalue">1863-05-28</span>" <span class="attribute">to</span>="<span class="attributevalue">1863-06-01</span>"&gt;</span>28 May through 1 June 1863<span class="element">&lt;/date&gt;</span></div>
                         </td>
                      </tr>
                      <tr>
@@ -11425,7 +11447,7 @@ element trait
                                              </tr>
                                              <tr>
                                                 <td colspan="2">
-                                                   <div id="index.xml-egXML-d31e22455" class="pre egXML_valid"><span class="element">&lt;p&gt;</span> … The consequences of
+                                                   <div id="index.xml-egXML-d31e22462" class="pre egXML_valid"><span class="element">&lt;p&gt;</span> … The consequences of
                                                        this rapid depopulation were the loss of the last
                                                       <span class="element">&lt;foreign <span class="attribute">xml:lang</span>="<span class="attributevalue">rap</span>"&gt;</span>ariki<span class="element">&lt;/foreign&gt;</span> or chief
                                                        (Routledge 1920:205,210) and their connections to
@@ -11620,7 +11642,7 @@ element trait
                                              </tr>
                                              <tr>
                                                 <td colspan="2">
-                                                   <div id="index.xml-egXML-d31e23380" class="pre egXML_valid"><span class="element">&lt;group&gt;</span>
+                                                   <div id="index.xml-egXML-d31e23387" class="pre egXML_valid"><span class="element">&lt;group&gt;</span>
                                                        <span class="element">&lt;text <span class="attribute">xml:id</span>="<span class="attributevalue">t1-g1-t1</span>"
                                                            <span class="attribute">xml:lang</span>="<span class="attributevalue">mi</span>"&gt;</span>
                                                         <span class="element">&lt;body <span class="attribute">xml:id</span>="<span class="attributevalue">t1-g1-t1-body1</span>"&gt;</span>
@@ -11645,7 +11667,7 @@ element trait
                                              </tr>
                                              <tr>
                                                 <td colspan="2">
-                                                   <div id="index.xml-egXML-d31e23413" class="pre egXML_valid"><span class="element">&lt;place <span class="attribute">xml:id</span>="<span class="attributevalue">LOND1</span>"
+                                                   <div id="index.xml-egXML-d31e23420" class="pre egXML_valid"><span class="element">&lt;place <span class="attribute">xml:id</span>="<span class="attributevalue">LOND1</span>"
                                                           <span class="attribute">corresp</span>="<span class="attributevalue">people.xml#LOND2 people.xml#GENI1</span>"&gt;</span>
                                                        <span class="element">&lt;placeName&gt;</span>London<span class="element">&lt;/placeName&gt;</span>
                                                        <span class="element">&lt;desc&gt;</span>The city of London...<span class="element">&lt;/desc&gt;</span>
@@ -11715,7 +11737,7 @@ element trait
                                              </tr>
                                              <tr>
                                                 <td colspan="2">
-                                                   <div id="index.xml-egXML-d31e23718" class="pre egXML_valid"><span class="element">&lt;head <span class="attribute">rend</span>="<span class="attributevalue">align(center) case(allcaps)</span>"&gt;</span>
+                                                   <div id="index.xml-egXML-d31e23725" class="pre egXML_valid"><span class="element">&lt;head <span class="attribute">rend</span>="<span class="attributevalue">align(center) case(allcaps)</span>"&gt;</span>
                                                        <span class="element">&lt;lb/&gt;</span>To The <span class="element">&lt;lb/&gt;</span>Duchesse <span class="element">&lt;lb/&gt;</span>of <span class="element">&lt;lb/&gt;</span>Newcastle,
                                                       <span class="element">&lt;lb/&gt;</span>On Her <span class="element">&lt;lb/&gt;</span>
                                                        <span class="element">&lt;hi <span class="attribute">rend</span>="<span class="attributevalue">case(mixed)</span>"&gt;</span>New Blazing-World<span class="element">&lt;/hi&gt;</span>. 
@@ -11806,7 +11828,7 @@ element trait
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Example</span></td>
                         <td class="wovenodd-col2">
-                           <div id="index.xml-egXML-d31e24085" class="pre egXML_valid">Blessed are the
+                           <div id="index.xml-egXML-d31e24092" class="pre egXML_valid">Blessed are the
                               <span class="element">&lt;choice&gt;</span>
                                <span class="element">&lt;sic&gt;</span>cheesemakers<span class="element">&lt;/sic&gt;</span>
                                <span class="element">&lt;corr <span class="attribute">resp</span>="<span class="attributevalue">#editor</span>" <span class="attribute">cert</span>="<span class="attributevalue">high</span>"&gt;</span>peacemakers<span class="element">&lt;/corr&gt;</span>
@@ -11816,7 +11838,7 @@ element trait
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Example</span></td>
                         <td class="wovenodd-col2">
-                           <div id="index.xml-egXML-d31e24097" class="pre egXML_valid"><span class="element">&lt;lg&gt;</span>
+                           <div id="index.xml-egXML-d31e24104" class="pre egXML_valid"><span class="element">&lt;lg&gt;</span>
                                <span class="element">&lt;l&gt;</span>Punkes, Panders, baſe extortionizing
                                  sla<span class="element">&lt;choice&gt;</span>
                                  <span class="element">&lt;sic&gt;</span>n<span class="element">&lt;/sic&gt;</span>
@@ -11937,7 +11959,7 @@ element trait
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Example</span></td>
                         <td class="wovenodd-col2">
-                           <div id="index.xml-egXML-d31e24455" class="pre egXML_valid"><span class="element">&lt;p&gt;</span> As Willard McCarty (<span class="element">&lt;bibl <span class="attribute">xml:id</span>="<span class="attributevalue">mcc_2012</span>"&gt;</span>2012, p.2<span class="element">&lt;/bibl&gt;</span>) tells us, <span class="element">&lt;quote <span class="attribute">source</span>="<span class="attributevalue">#mcc_2012</span>"&gt;</span>‘Collaboration’ is a problematic and should be a contested
+                           <div id="index.xml-egXML-d31e24462" class="pre egXML_valid"><span class="element">&lt;p&gt;</span> As Willard McCarty (<span class="element">&lt;bibl <span class="attribute">xml:id</span>="<span class="attributevalue">mcc_2012</span>"&gt;</span>2012, p.2<span class="element">&lt;/bibl&gt;</span>) tells us, <span class="element">&lt;quote <span class="attribute">source</span>="<span class="attributevalue">#mcc_2012</span>"&gt;</span>‘Collaboration’ is a problematic and should be a contested
                                  term.<span class="element">&lt;/quote&gt;</span>
                               <span class="element">&lt;/p&gt;</span></div>
                         </td>
@@ -11945,7 +11967,7 @@ element trait
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Example</span></td>
                         <td class="wovenodd-col2">
-                           <div id="index.xml-egXML-d31e24468" class="pre egXML_valid"><span class="element">&lt;p&gt;</span>
+                           <div id="index.xml-egXML-d31e24475" class="pre egXML_valid"><span class="element">&lt;p&gt;</span>
                                <span class="element">&lt;quote <span class="attribute">source</span>="<span class="attributevalue">#chicago_15_ed</span>"&gt;</span>Grammatical theories are in flux, and the more we learn, the
                                  less we seem to know.<span class="element">&lt;/quote&gt;</span>
                               <span class="element">&lt;/p&gt;</span>
@@ -11960,12 +11982,12 @@ element trait
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Example</span></td>
                         <td class="wovenodd-col2">
-                           <div id="index.xml-egXML-d31e24492" class="pre egXML_valid"><span class="element">&lt;elementRef <span class="attribute">key</span>="<span class="attributevalue">p</span>" <span class="attribute">source</span>="<span class="attributevalue">tei:2.0.1</span>"/&gt;</span></div>Include in the schema an element named <a class="link_ref" href="#TEI.p" title="&lt;p&gt;">&lt;p&gt;</a> available from the TEI P5 2.0.1 release.</td>
+                           <div id="index.xml-egXML-d31e24499" class="pre egXML_valid"><span class="element">&lt;elementRef <span class="attribute">key</span>="<span class="attributevalue">p</span>" <span class="attribute">source</span>="<span class="attributevalue">tei:2.0.1</span>"/&gt;</span></div>Include in the schema an element named <a class="link_ref" href="#TEI.p" title="&lt;p&gt;">&lt;p&gt;</a> available from the TEI P5 2.0.1 release.</td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Example</span></td>
                         <td class="wovenodd-col2">
-                           <div id="index.xml-egXML-d31e24503" class="pre egXML_valid"><span class="element">&lt;schemaSpec <span class="attribute">ident</span>="<span class="attributevalue">myODD</span>"
+                           <div id="index.xml-egXML-d31e24510" class="pre egXML_valid"><span class="element">&lt;schemaSpec <span class="attribute">ident</span>="<span class="attributevalue">myODD</span>"
                                   <span class="attribute">source</span>="<span class="attributevalue">mycompiledODD.xml</span>"/&gt;</span></div>Create a schema using components taken from the file <span class="ident">mycompiledODD.xml</span>.</td>
                      </tr>
                   </table>
@@ -12186,7 +12208,7 @@ element trait
                                              </tr>
                                              <tr>
                                                 <td colspan="2">
-                                                   <div id="index.xml-egXML-d31e24994" class="pre egXML_valid"><span class="element">&lt;div <span class="attribute">type</span>="<span class="attributevalue">verse</span>"&gt;</span>
+                                                   <div id="index.xml-egXML-d31e25001" class="pre egXML_valid"><span class="element">&lt;div <span class="attribute">type</span>="<span class="attributevalue">verse</span>"&gt;</span>
                                                        <span class="element">&lt;head&gt;</span>Night in Tarras<span class="element">&lt;/head&gt;</span>
                                                        <span class="element">&lt;lg <span class="attribute">type</span>="<span class="attributevalue">stanza</span>"&gt;</span>
                                                         <span class="element">&lt;l&gt;</span>At evening tramping on the hot white road<span class="element">&lt;/l&gt;</span>
@@ -12283,7 +12305,7 @@ element trait
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25114" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e25121" class="pre_eg cdata">
 &lt;content&gt;
  &lt;alternate minOccurs="0"
   maxOccurs="unbounded"&gt;
@@ -12291,14 +12313,14 @@ element trait
   &lt;classRef key="model.paraPart"/&gt;
  &lt;/alternate&gt;
 &lt;/content&gt;
-    <a href="#index.xml-eg-d31e25114" class="anchorlink">⚓</a></pre>
+    <a href="#index.xml-eg-d31e25121" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Declaration</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25121" class="pre_eg">
-tei_macro.paraContent = ( text | tei_model.paraPart )*<a href="#index.xml-eg-d31e25121" class="anchorlink">⚓</a></pre>
+                           <pre id="index.xml-eg-d31e25128" class="pre_eg">
+tei_macro.paraContent = ( text | tei_model.paraPart )*<a href="#index.xml-eg-d31e25128" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                   </table>
@@ -12324,7 +12346,7 @@ tei_macro.paraContent = ( text | tei_model.paraPart )*<a href="#index.xml-eg-d31
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25180" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e25187" class="pre_eg cdata">
 &lt;content&gt;
  &lt;alternate minOccurs="0"
   maxOccurs="unbounded"&gt;
@@ -12335,13 +12357,13 @@ tei_macro.paraContent = ( text | tei_model.paraPart )*<a href="#index.xml-eg-d31
   &lt;classRef key="model.global"/&gt;
  &lt;/alternate&gt;
 &lt;/content&gt;
-    <a href="#index.xml-eg-d31e25180" class="anchorlink">⚓</a></pre>
+    <a href="#index.xml-eg-d31e25187" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Declaration</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25187" class="pre_eg">
+                           <pre id="index.xml-eg-d31e25194" class="pre_eg">
 tei_macro.phraseSeq =
    (
       text
@@ -12349,7 +12371,7 @@ tei_macro.phraseSeq =
     | tei_model.attributable
     | tei_model.phrase
     | tei_model.global
-   )*<a href="#index.xml-eg-d31e25187" class="anchorlink">⚓</a></pre>
+   )*<a href="#index.xml-eg-d31e25194" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                   </table>
@@ -12376,7 +12398,7 @@ tei_macro.phraseSeq =
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25247" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e25254" class="pre_eg cdata">
 &lt;content&gt;
  &lt;alternate minOccurs="0"
   maxOccurs="unbounded"&gt;
@@ -12385,15 +12407,15 @@ tei_macro.phraseSeq =
   &lt;classRef key="model.global"/&gt;
  &lt;/alternate&gt;
 &lt;/content&gt;
-    <a href="#index.xml-eg-d31e25247" class="anchorlink">⚓</a></pre>
+    <a href="#index.xml-eg-d31e25254" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Declaration</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25254" class="pre_eg">
+                           <pre id="index.xml-eg-d31e25261" class="pre_eg">
 tei_macro.phraseSeq.limited =
-   ( text | tei_model.limitedPhrase | tei_model.global )*<a href="#index.xml-eg-d31e25254" class="anchorlink">⚓</a></pre>
+   ( text | tei_model.limitedPhrase | tei_model.global )*<a href="#index.xml-eg-d31e25261" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                   </table>
@@ -12421,7 +12443,7 @@ tei_macro.phraseSeq.limited =
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25300" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e25307" class="pre_eg cdata">
 &lt;content&gt;
  &lt;alternate minOccurs="0"
   maxOccurs="unbounded"&gt;
@@ -12433,13 +12455,13 @@ tei_macro.phraseSeq.limited =
   &lt;classRef key="model.global"/&gt;
  &lt;/alternate&gt;
 &lt;/content&gt;
-    <a href="#index.xml-eg-d31e25300" class="anchorlink">⚓</a></pre>
+    <a href="#index.xml-eg-d31e25307" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Declaration</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25307" class="pre_eg">
+                           <pre id="index.xml-eg-d31e25314" class="pre_eg">
 tei_macro.specialPara =
    (
       text
@@ -12448,7 +12470,7 @@ tei_macro.specialPara =
     | tei_model.inter
     | tei_model.divPart
     | tei_model.global
-   )*<a href="#index.xml-eg-d31e25307" class="anchorlink">⚓</a></pre>
+   )*<a href="#index.xml-eg-d31e25314" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                   </table>
@@ -12479,7 +12501,7 @@ tei_macro.specialPara =
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25354" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e25361" class="pre_eg cdata">
 &lt;content&gt;
  &lt;valList type="closed"&gt;
   &lt;valItem ident="high"/&gt;
@@ -12488,14 +12510,14 @@ tei_macro.specialPara =
   &lt;valItem ident="unknown"/&gt;
  &lt;/valList&gt;
 &lt;/content&gt;
-    <a href="#index.xml-eg-d31e25354" class="anchorlink">⚓</a></pre>
+    <a href="#index.xml-eg-d31e25361" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Declaration</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25361" class="pre_eg cdata">
-tei_teidata.certainty = "high" | "medium" | "low" | "unknown"<a href="#index.xml-eg-d31e25361" class="anchorlink">⚓</a></pre>
+                           <pre id="index.xml-eg-d31e25368" class="pre_eg cdata">
+tei_teidata.certainty = "high" | "medium" | "low" | "unknown"<a href="#index.xml-eg-d31e25368" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
@@ -12529,18 +12551,18 @@ tei_teidata.certainty = "high" | "medium" | "low" | "unknown"<a href="#index.xml
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25411" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e25418" class="pre_eg cdata">
 &lt;content&gt;
  &lt;dataRef name="nonNegativeInteger"/&gt;
 &lt;/content&gt;
-    <a href="#index.xml-eg-d31e25411" class="anchorlink">⚓</a></pre>
+    <a href="#index.xml-eg-d31e25418" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Declaration</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25418" class="pre_eg cdata">
-tei_teidata.count = xsd:nonNegativeInteger<a href="#index.xml-eg-d31e25418" class="anchorlink">⚓</a></pre>
+                           <pre id="index.xml-eg-d31e25425" class="pre_eg cdata">
+tei_teidata.count = xsd:nonNegativeInteger<a href="#index.xml-eg-d31e25425" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
@@ -12586,18 +12608,18 @@ tei_teidata.count = xsd:nonNegativeInteger<a href="#index.xml-eg-d31e25418" clas
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25503" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e25510" class="pre_eg cdata">
 &lt;content&gt;
  &lt;dataRef key="teidata.word"/&gt;
 &lt;/content&gt;
-    <a href="#index.xml-eg-d31e25503" class="anchorlink">⚓</a></pre>
+    <a href="#index.xml-eg-d31e25510" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Declaration</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25510" class="pre_eg">
-tei_teidata.enumerated = <a class="link_ref" href="#TEI.teidata.word" title="teidata.word">teidata.word</a><a href="#index.xml-eg-d31e25510" class="anchorlink">⚓</a></pre>
+                           <pre id="index.xml-eg-d31e25517" class="pre_eg">
+tei_teidata.enumerated = <a class="link_ref" href="#TEI.teidata.word" title="teidata.word">teidata.word</a><a href="#index.xml-eg-d31e25517" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
@@ -12637,7 +12659,7 @@ tei_teidata.enumerated = <a class="link_ref" href="#TEI.teidata.word" title="tei
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25567" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e25574" class="pre_eg cdata">
 &lt;content&gt;
  &lt;alternate minOccurs="1" maxOccurs="1"&gt;
   &lt;dataRef name="language"/&gt;
@@ -12646,14 +12668,14 @@ tei_teidata.enumerated = <a class="link_ref" href="#TEI.teidata.word" title="tei
   &lt;/valList&gt;
  &lt;/alternate&gt;
 &lt;/content&gt;
-    <a href="#index.xml-eg-d31e25567" class="anchorlink">⚓</a></pre>
+    <a href="#index.xml-eg-d31e25574" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Declaration</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25574" class="pre_eg cdata">
-tei_teidata.language = xsd:language | ( "" )<a href="#index.xml-eg-d31e25574" class="anchorlink">⚓</a></pre>
+                           <pre id="index.xml-eg-d31e25581" class="pre_eg cdata">
+tei_teidata.language = xsd:language | ( "" )<a href="#index.xml-eg-d31e25581" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
@@ -12760,18 +12782,18 @@ tei_teidata.language = xsd:language | ( "" )<a href="#index.xml-eg-d31e25574" cl
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25762" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e25769" class="pre_eg cdata">
 &lt;content&gt;
  &lt;dataRef restriction="\S+" name="anyURI"/&gt;
 &lt;/content&gt;
-    <a href="#index.xml-eg-d31e25762" class="anchorlink">⚓</a></pre>
+    <a href="#index.xml-eg-d31e25769" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Declaration</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25769" class="pre_eg cdata">
-tei_teidata.pointer = xsd:anyURI { pattern = "\S+" }<a href="#index.xml-eg-d31e25769" class="anchorlink">⚓</a></pre>
+                           <pre id="index.xml-eg-d31e25776" class="pre_eg cdata">
+tei_teidata.pointer = xsd:anyURI { pattern = "\S+" }<a href="#index.xml-eg-d31e25776" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
@@ -12803,18 +12825,18 @@ tei_teidata.pointer = xsd:anyURI { pattern = "\S+" }<a href="#index.xml-eg-d31e2
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25825" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e25832" class="pre_eg cdata">
 &lt;content&gt;
  &lt;dataRef name="double"/&gt;
 &lt;/content&gt;
-    <a href="#index.xml-eg-d31e25825" class="anchorlink">⚓</a></pre>
+    <a href="#index.xml-eg-d31e25832" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Declaration</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25832" class="pre_eg cdata">
-tei_teidata.probability = xsd:double<a href="#index.xml-eg-d31e25832" class="anchorlink">⚓</a></pre>
+                           <pre id="index.xml-eg-d31e25839" class="pre_eg cdata">
+tei_teidata.probability = xsd:double<a href="#index.xml-eg-d31e25839" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
@@ -12852,7 +12874,7 @@ tei_teidata.probability = xsd:double<a href="#index.xml-eg-d31e25832" class="anc
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25892" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e25899" class="pre_eg cdata">
 &lt;content&gt;
  &lt;alternate minOccurs="1" maxOccurs="1"&gt;
   &lt;dataRef name="date"/&gt;
@@ -12865,13 +12887,13 @@ tei_teidata.probability = xsd:double<a href="#index.xml-eg-d31e25832" class="anc
   &lt;dataRef name="dateTime"/&gt;
  &lt;/alternate&gt;
 &lt;/content&gt;
-    <a href="#index.xml-eg-d31e25892" class="anchorlink">⚓</a></pre>
+    <a href="#index.xml-eg-d31e25899" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Declaration</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25899" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e25906" class="pre_eg cdata">
 tei_teidata.temporal.w3c =
    xsd:date
  | xsd:gYear
@@ -12880,7 +12902,7 @@ tei_teidata.temporal.w3c =
  | xsd:gYearMonth
  | xsd:gMonthDay
  | xsd:time
- | xsd:dateTime<a href="#index.xml-eg-d31e25899" class="anchorlink">⚓</a></pre>
+ | xsd:dateTime<a href="#index.xml-eg-d31e25906" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
@@ -12919,18 +12941,18 @@ tei_teidata.temporal.w3c =
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25948" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e25955" class="pre_eg cdata">
 &lt;content&gt;
  &lt;dataRef name="string"/&gt;
 &lt;/content&gt;
-    <a href="#index.xml-eg-d31e25948" class="anchorlink">⚓</a></pre>
+    <a href="#index.xml-eg-d31e25955" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Declaration</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e25955" class="pre_eg cdata">
-tei_teidata.text = string<a href="#index.xml-eg-d31e25955" class="anchorlink">⚓</a></pre>
+                           <pre id="index.xml-eg-d31e25962" class="pre_eg cdata">
+tei_teidata.text = string<a href="#index.xml-eg-d31e25962" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
@@ -12967,19 +12989,19 @@ tei_teidata.text = string<a href="#index.xml-eg-d31e25955" class="anchorlink">�
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e26002" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e26009" class="pre_eg cdata">
 &lt;content&gt;
  &lt;dataRef name="token"
   restriction="[\d]+(\.[\d]+){0,2}"/&gt;
 &lt;/content&gt;
-    <a href="#index.xml-eg-d31e26002" class="anchorlink">⚓</a></pre>
+    <a href="#index.xml-eg-d31e26009" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Declaration</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e26009" class="pre_eg cdata">
-tei_teidata.version = token { pattern = "[\d]+(\.[\d]+){0,2}" }<a href="#index.xml-eg-d31e26009" class="anchorlink">⚓</a></pre>
+                           <pre id="index.xml-eg-d31e26016" class="pre_eg cdata">
+tei_teidata.version = token { pattern = "[\d]+(\.[\d]+){0,2}" }<a href="#index.xml-eg-d31e26016" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
@@ -13014,19 +13036,19 @@ tei_teidata.version = token { pattern = "[\d]+(\.[\d]+){0,2}" }<a href="#index.x
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e26051" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e26058" class="pre_eg cdata">
 &lt;content&gt;
  &lt;dataRef name="token"
   restriction="[^\p{C}\p{Z}]+"/&gt;
 &lt;/content&gt;
-    <a href="#index.xml-eg-d31e26051" class="anchorlink">⚓</a></pre>
+    <a href="#index.xml-eg-d31e26058" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Declaration</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e26058" class="pre_eg cdata">
-tei_teidata.word = token { pattern = "[^\p{C}\p{Z}]+" }<a href="#index.xml-eg-d31e26058" class="anchorlink">⚓</a></pre>
+                           <pre id="index.xml-eg-d31e26065" class="pre_eg cdata">
+tei_teidata.word = token { pattern = "[^\p{C}\p{Z}]+" }<a href="#index.xml-eg-d31e26065" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
@@ -13062,18 +13084,18 @@ tei_teidata.word = token { pattern = "[^\p{C}\p{Z}]+" }<a href="#index.xml-eg-d3
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e26106" class="pre_eg cdata">
+                           <pre id="index.xml-eg-d31e26113" class="pre_eg cdata">
 &lt;content&gt;
  &lt;textNode/&gt;
 &lt;/content&gt;
-    <a href="#index.xml-eg-d31e26106" class="anchorlink">⚓</a></pre>
+    <a href="#index.xml-eg-d31e26113" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Declaration</span></td>
                         <td class="wovenodd-col2">
-                           <pre id="index.xml-eg-d31e26113" class="pre_eg cdata">
-tei_teidata.xpath = text<a href="#index.xml-eg-d31e26113" class="anchorlink">⚓</a></pre>
+                           <pre id="index.xml-eg-d31e26120" class="pre_eg cdata">
+tei_teidata.xpath = text<a href="#index.xml-eg-d31e26120" class="anchorlink">⚓</a></pre>
                         </td>
                      </tr>
                      <tr>
@@ -13097,7 +13119,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e26113" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-10-31T18:39:53Z.
+	       on 2023-10-31T19:01:09Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>
