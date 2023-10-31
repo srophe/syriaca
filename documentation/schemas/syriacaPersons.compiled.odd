@@ -4036,7 +4036,7 @@ autor/a/es, ya sea una persona o una institución, de una obra; por ejemplo, en 
           </constraintSpec><constraintSpec ident="title-in-note" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:text//tei:note/tei:title/@ref">
-                <sch:assert test="starts-with(., concat('http://syriaca.org/work/', '{\d+?}'))">
+                <sch:assert test="starts-with(., concat('http://syriaca.org/work/', '\d+?'))">
                   The @ref attribute may only take a Syriaca.org work URI in the form "http://syriaca.org/work/{\d+?}" where {\d+?} is a number.
                 </sch:assert>
               </sch:rule>
@@ -4345,7 +4345,7 @@ doit pas être utilisé.</p>
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:text//tei:note/tei:bibl/tei:ptr/@target">
-                <sch:assert test="starts-with(., concat('http://syriaca.org/manuscript', '{\d+?}'))">
+                <sch:assert test="starts-with(., concat('http://syriaca.org/manuscript', '\d+?'))">
                   This target must point to a Syriaca.org manuscript URI taking the form "http://syriaca.org/manuscript/{\d+?}} where {\d+?} is a number
                 </sch:assert>
               </sch:rule>
