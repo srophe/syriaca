@@ -31,6 +31,16 @@
         </p>
       </sourceDesc>
     </fileDesc>
+    <profileDesc>
+      <!-- Instructions for processing the Syriaca.org chained ODD in oXygen.
+        - First, be sure that schemaSpec/@source in this document points to "syriacaAll.compiled.odd".
+        - Then process this ODD file into a compiled ODD using the transformation scenario "ODD to Compiled ODD".
+          - Save this as syriacaPersons.compiled.odd and then delete the @start attribute from tei:schemaSpec.
+          - This compiled ODD (without a tei:schemaSpec/@start attribute) will be the starting point for the next step in the chained ODD.
+        - This compiled ODD can also be used to generate a .rng file against which you can validate a TEI document. 
+          - You generate this file using the transformation scenario "TEI ODD to RELAX NG XML".
+          - After you have generated the Relax NG, you need to add xmlns:srophe="https://srophe.app" to the grammar element at the top of that file. -->
+    </profileDesc>
   </teiHeader>
   <text>
     <body>
@@ -6985,10 +6995,6 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                 <sch:assert test="@type='place' and @active">
                   For a 'has-relation-to-place' relationship, use @type="place" and @active/@passive attributes.</sch:assert>
               </sch:rule>
-              <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/has-literary-relation-to-place']">
-                <sch:assert test="@type='place' and @active">
-                  For a 'has-literary-relation-to-place' relationship, use @type="place" and @active/@passive attributes.</sch:assert>
-              </sch:rule>
               <sch:rule context="tei:text//tei:relation[@type='disambiguation']">
                 <sch:assert test="@ref='http://syriaca.org/keyword/distinct-entity' or @ref='http://syriaca.org/keyword/possibly-identical'">
                   With @type="disambiguation", the @ref attribute must be either "http://syriaca.org/keyword/distinct-entity" or "http://syriaca.org/keyword/possibly-identical".</sch:assert>
@@ -6996,10 +7002,6 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
               <sch:rule context="tei:text//tei:relation[@type='pseudonymity']">
                 <sch:assert test="@ref='http://syriaca.org/keyword/possibly-identical' or @ref='http://syriaca.org/keyword/shares-attribution-with' or @ref='skos:broader'">
                   With @type="pseudonymity", the @ref attribute must be either "http://syriaca.org/keyword/possibly-identical", "http://syriaca.org/keyword/shares-attribution-with", or "skos:broader".</sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:text//tei:relation[@type='place']">
-                <sch:assert test="@ref='http://syriaca.org/keyword/has-relation-to-place' or @ref='http://syriaca.org/keyword/has-literary-relation-to-place'">
-                  With @type="place", the @ref attribute must be either "http://syriaca.org/keyword/has-relation-to-place" or "http://syriaca.org/keyword/has-literary-relation-to-place".</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec><constraintSpec ident="personal-relations-ref" scheme="schematron">

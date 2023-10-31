@@ -889,10 +889,6 @@
                 <sch:assert test="@type='place' and @active">
                   For a 'has-relation-to-place' relationship, use @type="place" and @active/@passive attributes.</sch:assert>
               </sch:rule>
-              <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/has-literary-relation-to-place']">
-                <sch:assert test="@type='place' and @active">
-                  For a 'has-literary-relation-to-place' relationship, use @type="place" and @active/@passive attributes.</sch:assert>
-              </sch:rule>
               <sch:rule context="tei:text//tei:relation[@type='disambiguation']">
                 <sch:assert test="@ref='http://syriaca.org/keyword/distinct-entity' or @ref='http://syriaca.org/keyword/possibly-identical'">
                   With @type="disambiguation", the @ref attribute must be either "http://syriaca.org/keyword/distinct-entity" or "http://syriaca.org/keyword/possibly-identical".</sch:assert>
@@ -900,10 +896,6 @@
               <sch:rule context="tei:text//tei:relation[@type='pseudonymity']">
                 <sch:assert test="@ref='http://syriaca.org/keyword/possibly-identical' or @ref='http://syriaca.org/keyword/shares-attribution-with' or @ref='skos:broader'">
                   With @type="pseudonymity", the @ref attribute must be either "http://syriaca.org/keyword/possibly-identical", "http://syriaca.org/keyword/shares-attribution-with", or "skos:broader".</sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:text//tei:relation[@type='place']">
-                <sch:assert test="@ref='http://syriaca.org/keyword/has-relation-to-place' or @ref='http://syriaca.org/keyword/has-literary-relation-to-place'">
-                  With @type="place", the @ref attribute must be either "http://syriaca.org/keyword/has-relation-to-place" or "http://syriaca.org/keyword/has-literary-relation-to-place".</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>
