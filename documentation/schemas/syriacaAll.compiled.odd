@@ -6629,9 +6629,9 @@ autor/a/es, ya sea una persona o una institución, de una obra; por ejemplo, en 
             </constraint>
           </constraintSpec><constraintSpec ident="title-in-note" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:text//tei:note/tei:title/@ref">
-                <sch:assert test="starts-with(., concat('http://syriaca.org/work/', '\d+?'))">
-                  The @ref attribute may only take a Syriaca.org work URI in the form "http://syriaca.org/work/{\d+?}" where {\d+?} is a number.
+              <sch:rule context="//tei:text//tei:note/tei:title">
+                <sch:assert test="matches(@ref, concat('http://syriaca.org/work/', '\d+$'))">
+                  The @ref attribute may only take a Syriaca.org work URI in the form "http://syriaca.org/work/{\d+$}" where {\d+$} is a number.
                 </sch:assert>
               </sch:rule>
             </constraint>
@@ -6914,9 +6914,9 @@ doit pas être utilisé.</p>
                   A &lt;ptr&gt; element with a @target attribute is required. 
                 </sch:assert>
               </sch:rule>
-              <sch:rule context="//tei:text//tei:note/tei:bibl/tei:ptr/@target">
-                <sch:assert test="starts-with(., concat('http://syriaca.org/manuscript', '\d+?'))">
-                  This target must point to a Syriaca.org manuscript URI taking the form "http://syriaca.org/manuscript/{\d+?}} where {\d+?} is a number
+              <sch:rule context="//tei:text//tei:note/tei:bibl/tei:ptr">
+                <sch:assert test="matches(@target, concat('http://syriaca.org/manuscript', '\d+$'))">
+                  This target must point to a Syriaca.org manuscript URI taking the form "http://syriaca.org/manuscript/{\d+$}} where {\d+$} is a number
                 </sch:assert>
               </sch:rule>
             </constraint>

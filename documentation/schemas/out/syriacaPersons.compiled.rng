@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-10-31T19:10:20Z. .
+Schema generated from ODD source 2023-11-02T20:12:02Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -2756,9 +2756,9 @@ attributes @target and @cRef may be supplied on <name/>.</report>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:note/tei:title/@ref">
-               <sch:assert test="starts-with(., concat('http://syriaca.org/work/', '\d+?'))">
-                  The @ref attribute may only take a Syriaca.org work URI in the form "http://syriaca.org/work/{\d+?}" where {\d+?} is a number.
+                      context="//tei:text//tei:note/tei:title">
+               <sch:assert test="matches(@ref, concat('http://syriaca.org/work/', '\d+$'))">
+                  The @ref attribute may only take a Syriaca.org work URI in the form "http://syriaca.org/work/{\d+$}" where {\d+$} is a number.
                 </sch:assert>
             </sch:rule>
          </pattern>
@@ -2957,9 +2957,9 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:note/tei:bibl/tei:ptr/@target">
-               <sch:assert test="starts-with(., concat('http://syriaca.org/manuscript', '\d+?'))">
-                  This target must point to a Syriaca.org manuscript URI taking the form "http://syriaca.org/manuscript/{\d+?}} where {\d+?} is a number
+                      context="//tei:text//tei:note/tei:bibl/tei:ptr">
+               <sch:assert test="matches(@target, concat('http://syriaca.org/manuscript', '\d+$'))">
+                  This target must point to a Syriaca.org manuscript URI taking the form "http://syriaca.org/manuscript/{\d+$}} where {\d+$} is a number
                 </sch:assert>
             </sch:rule>
          </pattern>

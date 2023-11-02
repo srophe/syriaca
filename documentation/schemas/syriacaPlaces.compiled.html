@@ -980,10 +980,10 @@ element availability
                               &lt;sch:assert test="tei:ptr/@target"&gt; A &lt;ptr&gt; element with a @target attribute is required.
                               &lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
-                              &lt;sch:rule context="//tei:text//tei:note/tei:bibl/tei:ptr/@target"&gt;
-                              &lt;sch:assert test="starts-with(., concat('http://syriaca.org/manuscript', '\d+?'))"&gt;
-                              This target must point to a Syriaca.org manuscript URI taking the form "http://syriaca.org/manuscript/{\d+?}}
-                              where {\d+?} is a number
+                              &lt;sch:rule context="//tei:text//tei:note/tei:bibl/tei:ptr"&gt;
+                              &lt;sch:assert test="matches(@target, concat('http://syriaca.org/manuscript', '\d+$'))"&gt;
+                              This target must point to a Syriaca.org manuscript URI taking the form "http://syriaca.org/manuscript/{\d+$}}
+                              where {\d+$} is a number
                               &lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
@@ -9227,10 +9227,10 @@ element text { tei_body }<a href="#index.xml-eg-d31e17503" class="anchorlink">�
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td>
                         <td class="wovenodd-col2">
                            <div class="pre">
-                              &lt;sch:rule context="//tei:text//tei:note/tei:title/@ref"&gt;
-                              &lt;sch:assert test="starts-with(., concat('http://syriaca.org/work/', '\d+?'))"&gt; The
-                              @ref attribute may only take a Syriaca.org work URI in the form "http://syriaca.org/work/{\d+?}"
-                              where {\d+?} is a number.
+                              &lt;sch:rule context="//tei:text//tei:note/tei:title"&gt;
+                              &lt;sch:assert test="matches(@ref, concat('http://syriaca.org/work/', '\d+$'))"&gt; The
+                              @ref attribute may only take a Syriaca.org work URI in the form "http://syriaca.org/work/{\d+$}"
+                              where {\d+$} is a number.
                               &lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
@@ -13194,7 +13194,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e26776" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-10-31T19:10:52Z.
+	       on 2023-11-02T20:14:10Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>
