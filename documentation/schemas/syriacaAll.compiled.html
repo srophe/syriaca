@@ -2339,7 +2339,7 @@ element back
                                                 <td class="odd_label"><span xml:lang="en" lang="en" class="label">Legal values are:</span></td>
                                                 <td class="odd_value">
                                                    <dl class="valList">
-                                                      <dt><span class="odd_label">syriaca:Manuscript</span></dt>
+                                                      <dt><span class="odd_label">syriaca-ms</span></dt>
                                                       <dd><span>used for bibliographic citation of a manuscript</span></dd>
                                                    </dl>
                                                 </td>
@@ -2447,21 +2447,14 @@ element back
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td>
                         <td class="wovenodd-col2">
                            <div class="pre">
-                              &lt;sch:rule context="//tei:text//tei:bibl"&gt;
-                              &lt;sch:assert test="./@type['syriaca:Manuscript'] | ./tei:ptr"&gt;A &lt;bibl&gt; should contain
-                              a &lt;ptr&gt;
-                              indicating the URI or URL for the citation. The only exception is when
-                              when citing a manuscript in which case this &lt;bibl&gt; should have
-                              @type="syriaca:Manuscript".&lt;/sch:assert&gt;
-                              &lt;/sch:rule&gt;
-                              &lt;sch:rule context="//tei:text//tei:note/tei:bibl"&gt;
-                              &lt;sch:assert test="tei:ptr/@target"&gt; A &lt;ptr&gt; element with a @target attribute is required.
+                              &lt;sch:rule context="//tei:text//tei:note//tei:bibl"&gt;
+                              &lt;sch:assert test="@type='syriaca-ms'"&gt; Must be @type='syriaca-manuscript'. If not
+                              a mss, use &lt;title&gt;.
                               &lt;/sch:assert&gt;
-                              &lt;/sch:rule&gt;
-                              &lt;sch:rule context="//tei:text//tei:note/tei:bibl/tei:ptr"&gt;
-                              &lt;sch:assert test="matches(@target, concat('http://syriaca.org/manuscript', '\d+$'))"&gt;
-                              This target must point to a Syriaca.org manuscript URI taking the form "http://syriaca.org/manuscript/{\d+$}}
-                              where {\d+$} is a number
+                              &lt;sch:assert test="matches(tei:ptr/@target, concat('http://syriaca.org/manuscript/',
+                              
+                              '\d+$'))"&gt; This &lt;bibl&gt; must have a &lt;ptr&gt; and @target pointing to a Syriaca.org manuscript
+                              URI taking the form "http://syriaca.org/manuscript/{\d+$}} where {\d+$} is a number.
                               &lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
@@ -2500,7 +2493,7 @@ element back
 element bibl
 {
    tei_att.global.attribute.xmlid,
-   attribute type { "syriaca:Manuscript" }?,
+   attribute type { "syriaca-ms" }?,
    (
       tei_author*
     &amp; tei_citedRange*
@@ -22461,10 +22454,9 @@ element text { tei_body }<a href="#index.xml-eg-d31e94749" class="anchorlink">�
                         <td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td>
                         <td class="wovenodd-col2">
                            <div class="pre">
-                              &lt;sch:rule context="//tei:text//tei:note/tei:title"&gt;
-                              &lt;sch:assert test="matches(@ref, concat('http://syriaca.org/work/', '\d+$'))"&gt; The
-                              @ref attribute may only take a Syriaca.org work URI in the form "http://syriaca.org/work/{\d+$}"
-                              where {\d+$} is a number.
+                              &lt;sch:rule context="//tei:text//tei:note//tei:title/@ref"&gt;
+                              &lt;sch:assert test="matches(., concat('http://syriaca.org/work/', '\d+$'))"&gt; This @ref
+                              attribute must take the form "http://syriaca.org/work/{\d+$}} where {\d+$} is a number.
                               &lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
@@ -30745,7 +30737,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e123310" class="anchorlink">�
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-11-02T20:11:35Z.
+	       on 2023-11-02T20:57:39Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>

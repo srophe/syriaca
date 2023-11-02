@@ -461,21 +461,12 @@
           </content>
           <constraintSpec ident="mssCitation" scheme="schematron">
             <constraint>
-              <!-- This is a temporary rule until we have URIs for mss. Then the MSS option should go away.-->
-              <sch:rule context="//tei:text//tei:bibl">
-                <sch:assert test="./@type['syriaca:Manuscript'] | ./tei:ptr">A &lt;bibl&gt; should contain a &lt;ptr&gt; 
-                  indicating the URI or URL for the citation. The only exception is when 
-                  when citing a manuscript in which case this &lt;bibl&gt; should have
-                  @type="syriaca:Manuscript".</sch:assert>
-              </sch:rule>
-              <sch:rule context="//tei:text//tei:note/tei:bibl">
-                <sch:assert test="tei:ptr/@target">
-                  A &lt;ptr&gt; element with a @target attribute is required. 
+              <sch:rule context="//tei:text//tei:note//tei:bibl">
+                <sch:assert test="@type='syriaca-ms'">
+                  Must be @type='syriaca-manuscript'. If not a mss, use &lt;title&gt;.
                 </sch:assert>
-              </sch:rule>
-              <sch:rule context="//tei:text//tei:note/tei:bibl/tei:ptr">
-                <sch:assert test="matches(@target, concat('http://syriaca.org/manuscript', '\d+$'))">
-                  This target must point to a Syriaca.org manuscript URI taking the form "http://syriaca.org/manuscript/{\d+$}} where {\d+$} is a number
+                <sch:assert test="matches(tei:ptr/@target, concat('http://syriaca.org/manuscript/', '\d+$'))">
+                  This &lt;bibl&gt; must have a &lt;ptr&gt; and @target pointing to a Syriaca.org manuscript URI taking the form "http://syriaca.org/manuscript/{\d+$}} where {\d+$} is a number.
                 </sch:assert>
               </sch:rule>
             </constraint>
@@ -492,9 +483,8 @@
             <attDef ident="rend" mode="delete"/>
             <attDef ident="corresp" mode="delete"/>
             <attDef ident="type" mode="change" usage="opt">
-              <!-- This is a temporary addition until we have URIs for mss. -->
               <valList mode="change" type="closed">
-                <valItem ident="syriaca:Manuscript">
+                <valItem ident="syriaca-ms">
                   <desc>used for bibliographic citation of a manuscript</desc>
                 </valItem>
               </valList>
@@ -1486,9 +1476,9 @@
           </constraintSpec>
           <constraintSpec ident="title-in-note" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:text//tei:note/tei:title">
-                <sch:assert test="matches(@ref, concat('http://syriaca.org/work/', '\d+$'))">
-                  The @ref attribute may only take a Syriaca.org work URI in the form "http://syriaca.org/work/{\d+$}" where {\d+$} is a number.
+              <sch:rule context="//tei:text//tei:note//tei:title/@ref">
+                <sch:assert test="matches(., concat('http://syriaca.org/work/', '\d+$'))">
+                  This @ref attribute must take the form "http://syriaca.org/work/{\d+$}} where {\d+$} is a number.
                 </sch:assert>
               </sch:rule>
             </constraint>
