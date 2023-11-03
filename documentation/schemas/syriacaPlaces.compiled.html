@@ -9228,6 +9228,11 @@ element text { tei_body }<a href="#index.xml-eg-d31e17503" class="anchorlink">�
                               &lt;sch:assert test="matches(., concat('http://syriaca.org/work/', '\d+$'))"&gt; This @ref
                               attribute must take the form "http://syriaca.org/work/{\d+$}} where {\d+$} is a number.
                               &lt;/sch:assert&gt;
+                              &lt;/sch:rule&gt;
+                              &lt;sch:rule context="//tei:text//tei:desc//tei:title | //tei:text//tei:note//tei:title"&gt;
+                              &lt;sch:report test="tei:ptr"&gt; A &lt;ptr&gt; element is not allowed as child of &lt;title&gt;. Instead
+                              use a @target attribute.
+                              &lt;/sch:report&gt;
                               &lt;/sch:rule&gt;</div>
                         </td>
                      </tr>
@@ -13190,7 +13195,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e26776" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-11-03T14:03:32Z.
+	       on 2023-11-03T14:13:34Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>

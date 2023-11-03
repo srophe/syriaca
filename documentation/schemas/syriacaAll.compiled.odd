@@ -6634,6 +6634,11 @@ autor/a/es, ya sea una persona o una institución, de una obra; por ejemplo, en 
                   This @ref attribute must take the form "http://syriaca.org/work/{\d+$}} where {\d+$} is a number.
                 </sch:assert>
               </sch:rule>
+              <sch:rule context="//tei:text//tei:desc//tei:title | //tei:text//tei:note//tei:title">
+                <sch:report test="tei:ptr">
+                  A &lt;ptr&gt; element is not allowed as child of &lt;title&gt;. Instead use a @target attribute.
+                </sch:report>
+              </sch:rule>
             </constraint>
           </constraintSpec><attList><attDef ident="type" mode="replace" usage="opt">
               <desc>Describes the function of the title. This attribute is optional. Certain
