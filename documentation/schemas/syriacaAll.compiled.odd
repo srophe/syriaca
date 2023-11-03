@@ -6908,8 +6908,8 @@ doit pas être utilisé.</p>
     ausgezeichnet sein können.</desc><classes><memberOf key="att.global"/><memberOf key="model.biblLike"/><memberOf key="att.typed"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="author" minOccurs="0" maxOccurs="unbounded"/><elementRef key="citedRange" minOccurs="0" maxOccurs="unbounded"/><elementRef key="date" minOccurs="0" maxOccurs="unbounded"/><elementRef key="editor" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="ptr" minOccurs="0" maxOccurs="unbounded"/><elementRef key="title" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><constraintSpec ident="mssCitation" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:text//tei:desc//tei:bibl | //tei:text//tei:note//tei:bibl">
-                <sch:assert test="@type='syriaca-manuscript'">
-                  Must be @type='syriaca-manuscript'. If not a mss, use &lt;title&gt;.
+                <sch:assert test="@type='syriaca-ms'">
+                  Must be @type='syriaca-ms'. If not a mss, use &lt;title&gt;.
                 </sch:assert>
                 <sch:assert test="tei:ptr/@target">
                   This &lt;bibl&gt; must have a &lt;ptr&gt; element with @target attribute.
