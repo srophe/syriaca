@@ -7825,6 +7825,10 @@ element reg { tei_date }<a href="#index.xml-eg-d31e13740" class="anchorlink">⚓
                               With @type="disambiguation", the @ref attribute must be either "http://syriaca.org/keyword/distinct-entity"
                               or "http://syriaca.org/keyword/possibly-identical".&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
+                              &lt;sch:rule context="tei:text//tei:relation[@type='disambiguation']/@mutual"&gt;
+                              &lt;sch:assert test="count(tokenize(., ' ')) eq 2"&gt; Exactly two @mutual values required.
+                              &lt;/sch:assert&gt;
+                              &lt;/sch:rule&gt;
                               &lt;sch:rule context="tei:text//tei:relation[@type='pseudonymity']"&gt;
                               &lt;sch:assert test="@ref='http://syriaca.org/keyword/possibly-identical' or @ref='http://syriaca.org/keyword/shares-attribution-with'
                               
@@ -13120,7 +13124,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e26120" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-11-03T15:12:31Z.
+	       on 2023-11-03T22:01:51Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>
