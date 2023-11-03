@@ -6627,9 +6627,9 @@ autor/a/es, ya sea una persona o una institución, de una obra; por ejemplo, en 
                 </sch:assert>
               </sch:rule>
             </constraint>
-          </constraintSpec><constraintSpec ident="title-in-note" scheme="schematron">
+          </constraintSpec><constraintSpec ident="title-in-desc-note" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:text//tei:note//tei:title/@ref">
+              <sch:rule context="//tei:text//tei:desc//tei:title/@ref | //tei:text//tei:note//tei:title/@ref">
                 <sch:assert test="matches(., concat('http://syriaca.org/work/', '\d+$'))">
                   This @ref attribute must take the form "http://syriaca.org/work/{\d+$}} where {\d+$} is a number.
                 </sch:assert>
@@ -6902,12 +6902,17 @@ doit pas être utilisé.</p>
     liberamente i cui componeneti potrebbero o meno essere codificati esplicitamente.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-13" xml:lang="de">enthält eine lose strukturierte bibliografische Angabe, in der einzelne Komponenten explizit
     ausgezeichnet sein können.</desc><classes><memberOf key="att.global"/><memberOf key="model.biblLike"/><memberOf key="att.typed"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="author" minOccurs="0" maxOccurs="unbounded"/><elementRef key="citedRange" minOccurs="0" maxOccurs="unbounded"/><elementRef key="date" minOccurs="0" maxOccurs="unbounded"/><elementRef key="editor" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="ptr" minOccurs="0" maxOccurs="unbounded"/><elementRef key="title" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><constraintSpec ident="mssCitation" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:text//tei:note//tei:bibl">
-                <sch:assert test="@type='syriaca-ms'">
+              <sch:rule context="//tei:text//tei:desc//tei:bibl | //tei:text//tei:note//tei:bibl">
+                <sch:assert test="@type='syriaca-manuscript'">
                   Must be @type='syriaca-manuscript'. If not a mss, use &lt;title&gt;.
                 </sch:assert>
-                <sch:assert test="matches(tei:ptr/@target, concat('http://syriaca.org/manuscript/', '\d+$'))">
-                  This &lt;bibl&gt; must have a &lt;ptr&gt; and @target pointing to a Syriaca.org manuscript URI taking the form "http://syriaca.org/manuscript/{\d+$}} where {\d+$} is a number.
+                <sch:assert test="tei:ptr/@target">
+                  This &lt;bibl&gt; must have a &lt;ptr&gt; element with @target attribute.
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:text//tei:desc//tei:bibl/tei:ptr/@target | //tei:text//tei:note//tei:bibl/tei:ptr/@target">
+                <sch:assert test="matches(., concat('http://syriaca.org/manuscript/', '\d+$'))">
+                  This @target attribute must point to a Syriaca.org manuscript URI taking the form "http://syriaca.org/manuscript/{\d+$}} where {\d+$} is a number.
                 </sch:assert>
               </sch:rule>
             </constraint>
