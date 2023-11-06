@@ -894,7 +894,7 @@
                   With @type="disambiguation", the @ref attribute must be either "http://syriaca.org/keyword/distinct-entity" or "http://syriaca.org/keyword/possibly-identical".</sch:assert>
               </sch:rule>
               <sch:rule context="tei:text//tei:relation[@type='disambiguation']/@mutual">
-                <sch:assert test="count(tokenize(., ' ')) eq 2">
+                <sch:assert test="count(tokenize(., '/s')) eq 2">
                   Exactly two @mutual values required.
                 </sch:assert>
               </sch:rule>
@@ -916,7 +916,7 @@
                 <sch:let name="qrURI" value="$ti//listURI[@type = 'qualifier-relationship']//uri"/>
                 <sch:let name="error" value="."/>
                 <sch:assert test="
-                  every $i in (tokenize(., ' '))
+                  every $i in (tokenize(., '/s'))
                   satisfies $i = $qrURI">
                   <sch:value-of select="$error"/> is not currently in use. The value of this @ref attribute must be one of the following: <sch:value-of select="string-join($qrURI, ';  ')"/>.</sch:assert>
               </sch:rule>

@@ -7826,7 +7826,7 @@ element reg { tei_date }<a href="#index.xml-eg-d31e13740" class="anchorlink">⚓
                               or "http://syriaca.org/keyword/possibly-identical".&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
                               &lt;sch:rule context="tei:text//tei:relation[@type='disambiguation']/@mutual"&gt;
-                              &lt;sch:assert test="count(tokenize(., ' ')) eq 2"&gt; Exactly two @mutual values required.
+                              &lt;sch:assert test="count(tokenize(., '/s')) eq 2"&gt; Exactly two @mutual values required.
                               &lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
                               &lt;sch:rule context="tei:text//tei:relation[@type='pseudonymity']"&gt;
@@ -7855,7 +7855,7 @@ element reg { tei_date }<a href="#index.xml-eg-d31e13740" class="anchorlink">⚓
                               &lt;sch:let name="qrURI"
                                value="$ti//listURI[@type = 'qualifier-relationship']//uri"/&gt;
                               &lt;sch:let name="error" value="."/&gt;
-                              &lt;sch:assert test=" every $i in (tokenize(., ' ')) satisfies $i = $qrURI"&gt;
+                              &lt;sch:assert test=" every $i in (tokenize(., '/s')) satisfies $i = $qrURI"&gt;
                                &lt;sch:value-of select="$error"/&gt; is not currently in use. The value of this @ref attribute
                               must be one of the following: &lt;sch:value-of select="string-join($qrURI, '; ')"/&gt;.&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;</div>
@@ -13124,7 +13124,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e26120" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-11-03T22:01:51Z.
+	       on 2023-11-06T15:11:00Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>

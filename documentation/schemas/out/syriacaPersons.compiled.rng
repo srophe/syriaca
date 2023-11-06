@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-11-03T22:01:49Z. .
+Schema generated from ODD source 2023-11-06T15:10:58Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -4653,7 +4653,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
                       context="tei:text//tei:relation[@type='disambiguation']/@mutual">
-               <sch:assert test="count(tokenize(., ' ')) eq 2">
+               <sch:assert test="count(tokenize(., '/s')) eq 2">
                   Exactly two @mutual values required.
                 </sch:assert>
             </sch:rule>
@@ -4685,7 +4685,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
                <sch:let name="qrURI"
                         value="$ti//listURI[@type = 'qualifier-relationship']//uri"/>
                <sch:let name="error" value="."/>
-               <sch:assert test="                   every $i in (tokenize(., ' '))                   satisfies $i = $qrURI">
+               <sch:assert test="                   every $i in (tokenize(., '/s'))                   satisfies $i = $qrURI">
                   <sch:value-of select="$error"/> is not currently in use. The value of this @ref attribute must be one of the following: <sch:value-of select="string-join($qrURI, ';  ')"/>.</sch:assert>
             </sch:rule>
          </pattern>
