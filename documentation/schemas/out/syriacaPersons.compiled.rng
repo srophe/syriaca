@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-11-06T21:13:30Z. .
+Schema generated from ODD source 2023-11-06T21:21:25Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -4648,12 +4648,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
                       context="tei:text//tei:relation[@type='disambiguation']">
                <sch:assert test="@ref='http://syriaca.org/keyword/distinct-entity' or @ref='http://syriaca.org/keyword/possibly-identical'">
                   With @type="disambiguation", the @ref attribute must be either "http://syriaca.org/keyword/distinct-entity" or "http://syriaca.org/keyword/possibly-identical".</sch:assert>
-            </sch:rule>
-            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:srophe="https://srophe.app"
-                      context="tei:text//tei:relation[@type='disambiguation']/@mutual">
-               <sch:report test="count(tokenize(., '\s')) ne 2">
+               <sch:report test="count(tokenize(@mutual, '\s')) ne 2">
                   Exactly two @mutual values required.
                 </sch:report>
             </sch:rule>
@@ -4675,7 +4670,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-personal-relations-ref-constraint-rule-127">
+                  id="syriacaPersons-relation-personal-relations-ref-constraint-rule-126">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4817,7 +4812,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
             </zeroOrMore>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-state-state-person-atts-constraint-rule-129">
+                  id="syriacaPersons-state-state-person-atts-constraint-rule-128">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4868,7 +4863,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-state-type-ref-combinations-constraint-rule-137">
+                  id="syriacaPersons-state-type-ref-combinations-constraint-rule-136">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4926,7 +4921,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-state-documentation-on-state-constraint-rule-142">
+                  id="syriacaPersons-state-documentation-on-state-constraint-rule-141">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5033,7 +5028,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(text) contains a single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample. [4. Default Text Structure 15.1. Varieties of Composite Text]</a:documentation>
          <ref name="tei_body"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-text-source-within-text-constraint-rule-143">
+                  id="syriacaPersons-text-source-within-text-constraint-rule-142">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5084,7 +5079,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="syriacaPersons-att.global.change-change-att-values-constraint-rule-144">
+            id="syriacaPersons-att.global.change-change-att-values-constraint-rule-143">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:srophe="https://srophe.app"

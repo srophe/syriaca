@@ -7016,9 +7016,7 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
               <sch:rule context="tei:text//tei:relation[@type='disambiguation']">
                 <sch:assert test="@ref='http://syriaca.org/keyword/distinct-entity' or @ref='http://syriaca.org/keyword/possibly-identical'">
                   With @type="disambiguation", the @ref attribute must be either "http://syriaca.org/keyword/distinct-entity" or "http://syriaca.org/keyword/possibly-identical".</sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:text//tei:relation[@type='disambiguation']/@mutual">
-                <sch:report test="count(tokenize(., '\s')) ne 2">
+                <sch:report test="count(tokenize(@mutual, '\s')) ne 2">
                   Exactly two @mutual values required.
                 </sch:report>
               </sch:rule>
