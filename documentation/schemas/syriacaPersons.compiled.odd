@@ -7018,8 +7018,14 @@ langues, registres, dialectes, etc. présents à l’intérieur d’un texte.</d
                   With @type="disambiguation", the @ref attribute must be either "http://syriaca.org/keyword/distinct-entity" or "http://syriaca.org/keyword/possibly-identical".</sch:assert>
               </sch:rule>
               <sch:rule context="tei:text//tei:relation[@type='disambiguation']/@mutual">
-                <sch:assert test="count(tokenize(., '/s')) eq 2">
+                <sch:report test="count(tokenize(., '\s')) ne 2">
                   Exactly two @mutual values required.
+                </sch:report>
+              </sch:rule>
+              <sch:rule context="tei:text//tei:relation[not(@type='place')][@mutual]/tei:desc/tei:persName/@ref">
+                <sch:let name="mutualVals" value="tokenize(ancestor::tei:relation/@mutual, ' ')"/>
+                <sch:assert test=". = $mutualVals">
+                  Values allowed: <sch:value-of select="string-join($mutualVals, ';  ')"/>.
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:text//tei:relation[@type='pseudonymity']">

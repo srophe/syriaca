@@ -7826,7 +7826,14 @@ element reg { tei_date }<a href="#index.xml-eg-d31e13740" class="anchorlink">⚓
                               or "http://syriaca.org/keyword/possibly-identical".&lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
                               &lt;sch:rule context="tei:text//tei:relation[@type='disambiguation']/@mutual"&gt;
-                              &lt;sch:assert test="count(tokenize(., '/s')) eq 2"&gt; Exactly two @mutual values required.
+                              &lt;sch:report test="count(tokenize(., '\s')) ne 2"&gt; Exactly two @mutual values required.
+                              &lt;/sch:report&gt;
+                              &lt;/sch:rule&gt;
+                              &lt;sch:rule context="tei:text//tei:relation[not(@type='place')][@mutual]/tei:desc/tei:persName/@ref"&gt;
+                              &lt;sch:let name="mutualVals"
+                               value="tokenize(ancestor::tei:relation/@mutual, ' ')"/&gt;
+                              &lt;sch:assert test=". = $mutualVals"&gt; Values allowed: &lt;sch:value-of select="string-join($mutualVals,
+                              '; ')"/&gt;.
                               &lt;/sch:assert&gt;
                               &lt;/sch:rule&gt;
                               &lt;sch:rule context="tei:text//tei:relation[@type='pseudonymity']"&gt;
@@ -13124,7 +13131,7 @@ tei_teidata.xpath = text<a href="#index.xml-eg-d31e26120" class="anchorlink">⚓
             <!--
 	  Generated from index.xml using XSLT stylesheets version 7.54.0
 	       based on http://www.tei-c.org/Stylesheets/
-	       on 2023-11-06T15:11:00Z.
+	       on 2023-11-06T21:13:32Z.
 	       SAXON HE 11.4.
 		 --></address>
       </div>
