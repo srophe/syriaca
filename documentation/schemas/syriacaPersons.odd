@@ -831,7 +831,7 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
-          <constraintSpec ident="atts-on-relation" scheme="schematron">
+          <constraintSpec ident="act-pass-mutual-on-relation" scheme="schematron">
             <constraint>
               <sch:rule context="tei:text//tei:relation/@mutual">
                 <sch:let name="personIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/persons.xml')"/>
@@ -869,6 +869,14 @@
                   The @passive attribute contains one or more place URIs not in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+?}' (where {\d+?} is a number).
                 </sch:assert>
               </sch:rule>
+              <sch:rule context="tei:text//tei:relation[@type='disambiguation']">
+                <sch:report test="count(tokenize(@mutual, '\s')) ne 2"><!-- Work in schematron file but not embedded here. -->
+                  Exactly two @mutual values required.</sch:report>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="att-combos-on-relation" scheme="schematron">
+            <constraint>
               <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/distinct-entity']">
                 <sch:assert test="@type='disambiguation' and @mutual and not(@ana)">
                   For a 'distinct entity' relationship use @type="disambiguation", and a @mutual, and not @ana.</sch:assert>
@@ -892,8 +900,6 @@
               <sch:rule context="tei:text//tei:relation[@type='disambiguation']">
                 <sch:assert test="@ref='http://syriaca.org/keyword/distinct-entity' or @ref='http://syriaca.org/keyword/possibly-identical'">
                   With @type="disambiguation", the @ref attribute must be either "http://syriaca.org/keyword/distinct-entity" or "http://syriaca.org/keyword/possibly-identical".</sch:assert>
-                <sch:report test="count(tokenize(@mutual, '\s')) ne 2"><!-- Work in schematron file but not embedded here. -->
-                  Exactly two @mutual values required.</sch:report>
               </sch:rule>
               <sch:rule context="tei:text//tei:relation[not(@type='place')][@mutual]/tei:desc/tei:persName/@ref">
                 <sch:let name="mutualVals" value="tokenize(ancestor::tei:relation/@mutual, ' ')"/>
