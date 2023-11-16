@@ -381,6 +381,13 @@
             <elementRef key="idno" minOccurs="1" maxOccurs="unbounded"/>
             <elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/>
           </content>
+          <constraintSpec ident="personAbstractReq" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:person">
+                <sch:assert test="tei:desc[@type='abstract']">Every p record must have at least one &lt;note&gt; @type="abstract".</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
           <constraintSpec ident="abstract-in-place" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:body//tei:place">

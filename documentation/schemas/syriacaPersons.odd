@@ -433,7 +433,6 @@
                 </valItem>
               </valList>
             </attDef>
-            <attDef ident="corresp" usage="req" mode="change"/>
           </attList>
         </elementSpec>
         
@@ -565,7 +564,7 @@
             <sequence minOccurs="1" maxOccurs="1" preserveOrder="true">
               <elementRef key="persName" minOccurs="1" maxOccurs="unbounded"/>
               <elementRef key="idno" minOccurs="1" maxOccurs="unbounded"/>
-              <elementRef key="note" minOccurs="0" maxOccurs="unbounded"/> <!-- This needs to be changed to minOccurs="1". Every record needs an abstract. -->
+              <elementRef key="note" minOccurs="1" maxOccurs="unbounded"/> 
               <elementRef key="floruit" minOccurs="0" maxOccurs="unbounded"/>
               <elementRef key="birth" minOccurs="0" maxOccurs="unbounded"/>
               <elementRef key="death" minOccurs="0" maxOccurs="unbounded"/>
@@ -653,6 +652,14 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
+          <constraintSpec ident="personAbstractReq" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:person">
+                <sch:assert test="tei:note[@type='abstract']">Every person record must have at least one &lt;note&gt; @type="abstract".</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          
           <attList>
             <attDef ident="n" mode="delete"/>
             <attDef ident="xml:id" mode="delete"/>
@@ -769,6 +776,13 @@
                 <sch:assert test="contains(@ana, '#syriaca-anonymous')">
                   If a person record is part of the series "Syriac Anonymi" it must have an @ana attribute with "#syriaca-anonymous" on the &lt;personGrp&gt; element.
                 </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="personGrpAbstractReq" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:person">
+                <sch:assert test="tei:note[@type='abstract']">Every person record must have at least one &lt;note&gt; @type="abstract".</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>
