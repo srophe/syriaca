@@ -250,6 +250,9 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
+          <attList>
+            <attDef ident="corresp" mode="delete"/>
+          </attList>
         </elementSpec>
         
         
@@ -377,7 +380,7 @@
               <sch:rule context="//tei:body//tei:note[@type='deprecation']/@target"><!-- I carried this over from places, test -->
                 <sch:let name="nameIDs" value="//tei:person/tei:persName/@xml:id"/>
                 <sch:let name="IDvalues" value="for $i in $nameIDs return concat('#', $i)"/>
-                <sch:assert test="                   every $i in tokenize(., ' ')                   satisfies $i = $IDvalues">
+                <sch:assert test="every $i in tokenize(., ' ') satisfies $i = $IDvalues">
                   This @target attribute on &lt;note&gt; of @type="deprecation" can take one or more of the following value separated by a space: 
                   <sch:value-of select="string-join($IDvalues, ' | ')"/>.
                 </sch:assert>
@@ -392,7 +395,7 @@
               <sch:rule context="//tei:text//tei:person/tei:note[@type='deprecation']/@target | //tei:text//tei:personGrp/tei:note[@type='deprecation']/@target">
                 <sch:let name="nameIDs" value="//tei:text//tei:persName/@xml:id"/>
                 <sch:let name="nameIDpointers" value="for $i in $nameIDs return concat('#', $i)"/>
-                <sch:assert test="                  every $i in tokenize(., ' ')                  satisfies $i = $nameIDpointers">
+                <sch:assert test="every $i in tokenize(., ' ') satisfies $i = $nameIDpointers">
                   This @target attribute can contain one or more of the following <sch:value-of select="$nameIDpointers"/>.
                 </sch:assert>
               </sch:rule>
@@ -430,6 +433,7 @@
                 </valItem>
               </valList>
             </attDef>
+            <attDef ident="corresp" usage="req" mode="change"/>
           </attList>
         </elementSpec>
         
@@ -837,7 +841,7 @@
                 <sch:let name="personIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/persons.xml')"/>
                 <sch:let name="personURIs" value="$personIndex//tei:person/@ref"/>
                 <sch:let name="docURI" value="//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/substring-before(., '/tei')"/>
-                <sch:assert test="                   every $i in tokenize(., ' ')                   satisfies $i = $personURIs">
+                <sch:assert test="every $i in tokenize(., ' ') satisfies $i = $personURIs">
                   The @mutual attribute contains one or more person URIs not in use in Syriaca.org data. Note that all person URIs take the form 'http://syriaca.org/person/{\d+?}' (where {\d+?} is a number).
                 </sch:assert>
                 <sch:assert test="contains(., $docURI)">
@@ -865,7 +869,7 @@
               <sch:rule context="tei:text//tei:relation[@type='place']/@passive">
                 <sch:let name="placeIndex" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
                 <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
-                <sch:assert test="                   every $i in tokenize(., ' ')                   satisfies $i = $placeURIs">
+                <sch:assert test="every $i in tokenize(., ' ') satisfies $i = $placeURIs">
                   The @passive attribute contains one or more place URIs not in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+?}' (where {\d+?} is a number).
                 </sch:assert>
               </sch:rule>

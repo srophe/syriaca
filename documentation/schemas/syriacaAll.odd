@@ -521,7 +521,7 @@
                 <sch:let name="edsDoc" value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/editors.xml')"/>
                 <sch:let name="eds" value="$edsDoc//tei:text/tei:body/tei:listPerson/tei:person/@xml:id"/>
                 <sch:let name="refValues" value="for $i in $eds return concat('http://syriaca.org/documentation/editors.xml#', $i)"/>
-                <sch:assert test="                   every $i in .                   satisfies $i = $refValues">
+                <sch:assert test="every $i in . satisfies $i = $refValues">
                   Acceptable values for the @who attribute on a &lt;change&gt; element inside the &lt;revisionDesc&gt; include: 
                   <sch:value-of select="string-join($refValues, ' | ')"/>.
                 </sch:assert>
@@ -679,12 +679,18 @@
                   All &lt;desc&gt; elements must have an @xml:lang attribute.
                 </sch:assert>
               </sch:rule>
-              <sch:rule context="//tei:text//tei:desc[@type='abstract']">
-                <sch:let name="countAbs" value="count(//tei:text//tei:desc[@type='abstract'])"/>
-                <sch:let name="countLangs" value="count(distinct-values(//tei:text//tei:desc[@type='abstract']/@xml:lang))"/>
-                <sch:assert test="$countAbs = $countLangs">
-                  There can only be one abstract in a given language. 
-                  Each abstract (&lt;desc&gt; element of @type="abstract") must have a unique @xml:lang attribute.
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="uniqueDescAbstracts" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:desc[@type='abstract']">
+                <sch:let name="series" value="ancestor::tei:TEI//tei:seriesStmt/tei:idno[@type='URI']"/>
+                <sch:let name="abstractLangPairs" value="for $i in parent::element()/tei:desc[@type='abstract']/tokenize(@corresp, ' ') return concat($i, '-', @xml:lang)"/>
+                <sch:assert test="every $i in tokenize(@corresp, ' ') satisfies $i = $series">
+                  Values allowed on @corresp: <sch:value-of select="string-join($series, ';  ')"/>.
+                </sch:assert>
+                <sch:assert test="count($abstractLangPairs) eq count(distinct-values($abstractLangPairs))">
+                  A series (see individual values of @corresp) may have only one abstract per language (see @xml:lang).
                 </sch:assert>
               </sch:rule>
             </constraint>
@@ -716,7 +722,6 @@
             <attDef ident="change" mode="delete"/>
             <attDef ident="previous" mode="delete"/>
             <attDef ident="rend" mode="delete"/>
-            <attDef ident="corresp" mode="delete"/>
             <attDef ident="xml:id" mode="delete"/>
             <attDef ident="type" mode="change">
               <valList type="closed">
@@ -948,7 +953,7 @@
                 <sch:let name="edsDoc" value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/editors.xml')"/>
                 <sch:let name="eds" value="$edsDoc//tei:body//@xml:id"/>
                 <sch:let name="refValues" value="for $i in $eds return concat('http://syriaca.org/documentation/editors.xml#', $i)"/>
-                <sch:assert test="                   every $i in .                   satisfies $i = $refValues">
+                <sch:assert test="every $i in . satisfies $i = $refValues">
                   Acceptable values for the @ref attribute on a &lt;name&gt; element inside the &lt;teiHeader&gt; include: 
                   <sch:value-of select="string-join($refValues, ' | ')"/>.
                 </sch:assert>
@@ -984,11 +989,25 @@
           </content>
           <constraintSpec ident="documentation-on-note" scheme="schematron">
             <constraint>
-              <sch:rule context="tei:place/tei:note">
+              <sch:rule context="tei:note">
                 <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
               </sch:rule>
-              <sch:rule context="tei:place/tei:note[not(tei:quote)]">
+              <sch:rule context="tei:note[not(tei:quote)]">
                 <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="uniqueNoteAbstracts" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:note[@type='abstract']">
+                <sch:let name="series" value="ancestor::tei:TEI//tei:seriesStmt/tei:idno[@type='URI']"/>
+                <sch:let name="abstractLangPairs" value="for $i in parent::element()/tei:note[@type='abstract']/tokenize(@corresp, ' ') return concat($i, '-', @xml:lang)"/>
+                <sch:assert test="every $i in tokenize(@corresp, ' ') satisfies $i = $series">
+                  Values allowed on @corresp: <sch:value-of select="string-join($series, ';  ')"/>.
+                </sch:assert>
+                <sch:assert test="count($abstractLangPairs) eq count(distinct-values($abstractLangPairs))">
+                  A series (see individual values of @corresp) may have only one abstract per language (see @xml:lang).
+                </sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>
@@ -999,7 +1018,6 @@
             <attDef ident="change" mode="delete"/>
             <attDef ident="previous" mode="delete"/>
             <attDef ident="rend" mode="delete"/>
-            <attDef ident="corresp" mode="delete"/>
             <attDef ident="xml:id" mode="delete"/>
           </attList>
         </elementSpec>

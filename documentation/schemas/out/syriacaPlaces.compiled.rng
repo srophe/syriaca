@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-11-03T15:12:51Z. .
+Schema generated from ODD source 2023-11-16T20:24:58Z. .
 TEI Edition: Version 4.5.0. Last updated on
         25th October 2022, revision 3e98e619e
 TEI Edition Location: https://www.tei-c.org/Vault/P5/Version 4.5.0/
@@ -2253,11 +2253,11 @@ Suggested values include: 1] m (metre); 2] kg (kilogram); 3] s (second); 4] Hz (
                <sch:let name="labelToRef"
                         value="for $i in $spaceTo- return lower-case($spaceTo-)"/>
                <sch:assert test="parent::tei:state/@type='confession'">A &lt;label&gt; element can only be used when parent &lt;state&gt; element has @type="confession"</sch:assert>
-               <sch:assert test="                   every $i in $labelToRef                   satisfies $i = $stateRefPart">
+               <sch:assert test="every $i in $labelToRef satisfies $i = $stateRefPart">
                   The text node in the &lt;label&gt; element must correspond to the @ref attribute on the parent &lt;state&gt;: 
                   <sch:value-of select="parent::tei:state/@ref"/>.
                 </sch:assert>
-               <sch:assert test="                   every $i in .                   satisfies $i = $confessionLabels">
+               <sch:assert test="every $i in . satisfies $i = $confessionLabels">
                   The text node in the &lt;label&gt; element must be one of the following: <sch:value-of select="string-join($confessionLabels, '; ')"/>.
                 </sch:assert>
             </sch:rule>
@@ -2272,16 +2272,22 @@ Suggested values include: 1] m (metre); 2] kg (kilogram); 3] s (second); 4] Hz (
                   All &lt;desc&gt; elements must have an @xml:lang attribute.
                 </sch:assert>
             </sch:rule>
+         </pattern>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="syriacaPlaces-desc-uniqueDescAbstracts-constraint-rule-17">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="//tei:text//tei:desc[@type='abstract']">
-               <sch:let name="countAbs" value="count(//tei:text//tei:desc[@type='abstract'])"/>
-               <sch:let name="countLangs"
-                        value="count(distinct-values(//tei:text//tei:desc[@type='abstract']/@xml:lang))"/>
-               <sch:assert test="$countAbs = $countLangs">
-                  There can only be one abstract in a given language. 
-                  Each abstract (&lt;desc&gt; element of @type="abstract") must have a unique @xml:lang attribute.
+                      context="tei:desc[@type='abstract']">
+               <sch:let name="series"
+                        value="ancestor::tei:TEI//tei:seriesStmt/tei:idno[@type='URI']"/>
+               <sch:let name="abstractLangPairs"
+                        value="for $i in parent::element()/tei:desc[@type='abstract']/tokenize(@corresp, ' ') return concat($i, '-', @xml:lang)"/>
+               <sch:assert test="every $i in tokenize(@corresp, ' ') satisfies $i = $series">
+                  Values allowed on @corresp: <sch:value-of select="string-join($series, ';  ')"/>.
+                </sch:assert>
+               <sch:assert test="count($abstractLangPairs) eq count(distinct-values($abstractLangPairs))">
+                  A series (see individual values of @corresp) may have only one abstract per language (see @xml:lang).
                 </sch:assert>
             </sch:rule>
          </pattern>
@@ -2422,6 +2428,16 @@ Suggested values include: 1] m (metre); 2] kg (kilogram); 3] s (second); 4] Hz (
                </choice>
             </attribute>
          </optional>
+         <attribute name="corresp">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(corresponds) points to elements that correspond to the current element in some way.</a:documentation>
+            <list>
+               <oneOrMore>
+                  <data type="anyURI">
+                     <param name="pattern">\S+</param>
+                  </data>
+               </oneOrMore>
+            </list>
+         </attribute>
          <optional>
             <attribute name="type">
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">characterizes the element in some sense, using any convenient classification scheme or typology.
@@ -2477,7 +2493,7 @@ Normalization 12. Critical Apparatus]</a:documentation>
                <sch:let name="eds" value="$edsDoc//tei:body//@xml:id"/>
                <sch:let name="refValues"
                         value="for $i in $eds return concat('http://syriaca.org/documentation/editors.xml#', $i)"/>
-               <sch:assert test="                   every $i in .                   satisfies $i = $refValues">
+               <sch:assert test="every $i in . satisfies $i = $refValues">
                   Acceptable values for the @ref attribute on a &lt;name&gt; element inside the &lt;teiHeader&gt; include: 
                   <sch:value-of select="string-join($refValues, ' | ')"/>.
                 </sch:assert>
@@ -2703,7 +2719,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
                       context="//tei:text//tei:note[@type='deprecation']/@target">
                <sch:let name="nameIDs" value="//tei:place/tei:placeName/@xml:id"/>
                <sch:let name="IDvalues" value="for $i in $nameIDs return concat('#', $i)"/>
-               <sch:assert test="                   every $i in tokenize(., ' ')                   satisfies $i = $IDvalues">
+               <sch:assert test="every $i in tokenize(., ' ') satisfies $i = $IDvalues">
                   This @target attribute on &lt;note&gt; of @type="deprecation" can take one or more of the following value 
                   separated by a space: 
                   <sch:value-of select="string-join($IDvalues, ' | ')"/>.
@@ -2734,7 +2750,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
                       context="//tei:body//tei:note[@type='deprecation']/@target">
                <sch:let name="nameIDs" value="//tei:place/tei:placeName/@xml:id"/>
                <sch:let name="IDvalues" value="for $i in $nameIDs return concat('#', $i)"/>
-               <sch:assert test="                   every $i in tokenize(., ' ')                   satisfies $i = $IDvalues">
+               <sch:assert test="every $i in tokenize(., ' ') satisfies $i = $IDvalues">
                   This @target attribute on &lt;note&gt; of @type="deprecation" can take one or more of the following value 
                   separated by a space: 
                   <sch:value-of select="string-join($IDvalues, ' | ')"/>.
@@ -2746,18 +2762,36 @@ attributes @target and @cRef may be supplied on <name/>.</report>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="tei:place/tei:note">
+                      context="tei:note">
                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="tei:place/tei:note[not(tei:quote)]">
+                      context="tei:note[not(tei:quote)]">
                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-note-xmlLang-in-note-constraint-rule-34">
+                  id="syriacaPlaces-note-uniqueNoteAbstracts-constraint-rule-34">
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:note[@type='abstract']">
+               <sch:let name="series"
+                        value="ancestor::tei:TEI//tei:seriesStmt/tei:idno[@type='URI']"/>
+               <sch:let name="abstractLangPairs"
+                        value="for $i in parent::element()/tei:note[@type='abstract']/tokenize(@corresp, ' ') return concat($i, '-', @xml:lang)"/>
+               <sch:assert test="every $i in tokenize(@corresp, ' ') satisfies $i = $series">
+                  Values allowed on @corresp: <sch:value-of select="string-join($series, ';  ')"/>.
+                </sch:assert>
+               <sch:assert test="count($abstractLangPairs) eq count(distinct-values($abstractLangPairs))">
+                  A series (see individual values of @corresp) may have only one abstract per language (see @xml:lang).
+                </sch:assert>
+            </sch:rule>
+         </pattern>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="syriacaPlaces-note-xmlLang-in-note-constraint-rule-35">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -2818,7 +2852,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
             <text/>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-editor-role-on-editor-constraint-rule-35">
+                  id="syriacaPlaces-editor-role-on-editor-constraint-rule-36">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -2856,7 +2890,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-editor-date-past-editor-constraint-rule-39">
+                  id="syriacaPlaces-editor-date-past-editor-constraint-rule-40">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -2866,7 +2900,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-editor-ref-on-editor-constraint-rule-40">
+                  id="syriacaPlaces-editor-ref-on-editor-constraint-rule-41">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -2886,7 +2920,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
                         value="$edsDoc//tei:text/tei:body/tei:listPerson/tei:person/@xml:id"/>
                <sch:let name="refValues"
                         value="for $i in $eds return concat('http://syriaca.org/documentation/editors.xml#', $i)"/>
-               <sch:assert test="                   every $i in .                   satisfies $i = $refValues"> Acceptable values for the @ref attribute on an &lt;editor&gt; element inside the
+               <sch:assert test="every $i in . satisfies $i = $refValues"> Acceptable values for the @ref attribute on an &lt;editor&gt; element inside the
                   &lt;teiHeader&gt; include: <sch:value-of select="string-join($refValues, ' | ')"/>. </sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
@@ -2974,7 +3008,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(title) contains a title for any kind of work. [3.12.2.2. Titles, Authors, and Editors 2.2.1. The Title Statement 2.2.5. The Series Statement]</a:documentation>
          <ref name="tei_macro.paraContent"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-title-lang-on-title-in-body-constraint-rule-43">
+                  id="syriacaPlaces-title-lang-on-title-in-body-constraint-rule-44">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -2986,7 +3020,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-title-title-in-titleStmt-constraint-rule-44">
+                  id="syriacaPlaces-title-title-in-titleStmt-constraint-rule-45">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -2996,7 +3030,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-title-title-in-seriesStmt-constraint-rule-45">
+                  id="syriacaPlaces-title-title-in-seriesStmt-constraint-rule-46">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3007,7 +3041,7 @@ attributes @target and @cRef may be supplied on <name/>.</report>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-title-title-in-desc-note-constraint-rule-46">
+                  id="syriacaPlaces-title-title-in-desc-note-constraint-rule-47">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3074,7 +3108,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          </zeroOrMore>
          <text/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-biblScope-biblScope-in-seriesStmt-constraint-rule-48">
+                  id="syriacaPlaces-biblScope-biblScope-in-seriesStmt-constraint-rule-49">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3178,7 +3212,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <text/>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-bibl-xmlID-on-bibl-constraint-rule-49">
+                  id="syriacaPlaces-bibl-xmlID-on-bibl-constraint-rule-50">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3199,7 +3233,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-bibl-mssCitation-constraint-rule-51">
+                  id="syriacaPlaces-bibl-mssCitation-constraint-rule-52">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3366,7 +3400,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(release authority) supplies the name of a person or other agency responsible for making a work available, other than a publisher or distributor. [2.2.4. Publication, Distribution, Licensing, etc.]</a:documentation>
          <text/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-authority-authorityText-constraint-rule-53">
+                  id="syriacaPlaces-authority-authorityText-constraint-rule-54">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3383,7 +3417,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(identifier) supplies any form of identifier used to identify some object, such as a bibliographic item, a person, a title, an organization, etc. in a standardized way. [13.3.1. Basic Principles 2.2.4. Publication, Distribution, Licensing, etc. 2.2.5. The Series Statement 3.12.2.4. Imprint, Size of a Document, and Reprint Information]</a:documentation>
          <text/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-idno-idno-uri-constraint-rule-54">
+                  id="syriacaPlaces-idno-idno-uri-constraint-rule-55">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3399,7 +3433,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-idno-change-on-idno-constraint-rule-55">
+                  id="syriacaPlaces-idno-change-on-idno-constraint-rule-56">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3483,7 +3517,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          </optional>
          <ref name="tei_idno"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-seriesStmt-seriesStmt-content-constraint-rule-57">
+                  id="syriacaPlaces-seriesStmt-seriesStmt-content-constraint-rule-58">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3695,7 +3729,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(change) documents a change or set of changes made during the production of a source document, or during the revision of an electronic file. [2.6. The Revision Description 2.4.1. Creation 11.7. Identifying Changes and Revisions]</a:documentation>
          <ref name="tei_macro.specialPara"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-change-who-on-change-constraint-rule-62">
+                  id="syriacaPlaces-change-who-on-change-constraint-rule-63">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3706,14 +3740,14 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                         value="$edsDoc//tei:text/tei:body/tei:listPerson/tei:person/@xml:id"/>
                <sch:let name="refValues"
                         value="for $i in $eds return concat('http://syriaca.org/documentation/editors.xml#', $i)"/>
-               <sch:assert test="                   every $i in .                   satisfies $i = $refValues">
+               <sch:assert test="every $i in . satisfies $i = $refValues">
                   Acceptable values for the @who attribute on a &lt;change&gt; element inside the &lt;revisionDesc&gt; include: 
                   <sch:value-of select="string-join($refValues, ' | ')"/>.
                 </sch:assert>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-change-xmlID-on-change-constraint-rule-63">
+                  id="syriacaPlaces-change-xmlID-on-change-constraint-rule-64">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3793,7 +3827,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(link) defines an association or hypertextual link among elements or passages, of some type not more precisely specifiable by other elements. [16.1. Links]</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-link-target-on-link-constraint-rule-64">
+                  id="syriacaPlaces-link-target-on-link-constraint-rule-65">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3802,13 +3836,13 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                       context="//tei:link/@target">
                <sch:let name="allIDs" value="//@xml:id"/>
                <sch:let name="targetVals" value="for $i in $allIDs return concat('#', $i)"/>
-               <sch:assert test="                   every $i in (tokenize(., ' '))                   satisfies $i = $targetVals">A &lt;link&gt; element takes a @target attribute with two or more of the
+               <sch:assert test="every $i in (tokenize(., ' ')) satisfies $i = $targetVals">A &lt;link&gt; element takes a @target attribute with two or more of the
                   following values: <sch:value-of select="string-join($targetVals, ' | ')"/>.
                 </sch:assert>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-link-linkTargets3-constraint-assert-51">
+                  id="syriacaPlaces-link-linkTargets3-constraint-assert-54">
             <rule context="tei:link">
                <sch:assert xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -3953,7 +3987,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <text/>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-persName-persName-ref-constraint-rule-65">
+                  id="syriacaPlaces-persName-persName-ref-constraint-rule-66">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3988,7 +4022,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <text/>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-placeName-documentation-on-placeName-constraint-rule-67">
+                  id="syriacaPlaces-placeName-documentation-on-placeName-constraint-rule-68">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4004,7 +4038,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-placeName-placeName-content-constraint-rule-69">
+                  id="syriacaPlaces-placeName-placeName-content-constraint-rule-70">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4013,7 +4047,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-placeName-xmlID-on-placeName-constraint-rule-70">
+                  id="syriacaPlaces-placeName-xmlID-on-placeName-constraint-rule-71">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4028,7 +4062,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-placeName-xmlLang-on-placeName-constraint-rule-71">
+                  id="syriacaPlaces-placeName-xmlLang-on-placeName-constraint-rule-72">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4037,7 +4071,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-placeName-place-ref-constraint-rule-72">
+                  id="syriacaPlaces-placeName-place-ref-constraint-rule-73">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4182,7 +4216,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </zeroOrMore>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-event-xmlID-on-event-constraint-rule-74">
+                  id="syriacaPlaces-event-xmlID-on-event-constraint-rule-75">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4197,7 +4231,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-event-documentation-on-event-constraint-rule-75">
+                  id="syriacaPlaces-event-documentation-on-event-constraint-rule-76">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4259,7 +4293,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <ref name="tei_desc"/>
          </choice>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-location-location-children-constraint-rule-77">
+                  id="syriacaPlaces-location-location-children-constraint-rule-78">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4278,7 +4312,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-location-documentation-on-location-constraint-rule-79">
+                  id="syriacaPlaces-location-documentation-on-location-constraint-rule-80">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4315,7 +4349,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-location-source-only_1_ODD_source-constraint-rule-81">
+                  id="syriacaPlaces-location-source-only_1_ODD_source-constraint-rule-82">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4370,7 +4404,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <ref name="tei_bibl"/>
          </oneOrMore>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-place-abstract-in-place-constraint-rule-82">
+                  id="syriacaPlaces-place-abstract-in-place-constraint-rule-83">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4443,7 +4477,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(relationship) describes any kind of relationship or linkage amongst a specified group of places, events, persons, objects or other items. [13.3.2.3. Personal Relationships]</a:documentation>
          <ref name="tei_desc"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-relation-documentation-on-relation-constraint-rule-83">
+                  id="syriacaPlaces-relation-documentation-on-relation-constraint-rule-84">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4453,7 +4487,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-relation-atts-on-relation-constraint-rule-84">
+                  id="syriacaPlaces-relation-atts-on-relation-constraint-rule-85">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4461,7 +4495,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                <sch:let name="placeIndex"
                         value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/indexes/places.xml')"/>
                <sch:let name="placeURIs" value="$placeIndex//tei:place/@ref"/>
-               <sch:assert test="                   every $i in tokenize(., ' ')                   satisfies $i = $placeURIs">
+               <sch:assert test="every $i in tokenize(., ' ') satisfies $i = $placeURIs">
                   This attribute contains one or more place URIs not in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+?}' (where {\d+?} is a number).
                 </sch:assert>
             </sch:rule>
@@ -4540,7 +4574,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-relation-reforkeyorname-constraint-assert-77">
+                  id="syriacaPlaces-relation-reforkeyorname-constraint-assert-80">
             <rule context="tei:relation">
                <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4665,7 +4699,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </zeroOrMore>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-state-state-type-existence-constraint-rule-95">
+                  id="syriacaPlaces-state-state-type-existence-constraint-rule-96">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4685,7 +4719,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-state-state-type-confession-constraint-rule-96">
+                  id="syriacaPlaces-state-state-type-confession-constraint-rule-97">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4710,14 +4744,14 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                         value="for $i in $confessionIDs return concat('#', $i)"/>
                <sch:let name="confessionRefValues"
                         value="for $i in $confessionPtrs return concat('http://syriaca.org/documentation/confessions.xml', $i)"/>
-               <sch:assert test="                   every $i in .                   satisfies $i = $confessionRefValues">
+               <sch:assert test="every $i in . satisfies $i = $confessionRefValues">
                   The acceptable values of @ref are 'http://syriaca.org/documentation/confessions.xml' followed by one of the following:
                   <sch:value-of select="string-join($confessionPtrs, '; ')"/>
                </sch:assert>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-state-documentation-on-state-constraint-rule-98">
+                  id="syriacaPlaces-state-documentation-on-state-constraint-rule-99">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4823,7 +4857,7 @@ Sample values include: 1] TEI; 2] DBK (docbook); 3] XX (unknown); 4] Schematron;
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(text) contains a single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample. [4. Default Text Structure 15.1. Varieties of Composite Text]</a:documentation>
          <ref name="tei_body"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-text-source-within-text-constraint-rule-99">
+                  id="syriacaPlaces-text-source-within-text-constraint-rule-100">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4874,7 +4908,7 @@ Sample values include: 1] TEI; 2] DBK (docbook); 3] XX (unknown); 4] Schematron;
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="syriacaPlaces-att.global.change-change-att-values-constraint-rule-100">
+            id="syriacaPlaces-att.global.change-change-att-values-constraint-rule-101">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:srophe="https://srophe.app"
