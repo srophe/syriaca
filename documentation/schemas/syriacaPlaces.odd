@@ -370,7 +370,7 @@
           </classes>
           <content>
             <elementRef key="placeName" minOccurs="1" maxOccurs="unbounded"/>
-            <elementRef key="desc" minOccurs="1" maxOccurs="unbounded"/>
+            <elementRef key="desc" minOccurs="0" maxOccurs="unbounded"/>
             <elementRef key="location" minOccurs="0" maxOccurs="unbounded"/>
             <elementRef key="event" minOccurs="0" maxOccurs="unbounded"/>
             <elementRef key="state" minOccurs="0" maxOccurs="unbounded"/>
@@ -381,16 +381,7 @@
           <constraintSpec ident="personAbstractReq" scheme="schematron">
             <constraint>
               <sch:rule context="tei:person">
-                <sch:assert test="tei:desc[@type='abstract']">Every p record must have at least one &lt;note&gt; @type="abstract".</sch:assert>
-              </sch:rule>
-            </constraint>
-          </constraintSpec>
-          <constraintSpec ident="abstract-in-place" scheme="schematron">
-            <constraint>
-              <sch:rule context="//tei:body//tei:place">
-                <sch:report test="count(//tei:desc[@type='abstract']) lt 1">
-                  Every &lt;place&gt; element must have at least one &lt;desc&gt; element with @type="abstract".
-                </sch:report>
+                <sch:assert test="tei:desc[@type='abstract']">Every place record must have at least one &lt;desc&gt; @type="abstract".</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>
