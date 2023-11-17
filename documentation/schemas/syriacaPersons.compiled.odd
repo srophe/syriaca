@@ -3044,16 +3044,7 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
         type="deprecationInfo"&gt;.</sch:assert>
       </sch:rule>
     </constraint>
-  </constraintSpec><attList><attDef ident="corresp" mode="delete"/><attDef ident="subtype" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="xml:id" mode="delete"/><attDef ident="xml:lang" mode="change" usage="rec"/><attDef ident="type" mode="change" rend="change"><valList xmlns:rng="http://relaxng.org/ns/structure/1.0" type="semi" mode="add">
-        <valItem ident="deprecationInfo">
-          <gloss versionDate="2018-09-14" xml:lang="en">deprecation
-          information</gloss>
-          <desc versionDate="2018-09-14" xml:lang="en">This element
-          describes why or how its parent element is being deprecated,
-          typically including recommendations for alternate
-          encoding.</desc>
-        </valItem>
-      </valList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
+  </constraintSpec><attList><attDef ident="corresp" mode="delete"/><attDef ident="subtype" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="xml:id" mode="delete"/><attDef ident="xml:lang" mode="change" usage="rec"/><attDef ident="type" mode="change" rend="change"><valList type="closed" mode="change"><valItem ident="abstract"/><valItem ident="note"/></valList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
         <egXML xmlns="http://www.tei-c.org/ns/Examples">
            <dataSpec module="tei" ident="teidata.point" validUntil="2050-02-25">
             <desc type="deprecationInfo" versionDate="2018-09-14" xml:lang="en">Several standards bodies, including NIST in the USA,
@@ -3553,26 +3544,44 @@ attributes @target and @cRef may be supplied on <name/>.</report>
                   have an @xml:lang attribute. </sch:assert>
               </sch:rule>
             </constraint>
-          </constraintSpec><attList><attDef ident="subtype" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="xml:id" mode="delete"/><attDef ident="type" mode="change" rend="change" usage="req"><desc xmlns:rng="http://relaxng.org/ns/structure/1.0">Describes the function of the note. This attribute is recommended and determines
-                how the note is displayed on the page.</desc><valList type="closed" mode="replace"><valItem ident="abstract">
-                  <desc>Used for the abstract of the entity.</desc>
-                </valItem><valItem ident="corrigenda">
-                  <desc>Used to correct a piece of data.</desc>
-                </valItem><valItem ident="deprecation">
-                  <desc>Used to indicate the deprecation of a piece of data.</desc>
-                </valItem><valItem ident="description">
-                  <desc>Used to describing the subject of the record.</desc>
-                </valItem><valItem ident="disambiguation">
-                  <desc>Used to disambiguate between two similar entities.</desc>
-                </valItem><valItem ident="discursive">
-                  <desc>Used to discuss some aspect of the record, often with reference to scholarly debates.</desc>
-                </valItem><valItem ident="incerta">
-                  <desc>Used to indicate that the content of a note is uncertain.</desc>
-                </valItem><valItem ident="license">
-                  <desc>Used only in the header to indicate the license under which this data is released.</desc>
-                </valItem><valItem ident="misc">
-                  <desc>Used for notes that do not fit into another category.</desc>
-                </valItem></valList></attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
+          </constraintSpec><attList><attDef ident="subtype" mode="delete"/><attDef ident="n" mode="delete"/><attDef ident="ana" mode="delete"/><attDef ident="change" mode="delete"/><attDef ident="previous" mode="delete"/><attDef ident="rend" mode="delete"/><attDef ident="xml:id" mode="delete"/><attDef xmlns:rng="http://relaxng.org/ns/structure/1.0" ident="type" mode="change" usage="req">
+              <desc>Describes the function of the note. This attribute is recommended and determines
+                how the note is displayed on the page.</desc>
+              <valList mode="replace" type="closed">
+                <valItem ident="abstract">
+                  <desc>A note that contains an abstract for an authority file.</desc>
+                </valItem>
+                <valItem ident="corrigenda">
+                  <desc>A note describing how the record should be corrected or read
+                    differently.</desc>
+                </valItem>
+                <valItem ident="deprecation">
+                  <desc>A note logging the reason(s) for deprecating a particular data point.</desc>
+                </valItem>
+                <valItem ident="description">
+                  <desc>A note describing this entity (person, place, work, etc.).</desc>
+                </valItem>
+                <valItem ident="disambiguation">
+                  <desc>A note disambiguating this entity from another entity in a different dataset, i.e. one without a Syriaca.org URI.</desc>
+                </valItem>
+                <valItem ident="discursive">
+                  <desc>A discursive note discussing a bibliographic item related to this entity.</desc>
+                </valItem>
+                <valItem ident="errata">
+                  <desc>A note describing data that is included in the record but is known to be
+                    incorrect.</desc>
+                </valItem>
+                <valItem ident="incerta">
+                  <desc>A note describing uncertain data in the record.</desc>
+                </valItem>
+                <valItem ident="license">
+                  <desc>A note describing the license under which this file is released.</desc>
+                </valItem>
+                <valItem ident="misc">
+                  <desc>A note that cannot be categorized as any other type.</desc>
+                </valItem>
+              </valList>
+            </attDef></attList><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
     <p>In the following example, the translator has supplied a footnote
       containing an explanation of the term translated as "painterly":</p>
 <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#NOTE-eg">And yet it is not only
