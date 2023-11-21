@@ -4031,6 +4031,16 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
                 </sch:assert>
               </sch:rule>
             </constraint>
+          </constraintSpec><constraintSpec ident="abstract-on-each-series" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:desc[@type='abstract'][@xml:lang='en']">
+                <sch:let name="series" value="ancestor::tei:TEI//tei:seriesStmt/tei:idno[@type='URI']"/>
+                <sch:let name="corresps" value="parent::*/tei:desc[@xml:lang='en']/@corresp/tokenize(., '\s')"/>
+                <sch:assert test="every $i in $series satisfies $i = $corresps">
+                  Each series in the header must have an abstract. As such, each of the following must appear once as a value on the @corresp attribute of an abstract: <sch:value-of select="string-join($series, ';  ')"/>.
+                </sch:assert>
+              </sch:rule>
+            </constraint>
           </constraintSpec><constraintSpec ident="documentation-on-desc" scheme="schematron">
             <constraint>
               <sch:rule context="tei:event/tei:desc">
@@ -4944,9 +4954,8 @@ attributes @target and @cRef may be supplied on <name/>.</report>
               <sch:rule context="tei:text//tei:note[not(tei:quote)]">
                 <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
               </sch:rule>
-              
             </constraint>
-          </constraintSpec><constraintSpec ident="uniqueNoteAbstracts" scheme="schematron">
+          </constraintSpec><constraintSpec ident="unique-note-abstracts" scheme="schematron">
             <constraint>
               <sch:rule context="tei:note[@type='abstract']">
                 <sch:let name="series" value="ancestor::tei:TEI//tei:seriesStmt/tei:idno[@type='URI']"/>
@@ -4956,6 +4965,16 @@ attributes @target and @cRef may be supplied on <name/>.</report>
                 </sch:assert>
                 <sch:assert test="count($abstractLangPairs) eq count(distinct-values($abstractLangPairs))">
                   A series (see individual values of @corresp) may have only one abstract per language (see @xml:lang).
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="note-abstract-on-each-series" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:note[@type='abstract'][@xml:lang='en']">
+                <sch:let name="series" value="ancestor::tei:TEI//tei:seriesStmt/tei:idno[@type='URI']"/>
+                <sch:let name="corresps" value="parent::*/tei:note[@xml:lang='en']/@corresp/tokenize(., '\s')"/>
+                <sch:assert test="every $i in $series satisfies $i = $corresps">
+                  Each series in the header must have an abstract. As such, each of the following must appear once as a value on the @corresp attribute of an abstract: <sch:value-of select="string-join($series, ';  ')"/>.
                 </sch:assert>
               </sch:rule>
             </constraint>
@@ -8623,7 +8642,7 @@ codes used elsewhere in the text.</desc><desc xmlns:rng="http://relaxng.org/ns/s
     </egXML>
   </exemplum><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html#NDGEOG">13.3.4. Places</ref>
-  </listRef></elementSpec><elementSpec rend="add" ident="place" module="namesdates"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2008-12-09">place</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">lieu</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-06-14" xml:lang="en">contains data about a geographic location</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">지리적 위치에 관한 데이터를 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-06" xml:lang="es">contiene los datos sobre una localización geográfica</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">地理上の場所のデータを示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">contient des informations sur un lieu géographique.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-11-06" xml:lang="it">contiene informazioni relative a un luogo geografico</desc><classes><memberOf key="att.typed"/></classes><content><elementRef key="placeName" minOccurs="1" maxOccurs="unbounded"/><elementRef key="desc" minOccurs="0" maxOccurs="unbounded"/><elementRef key="location" minOccurs="0" maxOccurs="unbounded"/><elementRef key="event" minOccurs="0" maxOccurs="unbounded"/><elementRef key="state" minOccurs="0" maxOccurs="unbounded"/><elementRef key="note" minOccurs="0" maxOccurs="unbounded"/><elementRef key="idno" minOccurs="1" maxOccurs="unbounded"/><elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/></content><constraintSpec ident="personAbstractReq" scheme="schematron">
+  </listRef></elementSpec><elementSpec rend="add" ident="place" module="namesdates"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2008-12-09">place</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">lieu</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-06-14" xml:lang="en">contains data about a geographic location</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">지리적 위치에 관한 데이터를 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-06" xml:lang="es">contiene los datos sobre una localización geográfica</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">地理上の場所のデータを示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-12-09" xml:lang="fr">contient des informations sur un lieu géographique.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-11-06" xml:lang="it">contiene informazioni relative a un luogo geografico</desc><classes><memberOf key="att.typed"/></classes><content><elementRef key="placeName" minOccurs="1" maxOccurs="unbounded"/><elementRef key="desc" minOccurs="0" maxOccurs="unbounded"/><elementRef key="location" minOccurs="0" maxOccurs="unbounded"/><elementRef key="event" minOccurs="0" maxOccurs="unbounded"/><elementRef key="state" minOccurs="0" maxOccurs="unbounded"/><elementRef key="note" minOccurs="0" maxOccurs="unbounded"/><elementRef key="idno" minOccurs="1" maxOccurs="unbounded"/><elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/></content><constraintSpec ident="person-abstract-req" scheme="schematron">
             <constraint>
               <sch:rule context="tei:place">
                 <sch:assert test="tei:desc[@type='abstract']">Every place record must have at least one &lt;desc&gt; @type="abstract".</sch:assert>
