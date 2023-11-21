@@ -3300,13 +3300,25 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
   annotiert wird, üblicherweise einem Dokumentationselement oder einer
   Einheit.</desc><classes><memberOf key="att.global"/><memberOf key="model.descLike"/><memberOf key="att.typed"/><memberOf key="model.labelLike"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="choice" minOccurs="0" maxOccurs="unbounded"/><elementRef key="date" minOccurs="0" maxOccurs="unbounded"/><elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/><elementRef key="measure" minOccurs="0" maxOccurs="unbounded"/><elementRef key="offset" minOccurs="0" maxOccurs="unbounded"/><elementRef key="orgName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="quote" minOccurs="0" maxOccurs="1"/><elementRef key="title" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><constraintSpec ident="documentation-on-person-desc" scheme="schematron">
             <constraint>
-              <sch:rule context="tei:person/tei:desc or tei:personGrp/tei:desc">
+              <sch:rule context="tei:person/tei:desc">
                 <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
               </sch:rule>
             </constraint>
           </constraintSpec><constraintSpec ident="person-desc-child-quote" scheme="schematron">
             <constraint>
-              <sch:rule context="tei:person/tei:desc[not(tei:quote)] or tei:personGrp/tei:desc[not(tei:quote)]">
+              <sch:rule context="tei:person/tei:desc[not(tei:quote)]">
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="documentation-on-personGrp-desc" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:personGrp/tei:desc">
+                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="personGrp-desc-child-quote" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:personGrp/tei:desc[not(tei:quote)]">
                 <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
               </sch:rule>
             </constraint>

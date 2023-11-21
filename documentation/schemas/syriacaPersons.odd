@@ -174,14 +174,28 @@
         <elementSpec ident="desc" module="core" mode="change">
           <constraintSpec ident="documentation-on-person-desc" scheme="schematron">
             <constraint>
-              <sch:rule context="tei:person/tei:desc or tei:personGrp/tei:desc">
+              <sch:rule context="tei:person/tei:desc">
                 <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
               </sch:rule>
             </constraint>
           </constraintSpec>
           <constraintSpec ident="person-desc-child-quote" scheme="schematron">
             <constraint>
-              <sch:rule context="tei:person/tei:desc[not(tei:quote)] or tei:personGrp/tei:desc[not(tei:quote)]">
+              <sch:rule context="tei:person/tei:desc[not(tei:quote)]">
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="documentation-on-personGrp-desc" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:personGrp/tei:desc">
+                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="personGrp-desc-child-quote" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:personGrp/tei:desc[not(tei:quote)]">
                 <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
               </sch:rule>
             </constraint>
