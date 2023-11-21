@@ -681,7 +681,7 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
-          <constraintSpec ident="uniqueDescAbstracts" scheme="schematron">
+          <constraintSpec ident="unique-desc-abstracts" scheme="schematron">
             <constraint>
               <sch:rule context="tei:desc[@type='abstract']">
                 <sch:let name="series" value="ancestor::tei:TEI//tei:seriesStmt/tei:idno[@type='URI']"/>
@@ -700,9 +700,6 @@
               <sch:rule context="tei:place/tei:desc">
                 <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
               </sch:rule>
-              <sch:rule context="tei:place/tei:desc[not(tei:quote)]">
-                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
-              </sch:rule>
               <sch:rule context="tei:event/tei:desc">
                 <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;event&gt; element.</sch:report>
               </sch:rule>
@@ -711,6 +708,13 @@
               </sch:rule>
               <sch:rule context="tei:state/tei:desc">
                 <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;state&gt; element.</sch:report>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="desc-child-quote" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:place/tei:desc[not(tei:quote)]">
+                <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>

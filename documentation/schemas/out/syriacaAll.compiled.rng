@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-11-20T15:46:17Z. . 
+Schema generated from ODD source 2023-11-21T19:10:48Z. . 
 TEI Edition: Version 4.5.0. Last updated on 25th October 2022, revision 3e98e619e 
 TEI Edition Location: https://www.tei-c.org/Vault/P5/4.5.0/ 
   
@@ -3476,7 +3476,7 @@ Suggested values include: 1] volume (volume); 2] issue; 3] page (page); 4] line;
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaAll-desc-uniqueDescAbstracts-constraint-rule-15">
+                  id="syriacaAll-desc-unique-desc-abstracts-constraint-rule-15">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3504,12 +3504,6 @@ Suggested values include: 1] volume (volume); 2] issue; 3] page (page); 4] line;
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="tei:place/tei:desc[not(tei:quote)]">
-               <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
-            </sch:rule>
-            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
-                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
-                      xmlns:srophe="https://srophe.app"
                       context="tei:event/tei:desc">
                <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;event&gt; element.</sch:report>
             </sch:rule>
@@ -3524,6 +3518,15 @@ Suggested values include: 1] volume (volume); 2] issue; 3] page (page); 4] line;
                       xmlns:srophe="https://srophe.app"
                       context="tei:state/tei:desc">
                <sch:report test="@resp or @source">Documentation using @resp or @source should go on the parent &lt;state&gt; element.</sch:report>
+            </sch:rule>
+         </pattern>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="syriacaAll-desc-desc-child-quote-constraint-rule-20">
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="tei:place/tei:desc[not(tei:quote)]">
+               <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
