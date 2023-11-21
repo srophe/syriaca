@@ -4935,13 +4935,13 @@ attributes @target and @cRef may be supplied on <name/>.</report>
             </constraint>
           </constraintSpec><constraintSpec ident="documentation-on-note" scheme="schematron">
             <constraint>
-              <sch:rule context="tei:note">
+              <sch:rule context="tei:text//tei:note">
                 <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
               </sch:rule>
             </constraint>
-          </constraintSpec><constraintSpec ident="documentation-not-child-quote" scheme="schematron">
+          </constraintSpec><constraintSpec ident="documentation-note-child-quote" scheme="schematron">
             <constraint>
-              <sch:rule context="tei:note[not(tei:quote)]">
+              <sch:rule context="tei:text//tei:note[not(tei:quote)]">
                 <sch:assert test="@resp or @source">One of the attributes @resp or @source must be supplied.</sch:assert>
               </sch:rule>
               
