@@ -6710,6 +6710,84 @@ attributes @target and @cRef may be supplied on <name/>.</report>
           sodass dann für jeden Teil spezielle Überschriften (<gi>headLabel</gi>, <gi>headItem</gi>) verwendet werden können.</p>
   </remarks><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0">
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#COLI">3.8. Lists</ref>
+  </listRef></elementSpec><elementSpec rend="add" module="core" ident="item"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en" versionDate="2017-06-04">item</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-04" xml:lang="de">Listenpunkt</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2005-01-14" xml:lang="en">contains one component of a list.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">목록에서 하나의 성분을 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">包含列表中的一個項目。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-05" xml:lang="ja">リストのいち項目を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">contient un composant d'une liste.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">contiene un componente de una lista.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">contiene un componente di una lista</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-04" xml:lang="de">enthält einen Listenpunkt.</desc><classes xmlns:rng="http://relaxng.org/ns/structure/1.0">
+    <memberOf key="att.global"/>
+    <memberOf key="att.sortable"/>
+  </classes><content xmlns:rng="http://relaxng.org/ns/structure/1.0">
+    <macroRef key="macro.specialPara"/>
+  </content><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#DS-eg-01">
+      <list rend="numbered">
+        <head>Here begin the chapter headings of Book IV</head>
+        <item n="4.1">The death of Queen Clotild.</item>
+        <item n="4.2">How King Lothar wanted to appropriate one third of the Church revenues.</item>
+        <item n="4.3">The wives and children of Lothar.</item>
+        <item n="4.4">The Counts of the Bretons.</item>
+        <item n="4.5">Saint Gall the Bishop.</item>
+        <item n="4.6">The priest Cato.</item>
+        <item> ...</item>
+      </list>
+    </egXML>
+  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-06" xml:lang="fr">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Perec-vie">
+      <list type="unordered">
+        <head>Tentative d'inventaire de quelques-unes des choses qui ont été trouvées dans
+              les escaliers au fil des ans.</head>
+        <item>Plusieurs photos, dont celle d'une jeune fille de quinze<lb/> ans vêtue d'un slip
+              de bain noir et d'un chandail blanc, agenouillée sur une plage,</item>
+        <item>un réveil radio de toute évidence destiné à un réparateur, dans un sac plastique
+              des établissements Nicolas,</item>
+        <item>un soulier noir orné de brillants,</item>
+        <item>une mule en chevreau doré,</item>
+        <item>une boîte de pastilles Géraudel contre la toux.</item>
+      </list>
+    </egXML>
+  </exemplum><exemplum xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="zh-TW">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#biblzh-tw_n8">
+      <list rend="numbered">
+        <head>以下為第三部份的各個章節標題</head>
+        <item n="3.1">人物的鑑賞</item>
+        <item n="3.2">情節的鑑賞</item>
+        <item n="3.3">環境的鑑賞</item>
+        <item n="3.4">主題的鑑賞</item>
+        <item n="3.5">語言的鑑賞</item>
+        <item> ...</item>
+      </list>
+    </egXML>
+  </exemplum><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2005-01-14" xml:lang="en">
+    <p rend="dataDesc">May contain simple prose or a sequence of chunks.</p>
+    <p>Whatever string of characters is used to label a list item in the copy text may be used as
+      the value of the global <att>n</att> attribute, but it is not required that numbering be
+      recorded explicitly. In ordered lists, the <att>n</att> attribute on the <gi>item</gi> element
+      is by definition synonymous with the use of the <gi>label</gi> element to record the
+      enumerator of the list item. In glossary lists, however, the term being defined should be
+      given with the <gi>label</gi> element, not <att>n</att>.</p>
+  </remarks><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="fr" versionDate="2007-06-12">
+    <p rend="dataDesc">Peut contenir un texte ou une succession d'extraits.</p>
+    <p>Toute chaîne de caractères utilisée pour étiqueter un item de liste dans le texte peut être
+      utilisée comme valeur de l'attribut global <att>n</att>, mais il n'est pas obligatoire de
+      noter explicitement cette numérotation. Dans les listes ordonnées, l'attribut <att>n</att> de
+      l'élément <gi>item</gi> est par définition synonyme de l'utilisation de l'élément
+      <gi>label</gi> pour noter le numéro de l'item de la liste. Pour les glossaires toutefois, le
+      terme défini doit être donné avec l'élément <gi>label</gi>, et non pas <att>n</att>.</p>
+  </remarks><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" xml:lang="ja" versionDate="2008-04-05">
+    <p rend="dataDesc"> 散文または文塊を示す。 </p>
+    <p> 文字列が元資料中にあるリスト項目のラベルを表すために使用される使わ れる場合、グローバル属性<att>n</att>の値として使用されるかもしれな
+      い。しかし、この数は明記される必要はない。 順序付きリストの場合、要素<gi>item</gi>の属性<att>n</att>は、
+      リスト項目の数を示す要素<gi>label</gi>と同じ意味で使用されている。 用語集の場合、当該要素は、属性<att>n</att>ではなく、要素
+      <gi>label</gi>と共に使用されるべきである。 </p>
+  </remarks><remarks xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2017-06-04" xml:lang="de">
+    <p rend="dataDesc">Kann einen einfachen Fließtext enthalten oder eine Sequenz von Chunks.</p>
+    <p>Welche Zeichenfolge auch immer für die Kennzeichnung eines Listenpunkts in der Vorlage
+      benutzt wird, kann als Wert des globalen <att>n</att>-Attributs verwendet werden, dabei muss die
+      Nummerierung nicht notwendigerweise erfasst werden. In geordneten Listen ist das
+      <att>n</att>-Attribut des <gi>item</gi>-Elements per Definition synonym mit dem Gebrauch des
+      <gi>label</gi>-Elements, um den Zähler des Listenpunkts zu erfassen. In Glossarlisten sollte
+      der zu definierende Term im <gi>label</gi>-Element und nicht im <att>n</att>-Attribut angegeben
+      werden.</p>
+  </remarks><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0">
+    <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#COLI">3.8. Lists</ref>
+    <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD6">2.6. The Revision Description</ref>
   </listRef></elementSpec><elementSpec rend="add" module="core" ident="head"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2005-01-14" xml:lang="en">heading</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">표제부</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">標題</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">en-tête</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">encabezamiento</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-01-21" xml:lang="it">titolo</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2016-11-29" xml:lang="de">Überschrift</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2005-12-13" xml:lang="en">contains any type of heading, for example the title of a section, or the heading of a list,
     glossary, manuscript description, etc.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-12-20" xml:lang="ko">예를 들어 절의 제목 또는 용어집, 원고 기술의 제목 등과 같이 표제부 유형을 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-02" xml:lang="zh-TW">包含任何種類的標題，如章節、列表、詞彙表、寫本描述等的標題。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2008-04-05" xml:lang="ja">各種の見出しを示す。例えば、節のタイトル、リストや用語集、手書き資料 の解説などにある見出し。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2009-01-06" xml:lang="fr">contient tout type d'en-tête, par exemple le titre d'une
     section, ou l'intitulé d'une liste, d'un glossaire, d'une description de manuscrit, etc.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" versionDate="2007-05-04" xml:lang="es">contiene cualquier tipo de encabezamiento, por ejemplo el

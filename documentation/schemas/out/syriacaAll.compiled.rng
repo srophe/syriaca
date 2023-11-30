@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2023-11-30T17:36:20Z. . 
+Schema generated from ODD source 2023-11-30T17:48:17Z. . 
 TEI Edition: Version 4.5.0. Last updated on 25th October 2022, revision 3e98e619e 
 TEI Edition Location: https://www.tei-c.org/Vault/P5/4.5.0/ 
   
@@ -3999,15 +3999,21 @@ attributes @target and @cRef may be supplied on <name/>.</report>
                </choice>
             </zeroOrMore>
             <choice>
-               <zeroOrMore>
-                  <ref name="tei_model.global"/>
-               </zeroOrMore>
+               <oneOrMore>
+                  <group>
+                     <ref name="tei_item"/>
+                     <zeroOrMore>
+                        <ref name="tei_model.global"/>
+                     </zeroOrMore>
+                  </group>
+               </oneOrMore>
                <group>
                   <oneOrMore>
                      <group>
                         <zeroOrMore>
                            <ref name="tei_model.global"/>
                         </zeroOrMore>
+                        <ref name="tei_item"/>
                         <zeroOrMore>
                            <ref name="tei_model.global"/>
                         </zeroOrMore>
@@ -4058,6 +4064,15 @@ Suggested values include: 1] gloss (gloss); 2] index (index); 3] instructions (i
                </choice>
             </attribute>
          </optional>
+         <empty/>
+      </element>
+   </define>
+   <define name="tei_item">
+      <element name="item">
+         <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(item) contains one component of a list. [3.8. Lists 2.6. The Revision Description]</a:documentation>
+         <ref name="tei_macro.specialPara"/>
+         <ref name="tei_att.global.attributes"/>
+         <ref name="tei_att.sortable.attributes"/>
          <empty/>
       </element>
    </define>
