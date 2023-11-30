@@ -8483,6 +8483,426 @@ attributes @target and @cRef may be supplied on <name/>.</report>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#COXR">3.7. Simple Links and Cross-References</ref>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SAPT">16.1. Links</ref>
   </listRef>
+</elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" module="core" ident="list">
+  <gloss xml:lang="en" versionDate="2007-06-12">list</gloss>
+  <gloss versionDate="2007-06-12" xml:lang="fr">liste</gloss>
+  <gloss versionDate="2016-11-25" xml:lang="de">Liste</gloss>
+  <desc versionDate="2005-01-14" xml:lang="en">contains any sequence of items organized as a list.</desc>
+  <desc versionDate="2007-12-20" xml:lang="ko">목록의 형태로 정리된 항목을 포함한다.</desc>
+  <desc versionDate="2007-05-02" xml:lang="zh-TW">包含以列表方式呈現的任何連續項目。</desc>
+  <desc versionDate="2008-04-05" xml:lang="ja">リストのような、項目列を示す。</desc>
+  <desc versionDate="2007-06-12" xml:lang="fr">contient une suite d'items ordonnés dans une liste.</desc>
+  <desc versionDate="2007-05-04" xml:lang="es">contiene cualquier secuencia de ítems o elementos
+    organizados en una lista.</desc>
+  <desc versionDate="2007-01-21" xml:lang="it">contiene una qualsiasi sequenza di voci organizzate in
+    una lista.</desc>
+    <desc versionDate="2016-11-25" xml:lang="de">enthält eine Reihe von Listenpunkten, die als Liste organisiert sind.</desc>
+  <classes>
+    <memberOf key="att.global"/>
+    <memberOf key="att.sortable"/>
+    <memberOf key="att.typed"/>
+    <memberOf key="model.listLike"/>
+  </classes>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <content>
+    <sequence>
+      
+        <alternate minOccurs="0" maxOccurs="unbounded">
+          
+            <classRef key="model.divTop"/>
+            <classRef key="model.global"/>
+            <elementRef key="desc" minOccurs="0" maxOccurs="unbounded"/>          
+        </alternate>
+      
+      <alternate>
+        <sequence minOccurs="1" maxOccurs="unbounded">
+          <elementRef key="item"/>
+          
+            <classRef key="model.global" minOccurs="0" maxOccurs="unbounded"/>
+          
+        </sequence>
+        <sequence>
+          
+            <elementRef key="headLabel" minOccurs="0"/>
+          
+          
+            <elementRef key="headItem" minOccurs="0"/>
+          
+          <sequence minOccurs="1" maxOccurs="unbounded">
+            <elementRef key="label"/>
+            
+              <classRef key="model.global" minOccurs="0" maxOccurs="unbounded"/>
+            
+            <elementRef key="item"/>
+            
+              <classRef key="model.global" minOccurs="0" maxOccurs="unbounded"/>
+            
+          </sequence>
+        </sequence>
+      </alternate>
+      
+        <sequence minOccurs="0" maxOccurs="unbounded">
+          
+            <classRef key="model.divBottom"/>
+          
+          
+            <classRef key="model.global" minOccurs="0" maxOccurs="unbounded"/>
+          
+        </sequence>
+      
+    </sequence>
+  </content>
+  <constraintSpec ident="gloss-list-must-have-labels" scheme="schematron">
+    <constraint>
+      <sch:rule context="tei:list[@type='gloss']">
+	<sch:assert test="tei:label">The content of a "gloss" list should include a sequence of one or more pairs of a label element followed by an item element</sch:assert>
+      </sch:rule>
+    </constraint>
+  </constraintSpec>
+  <attList>
+
+    
+    <attDef ident="type" usage="opt" mode="change">
+      <gloss xml:lang="en" versionDate="2017-06-25">type</gloss>
+      <gloss versionDate="2017-06-25" xml:lang="de">Typ</gloss>
+      <desc versionDate="2014-07-29" xml:lang="en">describes the nature of the items in the list.</desc>
+      <desc versionDate="2016-11-25" xml:lang="de">beschreibt die Art der Listenpunkte.</desc>
+      <datatype><dataRef key="teidata.enumerated"/></datatype>
+      <valList type="semi" mode="add">
+        <valItem ident="gloss">
+          <gloss xml:lang="en" versionDate="2017-06-25">gloss</gloss>
+          <gloss versionDate="2017-06-25" xml:lang="de">Gloss</gloss>
+          <desc versionDate="2016-11-25" xml:lang="en">each list item glosses some term or concept, which is given by a <gi>label</gi> element
+            preceding the list item.</desc>
+          <desc versionDate="2007-12-20" xml:lang="ko">목록의 각 항목은 선행하는 요소에서 제시된 용어 또는 개념에 대한 설명이다.</desc>
+          <desc versionDate="2007-05-02" xml:lang="zh-TW">各列表項目為一些字詞或概念下註解，每個項目之前並帶有標籤元素。</desc>
+          <desc versionDate="2008-04-06" xml:lang="es">cada item de la lista glosa algun término o
+            concepto de los que han sido dados por un elemento de la lista de la etiqueta que
+            precede.</desc>
+          <desc versionDate="2008-04-05" xml:lang="ja">リスト項目は、当該リスト項目に先行してあるラベル要素で示され
+            たある用語や意義をまとめたものである。</desc>
+          <desc versionDate="2008-03-30" xml:lang="fr">chaque item de la liste commente un terme ou un
+            concept qui est donné par un élément <gi>label</gi> précédant l'item de la liste.</desc>
+          <desc versionDate="2007-01-21" xml:lang="it">ogni voce dell'elenco è la glossa di un termine o
+            concetto dato da un elemento legenda che precede la voce stessa</desc>
+            <desc versionDate="2016-11-25" xml:lang="de">jeder Listenpunkt erläutert einen Begriff oder ein Konzept, das von einem voranstehenden <gi>label</gi>-Element genannt wird.</desc>
+        </valItem>
+        <valItem ident="index">
+          <gloss xml:lang="en" versionDate="2017-06-25">index</gloss>
+          <gloss versionDate="2017-06-25" xml:lang="de">Index</gloss>
+          <desc versionDate="2014-05-04" xml:lang="en">each list item is an entry in an index such as the alphabetical topical index 
+          at the back of a print volume.</desc>
+            <desc versionDate="2016-11-25" xml:lang="de">jeder Listenpunkt ist ein Registereintrag z. B. in einem alphabetisch geordneten 
+                Sachregister am Ende einer Druckausgabe.</desc>
+        </valItem>
+        <valItem ident="instructions">
+          <gloss xml:lang="en" versionDate="2017-06-25">instructions</gloss>
+          <gloss versionDate="2017-06-25" xml:lang="de">Arbeitsschritt</gloss>
+          <desc versionDate="2014-05-04" xml:lang="en">each list item is a step in a sequence of instructions, as in a
+            recipe.</desc>
+            <desc versionDate="2016-11-25" xml:lang="de">jeder Listenpunkt ist ein Arbeitsschritt in einer Folge von Anweisungen, 
+                wie z. B. in einem Rezept.</desc>
+        </valItem>
+        <valItem ident="litany">
+          <gloss xml:lang="en" versionDate="2017-06-25">litany</gloss>
+          <gloss versionDate="2017-06-25" xml:lang="de">Litanei</gloss>
+          <desc versionDate="2014-05-04" xml:lang="en">each list item is one of a sequence of petitions, supplications 
+            or invocations, typically in a religious ritual.</desc>
+            <desc versionDate="2016-11-25" xml:lang="de">jeder Listenpunkt ist Teil einer Reihenfolge von Gebeten, Bitten oder Anrufungen die 
+                üblicherweise in einem religiösen Ritual verwendet werden.</desc>
+        </valItem>
+        <valItem ident="syllogism">
+          <gloss xml:lang="en" versionDate="2017-06-25">syllogism</gloss>
+          <gloss versionDate="2017-06-25" xml:lang="de">logischer Schluss</gloss>
+          <desc versionDate="2014-05-04" xml:lang="en">each list item is part of an argument consisting of two or more propositions 
+            and a final conclusion derived from them.</desc>
+            <desc versionDate="2016-11-25" xml:lang="de">jeder Listenpunkt ist Teil eines Arguments, das aus zwei oder mehr Prämissen 
+                und einem daraus gezogenen Schluss besteht.</desc>
+        </valItem>
+      </valList>
+      <remarks versionDate="2014-07-30" xml:lang="en">
+        <p>Previous versions of these Guidelines recommended the use
+        of <att>type</att> on <gi>list</gi> to encode the rendering or
+        appearance of a list (whether it was bulleted, numbered,
+        etc.). The current recommendation is to use the
+        <att>rend</att> or <att>style</att> attributes for these
+        aspects of a list, while using <att>type</att> for the more
+        appropriate task of characterizing the nature of the content
+        of a list.</p>
+        <p>The formal syntax of the element declarations allows
+        <gi>label</gi> tags to be omitted from lists tagged <tag>list
+        type="gloss"</tag>; this is however a semantic error.</p>
+      </remarks>
+      <remarks xml:lang="fr" versionDate="2007-06-12">
+        <p>La syntaxe formelle des déclarations d'élément permet d'omettre les étiquettes de balises
+          des listes balisées par <tag>list type="gloss"</tag> mais c'est une erreur sémantique.</p>
+      </remarks>
+      <remarks xml:lang="ja" versionDate="2008-04-05">
+        <p> 当該要素の宣言では、要素<gi>label</gi>は、タグ<tag>list type="gloss"</tag>中で省略することができることになっているが、
+          これは意味上のエラーになる。 </p>
+      </remarks>
+      <remarks versionDate="2016-11-25" xml:lang="de">
+          <p>In älteren Versionen dieser Richtlinien wurde empfohlen, mit dem Attribut <att>type</att> am <gi>list</gi>-Element 
+              die Darstellung oder das Erscheinungsbild einer Liste zu kodieren (also ob sie z. B. nummeriert oder mit Symbolen 
+              versehen ist). Die aktuelle Empfehlung ist, dafür die Attribute <att>rend</att> oder <att>style</att> zu verwenden, 
+              während mit <att>type</att> der Inhalt der Liste charakterisiert werden sollte.</p>
+            <p>Die formale Syntax der Elementdeklaration 
+                erlaubt es, Listen vom <tag>list type="gloss"</tag> ohne das Element <gi>label</gi> zu verwenden; das ist jedoch ein 
+                semantischer Fehler.</p>
+        </remarks>
+    </attDef>
+  </attList>
+  <exemplum xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <list rend="numbered">
+        <item>a butcher</item>
+        <item>a baker</item>
+        <item>a candlestick maker, with 
+	  <list rend="bulleted"><item>rings on his fingers</item><item>bells on his toes</item></list>
+            </item>
+      </list>
+    </egXML>
+  </exemplum>
+  <exemplum versionDate="2014-08-04" xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <list type="syllogism" rend="bulleted">
+        <item>All Cretans are liars.</item>
+        <item>Epimenides is a Cretan.</item>
+        <item>ERGO Epimenides is a liar.</item>
+      </list>
+    </egXML>
+  </exemplum>
+  <exemplum versionDate="2014-08-04" xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <list type="litany" rend="simple">
+        <item>God save us from drought.</item>
+        <item>God save us from pestilence.</item>
+        <item>God save us from wickedness in high places.</item>
+        <item>Praise be to God.</item>
+      </list>
+    </egXML>
+  </exemplum>
+  <exemplum versionDate="2008-04-06" xml:lang="fr">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Perec-vie">
+      <list rend="bulleted">
+        <item>Thé sans sucre et sans lait </item>
+        <item>Un jus d'ananas</item>
+        <item>Un yaourt</item>
+        <item>Trois biscuits de seigle </item>
+        <item>Carottes râpées</item>
+        <item>Côtelettes d'agneau (deux)</item>
+        <item>Courgettes</item>
+        <item>Chèvre frais </item>
+        <item>Coings</item>
+      </list>
+    </egXML>
+  </exemplum>
+  <exemplum versionDate="2008-04-06" xml:lang="fr">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Perec-vie">
+      <div>
+        <p> Selon des critères qui n'appartiennent qu'à lui, Rémi Plassaert a classé ses buvards
+            en huit tas respectivement surmontés par :</p>
+        <list rend="bulleted">
+          <item>un toréador chantant (dentifrice émail Diamant)</item>
+          <item>un tapis d'Orient du XVIIe siècle, provenant d'une basilique de Transylvanie
+              (Kalium-Sedaph, soluté de propionate de potassium)</item>
+          <item>Le Renard et la Cicogne (sic), gravure de Jean-Baptiste Oudry (Papeteries
+              Marquaize, Stencyl, Reprographie)</item>
+        </list>
+      </div>
+    </egXML>
+  </exemplum>
+  <exemplum versionDate="2008-04-06" xml:lang="fr">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Perec-vie">
+      <div>
+        <p> [...] et tout autour, la longue cohorte de ses personnages, avec leur histoire, leur
+            passé, leurs légendes :</p>
+        <list rend="numbered">
+          <item n="1">Pélage vainqueur d'Alkhamah se faisant couronner à Covadonga </item>
+          <item n="2">La cantatrice exilée de Russie suivant Schönberg à Amsterdam</item>
+          <item n="3">Le petit chat sourd aux yeux vairons vivant au dernier étage</item>
+          <item n="4">Le crétin chef d'îlot faisant préparer des tonneaux de sable</item>
+        </list>
+      </div>
+    </egXML>
+  </exemplum>
+  <exemplum xml:lang="zh-TW">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <list rend="numbered">
+        <item>一個屠夫</item>
+        <item>一個糕點師父</item>
+        <item>一個燭台工人<list rend="bulleted"><item>手上戴了戒指</item><item>腳趾上有鈴鐺</item></list>
+            </item>
+      </list>
+    </egXML>
+  </exemplum>
+  <exemplum xml:lang="zh-TW">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#biblzh-tw_n11">
+      <div1 type="section">
+        <head>青年守則</head>
+        <list rend="numbered">
+          <item n="1">守則一至五條包括八德：<list rend="numbered"><item n="1.1">一、忠勇為愛國之本 。</item><item n="1.2">二、服從為負責之本。</item><item n="1.3">三、孝順為齊家之本。</item><item n="1.4">四、勤儉為服務之本。</item><item n="1.5">五、仁愛為接物之本。</item></list>
+               </item>
+          <item n="2">六至九條意指四維：<list rend="numbered"><item n="2.1">六、整潔為強身之本。</item><item n="2.2">七、信義為立業之本。</item><item n="2.3">八、助人為快樂之本。</item><item n="2.4">九、和平為處世之本</item></list>
+               </item>
+          <item n="3">十至十二條就是三達德：<list rend="numbered"><item n="3.1">十、學問為濟世之本。</item><item n="3.2">十一、禮節為治事之本。</item><item n="3.3">十二、有恆為成功之本。</item></list>
+               </item>
+        </list>
+      </div1>
+    </egXML>
+  </exemplum>
+  <exemplum xml:lang="zh-TW">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#biblzh-tw_n12">
+      <p>我們二人謹定于2008年7月3日正午十二時，在台北舉行結婚典禮，寫下海誓山盟，終身遵守，在婚姻路上，共同經營，災難病情，互相扶持，永不分離。并就下列事項，立下承諾，即令滄海化為桑田，桑田再變為滄海，也要攜手共進，相親相愛，直到白頭。<list rend="simple"><item>我們宣誓：從結婚這一天開始，不但成為夫妻，互相敬愛，分擔對方的快樂和憂愁，也同時成為朋友，而且是諍友，互相勉勵，互相規勸，互相批評。</item><item>我們領悟：愉快的共同生活，全靠心靈溝通，所以，我們一定善用言語，不僅表達愛心、關心，也使彼此藉語言加深了解，一起成長。絕不粗聲叱責，絕不用肢體代替言語，絕不允許發生婚姻暴力。 </item><item>我們認知：家庭與事業是夫妻共同經營的果實，夫妻對家庭的貢獻等值，在家庭內或社會上，價值完全相同，社會工作薪俸無論多少，家務工作的薪俸都與其相同。</item><item>我們同意：將來我們有子女，管教上如果有不同的意見，甚至尖銳對立的意見，一定要克制自己，去請教專家，絕不把孩子當成實現自己希望的工具，也絕不用孩子來炫耀自己。 </item><item>我們認為：一夫一妻制，是社會安定的磐石，是孩子們成長最安全的溫床，我們喜愛并尊重這種制度，并用事實和行動，維護它的尊嚴。</item><item>我們警惕：婚姻生活并不多彩多姿，它不但平凡，而且瑣碎，如果不滋養珍惜，容易使生命憔悴，心靈粗俗，所以生活之中，我們一定保持適度的假期，與孩子一起長大。</item><item>我們謹記：我們孝敬自己的父母，也孝敬對方的父母，不僅是回報養育之恩，也是培養自己人格的完整，為我們的下一代立下榜樣。 </item><item>我們了解：我們將來會老，所以，我們從結婚這一天，就培養專業之外的其它藝朮興趣，如書、畫、音樂，使我們生命永遠充實燦爛。 </item></list>
+         </p>
+    </egXML>
+  </exemplum>
+  <exemplum xml:lang="en">
+    <p>The following example treats the short numbered clauses of Anglo-Saxon legal codes as lists
+      of items. The text is from an ordinance of King Athelstan (924–939):</p>
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <div1 type="section">
+        <head>Athelstan's Ordinance</head>
+        <list rend="numbered">
+          <item n="1">Concerning thieves. First, that no thief is to be spared who is caught with
+            the stolen goods, [if he is] over twelve years and [if the value of the goods is] over
+            eightpence. 
+            <list rend="numbered"><item n="1.1">And if anyone does spare one, he is to pay for the thief with his
+                wergild — and the thief is to be no nearer a settlement on that account — or to
+                clear himself by an oath of that amount.</item><item n="1.2">If, however, he [the thief] wishes to defend himself or to escape, he is
+                not to be spared [whether younger or older than twelve].</item><item n="1.3">If a thief is put into prison, he is to be in prison 40 days, and he may
+                then be redeemed with 120 shillings; and the kindred are to stand surety for him
+                that he will desist for ever.</item><item n="1.4">And if he steals after that, they are to pay for him with his wergild,
+                or to bring him back there.</item><item n="1.5">And if he steals after that, they are to pay for him with his wergild,
+                whether to the king or to him to whom it rightly belongs; and everyone of those who
+                supported him is to pay 120 shillings to the king as a fine.</item></list>
+               </item>
+          <item n="2">Concerning lordless men. And we pronounced about these lordless men, from whom
+            no justice can be obtained, that one should order their kindred to fetch back such a
+            person to justice and to find him a lord in public meeting. 
+            <list rend="numbered"><item n="2.1">And if they then will not, or cannot, produce him on that appointed day,
+                he is then to be a fugitive afterwards, and he who encounters him is to strike him
+                down as a thief.</item><item n="2.2">And he who harbours him after that, is to pay for him with his wergild
+                or to clear himself by an oath of that amount.</item></list>
+               </item>
+          <item n="3">Concerning the refusal of justice. The lord who refuses justice and upholds
+            his guilty man, so that the king is appealed to, is to repay the value of the goods and
+            120 shillings to the king; and he who appeals to the king before he demands justice as
+            often as he ought, is to pay the same fine as the other would have done, if he had
+            refused him justice. 
+            <list rend="numbered"><item n="3.1">And the lord who is an accessory to a theft by his slave, and it becomes
+                known about him, is to forfeit the slave and be liable to his wergild on the first
+                occasionp if he does it more often, he is to be liable to pay all that he owns.</item><item n="3.2">And likewise any of the king's treasurers or of our reeves, who has been
+                an accessory of thieves who have committed theft, is to liable to the same.</item></list>
+               </item>
+          <item n="4">Concerning treachery to a lord. And we have pronounced concerning treachery to
+            a lord, that he [who is accused] is to forfeit his life if he cannot deny it or is
+            afterwards convicted at the three-fold ordeal.</item>
+        </list>
+      </div1>
+    </egXML>
+    <p>Note that nested lists have been used so the tagging mirrors the structure indicated by the
+      two-level numbering of the clauses. The clauses could have been treated as a one-level list
+      with irregular numbering, if desired.</p>
+  </exemplum>
+  <exemplum xml:lang="de" versionDate="2017-06-25">
+    <p>Das folgende Beispiel behandelt die kurzen nummerierten Klauseln von angelsächsischen
+      Rechtstexten als Listen von <gi>item</gi>-Elementen. Der Text stammt aus einer Verordnung von
+      König Athelstan (924-939):</p>
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <div1 type="section">
+        <head>Athelstan's Ordinance</head>
+        <list rend="numbered">
+          <item n="1">Concerning thieves. First, that no thief is to be spared who is caught with
+            the stolen goods, [if he is] over twelve years and [if the value of the goods is] over
+            eightpence. 
+            <list rend="numbered"><item n="1.1">And if anyone does spare one, he is to pay for the thief with his
+              wergild — and the thief is to be no nearer a settlement on that account — or to
+              clear himself by an oath of that amount.</item><item n="1.2">If, however, he [the thief] wishes to defend himself or to escape, he is
+                not to be spared [whether younger or older than twelve].</item><item n="1.3">If a thief is put into prison, he is to be in prison 40 days, and he may
+                  then be redeemed with 120 shillings; and the kindred are to stand surety for him
+                  that he will desist for ever.</item><item n="1.4">And if he steals after that, they are to pay for him with his wergild,
+                    or to bring him back there.</item><item n="1.5">And if he steals after that, they are to pay for him with his wergild,
+                      whether to the king or to him to whom it rightly belongs; and everyone of those who
+                      supported him is to pay 120 shillings to the king as a fine.</item></list>
+          </item>
+          <item n="2">Concerning lordless men. And we pronounced about these lordless men, from whom
+            no justice can be obtained, that one should order their kindred to fetch back such a
+            person to justice and to find him a lord in public meeting. 
+            <list rend="numbered"><item n="2.1">And if they then will not, or cannot, produce him on that appointed day,
+              he is then to be a fugitive afterwards, and he who encounters him is to strike him
+              down as a thief.</item><item n="2.2">And he who harbours him after that, is to pay for him with his wergild
+                or to clear himself by an oath of that amount.</item></list>
+          </item>
+          <item n="3">Concerning the refusal of justice. The lord who refuses justice and upholds
+            his guilty man, so that the king is appealed to, is to repay the value of the goods and
+            120 shillings to the king; and he who appeals to the king before he demands justice as
+            often as he ought, is to pay the same fine as the other would have done, if he had
+            refused him justice. 
+            <list rend="numbered"><item n="3.1">And the lord who is an accessory to a theft by his slave, and it becomes
+              known about him, is to forfeit the slave and be liable to his wergild on the first
+              occasionp if he does it more often, he is to be liable to pay all that he owns.</item><item n="3.2">And likewise any of the king's treasurers or of our reeves, who has been
+                an accessory of thieves who have committed theft, is to liable to the same.</item></list>
+          </item>
+          <item n="4">Concerning treachery to a lord. And we have pronounced concerning treachery to
+            a lord, that he [who is accused] is to forfeit his life if he cannot deny it or is
+            afterwards convicted at the three-fold ordeal.</item>
+        </list>
+      </div1>
+    </egXML>
+    <p>In diesem Beispiel wurden verschachtelte Listen verwendet. Die Auszeichnung spiegelt somit die
+      Struktur der zweistufigen Nummerierung der Klauseln wider. Die Klauseln könnten auch als eine
+      einstufige Liste mit unregelmäßiger Nummerierung behandelt werden.</p>
+  </exemplum>
+  
+  <exemplum xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <p>These decrees, most blessed Pope Hadrian, we propounded in the public council ... and they
+        confirmed them in our hand in your stead with the sign of the Holy Cross, and afterwards
+        inscribed with a careful pen on the paper of this page, affixing thus the sign of the Holy
+        Cross. 
+        <list rend="simple"><item>I, Eanbald, by the grace of God archbishop of the holy church of York, have
+            subscribed to the pious and catholic validity of this document with the sign of the Holy
+            Cross.</item><item>I, Ælfwold, king of the people across the Humber, consenting have subscribed with
+            the sign of the Holy Cross.</item><item>I, Tilberht, prelate of the church of Hexham, rejoicing have subscribed with the
+            sign of the Holy Cross.</item><item>I, Higbald, bishop of the church of Lindisfarne, obeying have subscribed with the
+            sign of the Holy Cross.</item><item>I, Ethelbert, bishop of Candida Casa, suppliant, have subscribed with thef sign of
+            the Holy Cross.</item><item>I, Ealdwulf, bishop of the church of Mayo, have subscribed with devout will.</item><item>I, Æthelwine, bishop, have subscribed through delegates.</item><item>I, Sicga, patrician, have subscribed with serene mind with the sign of the Holy
+            Cross.</item></list>
+         </p>
+    </egXML>
+  </exemplum>
+  <remarks versionDate="2005-01-14" xml:lang="en">
+    <p rend="dataDesc">May contain an optional heading followed by a series of items, or a series of
+      label and item pairs, the latter being optionally preceded by one or two specialized
+    headings.</p>
+  </remarks>
+  <remarks xml:lang="fr" versionDate="2007-06-12">
+    <p rend="dataDesc">Peut contenir un titre facultatif suivi d'une succession d'items ou d'une
+      succession de couples constitués d'une étiquette et d'un item, ce dernier type pouvant être
+      précédé par un ou deux titres spécifiques.</p>
+  </remarks>
+  <remarks xml:lang="ja" versionDate="2008-04-05">
+    <p rend="dataDesc"> 一連の項目またはラベルと項目の組の前に、選択的にヘダーをとることが ある。一連のラベルと項目の組の場合、選択的に、ひとつ以上のヘダーが
+      先行することがある。 </p>
+  </remarks>
+  <remarks xml:lang="de" versionDate="2017-06-25">
+      <p>Die Liste kann mit einer Überschrift <gi>head</gi> beginnen. Sie kann auch aus Paaren von Labels und Beschreibungen bestehen, 
+          sodass dann für jeden Teil spezielle Überschriften (<gi>headLabel</gi>, <gi>headItem</gi>) verwendet werden können.</p>
+  </remarks>
+  <listRef>
+    <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#COLI">3.8. Lists</ref>
+  </listRef>
 </elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" module="core" ident="label">
   <gloss xml:lang="en" versionDate="2009-01-06">label</gloss>
   <gloss versionDate="2009-01-06" xml:lang="fr">étiquette</gloss>
@@ -8820,6 +9240,196 @@ entre les Romains.</label>
   </exemplum>
   <listRef>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#COLI">3.8. Lists</ref>
+  </listRef>
+</elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" module="core" ident="head">
+  <gloss versionDate="2005-01-14" xml:lang="en">heading</gloss>
+  <gloss versionDate="2007-12-20" xml:lang="ko">표제부</gloss>
+  <gloss versionDate="2007-05-02" xml:lang="zh-TW">標題</gloss>
+  <gloss versionDate="2009-01-06" xml:lang="fr">en-tête</gloss>
+  <gloss versionDate="2007-05-04" xml:lang="es">encabezamiento</gloss>
+  <gloss versionDate="2007-01-21" xml:lang="it">titolo</gloss>
+  <gloss versionDate="2016-11-29" xml:lang="de">Überschrift</gloss>
+  <desc versionDate="2005-12-13" xml:lang="en">contains any type of heading, for example the title of a section, or the heading of a list,
+    glossary, manuscript description, etc.</desc>
+  <desc versionDate="2007-12-20" xml:lang="ko">예를 들어 절의 제목 또는 용어집, 원고 기술의 제목 등과 같이 표제부 유형을 포함한다.</desc>
+  <desc versionDate="2007-05-02" xml:lang="zh-TW">包含任何種類的標題，如章節、列表、詞彙表、寫本描述等的標題。</desc>
+  <desc versionDate="2008-04-05" xml:lang="ja">各種の見出しを示す。例えば、節のタイトル、リストや用語集、手書き資料 の解説などにある見出し。</desc>
+  <desc versionDate="2009-01-06" xml:lang="fr">contient tout type d'en-tête, par exemple le titre d'une
+    section, ou l'intitulé d'une liste, d'un glossaire, d'une description de manuscrit, etc.</desc>
+  <desc versionDate="2007-05-04" xml:lang="es">contiene cualquier tipo de encabezamiento, por ejemplo el
+    título de una sección o el encabezado de una lista, glosario, descripción de un manuscrito, etc.</desc>
+  <desc versionDate="2007-01-21" xml:lang="it">contiene qualsiasi tipo di titolo, per esempio il titolo
+    di una sezione, di una lista, di un glossario, di una descrizione di manoscritto, ecc.</desc>
+  <desc versionDate="2016-11-29" xml:lang="de">enthält eine beliebige Art von Überschrift, 
+    z. B. eines Kapitels, einer Liste, eines Glossars oder einer Handschriftenbeschreibung.</desc>
+  <classes>
+    <memberOf key="att.global"/>
+    <memberOf key="att.typed"/>
+    <memberOf key="att.placement"/>
+    <memberOf key="att.written"/>
+    <memberOf key="model.headLike"/>
+    <memberOf key="model.pLike.front"/>
+  </classes>
+  <content>
+    
+      <alternate minOccurs="0" maxOccurs="unbounded">
+        <textNode/>
+        <elementRef key="lg"/>
+        <classRef key="model.gLike"/>
+        <classRef key="model.phrase"/>
+        <classRef key="model.inter"/>
+        <classRef key="model.lLike"/>
+        <classRef key="model.global"/>
+      </alternate>
+    
+  </content>
+  <exemplum xml:lang="en">
+    <p>The most common use for the <gi>head</gi> element is to mark the headings of sections. In
+      older writings, the headings or <term>incipits</term> may be rather longer than usual in
+      modern works. If a section has an explicit ending as well as a heading, it should be marked as
+      a <gi>trailer</gi>, as in this example:</p>
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <div1 n="I" type="book">
+        <head>In the name of Christ here begins the first book of the ecclesiastical history of
+          Georgius Florentinus, known as Gregory, Bishop of Tours.</head>
+        <div2 type="section">
+          <head>In the name of Christ here begins Book I of the history.</head>
+          <p>Proposing as I do ...</p>
+          <p>From the Passion of our Lord until the death of Saint Martin four hundred and twelve
+            years passed.</p>
+          <trailer>Here ends the first Book, which covers five thousand, five hundred and ninety-six
+            years from the beginning of the world down to the death of Saint Martin.</trailer>
+        </div2>
+      </div1>
+    </egXML>
+  </exemplum>
+  <exemplum xml:lang="de" versionDate="2017-06-25">
+    <p>Die häufigste Verwendung von <gi>head</gi>-Elementen ist es, Überschriften von Abschnitten zu
+      kennzeichnen. In älteren Schriften können die Überschriften oder <term>Incipits</term> länger
+      sein, als es in modernen Werken üblich ist. Wenn ein Abschnitt eine explizite Endung und eine
+      Überschrift hat, sollte die Endung mit dem <gi>trailer</gi>-Element markiert werden, wie in
+      diesem Beispiel:</p>
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <div1 n="I" type="book">
+        <head>In the name of Christ here begins the first book of the ecclesiastical history of
+          Georgius Florentinus, known as Gregory, Bishop of Tours.</head>
+        <div2 type="section">
+          <head>In the name of Christ here begins Book I of the history.</head>
+          <p>Proposing as I do ...</p>
+          <p>From the Passion of our Lord until the death of Saint Martin four hundred and twelve
+            years passed.</p>
+          <trailer>Here ends the first Book, which covers five thousand, five hundred and ninety-six
+            years from the beginning of the world down to the death of Saint Martin.</trailer>
+        </div2>
+      </div1>
+    </egXML>
+  </exemplum>
+  <exemplum xml:lang="en">
+    <p>When headings are not inline with the running text (see e.g. 
+      <ref target="http://diglib.hab.de/show_image.php?dir=drucke/ed000364&amp;pointer=34">the heading "Secunda conclusio"</ref>) 
+      they might however be encoded as if. 
+      The actual placement in the source document can be captured with the <att>place</att> attribute. </p>
+    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#Karstadt-Distinctiones-Thomistarum">
+      <div type="subsection">
+        <head place="margin">Secunda conclusio</head>
+        <p>
+          <lb n="1251"/><hi rend="large">Potencia: habitus: et actus: recipiunt speciem ab obiectis<supplied>.</supplied></hi>
+          <lb n="1252"/>Probatur sic. Omne importans necessariam habitudinem ad proprium
+          [...]
+        </p>
+      </div>
+    </egXML>
+  </exemplum>
+  <exemplum versionDate="2008-04-06" xml:lang="fr">
+    <p xmlns:teix="http://www.tei-c.org/ns/Examples">L'élément<gi>head</gi>est employé habituellement pour marquer les titres de sections. Dans
+        d'anciens textes , les titres des textes conclusifs seront précédés de l'élément
+        <gi>trailer</gi>, comme dans cet exemple : </p>
+    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Galland_Mille">
+      <div type="chapitre">
+        <head>Les Mille et une Nuits</head>
+        <p>LES chroniques des Sassaniens, anciens rois de Perse, qui avaient étendu leur empire
+            dans les Indes, [...]</p>
+        <div type="histoire">
+          <head>Histoire du Vizir puni</head>
+          <p>IL était autrefois un roi, poursuivit-il, qui avait un<lb/> fils qui aimait
+              passionnément la chasse. Il lui permettait<lb/> de prendre souvent ce divertissement ;
+              [...] </p>
+        </div>
+      </div>
+      <trailer>
+        <hi rend="majuscule">fin du tome premier.</hi>
+      </trailer>
+    </egXML>
+  </exemplum>
+  <exemplum versionDate="2008-04-06" xml:lang="fr">
+    <p xmlns:teix="http://www.tei-c.org/ns/Examples">L'élément <gi>head</gi> est aussi employé pour donner un titre à d'autres éléments, dans
+        une liste par exemple :</p>
+    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Etudes_Litt"> Les déictiques
+        sont des termes qui ne prennent leur sens que dans le cadre de la situation d'énonciation.
+          <list rend="bulleted"><head>déictiques</head><item>ici</item><item>hier</item><item>là</item><item>je</item><item>tu</item><item>nous</item><item>vous</item><item/></list>
+      </egXML>
+  </exemplum>
+  <exemplum xml:lang="zh-TW">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#biblzh-tw_n6">
+      <div1 n="I" type="book">
+        <head>三國演義</head>
+        <div2 type="section">
+          <head>第一回 宴桃園豪杰三結義 斬黃巾英雄首立功</head>
+          <p>滾滾長江東逝水，浪花淘盡英雄。是非成敗轉頭空。 青山依舊在，几度夕陽紅。 白發漁樵江渚上，慣看秋月春風。一壺濁酒喜相逢。古今多少事，都付笑談中。</p>
+          <p>話說天下大勢，分久必合，合久必分。周末七國分爭，并入于秦。...</p>
+          <trailer>三人救了董卓回寨。卓問三人現居何職。玄德曰：白身。...畢竟董卓性命如何，且听下文分解。</trailer>
+        </div2>
+      </div1>
+    </egXML>
+  </exemplum>
+  <exemplum xml:lang="zh-TW">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples"> 除了少數特例，連接詞均用於所有論述，例如描述、記敘、闡述、論說。<list rend="bulleted"><head>連接詞</head><item>上述的</item><item>因此</item><item>在…的對面</item><item>比鄰於</item><item>再次</item><item><!-- ... --></item></list>
+      </egXML>
+  </exemplum>
+  <exemplum xml:lang="en">
+    <p>The <gi>head</gi> element is also used to mark headings of other units, such as lists:</p>
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">With a few exceptions, connectives are equally
+      useful in all kinds of discourse: description, narration, exposition, argument. <list rend="bulleted"><head>Connectives</head><item>above</item><item>accordingly</item><item>across from</item><item>adjacent to</item><item>again</item><item><!-- ... --></item></list>
+      </egXML>
+  </exemplum>
+  <exemplum xml:lang="de" versionDate="2017-06-25">
+    <p>Das <gi>head</gi>-Element wird auch verwendet, um Überschriften anderer Einheiten zu markieren, wie z. B. Listen:</p>
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">With a few exceptions, connectives are equally
+      useful in all kinds of discourse: description, narration, exposition, argument. <list rend="bulleted"><head>Connectives</head><item>above</item><item>accordingly</item><item>across from</item><item>adjacent to</item><item>again</item><item><!-- ... --></item></list>
+    </egXML>
+  </exemplum>
+  <remarks versionDate="2005-12-13" xml:lang="en">
+    <p>The <gi>head</gi> element is used for headings at all levels; software which treats (e.g.)
+      chapter headings, section headings, and list titles differently must determine the proper
+      processing of a <gi>head</gi> element based on its structural position. A <gi>head</gi>
+      occurring as the first element of a list is the title of that list; one occurring as the first
+      element of a <gi>div1</gi> is the title of that chapter or section.</p>
+  </remarks>
+  <remarks xml:lang="fr" versionDate="2007-06-12">
+    <p>L'élément <gi>head</gi> est utilisé pour les titres de tous niveaux ; un logiciel qui
+      traitera différemment, par exemple, les titres de chapitres, les titres de sections et les
+      titres de listes, devra déterminer le traitement approprié de l'élément <gi>head</gi>
+      rencontré en fonction de sa position dans la structure XML. Un élément <gi>head</gi> qui est
+      le premier élément d'une liste est le titre de cette liste ; si l'élément <gi>head</gi>
+      apparaît comme le premier élément d'un élément <gi>div1</gi>, il sera considéré comme le titre
+      de ce chapitre ou de cette section.</p>
+  </remarks>
+  <remarks xml:lang="ja" versionDate="2008-04-05">
+    <p> 要素<gi>head</gi>は、各種レベル上にある見出しに使用される。例えば、 章や節、リストの見出しを扱うソフトウェアは、構造中の場所により要素
+        <gi>head</gi>の扱いを適切に行う必要がある。要素<gi>head</gi>が、リス トの第一項目に出現した場合、それは当該リストのタイトルになる。例えば、
+        要素<gi>div1</gi>の第一項目として当該要素が出現した場合、それは章ま たは節の見出しとされる。 </p>
+  </remarks>
+  <remarks versionDate="2016-11-29" xml:lang="de">
+    <p>Das <gi>head</gi>-Element wird für Überschriften jeder Hierarchiestufe verwendet; 
+      Software, die zwischen Kapitelüberschriften, Abschnittsüberschriften und Listenbezeichnern unterscheidet, 
+      muss die entsprechende Zuordnung aus der Position des <gi>head</gi>-Elements in der Textstruktur ableiten. 
+      Ein <gi>head</gi>-Element, das als erstes Element einer Liste erscheint, ist der Listenbezeichner; 
+      ein <gi>head</gi>-Element, das am Beginn einer mit <gi>div1</gi> bezeichneten Struktur steht, 
+      ist die Überschrift dieses Kapitels oder Abschnitts.</p>
+  </remarks>
+  <listRef>
+    
+    <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/DS.html#DSHD">4.2.1. Headings and Trailers</ref>
   </listRef>
 </elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" rend="change" module="core" ident="note"><gloss xml:lang="en" versionDate="2017-06-25">note</gloss><gloss versionDate="2017-06-25" xml:lang="de">Anmerkung</gloss><desc versionDate="2005-01-14" xml:lang="en">contains a note or annotation.</desc><desc versionDate="2009-01-06" xml:lang="fr">contient une note ou une annotation</desc><desc versionDate="2007-05-04" xml:lang="es">contiene una nota o aclaración</desc><desc versionDate="2007-05-02" xml:lang="zh-TW">包含附註或註釋。</desc><desc versionDate="2007-01-21" xml:lang="it">contiene una nota o un'annotazione</desc><desc versionDate="2006-10-28" xml:lang="ja">注釈・コメント。</desc><desc versionDate="2017-06-25" xml:lang="de">enthält eine Anmerkung oder Annotation.</desc><classes><memberOf key="att.global"/><memberOf key="model.noteLike"/><memberOf key="att.placement"/><memberOf key="att.pointing"/><memberOf key="att.typed"/><memberOf key="att.written"/><memberOf key="att.anchoring"/></classes><content><macroRef key="macro.specialPara"/></content><constraintSpec ident="xmlLang-in-note" scheme="schematron">
             <constraint>
@@ -10078,7 +10688,55 @@ epistemology, methodology and history of
               It requires a <att>unit</att> attribute with one of the following values: col, entry, fol, line, map, part, p, section, and vol.</p>
           </remarks><listRef>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#COBICOB">3.12.2.5. Scopes and Ranges in Bibliographic Citations</ref>
-  </listRef></elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" module="core" ident="bibl">
+  </listRef></elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" module="core" ident="pubPlace">
+  <gloss versionDate="2007-07-04" xml:lang="en">publication place</gloss>
+  <gloss versionDate="2007-12-20" xml:lang="ko">출판지</gloss>
+  <gloss versionDate="2007-05-02" xml:lang="zh-TW"/>
+  <gloss versionDate="2008-04-06" xml:lang="es">lugar de la publicación</gloss>
+  <gloss versionDate="2009-01-06" xml:lang="fr">lieu de publication</gloss>
+  <gloss versionDate="2007-11-06" xml:lang="it">luogo di pubblicazione</gloss>
+  <gloss versionDate="2017-06-13" xml:lang="de">Verlagsort</gloss>
+  <desc versionDate="2005-01-14" xml:lang="en">contains the name of the place where a bibliographic item was published.</desc>
+  <desc versionDate="2007-12-20" xml:lang="ko">서지 대상이 출판된 장소명을 포함한다.</desc>
+  <desc versionDate="2007-05-02" xml:lang="zh-TW">包含書目項目的出版地名稱。</desc>
+  <desc versionDate="2008-04-05" xml:lang="ja">書誌項目が出版された場所の名前を示す。</desc>
+  <desc versionDate="2009-01-06" xml:lang="fr">contient le nom du lieu d'une publication.</desc>
+  <desc versionDate="2007-05-04" xml:lang="es">contiene el nombre del lugar de publicación de un
+        elemento bibliográfico.</desc>
+  <desc versionDate="2007-01-21" xml:lang="it">contiene il nome del luogo in cui un'unità
+        bibliografica è stata pubblicata</desc>
+  <desc versionDate="2017-06-13" xml:lang="de">enthält den Namen des Orts, an dem ein bibliografisches Objekt veröffentlicht wurde.</desc>
+  <classes>
+    <memberOf key="att.global"/>
+    <memberOf key="att.naming"/>
+    <memberOf key="model.imprintPart"/>
+    
+  </classes>
+  <content>
+    <macroRef key="macro.phraseSeq"/>
+  </content>
+  <exemplum xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <publicationStmt>
+        <publisher>Oxford University Press</publisher>
+        <pubPlace>Oxford</pubPlace>
+        <date>1989</date>
+      </publicationStmt>
+    </egXML>
+  </exemplum>
+  <exemplum xml:lang="fr">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <publicationStmt>
+        <publisher>Editions Denoëll</publisher>
+        <pubPlace>Paris</pubPlace>
+        <date>1975</date>
+      </publicationStmt>
+    </egXML>
+  </exemplum>
+  <listRef>
+    <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#COBICOI">3.12.2.4. Imprint, Size of a Document, and Reprint Information</ref>
+  </listRef>
+</elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" module="core" ident="bibl">
   <gloss versionDate="2005-01-14" xml:lang="en">bibliographic citation</gloss>
   <gloss versionDate="2007-12-20" xml:lang="ko">서지 인용</gloss>
   <gloss versionDate="2007-05-02" xml:lang="zh-TW">書目資料</gloss>
@@ -10809,6 +11467,66 @@ l'original apparaît comme une forme fusionnée.</desc>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/DI.html#DIBO">9.1. Dictionary Body and Overall Structure</ref>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/DI.html#DIEN">9.2. The Structure of Dictionary Entries</ref>
   </listRef>
+</elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" module="figures" ident="formula">
+  <gloss xml:lang="en" versionDate="2007-06-12">formula</gloss>
+  <gloss versionDate="2007-06-12" xml:lang="fr">formule</gloss>
+  <gloss versionDate="2017-06-19" xml:lang="de">Formel</gloss>
+  <desc versionDate="2005-01-14" xml:lang="en">contains a mathematical or other formula.</desc>
+  <desc versionDate="2007-12-20" xml:lang="ko">수식 또는 다른 식을 포함한다.</desc>
+  <desc versionDate="2007-05-02" xml:lang="zh-TW">包含數學或其他方程式。</desc>
+  <desc versionDate="2008-04-05" xml:lang="ja">数式を示す。</desc>
+  <desc versionDate="2007-06-12" xml:lang="fr">contient une formule mathématique ou tout autre type de
+    formule</desc>
+  <desc versionDate="2007-05-04" xml:lang="es">contiene una fórmula matemática o de otro tipo.</desc>
+  <desc versionDate="2007-01-21" xml:lang="it">contiene una formula matematica o di altra natura.</desc>
+  <desc versionDate="2017-06-19" xml:lang="de">enthält eine mathematische oder andere Formel.</desc>
+  <classes>
+    <memberOf key="att.global"/>
+    <memberOf key="model.graphicLike"/>
+    <memberOf key="att.notated"/>
+  </classes>
+  <content>
+       <alternate minOccurs="0" maxOccurs="unbounded">
+        <textNode/>
+        <classRef key="model.graphicLike"/>
+        <classRef key="model.hiLike"/>       
+      </alternate>  
+  </content>
+
+  
+  <exemplum xml:lang="und">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <formula notation="tex">$E=mc^2$</formula>
+    </egXML>
+  </exemplum>
+  <exemplum xml:lang="und">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <formula notation="none">E=mc<hi rend="sup">2</hi>
+         </formula>
+    </egXML>
+  </exemplum>
+  <exemplum xml:lang="und">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <formula notation="mathml">
+        <math xmlns="http://www.w3.org/1998/Math/MathML">
+          <mi>E</mi>
+          <mo>=</mo>
+          <mi>m</mi>
+          <msup>
+            <mrow>
+              <mi>c</mi>
+            </mrow>
+            <mrow>
+              <mn>2</mn>
+            </mrow>
+          </msup>
+        </math>
+      </formula>
+    </egXML>
+  </exemplum>
+  <listRef>
+    <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/FT.html#FTFOR">14.2. Formulæ and Mathematical Expressions</ref>
+  </listRef>
 </elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" rend="change" module="header" ident="teiHeader"><gloss versionDate="2013-02-02" xml:lang="en">TEI header</gloss><gloss versionDate="2009-01-05" xml:lang="fr">en-tête TEI</gloss><gloss versionDate="2007-12-20" xml:lang="ko">TEI 헤더</gloss><gloss versionDate="2007-05-02" xml:lang="zh-TW">TEI標頭</gloss><gloss versionDate="2006-10-18" xml:lang="de">TEI-Header (elektronische Titelseite)</gloss><gloss versionDate="2007-05-04" xml:lang="es">Encabezado TEI</gloss><gloss versionDate="2007-01-21" xml:lang="it">intestazione</gloss><desc versionDate="2016-02-19" xml:lang="en">supplies descriptive and
     declarative metadata associated with a digital resource or set of
     resources.</desc><desc versionDate="2009-01-05" xml:lang="fr">fournit des informations descriptives et déclaratives qui
@@ -11388,6 +12106,79 @@ creation of an electronic text.</desc>
   </exemplum>
   <listRef>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD22">2.2.2. The Edition Statement</ref>
+  </listRef>
+</elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" module="header" ident="extent">
+  <gloss xml:lang="en" versionDate="2007-06-12">extent</gloss>
+  <gloss versionDate="2007-06-12" xml:lang="fr">étendue</gloss>
+  <desc versionDate="2013-01-07" xml:lang="en">describes the approximate size of a text stored on some carrier medium or of some other object, digital  or non-digital, specified in any convenient units.</desc>
+  <desc versionDate="2009-01-05" xml:lang="fr">décrit la taille approximative d’un texte stocké sur son support, numérique ou non numérique, exprimé dans une unité quelconque appropriée.</desc>
+  <desc versionDate="2007-12-20" xml:lang="ko">전달 매체, 즉, 디지털 또는 비디지털로 저장된 텍스트의, 다양한 단위로 명시되는, 대략적 규모를 기술한다.</desc>
+  <desc versionDate="2007-05-02" xml:lang="zh-TW">描述電子文件儲存在某一承載媒介時的約略大小，標以任何適用的單位。</desc>
+  <desc versionDate="2008-04-05" xml:lang="ja">電子・非電子テキストのおよその大きさを任意の単位で示す。</desc>
+  <desc versionDate="2016-11-25" xml:lang="de">beschreibt die ungefähre Größe des elektronischen Textes, die er auf einem Datenträger einnimmt; 
+    kann auch für andere digitale oder nicht digitale Objekte verwendet werden; die Angabe erfolgt in entsprechenden Maßeinheiten.</desc>
+  <desc versionDate="2007-05-04" xml:lang="es">describe el tamaño aproximado de un texto almacenado en algún medio, digital o no, especificándolo en alguna unidad funcional.</desc>
+  <desc versionDate="2007-01-21" xml:lang="it">descrive la grandezza approssimativa di un documento elettronico così come immagazzinata su supporto, secondo una qualsiasi unità funzionale.</desc>
+  <classes>
+    <memberOf key="att.global"/>
+    <memberOf key="model.biblPart"/>
+  </classes>
+  <content>
+    <macroRef key="macro.phraseSeq"/>
+  </content>
+  <exemplum xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <extent>3200 sentences</extent>
+      <extent>between 10 and 20 Mb</extent>
+      <extent>ten 3.5 inch high density diskettes</extent>
+    </egXML>
+  </exemplum>
+  <exemplum versionDate="2016-11-04" xml:lang="en">
+    <p>The  <gi>measure</gi> element may be used to supply normalized
+or machine tractable versions of the size or sizes concerned.</p>
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <extent>
+        <measure unit="MiB" quantity="4.2">About four megabytes</measure>
+        <measure unit="pages" quantity="245">245 pages of source
+material</measure>
+      </extent>
+    </egXML>
+  </exemplum>
+  <exemplum xml:lang="de" versionDate="2016-11-25">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <extent>400 Seiten</extent>
+      <extent>ungefähr 10MB</extent>
+    </egXML>
+  </exemplum>
+  <exemplum versionDate="2023-02-03" xml:lang="de">
+    <p>Das <gi>measure</gi>-Element kann dazu verwendet werden, um normalisierte oder 
+      maschinenlesbare Versionen der Größen-Angaben bereitzustellen.</p>
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <extent>
+        <measure unit="MiB" quantity="4.2">Ungefähr vier Megabyte</measure>
+        <measure unit="pages" quantity="245">Textumfang 245 Seiten</measure>
+      </extent>
+    </egXML>
+  </exemplum>
+  <exemplum versionDate="2010-02-26" xml:lang="fr">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <extent>198 pages</extent>
+      <extent>90 195 mots</extent>
+      <extent>1 Mo</extent>
+    </egXML>
+  </exemplum>
+  <exemplum xml:lang="zh-TW">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <extent>3200個句子</extent>
+      <extent>介於10 到20 Mb</extent>
+      <extent>10片3.5吋磁碟片</extent>
+    </egXML>
+  </exemplum>
+  <listRef>
+    <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD23">2.2.3. Type and Extent of File</ref>
+    <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD2">2.2. The File Description</ref>
+    <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CO.html#COBICOI">3.12.2.4. Imprint, Size of a Document, and Reprint Information</ref>
+    <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/MS.html#msph1">10.7.1. Object Description</ref>
   </listRef>
 </elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" rend="change" module="header" ident="publicationStmt"><gloss versionDate="2005-01-14" xml:lang="en">publication statement</gloss><gloss versionDate="2009-01-05" xml:lang="fr">mention de publication</gloss><gloss versionDate="2007-12-20" xml:lang="ko">출판 진술</gloss><gloss versionDate="2007-05-02" xml:lang="zh-TW">出版陳述</gloss><gloss versionDate="2016-11-17" xml:lang="de">Angaben zur Veröffentlichung</gloss><gloss versionDate="2007-05-04" xml:lang="es">declaración de la publicación</gloss><gloss versionDate="2007-01-21" xml:lang="it">dichiarazione sulla pubblicazione</gloss><desc versionDate="2005-01-14" xml:lang="en">groups information concerning the publication or distribution of an electronic or other text.</desc><desc versionDate="2009-01-05" xml:lang="fr">regroupe des informations concernant la publication ou
     la diffusion d’un texte électronique ou d’un autre type de texte.</desc><desc versionDate="2007-12-20" xml:lang="ko">전자 또는 기타 텍스트의 출판 또는 배포에 관한 정보를 모아 놓는다.</desc><desc versionDate="2007-05-02" xml:lang="zh-TW">匯集電子文件或其他類型文件的出版或發行相關資訊。</desc><desc versionDate="2008-04-05" xml:lang="ja">電子テキストなどの出版や頒布に関する情報をまとめる。</desc><desc versionDate="2016-11-17" xml:lang="de">umfasst Angaben zu Veröffentlichung oder Vertrieb eines elektronischen oder sonstigen Textes.</desc><desc versionDate="2007-05-04" xml:lang="es">agrupa la información concerniente a la publicación o
@@ -12433,6 +13224,57 @@ elements of  <gi>profileDesc</gi> unless these are documenting multiple texts.</
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD4">2.4. The Profile Description</ref>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD11">2.1.1. The TEI Header and Its Components</ref>
   </listRef>
+</elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" module="header" xml:id="HANDNOTE" ident="handNote">
+  <gloss versionDate="2005-01-14" xml:lang="en">note on hand</gloss>
+  <gloss versionDate="2007-12-20" xml:lang="ko">기법에 관한 설명</gloss>
+  <gloss versionDate="2007-05-02" xml:lang="zh-TW">書寫特徵</gloss>
+  <gloss versionDate="2007-06-12" xml:lang="fr">note sur une main</gloss>
+  <gloss versionDate="2007-05-04" xml:lang="es">notas sobre la mano</gloss>
+  <gloss versionDate="2007-01-21" xml:lang="it">nota sulla mano</gloss>
+  <desc versionDate="2005-01-14" xml:lang="en">describes a particular style or hand distinguished within a manuscript.</desc>
+  <desc versionDate="2007-12-20" xml:lang="ko">원고 내에서 구분되는 특별한 문체 또는 기법을 기술한다.</desc>
+  <desc versionDate="2007-05-02" xml:lang="zh-TW">描述在手稿中可明顯辨識出的特殊風格或書寫手法。</desc>
+  <desc versionDate="2008-04-05" xml:lang="ja">手書き資料中にある特定のスタイルまたは筆致を示す。</desc>
+  <desc versionDate="2007-06-12" xml:lang="fr">décrit un style d'écriture ou une main qui sont
+    reconnus dans un manuscrit.</desc>
+  <desc versionDate="2007-05-04" xml:lang="es">describe un determinado estilo o una determinada mano
+    al interno de un manuscrito.</desc>
+  <desc versionDate="2007-01-21" xml:lang="it">descrive un determinato stile o una determinata mano
+    all'interno di un manoscritto</desc>
+  <classes>
+    <memberOf key="att.global"/>
+    <memberOf key="att.handFeatures"/>
+  </classes>
+  <content>
+    <macroRef key="macro.specialPara"/>
+  </content>
+  <exemplum xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <handNote scope="sole">
+        <p>Written in insular
+      phase II half-uncial with interlinear Old English gloss in an Anglo-Saxon pointed
+      minuscule.</p>
+      </handNote>
+    </egXML>
+  </exemplum>
+  <exemplum versionDate="2008-04-06" xml:lang="fr">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#fr-ex-Lavrentev-TEI-BFM">
+      <handNote xml:id="fr_scribe1">Premier scribe : <name type="person">inconnu</name> 
+         </handNote>
+      <handNote xml:id="fr_rubricateur1">Premier rubricateur : <name type="person">inconnu</name> 
+         </handNote>
+    </egXML>
+  </exemplum>
+  <exemplum xml:lang="zh-TW">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <handNote scope="sole">
+        <p>以類似小篆字體書寫，行間有以隸書寫成的古文字。</p>
+      </handNote>
+    </egXML>
+  </exemplum>
+  <listRef>
+    <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/MS.html#msph2">10.7.2. Writing, Decoration, and Other Notations</ref>
+  </listRef>
 </elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" module="header" ident="langUsage">
   <gloss versionDate="2005-01-14" xml:lang="en">language usage</gloss>
   <gloss versionDate="2009-01-05" xml:lang="fr">langue utilisée</gloss>
@@ -12495,6 +13337,227 @@ elements of  <gi>profileDesc</gi> unless these are documenting multiple texts.</
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD41">2.4.2. Language Usage</ref>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD4">2.4. The Profile Description</ref>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/CC.html#CCAS2">15.3.2. Declarable Elements</ref>
+  </listRef>
+</elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" module="header" ident="language">
+  <gloss xml:lang="en" versionDate="2009-01-05">language</gloss>
+  <gloss versionDate="2009-01-05" xml:lang="fr">langue</gloss>
+  <gloss versionDate="2016-11-17" xml:lang="de">Sprache</gloss>
+  <desc versionDate="2005-01-14" xml:lang="en">characterizes a single language or sublanguage used within a text.</desc>
+  <desc versionDate="2009-01-05" xml:lang="fr">caractérise une langue ou une variété de langue utilisée
+    dans un texte.</desc>
+  <desc versionDate="2007-12-20" xml:lang="ko">텍스트 내에서 사용되는 언어 또는 특수 언어의 특징을 기술한다.</desc>
+  <desc versionDate="2007-05-02" xml:lang="zh-TW">個別敘述文本中使用的語言或次要語言。</desc>
+  <desc versionDate="2008-04-05" xml:lang="ja">テキスト中にあるひとつの言語または特殊言語を示す。</desc>
+    <desc versionDate="2016-11-17" xml:lang="de">beschreibt eine einzelne Sprache oder eine Subsprache, die innerhalb eines Textes verwendet wird.</desc>
+  <desc versionDate="2007-05-04" xml:lang="es">caracteriza una lengua o jerga empleada en un texto.</desc>
+  <desc versionDate="2007-01-21" xml:lang="it">indica una lingua o un linguaggio secondario utilizzato
+    all'interno di un testo.</desc>
+  <classes>
+    <memberOf key="att.global"/>
+  </classes>
+  <content>
+    <macroRef key="macro.phraseSeq.limited"/>
+  </content>
+  <attList>
+    <attDef ident="ident" usage="req">
+      <gloss versionDate="2007-07-04" xml:lang="en">identifier</gloss>
+      <gloss versionDate="2007-12-20" xml:lang="ko">확인소</gloss>
+      <gloss versionDate="2008-04-06" xml:lang="es">identificador</gloss>
+      <gloss versionDate="2008-03-30" xml:lang="fr">identificateur</gloss>
+      <gloss versionDate="2007-11-06" xml:lang="it">identificatore</gloss>
+        <gloss versionDate="2016-11-17" xml:lang="de">Identifikator</gloss>
+
+      <desc versionDate="2007-07-08" xml:lang="en">Supplies a language code constructed as defined in <ref target="https://tools.ietf.org/html/bcp47">BCP 47</ref> which is used to identify the
+        language documented by this element, and which may be referenced by the global
+        <att>xml:lang</att> attribute.</desc>
+      <desc versionDate="2009-01-05" xml:lang="fr">fournit un code de langue issu de la recommandation
+        <ref target="https://tools.ietf.org/html/bcp47">BCP 47</ref> (ou son
+        successeur) utilisé pour identifier la langue précisée par cet élément, référencé par
+        l’attribut global <att>xml:lang</att> s’appliquant à l’élément considéré.</desc>
+      <desc versionDate="2007-12-20" xml:lang="ko">요소로 기록된 언어를 식별하고기 위해 사용되는, 전체 <att>xml:lang</att> 속성에
+        의해 참조되는 <ref target="https://tools.ietf.org/html/bcp47">BCP 47</ref>에서 정의된 방식대로 구축된 언어 부호를
+        제시한다.</desc>
+      <desc versionDate="2007-05-02" xml:lang="zh-TW">提供一語言代碼，其編碼方式定義在<ref target="https://tools.ietf.org/html/bcp47">BCP 47</ref>中 (或其系列中)
+          ，用來識別此元素所紀錄的語言，並由全域屬性<att>xml:lang</att>所參照。</desc>
+      <desc versionDate="2008-04-05" xml:lang="ja">当該要素で記録される言語を特定するために、 <ref target="https://tools.ietf.org/html/bcp47">BCP 47</ref> で定義されている言語コードを示す。また、 <ref target="https://tools.ietf.org/html/bcp47">BCP 47</ref>
+        は、グローバル属性<att>xml:lang</att>でも使用される。</desc>
+        <desc versionDate="2016-11-17" xml:lang="de">gibt einen Sprachcode, aufgebaut nach <ref target="https://tools.ietf.org/html/bcp47">BCP 47</ref> an, 
+            der zur Identifikation der im Element dokumentierten Sprache benutzt wird und auf den das globale <att>xml:lang</att>-Attribut verweist.</desc>
+      <desc versionDate="2007-05-04" xml:lang="es">proporciona un código de lengua construido según se
+        define en <ref target="https://tools.ietf.org/html/bcp47">BCP 47</ref> (o en su sucesor)
+        que se utiliza para identificar la lengua documentada por este elemento, y a la cual se hace
+        referencia mediante el atributo globlal <att>xml:lang</att>.</desc>
+      <desc versionDate="2007-01-21" xml:lang="it">fornisce un codice per la lingua costruito come
+        definito in <ref target="https://tools.ietf.org/html/bcp47">BCP 47</ref> (o nei sui
+        successori), utilizzato per identificare la lingua documentata da questo elemento e che è
+        indicato dall'attributo globale <att>xml:lang</att>.</desc>
+      <datatype><dataRef key="teidata.language"/></datatype>
+    </attDef>
+    <attDef ident="usage" usage="opt">
+      <desc versionDate="2005-01-14" xml:lang="en">specifies the approximate percentage of the text which uses this language.</desc>
+      <desc versionDate="2009-01-05" xml:lang="fr">précise approximativement le pourcentage du volume de
+        texte utilisant cette langue.</desc>
+      <desc versionDate="2007-12-20" xml:lang="ko">이 언어를 사용하는 텍스트의 대략적 백분율(분량)을 명시한다.</desc>
+      <desc versionDate="2007-05-02" xml:lang="zh-TW">標明該文本使用此語言的大約比例 (以冊計) 。</desc>
+      <desc versionDate="2008-04-05" xml:lang="ja">当該言語がテキスト中で使用されているおよその割合を示す。</desc>
+        <desc versionDate="2016-11-17" xml:lang="de">gibt den ungefähren prozentualen Anteil des Textes an, der in dieser Sprache verfasst wurde.</desc>
+      <desc versionDate="2007-05-04" xml:lang="es">especifica el porcentaje (de volumen) aproximado de
+        texto que usa esa lengua.</desc>
+      <desc versionDate="2007-01-21" xml:lang="it">specifica la percentuale approsimativa (per volume)
+        di testo che usa questa lingua.</desc>
+      <datatype><dataRef name="nonNegativeInteger"/></datatype>
+    </attDef>
+  </attList>
+  <exemplum xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples" xml:lang="en">
+      <langUsage>
+        <language ident="en-US" usage="75">modern American English</language>
+        <language ident="az-Arab" usage="20">Azerbaijani in Arabic script</language>
+        <language ident="x-lap" usage="05">Pig Latin</language>
+      </langUsage>
+    </egXML>
+  </exemplum>
+  <exemplum versionDate="2008-04-06" xml:lang="fr">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <langUsage>
+        <language ident="en-US" usage="75">Anglais américain moderne</language>
+        <language ident="az-Arab" usage="20">Azerbaijanais en caractères arabes</language>
+        <language ident="x-verlan" usage="05">verlan</language>
+      </langUsage>
+    </egXML>
+  </exemplum>
+  <exemplum xml:lang="zh-TW">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <langUsage>
+        <language ident="en-US" usage="75">現代美語</language>
+        <language ident="az-Arab" usage="20">阿拉伯文手寫的亞塞拜然語</language>
+        <language ident="x-lap" usage="05">一種行話，將字頭的子音調至字尾，再多加一個音節</language>
+      </langUsage>
+    </egXML>
+  </exemplum>
+  <remarks versionDate="2005-01-14" xml:lang="en">
+    <p rend="dataDesc">Particularly for sublanguages, an informal prose characterization should be
+      supplied as content for the element.</p>
+  </remarks>
+  <remarks xml:lang="fr" versionDate="2007-06-12">
+    <p rend="dataDesc">Dans le cas particulier des variétés de langues, l'élément contiendra un
+      texte caractérisant mais non structuré.</p>
+  </remarks>
+  <remarks xml:lang="es" versionDate="2008-04-06">
+    <p rend="dataDesc">Determinado para los sublenguajes, se debe suministrar una caracterización
+      informal de la prosa como contenido del elemento.</p>
+  </remarks>
+  <remarks xml:lang="ja" versionDate="2008-04-05">
+    <p rend="dataDesc"> 特殊言語の場合には、非公式の散文による記述にすべきである。 </p>
+  </remarks>
+  <remarks xml:lang="de" versionDate="2016-11-17">
+      <p rend="dataDesc">Insbesondere für Subsprachen sollte eine Beschreibung als Inhalt des Elements angegeben werden.</p>
+  </remarks>
+  <listRef>
+    <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD41">2.4.2. Language Usage</ref>
+  </listRef>
+</elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" module="header" ident="textClass">
+  <gloss versionDate="2005-01-14" xml:lang="en">text classification</gloss>
+  <gloss versionDate="2009-01-05" xml:lang="fr">classification du texte</gloss>
+  <gloss versionDate="2007-12-20" xml:lang="ko">텍스트 분류</gloss>
+  <gloss versionDate="2007-05-02" xml:lang="zh-TW">文件分類</gloss>
+  <gloss versionDate="2006-10-18" xml:lang="de">Textklassifikation</gloss>
+  <gloss versionDate="2007-05-04" xml:lang="es">clasificación de texto</gloss>
+  <gloss versionDate="2007-01-21" xml:lang="it">classificazione del testo</gloss>
+  <desc versionDate="2005-01-14" xml:lang="en">groups information which describes the nature or topic of a text in terms of a standard
+    classification scheme, thesaurus, etc.</desc>
+  <desc versionDate="2009-01-05" xml:lang="fr">regroupe des informations décrivant la nature ou le sujet
+    d’un texte selon des termes issus d’un système de classification standardisé, d’un thésaurus,
+    etc.</desc>
+  <desc versionDate="2007-12-20" xml:lang="ko">표준 분류 스키마, 시소러스 등을 통해서 텍스트의 특성 또는 주제를 기술하는 정보를 모아 놓는다.</desc>
+  <desc versionDate="2007-05-02" xml:lang="zh-TW">匯集以標準分類架構、索引典等來描述文件性質或主題的資訊。</desc>
+  <desc versionDate="2008-04-05" xml:lang="ja">標準的な分類スキーム、分類語彙などにより、テキストの性格や話題を示す 情報をまとめる。</desc>
+  <desc versionDate="2016-11-24" xml:lang="de">gruppiert Informationen über Art oder Thematik eines Textes unter 
+      Bezug auf ein Standard-Klassifikationsschema, einen Thesaurus o. ä.
+  </desc>
+  <desc versionDate="2007-05-04" xml:lang="es">agrupa información que describe la naturaleza o la
+    temática de un texto en términos de un esquema de clasificación estándard.</desc>
+  <desc versionDate="2007-01-21" xml:lang="it">raggruppa le informazioni che descrivono la natura o
+    l'argomento di un testo secondo uno schema di classificazione standard, un dizionario i
+    sinonimi, ecc.</desc>
+  <classes>
+    <memberOf key="att.global"/>
+    <memberOf key="model.profileDescPart"/>
+    <memberOf key="att.declarable"/>
+  </classes>
+  <content>
+    
+      <alternate minOccurs="0" maxOccurs="unbounded">
+        <elementRef key="classCode"/>
+        <elementRef key="catRef"/>
+        <elementRef key="keywords"/>
+      </alternate>
+    
+  </content>
+  <exemplum xml:lang="en">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <taxonomy>
+        <category xml:id="acprose">
+          <catDesc>Academic prose</catDesc>
+        </category>
+        <!-- other categories here -->
+      </taxonomy>
+      <!-- ... -->
+      <textClass>
+        <catRef target="#acprose"/>
+        <classCode scheme="http://www.udcc.org">001.9</classCode>
+        <keywords scheme="http://authorities.loc.gov">
+          <list>
+            <item>End of the world</item>
+            <item>History - philosophy</item>
+          </list>
+        </keywords>
+      </textClass>
+    </egXML>
+  </exemplum>
+  <exemplum versionDate="2008-04-06" xml:lang="fr">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <textClass>
+        <keywords scheme="#fr_RAMEAU">
+          <list>
+            <item>Littérature française -- 20ème siècle -- Histoire et critique</item>
+            <item>Littérature française -- Histoire et critique -- Théorie, etc.</item>
+            <item>Français (langue) -- Style -- Bases de données.</item>
+          </list>
+        </keywords>
+      </textClass>
+    </egXML>
+  </exemplum>
+  <exemplum versionDate="2008-04-06" xml:lang="fr">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples" source="#UND">
+      <textClass>
+        <catRef target="#fr_forme_prose"/>
+      </textClass>
+    </egXML>
+  </exemplum>
+  <exemplum xml:lang="zh-TW">
+    <egXML xmlns="http://www.tei-c.org/ns/Examples">
+      <taxonomy>
+        <category xml:id="zh-tw_chineseliterature">
+          <catDesc>中國文學</catDesc>
+        </category>
+        <!-- 其他文類 -->
+      </taxonomy>
+      <!-- ... -->
+      <textClass>
+        <catRef target="#zh-tw_chineseliterature"/>
+        <classCode scheme="http://www.ncl.edu.tw/">820</classCode>
+        <keywords scheme="http://authorities.loc.gov">
+          <list>
+            <item>傷痕文學</item>
+            <item>語文類</item>
+          </list>
+        </keywords>
+      </textClass>
+    </egXML>
+  </exemplum>
+  <listRef>
+    <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD43">2.4.3. The Text Classification</ref>
   </listRef>
 </elementSpec><elementSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" rend="change" module="header" ident="revisionDesc"><gloss versionDate="2005-01-14" xml:lang="en">revision description</gloss><gloss versionDate="2009-01-05" xml:lang="fr">descriptif des révisions</gloss><gloss versionDate="2007-12-20" xml:lang="ko">수정 기술</gloss><gloss versionDate="2007-05-02" xml:lang="zh-TW">修訂描述</gloss><gloss versionDate="2016-11-25" xml:lang="de">Beschreibung der Dateihistorie</gloss><gloss versionDate="2007-05-04" xml:lang="es">descripción de la revisión</gloss><gloss versionDate="2007-01-21" xml:lang="it">descirzione della revisione</gloss><desc versionDate="2005-01-14" xml:lang="en">summarizes the revision history for a file.</desc><desc versionDate="2009-01-05" xml:lang="fr">fournit un résumé de l’historique des révisions d’un fichier.</desc><desc versionDate="2007-12-20" xml:lang="ko">하나의 파일에 대한 수정 이력을 요약한다.</desc><desc versionDate="2007-05-02" xml:lang="zh-TW">概述檔案的修訂歷史。</desc><desc versionDate="2008-04-05" xml:lang="ja">ファイルの改訂履歴を示す。</desc><desc versionDate="2016-11-25" xml:lang="de">dokumentiert die Änderungen, die an der Datei vorgenommen wurden.</desc><desc versionDate="2007-05-04" xml:lang="es">resume el historial de la revisión de un archivo.</desc><desc versionDate="2007-01-21" xml:lang="it">sintetizza la storia delle revisioni di un file</desc><classes><memberOf key="att.global"/><memberOf key="att.docStatus"/></classes><content><elementRef key="change" minOccurs="0" maxOccurs="unbounded"/></content><attList><attDef ident="status" mode="replace" usage="opt">
               <valList type="closed" mode="replace">
@@ -26364,7 +27427,7 @@ associated.</desc>
   <listRef>
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/SA.html#SA">16. Linking, Segmentation, and Alignment</ref>
   </listRef>
-</classSpec><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="ST" xml:id="DSTTEI2" ident="tei" type="core"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="CO" xml:id="DCO" ident="core"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="CE" xml:id="DCE" ident="certainty"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="DI" xml:id="DDIBO" ident="dictionaries"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="HD" xml:id="DHD" ident="header"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="SA" xml:id="DSA" ident="linking"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="MS" xml:id="DMSD2" ident="msdescription"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="ND" xml:id="DND" ident="namesdates"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="TD" xml:id="DTDDTD" ident="tagdocs"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="TC" xml:id="DTC" ident="textcrit"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="PH" xml:id="DPH" ident="transcr"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="DS" xml:id="DDS" ident="textstructure"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="AI" xml:id="DAI" ident="analysis"/></schemaSpec>
+</classSpec><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="ST" xml:id="DSTTEI2" ident="tei" type="core"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="CO" xml:id="DCO" ident="core"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="CE" xml:id="DCE" ident="certainty"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="DI" xml:id="DDIBO" ident="dictionaries"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="FT" xml:id="DFTFF" ident="figures"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="HD" xml:id="DHD" ident="header"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="SA" xml:id="DSA" ident="linking"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="MS" xml:id="DMSD2" ident="msdescription"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="ND" xml:id="DND" ident="namesdates"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="TD" xml:id="DTDDTD" ident="tagdocs"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="TC" xml:id="DTC" ident="textcrit"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" n="PH" xml:id="DPH" ident="transcr"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="DS" xml:id="DDS" ident="textstructure"/><moduleSpec xmlns:rng="http://relaxng.org/ns/structure/1.0" n="AI" xml:id="DAI" ident="analysis"/></schemaSpec>
     </body>
   </text>
 </TEI>
