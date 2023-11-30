@@ -67,8 +67,7 @@ docker build -t "$PACKAGE_NAME:$VERSION" --build-arg ADMIN_PASSWORD="$ADMIN_PASS
 echo docker build -t "$PACKAGE_NAME:$VERSION" --build-arg ADMIN_PASSWORD="$ADMIN_PASSWORD" --no-cache .
 echo "Built successfully"
 
-DOCKER_URL=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DEV_ECR_REPOSITORY
-:latest
+DOCKER_URL=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$DEV_ECR_REPOSITORY:latest
 
 ### UPLOAD TO ECR
 echo "Loging in to AWS"
