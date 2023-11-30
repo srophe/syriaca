@@ -21,6 +21,7 @@ declare variable $target external;
    (: sf:update-index(),:)
 (: Set UID for inexing function. Used only if building facets. :)   
    sm:chmod(xs:anyURI($target || '/modules/index.xql'), "rwsr-xr-x"),
+   sm:chmod(xs:anyURI($target || '/zotero2bibl/get-zotero-data.xql'), "rwsr-xr-x"),
 (: Set UID for git-sync. :)
    sm:chmod(xs:anyURI($target || '/modules/git-sync.xql'), "rwsr-xr-x"),
    sm:chmod(xs:anyURI($target || '/sparql/update-rdf.xql'), "rwsr-xr-x")
