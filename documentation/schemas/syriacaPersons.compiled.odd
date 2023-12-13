@@ -6016,31 +6016,39 @@ définissant les droits d'utilisation.</desc><desc xmlns:rng="http://relaxng.org
   </listRef></elementSpec><elementSpec rend="change" module="header" ident="seriesStmt"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">series statement</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-01-05" xml:lang="fr">mention de collection</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">연속간행물 진술</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">集叢陳述</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2016-11-17" xml:lang="de">Angaben zu einer Publikationsreihe</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">declaración de serie</gloss><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">dichiarazione sulla serie</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2005-01-14" xml:lang="en">groups information about the series, if any, to which a publication belongs.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2009-01-05" xml:lang="fr">regroupe toute information relative à la collection (si
     elle existe) à laquelle appartient une publication.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">연속 간행물에 대한 정보를 모아 놓는다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">若出版品隸屬於某叢書，則在此匯集該叢書的相關資訊。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">出版されたシリーズの情報をまとめる。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2016-11-17" xml:lang="de">umfasst Angaben zu einer Publikationsreihe, zu der eine Veröffentlichung gehört.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">agrupa información sobre la serie, si la hay, a la que
     pertenece una publicación.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">raggruppa le informazioni circa la serie alla quale
-    eventualmente la pubblicazione appartiene.</desc><classes><memberOf key="att.global"/></classes><content><elementRef key="title" minOccurs="1" maxOccurs="1"/><elementRef key="editor" minOccurs="1" maxOccurs="unbounded"/><elementRef key="biblScope" minOccurs="0" maxOccurs="1"/><elementRef key="idno" minOccurs="1" maxOccurs="1"/></content><constraintSpec ident="seriesStmt-content" scheme="schematron">
+    eventualmente la pubblicazione appartiene.</desc><classes><memberOf key="att.global"/></classes><content><elementRef key="title" minOccurs="1" maxOccurs="1"/><elementRef key="editor" minOccurs="1" maxOccurs="unbounded"/><elementRef key="biblScope" minOccurs="0" maxOccurs="1"/><elementRef key="idno" minOccurs="1" maxOccurs="1"/></content><constraintSpec ident="seriesStmt-series" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:seriesStmt//tei:title[@level='s']">
-                <sch:assert test="./node() = 'The Syriac Biographical Dictionary' or ./node() = 'Gateway to the Syriac Saints'"> 
-                  The text node of this &lt;idno&gt; element must be "The Syriac Biographical Dictionary" or "Gateway to the Syriac Saints". 
+                <sch:assert test="./node() = 'The Syriac Biographical Dictionary' or ./node() = 'Gateway to the Syriac Saints' or ./node() = 'A Guide to John of Ephesus'"> 
+                  This &lt;title&gt; element must be "The Syriac Biographical Dictionary", "Gateway to the Syriac Saints", or "A Guide to John of Ephesus". 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title = 'The Syriac Biographical Dictionary']/tei:idno">
                 <sch:assert test="matches(., 'http://syriaca.org/persons')">
-                  A &lt;title&gt; containing "The Syriac Biographical Dictionary" requires a following sibling &lt;idno&gt; element containing "http://syriaca.org/persons'. 
+                 This &lt;idno&gt; element must contain "http://syriaca.org/persons". 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title = 'Gateway to the Syriac Saints']/tei:idno">
                 <sch:assert test="matches(., 'http://syriaca.org/saints')">
-                  A &lt;title&gt; containing "Gateway to the Syriac Saints" requires a following sibling &lt;idno&gt; element containing "http://syriaca.org/saints'. 
+                  This &lt;idno&gt; element must contain "http://syriaca.org/saints". 
                 </sch:assert>
               </sch:rule>
+              <sch:rule context="//tei:seriesStmt[tei:title = 'A Guide to John of Ephesus']/tei:idno">
+                <sch:assert test="matches(., 'http://syriaca.org/johnofephesus')">
+                  This &lt;idno&gt; element must contain "http://syriaca.org/johnofephesus". 
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec><constraintSpec ident="seriesStmt-monograph" scheme="schematron">
+            <constraint>
               <sch:rule context="//tei:seriesStmt/tei:title[@level='m']">
-                <sch:assert test="./node() = 'Qadishe: A Guide to the Syriac Saints' or ./node() = 'A Guide to Syriac Authors' or ./node() = 'Syriac Anonymi'">
-                  The text node of this &lt;title&gt; element must be "Qadishe: A Guide to the Syriac Saints", "A Guide to Syriac Authors", or "Syriac Anonymi". 
+                <sch:assert test="./node() = 'Qadishe: A Guide to the Syriac Saints' or ./node() = 'A Guide to Syriac Authors' or ./node() = 'Syriac Anonymi' or ./node() = 'Prosopography to John of Ephesus’s Ecclesiastical History'">
+                  This &lt;title&gt; element must be "Qadishe: A Guide to the Syriac Saints", "A Guide to Syriac Authors", "Syriac Anonymi", or "Prosopography to John of Ephesus’s Ecclesiastical History". 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title='Qadishe: A Guide to the Syriac Saints']/tei:idno">
                 <sch:assert test="matches(., 'http://syriaca.org/q')">
-                  The text node of this &lt;idno&gt; element must be "http://syriaca.org/q'. 
+                  This &lt;idno&gt; element must contain "http://syriaca.org/q'. 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title='Qadishe: A Guide to the Syriac Saints']">
@@ -6050,7 +6058,7 @@ définissant les droits d'utilisation.</desc><desc xmlns:rng="http://relaxng.org
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title='A Guide to Syriac Authors']/tei:idno">
                 <sch:assert test="matches(., 'http://syriaca.org/authors')">
-                  The text node of this &lt;idno&gt; element must be "http://syriaca.org/authors'. 
+                  This &lt;idno&gt; element must contain "http://syriaca.org/authors". 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title='A Guide to Syriac Authors']">
@@ -6058,9 +6066,24 @@ définissant les droits d'utilisation.</desc><desc xmlns:rng="http://relaxng.org
                   Requires a &lt;biblScope&gt; element with @n="2" since "A Guide to Syriac Authors" is volume 2 of "The Syriac Biographical Dictionary".
                 </sch:assert>
               </sch:rule>
+              <sch:rule context="//tei:seriesStmt[tei:title='Syriac Anonymi']/tei:idno">
+                <sch:assert test="matches(., 'http://syriaca.org/anonymi')">
+                  This &lt;idno&gt; element must contain "http://syriaca.org/authors". 
+                </sch:assert>
+              </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title='Syriac Anonymi']">
                 <sch:assert test="tei:biblScope/@n = '3'">
                   Requires a &lt;biblScope&gt; element with @n="3" since "Syriac Anonymi" is volume 3 of "The Syriac Biographical Dictionary".
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:seriesStmt[tei:title='Prosopography to John of Ephesus’s Ecclesiastical History']/tei:idno">
+                <sch:assert test="matches(., 'http://syriaca.org/johnofephesus/persons')">
+                  This &lt;idno&gt; element must contain "http://syriaca.org/johnofephesus/persons". 
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:seriesStmt[tei:title='Prosopography to John of Ephesus’s Ecclesiastical History']">
+                <sch:assert test="tei:biblScope/@n = '4'">
+                  Requires a &lt;biblScope&gt; element with @n="4" since "Prosopography to John of Ephesus’s Ecclesiastical History" is volume 4 of "The Syriac Biographical Dictionary".
                 </sch:assert>
               </sch:rule>
             </constraint>

@@ -688,36 +688,50 @@
         
         
         <elementSpec ident="seriesStmt" module="header" mode="change">
-          <constraintSpec ident="seriesStmt-content" scheme="schematron">
+          <constraintSpec ident="seriesStmt-series" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:seriesStmt//tei:title[@level='s']">
-                <!-- Add additional values with an "or" operator if there are multiple series levels associated with a document. -->
-                <sch:assert test="matches(., 'The Syriac Gazetteer') ">
-                  The text node of this &lt;title&gt; element must be "The Syriac Gazetteer". 
+              <sch:rule context="//tei:seriesStmt/tei:title[@level='s']">
+                <sch:assert test="./node() = 'The Syriac Gazetteer' or ./node() = 'A Guide to John of Ephesus'">
+                  This &lt;title&gt; element must be "The Syriac Gazetteer" or "A Guide to John of Ephesus". 
                 </sch:assert>
               </sch:rule>
-              <sch:rule context="//tei:seriesStmt//tei:title[node() = 'The Syriac Gazetteer']">
-                <!-- Add additional rules with appropriate contexts when adding additional monograph values above. -->
-                <sch:assert test="./following-sibling::tei:idno/node() = 'http://syriaca.org/geo'">
-                  A &lt;title&gt; containing "The Syriac Gazetteer" requires a following sibling &lt;idno&gt; element containing "http://syriaca.org/geo'. 
+              <sch:rule context="//tei:seriesStmt[tei:title = 'The Syriac Gazetteer']/tei:idno">
+                <sch:assert test="matches(., 'http://syriaca.org/geo')">
+                  This &lt;idno&gt; element must contain "http://syriaca.org/geo". 
                 </sch:assert>
               </sch:rule>
+              <sch:rule context="//tei:seriesStmt[tei:title = 'A Guide to John of Ephesus']/tei:idno">
+                <sch:assert test="matches(., 'http://syriaca.org/johnofephesus')">
+                  This &lt;idno&gt; element must contain "http://syriaca.org/johnofephesus". 
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="seriesStmt-monograph" scheme="schematron">
+            <constraint>
               <sch:rule context="//tei:seriesStmt/tei:title[@level='m']">
-                <sch:assert test="matches(., 'Beth Qaṭraye Gazetteer')">
-                  <!-- Add additional monograph values with an "or" operator as needed. -->
-                  The text node of this &lt;title&gt; element must be "Beth Qaṭraye Gazetteer". 
+                <sch:assert test="./node() = 'Beth Qaṭraye Gazetteer' or ./node() = 'Gazetteer to John of Ephesus’s Ecclesiastical History'">
+                  This &lt;title&gt; element must be "Beth Qaṭraye Gazetteer" or "Gazetteer to John of Ephesus’s Ecclesiastical History". 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title='Beth Qaṭraye Gazetteer']/tei:idno">
-                <!-- Add additional rules with appropriate contexts when adding additional monograph values above. -->
                 <sch:assert test="matches(., 'http://syriaca.org/bethqatraye')">
-                  The text node of this &lt;idno&gt; element must be "http://syriaca.org/bethqatraye'. 
+                  This &lt;idno&gt; element must be "http://syriaca.org/bethqatraye". 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title='Beth Qaṭraye Gazetteer']">
-                <!-- Add an additional rule with appropriate context/assert if there are multiple monographs. -->
                 <sch:assert test="tei:biblScope/@n = '1'">
                   Requires a &lt;biblScope&gt; element with @n="1" since the "Beth Qaṭraye Gazetteer" is volume 1 of "The Syriac Gazetteer".
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:seriesStmt[tei:title='Gazetteer to John of Ephesus’s Ecclesiastical History']/tei:idno">
+                <sch:assert test="matches(., 'http://syriaca.org/johnofephesus/places')">
+                  This &lt;idno&gt; element must be "http://syriaca.org/johnofephesus/places". 
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:seriesStmt[tei:title='Gazetteer to John of Ephesus’s Ecclesiastical History']">
+                <sch:assert test="tei:biblScope/@n = '2'">
+                  Requires a &lt;biblScope&gt; element with @n="2" since the "Gazetteer to John of Ephesus’s Ecclesiastical History" is volume 2 of "The Syriac Gazetteer".
                 </sch:assert>
               </sch:rule>
             </constraint>

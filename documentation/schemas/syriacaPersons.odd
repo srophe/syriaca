@@ -1001,31 +1001,40 @@
         
         
         <elementSpec ident="seriesStmt" module="header" mode="change">
-          <constraintSpec ident="seriesStmt-content" scheme="schematron">
+          <constraintSpec ident="seriesStmt-series" scheme="schematron">
             <constraint>
               <sch:rule context="//tei:seriesStmt//tei:title[@level='s']">
-                <sch:assert test="./node() = 'The Syriac Biographical Dictionary' or ./node() = 'Gateway to the Syriac Saints'"> 
-                  The text node of this &lt;idno&gt; element must be "The Syriac Biographical Dictionary" or "Gateway to the Syriac Saints". 
+                <sch:assert test="./node() = 'The Syriac Biographical Dictionary' or ./node() = 'Gateway to the Syriac Saints' or ./node() = 'A Guide to John of Ephesus'"> 
+                  This &lt;title&gt; element must be "The Syriac Biographical Dictionary", "Gateway to the Syriac Saints", or "A Guide to John of Ephesus". 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title = 'The Syriac Biographical Dictionary']/tei:idno">
                 <sch:assert test="matches(., 'http://syriaca.org/persons')">
-                  A &lt;title&gt; containing "The Syriac Biographical Dictionary" requires a following sibling &lt;idno&gt; element containing "http://syriaca.org/persons'. 
+                 This &lt;idno&gt; element must contain "http://syriaca.org/persons". 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title = 'Gateway to the Syriac Saints']/tei:idno">
                 <sch:assert test="matches(., 'http://syriaca.org/saints')">
-                  A &lt;title&gt; containing "Gateway to the Syriac Saints" requires a following sibling &lt;idno&gt; element containing "http://syriaca.org/saints'. 
+                  This &lt;idno&gt; element must contain "http://syriaca.org/saints". 
                 </sch:assert>
               </sch:rule>
+              <sch:rule context="//tei:seriesStmt[tei:title = 'A Guide to John of Ephesus']/tei:idno">
+                <sch:assert test="matches(., 'http://syriaca.org/johnofephesus')">
+                  This &lt;idno&gt; element must contain "http://syriaca.org/johnofephesus". 
+                </sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
+          <constraintSpec ident="seriesStmt-monograph" scheme="schematron">
+            <constraint>
               <sch:rule context="//tei:seriesStmt/tei:title[@level='m']">
-                <sch:assert test="./node() = 'Qadishe: A Guide to the Syriac Saints' or ./node() = 'A Guide to Syriac Authors' or ./node() = 'Syriac Anonymi'">
-                  The text node of this &lt;title&gt; element must be "Qadishe: A Guide to the Syriac Saints", "A Guide to Syriac Authors", or "Syriac Anonymi". 
+                <sch:assert test="./node() = 'Qadishe: A Guide to the Syriac Saints' or ./node() = 'A Guide to Syriac Authors' or ./node() = 'Syriac Anonymi' or ./node() = 'Prosopography to John of Ephesus’s Ecclesiastical History'">
+                  This &lt;title&gt; element must be "Qadishe: A Guide to the Syriac Saints", "A Guide to Syriac Authors", "Syriac Anonymi", or "Prosopography to John of Ephesus’s Ecclesiastical History". 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title='Qadishe: A Guide to the Syriac Saints']/tei:idno">
                 <sch:assert test="matches(., 'http://syriaca.org/q')">
-                  The text node of this &lt;idno&gt; element must be "http://syriaca.org/q'. 
+                  This &lt;idno&gt; element must contain "http://syriaca.org/q'. 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title='Qadishe: A Guide to the Syriac Saints']">
@@ -1035,7 +1044,7 @@
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title='A Guide to Syriac Authors']/tei:idno">
                 <sch:assert test="matches(., 'http://syriaca.org/authors')">
-                  The text node of this &lt;idno&gt; element must be "http://syriaca.org/authors'. 
+                  This &lt;idno&gt; element must contain "http://syriaca.org/authors". 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title='A Guide to Syriac Authors']">
@@ -1043,9 +1052,24 @@
                   Requires a &lt;biblScope&gt; element with @n="2" since "A Guide to Syriac Authors" is volume 2 of "The Syriac Biographical Dictionary".
                 </sch:assert>
               </sch:rule>
+              <sch:rule context="//tei:seriesStmt[tei:title='Syriac Anonymi']/tei:idno">
+                <sch:assert test="matches(., 'http://syriaca.org/anonymi')">
+                  This &lt;idno&gt; element must contain "http://syriaca.org/authors". 
+                </sch:assert>
+              </sch:rule>
               <sch:rule context="//tei:seriesStmt[tei:title='Syriac Anonymi']">
                 <sch:assert test="tei:biblScope/@n = '3'">
                   Requires a &lt;biblScope&gt; element with @n="3" since "Syriac Anonymi" is volume 3 of "The Syriac Biographical Dictionary".
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:seriesStmt[tei:title='Prosopography to John of Ephesus’s Ecclesiastical History']/tei:idno">
+                <sch:assert test="matches(., 'http://syriaca.org/johnofephesus/persons')">
+                  This &lt;idno&gt; element must contain "http://syriaca.org/johnofephesus/persons". 
+                </sch:assert>
+              </sch:rule>
+              <sch:rule context="//tei:seriesStmt[tei:title='Prosopography to John of Ephesus’s Ecclesiastical History']">
+                <sch:assert test="tei:biblScope/@n = '4'">
+                  Requires a &lt;biblScope&gt; element with @n="4" since "Prosopography to John of Ephesus’s Ecclesiastical History" is volume 4 of "The Syriac Biographical Dictionary".
                 </sch:assert>
               </sch:rule>
             </constraint>
