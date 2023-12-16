@@ -26,8 +26,15 @@ declare namespace srophe="https://srophe.app";
 declare variable $browse:alpha-filter {request:get-parameter('alpha-filter', '')[1]};
 declare variable $browse:lang {request:get-parameter('lang', '')[1]};
 declare variable $browse:view {request:get-parameter('view', '')[1]};
-declare variable $browse:start {request:get-parameter('start', 1)[1] cast as xs:integer};
-declare variable $browse:perpage {request:get-parameter('perpage', 25)[1] cast as xs:integer};
+declare variable $browse:start {
+    if(request:get-parameter('start', 1)[1] castable as xs:integer) then 
+        xs:integer(request:get-parameter('start', 1)[1]) 
+    else 1};
+declare variable $browse:perpage {
+    if(request:get-parameter('perpage', 25)[1] castable as xs:integer) then 
+        xs:integer(request:get-parameter('perpage', 25)[1]) 
+    else 25
+    };
 
 (:~
  : Build initial browse results based on parameters
@@ -75,7 +82,7 @@ declare function browse:show-hits($node as node(), $model as map(*), $collection
                         if($browse:alpha-filter != '') then $browse:alpha-filter else 'A')}</h3>,
                 <div class="results {if($browse:lang = 'syr' or $browse:lang = 'ar') then 'syr-list' else 'en-list'}">
                     {if(($browse:lang = 'syr') or ($browse:lang = 'ar')) then (attribute dir {"rtl"}) else()}
-                    {browse:display-hits($hits)}
+                    {browse:display-hits($hits,$collection)}
                 </div>
             )}
         </div>
@@ -84,7 +91,7 @@ declare function browse:show-hits($node as node(), $model as map(*), $collection
 (:
  : Page through browse results
 :)
-declare function browse:display-hits($hits){
+declare function browse:display-hits($hits, $collection){
     for $hit in subsequence($hits, $browse:start,$browse:perpage)
     let $sort-title := 
         if($browse:lang != 'en') then 
@@ -96,7 +103,11 @@ declare function browse:display-hits($hits){
                 else ()
             )}</span> 
         else () 
-    let $uri := replace($hit/descendant::tei:publicationStmt/tei:idno[1],'/tei','')
+    let $uri := if($collection = 'johnofephesusPersons') then 
+                    $hit/descendant::tei:body/descendant::tei:idno[contains(.,'/johnofephesus/persons/')]
+                else if($collection = 'johnofephesusPlaces') then 
+                    $hit/descendant::tei:body/descendant::tei:idno[contains(.,'/johnofephesus/places/')]     
+                else replace($hit/descendant::tei:publicationStmt/tei:idno[1],'/tei','')
     return 
         <div xmlns="http://www.w3.org/1999/xhtml" class="result">
             {($sort-title, tei2html:summary-view($hit, $browse:lang, $uri))}

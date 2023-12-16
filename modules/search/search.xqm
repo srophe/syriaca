@@ -32,15 +32,22 @@ declare namespace tei="http://www.tei-c.org/ns/1.0";
 (:declare namespace facet="http://expath.org/ns/facet";:)
 
 (: Variables:)
-declare variable $search:start {request:get-parameter('start', 1) cast as xs:integer};
-declare variable $search:perpage {request:get-parameter('perpage', 20) cast as xs:integer};
+declare variable $search:start {
+    if(request:get-parameter('start', 1)[1] castable as xs:integer) then 
+        xs:integer(request:get-parameter('start', 1)[1]) 
+    else 1};
+declare variable $search:perpage {
+    if(request:get-parameter('perpage', 25)[1] castable as xs:integer) then 
+        xs:integer(request:get-parameter('perpage', 25)[1]) 
+    else 25};
 
 (:~
  : Builds search result, saves to model("hits") for use in HTML display
 :)
 
 declare function search:build-query($collection as xs:string?){
-    if($collection = ('sbd','q','authors','saints','persons')) then persons:query-string($collection)
+    if($collection = ('johnofephesusPersons','johnofephesusPlaces')) then ()
+    else if($collection = ('sbd','q','authors','saints','persons')) then persons:query-string($collection)
     else if($collection ='spear') then spears:query-string()
     else if($collection = 'places') then places:query-string()
     else if($collection = ('bhse','nhsl','bible')) then bhses:query-string($collection)
@@ -52,9 +59,9 @@ declare function search:build-query($collection as xs:string?){
 (:~
  : Search results stored in map for use by other HTML display functions 
 :)
-declare %templates:wrap function search:search-data($node as node(), $model as map(*), $collection as xs:string?, $sort-element as xs:string?){
+declare %templates:wrap function search:search-data($node as node(), $model as map(*), $collection as xs:string*, $sort-element as xs:string*){
     let $queryExpr := search:build-query($collection)
-    let $hits := data:search($collection, $queryExpr, $sort-element)
+    let $hits := data:search($collection, $queryExpr, $sort-element[1])
     return
         map {
                 "hits" :
@@ -74,7 +81,7 @@ function search:show-hits($node as node()*, $model as map(*), $collection as xs:
     let $count := count($hits)
     let $facet-config := global:facet-definition-file($collection)
     let $facetsDisplay := sf:display($model("hits"),$facet-config)
-    return     
+    return 
         if(request:get-parameter-names() = '' or empty(request:get-parameter-names())) then () 
            (: search:search-form($node, $model, $collection):) 
         else if($count = 0  and exists(request:get-parameter-names())) then ()
@@ -130,7 +137,12 @@ function search:show-hits($node as node()*, $model as map(*), $collection as xs:
          {
                  let $hits := $model("hits")
                  for $hit at $p in subsequence($hits, $search:start, $search:perpage)
-                 let $id := replace($hit/descendant::tei:idno[1],'/tei','')
+                 let $id := 
+                    if($collection = 'johnofephesusPersons') then 
+                        $hit/descendant::tei:body/descendant::tei:idno[contains(.,'/johnofephesus/persons/')]
+                    else if($collection = 'johnofephesusPlaces') then 
+                        $hit/descendant::tei:body/descendant::tei:idno[contains(.,'/johnofephesus/places/')]     
+                    else replace($hit/descendant::tei:publicationStmt/tei:idno[1],'/tei','')
                  let $kwic := if($kwic = ('true','yes','true()','kwic')) then kwic:expand($hit) else () 
                  return 
                   <div class="row record" xmlns="http://www.w3.org/1999/xhtml" style="border-bottom:1px dotted #eee; padding-top:.5em">
