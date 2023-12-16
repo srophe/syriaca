@@ -187,7 +187,7 @@ return
 :)
 declare function zotero2tei:build-new-record-json($rec as item()*, $local-id as xs:string) {
 let $ids :=  tokenize($rec?links?alternate?href,'/')[last()]
-let $local-id := if($ids != '') then concat($zotero2tei:zotero-config//*:base-uri/text(),'/',$ids) else $local-id
+let $local-id := if($ids != '') then concat($zotero2tei:zotero-config//*:base-uri/text(),$ids) else $local-id
 let $itemType := $rec?data?itemType
 let $recordType := 	
     if($itemType = 'book' and $rec?data?series[. != '']) then 'monograph'
