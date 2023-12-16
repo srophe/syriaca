@@ -17,6 +17,7 @@ import module namespace maps="http://srophe.org/srophe/maps" at "lib/maps.xqm";
 import module namespace search="http://srophe.org/srophe/search" at "search/search.xqm";
 import module namespace sf="http://srophe.org/srophe/facets" at "facets.xql";
 import module namespace functx="http://www.functx.com";
+import module namespace tei2html="http://srophe.org/srophe/tei2html" at "../content-negotiation/tei2html.xqm";
 
 declare namespace http="http://expath.org/ns/http-client";
 declare namespace tei="http://www.tei-c.org/ns/1.0";
@@ -53,8 +54,9 @@ let $data :=
                         </div>
             else if($ids != '') then 
                 let $ids := string-join(for $id in tokenize($ids,' ') return replace($id,'(/|:)','\\$1'),' OR ')
-                for $r in collection($config:data-root)//tei:body[ft:query(., data:searchField('idno', $ids))] 
-                return root($r)
+                for $r in collection($config:data-root)//tei:body[ft:query(., data:searchField('idno', $ids))]
+                let $id := replace(root($r)/descendant::tei:publicationStmt/tei:idno[1],'/tei','')
+                return tei2html:summary-view(root($r), (), $id)
                 (:collection($config:data-root)//tei:TEI[ft:query(., 'idno:(' || $ids ||')')]:)
             else if($params != '') then
                 data:search($collection, (), ())
@@ -68,11 +70,6 @@ let $request-format := if($format != '') then $format else 'xml'
 let $queryString := request:get-query-string()
 return 
     if($relationship != '') then
-        (:
-        if($relationship = 'internal') then 
-            (response:set-header("Content-Type", "text/html; charset=utf-8"),
-            relations:get-related($data, request:get-parameter("relID", ())))
-        else:) 
         if($relationship = 'external' and $currentID != '') then 
             (response:set-header("Content-Type", "text/html; charset=utf-8"),
             relations:display-external-relationships($currentID, $relationshipType, $label))

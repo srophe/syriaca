@@ -127,7 +127,7 @@ else if(ends-with($exist:resource,('.tei','.xml','.txt','.pdf','.json','.geojson
     
 (: Checks for any record uri patterns as defined in repo.xml :)    
 else if(replace($exist:path, $exist:resource,'') =  $exist:record-uris) then
-    if($exist:resource = ('index.html','search.html','browse.html','about.html','aggregate.html')) then    
+    if($exist:resource = ('index.html','search.html','browse.html','about.html','aggregate.html','documentation.html','introduction.html','teams.html')) then    
         <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
             <view>
                 <forward url="{$exist:controller}/modules/view.xql"/>
@@ -140,13 +140,48 @@ else if(replace($exist:path, $exist:resource,'') =  $exist:record-uris) then
     else 
         let $id := replace(xmldb:decode($exist:resource), "^(.*)\..*$", "$1")
         let $record-uri-root := replace($exist:path,$exist:resource,'')
+        let $collection := if($config:get-config//repo:collection[ends-with(@record-URI-pattern, $record-uri-root)]) then
+                                $config:get-config//repo:collection[ends-with(@record-URI-pattern, $record-uri-root)][1]/@data-root
+                           else $id
         let $id := if($config:get-config//repo:collection[ends-with(@record-URI-pattern, $record-uri-root)]) then
                         concat($config:get-config//repo:collection[ends-with(@record-URI-pattern, $record-uri-root)][1]/@record-URI-pattern,$id)
                    else $id
         let $html-path := concat($config:get-config//repo:collection[ends-with(@record-URI-pattern, $record-uri-root)][1]/@app-root,'record.html')
         let $format := fn:tokenize($exist:resource, '\.')[fn:last()]
+        let $document-uri := concat($config:app-root,'/html/',$collection,'/',tokenize($id,'/')[last()],'.html')
+        let $path2html := concat('/html/',$collection,'/',tokenize($id,'/')[last()],'.html')
         return 
-        (:<div>HTML page for id: {$id} root: {$record-uri-root} HTML: {$html-path}</div>:)
+            if(contains($exist:path,'/spear/')) then 
+                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                     <redirect url="https://spear-prosop.org/index.html"/>
+                 </dispatch>  
+            else if(doc-available(xs:anyURI($document-uri))) then
+               <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                    <forward url="{$exist:controller}{$path2html}"></forward>
+                    <view>
+                        <forward url="{$exist:controller}/modules/view.xql">
+                           <add-parameter name="id" value="{$id}"/>
+                        </forward>
+                    </view>
+                    <error-handler>
+                        <forward url="{$exist:controller}/error-page.html" method="get"/>
+                        <forward url="{$exist:controller}/modules/view.xql"/>
+                    </error-handler>
+                </dispatch>
+            else 
+                <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
+                <forward url="{$exist:controller}{$html-path}"></forward>
+                <view>
+                    <forward url="{$exist:controller}/modules/view.xql">
+                       <add-parameter name="id" value="{$id}"/>
+                    </forward>
+                </view>
+                <error-handler>
+                    <forward url="{$exist:controller}/error-page.html" method="get"/>
+                    <forward url="{$exist:controller}/modules/view.xql"/>
+                </error-handler>
+            </dispatch>
+        (:
             <dispatch xmlns="http://exist.sourceforge.net/NS/exist">
                 <forward url="{$exist:controller}{$html-path}"></forward>
                 <view>
@@ -159,6 +194,7 @@ else if(replace($exist:path, $exist:resource,'') =  $exist:record-uris) then
                     <forward url="{$exist:controller}/modules/view.xql"/>
                 </error-handler>
             </dispatch>
+            :)
 else if (ends-with($exist:resource, ".html")) then
     (: the html page is run through view.xql to expand templates :)
     <dispatch xmlns="http://exist.sourceforge.net/NS/exist">

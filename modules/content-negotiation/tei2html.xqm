@@ -154,13 +154,6 @@ declare function tei2html:summary-view($nodes as node()*, $lang as xs:string?, $
 (: Special short view template for Persons :)
 declare function tei2html:summary-view-persons($nodes as node()*, $id as xs:string?) as item()* {
     let $title := ($nodes/descendant-or-self::*[@syriaca-tags='#syriaca-headword'][@xml:lang='en'],$nodes/descendant-or-self::tei:title[@level='a'],$nodes/descendant-or-self::tei:title[1])[1]
-    (:
-        if($nodes/descendant-or-self::*[@syriaca-tags='#syriaca-headword'][@xml:lang='en']) then 
-                    $nodes/descendant-or-self::*[@syriaca-tags='#syriaca-headword'][@xml:lang='en'][1]
-                  else if($nodes/descendant-or-self::tei:title[@level='a']) then
-                    $nodes/descendant-or-self::tei:title[1]
-                  else $nodes/descendant-or-self::tei:title[1]
-    :)
     let $syr-title := 
                 if($nodes/descendant::*[contains(@syriaca-tags,'#syriaca-headword')][matches(@xml:lang,'^syr')][1]) then
                      <span xml:lang="syr" lang="syr" dir="rtl">{string-join($nodes/descendant::*[contains(@syriaca-tags,'#syriaca-headword')][matches(@xml:lang,'^syr')][1]//text(),' ')}</span>
@@ -306,10 +299,7 @@ declare function tei2html:summary-view-generic($nodes as node()*, $id as xs:stri
     let $title := ($nodes/descendant-or-self::*[@syriaca-tags='#syriaca-headword'][@xml:lang='en'],$nodes/descendant-or-self::tei:title[@level='a'],$nodes/descendant-or-self::tei:title[1])[1]
     let $series := for $a in distinct-values($nodes/descendant::tei:seriesStmt/tei:biblScope/tei:title)
                    return tei2html:translate-series($a)
-    let $url := (:<document-ids type="document-url">document-url</document-ids>:)
-                if($config:get-config//*:document-ids[@type='document-url']) then
-                    concat('record.html?doc=',document-uri(root($nodes[1])))
-                else replace(replace($id,$config:base-uri,$config:nav-base),'/tei','')                   
+    let $url := replace(replace($id,$config:base-uri,$config:nav-base),'/tei','')                   
     return 
         <div class="short-rec-view">
             <a href="{$url}" dir="ltr">{tei2html:tei2html($title)}</a>

@@ -30,8 +30,15 @@ declare namespace html="http://www.w3.org/1999/xhtml";
 declare namespace srophe="https://srophe.app";
 
 (: Global Variables:)
-declare variable $app:start {request:get-parameter('start', 1)[1] cast as xs:integer};
-declare variable $app:perpage {request:get-parameter('perpage', 25)[1] cast as xs:integer};
+declare variable $app:start {
+    if(request:get-parameter('start', 1)[1] castable as xs:integer) then 
+        xs:integer(request:get-parameter('start', 1)[1]) 
+    else 1};
+declare variable $app:perpage {
+    if(request:get-parameter('perpage', 25)[1] castable as xs:integer) then 
+        xs:integer(request:get-parameter('perpage', 25)[1]) 
+    else 25
+    };
 
 (:~
  : Get app logo. Value passed from repo-config.xml  
@@ -276,7 +283,7 @@ declare function app:display-map($node as node(), $model as map(*)){
  : @depreciataed: timeline functions are depreciated. 
  :)                 
 declare function app:display-timeline($node as node(), $model as map(*)){
-    if($model("hits")/descendant::tei:body/descendant::*[@when or @notBefore or @notAfter]) then
+    if($model("hits")/descendant::tei:date) then
         timeline:timeline($model("hits"), 'Timeline')
      else ()
 };

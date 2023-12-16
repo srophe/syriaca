@@ -21,6 +21,15 @@ declare variable $data:QUERY_OPTIONS := map {
 
 declare variable $data:SORT_FIELDS := $config:get-config//*:sortFields/*:fields;
 
+
+declare function data:searchField($fieldName, $term){
+    $fieldName || ':(' || $term ||')'
+};
+
+declare function data:sanitizeURI($uri){
+   replace($uri,'(/|:)','\\$1')
+};
+
 (:~
  : Return document by id/tei:idno or document path
  : Return by id if get-parameter $id
@@ -33,7 +42,8 @@ declare function data:get-document() {
                 for $rec in collection($config:data-root)//tei:ab[tei:idno[. = request:get-parameter('id', '')]]
                 return <tei:TEI xmlns="http://www.tei-c.org/ns/1.0">{$rec/ancestor::tei:TEI/tei:teiHeader, <body>{$rec}</body>}</tei:TEI>   
         else if($config:document-id) then 
-            collection($config:data-root)//tei:idno[@type='URI'][. = request:get-parameter('id', '')]/ancestor::tei:TEI[1]
+           collection($config:data-root)//tei:idno[@type='URI'][. = request:get-parameter('id', '')]/ancestor::tei:TEI[1]
+           (:collection($config:data-root)//tei:body[ft:query(.,data:searchField('idno', data:sanitizeURI(request:get-parameter('id', ''))))]/ancestor::tei:TEI[1]:)
         else collection($config:data-root)/id(request:get-parameter('id', ''))/ancestor::tei:TEI[1]
     (: Get document by document path. :)
     else if(request:get-parameter('doc', '') != '') then 
@@ -120,7 +130,7 @@ declare function data:build-collection-path($collection as xs:string?) as xs:str
 declare function data:get-records($collection as xs:string*, $element as xs:string?){
     let $sort := 
         if(request:get-parameter('sort', '') != '') then request:get-parameter('sort', '') 
-        else if(request:get-parameter('sort-element', '') != '') then request:get-parameter('sort-element', '')
+        else if(request:get-parameter('sort-element', '') != '') then request:get-parameter('sort-element', '')[1]
         else ()         
     let $hits := util:eval(data:build-collection-path($collection))[descendant::tei:body[ft:query(., (),sf:facet-query())]]                        
     return 
@@ -234,9 +244,9 @@ declare function data:search($collection as xs:string*, $queryString as xs:strin
             else () 
         else ()            
     let $sort := if($sort-element != '') then 
-                    $sort-element
+                    $sort-element[1]
                  else if(request:get-parameter('sort-element', '') != '') then
-                    request:get-parameter('sort-element', '')
+                    request:get-parameter('sort-element', '')[1]
                  else ()
     return
         if((request:get-parameter('sort-element', '') != '' and request:get-parameter('sort-element', '') != 'relevance') or ($sort-element != '' and $sort-element != 'relevance')) then 
@@ -274,11 +284,11 @@ declare function data:apiSearch($collection as xs:string*, $element as xs:string
     let $eval-string := concat(data:build-collection-path($collection), $elementSearch)
     let $hits := util:eval($eval-string)     
     let $sort := if($sort-element != '') then 
-                    $sort-element
+                    $sort-element[1]
                  else if(request:get-parameter('sort', '') != '') then
                     request:get-parameter('sort', '')
                  else if(request:get-parameter('sort-element', '') != '') then
-                    request:get-parameter('sort-element', '')
+                    request:get-parameter('sort-element', '')[1]
                  else ()
     return 
         if((request:get-parameter('sort-element', '') != '' and request:get-parameter('sort-element', '') != 'relevance') or ($sort-element != '' and $sort-element != 'relevance')) then 
