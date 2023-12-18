@@ -448,7 +448,7 @@ declare function app:wiki-page-title($node, $model){
 declare function app:wiki-page-content($node, $model){
     let $wiki-data := $model("hits")
     return 
-        app:wiki-data($wiki-data//html:div[@id='wiki-body']) 
+        app:wiki-data($wiki-data//html:div[@id='wiki-body']//*[@class="markdown-body"]) 
 };
 
 (:~
