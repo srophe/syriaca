@@ -99,7 +99,7 @@ else
 };
 
 (:~
- : Builds advanced search form for persons
+ : Builds advanced search form for Bibl module
  :)
 declare function bibls:search-form() {   
 <form method="get" action="search.html" xmlns:xi="http://www.w3.org/2001/XInclude"  class="form-horizontal" role="form">
@@ -125,12 +125,26 @@ declare function bibls:search-form() {
                     else ())
                 else ()}
         <div class="well well-small search-inner well-white">
+        <!-- 
+        
+       done -  Update label of the "Keyword search" box to be "Search All" (avoids confusion with searching by keyword/tag)
+        
+        Need to add, where? Filter by Keywords (tags)
+        
+        Zotero tags not currently being brought over by the zot2bibl function Ideally will have an autocomplete on this box that suggests keywords as you type
+        
+        
+        Search in abstract (separate from the "Search all"?)
+
+        -->
         <!-- Keyword -->
+        <div class="row">
+            <div class="col-md-8">            
             <div class="form-group">            
-                <label for="q" class="col-sm-2 col-md-3  control-label">Keyword: </label>
+                <label for="q" class="col-sm-2 col-md-3  control-label">Search All: </label>
                 <div class="col-sm-10 col-md-6 ">
                     <div class="input-group">
-                        <input type="text" id="qs" name="q" class="form-control keyboard" placeholder="Any word in citation"/>
+                        <input type="text" id="qs" name="q" class="form-control keyboard" placeholder=""/>
                         <div class="input-group-btn">{global:keyboard-select-menu('qs')}</div>
                     </div>                 
                 </div>
@@ -177,7 +191,16 @@ declare function bibls:search-form() {
                 <div class="col-sm-10 col-md-6 ">
                     <input type="text" id="date" name="date" class="form-control" placeholder="Year as YYYY"/>
                 </div>
-            </div>   
+            </div> 
+            <div class="form-group">            
+                <label for="title" class="col-sm-2 col-md-3  control-label">Abstract: </label>
+                <div class="col-sm-10 col-md-6 ">
+                    <div class="input-group">
+                        <input type="text" id="abstract" name="abstract" class="form-control keyboard"  placeholder="Search abstract"/>
+                        <div class="input-group-btn">{global:keyboard-select-menu('abstract')}</div>
+                    </div>                 
+                </div>
+            </div>
             <hr/>
             <div class="form-group">            
                 <label for="idno" class="col-sm-2 col-md-3  control-label">Id Number: </label>
@@ -185,6 +208,20 @@ declare function bibls:search-form() {
                     <input type="text" id="idno" name="idno" class="form-control"  placeholder="Ex: 3490"/>
                 </div>
             </div> 
+            </div>
+            <div class="col-md-4">
+            <h4>Filters</h4>
+            <!-- 
+            Filter by Language of Publication Pulled into /TEI/text/body/biblStruct///textLang/@mainLang, example: https://dev-syriacaorg.vuexistapps.us/bibl/YHAZ3RFL
+        What do we do with records that do not have a textLang/@mainLang?
+        Filter by Language of Title: needs discussion
+        Filter by Keywords (tags)
+        Filter by Publication Type (book, article, dissertation, book chapter, etc.) May require zot2bibl update?
+        
+        -->
+            
+            </div>
+        </div>
         </div>
         <div class="pull-right">
             <button type="submit" class="btn btn-info">Search</button>&#160;
