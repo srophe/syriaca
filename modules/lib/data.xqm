@@ -154,7 +154,7 @@ declare function data:get-records($collection as xs:string*, $element as xs:stri
                     else if(request:get-parameter('lang', '') = 'ar') then ft:field($hit, "titleArabic")[1]
                     else if(request:get-parameter('lang', '') = 'fr') then ft:field($hit, "titleFrench")[1]
                     else if(request:get-parameter('lang', '') = 'en-x-gedsh') then ft:field($hit, "titleTransliteration")[1]
-                    else ft:field($hit, "title")[1]                
+                    else ft:field($hit, "author")[1]                
                 order by $s[1] collation 'http://www.w3.org/2013/collation/UCA'
                 where 
                     if(request:get-parameter('view', '') = 'A-Z') then 
