@@ -1,4 +1,4 @@
-<xsl:stylesheet xmlns="http://www.w3.org/1999/xhtml" xmlns:srophe="https://srophe.app" xmlns:saxon="http://saxon.sf.net/" xmlns:local="http://syriaca.org/ns" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:t="http://www.tei-c.org/ns/1.0" xmlns:x="http://www.w3.org/1999/xhtml" xmlns:xs="http://www.w3.org/2001/XMLSchema" exclude-result-prefixes="xs t x saxon local" version="2.0">
+<xsl:stylesheet xmlns="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:t="http://www.tei-c.org/ns/1.0" xmlns:x="http://www.w3.org/1999/xhtml" xmlns:srophe="https://srophe.app" xmlns:saxon="http://saxon.sf.net/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:local="http://syriaca.org/ns" exclude-result-prefixes="xs t x saxon local" version="2.0">
 
  <!-- ================================================================== 
        Copyright 2013 New York University  
@@ -713,18 +713,18 @@
         <xsl:if test="not(empty(t:note[not(@type='description')][1]))">
             <xsl:choose>
                 <xsl:when test="$collection = 'johnofephesusPersons'">
-                    <xsl:if test="t:note[@type='abstract'][contains(@corresp,'http://syriaca.org/johnofephesus/persons')]">
+                    <xsl:if test="t:note[not(@type='abstract')][not(@type='description')][contains(@corresp,'http://syriaca.org/johnofephesus/persons')]">
                         <h3>Notes</h3>
-                        <xsl:apply-templates select="t:note[not(@type='description')][not(contains(@corresp,'http://syriaca.org/johnofephesus/persons'))]"/>
+                        <xsl:apply-templates select="t:note[not(@type='abstract')][not(@type='description')][not(contains(@corresp,'http://syriaca.org/johnofephesus/persons'))]"/>
                     </xsl:if>
                 </xsl:when>
-                <xsl:when test="t:note[@type='abstract'][contains(@corresp,'http://syriaca.org/persons')]">
+                <xsl:when test="t:note[not(@type='abstract')][contains(@corresp,'http://syriaca.org/persons')]">
                     <h3>Notes</h3>
-                    <xsl:apply-templates select="t:note[not(@type='description')][not(contains(@corresp,'http://syriaca.org/persons'))]"/>
+                    <xsl:apply-templates select="t:note[not(@type='abstract')][not(@type='description')][not(contains(@corresp,'http://syriaca.org/persons'))]"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <h3>Notes</h3>
-                    <xsl:apply-templates select="t:note[not(@type='description')]"/>
+                    <xsl:apply-templates select="t:note[not(@type='abstract')][not(@type='description')]"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:if>
@@ -865,18 +865,18 @@
         <xsl:if test="not(empty(t:note[not(@type='description')][1]))">
             <xsl:choose>
                 <xsl:when test="$collection = 'johnofephesusPlace'">
-                    <xsl:if test="t:note[@type='abstract'][contains(@corresp,'http://syriaca.org/johnofephesus/places')]">
+                    <xsl:if test="t:note[not(@type='abstract')][not(@type='description')][contains(@corresp,'http://syriaca.org/johnofephesus/places')]">
                         <h3>Notes</h3>
-                        <xsl:apply-templates select="t:note[not(@type='description')][not(contains(@corresp,'http://syriaca.org/johnofephesus/places'))]"/>
+                        <xsl:apply-templates select="t:note[not(@type='abstract')][not(@type='description')][not(contains(@corresp,'http://syriaca.org/johnofephesus/places'))]"/>
                     </xsl:if>
                 </xsl:when>
-                <xsl:when test="t:note[@type='abstract'][contains(@corresp,'http://syriaca.org/places')]">
+                <xsl:when test="t:note[not(@type='abstract')][not(@type='description')][contains(@corresp,'http://syriaca.org/places')]">
                     <h3>Notes</h3>
-                    <xsl:apply-templates select="t:note[not(@type='description')][not(contains(@corresp,'http://syriaca.org/places'))]"/>
+                    <xsl:apply-templates select="t:note[not(@type='abstract')][not(@type='description')][not(contains(@corresp,'http://syriaca.org/places'))]"/>
                 </xsl:when>
                 <xsl:otherwise>
                     <h3>Notes</h3>
-                    <xsl:apply-templates select="t:note[not(@type='description')]"/>
+                    <xsl:apply-templates select="t:note[not(@type='abstract')][not(@type='description')]"/>
                 </xsl:otherwise>
             </xsl:choose>
         </xsl:if>
