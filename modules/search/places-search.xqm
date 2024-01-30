@@ -547,3 +547,187 @@ declare function places:search-form() {
     </div>    
 </form>
 };
+
+declare function places:johnofephesusPlaces-form() {   
+<form method="get" action="search.html" xmlns:xi="http://www.w3.org/2001/XInclude"  class="form-horizontal" role="form">
+    <div class="well well-small">
+        <div class="well well-small search-inner well-white">
+            <div class="row">
+                <div class="col-md-7" style="border-right:1px solid #ccc;">
+                <!-- Keyword -->
+                 <div class="form-group">
+                    <label for="q" class="col-sm-2 col-md-3  control-label">Keyword: </label>
+                    <div class="col-sm-10 col-md-9 ">
+                       <div class="input-group">
+                        <input type="text" id="qs" name="q" class="form-control keyboard"/>
+                            <div class="input-group-btn">{global:keyboard-select-menu('qs')}</div>
+                    </div> 
+                    </div>
+                  </div>
+                    <!-- Place Name-->
+                  <div class="form-group">
+                    <label for="p" class="col-sm-2 col-md-3  control-label">Place Name: </label>
+                    <div class="col-sm-10 col-md-9 ">
+                       <div class="input-group">
+                            <input type="text" id="p" name="p" class="form-control keyboard"/>
+                            <div class="input-group-btn">{global:keyboard-select-menu('p')}</div>
+                        </div> 
+                    </div>
+                  </div>
+                    <!-- Location --> 
+                    <div class="form-group">
+                        <label for="loc" class="col-sm-2 col-md-3  control-label">Location: </label>
+                        <div class="col-sm-10 col-md-9 ">
+                           <div class="input-group">
+                                <input type="text" id="loc" name="loc" class="form-control keyboard"/>
+                            <div class="input-group-btn">{global:keyboard-select-menu('loc')}</div>
+                            </div>                         
+                        </div>
+                    </div>
+                    <hr/>
+                    <div class="form-group">
+                        <label for="e" class="col-sm-2 col-md-3  control-label">Events: </label>
+                        <div class="col-sm-10 col-md-9 ">
+                           <div class="input-group">
+                            <input type="text" id="e" name="e" class="form-control keyboard"/>
+                            <div class="input-group-btn">{global:keyboard-select-menu('e')}</div>
+                            </div>                              
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="eds" class="col-sm-2 col-md-3  control-label">Dates: </label>
+                        <div class="col-sm-10 col-md-9 form-inline">
+                            <input type="text" id="eds" name="eds" placeholder="Start Date" class="form-control"/>&#160;
+                            <input type="text" id="ede" name="ede" placeholder="End Date" class="form-control"/>
+                            <p class="hint" style="margin:.5em; color: grey; font-style:italic;">* Dates should be entered as YYYY or YYYY-MM-DD</p>
+                        </div>
+                    </div>
+                     <hr/>
+                     <!-- Attestations -->
+                     <div class="form-group">
+                        <label for="a" class="col-sm-2 col-md-3  control-label">Attestations: </label>
+                        <div class="col-sm-10 col-md-9 ">
+                           <div class="input-group">
+                            <input type="text" id="a" name="a" class="form-control keyboard"/>
+                            <div class="input-group-btn">{global:keyboard-select-menu('a')}</div>
+                            </div>                             
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ads" class="col-sm-2 col-md-3  control-label">Dates: </label>
+                        <div class="col-sm-10 col-md-9 form-inline">
+                            <input type="text" id="ads" name="ads" placeholder="Start Date" class="form-control"/>&#160;
+                            <input type="text" id="ade" name="ade" placeholder="End Date" class="form-control"/>
+                            <p class="hint" style="margin:.5em; color: grey; font-style:italic;">* Dates should be entered as YYYY or YYYY-MM-DD</p>
+                        </div>
+                    </div>
+                     <hr/>
+                     <!-- Confessions -->
+                      <div class="form-group">
+                        <label for="c" class="col-sm-2 col-md-3 control-label">Religious Communities: </label>
+                        <div class="col-sm-10 col-md-9">
+                            <select type="text" id="c" name="c" class="form-control">
+                                <option value="">-- Select --</option>
+                                {for $confession in doc(concat($config:app-root, '/documentation/confessions.xml'))//tei:item
+                                 return 
+                                 <option value="{$confession/child::tei:label}">
+                                 {
+                                    (for $confession-parent in $confession/ancestor::tei:item return '&#160;',
+                                     $confession/child::tei:label)
+                                 }
+                                 </option>
+                                }
+                            </select>
+                        </div>
+                      </div>
+                    <div class="form-group">
+                        <label for="cds" class="col-sm-2 col-md-3 control-label">Dates: </label>
+                        <div class="col-sm-10 col-md-9 form-inline">
+                            <input type="text" id="cds" name="cds" placeholder="Start Date" class="form-control"/>&#160;
+                            <input type="text" id="cde" name="cde" placeholder="End Date" class="form-control"/>
+                            <p class="hint" style="margin:.5em; color: grey; font-style:italic;">* Dates should be entered as YYYY or YYYY-MM-DD</p>
+                        </div>
+                    </div>
+                     <hr/>
+                     <!-- Existence -->
+                    <div class="form-group">
+                        <label for="existds" class="col-sm-2 col-md-3 control-label">Existence Dates: </label>
+                        <div class="col-sm-10 col-md-9 form-inline">
+                            <input type="text" id="existds" name="existds" placeholder="Start Date" class="form-control"/>&#160;
+                            <input type="text" id="existde" name="existde" placeholder="End Date" class="form-control"/>
+                            <p class="hint" style="margin:.5em; color: grey; font-style:italic;">* Dates should be entered as YYYY or YYYY-MM-DD</p>
+                        </div>
+                    </div>
+            <!-- Associated Places-->
+            <div class="form-group">            
+                <label for="related-place" class="col-sm-2 col-md-3  control-label">Related Places: </label>
+                <div class="col-sm-10 col-md-6">
+                    <input type="text" id="related-place" name="related-place" placeholder="Related Places" class="form-control"/>&#160;
+                    <p class="hint small">* Enter syriaca.org URI, ex: http://syriaca.org/place/78</p>
+                </div>
+            </div>
+            <!-- Related persons-->
+            <div class="form-group">            
+                <label for="related-persons" class="col-sm-2 col-md-3  control-label">Related Persons: </label>
+                <div class="col-sm-10 col-md-6">
+                    <input type="text" id="related-persons" name="related-persons" class="form-control" placeholder="Related Persons"/>
+                    <p class="hint small">* Enter syriaca.org URI, ex: http://syriaca.org/person/13</p>
+                </div>
+            </div>
+            <!--Associated Texts:-->
+            <div class="form-group">            
+                <label for="mentioned" class="col-sm-2 col-md-3  control-label">Related Works: </label>
+                <div class="col-sm-10 col-md-6">
+                    <input type="text" id="mentioned" name="mentioned" class="form-control" placeholder="Related Works"/>
+                    <p class="hint small">* Enter syriaca.org URI, ex: http://syriaca.org/work/429</p>
+                </div>
+            </div>                    
+                </div>
+                <div class="col-md-5">
+                      <!-- Place Type -->
+                    <div style="margin-top:1em; padding-left:.5em;">
+                        <label class="control-label">Place Type: </label>
+                            <select name="type" id="type" class="input-medium form-control">
+                                <option value="">- Select -</option>
+                                <option value="building">building</option>
+                                <option value="church">church</option>
+                                <option value="diocese">diocese</option>
+                                <option value="fortification">fortification</option>
+                                <option value="island">island</option>
+                                <option value="madrasa">madrasa</option>
+                                <option value="monastery">monastery</option>
+                                <option value="mosque">mosque</option>
+                                <option value="mountain">mountain</option>
+                                <option value="open-water">open-water</option>
+                                <option value="parish">parish</option>
+                                <option value="province">province</option>
+                                <option value="quarter">quarter</option>
+                                <option value="region">region</option>
+                                <option value="river">river</option>
+                                <option value="settlement">settlement</option>
+                                <option value="state">state</option>
+                                <option value="synagogue">synagogue</option>
+                                <option value="temple">temple</option>
+                                <option value="unknown">unknown</option>
+                            </select>
+                        <hr/>
+                    <!-- Language -->
+                       <label class="control-label">Language: </label>
+                        <div class="col-md-offset-1">
+                            <input type="checkbox" name="en" value="en"/> English<br/>
+                            <input type="checkbox" name="ar" value="ar"/> Arabic<br/>
+                            <input type="checkbox" name="syr" value="syr"/> Syriac<br/>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pull-right">        
+            <button type="submit" class="btn btn-info">Search</button>&#160;
+            <button type="reset" class="btn">Clear</button>
+        </div>
+        <br class="clearfix"/><br/>
+    </div>    
+</form>
+};
