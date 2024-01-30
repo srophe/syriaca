@@ -432,3 +432,116 @@ declare function persons:search-form($collection) {
     </div>
 </form>
 };
+
+(: JoE Persons search form :)
+declare function persons:johnofephesusPersons-form(){
+<form method="get" action="search.html" xmlns:xi="http://www.w3.org/2001/XInclude"  class="form-horizontal" role="form">
+    <div class="well well-small" style="margin-top:2em;">
+        <div class="well well-small search-inner well-white">
+        <!-- Keyword -->
+            <div class="form-group">
+                <label for="q" class="col-sm-2 col-md-3  control-label">Keyword: </label>
+                <div class="col-sm-10 col-md-6">
+                    <div class="input-group">
+                        <input type="text" id="qs" name="q" class="form-control keyboard" placeholder="Any script (Syriac, Roman, etc.)"/>
+                        <div class="input-group-btn">{global:keyboard-select-menu('qs')}</div>
+                    </div> 
+                </div>
+            </div>
+            <!-- Person Name -->
+            <div class="form-group">
+                <label for="name" class="col-sm-2 col-md-3  control-label">Person Name: </label>
+                <div class="col-sm-10 col-md-6">
+                    <div class="input-group">
+                        <input type="text" id="persNameSearch" name="persName" class="form-control keyboard" placeholder="Any script (Syriac, Roman, etc.)"/>
+                        <div class="input-group-btn">{global:keyboard-select-menu('persNameSearch')}</div>
+                    </div> 
+                </div>
+            </div>
+            <hr/>            
+            <!-- Date range-->
+                <div class="form-group">
+                        <label for="start-date" class="col-sm-2 col-md-3  control-label">Gregorian Date Range: </label>
+                        <div class="col-sm-10 col-md-6 form-inline">
+                            <input type="text" id="start-date" name="start-date" placeholder="Start Date" class="form-control"/>&#160;
+                            <input type="text" id="end-date" name="end-date" placeholder="End Date" class="form-control"/>&#160;
+                            <select name="date-type" class="form-control">
+                                <option value="">all</option>
+                                <option value="birth">birth</option>
+                                <option value="death">death</option>
+                                <option value="floruit">active</option>
+                                <option value="office">office</option>
+                                <option value="event">other</option>
+                            </select>
+                            <p class="hint">* Dates should be entered as YYYY or YYYY-MM-DD. Add a minus sign (-) in front of BC dates. <span><a href="http://syriaca.org/documentation/dates.html">more <i class="glyphicon glyphicon-circle-arrow-right"></i></a></span></p>
+                        </div>
+                </div>    
+                
+                <!-- Sex or Gender --> 
+                    <div class="form-group">
+                        <label for="gender" class="col-sm-2 col-md-3  control-label">Sex or Gender: </label>
+                        <div class="col-sm-10 col-md-6 form-inline">
+                            <select name="gender" class="form-control">
+                                <option value="">all</option>
+                                <option value="F">female</option>
+                                <option value="M">male</option>
+                                <option value="E">eunuch</option>
+                                <option value="other">other</option>
+                            </select>
+                        </div>
+                </div>
+                <!-- State  Limit to: [Dropdown] martyr, confession, office  -->
+                <div class="form-group">
+                        <label for="state" class="col-sm-2 col-md-3  control-label">Limit to: </label>
+                        <div class="col-sm-10 col-md-6 form-inline">
+                            <select name="state" class="form-control">
+                                <option value="">all</option>
+                                <option value="martyr">martyr</option>
+                                <option value="confession">confession</option>
+                                <option value="office">office</option>
+                                <option value="other">other</option>
+                            </select>
+                        </div>
+                </div>
+            <hr/>
+                
+            <!-- Associated Places-->
+            <div class="form-group">            
+                <label for="related-place" class="col-sm-2 col-md-3  control-label">Related Places: </label>
+                <div class="col-sm-10 col-md-6 form-inline">
+                    <input type="text" id="related-place" name="related-place" placeholder="Related Places" class="form-control"/>&#160;
+                    <select name="place-type" id="place-type" class="form-control">
+                         <option value="">any</option>
+                         <option value="birth">birth</option>
+                         <option value="death">death</option>
+                         <!--<option value="venerated">venerated</option>-->
+                         <option value="other">other</option>
+                    </select>
+                    <p class="hint">* Enter syriaca.org URI, ex: http://syriaca.org/place/78</p>
+                </div>
+            </div>
+            <!-- Related persons-->
+            <div class="form-group">            
+                <label for="related-persons" class="col-sm-2 col-md-3  control-label">Related Persons: </label>
+                <div class="col-sm-10 col-md-6">
+                    <input type="text" id="related-persons" name="related-persons" class="form-control"/>
+                    <p class="hint">* Enter syriaca.org URI, ex: http://syriaca.org/person/13</p>
+                </div>
+            </div>
+            <!--Associated Texts:-->
+            <div class="form-group">            
+                <label for="mentioned" class="col-sm-2 col-md-3  control-label">Related Works: </label>
+                <div class="col-sm-10 col-md-6">
+                    <input type="text" id="mentioned" name="mentioned" class="form-control"/>
+                    <p class="hint">* Enter syriaca.org URI, ex: http://syriaca.org/work/429</p>
+                </div>
+            </div> 
+        </div>
+        <div class="pull-right">
+            <button type="submit" class="btn btn-info">Search</button>&#160;
+            <button type="reset" class="btn">Clear</button>
+        </div>
+        <br class="clearfix"/><br/>
+    </div>
+</form>
+};

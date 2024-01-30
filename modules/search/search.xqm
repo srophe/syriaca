@@ -46,10 +46,10 @@ declare variable $search:perpage {
 :)
 
 declare function search:build-query($collection as xs:string?){
-    if($collection = ('johnofephesusPersons','johnofephesusPlaces')) then ()
-    else if($collection = ('sbd','q','authors','saints','persons')) then persons:query-string($collection)
+    (:if($collection = ('johnofephesusPersons','johnofephesusPlaces')) then ()
+    else:) if($collection = ('sbd','q','authors','saints','persons','johnofephesusPersons')) then persons:query-string($collection)
     else if($collection ='spear') then spears:query-string()
-    else if($collection = 'places') then places:query-string()
+    else if($collection = ('places','johnofephesusPersons')) then places:query-string()
     else if($collection = ('bhse','nhsl','bible')) then bhses:query-string($collection)
     else if($collection = 'bibl') then bibls:query-string()
     else if($collection = 'manuscripts') then ms:query-string()
@@ -181,7 +181,9 @@ else
         else if($collection ='manuscripts') then <div>{ms:search-form()}</div>
         else if($collection = ('bhse','nhsl')) then <div>{bhses:search-form($collection)}</div>
         else if($collection ='bibl') then <div>{bibls:search-form()}</div>
-        else if($collection ='places') then <div>{places:search-form()}</div> 
+        else if($collection ='places') then <div>{places:search-form()}</div>
+        else if($collection ='johnofephesusPersons') then <div>{persons:johnofephesusPersons-form()}</div>
+        else if($collection ='johnofephesusPlaces') then <div>{places:johnofephesusPlaces-form()}</div>
         else if(doc-available($search-config)) then 
             search:build-form($search-config)             
         else search:default-search-form()
