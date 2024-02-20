@@ -912,7 +912,7 @@
                 <sch:assert test="@type='pseudonymity' and @mutual and not(@ana)">
                   For a 'share-attribution-with' relationship, use @type="pseudonymity" and a @mutual attribute.</sch:assert>
               </sch:rule>
-              <sch:rule context="tei:text//tei:relation[@ref='skos:broader']">
+              <sch:rule context="tei:text//tei:relation[@ref='http://www.w3.org/2004/02/skos/core#broader']">
                 <sch:assert test="@type='pseudonymity' and @active and not(@ana)">
                   For a 'broader' relationship, use @type="pseudonymity" and @active/@passive attributes.</sch:assert>
               </sch:rule>
@@ -931,8 +931,8 @@
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:text//tei:relation[@type='pseudonymity']">
-                <sch:assert test="@ref='http://syriaca.org/keyword/possibly-identical' or @ref='http://syriaca.org/keyword/shares-attribution-with' or @ref='skos:broader'">
-                  With @type="pseudonymity", the @ref attribute must be either "http://syriaca.org/keyword/possibly-identical", "http://syriaca.org/keyword/shares-attribution-with", or "skos:broader".</sch:assert>
+                <sch:assert test="@ref='http://syriaca.org/keyword/possibly-identical' or @ref='http://syriaca.org/keyword/shares-attribution-with' or @ref='http://www.w3.org/2004/02/skos/core#broader'">
+                  With @type="pseudonymity", the @ref attribute must be either "http://syriaca.org/keyword/possibly-identical", "http://syriaca.org/keyword/shares-attribution-with", or "http://www.w3.org/2004/02/skos/core#broader".</sch:assert>
               </sch:rule>
             </constraint>
           </constraintSpec>
@@ -989,7 +989,7 @@
                   <desc>Used for pseudonymous authorship to indicate the relationship between the supposed author (i.e. Ephrem) and the 
                     otherwise unknown "pseudo" author (i.e. Pseudo-Ephrem).</desc>
                 </valItem>
-                <valItem ident="skos:broader">
+                <valItem ident="http://www.w3.org/2004/02/skos/core#broader">
                   <desc>Used for pseudonymous authorship to indicate the relationship between the unknown author of a specific work and the 
                     scholarly composite used to refer to author of multiple texts (i.e. Pseudo-Ephrem).</desc>
                 </valItem>
