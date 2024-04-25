@@ -28,7 +28,7 @@ ENV JAVA_TOOL_OPTIONS \
 -XX:MaxRAMPercentage=${JVM_MAX_RAM_PERCENTAGE:-75.0} \
 -XX:+ExitOnOutOfMemoryError \
 -XX:-HeapDumpOnOutOfMemoryError \
--XX:HeapDumpPath=/exist/heapDump/exist-memory-dump.hprof
+-XX:HeapDumpPath=/exist/exist-memory-dump.hprof
 
 HEALTHCHECK CMD [ "java", \
 "org.exist.start.Main", "client", \
