@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2024-02-20T16:48:17Z. . 
+Schema generated from ODD source 2024-04-30T14:38:52Z. . 
 TEI Edition: Version 4.5.0. Last updated on 25th October 2022, revision 3e98e619e 
 TEI Edition Location: https://www.tei-c.org/Vault/P5/4.5.0/ 
   
@@ -3242,6 +3242,15 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                 </sch:assert>
             </sch:rule>
          </pattern>
+         <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
+                  id="syriacaPersons-bibl-titleWithExternalURL-constraint-rule-78">
+            <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
+                      xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                      xmlns:srophe="https://srophe.app"
+                      context="//tei:text//tei:bibl[tei:ptr/@target/not(contains(., 'syriaca.org'))]">
+               <sch:assert test="tei:title/text() = tei:ptr/@target">This &lt;bibl&gt; must have a child &lt;title&gt; element that equals the value of the @target attribute on the sibling &lt;ptr&gt; element.</sch:assert>
+            </sch:rule>
+         </pattern>
          <ref name="tei_att.global.attribute.xmlid"/>
          <optional>
             <attribute name="type">
@@ -3268,7 +3277,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">indicates the numerical accuracy or precision associated with some aspect of the text markup. [21.2. Indications of Precision]</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-precision-calendar-check-precision-constraint-rule-78">
+                  id="syriacaPersons-precision-calendar-check-precision-constraint-rule-79">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3280,7 +3289,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-precision-calendar-check-precision-constraint-rule-79">
+                  id="syriacaPersons-precision-calendar-check-precision-constraint-rule-80">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3361,7 +3370,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(sponsor) specifies the name of a sponsoring organization or institution. [2.2.1. The Title Statement]</a:documentation>
          <ref name="tei_macro.phraseSeq.limited"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-sponsor-calendar-check-sponsor-constraint-rule-80">
+                  id="syriacaPersons-sponsor-calendar-check-sponsor-constraint-rule-81">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3389,7 +3398,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-sponsor-calendar-calendar-check-sponsor-constraint-rule-81">
+                  id="syriacaPersons-sponsor-calendar-calendar-check-sponsor-constraint-rule-82">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3409,7 +3418,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(funding body) specifies the name of an individual, institution, or organization responsible for the funding of a project or text. [2.2.1. The Title Statement]</a:documentation>
          <ref name="tei_macro.phraseSeq.limited"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-funder-calendar-check-funder-constraint-rule-82">
+                  id="syriacaPersons-funder-calendar-check-funder-constraint-rule-83">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3437,7 +3446,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-funder-calendar-calendar-check-funder-constraint-rule-83">
+                  id="syriacaPersons-funder-calendar-calendar-check-funder-constraint-rule-84">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3488,7 +3497,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(release authority) supplies the name of a person or other agency responsible for making a work available, other than a publisher or distributor. [2.2.4. Publication, Distribution, Licensing, etc.]</a:documentation>
          <text/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-authority-authorityText-constraint-rule-85">
+                  id="syriacaPersons-authority-authorityText-constraint-rule-86">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3505,7 +3514,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(identifier) supplies any form of identifier used to identify some object, such as a bibliographic item, a person, a title, an organization, etc. in a standardized way. [13.3.1. Basic Principles 2.2.4. Publication, Distribution, Licensing, etc. 2.2.5. The Series Statement 3.12.2.4. Imprint, Size of a Document, and Reprint Information]</a:documentation>
          <text/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-idno-idno-uri-constraint-rule-86">
+                  id="syriacaPersons-idno-idno-uri-constraint-rule-87">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3521,7 +3530,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-idno-change-on-idno-constraint-rule-87">
+                  id="syriacaPersons-idno-change-on-idno-constraint-rule-88">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3540,7 +3549,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-idno-calendar-check-idno-constraint-rule-89">
+                  id="syriacaPersons-idno-calendar-check-idno-constraint-rule-90">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3553,7 +3562,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-idno-calendar-check-idno-constraint-rule-90">
+                  id="syriacaPersons-idno-calendar-check-idno-constraint-rule-91">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3593,7 +3602,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-idno-calendar-calendar-check-idno-constraint-rule-91">
+                  id="syriacaPersons-idno-calendar-calendar-check-idno-constraint-rule-92">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3639,7 +3648,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">contains information about a licence or other legal agreement applicable to the text. [2.2.4. Publication, Distribution, Licensing, etc.]</a:documentation>
          <ref name="tei_macro.specialPara"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-licence-calendar-check-licence-constraint-rule-92">
+                  id="syriacaPersons-licence-calendar-check-licence-constraint-rule-93">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3667,7 +3676,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-licence-calendar-calendar-check-licence-constraint-rule-93">
+                  id="syriacaPersons-licence-calendar-calendar-check-licence-constraint-rule-94">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -3694,7 +3703,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          </optional>
          <ref name="tei_idno"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-seriesStmt-seriesStmt-series-constraint-rule-94">
+                  id="syriacaPersons-seriesStmt-seriesStmt-series-constraint-rule-95">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3729,7 +3738,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-seriesStmt-seriesStmt-monograph-constraint-rule-98">
+                  id="syriacaPersons-seriesStmt-seriesStmt-monograph-constraint-rule-99">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -3987,7 +3996,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(change) documents a change or set of changes made during the production of a source document, or during the revision of an electronic file. [2.6. The Revision Description 2.4.1. Creation 11.7. Identifying Changes and Revisions]</a:documentation>
          <ref name="tei_macro.specialPara"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-change-who-on-change-constraint-rule-107">
+                  id="syriacaPersons-change-who-on-change-constraint-rule-108">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4005,7 +4014,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-change-xmlID-on-change-constraint-rule-108">
+                  id="syriacaPersons-change-xmlID-on-change-constraint-rule-109">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4019,7 +4028,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-change-calendar-check-change-constraint-rule-109">
+                  id="syriacaPersons-change-calendar-check-change-constraint-rule-110">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4032,7 +4041,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-change-calendar-check-change-constraint-rule-110">
+                  id="syriacaPersons-change-calendar-check-change-constraint-rule-111">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4091,7 +4100,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-change-calendar-calendar-check-change-constraint-rule-111">
+                  id="syriacaPersons-change-calendar-calendar-check-change-constraint-rule-112">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4128,7 +4137,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(link) defines an association or hypertextual link among elements or passages, of some type not more precisely specifiable by other elements. [16.1. Links]</a:documentation>
          <empty/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-link-target-on-link-constraint-rule-112">
+                  id="syriacaPersons-link-target-on-link-constraint-rule-113">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4143,7 +4152,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-link-linkTargets3-constraint-assert-100">
+                  id="syriacaPersons-link-linkTargets3-constraint-assert-101">
             <rule context="tei:link">
                <sch:assert xmlns="http://www.tei-c.org/ns/1.0"
                            xmlns:rng="http://relaxng.org/ns/structure/1.0"
@@ -4334,7 +4343,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <text/>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-orgName-calendar-check-orgName-constraint-rule-113">
+                  id="syriacaPersons-orgName-calendar-check-orgName-constraint-rule-114">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4361,7 +4370,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-orgName-calendar-calendar-check-orgName-constraint-rule-114">
+                  id="syriacaPersons-orgName-calendar-calendar-check-orgName-constraint-rule-115">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4401,7 +4410,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <text/>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-persName-source-on-persName-constraint-rule-115">
+                  id="syriacaPersons-persName-source-on-persName-constraint-rule-116">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4415,7 +4424,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-persName-persName-content-constraint-rule-116">
+                  id="syriacaPersons-persName-persName-content-constraint-rule-117">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4424,7 +4433,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-persName-xmlID-on-persName-constraint-rule-117">
+                  id="syriacaPersons-persName-xmlID-on-persName-constraint-rule-118">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4439,7 +4448,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-persName-xmlLang-on-persName-constraint-rule-118">
+                  id="syriacaPersons-persName-xmlLang-on-persName-constraint-rule-119">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4448,7 +4457,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-persName-corresp-on-persName-constraint-rule-119">
+                  id="syriacaPersons-persName-corresp-on-persName-constraint-rule-120">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4461,7 +4470,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-persName-persName-ref-constraint-rule-120">
+                  id="syriacaPersons-persName-persName-ref-constraint-rule-121">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4480,7 +4489,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-persName-calendar-check-persName-constraint-rule-122">
+                  id="syriacaPersons-persName-calendar-check-persName-constraint-rule-123">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4493,7 +4502,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-persName-calendar-check-persName-constraint-rule-123">
+                  id="syriacaPersons-persName-calendar-check-persName-constraint-rule-124">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4617,7 +4626,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-persName-calendar-calendar-check-persName-constraint-rule-124">
+                  id="syriacaPersons-persName-calendar-calendar-check-persName-constraint-rule-125">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4685,7 +4694,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             <text/>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-placeName-place-ref-constraint-rule-125">
+                  id="syriacaPersons-placeName-place-ref-constraint-rule-126">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4704,7 +4713,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-placeName-calendar-check-placeName-constraint-rule-127">
+                  id="syriacaPersons-placeName-calendar-check-placeName-constraint-rule-128">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4717,7 +4726,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-placeName-calendar-check-placeName-constraint-rule-128">
+                  id="syriacaPersons-placeName-calendar-check-placeName-constraint-rule-129">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4745,7 +4754,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-placeName-calendar-calendar-check-placeName-constraint-rule-129">
+                  id="syriacaPersons-placeName-calendar-calendar-check-placeName-constraint-rule-130">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4772,7 +4781,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </zeroOrMore>
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-birth-calendar-check-birth-constraint-rule-130">
+                  id="syriacaPersons-birth-calendar-check-birth-constraint-rule-131">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4797,7 +4806,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-birth-calendar-calendar-check-birth-constraint-rule-131">
+                  id="syriacaPersons-birth-calendar-calendar-check-birth-constraint-rule-132">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4824,7 +4833,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </zeroOrMore>
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-death-calendar-check-death-constraint-rule-132">
+                  id="syriacaPersons-death-calendar-check-death-constraint-rule-133">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4849,7 +4858,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-death-calendar-calendar-check-death-constraint-rule-133">
+                  id="syriacaPersons-death-calendar-calendar-check-death-constraint-rule-134">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4877,7 +4886,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </zeroOrMore>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-event-xmlID-on-event-constraint-rule-134">
+                  id="syriacaPersons-event-xmlID-on-event-constraint-rule-135">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4892,7 +4901,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-event-documentation-on-event-constraint-rule-135">
+                  id="syriacaPersons-event-documentation-on-event-constraint-rule-136">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -4907,7 +4916,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-event-calendar-check-event-constraint-rule-137">
+                  id="syriacaPersons-event-calendar-check-event-constraint-rule-138">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4920,7 +4929,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-event-calendar-check-event-constraint-rule-138">
+                  id="syriacaPersons-event-calendar-check-event-constraint-rule-139">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4961,7 +4970,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-event-calendar-calendar-check-event-constraint-rule-139">
+                  id="syriacaPersons-event-calendar-calendar-check-event-constraint-rule-140">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -4989,7 +4998,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             <text/>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-floruit-calendar-check-floruit-constraint-rule-140">
+                  id="syriacaPersons-floruit-calendar-check-floruit-constraint-rule-141">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5014,7 +5023,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-floruit-calendar-calendar-check-floruit-constraint-rule-141">
+                  id="syriacaPersons-floruit-calendar-calendar-check-floruit-constraint-rule-142">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5034,7 +5043,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(gender) specifies the gender identity of a person, persona, or character. [13.3.2.1. Personal Characteristics]</a:documentation>
          <text/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-gender-documentation-on-gender-constraint-rule-142">
+                  id="syriacaPersons-gender-documentation-on-gender-constraint-rule-143">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5044,7 +5053,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-gender-calendar-check-gender-constraint-rule-143">
+                  id="syriacaPersons-gender-calendar-check-gender-constraint-rule-144">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5088,7 +5097,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-gender-calendar-calendar-check-gender-constraint-rule-144">
+                  id="syriacaPersons-gender-calendar-calendar-check-gender-constraint-rule-145">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5164,7 +5173,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </oneOrMore>
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-person-person-authors-constraint-rule-145">
+                  id="syriacaPersons-person-person-authors-constraint-rule-146">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5197,7 +5206,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-person-person-saints-constraint-rule-148">
+                  id="syriacaPersons-person-person-saints-constraint-rule-149">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5214,7 +5223,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-person-person-anonymi-constraint-rule-149">
+                  id="syriacaPersons-person-person-anonymi-constraint-rule-150">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5228,7 +5237,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-person-person-series-agreement-constraint-rule-150">
+                  id="syriacaPersons-person-person-series-agreement-constraint-rule-151">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5263,7 +5272,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-person-person-abstract-req-constraint-rule-154">
+                  id="syriacaPersons-person-person-abstract-req-constraint-rule-155">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5332,7 +5341,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </oneOrMore>
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-personGrp-personGrp-authors-constraint-rule-155">
+                  id="syriacaPersons-personGrp-personGrp-authors-constraint-rule-156">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5365,7 +5374,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-personGrp-personGrp-saints-constraint-rule-158">
+                  id="syriacaPersons-personGrp-personGrp-saints-constraint-rule-159">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5382,7 +5391,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-personGrp-personGrp-series-agreement-constraint-rule-159">
+                  id="syriacaPersons-personGrp-personGrp-series-agreement-constraint-rule-160">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5417,7 +5426,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-personGrp-personGrp-abstract-req-constraint-rule-163">
+                  id="syriacaPersons-personGrp-personGrp-abstract-req-constraint-rule-164">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5452,7 +5461,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(relationship) describes any kind of relationship or linkage amongst a specified group of places, events, persons, objects or other items. [13.3.2.3. Personal Relationships]</a:documentation>
          <ref name="tei_desc"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-documentation-on-relation-constraint-rule-164">
+                  id="syriacaPersons-relation-documentation-on-relation-constraint-rule-165">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5462,7 +5471,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-act-pass-mutual-on-relation-constraint-rule-165">
+                  id="syriacaPersons-relation-act-pass-mutual-on-relation-constraint-rule-166">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5526,7 +5535,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-att-combos-on-relation-constraint-rule-170">
+                  id="syriacaPersons-relation-att-combos-on-relation-constraint-rule-171">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5587,7 +5596,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-personal-relations-ref-constraint-rule-178">
+                  id="syriacaPersons-relation-personal-relations-ref-constraint-rule-179">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5611,7 +5620,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-reforkeyorname-constraint-assert-177">
+                  id="syriacaPersons-relation-reforkeyorname-constraint-assert-178">
             <rule context="tei:relation">
                <assert xmlns:rng="http://relaxng.org/ns/structure/1.0"
                        xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5641,7 +5650,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-calendar-check-relation-constraint-rule-180">
+                  id="syriacaPersons-relation-calendar-check-relation-constraint-rule-181">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5654,7 +5663,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-calendar-check-relation-constraint-rule-181">
+                  id="syriacaPersons-relation-calendar-check-relation-constraint-rule-182">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5713,7 +5722,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-calendar-calendar-check-relation-constraint-rule-182">
+                  id="syriacaPersons-relation-calendar-calendar-check-relation-constraint-rule-183">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5780,7 +5789,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
             </zeroOrMore>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-state-state-person-atts-constraint-rule-183">
+                  id="syriacaPersons-state-state-person-atts-constraint-rule-184">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5831,7 +5840,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-state-type-ref-combinations-constraint-rule-191">
+                  id="syriacaPersons-state-type-ref-combinations-constraint-rule-192">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5889,7 +5898,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-state-documentation-on-state-constraint-rule-196">
+                  id="syriacaPersons-state-documentation-on-state-constraint-rule-197">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5899,7 +5908,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-state-calendar-check-state-constraint-rule-197">
+                  id="syriacaPersons-state-calendar-check-state-constraint-rule-198">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5912,7 +5921,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-state-calendar-check-state-constraint-rule-198">
+                  id="syriacaPersons-state-calendar-check-state-constraint-rule-199">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5960,7 +5969,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-state-calendar-calendar-check-state-constraint-rule-199">
+                  id="syriacaPersons-state-calendar-calendar-check-state-constraint-rule-200">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5980,7 +5989,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(trait) contains a description of some status or quality attributed to a person, place, or organization typically, but not necessarily, independent of the volition or action of the holder and usually not at some specific time or for a specific date range. [13.3.1. Basic Principles 13.3.2.1. Personal Characteristics]</a:documentation>
          <ref name="tei_desc"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-trait-calendar-check-trait-constraint-rule-200">
+                  id="syriacaPersons-trait-calendar-check-trait-constraint-rule-201">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -6008,7 +6017,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-trait-calendar-calendar-check-trait-constraint-rule-201">
+                  id="syriacaPersons-trait-calendar-calendar-check-trait-constraint-rule-202">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -6096,7 +6105,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(text) contains a single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample. [4. Default Text Structure 15.1. Varieties of Composite Text]</a:documentation>
          <ref name="tei_body"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-text-source-within-text-constraint-rule-202">
+                  id="syriacaPersons-text-source-within-text-constraint-rule-203">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -6147,7 +6156,7 @@ Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="syriacaPersons-att.global.change-change-att-values-constraint-rule-203">
+            id="syriacaPersons-att.global.change-change-att-values-constraint-rule-204">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:srophe="https://srophe.app"
