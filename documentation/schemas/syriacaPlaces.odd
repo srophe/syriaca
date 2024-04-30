@@ -252,6 +252,19 @@
               </sch:rule>
             </constraint>
           </constraintSpec>
+          <constraintSpec ident="subtype-on-location" scheme="schematron">
+            <constraint>
+              <sch:rule context="tei:location[@subtype='preferred']">
+                <sch:report test="not(@type='gps')">The attribute @subtype with value "preferred" can only be used with @type="gps".</sch:report>
+                <sch:report test=".[@type='gps'][@subtype='preferred'][preceding-sibling::tei:location[@type='gps'][@subtype='preferred']]">
+                  The data already contains a preferred gps location and only one is allowed.</sch:report>
+              </sch:rule>
+              <sch:rule context="tei:location[count(../tei:location[@type='gps']) > 1][@type='gps']">
+                <sch:assert test="@subtype">
+                  When there are two or more gps locations, the &lt;location&gt; element must contain a @subtype attribute.</sch:assert>
+              </sch:rule>
+            </constraint>
+          </constraintSpec>
           <attList>
             <attDef ident="type" mode="change" usage="req">
               <valList mode="replace" type="closed">
@@ -259,7 +272,16 @@
                 <valItem ident="relative"/>
               </valList>
             </attDef>
-            <attDef ident="subtype" mode="delete"/>
+            <attDef ident="subtype" mode="change">
+              <valList mode="replace" type="closed">
+                <valItem ident="preferred">
+                  <desc>Indicates a preferred location when the data contains multiple locations</desc>
+                </valItem>
+                <valItem ident="alternate">
+                  <desc>Indicates a non-preferred location when the data contains multiple location</desc>
+                </valItem>
+              </valList>
+            </attDef>
             <attDef ident="source" mode="change">
               <desc>
                 In most cases the <gi>location</gi> element will have a <att>source</att> attribute pointing to the <gi>bibl</gi> element that is the 
