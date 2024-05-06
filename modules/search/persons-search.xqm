@@ -59,7 +59,7 @@ declare function persons:uri() as xs:string? {
 :)
 declare function persons:coll($coll as xs:string?) as xs:string?{
 let $collection := 
-                   if($persons:coll = 'johnofephesusPersons' ) then 'Prosopography to John of Ephesus’s Ecclesiastical History' 
+                   if($coll = 'johnofephesusPersons' ) then 'Prosopography to John of Ephesus’s Ecclesiastical History' 
                    else if($persons:coll = 'sbd' ) then 'The Syriac Biographical Dictionary'
                    else if($persons:coll = 'q' ) then 'Qadishe: A Guide to the Syriac Saints'
                    else if($persons:coll = 'authors' ) then 'A Guide to Syriac Authors'
@@ -67,8 +67,13 @@ let $collection :=
                    else if($coll = 'q' ) then 'Qadishe: A Guide to the Syriac Saints'
                    else if($coll = 'authors' ) then 'A Guide to Syriac Authors'
                    else ()
-return    (:     if($collection != '') then 'series': $collection else ():)                
-    if($collection != '') then concat("[ancestor::tei:TEI/descendant::tei:title/text() = '",$collection,"']")
+let $get-series :=  
+            if(config:collection-vars($collection)/@collection-URI != '') then string(config:collection-vars($collection)/@collection-URI)
+            else ()                   
+return  
+    (:if($coll = 'johnofephesusPersons') then
+        concat("//tei:idno[. = '",$get-series,"'][ancestor::tei:seriesStmt]/ancestor::tei:TEI")
+    else :) if($collection != '') then concat("[ancestor::tei:TEI/descendant::tei:title/text() = '",$collection,"']")
     else ()
 };
 
