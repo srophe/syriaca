@@ -20,6 +20,7 @@ declare variable $bibls:id-type {request:get-parameter('id-type', '')};
 declare variable $bibls:pub-place {request:get-parameter('pub-place', '')};
 declare variable $bibls:publisher {request:get-parameter('publisher', '')};
 declare variable $bibls:date {request:get-parameter('date', '')};
+declare variable $bibls:abstract {request:get-parameter('abstract', '')};
 
 declare function bibls:title() as xs:string? {
     if($bibls:title != '') then concat("[ft:query(descendant::tei:title,'",data:clean-string($bibls:title),"',sf:facet-query())]")
@@ -80,6 +81,41 @@ declare function bibls:bibl() as xs:string?{
     else ()  
 };
 
+declare function bibls:abstract() as xs:string? {
+    if($bibls:pub-place != '') then 
+        concat("[ft:query(descendant::biblStruct/tei:note[@type='abstract'],'",data:clean-string($bibls:abstract),"',sf:facet-query())]")
+    else ()  
+};
+
+(:
+book = "Books"
+journalArticle = "Journal Articles"
+bookSection = "Book Sections"
+thesis = "Thesis"
+:)
+declare function bibls:limits() as xs:string? {
+let $limits := 
+    string-join(
+            (
+            if(request:get-parameter('bookLimit', '') != 'true') then 
+               "descendant::tei:biblStruct[@type != 'book']" 
+            else(), 
+            if(request:get-parameter('journalArticleLimit', '') != 'true') then 
+               "descendant::tei:biblStruct[@type != 'journalArticle']" 
+            else(), 
+            if(request:get-parameter('bookSectionLimit', '') != 'true') then 
+               "descendant::tei:biblStruct[@type != 'bookSection']" 
+            else(),
+            if(request:get-parameter('thesisLimit', '') != 'true') then 
+               "descendant::tei:biblStruct[@type != 'thesis']" 
+            else()
+            ),' or ')
+return         
+    if($limits != '') then
+         concat("[",$limits,"]")
+    else ()
+};
+
 (:~     
  : Build query string to pass to search.xqm 
 :)
@@ -89,6 +125,8 @@ else if(request:get-parameter('bibl', '')) then bibls:bibl()
 else
  concat("collection('",$config:data-root,"/bibl/tei')//tei:body",
     data:keyword-search(),
+    bibls:abstract(),
+    bibls:limits(),
     bibls:title(),
     bibls:author(),
     bibls:pub-place(),
@@ -126,22 +164,17 @@ declare function bibls:search-form() {
                 else ()}
         <div class="well well-small search-inner well-white">
         <!-- 
-        
-       done -  Update label of the "Keyword search" box to be "Search All" (avoids confusion with searching by keyword/tag)
-        
-        Need to add, where? Filter by Keywords (tags)
-        
-        Zotero tags not currently being brought over by the zot2bibl function Ideally will have an autocomplete on this box that suggests keywords as you type
-        
-        
-        Search in abstract (separate from the "Search all"?)
-
+            <p>journalArticle</p>
+            <p>bookSection</p>
+            <p>book</p>
+            <p>thesis</p>
+            /TEI/text/body/biblStruct/note[@type="abstract"]/text()
         -->
         <!-- Keyword -->
         <div class="row">
-            <div class="col-md-8">            
+            <div class="col-md-12">            
             <div class="form-group">            
-                <label for="q" class="col-sm-2 col-md-3  control-label">Search All: </label>
+                <label for="q" class="col-sm-2 col-md-3  control-label">Search All Fields: </label>
                 <div class="col-sm-10 col-md-6 ">
                     <div class="input-group">
                         <input type="text" id="qs" name="q" class="form-control keyboard" placeholder=""/>
@@ -192,15 +225,27 @@ declare function bibls:search-form() {
                     <input type="text" id="date" name="date" class="form-control" placeholder="Year as YYYY"/>
                 </div>
             </div> 
-            <div class="form-group">            
-                <label for="title" class="col-sm-2 col-md-3  control-label">Abstract: </label>
+             <div class="form-group">            
+                <label for="abstract" class="col-sm-2 col-md-3  control-label">Search Abstract: </label>
                 <div class="col-sm-10 col-md-6 ">
                     <div class="input-group">
-                        <input type="text" id="abstract" name="abstract" class="form-control keyboard"  placeholder="Search abstract"/>
+                        <input type="text" id="abstract" name="abstract" class="form-control keyboard" placeholder=""/>
                         <div class="input-group-btn">{global:keyboard-select-menu('abstract')}</div>
                     </div>                 
                 </div>
-            </div>
+            </div> 
+            <div class="form-group">            
+                <label class="col-sm-2 col-md-3  control-label">Search in: </label>
+                <div class="col-sm-10 col-md-6 ">
+                    <div class="input-group">
+                        <input type="checkbox" id="bookLimit" name="bookLimit" value="true" checked="checked"/> Books 
+                    &#160;<input type="checkbox" id="journalArticleLimit" name="journalArticleLimit" value="true" checked="checked"/> Journal Articles
+                    &#160;<input type="checkbox" id="bookSectionLimit" name="bookSectionLimit" value="true" checked="checked"/> Book Sections
+                    &#160;<input type="checkbox" id="thesisLimit" name="thesisLimit" value="true" checked="checked"/> Thesis
+                    </div>                 
+                </div>
+            </div> 
+           
             <hr/>
             <div class="form-group">            
                 <label for="idno" class="col-sm-2 col-md-3  control-label">Id Number: </label>
@@ -209,9 +254,27 @@ declare function bibls:search-form() {
                 </div>
             </div> 
             </div>
-            <div class="col-md-4">
+            
+            <!--
             <h4>Filters</h4>
-            <!-- 
+                <label class="control-label">Publication Type: </label>
+                <select name="type" id="facet-pubType" class="input-medium form-control">
+                    <option value="">- Select -</option>
+                    <option value="journalArticle">Journal Article</option>
+                    <option value="book">Book</option>
+                    <option value="bookSection">Book Section</option>
+                    <option value="thesis">Thesis</option>
+                </select>
+                -->
+                
+            <!--
+    <p>eng</p>
+    <p>ger</p>
+    <p>Arabic</p>
+    <p>la</p>
+    <p>lat</p>
+    <p>Hebrew</p>
+    <p>English</p>
             Filter by Language of Publication Pulled into /TEI/text/body/biblStruct///textLang/@mainLang, example: https://dev-syriacaorg.vuexistapps.us/bibl/YHAZ3RFL
         What do we do with records that do not have a textLang/@mainLang?
         Filter by Language of Title: needs discussion
@@ -220,7 +283,7 @@ declare function bibls:search-form() {
         
         -->
             
-            </div>
+            
         </div>
         </div>
         <div class="pull-right">
