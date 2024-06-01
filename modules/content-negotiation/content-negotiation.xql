@@ -101,6 +101,15 @@ let $path := if(request:get-parameter('id', '')  != '') then
 let $data :=
     if(request:get-parameter('id', '') != '' or request:get-parameter('doc', '') != '') then
         data:get-document()
+    else if(request:get-parameter('keywordSearch', '') != '') then
+            let $keyword := concat(request:get-parameter('keywordSearch', ''),'*')
+            return 
+            distinct-values(
+                for $s in collection($config:data-root || '/bibl')//tei:relation/tei:desc[ft:query(.,$keyword)]
+                order by $s descending
+                return 
+                    $s//text())
+        
     else if(request:get-parameter-names() != '') then 
         if(request:get-parameter('api', '') != '') then
             if(request:get-parameter('element', '') !='' and request:get-parameter('q', '') != '') then 

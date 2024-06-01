@@ -81,6 +81,7 @@ function search:show-hits($node as node()*, $model as map(*), $collection as xs:
     let $count := count($hits)
     let $facet-config := global:facet-definition-file($collection)
     let $facetsDisplay := sf:display($model("hits"),$facet-config)
+    let $dateSlider := slider:browse-date-slider($hits, 'imprint')
     return 
         if(request:get-parameter-names() = '' or empty(request:get-parameter-names())) then () 
            (: search:search-form($node, $model, $collection):) 
@@ -92,9 +93,7 @@ function search:show-hits($node as node()*, $model as map(*), $collection as xs:
                 <br/>
             </div>
             :)
-        else 
-        (:
-        if(not(empty($facetsDisplay))) then 
+        else if(not(empty($facetsDisplay)) or not(empty($dateSlider)) ) then 
             <div>
                 {page:pages($hits, $collection, $search:start, $search:perpage,$search-string, $sort-options)}
                 <div class="row" id="search-results" xmlns="http://www.w3.org/1999/xhtml">
@@ -124,15 +123,15 @@ function search:show-hits($node as node()*, $model as map(*), $collection as xs:
                      let $hits := $model("hits")
                      let $facet-config := global:facet-definition-file($collection)
                      return 
+                        ($dateSlider,
                          if(not(empty($facetsDisplay))) then 
                              $facetsDisplay
-                         else ()  
+                         else ())  
                     }</div>
                 </div>
                 {page:pages($hits, $collection, $search:start, $search:perpage,'no', $sort-options)}
             </div>
         else 
-        :)
          <div class="indent" id="search-results" xmlns="http://www.w3.org/1999/xhtml">
          {
                  let $hits := $model("hits")

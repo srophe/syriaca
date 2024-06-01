@@ -1,4 +1,47 @@
 <facets xmlns="http://expath.org/ns/facet">
+    <facet-definition name="cbssPublicationDate" label="Publication Date" display="slider">
+        <group-by>
+            <sub-path>descendant::tei:biblStruct/descendant::tei:imprint/tei:date</sub-path>
+        </group-by>
+        <max-values show="5">40</max-values>
+        <order-by direction="descending">value</order-by>
+    </facet-definition>
+    <facet-definition name="cbssPubType" label="Publication Type">
+        <group-by function="cbssPubType">
+            <sub-path>descendant::tei:biblStruct/@type</sub-path>
+        </group-by>
+        <max-values show="5">40</max-values>
+        <order-by direction="ascending">value</order-by>
+    </facet-definition>
+    <!--
+    <facet-definition name="publicationDate" label="Language of Publication">
+        <group-by>
+            <sub-path>descendant::tei:biblStruct/descendant::tei:textLang/@mainLang</sub-path>
+        </group-by>
+        <max-values show="5">40</max-values>
+        <order-by direction="descending">value</order-by>
+    </facet-definition>
+    -->
+    <facet-definition name="cbssKeywords" label="Keywords">
+        <group-by>
+            <sub-path>descendant::tei:relation[@type="subject"]</sub-path>
+        </group-by>
+        <max-values show="5">40</max-values>
+        <order-by direction="ascending">value</order-by>
+    </facet-definition>
+    <!-- 
+    Keyword
+    record type
+    language of publication
+    
+    <facet-definition name="script" label="Script">
+        <group-by function="scriptValues">
+            <sub-path>descendant::tei:physDesc/tei:handDesc/tei:handNote/@script</sub-path>
+        </group-by>
+        <max-values show="5">10</max-values>
+        <order-by direction="ascending">value</order-by>
+    </facet-definition>
+    -->
     <!--
     <facet-definition name="subjects" label="Subjects">
         <group-by>

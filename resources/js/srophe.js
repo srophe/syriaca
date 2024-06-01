@@ -63,6 +63,31 @@ $('a.getData').click(function(event) {
     $("#moreInfoLabel").text(title);
     $('#moreInfo-box').load(URL + " #search-results");
 });
+ 
+function log( message ) {
+      $( "<div>" ).text( message ).prependTo( "#log" );
+      $( "#log" ).scrollTop( 0 );
+    }
+    
+$( "#keywordSearch" ).autocomplete({
+      source: function( request, response ) {
+        $.ajax( {
+          url: "/exist/apps/syriaca/modules/content-negotiation/content-negotiation.xql",
+          dataType: "json",
+          data: {
+            api: 'true',
+            keywordSearch: request.term
+          },
+          success: function( data ) {
+            response( data );
+          }
+        } );
+      },
+      minLength: 2,
+      select: function( event, ui ) {
+        log( "Selected: " + ui.item.value + " aka " + ui.item.id );
+      }
+    } );
     
 $('#showSection').click(function(event) {
     event.preventDefault();
