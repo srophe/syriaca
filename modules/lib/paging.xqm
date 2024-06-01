@@ -202,6 +202,7 @@ declare function page:display-search-params($collection as xs:string?){
     return 
         if(request:get-parameter($parameter, '') != '') then
             if($parameter = 'start' or $parameter = 'sort-element' or $parameter = 'fq' or starts-with($parameter, 'facet')) then ()
+            else if(starts-with($parameter,'all-')) then ()
             else if($parameter = ('q','keyword')) then 
                 (<span class="param">Keyword: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)
             else if($parameter = ('coll')) then 
@@ -238,10 +239,12 @@ declare function page:display-search-params($collection as xs:string?){
                 (<span class="param">Existence Dates: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)
             else if($parameter = ('existde')) then 
                 (<span class="param">Existence Dates: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)
-            else if(request:get-parameter('bookLimit', '') = 'true') then (<br/>,<span class="param">Search in Books</span>)
-            else if(request:get-parameter('journalArticleLimit', '') = 'true') then (<br/>,<span class="param">Search in Journal Articles</span>)
-            else if(request:get-parameter('bookSectionLimit', '') = 'true') then (<br/>,<span class="param">Search in Book Sections</span>)
-            else if(request:get-parameter('thesisLimit', '') = 'true') then (<br/>,<span class="param">Search in Thesis</span>)                
+            else if($parameter = ('keywordSearch')) then 
+                (<span class="param">Subject Keyword: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160;</span>)
+            else if(request:get-parameter('bookLimit', '') = 'true') then ()(:(<br/>,<span class="param">Search in Books</span>):)
+            else if(request:get-parameter('journalArticleLimit', '') = 'true') then () (:(<br/>,<span class="param">Search in Journal Articles</span>):)
+            else if(request:get-parameter('bookSectionLimit', '') = 'true') then () (: (<br/>,<span class="param">Search in Book Sections</span>):)
+            else if(request:get-parameter('thesisLimit', '') = 'true') then () (:(<br/>,<span class="param">Search in Thesis</span>):)                
             else (<span class="param">{replace(concat(upper-case(substring($parameter,1,1)),substring($parameter,2)),'-',' ')}: </span>,<span class="match">{request:get-parameter($parameter, '')}&#160; </span>)    
         else ())
         }
