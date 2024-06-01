@@ -21,14 +21,15 @@ declare variable $bibls:pub-place {request:get-parameter('pub-place', '')};
 declare variable $bibls:publisher {request:get-parameter('publisher', '')};
 declare variable $bibls:date {request:get-parameter('date', '')};
 declare variable $bibls:abstract {request:get-parameter('abstract', '')};
+declare variable $bibls:keywordSearch {request:get-parameter('keywordSearch', '')};
 
 declare function bibls:title() as xs:string? {
-    if($bibls:title != '') then concat("[ft:query(descendant::tei:title,'",data:clean-string($bibls:title),"',sf:facet-query())]")
+    if($bibls:title != '') then concat("[ft:query(descendant::tei:title,'",data:clean-string($bibls:title),"',sf:facet())]")
     else ()    
 };
 
 declare function bibls:author() as xs:string? {
-    if($bibls:author != '') then concat("[ft:query(descendant::tei:author,'",data:clean-string($bibls:author),"',sf:facet-query()) or ft:query(descendant::tei:editor,'",data:clean-string($bibls:author),"',sf:facet-query())]")
+    if($bibls:author != '') then concat("[ft:query(descendant::tei:author,'",data:clean-string($bibls:author),"',sf:facet()) or ft:query(descendant::tei:editor,'",data:clean-string($bibls:author),"',sf:facet())]")
     else ()    
 };
 
@@ -53,13 +54,13 @@ declare function bibls:idno() as xs:string? {
 
 declare function bibls:pub-place() as xs:string? {
     if($bibls:pub-place != '') then 
-        concat("[ft:query(descendant::tei:imprint/tei:pubPlace,'",data:clean-string($bibls:pub-place),"',sf:facet-query())]")
+        concat("[ft:query(descendant::tei:imprint/tei:pubPlace,'",data:clean-string($bibls:pub-place),"',sf:facet())]")
     else ()  
 };
 
 declare function bibls:publisher() as xs:string? {
     if($bibls:publisher != '') then 
-        concat("[ft:query(descendant::tei:imprint/tei:publisher,'",data:clean-string($bibls:publisher),"',sf:facet-query())]")
+        concat("[ft:query(descendant::tei:imprint/tei:publisher,'",data:clean-string($bibls:publisher),"',sf:facet())]")
     else ()  
 };
 
@@ -83,16 +84,16 @@ declare function bibls:bibl() as xs:string?{
 
 declare function bibls:abstract() as xs:string? {
     if($bibls:pub-place != '') then 
-        concat("[ft:query(descendant::biblStruct/tei:note[@type='abstract'],'",data:clean-string($bibls:abstract),"',sf:facet-query())]")
+        concat("[ft:query(descendant::biblStruct/tei:note[@type='abstract'],'",data:clean-string($bibls:abstract),"',sf:facet())]")
     else ()  
 };
 
-(:
-book = "Books"
-journalArticle = "Journal Articles"
-bookSection = "Book Sections"
-thesis = "Thesis"
-:)
+declare function bibls:keywordSearch() as xs:string? {
+    if($bibls:keywordSearch != '') then 
+        concat("[ft:query(descendant::tei:listRelation/tei:relation[@type='subject']/tei:desc,'",data:clean-string($bibls:keywordSearch),"',sf:facet())]")
+    else ()  
+};
+
 declare function bibls:limits() as xs:string? {
 let $limits := 
     string-join(
@@ -126,6 +127,7 @@ else
  concat("collection('",$config:data-root,"/bibl/tei')//tei:body",
     data:keyword-search(),
     bibls:abstract(),
+    bibls:keywordSearch(),
     bibls:limits(),
     bibls:title(),
     bibls:author(),
@@ -163,13 +165,6 @@ declare function bibls:search-form() {
                     else ())
                 else ()}
         <div class="well well-small search-inner well-white">
-        <!-- 
-            <p>journalArticle</p>
-            <p>bookSection</p>
-            <p>book</p>
-            <p>thesis</p>
-            /TEI/text/body/biblStruct/note[@type="abstract"]/text()
-        -->
         <!-- Keyword -->
         <div class="row">
             <div class="col-md-12">            
@@ -182,6 +177,15 @@ declare function bibls:search-form() {
                     </div>                 
                 </div>
             </div> 
+            <div class="form-group">            
+                <label for="keywordSearch" class="col-sm-2 col-md-3  control-label">Search by Subject Keyword: </label>
+                <div class="col-sm-10 col-md-6 ">
+                    <div class="input-group ui-widget">
+                        <input type="text" data-ref="{$config:nav-base}/modules/conent-negotiation.xql" id="keywordSearch" name="keywordSearch" class="form-control keywordSearch" placeholder="" />
+                        <div class="input-group-btn">{global:keyboard-select-menu('keywordSearch')}</div>
+                    </div> 
+                </div>
+            </div>
             <hr/>         
             <div class="form-group">            
                 <label for="title" class="col-sm-2 col-md-3  control-label">Title: </label>
