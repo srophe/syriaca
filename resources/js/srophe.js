@@ -72,7 +72,7 @@ function log( message ) {
 $( "#keywordSearch" ).autocomplete({
       source: function( request, response ) {
         $.ajax( {
-          url: "/exist/apps/syriaca/modules/content-negotiation/content-negotiation.xql",
+          url: "/modules/content-negotiation/content-negotiation.xql",
           dataType: "json",
           data: {
             api: 'true',
