@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2024-07-11T16:37:23Z. . 
+Schema generated from ODD source 2024-07-11T22:15:59Z. . 
 TEI Edition: Version 4.5.0. Last updated on 25th October 2022, revision 3e98e619e 
 TEI Edition Location: https://www.tei-c.org/Vault/P5/4.5.0/ 
   
@@ -5539,7 +5539,7 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/distinct-entity']">
+                      context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/not-to-be-confused-with']">
                <sch:assert test="@type='disambiguation' and @mutual and not(@ana)">
                   For a 'distinct entity' relationship use @type="disambiguation", and a @mutual, and not @ana.</sch:assert>
             </sch:rule>
@@ -5575,8 +5575,8 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
                       context="tei:text//tei:relation[@type='disambiguation']">
-               <sch:assert test="@ref='http://syriaca.org/keyword/distinct-entity' or @ref='http://syriaca.org/keyword/possibly-identical'">
-                  With @type="disambiguation", the @ref attribute must be either "http://syriaca.org/keyword/distinct-entity" or "http://syriaca.org/keyword/possibly-identical".</sch:assert>
+               <sch:assert test="@ref='http://syriaca.org/keyword/not-to-be-confused-with' or @ref='http://syriaca.org/keyword/possibly-identical'">
+                  With @type="disambiguation", the @ref attribute must be either "http://syriaca.org/keyword/not-to-be-confused-with" or "http://syriaca.org/keyword/possibly-identical".</sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5681,9 +5681,9 @@ Suggested values include: 1] attestation; 2] veneration</a:documentation>
          <ref name="tei_att.datable.attributes"/>
          <attribute name="ref">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">
-Suggested values include: 1] http://syriaca.org/keyword/distinct-entity; 2] http://syriaca.org/keyword/possibly-identical; 3] http://syriaca.org/keyword/shares-attribution-with; 4] http://www.w3.org/2004/02/skos/core#broader</a:documentation>
+Suggested values include: 1] http://syriaca.org/keyword/not-to-be-confused-with; 2] http://syriaca.org/keyword/possibly-identical; 3] http://syriaca.org/keyword/shares-attribution-with; 4] http://www.w3.org/2004/02/skos/core#broader</a:documentation>
             <choice>
-               <value>http://syriaca.org/keyword/distinct-entity</value>
+               <value>http://syriaca.org/keyword/not-to-be-confused-with</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to distinguish between entities that have been confused in the scholarly literature or might be confused by users.</a:documentation>
                <value>http://syriaca.org/keyword/possibly-identical</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">Used to indicate that even though Syriaca.org has identified this location as a distinct entity, it is possible that this entity is the same an another entity with a Syriaca.org URI.</a:documentation>

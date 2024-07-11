@@ -591,7 +591,7 @@
                   This attribute contains one or more place URIs not in use in Syriaca.org data. Note that all place URIs take the form 'http://syriaca.org/place/{\d+?}' (where {\d+?} is a number).
                 </sch:assert>
               </sch:rule>
-              <sch:rule context="tei:text//tei:relation/@mutual | tei:text//tei:relation/@active"><!-- This doesn't seem to be working even though in works in the schematron test document -->
+              <sch:rule context="tei:text//tei:relation/@mutual | tei:text//tei:relation/@active">
                 <sch:let name="docURI" value="//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/substring-before(., '/tei')"/>
                 <sch:assert test="contains(., $docURI)">
                   This attribute must contain the URI for this document's place: <sch:value-of select="$docURI"/>.

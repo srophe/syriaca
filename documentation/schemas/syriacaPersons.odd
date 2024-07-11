@@ -900,7 +900,7 @@
           </constraintSpec>
           <constraintSpec ident="att-combos-on-relation" scheme="schematron">
             <constraint>
-              <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/distinct-entity']">
+              <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/not-to-be-confused-with']">
                 <sch:assert test="@type='disambiguation' and @mutual and not(@ana)">
                   For a 'distinct entity' relationship use @type="disambiguation", and a @mutual, and not @ana.</sch:assert>
               </sch:rule>
@@ -921,8 +921,8 @@
                   For a 'has-relation-to-place' relationship, use @type="place" and @active/@passive attributes.</sch:assert>
               </sch:rule>
               <sch:rule context="tei:text//tei:relation[@type='disambiguation']">
-                <sch:assert test="@ref='http://syriaca.org/keyword/distinct-entity' or @ref='http://syriaca.org/keyword/possibly-identical'">
-                  With @type="disambiguation", the @ref attribute must be either "http://syriaca.org/keyword/distinct-entity" or "http://syriaca.org/keyword/possibly-identical".</sch:assert>
+                <sch:assert test="@ref='http://syriaca.org/keyword/not-to-be-confused-with' or @ref='http://syriaca.org/keyword/possibly-identical'">
+                  With @type="disambiguation", the @ref attribute must be either "http://syriaca.org/keyword/not-to-be-confused-with" or "http://syriaca.org/keyword/possibly-identical".</sch:assert>
               </sch:rule>
               <sch:rule context="tei:text//tei:relation[not(@type='place')][@mutual]/tei:desc/tei:persName/@ref">
                 <sch:let name="mutualVals" value="tokenize(ancestor::tei:relation/@mutual, ' ')"/>
@@ -977,9 +977,8 @@
                 <dataRef key="teidata.pointer"/>
               </datatype>
               <valList type="semi" mode="replace">
-                <valItem ident="http://syriaca.org/keyword/distinct-entity">
-                  <desc>Used to distinguish between entities that have been confused in the scholarly literature or might be 
-                    confused by users.</desc>
+                <valItem ident="http://syriaca.org/keyword/not-to-be-confused-with">
+                  <desc>Used to distinguish between entities that have been confused in the scholarly literature or might be confused by users.</desc>
                 </valItem>
                 <valItem ident="http://syriaca.org/keyword/possibly-identical">
                   <desc>Used to indicate that even though Syriaca.org has identified this location as a distinct entity, it 
