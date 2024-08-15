@@ -50,7 +50,7 @@ declare function sf:build-index(){
     <index xmlns="http://exist-db.org/collection-config/1.0" xmlns:tei="http://www.tei-c.org/ns/1.0" xmlns:srophe="https://srophe.app">
         <lucene diacritics="no">
             <module uri="http://srophe.org/srophe/facets" prefix="sf" at="xmldb:exist:///{$config:app-root}/modules/lib/facets.xql"/>
-            <text qname="tei:body">
+            <text qname="tei:TEI">
             {
             let $facets :=     
                 for $f in collection($config:app-root)//facet:facet-definition
@@ -58,14 +58,14 @@ declare function sf:build-index(){
                 group by $facet-grp := $f/@name
                 return 
                     if($f[1]/facet:group-by/@function != '') then 
-                       (<facet dimension="{functx:words-to-camel-case($facet-grp)}" expression="sf:facet(descendant-or-self::tei:body, {concat("'",$path[1],"'")}, {concat("'",$facet-grp,"'")})"/>,
-                        <field name="facet-{functx:words-to-camel-case($facet-grp)}" expression="sf:facet(descendant-or-self::tei:body, {concat("'",$path[1],"'")}, {concat("'",$facet-grp,"'")})"/>)
+                       (<facet dimension="{functx:words-to-camel-case($facet-grp)}" expression="sf:facet(., {concat("'",$path[1],"'")}, {concat("'",$facet-grp,"'")})"/>(:,
+                        <field name="facet-{functx:words-to-camel-case($facet-grp)}" expression="sf:facet(descendant-or-self::tei:body, {concat("'",$path[1],"'")}, {concat("'",$facet-grp,"'")})"/>:))
                     else if($f[1]/facet:range) then
-                       (<facet dimension="{functx:words-to-camel-case($facet-grp)}" expression="sf:facet(descendant-or-self::tei:body, {concat("'",$path[1],"'")}, {concat("'",$facet-grp,"'")})"/>,
-                       <field name="facet-{functx:words-to-camel-case($facet-grp)}" expression="sf:facet(descendant-or-self::tei:body, {concat("'",$path[1],"'")}, {concat("'",$facet-grp,"'")})"/>)
+                       (<facet dimension="{functx:words-to-camel-case($facet-grp)}" expression="sf:facet(., {concat("'",$path[1],"'")}, {concat("'",$facet-grp,"'")})"/>(:,
+                       <field name="facet-{functx:words-to-camel-case($facet-grp)}" expression="sf:facet(descendant-or-self::tei:body, {concat("'",$path[1],"'")}, {concat("'",$facet-grp,"'")})"/>:))
                     else 
-                        (<facet dimension="{functx:words-to-camel-case($facet-grp)}" expression="{replace($f[1]/facet:group-by/facet:sub-path/text(),"&#34;","'")}"/>,
-                        <field name="facet-{functx:words-to-camel-case($facet-grp)}" expression="{replace($f[1]/facet:group-by/facet:sub-path/text(),"&#34;","'")}"/>)
+                        (<facet dimension="{functx:words-to-camel-case($facet-grp)}" expression="{replace($f[1]/facet:group-by/facet:sub-path/text(),"&#34;","'")}"/>(:,
+                        <field name="facet-{functx:words-to-camel-case($facet-grp)}" expression="{replace($f[1]/facet:group-by/facet:sub-path/text(),"&#34;","'")}"/>:))
             return 
                 $facets
             }
@@ -82,11 +82,11 @@ declare function sf:build-index(){
                             }
                            }
                 else 
-                   ( <field name="title" expression="sf:field(descendant-or-self::tei:body,'title')"/>,
-                    <field name="idno" expression="sf:field(descendant-or-self::tei:body,'idno')"/>,
-                    <field name="titleSyriac" expression="sf:field(descendant-or-self::tei:body, 'titleSyriac')"/>,
-                    <field name="titleArabic" expression="sf:field(descendant-or-self::tei:body, 'titleArabic')"/>,
-                    <field name="author" expression="sf:field(descendant-or-self::tei:body, 'author')"/>)
+                   (<field name="title" expression="sf:field(.,'title')"/>,
+                    <field name="idno" expression="sf:field(.,'idno')"/>,
+                    <field name="titleSyriac" expression="sf:field(., 'titleSyriac')"/>,
+                    <field name="titleArabic" expression="sf:field(., 'titleArabic')"/>,
+                    <field name="author" expression="sf:field(., 'author')"/>)
             }
             </text>
             <text qname="tei:fileDesc"/>
@@ -100,6 +100,9 @@ declare function sf:build-index(){
             <text qname="tei:desc" boost="2.0"/>
             <!--<text qname="tei:event"/> -->
             <text qname="tei:note"/>
+            <text qname="tei:pubPlace"/>
+            <text qname="tei:publisher"/>
+            
             <!--<text qname="tei:term"/>-->
         </lucene> 
         <range>
@@ -571,7 +574,7 @@ declare function sf:field-title($element as item()*, $name as xs:string){
  : TEI idno field, specific to Srophe applications 
  :)
 declare function sf:field-idno($element as item()*, $name as xs:string){
-    replace($element/ancestor-or-self::tei:TEI/descendant::tei:publicationStmt/tei:idno[@type="URI"][1],'/tei','')
+    replace($element/descendant::tei:publicationStmt/tei:idno[@type="URI"][1],'/tei','')
 };
 
 (:~
@@ -662,31 +665,31 @@ declare function sf:field-titleTransliteration($element as item()*, $name as xs:
 
 (: Title Facet :)
 declare function sf:facet-title($element as item()*, $facet-definition as item(), $name as xs:string){
-    if($element/ancestor-or-self::tei:TEI/descendant::tei:biblStruct) then 
-        $element/ancestor-or-self::tei:TEI/descendant::tei:biblStruct/descendant::tei:title
-    else $element/ancestor-or-self::tei:TEI/descendant::tei:titleStmt/tei:title
+    if($element/descendant::tei:biblStruct) then 
+        $element/descendant::tei:biblStruct/descendant::tei:title
+    else $element/descendant::tei:titleStmt/tei:title
 };
 
 (: Author field :)
 declare function sf:field-author($element as item()*, $name as xs:string){
-    if($element/ancestor-or-self::tei:TEI/descendant::tei:biblStruct) then 
-        if($element/ancestor-or-self::tei:TEI/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]/descendant-or-self::tei:surname) then
-            concat($element/ancestor-or-self::tei:TEI/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]/descendant-or-self::tei:surname, ',',  
-                $element/ancestor-or-self::tei:TEI/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]/descendant-or-self::tei:forename)
-        else if($element/ancestor-or-self::tei:TEI/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:editor[1]/descendant-or-self::tei:surname) then 
-               concat($element/ancestor-or-self::tei:TEI/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]/descendant-or-self::tei:surname, ',',  
-                $element/ancestor-or-self::tei:TEI/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]/descendant-or-self::tei:forename)
-        else  $element/ancestor-or-self::tei:TEI/descendant::tei:biblStruct/descendant::tei:author
-    else $element/ancestor-or-self::tei:TEI/descendant::tei:titleStmt/descendant::tei:author
+    if($element/descendant::tei:biblStruct) then 
+        if($element/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]/descendant-or-self::tei:surname) then
+            concat($element/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]/descendant-or-self::tei:surname, ',',  
+                $element/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]/descendant-or-self::tei:forename)
+        else if($element/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:editor[1]/descendant-or-self::tei:surname) then 
+               concat($element/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]/descendant-or-self::tei:surname, ',',  
+                $element/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]/descendant-or-self::tei:forename)
+        else  $element/descendant::tei:biblStruct/descendant::tei:author
+    else $element/descendant::tei:titleStmt/descendant::tei:author
 };
 
 (:~
  : TEI author facet, specific to Srophe applications 
  :)
 declare function sf:facet-authors($element as item()*, $facet-definition as item(), $name as xs:string){
-    if($element/ancestor-or-self::tei:TEI/descendant::tei:biblStruct) then 
-        $element/ancestor-or-self::tei:TEI/descendant::tei:biblStruct/descendant::tei:author | $element/ancestor-or-self::tei:TEI/descendant::tei:biblStruct/descendant::tei:editor
-    else $element/ancestor-or-self::tei:TEI/descendant::tei:titleStmt/descendant::tei:author
+    if($element/descendant::tei:biblStruct) then 
+        $element/descendant::tei:biblStruct/descendant::tei:author | $element/descendant::tei:biblStruct/descendant::tei:editor
+    else $element/descendant::tei:titleStmt/descendant::tei:author
 };
  
 (:~
@@ -707,7 +710,7 @@ declare function sf:facet-cbssPubType($element as item()*, $facet-definition as 
         else if($value = 'journalArticle') then 'Journal Article'
         else if($value = 'bookSection') then 'Book Section'
         else if($value = 'thesis') then 'Thesis'
-        else ()
+        else $value
 };
 
 (:
