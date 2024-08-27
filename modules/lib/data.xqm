@@ -132,13 +132,13 @@ declare function data:get-records($collection as xs:string*, $element as xs:stri
         if(request:get-parameter('sort', '') != '') then request:get-parameter('sort', '') 
         else if(request:get-parameter('sort-element', '') != '') then request:get-parameter('sort-element', '')[1]
         else ()         
-    let $hits := util:eval(data:build-collection-path($collection))[descendant::tei:body[ft:query(., (),sf:facet-query())]]                        
+    let $hits := util:eval(data:build-collection-path($collection))[ft:query(., (),sf:facet-query())]                        
     return 
         if(request:get-parameter('view', '') = 'map') then $hits  
         else if(request:get-parameter('view', '') = 'timeline') then $hits
         else if($collection = 'bibl') then
             for $hit in $hits
-                let $s :=
+            let $s :=
                     if(contains($sort, 'author')) then ft:field($hit, "author")[1]                        
                     else if(contains($sort, 'title') or contains($sort, 'headword')) then 
                          if(request:get-parameter('lang', '') = 'syr') then ft:field($hit, "titleSyriac")[1]
@@ -155,8 +155,8 @@ declare function data:get-records($collection as xs:string*, $element as xs:stri
                     else if(request:get-parameter('lang', '') = 'fr') then ft:field($hit, "titleFrench")[1]
                     else if(request:get-parameter('lang', '') = 'en-x-gedsh') then ft:field($hit, "titleTransliteration")[1]
                     else ft:field($hit, "author")[1]                
-                order by $s[1] collation 'http://www.w3.org/2013/collation/UCA'
-                where 
+            order by $s[1] collation 'http://www.w3.org/2013/collation/UCA'
+            where 
                     if(request:get-parameter('view', '') = 'A-Z') then 
                         (matches($s,'\p{IsBasicLatin}|\p{IsLatin-1Supplement}|\p{IsLatinExtended-A}|\p{IsLatinExtended-B}','i') and matches($s,global:get-alpha-filter())) 
                     else if(request:get-parameter('view', '') = 'ܐ-ܬ') then
@@ -165,8 +165,8 @@ declare function data:get-records($collection as xs:string*, $element as xs:stri
                        (matches($s,'\p{IsArabic}','i'))
                     else if(request:get-parameter('view', '') = 'other') then  
                         not(matches(substring(global:build-sort-string($s,''),1,1),'\p{IsSyriac}|\p{IsArabic}|\p{IsBasicLatin}|\p{IsLatin-1Supplement}|\p{IsLatinExtended-A}|\p{IsLatinExtended-B}|\p{IsLatinExtendedAdditional}','i'))
-                    else matches($s,global:get-alpha-filter())  
-                return $hit/ancestor-or-self::tei:TEI
+                    else matches($s[1],global:get-alpha-filter())
+             return $hit
         else if(request:get-parameter('alpha-filter', '') != '' 
             and request:get-parameter('alpha-filter', '') != 'All'
             and request:get-parameter('alpha-filter', '') != 'ALL'
@@ -238,7 +238,7 @@ declare function data:search($collection as xs:string*, $queryString as xs:strin
         if($params != '') then
             if($queryString != '') then 
                 if(ends-with($queryString,'//tei:body')) then () 
-                else util:eval($queryString)
+                else util:eval($queryString)[ft:query(., (),sf:facet-query())]
             else if(data:create-query($collection) != '') then
                 util:eval(concat(data:build-collection-path($collection), data:create-query($collection),slider:date-filter(())))
             else () 
@@ -282,7 +282,7 @@ declare function data:apiSearch($collection as xs:string*, $element as xs:string
                     return concat("/descendant::tei:",$element,"[ft:query(.,'",data:clean-string($queryString),"',data:search-options())]")            
                 else ()                        
     let $eval-string := concat(data:build-collection-path($collection), $elementSearch)
-    let $hits := util:eval($eval-string)     
+    let $hits := util:eval($eval-string)[ft:query(., (),sf:facet-query())]     
     let $sort := if($sort-element != '') then 
                     $sort-element[1]
                  else if(request:get-parameter('sort', '') != '') then
@@ -501,9 +501,9 @@ declare function data:dynamic-paths($search-config as xs:string?){
                 if($p = 'keyword') then
                     data:keyword-search()
                 else if(string($config//input[@name = $p]/@element) = '.') then
-                    concat("[ft:query(descendant-or-self::tei:body,'",data:clean-string(request:get-parameter($p, '')),"',sf:facet-query())]")
+                    concat("[ft:query(descendant-or-self::tei:body,'",data:clean-string(request:get-parameter($p, '')),"')]")
                 else if(string($config//input[@name = $p]/@element) != '') then
-                    concat("[ft:query(descendant-or-self::",string($config//input[@name = $p]/@element),",'",data:clean-string(request:get-parameter($p, '')),"',sf:facet-query())]")
+                    concat("[ft:query(descendant-or-self::",string($config//input[@name = $p]/@element),",'",data:clean-string(request:get-parameter($p, '')),"')]")
                 else ()    
             else (),'')
 };
@@ -514,10 +514,10 @@ declare function data:dynamic-paths($search-config as xs:string?){
 declare function data:keyword-search(){
     if(request:get-parameter('keyword', '') != '') then 
         for $query in request:get-parameter('keyword', '') 
-        return concat("[ft:query(.,'",data:clean-string($query),"',sf:facet-query())]")
+        return concat("[ft:query(.,'",data:clean-string($query),"')]")
     else if(request:get-parameter('q', '') != '') then 
         for $query in request:get-parameter('q', '') 
-        return concat("[ft:query(.,'",data:clean-string($query),"',sf:facet-query())]")
+        return concat("[ft:query(.,'",data:clean-string($query),"')]")
     else ()
 };
 
@@ -541,7 +541,7 @@ declare function data:uri() as xs:string? {
         let $q := request:get-parameter('uri', '')
         return 
         concat("
-        [ft:query(descendant::*,'&quot;",$q,"&quot;',sf:facet-query()) or 
+        [ft:query(descendant::*,'&quot;",$q,"&quot;') or 
             .//@passive[matches(.,'",$q,"(\W.*)?$')]
             or 
             .//@mutual[matches(.,'",$q,"(\W.*)?$')]
@@ -564,7 +564,7 @@ declare function data:element-search($element, $query){
     if(exists($element) and $element != '') then 
         if(request:get-parameter($element, '') != '') then 
             for $e in $element
-            return concat("[ft:query(descendant-or-self::tei:",$element,",'",data:clean-string($query),"',sf:facet-query())]")            
+            return concat("[ft:query(descendant-or-self::tei:",$element,",'",data:clean-string($query),"')]")            
         else ()
     else ()
 };
@@ -600,7 +600,7 @@ declare function data:related-places() as xs:string?{
                 normalize-space($related-place)
             else 
                 string-join(distinct-values(
-                    for $r in collection($config:data-root || '/places')//tei:place[ft:query(tei:placeName,$related-place,sf:facet-query())]
+                    for $r in collection($config:data-root || '/places')//tei:place[ft:query(tei:placeName,$related-place)]
                     let $id := $r//tei:idno[starts-with(.,'http://syriaca.org')]
                     return $id),'|')                   
         return 
@@ -629,7 +629,7 @@ declare function data:related-persons() as xs:string?{
                 normalize-space($rel-person)
             else 
                 string-join(distinct-values(
-                    for $r in collection($config:data-root || '/persons')//tei:person[ft:query(tei:persName,$rel-person,sf:facet-query())]
+                    for $r in collection($config:data-root || '/persons')//tei:person[ft:query(tei:persName,$rel-person)]
                     let $id := $r//tei:idno[starts-with(.,'http://syriaca.org')]
                     return $id),'|')   
         return 
@@ -650,6 +650,6 @@ declare function data:mentioned() as xs:string?{
             let $id := normalize-space(request:get-parameter('mentioned', ''))
             return concat("[descendant::*[@ref[matches(.,'",$id,"(\W.*)?$')]]]")
         else 
-            concat("[descendant::*[ft:query(tei:title,'",data:clean-string(request:get-parameter('mentioned', '')),"',sf:facet-query())]]")
+            concat("[descendant::*[ft:query(tei:title,'",data:clean-string(request:get-parameter('mentioned', '')),"')]]")
     else ()  
 };

@@ -24,12 +24,12 @@ declare variable $bibls:abstract {request:get-parameter('abstract', '')};
 declare variable $bibls:keywordSearch {request:get-parameter('keywordSearch', '')};
 
 declare function bibls:title() as xs:string? {
-    if($bibls:title != '') then concat("[ft:query(descendant::tei:title,'",data:clean-string($bibls:title),"',sf:facet-query())]")
+    if($bibls:title != '') then concat("[ft:query(descendant::tei:title,'",data:clean-string($bibls:title),"')]")
     else ()    
 };
 
 declare function bibls:author() as xs:string? {
-    if($bibls:author != '') then concat("[ft:query(descendant::tei:author,'",data:clean-string($bibls:author),"',sf:facet-query()) or ft:query(descendant::tei:editor,'",data:clean-string($bibls:author),"',sf:facet-query())]")
+    if($bibls:author != '') then concat("[ft:query(descendant::tei:author,'",data:clean-string($bibls:author),"') or ft:query(descendant::tei:editor,'",data:clean-string($bibls:author),"')]")
     else ()    
 };
 
@@ -54,13 +54,13 @@ declare function bibls:idno() as xs:string? {
 
 declare function bibls:pub-place() as xs:string? {
     if($bibls:pub-place != '') then 
-        concat("[descendant::tei:pubPlace[ft:query(.,'",data:clean-string($bibls:pub-place),"',sf:facet-query())]]")
+        concat("[descendant::tei:pubPlace[ft:query(.,'",data:clean-string($bibls:pub-place),"')]]")
     else ()  
 };
 
 declare function bibls:publisher() as xs:string? {
     if($bibls:publisher != '') then 
-        concat("[descendant::tei:publisher[ft:query(.,'",data:clean-string($bibls:publisher),"',sf:facet-query())]]")
+        concat("[descendant::tei:publisher[ft:query(.,'",data:clean-string($bibls:publisher),"')]]")
     else ()  
 };
 
@@ -84,13 +84,13 @@ declare function bibls:bibl() as xs:string?{
 
 declare function bibls:abstract() as xs:string? {
     if($bibls:abstract != '') then 
-        concat("[descendant::tei:note[ft:query(.,'",data:clean-string($bibls:abstract),"',sf:facet-query())][@type='abstract']]")
+        concat("[descendant::tei:note[ft:query(.,'",data:clean-string($bibls:abstract),"')][@type='abstract']]")
     else ()  
 };
 
 declare function bibls:keywordSearch() as xs:string? {
     if($bibls:keywordSearch != '') then 
-        concat("[descendant::tei:desc[ft:query(.,'",data:clean-string($bibls:keywordSearch),"',sf:facet-query())][parent::tei:relation]]")
+        concat("[descendant::tei:desc[ft:query(.,'",data:clean-string($bibls:keywordSearch),"')][parent::tei:relation]]")
     else ()  
 };
 
