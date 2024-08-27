@@ -1369,7 +1369,8 @@
     </xsl:template>
     <xsl:template match="t:teiHeader" mode="#all">
         <xsl:choose>
-            <xsl:when test="contains($resource-id,'/bibl/')">
+            <xsl:when test="contains($resource-id,'/bibl/') or contains($resource-id,'/cbss/')">
+                <!--
                 <div id="about">
                     <xsl:choose>
                         <xsl:when test="contains($resource-id,'/bibl/')">
@@ -1382,6 +1383,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </div>
+                -->
             </xsl:when>
             <xsl:otherwise>
                 <div class="citationinfo">

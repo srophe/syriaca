@@ -161,8 +161,8 @@ if(not(empty($min)) and not(empty($max))) then
         else()}
         <script type="text/javascript">
         <![CDATA[
-            var minPadding = "]]>{'0001-01-01'}<![CDATA["
-            var maxPadding = "]]>{'2020-01-01'}<![CDATA["
+            var minPadding = "]]>{$minPadding}<![CDATA["
+            var maxPadding = "]]>{$maxPadding}<![CDATA["
             var minValue = "]]>{$min}<![CDATA["
             var maxValue = "]]>{$max}<![CDATA["
             $("#slider").dateRangeSlider({  
