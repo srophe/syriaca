@@ -380,13 +380,19 @@ let $imprint := if (empty($rec?data?place) and empty($rec?data?publisher) and em
                     if ($rec?data?date) then (<date>{$rec?data?date}</date>) else ()
                 }</imprint>)
 (: Transforming tags to relation... if no subject or ms s present, still shows <listRelations\>, I have to fix that :)
-let $list-relations := if (empty($rec?data?tags) or empty($rec?data?relations)) then () else (<listRelation>{(
+let $list-relations := if(empty($rec?data?tags) or empty($rec?data?relations)) then () else (<listRelation>{(
                         for $tag in $rec?data?tags?*?tag
+                        let $type := replace($tag,'^\s*(.+?):\s*.*','$1')
                         return 
-                            if (matches($tag,'^\s*(MS|Subject|Part|Section|Book|Provenance|Source|Translator):\s*')) then (
-                                element relation {
+                            element relation {
+                                (
+                                attribute active {$local-uri},
+                                attribute ref {"dc:subject"},
+                                element desc {$tag}                                            
+                                )
+                            }
+                            (:element relation {
                                     attribute active {$local-uri},
-                                    if (matches($tag,'^\s*(Subject|Part|Section|Book|Provenance|Source|Translator):\s*')) then (
                                         let $type := replace($tag,'^\s*(.+?):\s*.*','$1')
                                         return
                                         (attribute ref {"dc:subject"},
@@ -394,24 +400,8 @@ let $list-relations := if (empty($rec?data?tags) or empty($rec?data?relations)) 
                                             attribute type {lower-case($type)}
                                             else(),
                                         element desc {substring-after($tag,concat($type,": "))}
-                                    )) else (),
-                                    if (matches($tag,'^\s*MS:\s*')) then (
-                                        attribute ref{"dcterms:references"},
-                                        element desc {
-                                            element msDesc {
-                                                element msIdentifier {
-                                                    element settlement {normalize-space(tokenize(substring-after($tag,"MS: "),",")[1])},
-                                                    element collection {normalize-space(tokenize(substring-after($tag,"MS: "),",")[2])},
-                                                    element idno {
-                                                        attribute type {"shelfmark"},
-                                                        normalize-space(replace($tag,"MS:.*?,.*?,",""))
-                                                        }
-                                                }
-                                            }
-                                        }
-                                    ) else ()
-                                }
-                            ) else (),
+                                        }:)
+                                        ,
                         let $relations := $rec?data?relations
                         let $rec := $local-uri
                         let $zotero-url := concat('http://zotero.org/groups/',$zotero2tei:groupid,'/items')
@@ -645,6 +635,9 @@ return
         <text>
             <body>
                 <biblStruct>
+                  {if($itemType != '') then
+                    attribute type {$itemType}
+                  else ()}
                   {$tei-analytic}
                   {$tei-monogr}
                   {$tei-series}

@@ -24,12 +24,12 @@ declare variable $bibls:abstract {request:get-parameter('abstract', '')};
 declare variable $bibls:keywordSearch {request:get-parameter('keywordSearch', '')};
 
 declare function bibls:title() as xs:string? {
-    if($bibls:title != '') then concat("[ft:query(descendant::tei:title,'",data:clean-string($bibls:title),"',sf:facet())]")
+    if($bibls:title != '') then concat("[ft:query(descendant::tei:title,'",data:clean-string($bibls:title),"')]")
     else ()    
 };
 
 declare function bibls:author() as xs:string? {
-    if($bibls:author != '') then concat("[ft:query(descendant::tei:author,'",data:clean-string($bibls:author),"',sf:facet()) or ft:query(descendant::tei:editor,'",data:clean-string($bibls:author),"',sf:facet())]")
+    if($bibls:author != '') then concat("[ft:query(descendant::tei:author,'",data:clean-string($bibls:author),"') or ft:query(descendant::tei:editor,'",data:clean-string($bibls:author),"')]")
     else ()    
 };
 
@@ -54,13 +54,13 @@ declare function bibls:idno() as xs:string? {
 
 declare function bibls:pub-place() as xs:string? {
     if($bibls:pub-place != '') then 
-        concat("[ft:query(descendant::tei:imprint/tei:pubPlace,'",data:clean-string($bibls:pub-place),"',sf:facet())]")
+        concat("[descendant::tei:pubPlace[ft:query(.,'",data:clean-string($bibls:pub-place),"')]]")
     else ()  
 };
 
 declare function bibls:publisher() as xs:string? {
     if($bibls:publisher != '') then 
-        concat("[ft:query(descendant::tei:imprint/tei:publisher,'",data:clean-string($bibls:publisher),"',sf:facet())]")
+        concat("[descendant::tei:publisher[ft:query(.,'",data:clean-string($bibls:publisher),"')]]")
     else ()  
 };
 
@@ -83,14 +83,14 @@ declare function bibls:bibl() as xs:string?{
 };
 
 declare function bibls:abstract() as xs:string? {
-    if($bibls:pub-place != '') then 
-        concat("[ft:query(descendant::biblStruct/tei:note[@type='abstract'],'",data:clean-string($bibls:abstract),"',sf:facet())]")
+    if($bibls:abstract != '') then 
+        concat("[descendant::tei:note[ft:query(.,'",data:clean-string($bibls:abstract),"')][@type='abstract']]")
     else ()  
 };
 
 declare function bibls:keywordSearch() as xs:string? {
     if($bibls:keywordSearch != '') then 
-        concat("[ft:query(descendant::tei:listRelation/tei:relation[@type='subject']/tei:desc,'",data:clean-string($bibls:keywordSearch),"',sf:facet())]")
+        concat("[descendant::tei:desc[ft:query(.,'",data:clean-string($bibls:keywordSearch),"')][parent::tei:relation]]")
     else ()  
 };
 
@@ -98,17 +98,17 @@ declare function bibls:limits() as xs:string? {
 let $limits := 
     string-join(
             (
-            if(request:get-parameter('bookLimit', '') != 'true') then 
-               "descendant::tei:biblStruct[@type != 'book']" 
+            if(request:get-parameter('bookLimit', '') = 'true') then 
+               "descendant::tei:biblStruct[@type = 'book']" 
             else(), 
-            if(request:get-parameter('journalArticleLimit', '') != 'true') then 
-               "descendant::tei:biblStruct[@type != 'journalArticle']" 
+            if(request:get-parameter('journalArticleLimit', '') = 'true') then 
+               "descendant::tei:biblStruct[@type = 'journalArticle']" 
             else(), 
-            if(request:get-parameter('bookSectionLimit', '') != 'true') then 
-               "descendant::tei:biblStruct[@type != 'bookSection']" 
+            if(request:get-parameter('bookSectionLimit', '') = 'true') then 
+               "descendant::tei:biblStruct[@type = 'bookSection']" 
             else(),
-            if(request:get-parameter('thesisLimit', '') != 'true') then 
-               "descendant::tei:biblStruct[@type != 'thesis']" 
+            if(request:get-parameter('thesisLimit', '') = 'true') then 
+               "descendant::tei:biblStruct[@type = 'thesis']" 
             else()
             ),' or ')
 return         
@@ -124,7 +124,7 @@ declare function bibls:query-string() as xs:string? {
 if($bibls:subject != '') then bibls:subject()
 else if(request:get-parameter('bibl', '')) then bibls:bibl()
 else
- concat("collection('",$config:data-root,"/bibl/tei')//tei:body",
+ concat("collection('",$config:data-root,"/bibl/tei')//tei:TEI",
     data:keyword-search(),
     bibls:abstract(),
     bibls:keywordSearch(),
@@ -180,12 +180,13 @@ declare function bibls:search-form() {
             <div class="form-group">            
                 <label for="keywordSearch" class="col-sm-2 col-md-3  control-label">Search by Subject Keyword: </label>
                 <div class="col-sm-10 col-md-6 ">
-                    <div class="input-group ui-widget">
-                        <input type="text" data-ref="{$config:nav-base}/modules/conent-negotiation.xql" id="keywordSearch" name="keywordSearch" class="form-control keywordSearch" placeholder="" />
+                    <div class="input-group">
+                        <input type="text" id="qs" name="keywordSearch" class="form-control keyboard" placeholder=""/>
                         <div class="input-group-btn">{global:keyboard-select-menu('keywordSearch')}</div>
-                    </div> 
+                    </div>                 
                 </div>
             </div>
+            
             <hr/>         
             <div class="form-group">            
                 <label for="title" class="col-sm-2 col-md-3  control-label">Title: </label>
