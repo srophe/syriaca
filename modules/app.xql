@@ -235,6 +235,23 @@ declare %templates:wrap function app:pageination($node as node()*, $model as map
 };
 
 (:~
+ : Builds list of related records based on tei:relation with type = subject
+:)                   
+declare function app:subjectKeywords($node as node(), $model as map(*), $collection as xs:string, $label as xs:string?){
+    if($model("hits")//tei:listRelation[not(parent::tei:bibl/parent::tei:bibl)]/tei:relation[@ref='dc:subject']) then 
+        <div id="internalRelationships">
+           <h3>{if($label != '') then $label else 'Subject Keywords' }</h3> 
+           {
+            let $collectionNav := string($config:get-config//repo:collection[@name = $collection]/@app-root)
+            for $r in $model("hits")//tei:listRelation[not(parent::tei:bibl/parent::tei:bibl)]/tei:relation[@ref='dc:subject']
+            return 
+            <div class="indent"><a href="{$config:nav-base}{$collectionNav}search.html?facet-cbssKeywords={$r}">{normalize-space(($r//text()))}</a></div>
+           }
+        </div>
+    else ()
+};
+
+(:~
  : Builds list of related records based on tei:relation  
 :)                   
 declare function app:internal-relationships($node as node(), $model as map(*), $relationship-type as xs:string?, $display as xs:string?, $map as xs:string?,$label as xs:string?){
