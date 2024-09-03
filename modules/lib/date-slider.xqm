@@ -114,15 +114,15 @@ let $d :=
             for $dates in $hits/descendant::tei:state[@type="existence"]/@to | 
             $hits/descendant::tei:state[@type="existence"]/@from
             order by xs:date(slider:expand-dates($dates)) 
-            return $dates    
+            return xs:date($dates)    
 let $min := if($startDate) then 
                 slider:expand-dates($startDate) 
             else $d[1]
 let $max := 
             if($endDate) then slider:expand-dates($endDate) 
             else $d[last()]        
-let $minPadding := $min[1] - xs:yearMonthDuration('P10Y')
-let $maxPadding := $max[last()] + xs:yearMonthDuration('P10Y')
+let $minPadding := xs:date($min)[1] - xs:yearMonthDuration('P10Y')
+let $maxPadding := xs:date($max)[last()] + xs:yearMonthDuration('P10Y')
 let $cleanParams :=
         string-join(
         for $pramName in request:get-parameter-names()
