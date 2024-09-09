@@ -192,7 +192,7 @@ declare function bibls:search-form() {
                 <label for="title" class="col-sm-2 col-md-3  control-label">Title: </label>
                 <div class="col-sm-10 col-md-6 ">
                     <div class="input-group">
-                        <input type="text" id="title" name="title" class="form-control keyboard"  placeholder="Title of article, journal, book, or series"/>
+                        <input type="text" id="title" name="title" class="form-control keyboard"  placeholder=""/>
                         <div class="input-group-btn">{global:keyboard-select-menu('title')}</div>
                     </div>                 
                 </div>
@@ -201,7 +201,7 @@ declare function bibls:search-form() {
                 <label for="author" class="col-sm-2 col-md-3  control-label">Author/Editor: </label>
                 <div class="col-sm-10 col-md-6 ">
                     <div class="input-group">
-                        <input type="text" id="author" name="author" class="form-control keyboard" placeholder="First Last or Last, First"/>
+                        <input type="text" id="author" name="author" class="form-control keyboard" placeholder=""/>
                         <div class="input-group-btn">{global:keyboard-select-menu('author')}</div>
                     </div>                
                 </div>
@@ -210,7 +210,7 @@ declare function bibls:search-form() {
                 <label for="pub-place" class="col-sm-2 col-md-3  control-label">Publication Place: </label>
                 <div class="col-sm-10 col-md-6 ">
                     <div class="input-group">
-                        <input type="text" id="pubPlace" name="pub-place" class="form-control keyboard" placeholder="First Last or Last, First"/>
+                        <input type="text" id="pubPlace" name="pub-place" class="form-control keyboard" placeholder=""/>
                         <div class="input-group-btn">{global:keyboard-select-menu('pubPlace')}</div>
                     </div>                
                 </div>
@@ -219,7 +219,7 @@ declare function bibls:search-form() {
                 <label for="publisher" class="col-sm-2 col-md-3  control-label">Publisher: </label>
                 <div class="col-sm-10 col-md-6 ">
                     <div class="input-group">
-                    <input type="text" id="publisher" name="publisher" class="form-control keyboard" placeholder="Publisher Name"/>
+                    <input type="text" id="publisher" name="publisher" class="form-control keyboard" placeholder=""/>
                             <div class="input-group-btn">{global:keyboard-select-menu('publisher')}</div>
                     </div>                 
                 </div>
@@ -227,7 +227,7 @@ declare function bibls:search-form() {
             <div class="form-group">            
                 <label for="date" class="col-sm-2 col-md-3  control-label">Date: </label>
                 <div class="col-sm-10 col-md-6 ">
-                    <input type="text" id="date" name="date" class="form-control" placeholder="Year as YYYY"/>
+                    <input type="text" id="date" name="date" class="form-control" placeholder=""/>
                 </div>
             </div> 
              <div class="form-group">            
@@ -244,18 +244,10 @@ declare function bibls:search-form() {
                 <div class="col-sm-10 col-md-6 ">
                     <div class="input-group">
                         <input type="checkbox" id="bookLimit" name="bookLimit" value="true" checked="checked"/> Books 
-                    &#160;<input type="checkbox" id="journalArticleLimit" name="journalArticleLimit" value="true" checked="checked"/> Journal Articles
+                    &#160;<input type="checkbox" id="journalArticleLimit" name="journalArticleLimit" value="true" checked="checked"/> Journal Articles or Reviews
                     &#160;<input type="checkbox" id="bookSectionLimit" name="bookSectionLimit" value="true" checked="checked"/> Book Sections
                     &#160;<input type="checkbox" id="thesisLimit" name="thesisLimit" value="true" checked="checked"/> Thesis
                     </div>                 
-                </div>
-            </div> 
-           
-            <hr/>
-            <div class="form-group">            
-                <label for="idno" class="col-sm-2 col-md-3  control-label">Id Number: </label>
-                <div class="col-sm-10 col-md-2 ">
-                    <input type="text" id="idno" name="idno" class="form-control"  placeholder="Ex: 3490"/>
                 </div>
             </div> 
             </div>
