@@ -162,12 +162,22 @@ declare function data:get-records($collection as xs:string*, $element as xs:stri
             where 
                     if(request:get-parameter('view', '') = 'A-Z') then 
                         (matches($s,'\p{IsBasicLatin}|\p{IsLatin-1Supplement}|\p{IsLatinExtended-A}|\p{IsLatinExtended-B}','i') and matches($s,global:get-alpha-filter())) 
+                    else if(request:get-parameter('view', '') = 'Α-Ω') then
+                        (matches($s,'\p{IsGreekandCoptic}','i')) 
+                    else if(request:get-parameter('view', '') = 'А-Я') then
+                        (matches($s,'\p{IsCyrillic}','i'))
+                    else if(request:get-parameter('view', '') = 'Ա-Ֆ') then
+                        (matches($s,'\p{IsArmenian}','i'))   
+                    else if(request:get-parameter('view', '') = 'א-ת') then
+                        (matches($s,'\p{IsHebrew}','i'))     
                     else if(request:get-parameter('view', '') = 'ܐ-ܬ') then
                         (matches($s,'\p{IsSyriac}','i')) 
                     else if(request:get-parameter('view', '') = 'ا-ي') then
                        (matches($s,'\p{IsArabic}','i'))
+                       (:
                     else if(request:get-parameter('view', '') = 'other') then  
                         not(matches(substring(global:build-sort-string($s,''),1,1),'\p{IsSyriac}|\p{IsArabic}|\p{IsBasicLatin}|\p{IsLatin-1Supplement}|\p{IsLatinExtended-A}|\p{IsLatinExtended-B}|\p{IsLatinExtendedAdditional}','i'))
+                    :)
                     else matches($s[1],global:get-alpha-filter())
              return $hit
         else if(request:get-parameter('alpha-filter', '') != '' 
