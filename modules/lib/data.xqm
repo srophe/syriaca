@@ -132,7 +132,10 @@ declare function data:get-records($collection as xs:string*, $element as xs:stri
         if(request:get-parameter('sort', '') != '') then request:get-parameter('sort', '') 
         else if(request:get-parameter('sort-element', '') != '') then request:get-parameter('sort-element', '')[1]
         else ()         
-    let $hits := util:eval(data:build-collection-path($collection))[ft:query(., (),sf:facet-query())]                        
+    let $hits := 
+            if($collection = 'bibl') then
+                util:eval(concat(data:build-collection-path($collection),slider:date-filter('imprint')))[ft:query(., (),sf:facet-query())]
+            else util:eval(data:build-collection-path($collection))[ft:query(., (),sf:facet-query())]                        
     return 
         if(request:get-parameter('view', '') = 'map') then $hits  
         else if(request:get-parameter('view', '') = 'timeline') then $hits
@@ -257,6 +260,10 @@ declare function data:search($collection as xs:string*, $queryString as xs:strin
                         if(request:get-parameter('lang', '') = 'syr') then ft:field($hit, "titleSyriac")[1]
                         else if(request:get-parameter('lang', '') = 'ar') then ft:field($hit, "titleArabic")[1]
                         else ft:field($hit, "title")[1]
+                    else if($sort = 'pubDate' and $collection = ('bibl','cbss')) then
+                        ft:field($hit, "cbssPublicationDate")[1]
+                    else if($sort = 'pubPlace' and $collection = ('bibl','cbss')) then
+                        ft:field($hit, "cbssPubType")[1]    
                     else if(request:get-parameter('sort', '') != '' and request:get-parameter('sort', '') != 'title' and not(contains($sort, 'author'))) then
                         if($collection = 'bibl') then
                             data:add-sort-options-bibl($hit, $sort)

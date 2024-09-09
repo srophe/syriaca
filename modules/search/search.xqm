@@ -95,7 +95,7 @@ function search:show-hits($node as node()*, $model as map(*), $collection as xs:
             :)
         else if(not(empty($facetsDisplay)) or not(empty($dateSlider)) ) then 
             <div>
-                {page:pages($hits, $collection, $search:start, $search:perpage,$search-string, $sort-options)}
+                {if($collection = 'bibl') then () else page:pages($hits, $collection, $search:start, $search:perpage,$search-string, $sort-options)}
                 <div class="row" id="search-results" xmlns="http://www.w3.org/1999/xhtml">
                     <div class="col-md-8 col-md-push-4">
                         <div class="indent" id="search-results" xmlns="http://www.w3.org/1999/xhtml">{
