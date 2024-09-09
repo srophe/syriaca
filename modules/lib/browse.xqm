@@ -13,6 +13,7 @@ import module namespace config="http://srophe.org/srophe/config" at "../config.x
 import module namespace data="http://srophe.org/srophe/data" at "data.xqm";
 import module namespace tei2html="http://srophe.org/srophe/tei2html" at "../content-negotiation/tei2html.xqm";
 import module namespace timeline = "http://srophe.org/srophe/timeline" at "lib/timeline.xqm";
+import module namespace slider = "http://srophe.org/srophe/slider" at "../lib/date-slider.xqm";
 import module namespace sf="http://srophe.org/srophe/facets" at "facets.xql";
 import module namespace maps="http://srophe.org/srophe/maps" at "maps.xqm";
 import module namespace page="http://srophe.org/srophe/page" at "paging.xqm";
@@ -61,6 +62,31 @@ declare function browse:show-hits($node as node(), $model as map(*), $collection
     else if($browse:view = 'timeline') then 
         <div class="col-md-12 map-lg" xmlns="http://www.w3.org/1999/xhtml">
             {timeline:timeline($hits, 'Timeline', 'tei:teiHeader/tei:publicationStmt/tei:date')}
+        </div>
+    else if($collection = 'bibl') then
+        <div class="{if($browse:view = 'type' or $browse:view = 'date' or $browse:view = 'facets') then 'col-md-8 col-md-push-4' else 'col-md-12'}" xmlns="http://www.w3.org/1999/xhtml">
+           {( if(($browse:lang = 'syr') or ($browse:lang = 'ar')) then (attribute dir {"rtl"}) else(),
+                <div class="float-container">
+                    <div class="{if(($browse:lang = 'syr') or ($browse:lang = 'ar')) then "pull-left" else "pull-right paging"}">
+                         {page:pages($hits, $collection, $browse:start, $browse:perpage,'', $sort-options)}
+                    </div>
+                    {
+                    if($browse:view = 'type' or $browse:view = 'date' or $browse:view = 'facets' or ($collection = 'bibl' and $browse:view != 'A-Z')) then ()
+                    else browse:browse-abc-menu()
+                    }
+                </div>,
+                <div>{slider:browse-date-slider($hits, 'imprint')}</div>,
+                if($collection = 'bibl') then () 
+                else 
+                    <h3>{(
+                        if(($browse:lang = 'syr') or ($browse:lang = 'ar')) then (attribute dir {"rtl"}, attribute lang {"syr"}, attribute class {"label pull-right"}) 
+                        else attribute class {"label"},
+                        if($browse:alpha-filter != '') then $browse:alpha-filter else 'A')}</h3>,
+                <div class="results {if($browse:lang = 'syr' or $browse:lang = 'ar') then 'syr-list' else 'en-list'}">
+                    {if(($browse:lang = 'syr') or ($browse:lang = 'ar')) then (attribute dir {"rtl"}) else()}
+                    {browse:display-hits($hits,$collection)}
+                </div>
+            )}
         </div>
     else
         <div class="{if($browse:view = 'type' or $browse:view = 'date' or $browse:view = 'facets') then 'col-md-8 col-md-push-4' else 'col-md-12'}" xmlns="http://www.w3.org/1999/xhtml">

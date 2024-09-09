@@ -9,6 +9,7 @@ import module namespace functx="http://www.functx.com";
 import module namespace config="http://srophe.org/srophe/config" at "../config.xqm";
 import module namespace data="http://srophe.org/srophe/data" at "../lib/data.xqm";
 import module namespace global="http://srophe.org/srophe/global" at "../lib/global.xqm";
+import module namespace slider = "http://srophe.org/srophe/slider" at "date-slider.xqm";
 
 declare namespace tei="http://www.tei-c.org/ns/1.0";
 
@@ -134,7 +135,7 @@ else
     bibls:pub-place(),
     bibls:publisher(),
     bibls:date(),
-    bibls:idno()
+    bibls:idno(),slider:date-filter('imprint')
     )
 };
 

@@ -673,12 +673,12 @@ declare function sf:facet-title($element as item()*, $facet-definition as item()
 (: Author field :)
 declare function sf:field-author($element as item()*, $name as xs:string){
     if($element/descendant::tei:biblStruct) then 
-        if($element/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]/descendant-or-self::tei:surname) then
-            concat($element/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]/descendant-or-self::tei:surname, ',',  
-                $element/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]/descendant-or-self::tei:forename)
-        else if($element/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:editor[1]/descendant-or-self::tei:surname) then 
-               concat($element/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]/descendant-or-self::tei:surname, ',',  
-                $element/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[1]/descendant-or-self::tei:forename)
+        if($element/descendant::tei:biblStruct/descendant-or-self::tei:author[1]/tei:surname) then
+            concat($element/descendant::tei:biblStruct/descendant-or-self::tei:author[1]/tei:surname, ',',  
+                $element/descendant::tei:biblStruct/descendant-or-self::tei:author[1]/tei:forename)
+        else if($element/descendant::tei:biblStruct/descendant-or-self::tei:editor[1]/tei:surname) then 
+               concat($element/descendant::tei:biblStruct/descendant-or-self::tei:author[1]/tei:surname, ',',  
+                $element/descendant::tei:biblStruct/descendant-or-self::tei:author[1]/tei:forename)
         else  $element/descendant::tei:biblStruct/descendant::tei:author
     else $element/descendant::tei:titleStmt/descendant::tei:author
 };
@@ -711,6 +711,16 @@ declare function sf:facet-cbssPubType($element as item()*, $facet-definition as 
         else if($value = 'bookSection') then 'Book Section'
         else if($value = 'thesis') then 'Thesis'
         else $value
+};
+
+(: CBSS publication date field :)
+declare function sf:field-cbssPublicationDate($element as item()*, $name as xs:string){
+    $element/descendant::tei:imprint/tei:date
+};
+
+(: CBSS publication place field :)
+declare function sf:field-cbssPubPlace($element as item()*, $name as xs:string){
+    $element/descendant::tei:imprint/tei:pubPlace
 };
 
 (:

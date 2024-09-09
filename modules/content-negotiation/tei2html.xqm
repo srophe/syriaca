@@ -334,12 +334,13 @@ declare function tei2html:summary-view-bibl($nodes as node()*, $id as xs:string?
     let $title := ($nodes/descendant-or-self::*[@syriaca-tags='#syriaca-headword'][@xml:lang='en'],$nodes/descendant-or-self::tei:title[@level='a'],$nodes/descendant-or-self::tei:title[1])[1]
     let $series := for $a in distinct-values($nodes/descendant::tei:seriesStmt/tei:biblScope/tei:title)
                    return tei2html:translate-series($a)
+    let $citation := tei2html:tei2html($nodes/descendant::tei:bibl[@type='formatted'][@subtype='citation'])                   
     return 
         <div class="short-rec-view">
-            {tei2html:tei2html($nodes/descendant::tei:bibl[@type='formatted'][@subtype='citation'])}
+            {$citation}
             <button type="button" class="btn btn-sm btn-default copy-sm clipboard"  
-                data-toggle="tooltip" title="Copies record title &amp; URI to clipboard." 
-                data-clipboard-action="copy" data-clipboard-text="{normalize-space($title[1])} - {normalize-space($id[1])}">
+                data-toggle="tooltip" title="Copies citation &amp; URI to the clipboard." 
+                data-clipboard-action="copy" data-clipboard-text="{normalize-space($citation)} - {normalize-space($id[1])}">
                     <span class="glyphicon glyphicon-copy" aria-hidden="true"/>
             </button>
             {
