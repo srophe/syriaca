@@ -54,6 +54,10 @@ declare function browse:get-all($node as node(), $model as map(*), $collection a
 :)
 declare function browse:show-hits($node as node(), $model as map(*), $collection, $sort-options as xs:string*, $facets as xs:string?){
   let $hits := $model("hits")
+  let $rtl := 
+            if(($browse:lang = 'syr') or ($browse:lang = 'ar')) then 'rtl'
+            else if(($browse:view = 'ا-ي') or ($browse:view = 'ܐ-ܬ') or ($browse:view = 'א-ת'))   then 'rtl'
+            else 'ltr'
   return 
     if($browse:view = 'map') then 
         <div class="col-md-12 map-lg" xmlns="http://www.w3.org/1999/xhtml">
@@ -83,7 +87,7 @@ declare function browse:show-hits($node as node(), $model as map(*), $collection
                         else attribute class {"label"},
                         if($browse:alpha-filter != '') then $browse:alpha-filter else 'A')}</h3>,
                 <div class="results {if($browse:lang = 'syr' or $browse:lang = 'ar') then 'syr-list' else 'en-list'}">
-                    {if(($browse:lang = 'syr') or ($browse:lang = 'ar')) then (attribute dir {"rtl"}) else()}
+                    {if($rtl = 'rtl') then (attribute dir {"rtl"}) else()}
                     {browse:display-hits($hits,$collection)}
                 </div>
             )}
