@@ -11,6 +11,7 @@ import module namespace templates="http://exist-db.org/xquery/html-templating";
 (: Import Srophe application modules. :)
 import module namespace config="http://srophe.org/srophe/config" at "../config.xqm";
 import module namespace data="http://srophe.org/srophe/data" at "data.xqm";
+import module namespace global="http://srophe.org/srophe/global" at "../lib/global.xqm";
 import module namespace tei2html="http://srophe.org/srophe/tei2html" at "../content-negotiation/tei2html.xqm";
 import module namespace timeline = "http://srophe.org/srophe/timeline" at "lib/timeline.xqm";
 import module namespace slider = "http://srophe.org/srophe/slider" at "../lib/date-slider.xqm";
@@ -54,6 +55,8 @@ declare function browse:get-all($node as node(), $model as map(*), $collection a
 :)
 declare function browse:show-hits($node as node(), $model as map(*), $collection, $sort-options as xs:string*, $facets as xs:string?){
   let $hits := $model("hits")
+  let $facet-config := global:facet-definition-file($collection)
+  let $facetsDisplay := sf:display($model("hits"),$facet-config)
   let $rtl := 
             if(($browse:lang = 'syr') or ($browse:lang = 'ar')) then 'rtl'
             else if(($browse:view = 'ا-ي') or ($browse:view = 'ܐ-ܬ') or ($browse:view = 'א-ת'))   then 'rtl'
@@ -66,6 +69,18 @@ declare function browse:show-hits($node as node(), $model as map(*), $collection
     else if($browse:view = 'timeline') then 
         <div class="col-md-12 map-lg" xmlns="http://www.w3.org/1999/xhtml">
             {timeline:timeline($hits, 'Timeline', 'tei:teiHeader/tei:publicationStmt/tei:date')}
+        </div>
+    else if($browse:view = 'keywords' or $browse:view = '' or not($browse:view)) then 
+        <div class="col-md-12" xmlns="http://www.w3.org/1999/xhtml">
+            {browse:browse-abc-menu()}
+            {sf:displayKeywords($model("hits"),$facet-config, $browse:alpha-filter)}
+            {
+            if(request:get-parameter('facet-cbssKeywords', '') != '') then 
+               <div>
+               {browse:display-hits($hits,$collection)}
+               </div>
+            else ()
+            }
         </div>
     else if($collection = 'bibl') then
         <div class="{if($browse:view = 'type' or $browse:view = 'date' or $browse:view = 'facets') then 'col-md-8 col-md-push-4' else 'col-md-12'}" xmlns="http://www.w3.org/1999/xhtml">
@@ -216,7 +231,7 @@ declare function browse:browse-abc-menu(){
         <ul class="list-inline">
         {
             if(($browse:lang = 'syr')) then  
-                for $letter in tokenize('ܐ ܒ ܓ ܕ ܗ ܘ ܙ ܚ ܛ ܝ ܟ ܠ ܡ ܢ ܣ ܥ ܦ ܩ ܪ ܫ ܬ ALL', ' ')
+                for $letter in tokenize('ܐ ܒ ܓ ܕ ܗ ܘ ܙ ܚ ܛ ܝ ܟ ܠ ܡ ܢ ܣ ܥ ܦ ܩ ܪ ܫ ܬ ', ' ')
                 return 
                     <li class="syr-menu {if($browse:alpha-filter = $letter) then "selected badge" else()}" lang="syr"><a href="?lang={$browse:lang}&amp;alpha-filter={$letter}{if($browse:view != '') then concat('&amp;view=',$browse:view) else()}{if(request:get-parameter('element', '') != '') then concat('&amp;element=',request:get-parameter('element', '')) else()}">{$letter}</a></li>
             else if(($browse:lang = 'ar')) then  
@@ -224,14 +239,14 @@ declare function browse:browse-abc-menu(){
                 return 
                     <li class="ar-menu {if($browse:alpha-filter = $letter) then "selected badge" else()}" lang="ar"><a href="?lang={$browse:lang}&amp;alpha-filter={$letter}{if($browse:view != '') then concat('&amp;view=',$browse:view) else()}{if(request:get-parameter('element', '') != '') then concat('&amp;element=',request:get-parameter('element', '')) else()}">{$letter}</a></li>
             else if($browse:lang = 'ru') then 
-                for $letter in tokenize('А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ы Ь Э Ю Я ALL',' ')
+                for $letter in tokenize('А Б В Г Д Е Ё Ж З И Й К Л М Н О П Р С Т У Ф Х Ц Ч Ш Щ Ъ Ы Ь Э Ю Я ',' ')
                 return 
                 <li>{if($browse:alpha-filter = $letter) then attribute class {"selected badge"} else()}<a href="?lang={$browse:lang}&amp;alpha-filter={$letter}{if($browse:view != '') then concat('&amp;view=',$browse:view) else()}{if(request:get-parameter('element', '') != '') then concat('&amp;element=',request:get-parameter('element', '')) else()}">{$letter}</a></li>            
             else                
-                for $letter in tokenize('A B C D E F G H I J K L M N O P Q R S T U V W X Y Z ALL', ' ')
+                for $letter in tokenize('A B C D E F G H I J K L M N O P Q R S T U V W X Y Z ', ' ')
                 return
                     <li>{if($browse:alpha-filter = $letter) then attribute class {"selected badge"} else()}
-                    <a href="?lang={$browse:lang}&amp;alpha-filter={$letter}{if(request:get-parameter('element', '') != '') then concat('&amp;element=',request:get-parameter('element', '')) else()}">{$letter}</a></li>
+                    <a href="?lang={$browse:lang}&amp;alpha-filter={$letter}{if($browse:view = 'keywords') then '&amp;view=keywords' else ()}{if(request:get-parameter('element', '') != '') then concat('&amp;element=',request:get-parameter('element', '')) else()}">{$letter}</a></li>
         }
         </ul>
     </div>
