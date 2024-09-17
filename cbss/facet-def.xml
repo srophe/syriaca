@@ -14,6 +14,15 @@
         <order-by direction="ascending">value</order-by>
     </facet-definition>
     <!--
+    <facet-definition name="cbssLang" label="Language">
+        <group-by function="cbssLanguage">
+            <sub-path>descendant::tei:relation[@ref="dc:subject"]</sub-path>
+        </group-by>
+        <max-values show="5">40</max-values>
+        <order-by direction="ascending">value</order-by>
+    </facet-definition>
+    -->
+    <!--
     <facet-definition name="publicationDate" label="Language of Publication">
         <group-by>
             <sub-path>descendant::tei:biblStruct/descendant::tei:textLang/@mainLang</sub-path>
@@ -23,7 +32,7 @@
     </facet-definition>
     -->
     <facet-definition name="cbssKeywords" label="Keywords">
-        <group-by>
+        <group-by function="cbssKeywords">
             <sub-path>descendant::tei:relation[@ref="dc:subject"]</sub-path>
         </group-by>
         <max-values show="5">40</max-values>

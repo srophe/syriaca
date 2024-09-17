@@ -287,7 +287,45 @@ declare function sf:display($result as item()*, $facet-definition as item()*) {
         else () 
 };
 
-
+(:sf:displayKeywords:)
+declare function sf:displayKeywords($result as item()*, $facet-definition as item()*, $sort-option as xs:string*) {
+    let $facet-definitions := 
+        if($facet-definition/self::facet:facet-definition) then 'definition' 
+        else $facet-definition/facet:facets/facet:facet-definition[@name='cbssKeywords']
+    for $facet in $facet-definitions
+    let $name := string($facet/@name)
+    let $count := if(request:get-parameter(concat('all-',$name), '') = 'on' ) then () else string($facet/facet:max-values/@show)
+    let $f := ft:facets($result, $name, ())
+    let $sortedFacets :=  
+                        for $key at $p in map:keys($f)
+                        let $value := map:get($f, $key)
+                        order by $key ascending
+                        return 
+                            <facet label="{$key}" value="{$value}"/>
+    let $sort := if($sort-option != '') then $sort-option else 'A'                            
+    let $total := count($sortedFacets)                            
+    return 
+        <span class="facet-list">
+                {(
+                    for $facet at $n in $sortedFacets[matches(@label,concat('^[',$sort,lower-case($sort),']'))]
+                    let $label := string($facet/@label)
+                    let $count := string($facet/@value)
+                    let $param-name := concat('facet-',$name)
+                    let $facet-param := concat($param-name,'=',encode-for-uri($label))
+                    let $active := if(request:get-parameter($param-name, '') = $label) then 'active' else ()
+                    let $url-params := 
+                                    if($active) then replace(replace(replace(request:get-query-string(),encode-for-uri($label),''),concat($param-name,'='),''),'&amp;&amp;','&amp;')
+                                    else if(request:get-parameter('start', '')) then '&amp;start=1'
+                                    else if(request:get-query-string() != '') then concat($facet-param,'&amp;',request:get-query-string())
+                                    else $facet-param
+                    
+                    return 
+                        <a href="search.html?{$url-params}" class="facet-label {$active}" num="{$n}">
+                                    {if($active) then (<span class="glyphicon glyphicon-remove facet-remove"></span>)else ()}
+                                    {$label} <span class="count"> ({$count})</span> </a>
+                    )}
+                </span>
+};
 (:~ 
  : Add generic sort option to facets 
  : @depreciated 
@@ -748,6 +786,13 @@ return
     else if(matches($author,'\p{IsLatinExtended-B}')) then 'English'
     else if(matches($author,'\p{IsLatinExtendedAdditional}')) then 'English'
     else 'English'  
+};
+
+(: CBSS publication place field :)
+declare function sf:facet-cbssKeywords($element as item()*, $facet-definition as item(), $name as xs:string){
+    for $f in $element/descendant::tei:relation[@ref="dc:subject"]
+    return 
+        normalize-space(string-join($f/descendant::text(),' '))
 };
 
 
