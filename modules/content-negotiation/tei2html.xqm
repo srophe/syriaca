@@ -337,7 +337,7 @@ declare function tei2html:summary-view-bibl($nodes as node()*, $id as xs:string?
     let $citation := tei2html:tei2html($nodes/descendant::tei:bibl[@type='formatted'][@subtype='citation'])                   
     return 
         <div class="short-rec-view">
-            {$citation}
+            <bdi>{$citation}</bdi>
             <button type="button" class="btn btn-sm btn-default copy-sm clipboard"  
                 data-toggle="tooltip" title="Copies citation &amp; URI to the clipboard." 
                 data-clipboard-action="copy" data-clipboard-text="{normalize-space($citation)} - {normalize-space($id[1])}">

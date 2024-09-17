@@ -1365,7 +1365,7 @@
         <h4>Publication</h4>
         <div class="indent">
             <xsl:apply-templates select="t:title" mode="full"/>
-            <xsl:apply-templates select="*[not(self::t:title)]" mode="full"/>
+            <xsl:apply-templates select="*[not(self::t:title) and not(self::t:idno)]" mode="full"/>
         </div>
     </xsl:template>
     <xsl:template match="t:series" mode="full">
@@ -1375,6 +1375,7 @@
             <xsl:apply-templates select="*[not(self::t:title)]" mode="full"/>
         </div>
     </xsl:template>
+    <xsl:template match="t:note" mode="full"/>
     <xsl:template match="*" mode="full">
         <p>
            <span class="tei-label">
