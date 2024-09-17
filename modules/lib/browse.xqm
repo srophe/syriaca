@@ -75,7 +75,8 @@ declare function browse:show-hits($node as node(), $model as map(*), $collection
                          {page:pages($hits, $collection, $browse:start, $browse:perpage,'', $sort-options)}
                     </div>
                     {
-                    if($browse:view = 'type' or $browse:view = 'date' or $browse:view = 'facets' or ($collection = 'bibl' and $browse:view != 'A-Z')) then ()
+                    if($browse:alpha-filter != '') then browse:browse-abc-menu()
+                    else if($browse:view = 'type' or $browse:view = 'date' or $browse:view = 'facets' or ($collection = 'bibl' and $browse:view != 'A-Z')) then ()
                     else browse:browse-abc-menu()
                     }
                 </div>,
@@ -229,7 +230,8 @@ declare function browse:browse-abc-menu(){
             else                
                 for $letter in tokenize('A B C D E F G H I J K L M N O P Q R S T U V W X Y Z ALL', ' ')
                 return
-                    <li>{if($browse:alpha-filter = $letter) then attribute class {"selected badge"} else()}<a href="?lang={$browse:lang}&amp;alpha-filter={$letter}{if($browse:view != '') then concat('&amp;view=',$browse:view) else()}{if(request:get-parameter('element', '') != '') then concat('&amp;element=',request:get-parameter('element', '')) else()}">{$letter}</a></li>
+                    <li>{if($browse:alpha-filter = $letter) then attribute class {"selected badge"} else()}
+                    <a href="?lang={$browse:lang}&amp;alpha-filter={$letter}{if(request:get-parameter('element', '') != '') then concat('&amp;element=',request:get-parameter('element', '')) else()}">{$letter}</a></li>
         }
         </ul>
     </div>
