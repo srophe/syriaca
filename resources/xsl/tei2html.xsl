@@ -327,7 +327,13 @@
                 </div>
                 <h3>Full Citation Information</h3>
                 <div class="section indent">
+                    <h4>Permanent Identifiers</h4>
+                    <div class="indent">
+                        <xsl:apply-templates select="descendant::t:idno" mode="full"/>
+                    </div>
+                    <bdi>
                     <xsl:apply-templates mode="full"/>
+                    </bdi>
                 </div>
                 <div class="info-btns">  
                     <xsl:variable name="status" select="string(/descendant-or-self::t:revisionDesc/@status)"/>
@@ -1355,17 +1361,25 @@
     
     <!-- T -->
     <xsl:template match="t:TEI">
-        <!-- Header -->
-        <xsl:call-template name="h1"/>
-        <xsl:apply-templates select="descendant::t:sourceDesc/t:msDesc"/>
-        <!-- MSS display -->
-        <xsl:if test="descendant::t:sourceDesc/t:msDesc">
-            <xsl:apply-templates select="descendant::t:sourceDesc/t:msDesc"/>
-        </xsl:if>
-        <!-- Body -->
-        <xsl:apply-templates select="descendant::t:body"/>
-        <!-- Citation Information -->
-        <xsl:apply-templates select="t:teiHeader" mode="citation"/>
+        <xsl:choose>
+            <xsl:when test="contains($resource-id,'cbss')">
+                <xsl:apply-templates select="descendant::t:biblStruct"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- Header -->
+                <xsl:call-template name="h1"/>
+                <xsl:apply-templates select="descendant::t:sourceDesc/t:msDesc"/>
+                <!-- MSS display -->
+                <xsl:if test="descendant::t:sourceDesc/t:msDesc">
+                    <xsl:apply-templates select="descendant::t:sourceDesc/t:msDesc"/>
+                </xsl:if>
+                <!-- Body -->
+                <xsl:apply-templates select="descendant::t:body"/>
+                <!-- Citation Information -->
+                <xsl:apply-templates select="t:teiHeader" mode="citation"/>
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
     <xsl:template match="t:teiHeader" mode="#all">
         <xsl:choose>

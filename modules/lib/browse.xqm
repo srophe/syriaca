@@ -54,6 +54,10 @@ declare function browse:get-all($node as node(), $model as map(*), $collection a
 :)
 declare function browse:show-hits($node as node(), $model as map(*), $collection, $sort-options as xs:string*, $facets as xs:string?){
   let $hits := $model("hits")
+  let $rtl := 
+            if(($browse:lang = 'syr') or ($browse:lang = 'ar')) then 'rtl'
+            else if(($browse:view = 'ا-ي') or ($browse:view = 'ܐ-ܬ') or ($browse:view = 'א-ת'))   then 'rtl'
+            else 'ltr'
   return 
     if($browse:view = 'map') then 
         <div class="col-md-12 map-lg" xmlns="http://www.w3.org/1999/xhtml">
@@ -71,7 +75,8 @@ declare function browse:show-hits($node as node(), $model as map(*), $collection
                          {page:pages($hits, $collection, $browse:start, $browse:perpage,'', $sort-options)}
                     </div>
                     {
-                    if($browse:view = 'type' or $browse:view = 'date' or $browse:view = 'facets' or ($collection = 'bibl' and $browse:view != 'A-Z')) then ()
+                    if($browse:alpha-filter != '') then browse:browse-abc-menu()
+                    else if($browse:view = 'type' or $browse:view = 'date' or $browse:view = 'facets' or ($collection = 'bibl' and $browse:view != 'A-Z')) then ()
                     else browse:browse-abc-menu()
                     }
                 </div>,
@@ -83,7 +88,7 @@ declare function browse:show-hits($node as node(), $model as map(*), $collection
                         else attribute class {"label"},
                         if($browse:alpha-filter != '') then $browse:alpha-filter else 'A')}</h3>,
                 <div class="results {if($browse:lang = 'syr' or $browse:lang = 'ar') then 'syr-list' else 'en-list'}">
-                    {if(($browse:lang = 'syr') or ($browse:lang = 'ar')) then (attribute dir {"rtl"}) else()}
+                    {if($rtl = 'rtl') then (attribute dir {"rtl"}) else()}
                     {browse:display-hits($hits,$collection)}
                 </div>
             )}
@@ -225,7 +230,8 @@ declare function browse:browse-abc-menu(){
             else                
                 for $letter in tokenize('A B C D E F G H I J K L M N O P Q R S T U V W X Y Z ALL', ' ')
                 return
-                    <li>{if($browse:alpha-filter = $letter) then attribute class {"selected badge"} else()}<a href="?lang={$browse:lang}&amp;alpha-filter={$letter}{if($browse:view != '') then concat('&amp;view=',$browse:view) else()}{if(request:get-parameter('element', '') != '') then concat('&amp;element=',request:get-parameter('element', '')) else()}">{$letter}</a></li>
+                    <li>{if($browse:alpha-filter = $letter) then attribute class {"selected badge"} else()}
+                    <a href="?lang={$browse:lang}&amp;alpha-filter={$letter}{if(request:get-parameter('element', '') != '') then concat('&amp;element=',request:get-parameter('element', '')) else()}">{$letter}</a></li>
         }
         </ul>
     </div>
