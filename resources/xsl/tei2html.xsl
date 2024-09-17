@@ -331,8 +331,9 @@
                     <div class="indent">
                         <xsl:apply-templates select="descendant::t:idno" mode="full"/>
                     </div>
-                    
+                    <bdi>
                     <xsl:apply-templates mode="full"/>
+                    </bdi>
                 </div>
                 <div class="info-btns">  
                     <xsl:variable name="status" select="string(/descendant-or-self::t:revisionDesc/@status)"/>

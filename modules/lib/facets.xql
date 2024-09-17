@@ -86,7 +86,8 @@ declare function sf:build-index(){
                     <field name="idno" expression="sf:field(.,'idno')"/>,
                     <field name="titleSyriac" expression="sf:field(., 'titleSyriac')"/>,
                     <field name="titleArabic" expression="sf:field(., 'titleArabic')"/>,
-                    <field name="author" expression="sf:field(., 'author')"/>)
+                    <field name="author" expression="sf:field(., 'author')"/>,
+                    <field name="cbssLangFilter" expression="sf:field(., 'cbssLangFilter')"/>)
             }
             </text>
             <text qname="tei:fileDesc"/>
@@ -677,7 +678,7 @@ declare function sf:field-author($element as item()*, $name as xs:string){
             concat($element/descendant::tei:biblStruct/descendant-or-self::tei:author[1]/tei:surname, ',',  
                 $element/descendant::tei:biblStruct/descendant-or-self::tei:author[1]/tei:forename)
         else if($element/descendant::tei:biblStruct/descendant-or-self::tei:editor[1]/tei:surname) then 
-               concat($element/descendant::tei:biblStruct/descendant-or-self::tei:author[1]/tei:surname, ',',  
+               concat($element/descendant::tei:biblStruct/descendant-or-self::tei:editor[1]/tei:surname, ',',  
                 $element/descendant::tei:biblStruct/descendant-or-self::tei:author[1]/tei:forename)
         else  $element/descendant::tei:biblStruct/descendant::tei:author
     else $element/descendant::tei:titleStmt/descendant::tei:author
@@ -722,6 +723,33 @@ declare function sf:field-cbssPublicationDate($element as item()*, $name as xs:s
 declare function sf:field-cbssPubPlace($element as item()*, $name as xs:string){
     $element/descendant::tei:imprint/tei:pubPlace
 };
+
+(: CBSS publication place field :)
+declare function sf:field-cbssLangFilter($element as item()*, $name as xs:string){
+let $a := 
+    if($element/descendant::tei:biblStruct) then 
+        if($element/descendant::tei:biblStruct/descendant::tei:author/tei:surname) then
+            $element/descendant::tei:biblStruct/descendant::tei:author/tei:surname
+        else if($element/descendant::tei:biblStruct/descendant::tei:editor/tei:surname) then 
+               $element/descendant::tei:biblStruct/descendant::tei:editor/tei:surname
+        else $element/descendant::tei:biblStruct/descendant::tei:author
+    else $element/descendant::tei:titleStmt/descendant::tei:author
+for $as in $a
+let $author := replace($as,'[^\w+]','')
+return 
+    if(matches($author,'\p{IsBasicLatin}')) then 'English'
+    else if(matches($author,'\p{IsGreekandCoptic}')) then 'Greek'
+    else if(matches($author,"\p{IsCyrillic}")) then 'Cyrillic'
+    else if(matches($author,"\p{IsArabic}")) then 'Arabic'
+    else if(matches($author,"\p{IsHebrew}")) then 'Hebrew'
+    else if(matches($author,"\p{IsSyriac}")) then 'Syriac'
+    else if(matches($author,'\p{IsArmenian}')) then 'Armenian'
+    else if(matches($author,'\p{IsLatinExtended-A}')) then 'English'
+    else if(matches($author,'\p{IsLatinExtended-B}')) then 'English'
+    else if(matches($author,'\p{IsLatinExtendedAdditional}')) then 'English'
+    else 'English'  
+};
+
 
 (:
 declare function facet:collection($results as item()*, $facet-definition as element(facet:facet-definition)?){
