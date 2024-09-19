@@ -77,7 +77,7 @@ declare function app:get-work($node as node(), $model as map(*)) {
 declare %templates:wrap function app:record-title($node as node(), $model as map(*), $collection as xs:string?){
     if(request:get-parameter('id', '')) then
        if(contains($model("hits")/descendant::tei:titleStmt[1]/tei:title[1]/text(),' — ')) then
-            substring-before($model("hits")/descendant::tei:titleStmt[1]/tei:title[1],' — ')
+            substring-before($model("hits")[1]/descendant::tei:titleStmt[1]/tei:title[1],' — ')
        else $model("hits")/descendant::tei:titleStmt[1]/tei:title[1]/text()
     else if($collection != '') then
         string(config:collection-vars($collection)/@title)

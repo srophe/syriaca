@@ -106,7 +106,7 @@ declare function tei2html:tei2html($nodes as node()*) as item()* {
  : Display idno with copy icon and paging (if relevant)
 :)
 declare function tei2html:idno-title-display($id){
-    let $id-string := substring-after(tokenize($id,'/')[last()],'-')
+    let $id-string := substring-after(tokenize($id[1],'/')[last()],'-')
     let $id-num := if($id-string castable as xs:integer) then $id-string cast as xs:integer else 0
     let $next := $id-num + 1
     let $prev := $id-num - 1
