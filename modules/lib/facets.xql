@@ -19,7 +19,6 @@ xquery version "3.1";
 :)
 
 module namespace sf = "http://srophe.org/srophe/facets";
-import module namespace functx="http://www.functx.com";
 import module namespace config="http://srophe.org/srophe/config" at "../config.xqm";
 import module namespace slider = "http://srophe.org/srophe/slider" at "date-slider.xqm";
 declare namespace srophe="https://srophe.app";
@@ -41,6 +40,21 @@ declare variable $sf:sortFields :=  let $fields :=
                                         else ("title", "idno", "author","titleSyriac","titleArabic")
                                     return map { "fields": $fields };
 
+declare function sf:words-to-camel-case
+  ( $arg as xs:string? )  as xs:string {
+
+     string-join((tokenize($arg,'\s+')[1],
+       for $word in tokenize($arg,'\s+')[position() > 1]
+       return sf:capitalize-first($word))
+      ,'')
+ };
+ 
+ declare function sf:capitalize-first
+  ( $arg as xs:string? )  as xs:string? {
+
+   concat(upper-case(substring($arg,1,1)),
+             substring($arg,2))
+ };
 (:~ 
  : Build indexes for fields and facets as specified in facet-def.xml and search-config.xml files
  : Note: Hold off on fields until boost has been added. See: https://github.com/eXist-db/exist/issues/3403
@@ -58,14 +72,14 @@ declare function sf:build-index(){
                 group by $facet-grp := $f/@name
                 return 
                     if($f[1]/facet:group-by/@function != '') then 
-                       (<facet dimension="{functx:words-to-camel-case($facet-grp)}" expression="sf:facet(., {concat("'",$path[1],"'")}, {concat("'",$facet-grp,"'")})"/>(:,
-                        <field name="facet-{functx:words-to-camel-case($facet-grp)}" expression="sf:facet(descendant-or-self::tei:body, {concat("'",$path[1],"'")}, {concat("'",$facet-grp,"'")})"/>:))
+                       (<facet dimension="{sf:words-to-camel-case($facet-grp)}" expression="sf:facet(., {concat("'",$path[1],"'")}, {concat("'",$facet-grp,"'")})"/>(:,
+                        <field name="facet-{sf:words-to-camel-case($facet-grp)}" expression="sf:facet(descendant-or-self::tei:body, {concat("'",$path[1],"'")}, {concat("'",$facet-grp,"'")})"/>:))
                     else if($f[1]/facet:range) then
-                       (<facet dimension="{functx:words-to-camel-case($facet-grp)}" expression="sf:facet(., {concat("'",$path[1],"'")}, {concat("'",$facet-grp,"'")})"/>(:,
-                       <field name="facet-{functx:words-to-camel-case($facet-grp)}" expression="sf:facet(descendant-or-self::tei:body, {concat("'",$path[1],"'")}, {concat("'",$facet-grp,"'")})"/>:))
+                       (<facet dimension="{sf:words-to-camel-case($facet-grp)}" expression="sf:facet(., {concat("'",$path[1],"'")}, {concat("'",$facet-grp,"'")})"/>(:,
+                       <field name="facet-{sf:words-to-camel-case($facet-grp)}" expression="sf:facet(descendant-or-self::tei:body, {concat("'",$path[1],"'")}, {concat("'",$facet-grp,"'")})"/>:))
                     else 
-                        (<facet dimension="{functx:words-to-camel-case($facet-grp)}" expression="{replace($f[1]/facet:group-by/facet:sub-path/text(),"&#34;","'")}"/>(:,
-                        <field name="facet-{functx:words-to-camel-case($facet-grp)}" expression="{replace($f[1]/facet:group-by/facet:sub-path/text(),"&#34;","'")}"/>:))
+                        (<facet dimension="{sf:words-to-camel-case($facet-grp)}" expression="{replace($f[1]/facet:group-by/facet:sub-path/text(),"&#34;","'")}"/>(:,
+                        <field name="facet-{sf:words-to-camel-case($facet-grp)}" expression="{replace($f[1]/facet:group-by/facet:sub-path/text(),"&#34;","'")}"/>:))
             return 
                 $facets
             }
