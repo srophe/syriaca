@@ -100,8 +100,7 @@ declare function sf:build-index(){
                     <field name="idno" expression="sf:field(.,'idno')"/>,
                     <field name="titleSyriac" expression="sf:field(., 'titleSyriac')"/>,
                     <field name="titleArabic" expression="sf:field(., 'titleArabic')"/>,
-                    <field name="author" expression="sf:field(., 'author')"/>,
-                    <field name="cbssLangFilter" expression="sf:field(., 'cbssLangFilter')"/>)
+                    <field name="author" expression="sf:field(., 'author')"/>)
             }
             </text>
             <text qname="tei:fileDesc"/>
