@@ -17,7 +17,8 @@ declare namespace util="http://exist-db.org/xquery/util";
 :)
 declare function bibl2html:citation($nodes as node()*) {
     if($nodes/descendant::tei:monogr and not($nodes/descendant::tei:analytic)) then 
-        bibl2html:monograph($nodes/descendant::tei:monogr)
+        for $m in $nodes/descendant::tei:monogr
+        return bibl2html:monograph($m)
     else if($nodes/descendant::tei:analytic) then bibl2html:analytic($nodes/descendant::tei:analytic)
     else bibl2html:record($nodes/descendant-or-self::tei:teiHeader)
 };
@@ -124,8 +125,8 @@ declare function bibl2html:emit-responsible-persons($nodes as node()*, $num as x
                 for $n at $p in subsequence($nodes, 1, $num)
                 return 
                     if($p = ($num - 1)) then 
-                        (normalize-space(bibl2html:person($n)), ' and ')
-                    else concat(normalize-space(bibl2html:person($n)),', ')
+                        (normalize-space(string-join(bibl2html:person($n),' ')), ' and ')
+                    else concat(normalize-space(string-join(bibl2html:person($n),' ')),', ')
     return replace(string-join($persons),'\s+$','')                    
 };
 
