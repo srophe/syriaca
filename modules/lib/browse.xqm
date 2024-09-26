@@ -70,19 +70,20 @@ declare function browse:show-hits($node as node(), $model as map(*), $collection
         <div class="col-md-12 map-lg" xmlns="http://www.w3.org/1999/xhtml">
             {timeline:timeline($hits, 'Timeline', 'tei:teiHeader/tei:publicationStmt/tei:date')}
         </div>
-    else if($browse:view = 'keywords' or $browse:view = '' or not($browse:view)) then 
-        <div class="col-md-12" xmlns="http://www.w3.org/1999/xhtml">
-            {browse:browse-abc-menu()}
-            {sf:displayKeywords($model("hits"),$facet-config, $browse:alpha-filter)}
-            {
-            if(request:get-parameter('facet-cbssKeywords', '') != '') then 
-               <div>
-               {browse:display-hits($hits,$collection)}
-               </div>
-            else ()
-            }
-        </div>
     else if($collection = 'bibl') then
+        if($browse:view = 'keywords' or $browse:view = '' or not($browse:view)) then 
+            <div class="col-md-12" xmlns="http://www.w3.org/1999/xhtml">
+                {browse:browse-abc-menu()}
+                {sf:displayKeywords($model("hits"),$facet-config, $browse:alpha-filter)}
+                {
+                if(request:get-parameter('facet-cbssKeywords', '') != '') then 
+                   <div>
+                   {browse:display-hits($hits,$collection)}
+                   </div>
+                else ()
+                }
+            </div>
+       else  
         <div class="{if($browse:view = 'type' or $browse:view = 'date' or $browse:view = 'facets') then 'col-md-8 col-md-push-4' else 'col-md-12'}" xmlns="http://www.w3.org/1999/xhtml">
            {( if(($browse:lang = 'syr') or ($browse:lang = 'ar')) then (attribute dir {"rtl"}) else(),
                 <div class="float-container">
