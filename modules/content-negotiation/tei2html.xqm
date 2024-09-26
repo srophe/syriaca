@@ -334,13 +334,15 @@ declare function tei2html:summary-view-bibl($nodes as node()*, $id as xs:string?
     let $title := ($nodes/descendant-or-self::*[@syriaca-tags='#syriaca-headword'][@xml:lang='en'],$nodes/descendant-or-self::tei:title[@level='a'],$nodes/descendant-or-self::tei:title[1])[1]
     let $series := for $a in distinct-values($nodes/descendant::tei:seriesStmt/tei:biblScope/tei:title)
                    return tei2html:translate-series($a)
-    let $citation := tei2html:tei2html($nodes/descendant::tei:bibl[@type='formatted'][@subtype='citation'])                   
+    let $citation := if($nodes/descendant::tei:bibl[@type='formatted'][@subtype='citation']) then 
+                        tei2html:tei2html($nodes/descendant::tei:bibl[@type='formatted'][@subtype='citation'])
+                     else bibl2html:citation($nodes/descendant::tei:biblStruct)                   
     return 
         <div class="short-rec-view">
             <bdi>{$citation}</bdi>
             <button type="button" class="btn btn-sm btn-default copy-sm clipboard"  
                 data-toggle="tooltip" title="Copies citation &amp; URI to the clipboard." 
-                data-clipboard-action="copy" data-clipboard-text="{normalize-space($citation)} - {normalize-space($id[1])}">
+                data-clipboard-action="copy" data-clipboard-text="{normalize-space((string-join($citation,' ')))} - {normalize-space($id[1])}">
                     <span class="glyphicon glyphicon-copy" aria-hidden="true"/>
             </button>
             {

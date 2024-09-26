@@ -145,6 +145,8 @@ else if(replace($exist:path, $exist:resource,'') =  $exist:record-uris) then
                            else $id
         let $id := if($config:get-config//repo:collection[ends-with(@record-URI-pattern, $record-uri-root)]) then
                         concat($config:get-config//repo:collection[ends-with(@record-URI-pattern, $record-uri-root)][1]/@record-URI-pattern,$id)
+                   else if(contains($record-uri-root,'/bibl/')) then
+                        concat('http://syriaca.org/bibl/',$id)
                    else $id
         let $html-path := concat($config:get-config//repo:collection[ends-with(@record-URI-pattern, $record-uri-root)][1]/@app-root,'record.html')
         let $format := fn:tokenize($exist:resource, '\.')[fn:last()]
