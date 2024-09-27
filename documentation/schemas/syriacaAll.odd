@@ -479,7 +479,7 @@
           </constraintSpec>
           <constraintSpec ident="titleWithExternalURL" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:text//tei:bibl[tei:ptr/@target/not(contains(., 'syriaca.org'))]">
+              <sch:rule context="//tei:text//tei:bibl[tei:ptr/@target[not(contains(., 'syriaca.org'))]]">
                 <sch:assert test="tei:title/text() = tei:ptr/@target">This &lt;bibl&gt; must have a child &lt;title&gt; element that equals the value of the @target attribute on the sibling &lt;ptr&gt; element.</sch:assert>
               </sch:rule>
             </constraint>
