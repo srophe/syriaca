@@ -1,135 +1,555 @@
-<div xmlns="http://www.w3.org/1999/xhtml" xmlns:xi="http://www.w3.org/2001/XInclude" data-template="templates:surround" data-template-with="templates/page.html" data-template-at="content">
-    <div class="image-banner">
-    <span class="img-credit">
-        <label>Photo Credit:</label>Decorative Arch, Resafa, Syria. Copyright, Daniel Schwartz.
-        <button class="btn btn-link white-link" data-toggle="collapse" data-target="#img-rights">
-            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"/>
-        </button>
-        <span id="img-rights" class="collapse"/>
-    </span>
-</div>
-    <div class="main-content-block">
-    <div class="row">
-        <div class="col-md-8">
-            <h1>
-                    <a href="http://syriaca.org/">Syriaca.org</a> Manuscript Training Materials and Links</h1>
-            <p>Your main resources will be the manual and the videos (and perhaps their transcript). The blank template also has some instructions included,
-                as you will see when you open it or watch the videos. The other files are for the coding process itself.</p>
-            <div id="online">
-            <h2 class="about">Online Resources</h2>
-                <ul>
-                    <li>
-                            <a href="https://docs.google.com/spreadsheet/ccc?key=0Ap588DBrLAy8dGgtOU4yOTlGRmVHZVo2clRWeWp0VFE">The Wright Decoder</a>
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:srophe="https://srophe.app">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      <title data-template="app:record-title">App Title</title>
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      
+      <link rel="shortcut icon" href="/resources/images/fav-icons/syriaca-favicon.ico" />
+      
+      <!-- Bootstrap 3 -->
+      
+      <link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/bootstrap.min.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/sm-core-css.css" />
+      
+      <!-- Srophe styles -->
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/syr-icon-fonts.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/style.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/syriaca.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/slider.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/lightslider.css" />
+      
+      <link rel="stylesheet" type="text/css" media="print" href="/resources/css/print.css" />
+      
+      <!-- Leaflet -->
+      
+      <link rel="stylesheet" href="/resources/leaflet/leaflet.css" />
+      
+      <link rel="stylesheet" href="/resources/leaflet/leaflet.awesome-markers.css" />
+      <script defer="defer" data-domain="syriaca.org" src="https://plausible.io/js/plausible.js"></script>
+      
+      <!-- JQuery -->
+      <link href="/resources/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+      <script type="text/javascript" src="/resources/js/jquery.min.js"></script>
+      <script type="text/javascript" src="/resources/jquery-ui/jquery-ui.min.js"></script>
+      <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
+      <script type="text/javascript" src="/resources/js/clipboard.min.js"></script>
+      
+      <!-- Bootstrap -->
+      <script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script>
+      
+      <!-- ReCaptcha -->
+      <script src="https://www.google.com/recaptcha/api.js" type="text/javascript" async="async" defer="defer"></script>
+      
+      <!-- keyboard widget css & script -->
+      <link href="/resources/keyboard/css/keyboard.min.css" rel="stylesheet" />
+      
+      <link href="/resources/keyboard/css/keyboard-previewkeyset.min.css" rel="stylesheet" />
+      
+      <link href="/resources/keyboard/syr/syr.css" rel="stylesheet" />
+      <script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-mobile.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-navigation.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.extension-autocomplete.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/syr/keyboardSupport.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/syr/syr.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Greek.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Russian.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Arabic.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Hebrew.min.js"></script>
+      <script type="text/javascript">
+            $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip({ container: 'body' })
+
+                $('.keyboard').keyboard({
+                    openOn: null,
+                    stayOpen: false,
+                    alwaysOpen: false,
+                    autoAccept: true,
+                    usePreview: false,
+                    initialFocus: true,
+                    rtl : true,
+                    layout: 'syriac-phonetic',
+                    hidden: function(event, keyboard, el){
+                       //  keyboard.destroy();
+                     }
+                });
+
+                $('.keyboard-select').click(function () {
+                    var keyboardID = '#' + $(this).data("keyboard-id")
+                    var kb = $(keyboardID).getkeyboard();
+                    //var kb = $('#searchField').getkeyboard();
+                    // change layout based on link ID
+                    kb.options.layout = this.id
+                    // open keyboard if layout is different, or time from it last closing is &amp;gt; 200 ms
+                    if (kb.last.layout !== kb.options.layout || (new Date().getTime() - kb.last.eventTime) &lt; 200) {
+                        kb.reveal();
+                    }
+                });
+                //Change fonts
+                $('.swap-font').on('click', function(){
+                    var selectedFont = $(this).data("font-id")
+                    $('.selectableFont').not('.syr').css('font-family', selectedFont);
+                    $("*:lang(syr)").css('font-family', selectedFont)
+                });
+
+            })
+        </script>
+      </head>
+   <body id="body">
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+         
+         <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+            <a class="navbar-brand banner-container" href="index.html"> 
+               <span class="syriaca-icon syriaca-syriaca banner-icon">
+                  <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                  </span>
+               <span class="banner-text">Syriaca.org</span>
+               </a>
+            
+         </div>
+         
+         <div class="navbar-collapse collapse pull-right" id="navbar-collapse-1">
+            
+            <ul class="nav navbar-nav">
+               
+               <li class="dropdown">     <a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown">         <span class="mobile-submenu">Publications </span>  <b class="caret"></b>     </a>     
+                  <ul class="dropdown-menu pull-right">         
+                     <li>             <a href="/geo/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-geo icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Gazetteer</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/persons/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-sbd icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">SBD</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/authors/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-authors icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Authors</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/saints/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-saints icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Gateway to the Saints</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/q/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-q icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Qadishe</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/bhse/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-bhse icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">BHSE</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/cbss/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-bibl icon-nav"></span>                 <span class="icon-text">Works Cited</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-syriaca icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="mobile-submenu icon-text">Syriaca.org</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>     
+                  </ul> 
+               </li>
+               
+               <li class="dropdown">
+                  <a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown"> 
+                     <span class="mobile-submenu">About</span>  <b class="caret"></b>
+                     </a>
+                  
+                  <ul class="dropdown-menu pull-right">
+                     
+                     <li>
+                        <a href="/about-syriac.html">What is Syriac?</a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="/about-srophe.html">Project Overview</a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="/project-team.html">Project Team</a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="/project-partners.html">Project Partners</a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="/geo/index.html">
+                           <span class="icon-text">Gazetteer</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="http://vu.edu/syriac">Support Our Work</a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="/contact-us.html">Contact Us</a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="/documentation/index.html">
+                           <span class="syriaca-icon syriaca-book icon-nav" style="color:red;"></span>
+                           <span class="icon-text">Documentation</span>
+                           </a>
+                        
+                     </li>
+                     
+                  </ul>
+                  
+               </li>
+               
+               <li>
+                  <a href="/search.html" class="nav-text">Advanced Search</a>
+                  
+               </li>
+               
+               <li>
+                  
+                  <div id="search-wrapper">
+                     
+                     <form class="navbar-form navbar-right search-box" role="search" action="/search.html" method="get">
+                        
+                        <div class="form-group">
+                           <input type="text" class="form-control keyboard" placeholder="search" name="keyword" id="keywordNav" />
+                           <span class="keyboard-menu">             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Keyboard">                  <span class="syriaca-icon syriaca-keyboard">  </span><span class="caret"></span>             </button>             
+                              <ul class="dropdown-menu">                 
+                                 <li><a href="#" class="keyboard-select" id="syriac-phonetic" data-keyboard-id="keywordNav">Syriac Phonetic</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="syriac-standard" data-keyboard-id="keywordNav">Syriac Standard</a></li>                 
+                                 <li> <a href="#" class="keyboard-select" id="ms-Arabic (101)" data-keyboard-id="keywordNav">Arabic Mod. Standard</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="ms-Hebrew" data-keyboard-id="keywordNav">Hebrew</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="ms-Russian" data-keyboard-id="keywordNav">Russian</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="ms-Greek" data-keyboard-id="keywordNav">Greek</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="qwerty" data-keyboard-id="keywordNav">English QWERTY</a></li>             
+                              </ul>         </span>
+                           <button class="btn btn-default search-btn" id="searchbtn" type="submit" title="Search">
+                              <span class="glyphicon glyphicon-search"></span>
+                              </button>                                    
+                           
+                        </div>
+                        
+                     </form>
+                     
+                  </div>
+                  
+               </li>
+               
+               <li>
+                  
+                  <div class="btn-nav">
+                     <button class="btn btn-default navbar-btn" id="font" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Font">
+                        <span class="glyphicon glyphicon-font"></span>
+                        </button>  
+                     
+                     <ul class="dropdown-menu dropdown-menu-right" id="swap-font">
+                        
+                        <li>
+                           <a href="#" class="swap-font" id="DefaultSelect" data-font-id="EstrangeloEdessa">Default</a>
+                           
                         </li>
-                    <li>
-                            <a href="https://docs.google.com/spreadsheets/d/1-vDeuCL7cVZSz6Xfl5KsMsv9qQ5WYPIFfBaExNeTTkA/edit?usp=sharing">Work URIs for Syriaca.org</a>
+                        
+                        <li>
+                           <a href="#" class="swap-font" id="EstrangeloEdessaSelect" data-font-id="EstrangeloEdessa">Estrangelo Edessa</a>
+                           
                         </li>
-                    <li>
-                            <a href="https://docs.google.com/document/d/175Yx1uf_HaXRA6O36p83vf-ECFWLGFNbUXoDF7ffVDs/edit?usp=sharing                         ">Syriaca TEI Manuscript</a>
+                        
+                        <li>
+                           <a href="#" class="swap-font" id="EastSyriacAdiabeneSelect" data-font-id="EastSyriacAdiabene">East Syriac Adiabene</a>
+                           
                         </li>
-                    <li>
-                            <a href="http://www.vhmml.org/">Controlled Vocabulary For Manuscript Terminology</a>
+                        
+                        <li>
+                           <a href="#" class="swap-font" id="SertoBatnanSelect" data-font-id="SertoBatnan">Serto Batnan</a>
+                           
                         </li>
-                    <li>
-                            <a href="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/MS.htmlhttps://docs.google.com/spreadsheets/d/1PeQaVaqFLySPTps01RNk9ZOTLeOiMQMYxos9lOuKmwM/edit#gid=1718212956">General TEI Guide to Using XML</a>
+                        
+                        <li>
+                           <a href="/documentation/wiki.html?wiki-page=/How-to-view-Syriac-script&amp;wiki-uri=https://github.com/srophe/syriaca-data/wiki">Help <span class="glyphicon glyphicon-question-sign"></span>
+                              </a>
+                           
                         </li>
-                    <li>
-                            <a href="http://syriaca.org/documentation/dates.html">Instructions for Coding Dates in Wright</a>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+               </li>
+               
+            </ul>
+            
+         </div>
+         
+      </nav>
+      <div xmlns:xi="http://www.w3.org/2001/XInclude" data-template="templates:surround" data-template-with="templates/page.html" data-template-at="content">
+         
+         <div class="image-banner">
+            <span class="img-credit">
+               <label>Photo Credit:</label>Decorative Arch, Resafa, Syria. Copyright, Daniel Schwartz.
+               <button class="btn btn-link white-link" data-toggle="collapse" data-target="#img-rights">
+                  <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                  </button>
+               <span id="img-rights" class="collapse"></span>
+               </span>
+            
+         </div>
+         
+         <div class="main-content-block">
+            
+            <div class="row">
+               
+               <div class="col-md-8">
+                  
+                  <h1>
+                     <a href="http://syriaca.org/">Syriaca.org</a> Manuscript Training Materials and Links
+                  </h1>
+                  
+                  <p>Your main resources will be the manual and the videos (and perhaps their transcript).
+                     The blank template also has some instructions included,
+                     as you will see when you open it or watch the videos. The other files are for the
+                     coding process itself.
+                  </p>
+                  
+                  <div id="online">
+                     
+                     <h2 class="about">Online Resources</h2>
+                     
+                     <ul>
+                        
+                        <li>
+                           <a href="https://docs.google.com/spreadsheet/ccc?key=0Ap588DBrLAy8dGgtOU4yOTlGRmVHZVo2clRWeWp0VFE">The Wright Decoder</a>
+                           
                         </li>
-                </ul>
+                        
+                        <li>
+                           <a href="https://docs.google.com/spreadsheets/d/1-vDeuCL7cVZSz6Xfl5KsMsv9qQ5WYPIFfBaExNeTTkA/edit?usp=sharing">Work URIs for Syriaca.org</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="https://docs.google.com/document/d/175Yx1uf_HaXRA6O36p83vf-ECFWLGFNbUXoDF7ffVDs/edit?usp=sharing                         ">Syriaca TEI Manuscript</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="http://www.vhmml.org/">Controlled Vocabulary For Manuscript Terminology</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="http://www.tei-c.org/release/doc/tei-p5-doc/en/html/MS.htmlhttps://docs.google.com/spreadsheets/d/1PeQaVaqFLySPTps01RNk9ZOTLeOiMQMYxos9lOuKmwM/edit#gid=1718212956">General TEI Guide to Using XML</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="http://syriaca.org/documentation/dates.html">Instructions for Coding Dates in Wright</a>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+                  <div id="video">
+                     
+                     <h2 class="about">Video Tutorials</h2>
+                     
+                     <ul>
+                        
+                        <li>
+                           <a href="https://vanderbilt.box.com/v/Part-1-teiHeader">Editing the teiHeader section</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="https://vanderbilt.app.box.com/v/Part-2-msDesc">Entering identifying information in the msDesc section</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="https://vanderbilt.box.com/v/Part-3-msContents">Describing the work contained in the manuscript in the msContents section</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="https://vanderbilt.box.com/v/Part-4-Physical-Description-I">Physical Description (physDesc) Part I: Entering the object description in objectDesc</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="https://vanderbilt.box.com/v/Part-5-Physical-Description-II">Physical Description (physDesc) Part II: Entering scribal information in handDesc
+                              and additions</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="https://vanderbilt.box.com/v/Part-6-Entering-the-ms">Entering the manuscript history and wrap-up</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="Handout-for-Training-Wright-ms-IV-BL-Add-14427.pdf">Video Transcript</a>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                     <div id="downloadable">
+                        
+                        <h2 class="about">Downloadable Resources</h2>
+                        
+                        <ul>
+                           
+                           <li>
+                              <a href="templates/Blank-template-file-for-single-msPart-entries.xml">Blank Template File for Single Part Manuscripts</a>
+                              
+                           </li>
+                           
+                           <li>
+                              <a href="templates/Blank-template-file.xml">Blank Template File for Multiple Part Manuscripts</a>
+                              
+                           </li>
+                           
+                           <li>
+                              <a href="Wright-Vol-1-pp-1-39.docx">Wright Word Document for Video Tutorial</a>
+                              
+                           </li>
+                           
+                           <li>
+                              <a href="https://vanderbilt.app.box.com/v/syraica-mss-tutorial-videos">Wright PDF Document for Video Tutorial</a>
+                              
+                           </li>
+                           
+                           <!-- Kept box link due to inability to load large files to Github -->
+                           
+                        </ul>
+                        
+                     </div>
+                     
+                     <div class="col-md-4">
+                        
+                        <div>
+                           
+                           <!--<h3 class="underline">Documentation</h3>-->
+                           
+                           <!--<ul class="nav nav-tabs nav-stacked">-->
+                           
+                           <ul>
+                              
+                              <li>
+                                 <a href="$nav-base/documentation/dates.html">Dates</a>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <a href="$nav-base/documentation/faq.html">Frequently Asked Questions</a>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <a href="$nav-base/documentation/headwords.html">Headwords</a>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <a href="$nav-base/documentation/isostandards.html">Language and Script Identifiers</a>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <a href="$nav-base/documentation/place-types.html">Place Types</a>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <a href="$nav-base/documentation/relations.html">Relations</a>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <a href="$nav-base/documentation/confessions.html">Religious Communities</a>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <a href="$nav-base/documentation/terms.html">Technical Terminology</a>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <a href="$nav-base/documentation/view-teiDocs.html">TEI Tag usage in Gazetteer</a>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <a href="$nav-base/api-documentation/index.html">Syriaca.org API Documentation</a>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <a href="$nav-base/documentation/uris.html">URI Policies</a>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <a href="$nav-base/documentation/tei-mss-tutorials.html">Using TEI to Catalog Syriac Manuscripts</a>
+                                 
+                              </li>
+                              
+                              <li>
+                                 <a href="$nav-base/documentation/editors.html">Contributing Editors</a>
+                                 
+                              </li>
+                              
+                           </ul>
+                           
+                        </div>
+                        
+                     </div>
+                     
+                  </div>
+                  
+               </div>
+               
             </div>
-            <div id="video">
-            <h2 class="about">Video Tutorials</h2>
-                <ul>
-                    <li>
-                        <a href="https://vanderbilt.box.com/v/Part-1-teiHeader">Editing the teiHeader section</a>
-                    </li>
-                    <li>
-                        <a href="https://vanderbilt.app.box.com/v/Part-2-msDesc">Entering identifying information in the msDesc section</a>
-                    </li>
-                    <li>
-                        <a href="https://vanderbilt.box.com/v/Part-3-msContents">Describing the work contained in the manuscript in the msContents section</a>
-                    </li>
-                    <li>
-                        <a href="https://vanderbilt.box.com/v/Part-4-Physical-Description-I">Physical Description (physDesc) Part I: Entering the object description in objectDesc</a>
-                    </li>
-                    <li>
-                        <a href="https://vanderbilt.box.com/v/Part-5-Physical-Description-II">Physical Description (physDesc) Part II: Entering scribal information in handDesc and additions</a>
-                    </li>
-                    <li>
-                        <a href="https://vanderbilt.box.com/v/Part-6-Entering-the-ms">Entering the manuscript history and wrap-up</a>
-                    </li>
-                    <li>
-                            <a href="Handout-for-Training-Wright-ms-IV-BL-Add-14427.pdf">Video Transcript</a>
-                        </li>
-                </ul>
-            <div id="downloadable">
-            <h2 class="about">Downloadable Resources</h2>
-                <ul>
-                    <li>
-                                <a href="templates/Blank-template-file-for-single-msPart-entries.xml">Blank Template File for Single Part Manuscripts</a>
-                            </li>
-                    <li>
-                                <a href="templates/Blank-template-file.xml">Blank Template File for Multiple Part Manuscripts</a>
-                            </li>
-                    <li>
-                                <a href="Wright-Vol-1-pp-1-39.docx">Wright Word Document for Video Tutorial</a>
-                            </li>
-                    <li>
-                                <a href="https://vanderbilt.app.box.com/v/syraica-mss-tutorial-videos">Wright PDF Document for Video Tutorial</a>
-                            </li>
-                    <!-- Kept box link due to inability to load large files to Github -->
-                </ul>
-            </div>
-        <div class="col-md-4">
-            <div>
-    <!--<h3 class="underline">Documentation</h3>-->
-    <!--<ul class="nav nav-tabs nav-stacked">-->
-    <ul>
-        <li>
-            <a href="$nav-base/documentation/dates.html">Dates</a>
-        </li>
-        <li>
-            <a href="$nav-base/documentation/faq.html">Frequently Asked Questions</a>
-        </li>
-        <li>
-            <a href="$nav-base/documentation/headwords.html">Headwords</a>
-        </li>
-        <li>
-            <a href="$nav-base/documentation/isostandards.html">Language and Script Identifiers</a>
-        </li>
-        <li>
-            <a href="$nav-base/documentation/place-types.html">Place Types</a>
-        </li>
-        <li>
-            <a href="$nav-base/documentation/relations.html">Relations</a>
-        </li>
-        <li>
-            <a href="$nav-base/documentation/confessions.html">Religious Communities</a>
-        </li>
-        <li>
-            <a href="$nav-base/documentation/terms.html">Technical Terminology</a>
-        </li>
-        <li>
-            <a href="$nav-base/documentation/view-teiDocs.html">TEI Tag usage in Gazetteer</a>
-        </li>
-        <li>
-            <a href="$nav-base/api-documentation/index.html">Syriaca.org API Documentation</a>
-        </li>
-        <li>
-            <a href="$nav-base/documentation/uris.html">URI Policies</a>
-        </li>
-        <li>
-            <a href="$nav-base/documentation/tei-mss-tutorials.html">Using TEI to Catalog Syriac Manuscripts</a>
-        </li>
-        <li>
-            <a href="$nav-base/documentation/editors.html">Contributing Editors</a>
-        </li>
-    </ul>
-</div>
-        </div>
-    </div>
-</div>
-    </div>
-</div>
-</div>
+            
+         </div>
+         
+      </div>
+      <footer>
+         
+         <div class="container">
+            <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">
+               <img alt="Creative Commons License" style="border-width:0" src="/resources/images/cc.png" height="18px" />
+               </a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.
+            <br />Copyright Vanderbilt University, Princeton University, and the Contributor(s), 2014.
+            
+         </div>
+         
+      </footer>
+   </body><script type="text/javascript" src="/resources/js/jquery.validate.min.js"></script><script type="text/javascript" src="/resources/js/require.min.js"></script><script type="text/javascript" src="/resources/js/srophe.js"></script><script type="text/javascript" src="/resources/js/lightslider.min.js"></script><script type="text/javascript" src="/resources/js/lightslider-functions.js"></script><script data-template="app:google-analytics"></script></html>

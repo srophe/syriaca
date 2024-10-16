@@ -1,200 +1,705 @@
-<div xmlns="http://www.w3.org/1999/xhtml" xmlns:xi="http://www.w3.org/2001/XInclude"
-    data-template="templates:surround" data-template-with="templates/page.html"
-    data-template-at="content">
-    <div class="image-banner">
-        <span class="img-credit">
-            <label>Photo Credit:</label>Decorative Arch, Resafa, Syria. Copyright, Daniel Schwartz.
-                <button class="btn btn-link white-link" data-toggle="collapse"
-                data-target="#img-rights">
-                <span class="glyphicon glyphicon-info-sign" aria-hidden="true"/>
-            </button>
-            <span id="img-rights" class="collapse"/>
-        </span>
-    </div>
-    <div class="main-content-block">
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:srophe="https://srophe.app">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      <title data-template="app:record-title">App Title</title>
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      
+      <link rel="shortcut icon" href="/resources/images/fav-icons/syriaca-favicon.ico" />
+      
+      <!-- Bootstrap 3 -->
+      
+      <link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/bootstrap.min.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/sm-core-css.css" />
+      
+      <!-- Srophe styles -->
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/syr-icon-fonts.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/style.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/syriaca.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/slider.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/lightslider.css" />
+      
+      <link rel="stylesheet" type="text/css" media="print" href="/resources/css/print.css" />
+      
+      <!-- Leaflet -->
+      
+      <link rel="stylesheet" href="/resources/leaflet/leaflet.css" />
+      
+      <link rel="stylesheet" href="/resources/leaflet/leaflet.awesome-markers.css" />
+      <script defer="defer" data-domain="syriaca.org" src="https://plausible.io/js/plausible.js"></script>
+      
+      <!-- JQuery -->
+      <link href="/resources/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+      <script type="text/javascript" src="/resources/js/jquery.min.js"></script>
+      <script type="text/javascript" src="/resources/jquery-ui/jquery-ui.min.js"></script>
+      <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
+      <script type="text/javascript" src="/resources/js/clipboard.min.js"></script>
+      
+      <!-- Bootstrap -->
+      <script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script>
+      
+      <!-- ReCaptcha -->
+      <script src="https://www.google.com/recaptcha/api.js" type="text/javascript" async="async" defer="defer"></script>
+      
+      <!-- keyboard widget css & script -->
+      <link href="/resources/keyboard/css/keyboard.min.css" rel="stylesheet" />
+      
+      <link href="/resources/keyboard/css/keyboard-previewkeyset.min.css" rel="stylesheet" />
+      
+      <link href="/resources/keyboard/syr/syr.css" rel="stylesheet" />
+      <script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-mobile.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-navigation.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.extension-autocomplete.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/syr/keyboardSupport.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/syr/syr.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Greek.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Russian.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Arabic.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Hebrew.min.js"></script>
+      <script type="text/javascript">
+            $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip({ container: 'body' })
 
-        <div class="row">
-            <div class="col-md-8">
-                <div class="indent">
-                    <h1>Project Team</h1>
-                    <h3>General Editorial Committee</h3>
-                    <ul>
+                $('.keyboard').keyboard({
+                    openOn: null,
+                    stayOpen: false,
+                    alwaysOpen: false,
+                    autoAccept: true,
+                    usePreview: false,
+                    initialFocus: true,
+                    rtl : true,
+                    layout: 'syriac-phonetic',
+                    hidden: function(event, keyboard, el){
+                       //  keyboard.destroy();
+                     }
+                });
+
+                $('.keyboard-select').click(function () {
+                    var keyboardID = '#' + $(this).data("keyboard-id")
+                    var kb = $(keyboardID).getkeyboard();
+                    //var kb = $('#searchField').getkeyboard();
+                    // change layout based on link ID
+                    kb.options.layout = this.id
+                    // open keyboard if layout is different, or time from it last closing is &amp;gt; 200 ms
+                    if (kb.last.layout !== kb.options.layout || (new Date().getTime() - kb.last.eventTime) &lt; 200) {
+                        kb.reveal();
+                    }
+                });
+                //Change fonts
+                $('.swap-font').on('click', function(){
+                    var selectedFont = $(this).data("font-id")
+                    $('.selectableFont').not('.syr').css('font-family', selectedFont);
+                    $("*:lang(syr)").css('font-family', selectedFont)
+                });
+
+            })
+        </script>
+      </head>
+   <body id="body">
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+         
+         <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+            <a class="navbar-brand banner-container" href="index.html"> 
+               <span class="syriaca-icon syriaca-syriaca banner-icon">
+                  <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                  </span>
+               <span class="banner-text">Syriaca.org</span>
+               </a>
+            
+         </div>
+         
+         <div class="navbar-collapse collapse pull-right" id="navbar-collapse-1">
+            
+            <ul class="nav navbar-nav">
+               
+               <li class="dropdown">     <a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown">         <span class="mobile-submenu">Publications </span>  <b class="caret"></b>     </a>     
+                  <ul class="dropdown-menu pull-right">         
+                     <li>             <a href="/geo/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-geo icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Gazetteer</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/persons/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-sbd icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">SBD</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/authors/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-authors icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Authors</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/saints/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-saints icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Gateway to the Saints</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/q/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-q icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Qadishe</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/bhse/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-bhse icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">BHSE</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/cbss/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-bibl icon-nav"></span>                 <span class="icon-text">Works Cited</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-syriaca icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="mobile-submenu icon-text">Syriaca.org</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>     
+                  </ul> 
+               </li>
+               
+               <li class="dropdown">
+                  <a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown"> 
+                     <span class="mobile-submenu">About</span>  <b class="caret"></b>
+                     </a>
+                  
+                  <ul class="dropdown-menu pull-right">
+                     
+                     <li>
+                        <a href="/about-syriac.html">What is Syriac?</a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="/about-srophe.html">Project Overview</a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="/project-team.html">Project Team</a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="/project-partners.html">Project Partners</a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="/geo/index.html">
+                           <span class="icon-text">Gazetteer</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="http://vu.edu/syriac">Support Our Work</a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="/contact-us.html">Contact Us</a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="/documentation/index.html">
+                           <span class="syriaca-icon syriaca-book icon-nav" style="color:red;"></span>
+                           <span class="icon-text">Documentation</span>
+                           </a>
+                        
+                     </li>
+                     
+                  </ul>
+                  
+               </li>
+               
+               <li>
+                  <a href="/search.html" class="nav-text">Advanced Search</a>
+                  
+               </li>
+               
+               <li>
+                  
+                  <div id="search-wrapper">
+                     
+                     <form class="navbar-form navbar-right search-box" role="search" action="/search.html" method="get">
+                        
+                        <div class="form-group">
+                           <input type="text" class="form-control keyboard" placeholder="search" name="keyword" id="keywordNav" />
+                           <span class="keyboard-menu">             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Keyboard">                  <span class="syriaca-icon syriaca-keyboard">  </span><span class="caret"></span>             </button>             
+                              <ul class="dropdown-menu">                 
+                                 <li><a href="#" class="keyboard-select" id="syriac-phonetic" data-keyboard-id="keywordNav">Syriac Phonetic</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="syriac-standard" data-keyboard-id="keywordNav">Syriac Standard</a></li>                 
+                                 <li> <a href="#" class="keyboard-select" id="ms-Arabic (101)" data-keyboard-id="keywordNav">Arabic Mod. Standard</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="ms-Hebrew" data-keyboard-id="keywordNav">Hebrew</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="ms-Russian" data-keyboard-id="keywordNav">Russian</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="ms-Greek" data-keyboard-id="keywordNav">Greek</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="qwerty" data-keyboard-id="keywordNav">English QWERTY</a></li>             
+                              </ul>         </span>
+                           <button class="btn btn-default search-btn" id="searchbtn" type="submit" title="Search">
+                              <span class="glyphicon glyphicon-search"></span>
+                              </button>                                    
+                           
+                        </div>
+                        
+                     </form>
+                     
+                  </div>
+                  
+               </li>
+               
+               <li>
+                  
+                  <div class="btn-nav">
+                     <button class="btn btn-default navbar-btn" id="font" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Font">
+                        <span class="glyphicon glyphicon-font"></span>
+                        </button>  
+                     
+                     <ul class="dropdown-menu dropdown-menu-right" id="swap-font">
+                        
+                        <li>
+                           <a href="#" class="swap-font" id="DefaultSelect" data-font-id="EstrangeloEdessa">Default</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="#" class="swap-font" id="EstrangeloEdessaSelect" data-font-id="EstrangeloEdessa">Estrangelo Edessa</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="#" class="swap-font" id="EastSyriacAdiabeneSelect" data-font-id="EastSyriacAdiabene">East Syriac Adiabene</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="#" class="swap-font" id="SertoBatnanSelect" data-font-id="SertoBatnan">Serto Batnan</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="/documentation/wiki.html?wiki-page=/How-to-view-Syriac-script&amp;wiki-uri=https://github.com/srophe/syriaca-data/wiki">Help <span class="glyphicon glyphicon-question-sign"></span>
+                              </a>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+               </li>
+               
+            </ul>
+            
+         </div>
+         
+      </nav>
+      <div xmlns:xi="http://www.w3.org/2001/XInclude" data-template="templates:surround" data-template-with="templates/page.html" data-template-at="content">
+         
+         <div class="image-banner">
+            <span class="img-credit">
+               <label>Photo Credit:</label>Decorative Arch, Resafa, Syria. Copyright, Daniel Schwartz.
+               <button class="btn btn-link white-link" data-toggle="collapse" data-target="#img-rights">
+                  <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+                  </button>
+               <span id="img-rights" class="collapse"></span>
+               </span>
+            
+         </div>
+         
+         <div class="main-content-block">
+            
+            
+            <div class="row">
+               
+               <div class="col-md-8">
+                  
+                  <div class="indent">
+                     
+                     <h1>Project Team</h1>
+                     
+                     <h3>General Editorial Committee</h3>
+                     
+                     <ul>
+                        
                         <li>Dr. Thomas A. Carlson, Oklahoma State University (2012-2017)</li>
+                        
                         <li>Dr. Nathan P. Gibson, Ludwig-Maximilians-Universität München</li>
+                        
                         <li>Dr. Jeanne-Nicole Mellon Saint-Laurent, Marquette University (Assistant
-                            Director)</li>
+                           Director)
+                        </li>
+                        
                         <li>Dr. David A. Michelson, Vanderbilt University (General Editor)</li>
+                        
                         <li>Dr. Daniel L. Schwartz, Texas A&amp;M University (Director)</li>
+                        
                         <li>Dr. James E. Walters, Rochester College, Michigan</li>
-                    </ul>
-                    <h3>Research Staff</h3>
-                    <ul>
+                        
+                     </ul>
+                     
+                     <h3>Research Staff</h3>
+                     
+                     <ul>
+                        
                         <li>Winona Salesky, Independant Consultant (Senior Programmer)</li>
-                    </ul>
-                    <h3>Postdoctoral Research Assistants</h3>
-                    <ul>
+                        
+                     </ul>
+                     
+                     <h3>Postdoctoral Research Assistants</h3>
+                     
+                     <ul>
+                        
                         <li>Dr. Thomas A. Carlson, Princeton University (2012-2014)</li>
+                        
                         <li>Dr. Nathan Gibson, Vanderbilt University/Ludwig-Maximilians-Universität
-                            München (2015-2017)</li>
+                           München (2015-2017)
+                        </li>
+                        
                         <li>Dr. Michelle M. Taylor, Vanderbilt University (2018-2019)</li>
-                    </ul>
-                    <h3>Advisory Committee</h3>
-                    <ul>
+                        
+                     </ul>
+                     
+                     <h3>Advisory Committee</h3>
+                     
+                     <ul>
+                        
                         <li>Chair: Peter Brown, Princeton University, Emeritus</li>
+                        
                         <li>Dr. Clifford Anderson, Director of Scholarly Communications, University
-                            Libraries, Vanderbilt University</li>
+                           Libraries, Vanderbilt University
+                        </li>
+                        
                         <li>Dr. Sebastian P. Brock, F.B.A., Emeritus Reader in Syriac Studies in the
-                            University of Oxford</li>
+                           University of Oxford
+                        </li>
+                        
                         <li>Dr. Aaron M. Butts, Catholic University of America</li>
+                        
                         <li>Dr. Tom Elliott, Associate Director for Digital Programs, Institute for
-                            the Study of the Ancient World, New York University</li>
+                           the Study of the Ancient World, New York University
+                        </li>
+                        
                         <li>Dr. Kristian Heal, Center for the Preservation of Ancient Religious
-                            Texts, Brigham Young University</li>
+                           Texts, Brigham Young University
+                        </li>
+                        
                         <li>Dr. George A. Kiraz, Beth Mardutho: The Syriac Institute</li>
+                        
                         <li>Dr. Laura Mandell, Director, Initiative for Digital Humanities, Media,
-                            and Culture, Texas A&amp;M University</li>
-                    </ul>
-                    <h3>Geography Editorial Committee</h3>
-                    <ul>
+                           and Culture, Texas A&amp;M University
+                        </li>
+                        
+                     </ul>
+                     
+                     <h3>Geography Editorial Committee</h3>
+                     
+                     <ul>
+                        
                         <li>Chair: Dr. Thomas A. Carlson, Oklahoma State University</li>
+                        
                         <li>Dr. Aaron M. Butts, Catholic University of America</li>
+                        
                         <li>Dr. Mark Dickens, University of Alberta</li>
+                        
                         <li>Dr. George A. Kiraz, Beth Mardutho: The Syriac Institute</li>
+                        
                         <li>Ex Officio: Dr. David A. Michelson, Vanderbilt University</li>
+                        
                         <li>Dr. Jonathan Loopstra, Capital University</li>
+                        
                         <li>Dr. Heleen Murre-van den Berg, Institute of Religious Studies,
-                            Universiteit Leiden</li>
+                           Universiteit Leiden
+                        </li>
+                        
                         <li>Dr. Hidemi Takahashi, University of Tokyo Center of Philosophy</li>
+                        
                         <li>Dr. Lucas Van Rompay, Duke University</li>
+                        
                         <li>Dr. Joel Walker, University of Washington</li>
+                        
                         <li>Dr. Anthony Watson, Brown University</li>
+                        
                         <li>Dr. David Wilmshurst, Chinese University of Hong Kong</li>
-                    </ul>
-                    <h3>Hagiography Editorial Committee</h3>
-                    <ul>
+                        
+                     </ul>
+                     
+                     <h3>Hagiography Editorial Committee</h3>
+                     
+                     <ul>
+                        
                         <li>Chair: Dr. Jeanne-Nicole Mellon Saint-Laurent, Marquette University</li>
+                        
                         <li>Dr. André Bingelli, Institut de recherche et d’histoire des textes,
-                            Centre National de la Recherche Scientifique, Paris</li>
+                           Centre National de la Recherche Scientifique, Paris
+                        </li>
+                        
                         <li>Dr. Claude Detienne, Instituto de Filosofia e Teologia de Goiás,
-                            Brazil</li>
+                           Brazil
+                        </li>
+                        
                         <li>Dr. Maria Doerfler, Duke University</li>
+                        
                         <li>Ex Officio: Dr. David Michelson, Vanderbilt University</li>
+                        
                         <li>Dr. Sr. Jincy Othottil, Chaldean Syrian College, India</li>
+                        
                         <li>Dr. Aho Shemunkasho, Salzburg University</li>
+                        
                         <li>Dr. Jack Tannous, Princeton University</li>
+                        
                         <li>Fr. Ugo Zanetti, Monastère de Chevetogne</li>
-                    </ul>
-                    <h3>SPEAR Editorial Committee</h3>
-                    <ul>
+                        
+                     </ul>
+                     
+                     <h3>SPEAR Editorial Committee</h3>
+                     
+                     <ul>
+                        
                         <li>Chair: Dr. Daniel L. Schwartz, Texas A&amp;M University</li>
+                        
                         <li>Dr. Kutlu Akalin, Department of Syriac Language and Culture, Mardin
-                            Artuklu University (Turkey)</li>
+                           Artuklu University (Turkey)
+                        </li>
+                        
                         <li>Dr. Volker L. Menze, Department of Medieval Studies, Central European
-                            University</li>
+                           University
+                        </li>
+                        
                         <li>Dr. Meredith L.D. Riedel, Duke University</li>
+                        
                         <li>Ex Officio: Dr. Jeanne-Nicole Mellon Saint-Laurent, Marquette
-                            University</li>
-                    </ul>
-                    <h3>Syriac Authors Editorial Committee</h3>
-                    <ul>
+                           University
+                        </li>
+                        
+                     </ul>
+                     
+                     <h3>Syriac Authors Editorial Committee</h3>
+                     
+                     <ul>
+                        
                         <li>Chair: Dr. David Michelson, Vanderbilt University</li>
+                        
                         <li>Dr. André Bingelli, Institut de recherche et d’histoire des textes,
-                            Centre National de la Recherche Scientifique, Paris</li>
+                           Centre National de la Recherche Scientifique, Paris
+                        </li>
+                        
                         <li>Dr. Françiose Briquel-Chatonnet, Centre National de la Recherche
-                            Scientifique, Paris</li>
+                           Scientifique, Paris
+                        </li>
+                        
                         <li>Dr. Muriel Debié, Institut de recherche et d’histoire des textes, Centre
-                            National de la Recherche Scientifique, Paris</li>
+                           National de la Recherche Scientifique, Paris
+                        </li>
+                        
                         <li>Ex Officio: Dr. Nathan Gibson</li>
+                        
                         <li>Dr. Kristian Heal, Center for the Preservation of Ancient Religious
-                            Texts, Brigham Young University</li>
+                           Texts, Brigham Young University
+                        </li>
+                        
                         <li>Dr. Columba Stewart, O.S.B., Hill Museum and Manuscript Library</li>
+                        
                         <li>Dr. David G. K. Taylor, Lecturer in Aramaic and Syriac, Oxford
-                            University</li>
+                           University
+                        </li>
+                        
                         <li>Dr. James E. Walters, Rochester College, Michigan</li>
-                    </ul>
-                    <h3>New Handbook of Syriac Literature Editorial Committee</h3>
-                    <ul>
+                        
+                     </ul>
+                     
+                     <h3>New Handbook of Syriac Literature Editorial Committee</h3>
+                     
+                     <ul>
+                        
                         <li>Chair: Dr. Nathan Gibson, Vanderbilt University</li>
+                        
                         <li>Dr. André Binggeli, Institut de recherche et d’histoire des textes,
-                            Centre National de la Recherche Scientifique, Paris</li>
+                           Centre National de la Recherche Scientifique, Paris
+                        </li>
+                        
                         <li>Dr. Monica J. Blanchard, The Catholic University of America</li>
+                        
                         <li>Dr. Maria Conterno, Universiteit Gent</li>
+                        
                         <li>Dr. Grigory Kessel, Österreichische Akademie der Wissenschaften,
-                            Vienna</li>
+                           Vienna
+                        </li>
+                        
                         <li>Dr. Adam McCollum, University of Vienna</li>
+                        
                         <li>Ex Officio: Dr. David Michelson, Vanderbilt University</li>
+                        
                         <li>Morgan Reed, The Catholic University of America</li>
+                        
                         <li>Dr. Jeanne-Nicole Saint-Laurent, Marquette University</li>
+                        
                         <li>Ex Officio: Dr. Daniel L. Schwartz, Texas A&amp;M University</li>
+                        
                         <li>Dr. Columba Stewart, Hill Museum and Manuscript Library, St. John’s
-                            University / Institute for Advanced Studies</li>
-                    </ul>
-                    <h3>Graduate Research Assistants</h3>
-                    <ul>
+                           University / Institute for Advanced Studies
+                        </li>
+                        
+                     </ul>
+                     
+                     <h3>Graduate Research Assistants</h3>
+                     
+                     <ul>
+                        
                         <li>Justin Arnwine, Vanderbilt University</li>
+                        
                         <li>Anthony Davis, Vanderbilt University</li>
+                        
                         <li>Mitchell Esswein, Princeton Theological Seminary</li>
+                        
                         <li>Daniel Greeson, Vanderbilt University</li>
+                        
                         <li>Eric Gruebel, Beth Mardutho Research Library</li>
+                        
                         <li>Tucker Hannah, Vanderbilt University</li>
+                        
                         <li>Erin Minta Johnson, Vanderbilt University</li>
+                        
                         <li>Peter Miller, Vanderbilt University, Project Manager</li>
-                    </ul>
-                    <h3>Research Contributors</h3>
-                    <ul>
+                        
+                     </ul>
+                     
+                     <h3>Research Contributors</h3>
+                     
+                     <ul>
+                        
                         <li>Dayroyo Roger-Youssef Akhrass, St. Aphrem Theological Seminary, Damascus
-                            – Syria, PhD candidate, Patristics, Catholic University of Paris</li>
+                           – Syria, PhD candidate, Patristics, Catholic University of Paris
+                        </li>
+                        
                         <li>Robert Aydin, Oxford University</li>
+                        
                         <li>Jad Kaado, Beth Mardutho Research Library</li>
+                        
                         <li>Adam Perea-Kane, St. Michael’s College, Vermont</li>
+                        
                         <li>Dr. James E. Walters, Rochester College, Michigan</li>
-                    </ul>
-                    <h3>Project Alumni</h3>
-                    <ul>
+                        
+                     </ul>
+                     
+                     <h3>Project Alumni</h3>
+                     
+                     <ul>
+                        
                         <li>Blake Bassett, University of Alabama</li>
+                        
                         <li>David Blum, University of Alabama</li>
+                        
                         <li>Dr. Hugh Cayless, New York University</li>
+                        
                         <li>Charlie Deer, University of Alabama</li>
+                        
                         <li>Samantha Edmonds, University of Alabama</li>
+                        
                         <li>Dr. Sean Gilles, New York University</li>
+                        
                         <li>Nathan Godwin, University of Alabama</li>
+                        
                         <li>Kimberly Goins, University of Alabama</li>
+                        
                         <li>Edward Gray, University of Alabama</li>
+                        
                         <li>Edward Gray, University of Alabama</li>
+                        
                         <li>Sam Grimes, University of Alabama</li>
+                        
                         <li>Chip Harrison, University of Alabama</li>
+                        
                         <li>Christopher Johnson, University of Alabama</li>
+                        
                         <li>Corbin Karl, University of Alabama</li>
+                        
                         <li>Katherine Kelley, University of Alabama</li>
+                        
                         <li>Samer Khader, Beth Mardutho Research Library</li>
+                        
                         <li>Ian King, University of Alabama</li>
+                        
                         <li>Philemon Kirlles, University of Alabama</li>
+                        
                         <li>Kim Kosta, University of Alabama</li>
+                        
                         <li>Tim LaBarbera, University of Alabama</li>
+                        
                         <li>Matthew Makar, University of Alabama</li>
+                        
                         <li>Logan Manthey, University of Alabama</li>
+                        
                         <li>Andrew Martin, University of Alabama</li>
+                        
                         <li>Kathleen McCormick, University of Alabama</li>
+                        
                         <li>Michael McDowell, University of Alabama</li>
+                        
                         <li>Paul McKelvey, University of Alabama</li>
+                        
                         <li>Isabela Morales, University of Alabama</li>
+                        
                         <li>Jaimie Murdock, Indiana University</li>
+                        
                         <li>James Piazza, University of Alabama</li>
+                        
                         <li>Kyle Redding, University of Alabama</li>
+                        
                         <li>Patrick Sequeira, University of Alabama</li>
+                        
                         <li>Chris Sherrill ✝, University of Alabama</li>
+                        
                         <li>Ryan Stitt, University of Alabama</li>
+                        
                         <li>David Walston, University of Alabama</li>
+                        
                         <li>Elizabeth Walston, University of Alabama</li>
+                        
                         <li>Christopher Warner, New York University</li>
+                        
                         <li>Christian Wehby, University of Alabama</li>
+                        
                         <li>Cameron Wood, University of Alabama</li>
-                    </ul>
-                </div>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+               </div>
+               
+               <div class="col-md-4">
+                  
+                  <div data-template="app:shared-content" data-template-path="/about-menu.html"></div>
+                  
+               </div>
+               
             </div>
-            <div class="col-md-4">
-                <div data-template="app:shared-content" data-template-path="/about-menu.html"/>
-            </div>
-        </div>
-    </div>
-</div>
+            
+         </div>
+         
+      </div>
+      <footer>
+         
+         <div class="container">
+            <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">
+               <img alt="Creative Commons License" style="border-width:0" src="/resources/images/cc.png" height="18px" />
+               </a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.
+            <br />Copyright Vanderbilt University, Princeton University, and the Contributor(s), 2014.
+            
+         </div>
+         
+      </footer>
+   </body><script type="text/javascript" src="/resources/js/jquery.validate.min.js"></script><script type="text/javascript" src="/resources/js/require.min.js"></script><script type="text/javascript" src="/resources/js/srophe.js"></script><script type="text/javascript" src="/resources/js/lightslider.min.js"></script><script type="text/javascript" src="/resources/js/lightslider-functions.js"></script><script data-template="app:google-analytics"></script></html>

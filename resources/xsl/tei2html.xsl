@@ -327,7 +327,13 @@
                 </div>
                 <h3>Full Citation Information</h3>
                 <div class="section indent">
+                    <h4>Permanent Identifiers</h4>
+                    <div class="indent">
+                        <xsl:apply-templates select="descendant::t:idno" mode="full"/>
+                    </div>
+                    <bdi>
                     <xsl:apply-templates mode="full"/>
+                    </bdi>
                 </div>
                 <div class="info-btns">  
                     <xsl:variable name="status" select="string(/descendant-or-self::t:revisionDesc/@status)"/>
@@ -608,9 +614,25 @@
     <!-- Main page modules for syriaca.org display -->
     <xsl:template match="t:person">
         <xsl:if test="t:desc[@type='abstract'] | t:desc[starts-with(@xml:id, 'abstract-en')] | t:note[@type='abstract']">
-            <div class="tei-desc text abstract">
-                <xsl:apply-templates select="t:desc[@type='abstract' or starts-with(@xml:id, 'abstract-en')][1] | t:note[@type='abstract']"/>
-            </div>
+            <xsl:choose>
+                <xsl:when test="$collection = 'johnofephesusPersons'">
+                    <xsl:if test="t:note[@type='abstract'][contains(@corresp,'http://syriaca.org/johnofephesus/persons')]">
+                        <div class="tei-desc text abstract">
+                            <xsl:apply-templates select="t:note[@type='abstract'][contains(@corresp,'http://syriaca.org/johnofephesus/persons')]"/>
+                        </div>
+                    </xsl:if>
+                </xsl:when>
+                <xsl:when test="t:note[@type='abstract'][contains(@corresp,'http://syriaca.org/persons')]">
+                    <div class="tei-desc text abstract">
+                        <xsl:apply-templates select="t:note[@type='abstract'][contains(@corresp,'http://syriaca.org/persons')]"/>    
+                    </div>
+                </xsl:when>
+                <xsl:otherwise>
+                    <div class="tei-desc text abstract">
+                        <xsl:apply-templates select="t:desc[@type='abstract' or starts-with(@xml:id, 'abstract-en')][1] | t:note[@type='abstract'][1]"/>
+                    </div>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:if>
         <xsl:if test="t:persName[not(empty(descendant-or-self::text()))]">
             <h3>Names</h3>
@@ -695,8 +717,22 @@
         </xsl:if>
         
         <xsl:if test="not(empty(t:note[not(@type='description')][1]))">
-            <h3>Notes</h3>
-            <xsl:apply-templates select="t:note[not(@type='description')]"/>
+            <xsl:choose>
+                <xsl:when test="$collection = 'johnofephesusPersons'">
+                    <xsl:if test="t:note[not(@type='abstract')][not(@type='description')][contains(@corresp,'http://syriaca.org/johnofephesus/persons')]">
+                        <h3>Notes</h3>
+                        <xsl:apply-templates select="t:note[not(@type='abstract')][not(@type='description')][not(contains(@corresp,'http://syriaca.org/johnofephesus/persons'))]"/>
+                    </xsl:if>
+                </xsl:when>
+                <xsl:when test="t:note[not(@type='abstract')][contains(@corresp,'http://syriaca.org/persons')]">
+                    <h3>Notes</h3>
+                    <xsl:apply-templates select="t:note[not(@type='abstract')][not(@type='description')][not(contains(@corresp,'http://syriaca.org/persons'))]"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <h3>Notes</h3>
+                    <xsl:apply-templates select="t:note[not(@type='abstract')][not(@type='description')]"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:if>
         
         <div class="info-btns">  
@@ -720,9 +756,25 @@
     </xsl:template>
     <xsl:template match="t:place">
         <xsl:if test="t:desc[@type='abstract'] | t:desc[starts-with(@xml:id, 'abstract-en')] | t:note[@type='abstract']">
-            <div class="tei-desc text abstract">
-                <xsl:apply-templates select="t:desc[@type='abstract' or starts-with(@xml:id, 'abstract-en')][1] | t:note[@type='abstract']"/>
-            </div>
+            <xsl:choose>
+                <xsl:when test="$collection = 'johnofephesusPlace'">
+                    <xsl:if test="t:note[@type='abstract'][contains(@corresp,'http://syriaca.org/johnofephesus/places')]">
+                        <div class="tei-desc text abstract">
+                            <xsl:apply-templates select="t:note[@type='abstract'][contains(@corresp,'http://syriaca.org/johnofephesus/places')]"/>
+                        </div>
+                    </xsl:if>
+                </xsl:when>
+                <xsl:when test="t:note[@type='abstract'][contains(@corresp,'http://syriaca.org/places')]">
+                    <div class="tei-desc text abstract">
+                        <xsl:apply-templates select="t:note[@type='abstract'][contains(@corresp,'http://syriaca.org/places')]"/>    
+                    </div>
+                </xsl:when>
+                <xsl:otherwise>
+                    <div class="tei-desc text abstract">
+                        <xsl:apply-templates select="t:desc[@type='abstract' or starts-with(@xml:id, 'abstract-en')][1] | t:note[@type='abstract'][1]"/>
+                    </div>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:if>
         <xsl:if test="t:placeName">
             <div id="placenames" class="content-block">
@@ -817,8 +869,22 @@
         </xsl:if>
         
         <xsl:if test="not(empty(t:note[not(@type='description')][1]))">
-            <h3>Notes</h3>
-            <xsl:apply-templates select="t:note[not(@type='description')]"/>
+            <xsl:choose>
+                <xsl:when test="$collection = 'johnofephesusPlace'">
+                    <xsl:if test="t:note[not(@type='abstract')][not(@type='description')][contains(@corresp,'http://syriaca.org/johnofephesus/places')]">
+                        <h3>Notes</h3>
+                        <xsl:apply-templates select="t:note[not(@type='abstract')][not(@type='description')][not(contains(@corresp,'http://syriaca.org/johnofephesus/places'))]"/>
+                    </xsl:if>
+                </xsl:when>
+                <xsl:when test="t:note[not(@type='abstract')][not(@type='description')][contains(@corresp,'http://syriaca.org/places')]">
+                    <h3>Notes</h3>
+                    <xsl:apply-templates select="t:note[not(@type='abstract')][not(@type='description')][not(contains(@corresp,'http://syriaca.org/places'))]"/>
+                </xsl:when>
+                <xsl:otherwise>
+                    <h3>Notes</h3>
+                    <xsl:apply-templates select="t:note[not(@type='abstract')][not(@type='description')]"/>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:if>
         <!-- Confessions/Religious Communities -->
         <xsl:if test="t:state[@type='confession'][parent::t:place]">
@@ -1076,8 +1142,8 @@
                 </h3>
                 <div class="indent">
                     <xsl:for-each select="current-group()">
-                        <xsl:sort select="if(current-grouping-key() = 'MSS') then substring-after(t:bibl/@xml:id,'-') = '' else if(current-grouping-key() = 'editions') then substring-after(t:bibl/@corresp,'-') = '' else if(@xml:lang) then local:expand-lang(@xml:lang,$label) else ." order="ascending"/>
-                        <xsl:sort select="if(current-grouping-key() = 'MSS' and (substring-after(t:bibl/@xml:id,'-') castable as xs:integer)) then xs:integer(substring-after(t:bibl/@xml:id,'-')) else if(@xml:lang) then local:expand-lang(@xml:lang,$label) else ()" order="ascending"/>
+                        <xsl:sort select="if(current-grouping-key() = 'MSS') then substring-after(t:bibl[1]/@xml:id,'-') = '' else if(current-grouping-key() = 'editions') then substring-after(t:bibl/@corresp,'-') = '' else if(@xml:lang) then local:expand-lang(@xml:lang,$label) else ." order="ascending"/>
+                        <xsl:sort select="if(current-grouping-key() = 'MSS' and (substring-after(t:bibl[1]/@xml:id,'-') castable as xs:integer)) then xs:integer(substring-after(t:bibl/@xml:id,'-')) else if(@xml:lang) then local:expand-lang(@xml:lang,$label) else ()" order="ascending"/>
                         <xsl:apply-templates select="self::*"/>
                     </xsl:for-each>
                 </div>
@@ -1295,21 +1361,30 @@
     
     <!-- T -->
     <xsl:template match="t:TEI">
-        <!-- Header -->
-        <xsl:call-template name="h1"/>
-        <xsl:apply-templates select="descendant::t:sourceDesc/t:msDesc"/>
-        <!-- MSS display -->
-        <xsl:if test="descendant::t:sourceDesc/t:msDesc">
-            <xsl:apply-templates select="descendant::t:sourceDesc/t:msDesc"/>
-        </xsl:if>
-        <!-- Body -->
-        <xsl:apply-templates select="descendant::t:body"/>
-        <!-- Citation Information -->
-        <xsl:apply-templates select="t:teiHeader" mode="citation"/>
+        <xsl:choose>
+            <xsl:when test="contains($resource-id,'cbss')">
+                <xsl:apply-templates select="descendant::t:biblStruct"/>
+            </xsl:when>
+            <xsl:otherwise>
+                <!-- Header -->
+                <xsl:call-template name="h1"/>
+                <xsl:apply-templates select="descendant::t:sourceDesc/t:msDesc"/>
+                <!-- MSS display -->
+                <xsl:if test="descendant::t:sourceDesc/t:msDesc">
+                    <xsl:apply-templates select="descendant::t:sourceDesc/t:msDesc"/>
+                </xsl:if>
+                <!-- Body -->
+                <xsl:apply-templates select="descendant::t:body"/>
+                <!-- Citation Information -->
+                <xsl:apply-templates select="t:teiHeader" mode="citation"/>
+            </xsl:otherwise>
+        </xsl:choose>
+        
     </xsl:template>
     <xsl:template match="t:teiHeader" mode="#all">
         <xsl:choose>
-            <xsl:when test="contains($resource-id,'/bibl/')">
+            <xsl:when test="contains($resource-id,'/bibl/') or contains($resource-id,'/cbss/')">
+                <!--
                 <div id="about">
                     <xsl:choose>
                         <xsl:when test="contains($resource-id,'/bibl/')">
@@ -1322,6 +1397,7 @@
                         </xsl:otherwise>
                     </xsl:choose>
                 </div>
+                -->
             </xsl:when>
             <xsl:otherwise>
                 <div class="citationinfo">
