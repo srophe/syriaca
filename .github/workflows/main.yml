@@ -24,13 +24,14 @@ jobs:
           aws-region: us-east-1
           role-session-name: GitHub-OIDC-frontend
 
-      # Step 3: Check if there are changes in the `staticSite` branch
+      # Step 3: Check if there are changes in the current branch
       - name: Check for changes in `staticSite`
         id: changes
         run: |
           git fetch origin staticSite
-          git diff --exit-code HEAD^ HEAD -- ./website || echo "Changes detected"
-        continue-on-error: true  # This ensures the workflow continues if there are changes
+          git diff --exit-code HEAD -- ./website || echo "Changes detected"
+        continue-on-error: true  # Ensure the workflow continues if changes are detected
+
 
       # Step 4: Sync files to S3 for static website hosting only if there are changes
       - name: Sync files to S3 if changes detected
