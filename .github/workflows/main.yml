@@ -35,8 +35,6 @@ jobs:
       # Step 4: Sync files to S3 for static website hosting only if there are changes
       - name: Sync files to S3 if changes detected
         if: steps.changes.outcome == 'failure'  # Only proceed if the previous step found changes
-
-      - name: Sync files to S3
         run: |
           aws s3 sync ./ s3://srophe-syriaca-front-end --delete
         env:
