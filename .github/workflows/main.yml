@@ -24,7 +24,18 @@ jobs:
           aws-region: us-east-1
           role-session-name: GitHub-OIDC-frontend
 
-      # Step 3: Sync files to S3 for static website hosting
+      # Step 3: Check if there are changes in the `staticSite` branch
+      - name: Check for changes in `staticSite`
+        id: changes
+        run: |
+          git fetch origin staticSite
+          git diff --exit-code HEAD^ HEAD -- ./website || echo "Changes detected"
+        continue-on-error: true  # This ensures the workflow continues if there are changes
+
+      # Step 4: Sync files to S3 for static website hosting only if there are changes
+      - name: Sync files to S3 if changes detected
+        if: steps.changes.outcome == 'failure'  # Only proceed if the previous step found changes
+
       - name: Sync files to S3
         run: |
           aws s3 sync ./ s3://srophe-syriaca-front-end --delete
