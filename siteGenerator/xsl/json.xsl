@@ -32,7 +32,7 @@
             replace(
             replace(
             replace(
-            replace($string,'^\s+',''), 
+            replace($string[1],'^\s+',''), 
             '[ً-ٖ]',''), 
             '(^|\s)(ال|أل|ٱل)',''), 
             'آ|إ|أ|ٱ','ا'), 
@@ -374,12 +374,31 @@
         <xsl:if test="$doc/descendant::tei:publisher">
             <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">      
                 <xsl:for-each select="$doc/descendant::tei:publisher">
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="."/></string>
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
                 </xsl:for-each>
             </array>
         </xsl:if>
     </xsl:template>
-    
+    <xsl:template match="*:fields[@function = 'persName']">
+        <xsl:param name="doc"/>
+        <xsl:if test="$doc/descendant::tei:persName">
+            <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">      
+                <xsl:for-each select="$doc/descendant::tei:persName">
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+                </xsl:for-each>
+            </array>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="*:fields[@function = 'placeName']">
+        <xsl:param name="doc"/>
+        <xsl:if test="$doc/descendant::tei:placeName">
+            <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">      
+                <xsl:for-each select="$doc/descendant::tei:placeName">
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+                </xsl:for-each>
+            </array>
+        </xsl:if>
+    </xsl:template>
     <xsl:template match="*:fields"/>
     <!--
     <xsl:template match="*:fields[@function = 'fullText']">
@@ -389,7 +408,7 @@
     -->
     
     <xsl:template match="t:TEI" mode="fullText">
-       <xsl:apply-templates select="descendant::text()"/>
+        <xsl:apply-templates select="descendant::tei:body/descendant::text()"/>
     </xsl:template>
     <xsl:template match="t:TEI" mode="title">
         <xsl:choose>
