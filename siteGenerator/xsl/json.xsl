@@ -125,7 +125,8 @@
     <xsl:template match="*:fields[@function = 'fullText']">
         <xsl:param name="doc"/>
         <xsl:variable name="field">
-            <xsl:apply-templates select="$doc/descendant::text()"/>
+            <xsl:value-of select="normalize-space(string-join($doc/descendant::tei:body/descendant::text(),' '))"/>
+            <!--<xsl:apply-templates select="$doc/descendant::text()"/>-->
         </xsl:variable>
         <xsl:if test="$field != ''">
             <string key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">
@@ -317,7 +318,7 @@
         <xsl:if test="$doc/descendant::tei:imprint/tei:date">
             <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">      
                 <xsl:for-each select="$doc/descendant::tei:imprint/tei:date">
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="local:buildDate(.)"/></string>
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="."/></string>
                 </xsl:for-each>
             </array>
         </xsl:if>
@@ -381,9 +382,9 @@
     </xsl:template>
     <xsl:template match="*:fields[@function = 'persName']">
         <xsl:param name="doc"/>
-        <xsl:if test="$doc/descendant::tei:persName">
+        <xsl:if test="$doc/descendant::tei:body/descendant::tei:persName">
             <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">      
-                <xsl:for-each select="$doc/descendant::tei:persName">
+                <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:persName">
                     <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
                 </xsl:for-each>
             </array>
@@ -391,9 +392,9 @@
     </xsl:template>
     <xsl:template match="*:fields[@function = 'placeName']">
         <xsl:param name="doc"/>
-        <xsl:if test="$doc/descendant::tei:placeName">
+        <xsl:if test="$doc/descendant::tei:body/descendant::tei:placeName">
             <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">      
-                <xsl:for-each select="$doc/descendant::tei:placeName">
+                <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:placeName">
                     <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
                 </xsl:for-each>
             </array>
@@ -408,7 +409,7 @@
     -->
     
     <xsl:template match="t:TEI" mode="fullText">
-        <xsl:apply-templates select="descendant::tei:body/descendant::text()"/>
+        <xsl:value-of select="normalize-space(string-join(descendant::tei:body/descendant::text(),' '))"/>
     </xsl:template>
     <xsl:template match="t:TEI" mode="title">
         <xsl:choose>
