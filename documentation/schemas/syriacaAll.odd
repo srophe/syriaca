@@ -52,7 +52,7 @@
       <schemaSpec ident="syriacaAll" prefix="tei_" source="srophe.compiled.odd" xml:lang="en" defaultExceptions="http://www.tei-c.org/ns/1.0 teix:egXML​ http://www.example.org/ns/">
         <moduleRef key="tei"/>
         <moduleRef key="certainty" include="precision"/>
-        <moduleRef key="core" include="abbr author bibl biblScope choice citedRange date desc editor expan foreign head item list listBibl measure name note orig p ptr pubPlace quote reg ref resp respStmt sic title"/>
+        <moduleRef key="core" include="abbr author bibl biblScope choice citedRange date desc editor expan foreign head item list listBibl measure name note orig p ptr pubPlace quote reg ref resp respStmt rs sic title"/>
         <moduleRef key="dictionaries" include="entryFree"/>
         <moduleRef key="figures" include="formula"/>
         <moduleRef key="header" include="authority availability catDesc category change classDecl edition editionStmt editorialDecl encodingDesc extent fileDesc funder handNote idno interpretation language langUsage licence principal profileDesc publicationStmt revisionDesc seriesStmt sourceDesc sponsor taxonomy teiHeader textClass textLang titleStmt"/>
@@ -1387,6 +1387,22 @@
                 </valItem>
               </valList>
             </attDef>
+          </attList>
+        </elementSpec>
+        
+        
+        
+        <elementSpec ident="rs" module="core" mode="change">
+          <attList>
+            <attDef ident="type" mode="replace" usage="req">
+              <valList type="closed" mode="replace">
+                <valItem ident="religiousCommunity">
+                  <gloss>Religious Community</gloss>
+                  <desc>Indicates that the enclosed string points to a Religious Community</desc>
+                </valItem>
+              </valList>
+            </attDef>
+            <attDef ident="ref" mode="change" usage="req"/>
           </attList>
         </elementSpec>
         
