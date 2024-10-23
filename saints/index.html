@@ -1,554 +1,261 @@
 <?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:srophe="https://srophe.app">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      
-      <title data-template="app:record-title">App Title</title>
-      
+      <title>Generic Header:: </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      
       <meta name="DC.type" property="dc.type" content="Text" />
-      
-      <meta name="DC.isPartOf" property="dc.ispartof" content="Syriaca.org: The Syriac Reference Portal" />
-      
-      <link data-template="app:metadata" />
-      
-      <link rel="shortcut icon" href="/resources/images/fav-icons/saints-favicon.ico" />
-      
-      <!-- Bootstrap 3 -->
-      
+      <meta name="DC.isPartOf" property="dc.ispartof" content="" />
+      <link rel="shortcut icon" href="/resources/images/fav-icons/syriaca-favicon.ico" />
       <link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/bootstrap.min.css" />
-      
       <link rel="stylesheet" type="text/css" href="/resources/css/sm-core-css.css" />
-      
-      <!-- Srophe styles -->
-      
       <link rel="stylesheet" type="text/css" href="/resources/css/syr-icon-fonts.css" />
-      
       <link rel="stylesheet" type="text/css" href="/resources/css/style.css" />
-      
       <link rel="stylesheet" type="text/css" href="/resources/css/syriaca.css" />
-      
-      <link rel="stylesheet" type="text/css" href="/resources/css/saints.css" />
-      
       <link rel="stylesheet" type="text/css" href="/resources/css/slider.css" />
-      
       <link rel="stylesheet" type="text/css" href="/resources/css/lightslider.css" />
-      
       <link rel="stylesheet" type="text/css" media="print" href="/resources/css/print.css" />
-      
-      <!-- Leaflet -->
-      
       <link rel="stylesheet" href="/resources/leaflet/leaflet.css" />
-      
-      <link rel="stylesheet" href="/resources/leaflet/leaflet.awesome-markers.css" />
-      <script defer="defer" data-domain="syriaca.org" src="https://plausible.io/js/plausible.js"></script>
-      
-      <!-- JQuery -->
-      <link href="/resources/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
-      <script type="text/javascript" src="/resources/js/jquery.min.js"></script>
-      <script type="text/javascript" src="/resources/jquery-ui/jquery-ui.min.js"></script>
-      <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
-      <script type="text/javascript" src="/resources/js/clipboard.min.js"></script>
-      
-      <!-- Bootstrap -->
-      <script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script>
-      
-      <!-- ReCaptcha -->
-      <script src="https://www.google.com/recaptcha/api.js" type="text/javascript" async="async" defer="defer"></script>
-      
-      <!-- keyboard widget css & script -->
-      <link href="/resources/keyboard/css/keyboard.min.css" rel="stylesheet" />
-      
+      <link rel="stylesheet" href="/resources/leaflet/leaflet.awesome-markers.css" /><script defer="defer" data-domain="syriaca.org" src="https://plausible.io/js/plausible.js"></script><link href="/resources/jquery-ui/jquery-ui.min.css" rel="stylesheet" /><script type="text/javascript" src="/resources/js/jquery.min.js"></script><script type="text/javascript" src="/resources/jquery-ui/jquery-ui.min.js"></script><script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script><script type="text/javascript" src="/resources/js/clipboard.min.js"></script><script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script><script src="https://www.google.com/recaptcha/api.js" type="text/javascript" async="async" defer="defer"></script><link href="/resources/keyboard/css/keyboard.min.css" rel="stylesheet" />
       <link href="/resources/keyboard/css/keyboard-previewkeyset.min.css" rel="stylesheet" />
-      
-      <link href="/resources/keyboard/syr/syr.css" rel="stylesheet" />
-      <script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-mobile.min.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-navigation.min.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.extension-autocomplete.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/syr/keyboardSupport.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/syr/syr.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Greek.min.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Russian.min.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Arabic.min.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Hebrew.min.js"></script>
-      <script type="text/javascript">
-            $(document).ready(function () {
+      <link href="/resources/keyboard/syr/syr.css" rel="stylesheet" /><script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.js"></script><script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-mobile.min.js"></script><script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-navigation.min.js"></script><script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.extension-autocomplete.js"></script><script type="text/javascript" src="/resources/keyboard/syr/keyboardSupport.js"></script><script type="text/javascript" src="/resources/keyboard/syr/syr.js"></script><script type="text/javascript" src="/resources/keyboard/layouts/ms-Greek.min.js"></script><script type="text/javascript" src="/resources/keyboard/layouts/ms-Russian.min.js"></script><script type="text/javascript" src="/resources/keyboard/layouts/ms-Arabic.min.js"></script><script type="text/javascript" src="/resources/keyboard/layouts/ms-Hebrew.min.js"></script><script type="text/javascript">
+                    
+                $(document).ready(function () {
                 $('[data-toggle="tooltip"]').tooltip({ container: 'body' })
-
+                
                 $('.keyboard').keyboard({
-                    openOn: null,
-                    stayOpen: false,
-                    alwaysOpen: false,
-                    autoAccept: true,
-                    usePreview: false,
-                    initialFocus: true,
-                    rtl : true,
-                    layout: 'syriac-phonetic',
-                    hidden: function(event, keyboard, el){
-                       //  keyboard.destroy();
-                     }
+                openOn: null,
+                stayOpen: false,
+                alwaysOpen: false,
+                autoAccept: true,
+                usePreview: false,
+                initialFocus: true,
+                rtl : true,
+                layout: 'syriac-phonetic',
+                hidden: function(event, keyboard, el){
+                //  keyboard.destroy();
+                }
                 });
-
+                
                 $('.keyboard-select').click(function () {
-                    var keyboardID = '#' + $(this).data("keyboard-id")
-                    var kb = $(keyboardID).getkeyboard();
-                    //var kb = $('#searchField').getkeyboard();
-                    // change layout based on link ID
-                    kb.options.layout = this.id
-                    // open keyboard if layout is different, or time from it last closing is &amp;gt; 200 ms
-                    if (kb.last.layout !== kb.options.layout || (new Date().getTime() - kb.last.eventTime) &lt; 200) {
-                        kb.reveal();
-                    }
+                var keyboardID = '#' + $(this).data("keyboard-id")
+                var kb = $(keyboardID).getkeyboard();
+                //var kb = $('#searchField').getkeyboard();
+                // change layout based on link ID
+                kb.options.layout = this.id
+                // open keyboard if layout is different, or time from it last closing is &gt; 200 ms
+                if (kb.last.layout !== kb.options.layout || (new Date().getTime() - kb.last.eventTime) < 200) {
+                kb.reveal();
+                }
                 });
                 //Change fonts
                 $('.swap-font').on('click', function(){
-                    var selectedFont = $(this).data("font-id")
-                    $('.selectableFont').not('.syr').css('font-family', selectedFont);
-                    $("*:lang(syr)").css('font-family', selectedFont)
+                var selectedFont = $(this).data("font-id")
+                $('.selectableFont').not('.syr').css('font-family', selectedFont);
+                $("*:lang(syr)").css('font-family', selectedFont)
                 });
-
-            })
-        </script>
-      </head>
+                
+                })
+                </script></head>
    <body id="body">
       <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-         
-         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-               <span class="sr-only">Toggle navigation</span>
-               <span class="icon-bar"></span>
-               <span class="icon-bar"></span>
-               <span class="icon-bar"></span>
-               </button>
-            <a class="navbar-brand banner-container" href="saints/index.html">
-               <span class="syriaca-icon syriaca-saints banner-icon">
-                  <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
-                  </span>
-               <span class="banner-text" data-template="config:collection-title" data-template-collection="spear">Gateway to the Syriac Saints</span>
-               </a>
-            
-         </div>
-         
+         <div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand banner-container" href="index.html"><span class="syriaca-icon syriaca-syriaca banner-icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></span><span class="banner-text">T1</span></a></div>
          <div class="navbar-collapse collapse pull-right" id="navbar-collapse-1">
-            
             <ul class="nav navbar-nav">
-               
-               <li>
-                  <a href="/q/index.html" class="icon-container">
-                     <span class="syriaca-icon syriaca-q icon-nav">
-                        <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
-                        </span>
-                     <span class="icon-text">Qadishe</span>
+               <li class="dropdown">
+                  <a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown">
+                     <span class="mobile-submenu">Publications </span>  <b class="caret"></b>
                      </a>
                   
-               </li>
-               
-               <li>
-                  <a href="/bhse/index.html" class="icon-container">
-                     <span class="syriaca-icon syriaca-bhse icon-nav">
-                        <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
-                        </span>
-                     <span class="icon-text">BHSE</span>
-                     </a>
-                  
-               </li>
-               
-               <li class="dropdown">     <a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown">         <span class="mobile-submenu">Publications </span>  <b class="caret"></b>     </a>     
-                  <ul class="dropdown-menu pull-right">         
-                     <li>             <a href="/geo/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-geo icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Gazetteer</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/persons/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-sbd icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">SBD</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/authors/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-authors icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Authors</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/saints/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-saints icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Gateway to the Saints</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/q/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-q icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Qadishe</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/bhse/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-bhse icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">BHSE</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/cbss/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-bibl icon-nav"></span>                 <span class="icon-text">Works Cited</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-syriaca icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="mobile-submenu icon-text">Syriaca.org</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>     
-                  </ul> 
-               </li>
-               
-            </ul>
-            
-         </div>
-         
-      </nav>
-      <div data-template="templates:surround" data-template-with="templates/saints.html" data-template-at="content">
-         
-         <div class="full-page hide-search" style="margin-top:50px;">
-            
-            <div class="row" style="background-color:#A5744B;">
-               
-               <div class="col-md-6" style="margin:0;padding:0; ">
-                  
-                  <div class="q-saints">
-                     <span class="img-credit">
-                        <label>Photo Credit:</label> "Three Patriarchs in Paradise in the
-                        Monastery of St Moses (Syria)." Paul van Moorsel Centre for Christian Art and Culture.
-                        <button class="btn btn-link white-link" data-toggle="collapse" data-target="#img-rights">
-                           <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                           </button>
-                        <span id="img-rights" class="collapse">
-                           <br />
-                           Image provided by Paul van Moorsel Centre for Christian Art and
-                           Culture, VU Universiteit Amsterdam under the
-                           terms of the Creative Commons Attribution 4.0
-                           International License.</span>
-                        </span>
+                  <ul class="dropdown-menu pull-right">
                      
-                  </div>
-                  
-               </div>
-               
-               <div class="col-md-6" style="margin:0;padding:0;">
-                  
-                  <div class="indent">
-                     
-                     <h1 style="color:white; margin:1em;">
-                        <i>Part I: Qadishe</i>
-                        
-                     </h1>
-                     
-                  </div>
-                  
-                  <div class="row">
-                     
-                     <div class="indent col-md-12">
-                        
-                        <form role="search" id="site_search_form" method="GET" class="col-xs-12 col-sm-offset-2 col-sm-8" action="../q/search.html" style="">
-                           
-                           <div class="input-group">
-                              <input id="homepage_search_input " type="text" class="form-control input-lg transparent-input" placeholder="Search for Saints" name="q" />
-                              <input type="hidden" id="collection" value="saints" />
-                              
-                              <div class="input-group-btn">
-                                 <button class="btn btn-default input-lg" type="submit">
-                                      <span class="glyphicon glyphicon-search"></span>
-                                    </button>
-                                 <a href="../q/search.html" title="advanced search" class="btn btn-default input-lg" style="padding-top:.75em;">
-                                    <span class="glyphicon glyphicon-cog"></span> Search Tools
-                                    </a>
-                                 
-                              </div>
-                              
-                           </div>
-                           
-                        </form>
-                        
-                     </div>
-                     
-                  </div>
-                  
-                  <div class="indent">
-                     
-                     <p style="color:white; width:90%; margin-top:2em; margin-left:2em;">Qadishe contains information on persons relevant to the study of Syriac hagiography
-                        include the saints themselves (such as St. Simeon the Stylite) as well as their associates
-                        and the authors who narrated their lives or wrote homilies and hymns about them. 
-                        <a href="../q/index.html" style="color:white; margin-left:1em;">More <i class="glyphicon glyphicon-circle-arrow-right"></i>
-                           </a>
-                        
-                     </p>
-                     
-                  </div>
-                  
-               </div>
-               
-            </div>
-            
-            <div class="row" style="background-color:#861719;">
-               
-               <div class="col-md-6" style="margin:0;padding:0;">
-                  
-                  <div class="indent">
-                     
-                     <h1 style="color:white; margin:1em;">
-                        <i>Part II: Bibliotheca Hagiographica Syriaca Electronica</i>
-                        
-                     </h1>
-                     
-                  </div>
-                  
-                  <div class="row">
-                     
-                     <div class="indent col-md-12">
-                        
-                        <form role="search" id="site_search_form" method="GET" class="col-xs-12 col-sm-offset-2 col-sm-8" action="../bhse/search.html" style="">
-                           
-                           <div class="input-group">
-                              <input id="homepage_search_input " type="text" class="form-control input-lg transparent-input" placeholder="Search for Texts" name="q" />
-                              <input type="hidden" id="collection" value="bhse" />
-                              
-                              <div class="input-group-btn">
-                                 <button class="btn btn-default input-lg" type="submit">
-                                      <span class="glyphicon glyphicon-search"></span>
-                                    </button>
-                                 <a href="../bhse/search.html" title="advanced search" class="btn btn-default input-lg" style="padding-top:.75em;">
-                                    <span class="glyphicon glyphicon-cog"></span> Search Tools
-                                    </a>
-                                 
-                              </div>
-                              
-                           </div>
-                           
-                        </form>
-                        
-                     </div>
-                     
-                  </div>
-                  
-                  <div class="indent">
-                     
-                     <p style="color:white; width:90%; margin-top:2em; margin-left:2em;">Bibliotheca Hagiographica Syriaca Electronica describes texts written about saints
-                        and includes information about different versions and data such as the title, prologue,
-                        and epilogue of the saint's life, along with the hagiographer.
-                        <a href="../bhse/index.html" style="color:white; margin-left:1em;">More <i class="glyphicon glyphicon-circle-arrow-right"></i>
-                           </a>
-                        
-                     </p>
-                     
-                  </div>
-                  
-               </div>
-               
-               <div class="col-md-6" style="margin:0;padding:0;">
-                  
-                  <div class="bhse-saints">
-                     <span class="img-credit">
-                        <label>Photo Credit:</label> DFM 13, f. 61r, from Dominican Friars
-                        of Mosul MS 13 (1723 CE). Hill Museum &amp; Manuscript Library.
-                        <button class="btn btn-link white-link" data-toggle="collapse" data-target="#img-rights">
-                           <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                           </button>
-                        <span id="img-rights" class="collapse">
-                           <br />Image provided by Hill Museum &amp; Manuscript Library, Saint John’s University,
-                           Collegeville, Minnesota under the terms of the
-                           Creative Commons Attribution 4.0 International
-                           License.</span>
-                        </span>
-                     
-                  </div>
-                  
-               </div>
-               
-            </div>
-            
-            <div class="row grey" style="border-top:3px solid #861719;">
-               
-               <div class="col-md-8 main-content-block">
-                  
-                  <div class="indent">
-                     
-                     <h1>Gateway to the Syriac Saints: A Database Project</h1>
-                     
-                     <p class="indent">
-                        Jeanne-Nicole Mellon Saint-Laurent, Marquette University
-                        
-                     </p>
-                     
-                     <p>
-                        Syriaca.org has created an open-access digital research portal for the study of 
-                        
-                        Syriac saints and hagiographic texts<span class="footnote-refs">
-                           <span class="footnote-ref">
-                              <a href="#note1">1</a>
+                     <li>
+                        <a href="$nav-base/geo/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-geo icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
                               </span>
-                           </span>. It is a two-volume database entitled <em>The Gateway to 
-                           
-                           the Syriac Saints</em>.
-                        
-                     </p>
-                     
-                     <p>
-                        The first volume, <em>Qadishe</em> or “saints” in Syriac, is a digital catalogue of saints or
-                        
-                        holy persons venerated in the Syriac tradition.  Some saints are native to the Syriac-
-                        
-                        speaking milieu, whereas other texts come from other linguistic or cultural traditions.
-                        
-                     </p>
-                     
-                     <p>
-                        The second volume, the <em>Bibliotheca Hagiographica Syriaca Electronica</em> or <em>BHSE</em>
-                        
-                        is a digital reference catalogue on Syriac hagiographic texts.  The <em>BHSE</em> contains the 
-                        
-                        titles of over 1800 Syriac stories, hymns, and homilies on saints.  It organized according
-                        
-                        
-                        to text and includes authors’ or hagiographers’ names, the first and last lines of
-                        the texts, 
-                        
-                        bibliographic information, and the names of the manuscripts containing these 
-                        
-                        hagiographic works.  We have also listed modern and ancient translations of these
-                        works.
-                        
-                     </p>
-                     
-                     <p>
-                        All of the data in the <em>Gateway to the Syriac Saints</em> has been encoded in TEI, and it
-                        
-                        is fully searchable, linkable, and open.
-                        
-                     </p>
-                     
-                     <p>
-                        <a href="intro.html">See full paper <i class="glyphicon glyphicon-circle-arrow-right"></i>
+                           <span class="icon-text">Gazetteer</span>
                            </a>
                         
-                     </p>
+                     </li>
                      
-                     <hr />
+                     <li role="presentation" class="divider"></li>
                      
-                     <ul class="list-inline funding" style="margin-left:2em;">
+                     <li>
+                        <a href="$nav-base/persons/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-sbd icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">SBD</span>
+                           </a>
                         
-                        <li>
-                           <a href="http://www.balzan.org/en">
-                              <img src="../resources/images/marchioBALZANblu_bianco.png" alt="Fondazione Internazionale Balzan" /> Fondazione Internazionale
-                              Balzan </a>
-                           
-                        </li>
-                        
-                        <li>
-                           <a href="http://www.neh.gov/">
-                              <img src="../resources/images/neh_logo_horizontal_rgb.jpg" alt="NEH" />
-                              </a>
-                           
-                        </li>
-                        
-                        <li>
-                           <a href="http://www.vanderbilt.edu/">
-                              <img src="../resources/images/vu07b.gif" alt="Vanderbilt University" />
-                              </a>
-                           
-                        </li>
-                        
-                        <li>
-                           <a href="http://www.library.vanderbilt.edu/">
-                              <img src="../resources/images/HeardLogo_b.gif" alt="Jean and Alexander Heard Library, Vanderbilt University" width="70%" />
-                              </a>
-                           
-                        </li>
-                        
-                        <li>
-                           <a href="http://www.princeton.edu/main/">
-                              <img src="../resources/images/PU-standard.png" alt="Princeton University" height="60px" />
-                              </a>
-                           
-                        </li>
-                        
-                        <li>
-                           <a href="http://www.marquette.edu/">
-                              <img src="../resources/images/MU-Logo.jpg" alt="Marquette University" />
-                              </a>
-                           
-                        </li>
-                        
-                        <li>
-                           <a href="http://www.bollandistes.org/online-resources.php?pg=bollandistdatabases">
-                              <img src="../resources/images/bollandiste.png" alt="Société des Bollandistes" width="50%" style="padding-left:1em;" />
-                              </a>
-                           
-                        </li>
-                        
-                     </ul>
+                     </li>
                      
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/authors/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-authors icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">Authors</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/saints/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-saints icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">Gateway to the Saints</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/q/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-q icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">Qadishe</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/bhse/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-bhse icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">BHSE</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <!--
+        <li role="presentation" class="divider"/>
+        <li>
+            <a href="$nav-base/nhsl/index.html" class="icon-container">
+                <span class="syriaca-icon syriaca-nhsl icon-nav">
+                    <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+                </span>
+                <span class="icon-text">NHSL</span>
+            </a>
+        </li>
+        <li role="presentation" class="divider"/>
+        <li>
+            <a href="$nav-base/spear/index.html" class="icon-container">
+                <span class="syriaca-icon syriaca-spear icon-nav">
+                    <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+                </span>
+                <span class="icon-text">SPEAR</span>
+            </a>
+        </li>
+        <li role="presentation" class="divider"/>
+        <li>
+            <a href="$nav-base/mss/index.html" class="icon-container">
+                <span class="syriaca-icon syriaca-mss icon-nav">
+                    <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+                </span>
+                <span class="icon-text">MSS</span>
+            </a>
+        </li>
+        -->
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/cbss/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-bibl icon-nav"></span>
+                           <span class="icon-text">Works Cited</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-syriaca icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="mobile-submenu icon-text">Syriaca.org</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                  </ul>
+                  
+               </li>
+               <li class="dropdown"><a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown"> 
+                     <span class="mobile-submenu">About</span>  <b class="caret"></b></a><ul class="dropdown-menu pull-right">
+                     <li><a href="/about-syriac.html">What is Syriac?</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/about-srophe.html">Project Overview</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/project-team.html">Project Team</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/project-partners.html">Project Partners</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/geo/index.html"><span class="icon-text">Gazetteer</span></a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="http://vu.edu/syriac">Support Our Work</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/contact-us.html">Contact Us</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/documentation/index.html"><span class="syriaca-icon syriaca-book icon-nav" style="color:red;"></span><span class="icon-text">Documentation</span></a></li>
+                  </ul>
+               </li>
+               <li><a href="search.html" class="nav-text">Advanced Search</a></li>
+               <li>
+                  <div id="search-wrapper">
+                     <form class="navbar-form navbar-right search-box" role="search" action="search.html" method="get">
+                        <div class="form-group"><input type="text" class="form-control keyboard" placeholder="search" name="keyword" id="keywordNav" /><span class="keyboard-menu"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Keyboard">
+                                  <span class="syriaca-icon syriaca-keyboard">  </span><span class="caret"></span></button><ul class="dropdown-menu">
+                                 <li><a href="#" class="keyboard-select" id="syriac-phonetic" data-keyboard-id="keywordNav">Syriac Phonetic</a></li>
+                                 <li><a href="#" class="keyboard-select" id="syriac-standard" data-keyboard-id="keywordNav">Syriac Standard</a></li>
+                                 <li><a href="#" class="keyboard-select" id="ms-Arabic (101)" data-keyboard-id="keywordNav">Arabic Mod. Standard</a></li>
+                                 <li><a href="#" class="keyboard-select" id="ms-Hebrew" data-keyboard-id="keywordNav">Hebrew</a></li>
+                                 <li><a href="#" class="keyboard-select" id="ms-Russian" data-keyboard-id="keywordNav">Russian</a></li>
+                                 <li><a href="#" class="keyboard-select" id="ms-Greek" data-keyboard-id="keywordNav">Greek</a></li>
+                                 <li><a href="#" class="keyboard-select" id="qwerty" data-keyboard-id="keywordNav">English QWERTY</a></li>
+                              </ul></span><button class="btn btn-default search-btn" id="searchbtn" type="submit" title="Search"><span class="glyphicon glyphicon-search"></span></button></div>
+                     </form>
                   </div>
-                  
-               </div>
-               
-               <div class="col-md-4">
-                  
-                  <h2 style="color:#666">Sample entries for saints from <i>Part I: Qadishe</i>:
-                  </h2>
-                  
-                  <ul>
-                     
-                     <li>
-                        <a href="/person/1109">Abraham of the High Mountain</a>
-                        
-                     </li>
-                     
-                     <li>
-                        <a href="/person/1493">Ṭahmazgerd</a>
-                        
-                     </li>
-                     
-                     <li>
-                        <a href="/person/1382">Meharshabur</a>
-                        
-                     </li>
-                     
-                  </ul>
-                  
-                  <p class="indent">
-                     <a href="../q/browse.html">Browse all saints <i class="glyphicon glyphicon-circle-arrow-right"></i>
-                        </a>
-                     
-                  </p>
-                  
-                  <h2 style="color:#666">Sample entries for saints' lives from <i>Part II: Bibliotheca Hagiographica Syriaca Electronica</i>:
-                  </h2>
-                  
-                  <ul>
-                     
-                     <li>
-                        <a href="/work/270">
-                           <i>Miles, Aboursam and Sinay</i>
-                           </a>
-                        
-                     </li>
-                     
-                     <li>
-                        <a href="/work/250">
-                           <i>The Children of Ephesus</i>
-                           </a>
-                        
-                     </li>
-                     
-                     <li>
-                        <a href="/work/694">
-                           <i>Abraham of the High Mountain</i>
-                           </a>
-                        
-                     </li>
-                     
-                     <li>
-                        <a href="/work/294">
-                           <i>Saba Goushnazdad</i>
-                           </a>
-                        
-                     </li>
-                     
-                  </ul>
-                  
-                  <p class="indent">
-                     <a href="../bhse/browse.html">Browse all saints' lives <i class="glyphicon glyphicon-circle-arrow-right"></i>
-                        </a>
-                     
-                  </p>
-                  
-               </div>
-               
-            </div>
-            
+               </li>
+               <li>
+                  <div class="btn-nav"><button class="btn btn-default navbar-btn" id="font" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Font"><span class="glyphicon glyphicon-font"></span></button><ul class="dropdown-menu dropdown-menu-right" id="swap-font">
+                        <li><a href="#" class="swap-font" id="DefaultSelect" data-font-id="EstrangeloEdessa">Default</a></li>
+                        <li><a href="#" class="swap-font" id="EstrangeloEdessaSelect" data-font-id="EstrangeloEdessa">Estrangelo Edessa</a></li>
+                        <li><a href="#" class="swap-font" id="EastSyriacAdiabeneSelect" data-font-id="EastSyriacAdiabene">East Syriac Adiabene</a></li>
+                        <li><a href="#" class="swap-font" id="SertoBatnanSelect" data-font-id="SertoBatnan">Serto Batnan</a></li>
+                        <li><a href="$app-root/documentation/wiki.html?wiki-page=/How-to-view-Syriac-script&amp;wiki-uri=https://github.com/srophe/syriaca-data/wiki">Help <span class="glyphicon glyphicon-question-sign"></span></a></li>
+                     </ul>
+                  </div>
+               </li>
+            </ul>
          </div>
-         
+      </nav>
+      <div>
+         <div class="main-content-block">
+            <div class="interior-content">
+               <div class="container otherFormats"><a href="javascript:window.print();" type="button" class="btn btn-default btn-xs" id="teiBtn" data-toggle="tooltip" title="Click to send this page to the printer."><span class="glyphicon glyphicon-print" aria-hidden="true"></span></a> <a href=".tei" class="btn btn-default btn-xs" id="teiBtn" data-toggle="tooltip" title="Click to view the TEI XML data for this record."><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> TEI/XML
+                     </a> 
+               </div>
+               <div class="row">
+                  <div class="col-md-7 col-lg-8"></div>
+                  <div class="col-md-5 col-lg-4 right-menu"><br /></div>
+               </div>
+            </div>
+         </div>
       </div>
       <footer>
          
@@ -561,4 +268,5 @@
          </div>
          
       </footer>
-   </body><script type="text/javascript" src="/resources/js/jquery.validate.min.js"></script><script type="text/javascript" src="/resources/js/require.min.js"></script><script type="text/javascript" src="/resources/js/srophe.js"></script><script type="text/javascript" src="/resources/js/lightslider.min.js"></script><script type="text/javascript" src="/resources/js/lightslider-functions.js"></script><script data-template="app:google-analytics"></script></html>
+   </body>
+</html>

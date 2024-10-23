@@ -1,429 +1,261 @@
 <?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:srophe="https://srophe.app">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      
-      <title data-template="app:record-title">App Title</title>
-      
+      <title>Generic Header:: </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      
-      <meta data-template="config:app-meta" />
-      
-      <link rel="shortcut icon" href="/resources/images/fav-icons/joe-favicon.ico" />
-      
-      <!-- Bootstrap 3 -->
-      
+      <meta name="DC.type" property="dc.type" content="Text" />
+      <meta name="DC.isPartOf" property="dc.ispartof" content="" />
+      <link rel="shortcut icon" href="/resources/images/fav-icons/syriaca-favicon.ico" />
       <link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/bootstrap.min.css" />
-      
       <link rel="stylesheet" type="text/css" href="/resources/css/sm-core-css.css" />
-      
-      <!-- Srophe styles -->
-      
       <link rel="stylesheet" type="text/css" href="/resources/css/syr-icon-fonts.css" />
-      
       <link rel="stylesheet" type="text/css" href="/resources/css/style.css" />
-      
-      <link rel="stylesheet" type="text/css" href="/resources/css/johnEphesus.css" />
-      
+      <link rel="stylesheet" type="text/css" href="/resources/css/syriaca.css" />
+      <link rel="stylesheet" type="text/css" href="/resources/css/slider.css" />
+      <link rel="stylesheet" type="text/css" href="/resources/css/lightslider.css" />
       <link rel="stylesheet" type="text/css" media="print" href="/resources/css/print.css" />
-      
-      <!-- Leaflet -->
-      
       <link rel="stylesheet" href="/resources/leaflet/leaflet.css" />
-      
-      <link rel="stylesheet" href="/resources/leaflet/leaflet.awesome-markers.css" />
-      
-      <!-- JQuery -->
-      
-      <link href="/resources/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
-      <script type="text/javascript" src="/resources/js/jquery.min.js"></script>
-      <script type="text/javascript" src="/resources/jquery-ui/jquery-ui.min.js"></script>
-      <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
-      <script type="text/javascript" src="/resources/js/clipboard.min.js"></script>
-      <script src="https://kit.fontawesome.com/1a5f16b66e.js" crossorigin="anonymous"></script>
-      
-      <!-- Bootstrap -->
-      <script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script>
-      
-      <!-- ReCaptcha -->
-      <script src="https://www.google.com/recaptcha/api.js" type="text/javascript" async="async" defer="defer"></script>
-      
-      <!-- keyboard widget css & script -->
-      <link href="/resources/keyboard/css/keyboard.min.css" rel="stylesheet" />
-      
+      <link rel="stylesheet" href="/resources/leaflet/leaflet.awesome-markers.css" /><script defer="defer" data-domain="syriaca.org" src="https://plausible.io/js/plausible.js"></script><link href="/resources/jquery-ui/jquery-ui.min.css" rel="stylesheet" /><script type="text/javascript" src="/resources/js/jquery.min.js"></script><script type="text/javascript" src="/resources/jquery-ui/jquery-ui.min.js"></script><script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script><script type="text/javascript" src="/resources/js/clipboard.min.js"></script><script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script><script src="https://www.google.com/recaptcha/api.js" type="text/javascript" async="async" defer="defer"></script><link href="/resources/keyboard/css/keyboard.min.css" rel="stylesheet" />
       <link href="/resources/keyboard/css/keyboard-previewkeyset.min.css" rel="stylesheet" />
-      
-      <link href="/resources/keyboard/syr/syr.css" rel="stylesheet" />
-      <script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-mobile.min.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-navigation.min.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.extension-autocomplete.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/syr/keyboardSupport.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/syr/syr.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Greek.min.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Russian.min.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Arabic.min.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Hebrew.min.js"></script>
-      <script type="text/javascript">
-            $(document).ready(function () {
+      <link href="/resources/keyboard/syr/syr.css" rel="stylesheet" /><script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.js"></script><script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-mobile.min.js"></script><script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-navigation.min.js"></script><script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.extension-autocomplete.js"></script><script type="text/javascript" src="/resources/keyboard/syr/keyboardSupport.js"></script><script type="text/javascript" src="/resources/keyboard/syr/syr.js"></script><script type="text/javascript" src="/resources/keyboard/layouts/ms-Greek.min.js"></script><script type="text/javascript" src="/resources/keyboard/layouts/ms-Russian.min.js"></script><script type="text/javascript" src="/resources/keyboard/layouts/ms-Arabic.min.js"></script><script type="text/javascript" src="/resources/keyboard/layouts/ms-Hebrew.min.js"></script><script type="text/javascript">
+                    
+                $(document).ready(function () {
                 $('[data-toggle="tooltip"]').tooltip({ container: 'body' })
-
+                
                 $('.keyboard').keyboard({
-                    openOn: null,
-                    stayOpen: false,
-                    alwaysOpen: false,
-                    autoAccept: true,
-                    usePreview: false,
-                    initialFocus: true,
-                    rtl : true,
-                    layout: 'syriac-phonetic',
-                    hidden: function(event, keyboard, el){
-                       //  keyboard.destroy();
-                     }
+                openOn: null,
+                stayOpen: false,
+                alwaysOpen: false,
+                autoAccept: true,
+                usePreview: false,
+                initialFocus: true,
+                rtl : true,
+                layout: 'syriac-phonetic',
+                hidden: function(event, keyboard, el){
+                //  keyboard.destroy();
+                }
                 });
-
+                
                 $('.keyboard-select').click(function () {
-                    var keyboardID = '#' + $(this).data("keyboard-id")
-                    var kb = $(keyboardID).getkeyboard();
-                    //var kb = $('#searchField').getkeyboard();
-                    // change layout based on link ID
-                    kb.options.layout = this.id
-                    // open keyboard if layout is different, or time from it last closing is &amp;gt; 200 ms
-                    if (kb.last.layout !== kb.options.layout || (new Date().getTime() - kb.last.eventTime) &lt; 200) {
-                        kb.reveal();
-                    }
+                var keyboardID = '#' + $(this).data("keyboard-id")
+                var kb = $(keyboardID).getkeyboard();
+                //var kb = $('#searchField').getkeyboard();
+                // change layout based on link ID
+                kb.options.layout = this.id
+                // open keyboard if layout is different, or time from it last closing is &gt; 200 ms
+                if (kb.last.layout !== kb.options.layout || (new Date().getTime() - kb.last.eventTime) < 200) {
+                kb.reveal();
+                }
                 });
                 //Change fonts
                 $('.swap-font').on('click', function(){
-                    var selectedFont = $(this).data("font-id")
-                    $('.selectableFont').not('.syr').css('font-family', selectedFont);
-                    $("*:lang(syr)").css('font-family', selectedFont)
+                var selectedFont = $(this).data("font-id")
+                $('.selectableFont').not('.syr').css('font-family', selectedFont);
+                $("*:lang(syr)").css('font-family', selectedFont)
                 });
-
-            })
-        </script>
-      </head>
+                
+                })
+                </script></head>
    <body id="body">
       <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-         
-         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-               <span class="sr-only">Toggle navigation</span>
-               <span class="icon-bar"></span>
-               <span class="icon-bar"></span>
-               <span class="icon-bar"></span>
-               </button>
-            <a class="navbar-brand banner-container" href="johnofephesus/index.html"> 
-               <span class="syriaca-icon syriaca-geo banner-icon">
-                  <img src="/resources/images/johnEphesus/logo3.png" />
-                  </span>
-               <span data-template="config:collection-title" data-template-collection="johnofephesus"></span>
-               </a>
-            
-         </div>
-         
+         <div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand banner-container" href="index.html"><span class="syriaca-icon syriaca-syriaca banner-icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></span><span class="banner-text">T1</span></a></div>
          <div class="navbar-collapse collapse pull-right" id="navbar-collapse-1">
-            
             <ul class="nav navbar-nav">
-               
-               <li>
-                  <a href="/johnofephesus/index.html" class="nav-text">Home</a>
+               <li class="dropdown">
+                  <a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown">
+                     <span class="mobile-submenu">Publications </span>  <b class="caret"></b>
+                     </a>
                   
-               </li>
-               
-               <li>
-                  <a href="/johnofephesus/persons/index.html" class="nav-text">Prosopography</a>
-                  
-               </li>
-               
-               <li>
-                  <a href="/johnofephesus/places/index.html" class="nav-text">Gazetteer</a>
-                  
-               </li>
-               
-               <li class="dropdown">     <a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown">         <span class="mobile-submenu">Publications </span>  <b class="caret"></b>     </a>     
-                  <ul class="dropdown-menu pull-right">         
-                     <li>             <a href="/geo/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-geo icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Gazetteer</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/persons/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-sbd icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">SBD</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/authors/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-authors icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Authors</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/saints/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-saints icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Gateway to the Saints</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/q/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-q icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Qadishe</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/bhse/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-bhse icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">BHSE</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/cbss/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-bibl icon-nav"></span>                 <span class="icon-text">Works Cited</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-syriaca icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="mobile-submenu icon-text">Syriaca.org</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>     
-                  </ul> 
-               </li>
-               
-               <!--
-                    <li>
-                        <a href="search.html" class="nav-text">Advanced Search</a>
-                    </li>
-                    <li>
-                        <div id="search-wrapper">
-                            <form class="navbar-form navbar-right search-box" role="search" action="search.html" method="get">
-                                <div class="form-group">
-                                    <input type="text" class="form-control keyboard" placeholder="search" name="keyword" id="keywordNav"/>
-                                    <span xmlns="http://www.w3.org/1999/xhtml" class="keyboard-menu">             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Keyboard">                 &#160;<span class="syriaca-icon syriaca-keyboard">&#160; </span><span class="caret"/>             </button>             <ul class="dropdown-menu">                 <li><a href="#" class="keyboard-select" id="syriac-phonetic" data-keyboard-id="keywordNav">Syriac Phonetic</a></li>                 <li><a href="#" class="keyboard-select" id="syriac-standard" data-keyboard-id="keywordNav">Syriac Standard</a></li>                 <li> <a href="#" class="keyboard-select" id="ms-Arabic (101)" data-keyboard-id="keywordNav">Arabic Mod. Standard</a></li>                 <li><a href="#" class="keyboard-select" id="ms-Hebrew" data-keyboard-id="keywordNav">Hebrew</a></li>                 <li><a href="#" class="keyboard-select" id="ms-Russian" data-keyboard-id="keywordNav">Russian</a></li>                 <li><a href="#" class="keyboard-select" id="ms-Greek" data-keyboard-id="keywordNav">Greek</a></li>                 <li><a href="#" class="keyboard-select" id="qwerty" data-keyboard-id="keywordNav">English QWERTY</a></li>             </ul>         </span>
-                                    <button class="btn btn-default search-btn" id="searchbtn" type="submit" title="Search">
-                                        <span class="glyphicon glyphicon-search"/>
-                                    </button>                                    
-                                </div>
-                            </form>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="btn-nav">
-                            <button class="btn btn-default navbar-btn" id="font" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Font">
-                                <span class="glyphicon glyphicon-font"/>
-                            </button>  
-                            <ul class="dropdown-menu dropdown-menu-right" id="swap-font">
-                                <li>
-                                    <a href="#" class="swap-font" id="DefaultSelect" data-font-id="EstrangeloEdessa">Default</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="swap-font" id="EstrangeloEdessaSelect" data-font-id="EstrangeloEdessa">Estrangelo Edessa</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="swap-font" id="EastSyriacAdiabeneSelect" data-font-id="EastSyriacAdiabene">East Syriac Adiabene</a>
-                                </li>
-                                <li>
-                                    <a href="#" class="swap-font" id="SertoBatnanSelect" data-font-id="SertoBatnan">Serto Batnan</a>
-                                </li>
-                                <li>
-                                    <a href="/documentation/wiki.html?wiki-page=/How-to-view-Syriac-script&amp;wiki-uri=https://github.com/srophe/syriaca-data/wiki">Help <span class="glyphicon glyphicon-question-sign"/>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-                    -->
-               
-            </ul>
-            
-         </div>
-         
-      </nav>
-      <div xmlns:xi="http://www.w3.org/2001/XInclude" data-template="templates:surround" data-template-with="templates/johnEphesus.html" data-template-at="content">
-         
-         <div class="featureBanner">
-            
-            <div class="row homePage">
-               
-               <div class="col-md-6 personsImage">
-                  
-                  <div class="home-page-text">
-                     
-                     <h2 style="color:white; margin:.25em;"><a href="persons/index.html" style="color:white;">Part I: A Prosopography to John of Ephesus</a></h2>
-                     
-                     <h4 style="color:white" class="indent">Silvio Roggo, University of Frankfurt</h4>
-                     
-                     <div class="row">
-                        
-                        <div class="indent col-md-12">
-                           
-                           <form role="search" id="site_search_form" method="GET" class="col-xs-12 col-sm-offset-2 col-sm-8" action="persons/search.html" style="">
-                              
-                              <div class="input-group">
-                                 <input id="homepage_search_input " type="text" class="form-control input-lg transparent-input" placeholder="Search for People" name="q" />
-                                 <input type="hidden" id="collection" value="saints" />
-                                 
-                                 <div class="input-group-btn">
-                                    <button class="btn btn-default input-lg" type="submit">
-                                         <span class="glyphicon glyphicon-search"></span>
-                                       </button>
-                                    <a href="persons/search.html" title="advanced search" class="btn btn-default input-lg" style="padding-top:.75em;">
-                                       <span class="glyphicon glyphicon-cog"></span> Search Tools
-                                       </a>
-                                    
-                                 </div>
-                                 
-                              </div>
-                              
-                           </form>
-                           
-                        </div>
-                        
-                     </div>
-                     
-                     <div class="indent">
-                        
-                        <p style="color:white; width:90%; margin-top:2em; margin-left:2em;">A Prosopography for John of Ephesus’s <em>Ecclesiastical History</em>.<br />
-                           <a style="color:white; margin-left:1em;" href="persons/browse.html">Browse <i class="glyphicon glyphicon-circle-arrow-right"></i></a>
-                           
-                        </p>
-                        <span class="img-credit">
-                           <label>Photo Credit:</label> Solidus of Justin II (© <a href="http://www.cngcoins.com">http://www.cngcoins.com</a>)
-                           </span>
-                        
-                     </div>
-                     
-                  </div>
-                  
-               </div>
-               
-               <div class="col-md-6 placesImage">
-                  
-                  <div class="home-page-text">
-                     
-                     <h2 style="color:white; margin:.25em;"><a href="places/index.html" style="color:white;">Part II: A Gazetteer to John of Ephesus</a></h2>
-                     
-                     <h4 style="color:white" class="indent">Silvio Roggo, University of Frankfurt</h4>
-                     
-                     <div class="row">
-                        
-                        <div class="indent col-md-12">
-                           
-                           <form role="search" id="site_search_form" method="GET" class="col-xs-12 col-sm-offset-2 col-sm-8" action="places/search.html" style="">
-                              
-                              <div class="input-group">
-                                 <input id="homepage_search_input " type="text" class="form-control input-lg transparent-input" placeholder="Search for Places" name="q" />
-                                 <input type="hidden" id="collection" value="bhse" />
-                                 
-                                 <div class="input-group-btn">
-                                    <button class="btn btn-default input-lg" type="submit">
-                                         <span class="glyphicon glyphicon-search"></span>
-                                       </button>
-                                    <a href="places/search.html" title="advanced search" class="btn btn-default input-lg" style="padding-top:.75em;">
-                                       <span class="glyphicon glyphicon-cog"></span> Search Tools
-                                       </a>
-                                    
-                                 </div>
-                                 
-                              </div>
-                              
-                           </form>
-                           
-                        </div>
-                        
-                     </div>
-                     
-                     <div class="indent">
-                        
-                        <p style="color:white; width:90%; margin-top:2em; margin-left:2em;">
-                           A Gazetteer for John of Ephesus’s <em>Ecclesiastical History</em>.<br />
-                           <a style="color:white; margin-left:1em;" href="places/browse.html">Browse <i class="glyphicon glyphicon-circle-arrow-right"></i></a>
-                           
-                        </p>
-                        <span class="img-credit">
-                           <label>Photo Credit:</label> Hagia Sophia in Constantinople (© Arild Vågen).
-                           </span>
-                        
-                     </div>
-                     
-                  </div>
-                  
-               </div>
-               
-            </div>
-            
-         </div>
-         
-         <div class="container">
-            
-            <div>
-               
-               <div class="indent">
-                  
-                  <h1>A Guide to John of Ephesus</h1>
-                  
-                  <p class="indent">
-                     Silvio Roggo, University of Frankfurt
-                     
-                  </p>
-                  
-                  <p>
-                     This research portal aims to facilitate the study of the <em>Ecclesiastical History</em> of John of Ephesus by 
-                     providing an open-access database which contains information on all the persons and
-                     places occurring in its 
-                     third part, the only part of the work that has been preserved mostly intact. John
-                     (507–c. 589) was a prolific author 
-                     and leader of the nascent miaphysite movement. His major works, all written in Syriac,
-                     include a collection of 
-                     hagiographies known as the <em>Lives of the Eastern Saints</em> and an extensive <em>Ecclesiastical History</em>. 
-                     The third part of the <em>Ecclesiastical History</em> covers events of the 570s and the 580s with a focus on 
-                     Constantinople, but it also contains a wealth of information on other parts of the
-                     Roman Empire, Armenia, Persia, 
-                     and Nubia from the perspective of a religious group repeatedly subjected to persecution.
-                     
-                     At present, this database is solely focused on the extant third part of John’s <em>Ecclesiastical History</em>; 
-                     the fragments of the second part that can be retrieved from later Syriac chronicles
-                     have not been taken into account.
-                     
-                  </p>
-                  
-                  
-                  <p>
-                     <em>A Guide to John of Ephesus</em> is part of the broader project 
-                     “<a href="https://www.goethe-university-frankfurt.de/132206613/Commentary_on_John_of_Ephesus__Ecclesiastical_History">Commentary on John of Ephesus’s Ecclesiastical History</a>” 
-                     that 
-                     has been ongoing since 2022 at the University of Frankfurt and KU Leuven (PIs Hartmut
-                     Leppin and Philip Forness). 
-                     This project, generously funded by the DFG (German Research Foundation), aims to establish
-                     a new critical edition, 
-                     translation, and comprehensive commentary on the third part of the <em>Ecclesiastical History</em>, integrating historical, 
-                     philological, and theological research. In addition to the print versions scheduled
-                     to be published at the end of 
-                     the project in 2031, the results of the research will gradually be made available
-                     online as the project progresses. 
-                     The project collaborates with several digital humanities partners which host open-access
-                     versions of different parts 
-                     of the project’s output. Apart from <em>A Guide to John of Ephesus</em> on <a href="https://syriaca.org/">syriaca.org</a>, 
-                     these are: (1) the <em><a href="https://pta.bbaw.de/en/">Patristic Text Archive</a></em> 
-                     which hosts the new critical edition, translation, and commentary; (2) the <em><a href="https://syriaccorpus.org/index.html">Digital Syriac Corpus</a></em> 
-                     which hosts a mirror version of the new critical edition.
-                     
-                  </p>
-                  
-                  <hr />
-                  
-                  <!-- Funder, place holder -->
-                  
-                  <ul class="list-inline funding" style="margin-left:2em; text-align:center;">
+                  <ul class="dropdown-menu pull-right">
                      
                      <li>
-                        <a href="https://www.dfg.de/">
-                           <img src="../resources/images/johnEphesus/dfgLogo.jpg" alt="Deutsche Forschungsgemeinschaft" width="300px" style="margin-left:2em; text-align:center;" /> 
+                        <a href="$nav-base/geo/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-geo icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">Gazetteer</span>
                            </a>
                         
                      </li>
                      
+                     <li role="presentation" class="divider"></li>
+                     
                      <li>
-                        <a href="https://www.goethe-university-frankfurt.de/en?locale=en">
-                           <img src="../resources/images/johnEphesus/guLogo.jpg" alt="Goethe University Frankfurt" width="250px" style="margin-left:2em; text-align:center;" /> 
+                        <a href="$nav-base/persons/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-sbd icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">SBD</span>
                            </a>
                         
                      </li>
                      
+                     <li role="presentation" class="divider"></li>
+                     
                      <li>
-                        <a href="https://www.kuleuven.be/english/kuleuven/index.html">
-                           <img src="../resources/images/johnEphesus/kuLogo.png" alt="KU Leuven" width="250px" style="margin-left:2em; text-align:center;" /> 
+                        <a href="$nav-base/authors/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-authors icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">Authors</span>
                            </a>
                         
                      </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/saints/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-saints icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">Gateway to the Saints</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/q/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-q icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">Qadishe</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/bhse/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-bhse icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">BHSE</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <!--
+        <li role="presentation" class="divider"/>
+        <li>
+            <a href="$nav-base/nhsl/index.html" class="icon-container">
+                <span class="syriaca-icon syriaca-nhsl icon-nav">
+                    <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+                </span>
+                <span class="icon-text">NHSL</span>
+            </a>
+        </li>
+        <li role="presentation" class="divider"/>
+        <li>
+            <a href="$nav-base/spear/index.html" class="icon-container">
+                <span class="syriaca-icon syriaca-spear icon-nav">
+                    <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+                </span>
+                <span class="icon-text">SPEAR</span>
+            </a>
+        </li>
+        <li role="presentation" class="divider"/>
+        <li>
+            <a href="$nav-base/mss/index.html" class="icon-container">
+                <span class="syriaca-icon syriaca-mss icon-nav">
+                    <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+                </span>
+                <span class="icon-text">MSS</span>
+            </a>
+        </li>
+        -->
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/cbss/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-bibl icon-nav"></span>
+                           <span class="icon-text">Works Cited</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-syriaca icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="mobile-submenu icon-text">Syriaca.org</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
                      
                   </ul>
                   
-               </div>
-               
-            </div>
-            
+               </li>
+               <li class="dropdown"><a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown"> 
+                     <span class="mobile-submenu">About</span>  <b class="caret"></b></a><ul class="dropdown-menu pull-right">
+                     <li><a href="/about-syriac.html">What is Syriac?</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/about-srophe.html">Project Overview</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/project-team.html">Project Team</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/project-partners.html">Project Partners</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/geo/index.html"><span class="icon-text">Gazetteer</span></a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="http://vu.edu/syriac">Support Our Work</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/contact-us.html">Contact Us</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/documentation/index.html"><span class="syriaca-icon syriaca-book icon-nav" style="color:red;"></span><span class="icon-text">Documentation</span></a></li>
+                  </ul>
+               </li>
+               <li><a href="search.html" class="nav-text">Advanced Search</a></li>
+               <li>
+                  <div id="search-wrapper">
+                     <form class="navbar-form navbar-right search-box" role="search" action="search.html" method="get">
+                        <div class="form-group"><input type="text" class="form-control keyboard" placeholder="search" name="keyword" id="keywordNav" /><span class="keyboard-menu"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Keyboard">
+                                  <span class="syriaca-icon syriaca-keyboard">  </span><span class="caret"></span></button><ul class="dropdown-menu">
+                                 <li><a href="#" class="keyboard-select" id="syriac-phonetic" data-keyboard-id="keywordNav">Syriac Phonetic</a></li>
+                                 <li><a href="#" class="keyboard-select" id="syriac-standard" data-keyboard-id="keywordNav">Syriac Standard</a></li>
+                                 <li><a href="#" class="keyboard-select" id="ms-Arabic (101)" data-keyboard-id="keywordNav">Arabic Mod. Standard</a></li>
+                                 <li><a href="#" class="keyboard-select" id="ms-Hebrew" data-keyboard-id="keywordNav">Hebrew</a></li>
+                                 <li><a href="#" class="keyboard-select" id="ms-Russian" data-keyboard-id="keywordNav">Russian</a></li>
+                                 <li><a href="#" class="keyboard-select" id="ms-Greek" data-keyboard-id="keywordNav">Greek</a></li>
+                                 <li><a href="#" class="keyboard-select" id="qwerty" data-keyboard-id="keywordNav">English QWERTY</a></li>
+                              </ul></span><button class="btn btn-default search-btn" id="searchbtn" type="submit" title="Search"><span class="glyphicon glyphicon-search"></span></button></div>
+                     </form>
+                  </div>
+               </li>
+               <li>
+                  <div class="btn-nav"><button class="btn btn-default navbar-btn" id="font" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Font"><span class="glyphicon glyphicon-font"></span></button><ul class="dropdown-menu dropdown-menu-right" id="swap-font">
+                        <li><a href="#" class="swap-font" id="DefaultSelect" data-font-id="EstrangeloEdessa">Default</a></li>
+                        <li><a href="#" class="swap-font" id="EstrangeloEdessaSelect" data-font-id="EstrangeloEdessa">Estrangelo Edessa</a></li>
+                        <li><a href="#" class="swap-font" id="EastSyriacAdiabeneSelect" data-font-id="EastSyriacAdiabene">East Syriac Adiabene</a></li>
+                        <li><a href="#" class="swap-font" id="SertoBatnanSelect" data-font-id="SertoBatnan">Serto Batnan</a></li>
+                        <li><a href="$app-root/documentation/wiki.html?wiki-page=/How-to-view-Syriac-script&amp;wiki-uri=https://github.com/srophe/syriaca-data/wiki">Help <span class="glyphicon glyphicon-question-sign"></span></a></li>
+                     </ul>
+                  </div>
+               </li>
+            </ul>
          </div>
-         
+      </nav>
+      <div>
+         <div class="main-content-block">
+            <div class="interior-content">
+               <div class="container otherFormats"><a href="javascript:window.print();" type="button" class="btn btn-default btn-xs" id="teiBtn" data-toggle="tooltip" title="Click to send this page to the printer."><span class="glyphicon glyphicon-print" aria-hidden="true"></span></a> <a href=".tei" class="btn btn-default btn-xs" id="teiBtn" data-toggle="tooltip" title="Click to view the TEI XML data for this record."><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> TEI/XML
+                     </a> 
+               </div>
+               <div class="row">
+                  <div class="col-md-7 col-lg-8"></div>
+                  <div class="col-md-5 col-lg-4 right-menu"><br /></div>
+               </div>
+            </div>
+         </div>
       </div>
       <footer>
          
@@ -436,4 +268,5 @@
          </div>
          
       </footer>
-   </body><script type="text/javascript" src="/resources/js/jquery.validate.min.js"></script><script type="text/javascript" src="/resources/js/srophe.js"></script></html>
+   </body>
+</html>

@@ -1,436 +1,261 @@
 <?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:srophe="https://srophe.app">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      
-      <title data-template="app:record-title">App Title</title>
-      
+      <title>Generic Header:: </title>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      
       <meta name="DC.type" property="dc.type" content="Text" />
-      
-      <meta name="DC.isPartOf" property="dc.ispartof" content="Syriaca.org: The Syriac Reference Portal" />
-      
-      <link data-template="app:metadata" />
-      
-      <link rel="shortcut icon" href="/resources/images/fav-icons/geo-favicon.ico" />
-      
-      <!-- Bootstrap 3 -->
-      
+      <meta name="DC.isPartOf" property="dc.ispartof" content="" />
+      <link rel="shortcut icon" href="/resources/images/fav-icons/syriaca-favicon.ico" />
       <link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/bootstrap.min.css" />
-      
       <link rel="stylesheet" type="text/css" href="/resources/css/sm-core-css.css" />
-      
-      <!-- Srophe styles -->
-      
       <link rel="stylesheet" type="text/css" href="/resources/css/syr-icon-fonts.css" />
-      
       <link rel="stylesheet" type="text/css" href="/resources/css/style.css" />
-      
       <link rel="stylesheet" type="text/css" href="/resources/css/syriaca.css" />
-      
-      <link rel="stylesheet" type="text/css" href="/resources/css/geo.css" />
-      
       <link rel="stylesheet" type="text/css" href="/resources/css/slider.css" />
-      
       <link rel="stylesheet" type="text/css" href="/resources/css/lightslider.css" />
-      
       <link rel="stylesheet" type="text/css" media="print" href="/resources/css/print.css" />
-      
-      <!-- Leaflet -->
-      
       <link rel="stylesheet" href="/resources/leaflet/leaflet.css" />
-      
-      <link rel="stylesheet" href="/resources/leaflet/leaflet.awesome-markers.css" />
-      <script defer="defer" data-domain="syriaca.org" src="https://plausible.io/js/plausible.js"></script>
-      
-      <!-- JQuery -->
-      <link href="/resources/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
-      <script type="text/javascript" src="/resources/js/jquery.min.js"></script>
-      <script type="text/javascript" src="/resources/jquery-ui/jquery-ui.min.js"></script>
-      <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
-      <script type="text/javascript" src="/resources/js/clipboard.min.js"></script>
-      
-      <!-- Bootstrap -->
-      <script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script>
-      
-      <!-- ReCaptcha -->
-      <script src="https://www.google.com/recaptcha/api.js" type="text/javascript" async="async" defer="defer"></script>
-      
-      <!-- keyboard widget css & script -->
-      <link href="/resources/keyboard/css/keyboard.min.css" rel="stylesheet" />
-      
+      <link rel="stylesheet" href="/resources/leaflet/leaflet.awesome-markers.css" /><script defer="defer" data-domain="syriaca.org" src="https://plausible.io/js/plausible.js"></script><link href="/resources/jquery-ui/jquery-ui.min.css" rel="stylesheet" /><script type="text/javascript" src="/resources/js/jquery.min.js"></script><script type="text/javascript" src="/resources/jquery-ui/jquery-ui.min.js"></script><script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script><script type="text/javascript" src="/resources/js/clipboard.min.js"></script><script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script><script src="https://www.google.com/recaptcha/api.js" type="text/javascript" async="async" defer="defer"></script><link href="/resources/keyboard/css/keyboard.min.css" rel="stylesheet" />
       <link href="/resources/keyboard/css/keyboard-previewkeyset.min.css" rel="stylesheet" />
-      
-      <link href="/resources/keyboard/syr/syr.css" rel="stylesheet" />
-      <script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-mobile.min.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-navigation.min.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.extension-autocomplete.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/syr/keyboardSupport.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/syr/syr.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Greek.min.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Russian.min.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Arabic.min.js"></script>
-      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Hebrew.min.js"></script>
-      <script type="text/javascript">
-            $(document).ready(function () {
+      <link href="/resources/keyboard/syr/syr.css" rel="stylesheet" /><script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.js"></script><script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-mobile.min.js"></script><script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-navigation.min.js"></script><script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.extension-autocomplete.js"></script><script type="text/javascript" src="/resources/keyboard/syr/keyboardSupport.js"></script><script type="text/javascript" src="/resources/keyboard/syr/syr.js"></script><script type="text/javascript" src="/resources/keyboard/layouts/ms-Greek.min.js"></script><script type="text/javascript" src="/resources/keyboard/layouts/ms-Russian.min.js"></script><script type="text/javascript" src="/resources/keyboard/layouts/ms-Arabic.min.js"></script><script type="text/javascript" src="/resources/keyboard/layouts/ms-Hebrew.min.js"></script><script type="text/javascript">
+                    
+                $(document).ready(function () {
                 $('[data-toggle="tooltip"]').tooltip({ container: 'body' })
-
+                
                 $('.keyboard').keyboard({
-                    openOn: null,
-                    stayOpen: false,
-                    alwaysOpen: false,
-                    autoAccept: true,
-                    usePreview: false,
-                    initialFocus: true,
-                    rtl : true,
-                    layout: 'syriac-phonetic',
-                    hidden: function(event, keyboard, el){
-                       //  keyboard.destroy();
-                     }
+                openOn: null,
+                stayOpen: false,
+                alwaysOpen: false,
+                autoAccept: true,
+                usePreview: false,
+                initialFocus: true,
+                rtl : true,
+                layout: 'syriac-phonetic',
+                hidden: function(event, keyboard, el){
+                //  keyboard.destroy();
+                }
                 });
-
+                
                 $('.keyboard-select').click(function () {
-                    var keyboardID = '#' + $(this).data("keyboard-id")
-                    var kb = $(keyboardID).getkeyboard();
-                    //var kb = $('#searchField').getkeyboard();
-                    // change layout based on link ID
-                    kb.options.layout = this.id
-                    // open keyboard if layout is different, or time from it last closing is &amp;gt; 200 ms
-                    if (kb.last.layout !== kb.options.layout || (new Date().getTime() - kb.last.eventTime) &lt; 200) {
-                        kb.reveal();
-                    }
+                var keyboardID = '#' + $(this).data("keyboard-id")
+                var kb = $(keyboardID).getkeyboard();
+                //var kb = $('#searchField').getkeyboard();
+                // change layout based on link ID
+                kb.options.layout = this.id
+                // open keyboard if layout is different, or time from it last closing is &gt; 200 ms
+                if (kb.last.layout !== kb.options.layout || (new Date().getTime() - kb.last.eventTime) < 200) {
+                kb.reveal();
+                }
                 });
                 //Change fonts
                 $('.swap-font').on('click', function(){
-                    var selectedFont = $(this).data("font-id")
-                    $('.selectableFont').not('.syr').css('font-family', selectedFont);
-                    $("*:lang(syr)").css('font-family', selectedFont)
+                var selectedFont = $(this).data("font-id")
+                $('.selectableFont').not('.syr').css('font-family', selectedFont);
+                $("*:lang(syr)").css('font-family', selectedFont)
                 });
-
-            })
-        </script>
-      </head>
+                
+                })
+                </script></head>
    <body id="body">
       <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-         
-         <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
-               <span class="sr-only">Toggle navigation</span>
-               <span class="icon-bar"></span>
-               <span class="icon-bar"></span>
-               <span class="icon-bar"></span>
-               </button>
-            <a class="navbar-brand banner-container" href="geo/index.html"> 
-               <span class="syriaca-icon syriaca-geo banner-icon">
-                  <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
-                  </span>
-               <span class="banner-text"><span data-template="config:collection-title" data-template-collection="places"></span></span>
-               </a>
-            
-         </div>
-         
+         <div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand banner-container" href="index.html"><span class="syriaca-icon syriaca-syriaca banner-icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></span><span class="banner-text">T1</span></a></div>
          <div class="navbar-collapse collapse pull-right" id="navbar-collapse-1">
-            
             <ul class="nav navbar-nav">
-               
-               <li>
-                  <a href="/geo/browse.html" class="nav-text">Browse</a>
+               <li class="dropdown">
+                  <a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown">
+                     <span class="mobile-submenu">Publications </span>  <b class="caret"></b>
+                     </a>
                   
-               </li>
-               
-               <li>
-                  <a href="/geo/about.html" class="nav-text">About</a>
-                  
-               </li>
-               
-               <li>
-                  <a href="/geo/help/index.html" class="nav-text">Help</a>
-                  
-               </li>
-               
-               <li>
-                  <a href="/geo/howtoadd.html" class="nav-text">Add new place</a>
-                  
-               </li>
-               
-               <li class="dropdown">     <a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown">         <span class="mobile-submenu">Publications </span>  <b class="caret"></b>     </a>     
-                  <ul class="dropdown-menu pull-right">         
-                     <li>             <a href="/geo/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-geo icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Gazetteer</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/persons/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-sbd icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">SBD</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/authors/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-authors icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Authors</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/saints/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-saints icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Gateway to the Saints</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/q/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-q icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Qadishe</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/bhse/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-bhse icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">BHSE</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/cbss/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-bibl icon-nav"></span>                 <span class="icon-text">Works Cited</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>         
-                     <li>             <a href="/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-syriaca icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="mobile-submenu icon-text">Syriaca.org</span>             </a>         
-                     </li>         
-                     <li role="presentation" class="divider"></li>     
-                  </ul> 
-               </li>
-               
-               <li>
-                  <a href="/geo/search.html" class="nav-text">Advanced Search</a>
-                  
-               </li>
-               
-               <li>
-                  
-                  <div id="search-wrapper">
-                     
-                     <form class="navbar-form navbar-right search-box" role="search" action="/geo/search.html" method="get">
-                        
-                        <div class="form-group">
-                           <input type="text" class="form-control keyboard" placeholder="search" name="keyword" id="keywordNav" />
-                           <span class="keyboard-menu">             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Keyboard">                  <span class="syriaca-icon syriaca-keyboard">  </span><span class="caret"></span>             </button>             
-                              <ul class="dropdown-menu">                 
-                                 <li><a href="#" class="keyboard-select" id="syriac-phonetic" data-keyboard-id="keywordNav">Syriac Phonetic</a></li>                 
-                                 <li><a href="#" class="keyboard-select" id="syriac-standard" data-keyboard-id="keywordNav">Syriac Standard</a></li>                 
-                                 <li> <a href="#" class="keyboard-select" id="ms-Arabic (101)" data-keyboard-id="keywordNav">Arabic Mod. Standard</a></li>                 
-                                 <li><a href="#" class="keyboard-select" id="ms-Hebrew" data-keyboard-id="keywordNav">Hebrew</a></li>                 
-                                 <li><a href="#" class="keyboard-select" id="ms-Russian" data-keyboard-id="keywordNav">Russian</a></li>                 
-                                 <li><a href="#" class="keyboard-select" id="ms-Greek" data-keyboard-id="keywordNav">Greek</a></li>                 
-                                 <li><a href="#" class="keyboard-select" id="qwerty" data-keyboard-id="keywordNav">English QWERTY</a></li>             
-                              </ul>         </span>
-                           <button class="btn btn-default search-btn" id="searchbtn" type="submit" title="Search">
-                              <span class="glyphicon glyphicon-search"></span>
-                              </button>                                    
-                           
-                        </div>
-                        
-                     </form>
-                     
-                  </div>
-                  
-               </li>
-               
-               <li>
-                  
-                  <div class="btn-nav">
-                     <button class="btn btn-default navbar-btn" id="font" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Font">
-                        <span class="glyphicon glyphicon-font"></span>
-                        </button>  
-                     
-                     <ul class="dropdown-menu dropdown-menu-right" id="swap-font">
-                        
-                        <li>
-                           <a href="#" class="swap-font" id="DefaultSelect" data-font-id="EstrangeloEdessa">Default</a>
-                           
-                        </li>
-                        
-                        <li>
-                           <a href="#" class="swap-font" id="EstrangeloEdessaSelect" data-font-id="EstrangeloEdessa">Estrangelo Edessa</a>
-                           
-                        </li>
-                        
-                        <li>
-                           <a href="#" class="swap-font" id="EastSyriacAdiabeneSelect" data-font-id="EastSyriacAdiabene">East Syriac Adiabene</a>
-                           
-                        </li>
-                        
-                        <li>
-                           <a href="#" class="swap-font" id="SertoBatnanSelect" data-font-id="SertoBatnan">Serto Batnan</a>
-                           
-                        </li>
-                        
-                        <li>
-                           <a href="/documentation/wiki.html?wiki-page=/How-to-view-Syriac-script&amp;wiki-uri=https://github.com/srophe/syriaca-data/wiki">Help <span class="glyphicon glyphicon-question-sign"></span>
-                              </a>
-                           
-                        </li>
-                        
-                     </ul>
-                     
-                  </div>
-                  
-               </li>
-               
-            </ul>
-            
-         </div>
-         
-      </nav>
-      <div xmlns:xi="http://www.w3.org/2001/XInclude" data-template="templates:surround" data-template-with="templates/geo.html" data-template-at="content">
-         
-         <div class="main-content-block">
-            
-            <div class="image-banner">
-               <span class="img-credit">
-                  <label>Photo Credit:</label>Decorative Arch, Resafa, Syria. Copyright, Daniel Schwartz.
-                  <button class="btn btn-link white-link" data-toggle="collapse" data-target="#img-rights">
-                     <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
-                     </button>
-                  <span id="img-rights" class="collapse"></span>
-                  </span>
-               
-            </div>
-            
-            <div class="indent">
-               
-               <h1>Instructions for Contributors to <i>The Syriac Gazetteer</i>
-                  
-               </h1>
-               
-               <div style="padding-right:2em;">
-                  
-                  <p>Thank you for your interest in improving <i>The Syriac Gazetteer</i>! <i>The Syriac
-                        Gazetteer</i> belongs to the community of users, and all users benefit from the
-                     additional information submitted by others. There are several ways to add data to
-                     <i>The Syriac Gazetteer</i>:
-                  </p>
-                  
-                  <ul>
+                  <ul class="dropdown-menu pull-right">
                      
                      <li>
-                        <a href="#mistake">Notify the editors of a mistake</a>
+                        <a href="$nav-base/geo/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-geo icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">Gazetteer</span>
+                           </a>
                         
                      </li>
                      
+                     <li role="presentation" class="divider"></li>
+                     
                      <li>
-                        <a href="#existing">Add data to an existing entry</a>
+                        <a href="$nav-base/persons/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-sbd icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">SBD</span>
+                           </a>
                         
                      </li>
                      
+                     <li role="presentation" class="divider"></li>
+                     
                      <li>
-                        <a href="#new">Create a new entry</a>
+                        <a href="$nav-base/authors/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-authors icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">Authors</span>
+                           </a>
                         
                      </li>
                      
+                     <li role="presentation" class="divider"></li>
+                     
                      <li>
-                        <a href="#spreadsheet">Contribute datasets pertaining to several records
-                           simultaneously</a>
+                        <a href="$nav-base/saints/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-saints icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">Gateway to the Saints</span>
+                           </a>
                         
                      </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/q/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-q icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">Qadishe</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/bhse/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-bhse icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">BHSE</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <!--
+        <li role="presentation" class="divider"/>
+        <li>
+            <a href="$nav-base/nhsl/index.html" class="icon-container">
+                <span class="syriaca-icon syriaca-nhsl icon-nav">
+                    <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+                </span>
+                <span class="icon-text">NHSL</span>
+            </a>
+        </li>
+        <li role="presentation" class="divider"/>
+        <li>
+            <a href="$nav-base/spear/index.html" class="icon-container">
+                <span class="syriaca-icon syriaca-spear icon-nav">
+                    <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+                </span>
+                <span class="icon-text">SPEAR</span>
+            </a>
+        </li>
+        <li role="presentation" class="divider"/>
+        <li>
+            <a href="$nav-base/mss/index.html" class="icon-container">
+                <span class="syriaca-icon syriaca-mss icon-nav">
+                    <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+                </span>
+                <span class="icon-text">MSS</span>
+            </a>
+        </li>
+        -->
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/cbss/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-bibl icon-nav"></span>
+                           <span class="icon-text">Works Cited</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-syriaca icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="mobile-submenu icon-text">Syriaca.org</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
                      
                   </ul>
                   
-                  <p>You can easily submit information using the web form below. Your submission will then
-                     be sent to an editor for review. Because Syriaca.org is committed to maintaining the
-                     highest scholarly standards, you will be asked to specify the sources for your
-                     contribution (these will be converted into footnotes). Complete information in your
-                     submission (including full citations of relevant sources and your contact
-                     information for any follow-up questions) will expedite the editorial process. Our
-                     editors work on a volunteer basis, so we cannot promise a fixed timeline for
-                     publication of submissions. If the editor approves a submission, it becomes part of
-                     the Gazetteer citing you as a contributor. In order to publish your contribution,
-                     we
-                     request that you license your work to us under a <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution
-                        3.0 Unported License</a>. This license is used for all Syraica.org publications
-                     and allows you to retain copyright to your work while also allowing Syriaca.org to
-                     remain a free and open publication worldwide.
-                  </p>
-                  
-                  <h2>How to submit a contribution</h2>
-                  
-                  <p>The most important piece of information in your contribution is indicating to which
-                     entry your submission applies. We identify each entry by its unique identifier
-                     number or <a href="http://syriaca.org/documentation/terms.html#place-uri">URI</a>.
-                     These URIs take the form of "http://syriaca.org/place/78" (or another number).
-                     Please ensure that you accurately enter the URI for your submission so we can know
-                     which record you wish to augment, correct, etc.
-                  </p>
-                  
-                  <p>We particularly invite the following contributions to The Syriac Gazetteer. Please
-                     follow the instructions for the relevant case:
-                  </p>
-                  
-                  <h2>
-                     <a id="mistake" class="anchor"></a>Notify the editors of a mistake
-                  </h2>
-                  
-                  <p>Using the following link, please inform us which page URI the mistake is on, where
-                     on
-                     the page the mistake occurs, the content of the correction, and a citation for the
-                     correct information (except in the case of obvious corrections, such as misspelled
-                     words). Please also include your email address, so that we can follow up with you
-                     regarding anything which is unclear. We will publish your name, but not your contact
-                     information as the author of the correction. The form to notify us of an error is
-                     <a href="#feedback" data-toggle="modal">here</a>. 
-                  </p>
-                  
-                  <h2>
-                     <a id="existing" class="anchor"></a>Add data to an existing entry
-                  </h2>
-                  
-                  <p>
-                     <i>The Syriac Gazetteer</i> is an ever expanding resource created by and for users.
-                     The editors actively welcome additions to the gazetteer. If there is information
-                     which you would like to add to an existing place entry in <i>The Syriac
-                        Gazetteer</i>, please use the link below to inform us about the information,
-                     your (primary or scholarly) source(s) for the information, and your contact
-                     information so that we can credit you for the modification. For categories of
-                     information which <i>The Syriac Gazetteer</i> structure can support, please see the
-                     section headings on the entry for <a href="http://syriaca.org/place/78">Edessa</a>
-                     and specify in your submission which category or categories this new information
-                     falls into. At present this information should be entered into the email form <a href="#feedback" data-toggle="modal">here</a>, although there is an additional
-                     delay in this process as the data needs to be encoded in the appropriate structured
-                     data format and assigned a URI. A structured form for submitting new entries is
-                     under development.
-                  </p>
-                  
-                  <h2>
-                     <a id="new" class="anchor"></a>Create a new entry
-                  </h2>
-                  
-                  <p>If there is a place which is relevant to Syriac Studies but does not yet have an
-                     entry in <i>The Syriac Gazetteer</i>, please let us know. The first edition of the
-                     gazetteer only contains a portion of the places of interest to Syriac scholars.
-                     Please use the following link to inform us what you know about the place in
-                     question, including full citations to the source of the information. At a bare
-                     minimum, a place record can be created for a place based on a name (in English or
-                     Syriac), a source using that name (whether a primary source or a work of
-                     scholarship), and a <a href="http://syriaca.org/documentation/place-types.html">place type</a>. Your name is also necessary in order to credit you as the
-                     creator of the entry. Additional information would also be useful, such as
-                     additional names, location (in prose or coordinates), attestations in primary
-                     sources, known religious communities, links to other projects, etc. It is essential
-                     that every individual statement have a citation to a primary or scholarly source.
-                     At
-                     present this information should be entered into the email form <a href="#feedback" data-toggle="modal">here</a>, although there is an additional delay in this
-                     process as the data needs to be encoded in the appropriate structured data format
-                     and assigned a URI. A structured form for submitting new entries is under
-                     development.
-                  </p>
-                  
-                  <h2>
-                     <a id="spreadsheet" class="anchor"></a>Contribute datasets pertaining to several
-                     records simultaneously
-                  </h2>
-                  
-                  <p>The editors welcome the contribution of datasets which might be relevant to multiple
-                     place entries or for the creation of new records. Examples of such datasets might
-                     include but are not limited to archaeological field notes, notes on manuscript
-                     collections, or notes from a primary source document. If you would like to
-                     contribute such a dataset, it is best to <a href="#feedback" data-toggle="modal">contact</a> the general editors in order to discuss individually the format
-                     your data is currently in and how best to share that data with <i>The Syriac
-                        Gazetteer</i>.
-                  </p>
-                  
-                  
-                  <!-- Contact -->
-                  
-                  <div data-template="app:contact-form"></div>
-                  <br />
-                  
-               </div>
-               
-            </div>
-            
+               </li>
+               <li class="dropdown"><a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown"> 
+                     <span class="mobile-submenu">About</span>  <b class="caret"></b></a><ul class="dropdown-menu pull-right">
+                     <li><a href="/about-syriac.html">What is Syriac?</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/about-srophe.html">Project Overview</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/project-team.html">Project Team</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/project-partners.html">Project Partners</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/geo/index.html"><span class="icon-text">Gazetteer</span></a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="http://vu.edu/syriac">Support Our Work</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/contact-us.html">Contact Us</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/documentation/index.html"><span class="syriaca-icon syriaca-book icon-nav" style="color:red;"></span><span class="icon-text">Documentation</span></a></li>
+                  </ul>
+               </li>
+               <li><a href="search.html" class="nav-text">Advanced Search</a></li>
+               <li>
+                  <div id="search-wrapper">
+                     <form class="navbar-form navbar-right search-box" role="search" action="search.html" method="get">
+                        <div class="form-group"><input type="text" class="form-control keyboard" placeholder="search" name="keyword" id="keywordNav" /><span class="keyboard-menu"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Keyboard">
+                                  <span class="syriaca-icon syriaca-keyboard">  </span><span class="caret"></span></button><ul class="dropdown-menu">
+                                 <li><a href="#" class="keyboard-select" id="syriac-phonetic" data-keyboard-id="keywordNav">Syriac Phonetic</a></li>
+                                 <li><a href="#" class="keyboard-select" id="syriac-standard" data-keyboard-id="keywordNav">Syriac Standard</a></li>
+                                 <li><a href="#" class="keyboard-select" id="ms-Arabic (101)" data-keyboard-id="keywordNav">Arabic Mod. Standard</a></li>
+                                 <li><a href="#" class="keyboard-select" id="ms-Hebrew" data-keyboard-id="keywordNav">Hebrew</a></li>
+                                 <li><a href="#" class="keyboard-select" id="ms-Russian" data-keyboard-id="keywordNav">Russian</a></li>
+                                 <li><a href="#" class="keyboard-select" id="ms-Greek" data-keyboard-id="keywordNav">Greek</a></li>
+                                 <li><a href="#" class="keyboard-select" id="qwerty" data-keyboard-id="keywordNav">English QWERTY</a></li>
+                              </ul></span><button class="btn btn-default search-btn" id="searchbtn" type="submit" title="Search"><span class="glyphicon glyphicon-search"></span></button></div>
+                     </form>
+                  </div>
+               </li>
+               <li>
+                  <div class="btn-nav"><button class="btn btn-default navbar-btn" id="font" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Font"><span class="glyphicon glyphicon-font"></span></button><ul class="dropdown-menu dropdown-menu-right" id="swap-font">
+                        <li><a href="#" class="swap-font" id="DefaultSelect" data-font-id="EstrangeloEdessa">Default</a></li>
+                        <li><a href="#" class="swap-font" id="EstrangeloEdessaSelect" data-font-id="EstrangeloEdessa">Estrangelo Edessa</a></li>
+                        <li><a href="#" class="swap-font" id="EastSyriacAdiabeneSelect" data-font-id="EastSyriacAdiabene">East Syriac Adiabene</a></li>
+                        <li><a href="#" class="swap-font" id="SertoBatnanSelect" data-font-id="SertoBatnan">Serto Batnan</a></li>
+                        <li><a href="$app-root/documentation/wiki.html?wiki-page=/How-to-view-Syriac-script&amp;wiki-uri=https://github.com/srophe/syriaca-data/wiki">Help <span class="glyphicon glyphicon-question-sign"></span></a></li>
+                     </ul>
+                  </div>
+               </li>
+            </ul>
          </div>
-         
+      </nav>
+      <div>
+         <div class="main-content-block">
+            <div class="interior-content">
+               <div class="container otherFormats"><a href="javascript:window.print();" type="button" class="btn btn-default btn-xs" id="teiBtn" data-toggle="tooltip" title="Click to send this page to the printer."><span class="glyphicon glyphicon-print" aria-hidden="true"></span></a> <a href=".tei" class="btn btn-default btn-xs" id="teiBtn" data-toggle="tooltip" title="Click to view the TEI XML data for this record."><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> TEI/XML
+                     </a> 
+               </div>
+               <div class="row">
+                  <div class="col-md-7 col-lg-8"></div>
+                  <div class="col-md-5 col-lg-4 right-menu"><br /></div>
+               </div>
+            </div>
+         </div>
       </div>
       <footer>
          
@@ -443,4 +268,5 @@
          </div>
          
       </footer>
-   </body><script type="text/javascript" src="/resources/js/jquery.validate.min.js"></script><script type="text/javascript" src="/resources/js/require.min.js"></script><script type="text/javascript" src="/resources/js/srophe.js"></script><script type="text/javascript" src="/resources/js/lightslider.min.js"></script><script type="text/javascript" src="/resources/js/lightslider-functions.js"></script><script data-template="app:google-analytics"></script></html>
+   </body>
+</html>

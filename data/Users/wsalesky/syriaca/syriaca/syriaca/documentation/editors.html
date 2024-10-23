@@ -1,0 +1,1775 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:srophe="https://srophe.app">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <title>Generic Header:: Syriaca.org Editors</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="DC.type" property="dc.type" content="Text" />
+      <meta name="DC.isPartOf" property="dc.ispartof" content="" />
+      <link rel="shortcut icon" href="/resources/images/fav-icons/syriaca-favicon.ico" />
+      <link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/bootstrap.min.css" />
+      <link rel="stylesheet" type="text/css" href="/resources/css/sm-core-css.css" />
+      <link rel="stylesheet" type="text/css" href="/resources/css/syr-icon-fonts.css" />
+      <link rel="stylesheet" type="text/css" href="/resources/css/style.css" />
+      <link rel="stylesheet" type="text/css" href="/resources/css/syriaca.css" />
+      <link rel="stylesheet" type="text/css" href="/resources/css/slider.css" />
+      <link rel="stylesheet" type="text/css" href="/resources/css/lightslider.css" />
+      <link rel="stylesheet" type="text/css" media="print" href="/resources/css/print.css" />
+      <link rel="stylesheet" href="/resources/leaflet/leaflet.css" />
+      <link rel="stylesheet" href="/resources/leaflet/leaflet.awesome-markers.css" /><script defer="defer" data-domain="syriaca.org" src="https://plausible.io/js/plausible.js"></script><link href="/resources/jquery-ui/jquery-ui.min.css" rel="stylesheet" /><script type="text/javascript" src="/resources/js/jquery.min.js"></script><script type="text/javascript" src="/resources/jquery-ui/jquery-ui.min.js"></script><script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script><script type="text/javascript" src="/resources/js/clipboard.min.js"></script><script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script><script src="https://www.google.com/recaptcha/api.js" type="text/javascript" async="async" defer="defer"></script><link href="/resources/keyboard/css/keyboard.min.css" rel="stylesheet" />
+      <link href="/resources/keyboard/css/keyboard-previewkeyset.min.css" rel="stylesheet" />
+      <link href="/resources/keyboard/syr/syr.css" rel="stylesheet" /><script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.js"></script><script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-mobile.min.js"></script><script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-navigation.min.js"></script><script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.extension-autocomplete.js"></script><script type="text/javascript" src="/resources/keyboard/syr/keyboardSupport.js"></script><script type="text/javascript" src="/resources/keyboard/syr/syr.js"></script><script type="text/javascript" src="/resources/keyboard/layouts/ms-Greek.min.js"></script><script type="text/javascript" src="/resources/keyboard/layouts/ms-Russian.min.js"></script><script type="text/javascript" src="/resources/keyboard/layouts/ms-Arabic.min.js"></script><script type="text/javascript" src="/resources/keyboard/layouts/ms-Hebrew.min.js"></script><script type="text/javascript">
+                    
+                $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip({ container: 'body' })
+                
+                $('.keyboard').keyboard({
+                openOn: null,
+                stayOpen: false,
+                alwaysOpen: false,
+                autoAccept: true,
+                usePreview: false,
+                initialFocus: true,
+                rtl : true,
+                layout: 'syriac-phonetic',
+                hidden: function(event, keyboard, el){
+                //  keyboard.destroy();
+                }
+                });
+                
+                $('.keyboard-select').click(function () {
+                var keyboardID = '#' + $(this).data("keyboard-id")
+                var kb = $(keyboardID).getkeyboard();
+                //var kb = $('#searchField').getkeyboard();
+                // change layout based on link ID
+                kb.options.layout = this.id
+                // open keyboard if layout is different, or time from it last closing is &gt; 200 ms
+                if (kb.last.layout !== kb.options.layout || (new Date().getTime() - kb.last.eventTime) < 200) {
+                kb.reveal();
+                }
+                });
+                //Change fonts
+                $('.swap-font').on('click', function(){
+                var selectedFont = $(this).data("font-id")
+                $('.selectableFont').not('.syr').css('font-family', selectedFont);
+                $("*:lang(syr)").css('font-family', selectedFont)
+                });
+                
+                })
+                </script></head>
+   <body id="body">
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+         <div class="navbar-header"><button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="navbar-brand banner-container" href="index.html"><span class="syriaca-icon syriaca-syriaca banner-icon"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></span><span class="banner-text">T1</span></a></div>
+         <div class="navbar-collapse collapse pull-right" id="navbar-collapse-1">
+            <ul class="nav navbar-nav">
+               <li class="dropdown">
+                  <a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown">
+                     <span class="mobile-submenu">Publications </span>  <b class="caret"></b>
+                     </a>
+                  
+                  <ul class="dropdown-menu pull-right">
+                     
+                     <li>
+                        <a href="$nav-base/geo/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-geo icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">Gazetteer</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/persons/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-sbd icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">SBD</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/authors/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-authors icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">Authors</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/saints/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-saints icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">Gateway to the Saints</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/q/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-q icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">Qadishe</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/bhse/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-bhse icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="icon-text">BHSE</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <!--
+        <li role="presentation" class="divider"/>
+        <li>
+            <a href="$nav-base/nhsl/index.html" class="icon-container">
+                <span class="syriaca-icon syriaca-nhsl icon-nav">
+                    <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+                </span>
+                <span class="icon-text">NHSL</span>
+            </a>
+        </li>
+        <li role="presentation" class="divider"/>
+        <li>
+            <a href="$nav-base/spear/index.html" class="icon-container">
+                <span class="syriaca-icon syriaca-spear icon-nav">
+                    <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+                </span>
+                <span class="icon-text">SPEAR</span>
+            </a>
+        </li>
+        <li role="presentation" class="divider"/>
+        <li>
+            <a href="$nav-base/mss/index.html" class="icon-container">
+                <span class="syriaca-icon syriaca-mss icon-nav">
+                    <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
+                </span>
+                <span class="icon-text">MSS</span>
+            </a>
+        </li>
+        -->
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/cbss/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-bibl icon-nav"></span>
+                           <span class="icon-text">Works Cited</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                     <li>
+                        <a href="$nav-base/index.html" class="icon-container">
+                           <span class="syriaca-icon syriaca-syriaca icon-nav">
+                              <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                              </span>
+                           <span class="mobile-submenu icon-text">Syriaca.org</span>
+                           </a>
+                        
+                     </li>
+                     
+                     <li role="presentation" class="divider"></li>
+                     
+                  </ul>
+                  
+               </li>
+               <li class="dropdown"><a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown"> 
+                     <span class="mobile-submenu">About</span>  <b class="caret"></b></a><ul class="dropdown-menu pull-right">
+                     <li><a href="/about-syriac.html">What is Syriac?</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/about-srophe.html">Project Overview</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/project-team.html">Project Team</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/project-partners.html">Project Partners</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/geo/index.html"><span class="icon-text">Gazetteer</span></a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="http://vu.edu/syriac">Support Our Work</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/contact-us.html">Contact Us</a></li>
+                     <li role="presentation" class="divider"></li>
+                     <li><a href="/documentation/index.html"><span class="syriaca-icon syriaca-book icon-nav" style="color:red;"></span><span class="icon-text">Documentation</span></a></li>
+                  </ul>
+               </li>
+               <li><a href="search.html" class="nav-text">Advanced Search</a></li>
+               <li>
+                  <div id="search-wrapper">
+                     <form class="navbar-form navbar-right search-box" role="search" action="search.html" method="get">
+                        <div class="form-group"><input type="text" class="form-control keyboard" placeholder="search" name="keyword" id="keywordNav" /><span class="keyboard-menu"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Keyboard">
+                                  <span class="syriaca-icon syriaca-keyboard">  </span><span class="caret"></span></button><ul class="dropdown-menu">
+                                 <li><a href="#" class="keyboard-select" id="syriac-phonetic" data-keyboard-id="keywordNav">Syriac Phonetic</a></li>
+                                 <li><a href="#" class="keyboard-select" id="syriac-standard" data-keyboard-id="keywordNav">Syriac Standard</a></li>
+                                 <li><a href="#" class="keyboard-select" id="ms-Arabic (101)" data-keyboard-id="keywordNav">Arabic Mod. Standard</a></li>
+                                 <li><a href="#" class="keyboard-select" id="ms-Hebrew" data-keyboard-id="keywordNav">Hebrew</a></li>
+                                 <li><a href="#" class="keyboard-select" id="ms-Russian" data-keyboard-id="keywordNav">Russian</a></li>
+                                 <li><a href="#" class="keyboard-select" id="ms-Greek" data-keyboard-id="keywordNav">Greek</a></li>
+                                 <li><a href="#" class="keyboard-select" id="qwerty" data-keyboard-id="keywordNav">English QWERTY</a></li>
+                              </ul></span><button class="btn btn-default search-btn" id="searchbtn" type="submit" title="Search"><span class="glyphicon glyphicon-search"></span></button></div>
+                     </form>
+                  </div>
+               </li>
+               <li>
+                  <div class="btn-nav"><button class="btn btn-default navbar-btn" id="font" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Font"><span class="glyphicon glyphicon-font"></span></button><ul class="dropdown-menu dropdown-menu-right" id="swap-font">
+                        <li><a href="#" class="swap-font" id="DefaultSelect" data-font-id="EstrangeloEdessa">Default</a></li>
+                        <li><a href="#" class="swap-font" id="EstrangeloEdessaSelect" data-font-id="EstrangeloEdessa">Estrangelo Edessa</a></li>
+                        <li><a href="#" class="swap-font" id="EastSyriacAdiabeneSelect" data-font-id="EastSyriacAdiabene">East Syriac Adiabene</a></li>
+                        <li><a href="#" class="swap-font" id="SertoBatnanSelect" data-font-id="SertoBatnan">Serto Batnan</a></li>
+                        <li><a href="$app-root/documentation/wiki.html?wiki-page=/How-to-view-Syriac-script&amp;wiki-uri=https://github.com/srophe/syriaca-data/wiki">Help <span class="glyphicon glyphicon-question-sign"></span></a></li>
+                     </ul>
+                  </div>
+               </li>
+            </ul>
+         </div>
+      </nav>
+      <div>
+         <div class="main-content-block">
+            <div class="interior-content">
+               <div class="container otherFormats"><a href="javascript:window.print();" type="button" class="btn btn-default btn-xs" id="teiBtn" data-toggle="tooltip" title="Click to send this page to the printer."><span class="glyphicon glyphicon-print" aria-hidden="true"></span></a> <a href="/Users/wsalesky/syriaca/syriaca/syriacaStatic/data//Users/wsalesky/syriaca/syriaca/syriaca/documentation/editors.tei" class="btn btn-default btn-xs" id="teiBtn" data-toggle="tooltip" title="Click to view the TEI XML data for this record."><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> TEI/XML
+                     </a> 
+               </div>
+               <div class="row">
+                  <div class="col-md-7 col-lg-8">
+                     <div class="title">
+                        <h1><span id="title"><span xml:lang="en" lang="en" dir="ltr">Syriaca.org Editors</span></span></h1>
+                     </div>
+                     <div class="idno seriesStmt" style="margin:0; margin-top:.25em; margin-bottom: 1em; padding:1em; color: #999999;"><small><span class="uri"> <button type="button" class="btn btn-default btn-xs" id="idnoBtn" data-clipboard-action="copy" data-clipboard-target="#syriaca-id"><span class="srp-label">URI</span></button> <span id="syriaca-id">http://syriaca.org/documentation/editors.xml</span><script>
+                        var clipboard = new Clipboard('#idnoBtn');
+                        clipboard.on('success', function(e) {
+                        console.log(e);
+                        });
+                        
+                        clipboard.on('error', function(e) {
+                        console.log(e);
+                        });
+                    </script> </span></small></div><span class="tei-body">
+                        <span class="tei-listPerson">
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Abdulrahim Abu-Husayn</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Dayroyo Roger-Youssef Akhrass</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Haya Al Thani</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Saif al-Murikhi</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Justin A. Arnwine</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Robert Aydin</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Tara Baillargeon</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Nicolas Bamballi</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Ralph Barczok</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Aram Bar Schabo</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">André Binggeli</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Dina Boero</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Roman Brasoveanu</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Françoise Briquel-Chatonnet</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Thomas A. Carlson</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Abdul Rahman Chamseddine</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Seonghyun Choi</span></li>
+                              <li dir="ltr"><span class="tei-persName" xml:lang="ko" lang="ko">성현 최</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Lewis Collins</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Jimmy Daccache</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Anthony Davis</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Muriel Debie</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Youssef Dergham</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Alain Desreumaux</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Claude Detienne</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Febbie C. Dickerson</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Aaron H. Doenges</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Maria E. Doerfler</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Reyhan Durmaz</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Nick Elder</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Joshua Falconer</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Margherita Farina</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Philip Forness</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Erin Galgay Walsh</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Eric Garret</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Emma Claire Geitner</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Elizabeth Gibes</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Kelli Gibson</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Nathan P. Gibson</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Daniel J. Greeson</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Simcha Gross</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Tucker D. Hannah</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Kristian Heal</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Christopher Johnson</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Jad Kaado</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Adam P. Kane</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Anna Kelly</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Edward Keogh</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Grigory Kessel</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Samer Khader</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Philemon Kirlles</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">David Kiger</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Eric Kowalik</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Mario Kozah</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">K. Lindtner</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Adam Carter McCollum</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Joshua McManaway</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Taylor McNeir</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Jeanne-Nicole Mellon Saint-Laurent</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">David A. Michelson</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Peter G. Miller</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Sergey Minov</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Julia C. Nations-Quiroz</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Jessica Pagan</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Ute Possekel</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">William L. Potter</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Flavia Ruani</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Lindsay Ruth</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Daniel Salem</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Winona Salesky</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Tobias Scheunchen</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Andrea Schmidt</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Daniel L. Schwartz</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Eleonora Serra</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Eileen Smith</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Simone I. M. Pratelli</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Silvio Roggo</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Ryan Stitt</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Michelle M. Taylor</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Katayoun Torabi</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName">Rose Trupiano</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Alex Vawter</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Emilie Villey</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Elizabeth Walston</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">James E. Walters</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Jeffrey Wickes</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Luke Yarbrough</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Eliana Yonan</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Samuel Young</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Ashoor Yousif</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           
+                           <h3>Names</h3>
+                           <ul class="persNames">
+                              <li dir="ltr"><span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Ugo Zanetti</span></li>
+                           </ul>
+                           <div class="info-btns"><button class="btn btn-info" data-toggle="modal" data-target="#feedback">Corrections/Additions?</button> 
+                              <a href="#" class="btn btn-info" data-toggle="modal" data-target="#selection" data-ref="../documentation/faq.html" id="showSection">
+                                 Is this record complete?
+                                 </a></div>
+                           <div class="content-block">
+                              <div id="sources">
+                                 <h3>Works Cited</h3>
+                                 <p><small>Any information without attribution has been created following the Syriaca.org <a href="http://syriaca.org/documentation/">editorial guidelines</a>.</small></p>
+                                 <ul></ul>
+                              </div>
+                           </div>
+                           <span class="tei-org" id="uasyriacresearchgroup">
+                              <span class="tei-name" xml:lang="en" lang="en" dir="ltr">The Syriac Research Group, University of Alabama</span>
+                              </span>
+                           </span>
+                        </span><div class="citationinfo">
+                        <h3>How to Cite This Entry</h3>
+                        <div id="citation-note" class="content-block indent"><span> <span> Thomas A. Carlson</span></span>, “<span class="title">Syriaca.org Editors</span>” last modified September 13, 2021, <a href="http://syriaca.org/documentation/editors.xml">http://syriaca.org/documentation/editors.xml</a>.
+                           <div class="collapse" id="showcit">
+                              <div id="citation-bibliography">
+                                 <h4>Bibliography:</h4><span> <span> Thomas A. Carlson</span></span>, “<span class="title">Syriaca.org Editors</span>.”, edited by <span> <span> Thomas A. Carlson</span></span> and <span> <span> David A. Michelson</span></span>. Syriaca.org: The Syriac Reference Portal,
+                                 2021.
+                                  Entry published September 13, 2021. <a href="http://syriaca.org/documentation/editors.xml">http://syriaca.org/documentation/editors.xml</a>.
+                              </div>
+                              <div id="about">
+                                 <h3>About this Entry</h3>
+                                 <p><span class="heading-inline">Entry Title:</span> <span class="title">Syriaca.org Editors</span></p>
+                                 <div>
+                                    <h4>Authorial and Editorial Responsibility:</h4>
+                                    <ul>
+                                       <li><span> David A. Michelson</span>, general editor, Syriaca.org: The Syriac Reference Portal
+                                       </li>
+                                       <li><span> <span> Thomas A. Carlson</span></span> and <span> <span> David A. Michelson</span></span>, editors, 
+                                       </li>
+                                       <li><span> <span> Thomas A. Carlson</span></span>, entry contributor, “”
+                                       </li>
+                                    </ul>
+                                 </div>
+                                 <div>
+                                    <h4>Additional Credit:</h4>
+                                    <ul>
+                                       <li>List compiled and expanded by <span> <span> Thomas A. Carlson</span></span></li>
+                                       <li>List expanded by <span> <span> David A. Michelson</span></span></li>
+                                       <li>List expanded by <span> <span> Nathan P. Gibson</span></span></li>
+                                       <li>List expanded by <span> <span> Daniel L. Schwartz</span></span></li>
+                                       <li>List expanded by <span> <span> William L. Potter</span></span></li>
+                                    </ul>
+                                 </div>
+                              </div>
+                              <div id="license">
+                                 <h3>Copyright and License for Reuse</h3>
+                                 <div>Except otherwise noted, this page is © 2021.
+                                    
+                                 </div><span class="tei-licence"> Distributed under a
+                                    Creative Commons Attribution 3.0 Unported License </span></div>
+                           </div><a class="btn-sm btn-info togglelink pull-right" data-toggle="collapse" data-target="#showcit" data-text-swap="Hide citation">Show full citation information...</a></div>
+                     </div>
+                  </div>
+                  <div class="col-md-5 col-lg-4 right-menu"><br /></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer>
+         
+         <div class="container">
+            <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">
+               <img alt="Creative Commons License" style="border-width:0" src="/resources/images/cc.png" height="18px" />
+               </a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.
+            <br />Copyright Vanderbilt University, Princeton University, and the Contributor(s), 2014.
+            
+         </div>
+         
+      </footer>
+   </body>
+</html>

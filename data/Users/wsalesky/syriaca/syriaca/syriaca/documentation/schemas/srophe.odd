@@ -1,0 +1,1676 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:srophe="https://srophe.app">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      <title data-template="app:record-title">The Syriac Gazetteer</title>
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      
+      <meta name="DC.type" property="dc.type" content="Text" />
+      
+      <meta name="DC.isPartOf" property="dc.ispartof" content="Syriaca.org: The Syriac Reference Portal" />
+      
+      <link data-template="app:metadata" />
+      
+      <link rel="shortcut icon" href="/resources/images/fav-icons/geo-favicon.ico" />
+      
+      <!-- Bootstrap 3 -->
+      
+      <link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/bootstrap.min.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/sm-core-css.css" />
+      
+      <!-- Srophe styles -->
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/syr-icon-fonts.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/style.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/syriaca.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/geo.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/slider.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/lightslider.css" />
+      
+      <link rel="stylesheet" type="text/css" media="print" href="/resources/css/print.css" />
+      
+      <!-- Leaflet -->
+      
+      <link rel="stylesheet" href="/resources/leaflet/leaflet.css" />
+      
+      <link rel="stylesheet" href="/resources/leaflet/leaflet.awesome-markers.css" />
+      <script defer="defer" data-domain="syriaca.org" src="https://plausible.io/js/plausible.js"></script>
+      
+      <!-- JQuery -->
+      <link href="/resources/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+      <script type="text/javascript" src="/resources/js/jquery.min.js"></script>
+      <script type="text/javascript" src="/resources/jquery-ui/jquery-ui.min.js"></script>
+      <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
+      <script type="text/javascript" src="/resources/js/clipboard.min.js"></script>
+      
+      <!-- Bootstrap -->
+      <script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script>
+      
+      <!-- ReCaptcha -->
+      <script src="https://www.google.com/recaptcha/api.js" type="text/javascript" async="async" defer="defer"></script>
+      
+      <!-- keyboard widget css & script -->
+      <link href="/resources/keyboard/css/keyboard.min.css" rel="stylesheet" />
+      
+      <link href="/resources/keyboard/css/keyboard-previewkeyset.min.css" rel="stylesheet" />
+      
+      <link href="/resources/keyboard/syr/syr.css" rel="stylesheet" />
+      <script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-mobile.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-navigation.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.extension-autocomplete.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/syr/keyboardSupport.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/syr/syr.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Greek.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Russian.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Arabic.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Hebrew.min.js"></script>
+      <script type="text/javascript">
+            $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip({ container: 'body' })
+
+                $('.keyboard').keyboard({
+                    openOn: null,
+                    stayOpen: false,
+                    alwaysOpen: false,
+                    autoAccept: true,
+                    usePreview: false,
+                    initialFocus: true,
+                    rtl : true,
+                    layout: 'syriac-phonetic',
+                    hidden: function(event, keyboard, el){
+                       //  keyboard.destroy();
+                     }
+                });
+
+                $('.keyboard-select').click(function () {
+                    var keyboardID = '#' + $(this).data("keyboard-id")
+                    var kb = $(keyboardID).getkeyboard();
+                    //var kb = $('#searchField').getkeyboard();
+                    // change layout based on link ID
+                    kb.options.layout = this.id
+                    // open keyboard if layout is different, or time from it last closing is &amp;gt; 200 ms
+                    if (kb.last.layout !== kb.options.layout || (new Date().getTime() - kb.last.eventTime) &lt; 200) {
+                        kb.reveal();
+                    }
+                });
+                //Change fonts
+                $('.swap-font').on('click', function(){
+                    var selectedFont = $(this).data("font-id")
+                    $('.selectableFont').not('.syr').css('font-family', selectedFont);
+                    $("*:lang(syr)").css('font-family', selectedFont)
+                });
+
+            })
+        </script>
+      </head>
+   <body id="body">
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+         
+         <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+            <a class="navbar-brand banner-container" href="/geo/index.html"> 
+               <span class="syriaca-icon syriaca-geo banner-icon">
+                  <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                  </span>
+               <span class="banner-text">The Syriac Gazetteer</span>
+               </a>
+            
+         </div>
+         
+         <div class="navbar-collapse collapse pull-right" id="navbar-collapse-1">
+            
+            <ul class="nav navbar-nav">
+               
+               <li>
+                  <a href="/geo/browse.html" class="nav-text">Browse</a>
+                  
+               </li>
+               
+               <li>
+                  <a href="/geo/about.html" class="nav-text">About</a>
+                  
+               </li>
+               
+               <li>
+                  <a href="/geo/help/index.html" class="nav-text">Help</a>
+                  
+               </li>
+               
+               <li>
+                  <a href="/geo/howtoadd.html" class="nav-text">Add new place</a>
+                  
+               </li>
+               
+               <li class="dropdown">     <a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown">         <span class="mobile-submenu">Publications </span>  <b class="caret"></b>     </a>     
+                  <ul class="dropdown-menu pull-right">         
+                     <li>             <a href="/geo/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-geo icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Gazetteer</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/persons/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-sbd icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">SBD</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/authors/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-authors icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Authors</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/saints/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-saints icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Gateway to the Saints</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/q/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-q icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Qadishe</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/bhse/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-bhse icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">BHSE</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/cbss/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-bibl icon-nav"></span>                 <span class="icon-text">Works Cited</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-syriaca icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="mobile-submenu icon-text">Syriaca.org</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>     
+                  </ul> 
+               </li>
+               
+               <li>
+                  <a href="/geo/search.html" class="nav-text">Advanced Search</a>
+                  
+               </li>
+               
+               <li>
+                  
+                  <div id="search-wrapper">
+                     
+                     <form class="navbar-form navbar-right search-box" role="search" action="/geo/search.html" method="get">
+                        
+                        <div class="form-group">
+                           <input type="text" class="form-control keyboard" placeholder="search" name="keyword" id="keywordNav" />
+                           <span class="keyboard-menu">             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Keyboard">                  <span class="syriaca-icon syriaca-keyboard">  </span><span class="caret"></span>             </button>             
+                              <ul class="dropdown-menu">                 
+                                 <li><a href="#" class="keyboard-select" id="syriac-phonetic" data-keyboard-id="keywordNav">Syriac Phonetic</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="syriac-standard" data-keyboard-id="keywordNav">Syriac Standard</a></li>                 
+                                 <li> <a href="#" class="keyboard-select" id="ms-Arabic (101)" data-keyboard-id="keywordNav">Arabic Mod. Standard</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="ms-Hebrew" data-keyboard-id="keywordNav">Hebrew</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="ms-Russian" data-keyboard-id="keywordNav">Russian</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="ms-Greek" data-keyboard-id="keywordNav">Greek</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="qwerty" data-keyboard-id="keywordNav">English QWERTY</a></li>             
+                              </ul>         </span>
+                           <button class="btn btn-default search-btn" id="searchbtn" type="submit" title="Search">
+                              <span class="glyphicon glyphicon-search"></span>
+                              </button>                                    
+                           
+                        </div>
+                        
+                     </form>
+                     
+                  </div>
+                  
+               </li>
+               
+               <li>
+                  
+                  <div class="btn-nav">
+                     <button class="btn btn-default navbar-btn" id="font" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Font">
+                        <span class="glyphicon glyphicon-font"></span>
+                        </button>  
+                     
+                     <ul class="dropdown-menu dropdown-menu-right" id="swap-font">
+                        
+                        <li>
+                           <a href="#" class="swap-font" id="DefaultSelect" data-font-id="EstrangeloEdessa">Default</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="#" class="swap-font" id="EstrangeloEdessaSelect" data-font-id="EstrangeloEdessa">Estrangelo Edessa</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="#" class="swap-font" id="EastSyriacAdiabeneSelect" data-font-id="EastSyriacAdiabene">East Syriac Adiabene</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="#" class="swap-font" id="SertoBatnanSelect" data-font-id="SertoBatnan">Serto Batnan</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="/documentation/wiki.html?wiki-page=/How-to-view-Syriac-script&amp;wiki-uri=https://github.com/srophe/syriaca-data/wiki">Help <span class="glyphicon glyphicon-question-sign"></span>
+                              </a>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+               </li>
+               
+            </ul>
+            
+         </div>
+         
+      </nav>
+      <div>
+         <div class="main-content-block">
+            <div class="interior-content">
+               <div class="container otherFormats"><a href="javascript:window.print();" type="button" class="btn btn-default btn-xs" id="teiBtn" data-toggle="tooltip" title="Click to send this page to the printer."><span class="glyphicon glyphicon-print" aria-hidden="true"></span></a> <a href=".tei" class="btn btn-default btn-xs" id="teiBtn" data-toggle="tooltip" title="Click to view the TEI XML data for this record."><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> TEI/XML
+                     </a> 
+               </div>
+               <div class="row">
+                  <div class="col-md-7 col-lg-8">
+                     <div class="title">
+                        <h1><span id="title">Arethusa - <span lang="syr" dir="rtl">ܐܪܝܣܬܢ</span></span></h1>
+                     </div>
+                     <div class="idno seriesStmt" style="margin:0; margin-top:.25em; margin-bottom: 1em; padding:1em; color: #999999;"><small><span class="uri"> <button type="button" class="btn btn-default btn-xs" id="idnoBtn" data-clipboard-action="copy" data-clipboard-target="#syriaca-id"><span class="srp-label">URI</span></button> <span id="syriaca-id">http://syriaca.org/0000</span><script>
+                        var clipboard = new Clipboard('#idnoBtn');
+                        clipboard.on('success', function(e) {
+                        console.log(e);
+                        });
+                        
+                        clipboard.on('error', function(e) {
+                        console.log(e);
+                        });
+                    </script> </span></small></div><span class="tei-body">
+                        
+                        
+                        <span class="tei-schemaSpec" xml:lang="en" lang="en" dir="ltr">
+                           <span class="tei-moduleRef"></span>
+                           <span class="tei-moduleRef"></span>
+                           <span class="tei-moduleRef"></span>
+                           <span class="tei-moduleRef"></span>
+                           <span class="tei-moduleRef"></span>
+                           <span class="tei-moduleRef"></span>
+                           <span class="tei-moduleRef"></span>
+                           <span class="tei-moduleRef"></span>
+                           <span class="tei-moduleRef"></span>
+                           <span class="tei-moduleRef"></span>
+                           <span class="tei-moduleRef"></span>
+                           <span class="tei-moduleRef"></span>
+                           
+                           
+                           <span class="tei-classSpec">
+                              <span class="tei-desc">I have needed to include this because it somehow disappeared from this
+                                 customization. I do not know why this was necessary.</span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              </span>
+                           
+                           
+                           <span class="tei-classSpec">
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-desc">Specialized attributes specific to the functions performed by the Srophé
+                                       App.</span>
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-footnote-refs" dir="ltr" lang="en" xml:lang="en"><span class="tei-footnote-ref"><a href="tei"></a></span> </span></span>
+                           
+                           <span class="tei-classSpec">
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-desc">Start date</span>
+                                    <span class="tei-datatype">
+                                       <span class="tei-text"></span>
+                                       </span>
+                                    </span>
+                                 <span class="tei-attDef">
+                                    <span class="tei-desc">End date</span>
+                                    <span class="tei-datatype">
+                                       <span class="tei-text"></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-footnote-refs" dir="ltr" lang="en" xml:lang="en"><span class="tei-footnote-ref"><a href="tei"></a></span> </span></span>
+                           
+                           
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p> Every <span class="tei-gi">teiHeader</span> element contains a <span class="tei-gi">fileDesc</span> element (information
+                                    about the creation of a file), an <span class="tei-gi">encodingDesc</span> element (editorial rules), a
+                                    <span class="tei-gi">profileDesc</span> element (non-bibliographic aspects of a text), and a
+                                    <span class="tei-gi">revisionDesc</span> element (history of revisions). 
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p> Each <span class="tei-gi">fileDesc</span> element contains (in order) a <span class="tei-gi">titleStmt</span>, an
+                                    <span class="tei-gi">editionStmt</span>, a <span class="tei-gi">publicationStmt</span>, an optional <span class="tei-gi">seriesStmt</span>,
+                                    and a <span class="tei-gi">sourceDesc</span>. 
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-titleStmt">
+                                       <span class="tei-title" xml:lang="en" lang="en" dir="ltr">Van</span>
+                                       <span class="tei-sponsor">Syriaca.org: The Syriac Reference Portal</span>
+                                       <span class="tei-funder">The National Endowment for the Humanities</span>
+                                       <span class="tei-funder">The International Balzan Prize Foundation</span>
+                                       <span class="tei-editor"><a href="http://syriaca.org/documentation/editors.xml#tcarlson">Thomas A. Carlson</a></span>
+                                       <span class="tei-respStmt">
+                                          <span class="tei-resp">Data merging, Pleiades and Wikipedia linking, and XML by</span>
+                                          <span class="tei-name"><a href="http://syriaca.org/documentation/editors.xml#tcarlson">Thomas A.
+                                                Carlson</a></span>
+                                          </span>
+                                       <span class="tei-respStmt">
+                                          <span class="tei-resp">Wilmshurst index information entry by</span>
+                                          <span class="tei-name"><a href="http://syriaca.org/documentation/editors.xml#adavis">Anthony
+                                                Davis</a></span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p> Each <span class="tei-gi">titleStmt</span> element contains (in order) one or more <span class="tei-gi">title</span>
+                                    elements, optional <span class="tei-gi">sponsor</span> elements, optional <span class="tei-gi">funder</span> elements,
+                                    optional <span class="tei-gi">principal</span> elements, one or more <span class="tei-gi">sourceDesc</span> elements, and
+                                    optional <span class="tei-gi">respStmt</span> elements. 
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-classDecl">
+                                       <span class="tei-taxonomy">
+                                          <span class="tei-category" id="syriaca-headword">
+                                             <span class="tei-catDesc">The name used by Syriaca.org for document titles, citation, and
+                                                disambiguation. These names have been created according to the Syriac.org
+                                                guidelines for headwords: <span class="tei-ref">http://syriaca.org/documentation/headwords.html</span>.</span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>The <span class="tei-gi">classDecl</span> contains one or more taxonomies defining any classificatory
+                                    codes used elsewhere in the text. There are various tags which Syriaca.org uses to
+                                    mark elements for a variety of purposes. Syriaca.org’s preferred name forms are tagged
+                                    with "syriaca-headword", for example. 
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-classDecl">
+                                       <span class="tei-taxonomy">
+                                          <span class="tei-category" id="syriaca-headword">
+                                             <span class="tei-catDesc">The name used by Syriaca.org for document titles, citation, and
+                                                disambiguation. These names have been created according to the Syriac.org
+                                                guidelines for headwords: <span class="tei-ref">http://syriaca.org/documentation/headwords.html</span>.</span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>The <span class="tei-gi">taxonomy</span> contains one or more taxonomies defining any classificatory
+                                    codes used elsewhere in the text. There are various tags which Syriaca.org uses to
+                                    mark elements for a variety of purposes. Syriaca.org’s preferred name forms are tagged
+                                    with "syriaca-headword", for example. 
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-classDecl">
+                                       <span class="tei-taxonomy">
+                                          <span class="tei-category" id="syriaca-headword">
+                                             <span class="tei-catDesc">The name used by Syriaca.org for document titles, citation, and
+                                                disambiguation. These names have been created according to the Syriac.org
+                                                guidelines for headwords: <span class="tei-ref">http://syriaca.org/documentation/headwords.html</span>.</span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>The <span class="tei-gi">category</span> has an <span class="tei-att">xml:id</span> attribute whose value is the tag.
+                                    Within the <span class="tei-gi">category</span> element is a <span class="tei-gi">catDesc</span> element which contains a
+                                    brief prose description of the category’s purpose.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-classDecl">
+                                       <span class="tei-taxonomy">
+                                          <span class="tei-category" id="syriaca-headword">
+                                             <span class="tei-catDesc">The name used by Syriaca.org for document titles, citation, and
+                                                disambiguation. These names have been created according to the Syriac.org
+                                                guidelines for headwords: <span class="tei-ref">http://syriaca.org/documentation/headwords.html</span>.</span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>The <span class="tei-gi">catDesc</span> contains a brief prose description of the category’s
+                                    purpose.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">draft</span>
+                                          <span class="tei-desc">Indicates that this document is more-or-less complete but remains in draft
+                                             status.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">incomplete</span>
+                                          <span class="tei-desc">Indicates that this document is incomplete.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">published</span>
+                                          <span class="tei-desc">Indicates that this document has been published.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">under review</span>
+                                          <span class="tei-desc">Indicates that this document is under review by one or more editors.</span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-revisionDesc">
+                                       <span class="tei-change">CHANGED tei:author element to tei:persName under tei:event
+                                          element.</span>
+                                       <span class="tei-change">ADDED: Yaqut citation and attestation</span>
+                                       <span class="tei-change">ADDED: relation element with shares-name-with attribute for all
+                                          place headwords that share names</span>
+                                       <span class="tei-change">ADDED: syriaca-computed-start and syriaca-computed-end
+                                          attributes for searching</span>
+                                       <span class="tei-change">CREATED: place</span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p> The <span class="tei-gi">revisionDesc</span> element is used to include a detailed log of which changes
+                                    have been made to this file, when, and by whom. The <span class="tei-gi">revisionDesc</span> should have
+                                    a <span class="tei-att">status</span> attribute which indicates the publication stage of the file.
+                                    Possible values for this attribute include: “draft,” “incomplete,” “published,” and
+                                    “underReview”. Each revision contains a <span class="tei-gi">change</span> element. 
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-attList">
+                                 <span class="tei-attDef"></span>
+                                 <span class="tei-attDef"></span>
+                                 <span class="tei-attDef"></span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-revisionDesc">
+                                       <span class="tei-change"><span class="tei-attr-n">1.1</span> ADDED: Pleiades coordinates</span>
+                                       <span class="tei-change"> FIXED: Ufra to
+                                          Urfa</span>
+                                       <span class="tei-change"><span class="tei-attr-n">1.0</span> ADDED:
+                                          teiHeader/revisionDesc</span>
+                                       <span class="tei-change"> ADDED:
+                                          teiHeader</span>
+                                       <span class="tei-change"><span class="tei-attr-n">0.1</span> CREATED:
+                                          place</span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>The <span class="tei-gi">change</span> element takes attributes <span class="tei-att">when</span> and <span class="tei-att">who</span> which
+                                    indicate the date of the change and the person who made the change. The value of
+                                    <span class="tei-att">when</span> is a date in "yyyy-mm-dd" format, whereas <span class="tei-att">who</span> will have
+                                    the value of an <span class="tei-att">xml:id</span> attribute from
+                                    "http://syriaca.org/documentation/editors.xml" - the list of editors. An optional
+                                    <span class="tei-att">n</span> attribute whose value is a version number can indicate that this change
+                                    advanced the version number (given in the <span class="tei-gi">editionStmt</span> within the
+                                    <span class="tei-gi">fileDesc</span> element). The contents of the <span class="tei-gi">change</span> element describe the
+                                    revision that was made.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-alternate">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-titleStmt"> ... <span class="tei-respStmt">
+                                          <span class="tei-resp">Data merging, Pleiades and Wikipedia linking, and XML by</span>
+                                          <span class="tei-name"><a href="http://syriaca.org/documentation/editors.xml#tcarlson">Thomas A.
+                                                Carlson</a></span>
+                                          </span>
+                                       <span class="tei-respStmt">
+                                          <span class="tei-resp">Wilmshurst index information entry by</span>
+                                          <span class="tei-name"><a href="http://syriaca.org/documentation/editors.xml#adavis">Anthony
+                                                Davis</a></span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-respStmt">
+                                       <span class="tei-resp">These names were received as a dataset from E-Ktobe : manuscrits syriaques
+                                          (<span class="tei-ref">http://syriac.msscatalog.org/</span>). Née sur l’initiative d'André Binggeli
+                                          (IRHT-CNRS), Françoise Briquel-Chatonnet (Orient et Méditerranée-CNRS), Muriel
+                                          Debié (EPHE) et Alain Desreumaux (Orient et Méditerranée-CNRS) dans le cadre du
+                                          programme SYRAB de l'ANR (Agence Nationale de la Recherche), la base e-ktobe est
+                                          actuellement placée sous la responsabilité scientifique d’André Binggeli et Emilie
+                                          Villey (Orient et Méditerranée-CNRS). Liste des collaborateurs contribuant ou
+                                          ayant contribué à l’alimentation de la base : Youssef Dergham (Bibliothèque du
+                                          patriarcat syro-catholique de Charfet), Margherita Farina (CNRS, Paris), Simone I.
+                                          M. Pratelli (U. de Constance), Flavia Ruani (U. de Gand) et Eleonora Serra (U. de
+                                          Pise).</span>
+                                       <span class="tei-orgName"><a href="http://syriac.msscatalog.org/">E-Ktobe : manuscrits
+                                             syriaques</a></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p> Both the editors and other parties who are responsible for the creation of this TEI
+                                    place record are then identified individually in <span class="tei-gi">respStmt</span> elements
+                                    (<span class="tei-gi">resp</span> stands for "responsibility"). The schema requires the record have at
+                                    least one <span class="tei-gi">respStmt</span> which would describe the contribution of the
+                                    <span class="tei-gi">editor</span> with the <span class="tei-att">role</span>="creator". Most records will have multiple
+                                    <span class="tei-gi">respStmt</span> elements, especially in cases where there were contributions made
+                                    by persons who do not fall into the available @role values. The contents of the
+                                    <span class="tei-gi">respStmt</span> element are the description of the responsibility wrapped in a
+                                    <span class="tei-gi">resp</span> element followed by the name of the responsible party contained in a
+                                    <span class="tei-gi">name</span> element or the name of the responsible organization in an
+                                    <span class="tei-gi">orgName</span> element. The <span class="tei-gi">name</span> element should take a <span class="tei-att">ref</span>
+                                    attribute which points to the <span class="tei-att">xml:id</span> of the editor within the "editors.xml"
+                                    document. Additional participants in the creation of the file, for example by entering
+                                    Syriac or Arabic text, can be given additional <span class="tei-gi">respStmt</span> entries.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-alternate">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-textNode"></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">A @role attribute is required on the &lt;editor&gt;
+                                          element inside &lt;teiHeader&gt;.</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert"> The acceptable attribute values for @role on the &lt;editor&gt; element inside
+                                          the &lt;titleStmt&gt; are: creator, code-author, content-author, or contributor.
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert"> The acceptable attribute values for @role on the &lt;editor&gt; element inside
+                                          the &lt;seriesStmt&gt; are: associate, general, technical, past-associate,
+                                          past-general, or past-technical. </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert"> The acceptable
+                                          attribute values for @role on the &lt;editor&gt; element inside the &lt;body&gt;
+                                          are: editor, general, or translator. </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">An &lt;editor&gt; element with a "past" @role attribute must contain a &lt;date&gt; element.</span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">A @ref attribute is required on the &lt;editor&gt; element
+                                          inside &lt;teiHeader&gt;.</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-assert"> Acceptable values for the @ref attribute on an &lt;editor&gt; element inside the
+                                          &lt;teiHeader&gt; include: <span class="tei-value-of"></span>. </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-report">A @ref attribute is not allowed on the &lt;editor&gt;
+                                          element inside &lt;body&gt;.</span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-desc">Should contain the URI of a Syriaca.org editor from <a href="http://syriaca.org/documentation/editors">this list</a>.</span>
+                                    </span>
+                                 <span class="tei-attDef">
+                                    <span class="tei-desc">Specifies the connection of the editor to the work, selected from
+                                       http://syriaca.org/documentation/author-editor-roles.xml . The attribute value
+                                       should contain the above URL followed by a hash (#) and the <span class="tei-att">xml:id</span> of the
+                                       role. For example,
+                                       http://syriaca.org/documentation/author-editor-roles.xml#translator . This is
+                                       recommended, but not required if the type of connection is unknown.</span>
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">An associate editor</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">The person responsible for the creation of the xml encoding</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">The person responsible for the content encoded in this document by another
+                                             person</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">A person who contributed some data but is not the main person responsible
+                                             for the document</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">The main author responsible for the document</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">An editor as defined by the Chicago Manual of Style</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">A general editor of a module</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">A former associate editor</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">A former general editor of a module</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">A former editor responsible for the data model</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">An editor responsible for the data model</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">The translator of a text</span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-editor"><a href="http://syriaca.org/person/239">
+                                          <span class="tei-persName" xml:lang="en" lang="en" dir="ltr">Gregorius Bar Hebraeus</span> — <span class="tei-persName" xml:lang="syr" lang="syr" dir="rtl">ܓܪܝܓܘܪܝܘܣ ܒܪ ܥܒܪܝܐ</span>
+                                          </a></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-editor"><a href="http://syriaca.org/documentation/editors.xml#tcarlson">Thomas A. Carlson</a></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-bibl" id="bib18-9">
+                                       <span class="tei-title" xml:lang="en" lang="en" dir="ltr">The Sixth Book of the Select Letters of Severus, Patriarch of
+                                          Antioch in the Syriac Version of Athanasius of Nisibis</span>
+                                       <span class="tei-title">Translation, I.1 - II.3</span>
+                                       <span class="tei-author">
+                                          <span class="tei-persName"><a href="http://syriaca.org/person/51">Severus of Antioch</a></span>
+                                          </span>
+                                       <span class="tei-editor">
+                                          <span class="tei-persName"><a href="http://syriaca.org/person/403">E. W. Brooks</a></span>
+                                          </span>
+                                       <span class="tei-ptr"></span>
+                                       <span class="tei-citedRange">151</span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-titleStmt">
+                                       <span class="tei-title" xml:lang="en" lang="en" dir="ltr">Telneshe — <span class="tei-foreign" xml:lang="syr" lang="syr" dir="rtl">ܬܠܢܫܐ</span>
+                                          </span> ... <span class="tei-editor"><a href="http://syriaca.org/documentation/editors.xml#tcarlson">Thomas A.
+                                             Carlson</a></span>
+                                       <span class="tei-editor"><a href="http://syriaca.org/documentation/editors.xml#dboero">Dina Boero</a></span>
+                                       <span class="tei-respStmt">
+                                          <span class="tei-resp">Initial XML by</span>
+                                          <span class="tei-name"><a href="http://syriaca.org/documentation/editors.xml#tcarlson">Thomas A.
+                                                Carlson</a></span>
+                                          </span>
+                                       <span class="tei-respStmt">
+                                          <span class="tei-resp">Data submission by</span>
+                                          <span class="tei-name"><a href="http://syriaca.org/documentation/editors.xml#dboero">Dina Boero</a></span>
+                                          </span>
+                                       <span class="tei-respStmt">
+                                          <span class="tei-resp">Data submission review by</span>
+                                          <span class="tei-name"><a href="http://syriaca.org/documentation/editors.xml#pforness">Philip
+                                                Forness</a></span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-seriesStmt">
+                                       <span class="tei-title" xml:lang="en" lang="en" dir="ltr">The Syriac Gazetteer</span>
+                                       <span class="tei-editor"><a href="http://syriaca.org/documentation/editors.xml#dmichelson">
+                                             <span class="tei-persName">David A. Michelson</span>, <span class="tei-date">2014-present</span>.</a></span>
+                                       <span class="tei-editor"><a href="http://syriaca.org/documentation/editors.xml#wpotter">
+                                             <span class="tei-persName">William L. Potter</span>, <span class="tei-date">2020-present</span>.</a></span>
+                                       <span class="tei-editor"><a href="http://syriaca.org/documentation/editors.xml#dschwartz">
+                                             <span class="tei-persName">Daniel L. Schwartz</span>, <span class="tei-date">2019-present</span>.</a></span>
+                                       <span class="tei-editor"><a href="http://syriaca.org/documentation/editors.xml#tcarlson">
+                                             <span class="tei-persName">Thomas A. Carlson</span>, <span class="tei-date">2014-2018</span>
+                                             </a></span>
+                                       <span class="tei-idno">http://syriaca.org/geo</span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p> The <span class="tei-gi">editor</span> element is used in three places in the Srophé App. In the
+                                    <span class="tei-gi">teiHeader</span> the editors of the document appear inside the <span class="tei-gi">titleStmt</span>
+                                    element while inside the <span class="tei-gi">seriesStmt</span> the editors responsible for a series that
+                                    the document might be a part of are listed. In the text of files, the <span class="tei-gi">editor</span>
+                                    element is used inside of <span class="tei-gi">bibl</span> elements to indicated editors of works sited.
+                                    
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">A @ref attribute is required on the &lt;name&gt; element
+                                          inside &lt;teiHeader&gt;.</span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-editionStmt">
+                                       <span class="tei-edition"><span class="tei-attr-n">1.0</span></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p> The <span class="tei-gi">editionStmt</span> allows the specification of an edition or version number.
+                                    When a TEI file is first published online, that edition should be "1.0". Subsequent
+                                    revisions may bump the revision number, either by a whole new version (i.e. to "2.0")
+                                    or by a minor version (i.e. to "1.1"). 
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-publicationStmt">
+                                       <span class="tei-authority">Syriaca.org: The Syriac Reference Portal</span>
+                                       <span class="tei-idno">http://syriaca.org/place/1027/tei</span>
+                                       <span class="tei-availability">
+                                          <span class="tei-licence">
+                                             <span class="tei-p">Distributed under a Creative Commons Attribution 3.0 Unported License.</span>
+                                             </span>
+                                          </span>
+                                       <span class="tei-date">2014-01-14-05:00</span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>The <span class="tei-gi">publicationStmt</span> is where we identify Syriaca.org as the entity
+                                    responsible for publishing this information, indicate the date of the most recent
+                                    edit, and identify the use license (Creative Commons CC-BY). The
+                                    <span class="tei-gi">publicationStmt</span> contains requires (in order) the following
+                                    <span class="tei-gi">authority</span>, <span class="tei-gi">idno</span>, <span class="tei-gi">availability</span>, and <span class="tei-gi">date</span>. 
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-license">
+                                       <span class="tei-p">Distributed under a Creative Commons Attribution 3.0 Unported License.</span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-license">
+                                       <span class="tei-p">Distributed under a Creative Commons Attribution 3.0 Unported License.</span>
+                                       <span class="tei-p">This entry incorporates copyrighted material from the following work(s): <span class="tei-listBibl">
+                                             <span class="tei-bibl">
+                                                <span class="tei-ptr"></span>
+                                                </span>
+                                             <span class="tei-bibl">
+                                                <span class="tei-ptr"></span>
+                                                </span>
+                                             <span class="tei-bibl">
+                                                <span class="tei-ptr"></span>
+                                                </span>
+                                             </span>
+                                          <span class="tei-note">used under a Creative Commons Attribution license <span class="tei-ref"></span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p> The <span class="tei-gi">license</span> element within the <span class="tei-gi">availability</span> element is used to
+                                    specify the Creative Commons CC-BY license under which this record is made available.
+                                    Some records incorporate information from works under copyright (with permission),
+                                    a
+                                    fact which is also indicated in the <span class="tei-gi">license</span> element. 
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem"></span>
+                                       </span>
+                                    </span>
+                                 <span class="tei-attDef"></span>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-alternate">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert"> The &lt;sourceDesc&gt; must contain a
+                                          &lt;p&gt; element with the text node: "Born digital.". </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-sourceDesc">
+                                       <span class="tei-p">Born digital.</span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-sourceDesc" id="sourceDesc1">
+                                       <span class="tei-biblStruct">
+                                          <span class="tei-monogr">
+                                             <span class="tei-editor">
+                                                <span class="tei-forename">G. H.</span>
+                                                <span class="tei-surname">Gwilliam</span>
+                                                </span>
+                                             <span class="tei-editor">
+                                                <span class="tei-forename">J.</span>
+                                                <span class="tei-surname">Pinkerton</span>
+                                                </span>
+                                             <span class="tei-editor">
+                                                <span class="tei-forename">John</span>
+                                                <span class="tei-surname">Gwynn</span>
+                                                </span>
+                                             <span class="tei-title">The New Testament in Syriac [<span class="tei-foreign" xml:lang="syr" lang="syr" dir="rtl">ܕܝܬܝܩܐ
+                                                   ܚܕܬܐ ܕܡܪܢ ܝܫܘܥ ܡܫܝܚܐ</span>]</span>
+                                             <span class="tei-idno">http://syriaca.org/bibl/2491</span>
+                                             <span class="tei-idno">1049</span>
+                                             <span class="tei-idno">http://zotero.org/groups/392292/items/N4KFR4M9</span>
+                                             <span class="tei-ref"></span>
+                                             <span class="tei-imprint">
+                                                <span class="tei-pubPlace">London</span>
+                                                <span class="tei-publisher">British and Foreign Bible Society</span>
+                                                <span class="tei-date">1905</span>
+                                                </span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-sourceDesc">
+                                       <span class="tei-biblStruct">
+                                          <span class="tei-monogr">
+                                             <span class="tei-title">Gorgias Encyclopedic Dictionary of the Syriac Heritage</span>
+                                             <span class="tei-editor">Sebastian P. Brock</span>
+                                             <span class="tei-editor">Aaron M. Butts</span>
+                                             <span class="tei-editor">George A. Kiraz</span>
+                                             <span class="tei-editor">Lucas Van Rompay</span>
+                                             <span class="tei-imprint">
+                                                <span class="tei-pubPlace">Piscataway, N.J.</span>
+                                                <span class="tei-publisher">Gorgias Press for Beth Mardutho: The Syriac Institute</span>
+                                                <span class="tei-date">2011</span>
+                                                <span class="tei-note">Copyright ©2011 by Beth Mardutho: The Syriac Institute</span>
+                                                <span class="tei-note">ISBN: 978-1-59333-714-8</span>
+                                                </span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>The <span class="tei-gi">sourceDesc</span> element is a mandatory component of the <span class="tei-gi">fileDesc</span>
+                                    element. Its purpose is to indicate the source of the text which is encoded in this
+                                    file, for library cataloging among other uses. For Syriaca.org data that is not
+                                    marking up text from a source, the option of indicating that this TEI is "born
+                                    digital," should be used. For text encoding projects
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-encodingDesc">
+                                       <span class="tei-editorialDecl">
+                                          <span class="tei-p">This record has been created following the Syriaca.org editorial guidelines.
+                                             Documentation is available at: <span class="tei-ref">http://syriaca.org/documentation</span>. <span class="tei-title">The Syriac Gazetteer</span>
+                                             was encoded using both the general editorial guidelines for all publications of
+                                             Syriaca.org and an encoding schema specific to <span class="tei-title">The Syriac
+                                                Gazetteer</span>.</span>
+                                          <span class="tei-p">Approximate dates described in terms of centuries or partial centuries have
+                                             been interpreted into quantitative values as documented in the Syriaca.org
+                                             guidelines for normalization of dates. See <span class="tei-ref">Syriaca.org Guidelines
+                                                for Approximate Dates</span>.</span>
+                                          <span class="tei-p">The <span class="tei-gi">state</span> element of @type="existence" indicates the period for which
+                                             this place was in use as a place of its indicated type (e.g. an inhabited
+                                             settlement, a functioning monastery or church, an administrative province).
+                                             While it is possible to indicate a source for this date, this date is usually
+                                             based on the estimate of the editors and provided as an aid to searching. As a
+                                             practice, attested dates for a place based on historical sources have instead
+                                             been encoded more precisely using <span class="tei-gi">event</span> of @type="attestation". Natural
+                                             features which have always existed have no date on the <span class="tei-gi">state</span> element of
+                                             @type="existence" since they are are presumed to have always existed throughout
+                                             recorded history.</span>
+                                          <span class="tei-p">In some cases, maps from print publications have been used as the basis for
+                                             coordinate data in <span class="tei-title">The Syriac Gazetteer</span>. In two instances, the
+                                             editors of such print maps provided the digital coordinate data used to prepare
+                                             the print maps. Specifically, coordinates which are attributed to <span class="tei-title">The
+                                                Gorgias Encyclopedic Dictionary of the Syriac Heritage</span> (<span class="tei-ref">http://syriaca.org/bibl/1</span>) or to
+                                             <span class="tei-title">The Syriac World</span> (<span class="tei-ref">http://syriaca.org/bibl/PUTG99V4</span>) were extracted from the KML files
+                                             used to create the print maps for those volumes. Because only the print maps
+                                             were published, the citation for these coordinates refers to the print source.
+                                             The editors of the <span class="tei-title">The Syriac Gazetteer</span> are grateful to the
+                                             editors of <span class="tei-title">The Gorgias Encyclopedic Dictionary of the Syriac
+                                                Heritage</span> and <span class="tei-title">The Syriac World</span> for providing these
+                                             coordinate files.</span>
+                                          <span class="tei-p">The editors have silently normalized data from other sources in some cases. The
+                                             primary instances are listed below.</span>
+                                          <span class="tei-p">The capitalization of names from <span class="tei-title">The Gorgias Encyclopedic Dictionary of
+                                                the Syriac Heritage</span> (<span class="tei-ref">http://syriaca.org/bibl/1</span>) was normalized silently (i.e. names in
+                                             ALL-CAPS were replaced by Proper-noun capitalization).</span>
+                                          <span class="tei-p">The unchanging parts of alternate names from the editions and translations of
+                                             Barsoum, <span class="tei-title">The Scattered Pearls: A History of Syriac Literature and
+                                                Sciences</span> (<span class="tei-ref">http://syriaca.org/bibl/2</span>, <span class="tei-ref">http://syriaca.org/bibl/3</span>, or <span class="tei-ref">http://syriaca.org/bibl/4</span>) have been supplied silently.</span>
+                                          <span class="tei-p">Names from the English translation of Barsoum, <span class="tei-title">The Scattered Pearls: A
+                                                History of Syriac Literature and Sciences</span> (<span class="tei-ref">http://syriaca.org/bibl/4</span>) were
+                                             silently transformed into sentence word order rather than the headword
+                                             alphabetization used by Barsoum. Commas were silently removed.</span>
+                                          </span>
+                                       <span class="tei-classDecl">
+                                          <span class="tei-taxonomy">
+                                             <span class="tei-category" id="syriaca-headword">
+                                                <span class="tei-catDesc">The name used by Syriaca.org for document titles, citation, and
+                                                   disambiguation. These names have been created according to the Syriac.org
+                                                   guidelines for headwords: <span class="tei-ref">http://syriaca.org/documentation/headwords.html</span>.</span>
+                                                </span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-encodingDesc">
+                                       <span class="tei-editorialDecl">
+                                          <span class="tei-p">This record has been created following the Syriaca.org editorial guidelines.
+                                             Documentation is available at: <span class="tei-ref">http://syriaca.org/documentation</span>. <span class="tei-title">The Syriac Gazetteer</span>
+                                             was encoded using both the general editorial guidelines for all publications of
+                                             Syriaca.org and an encoding schema specific to <span class="tei-title">The Syriac
+                                                Gazetteer</span>.</span>
+                                          <span class="tei-p">Approximate dates described in terms of centuries or partial centuries have
+                                             been interpreted into quantitative values as documented in the Syriaca.org
+                                             guidelines for normalization of dates. See <span class="tei-ref">Syriaca.org Guidelines
+                                                for Approximate Dates</span>.</span>
+                                          <span class="tei-p">The <span class="tei-gi">state</span> element of @type="existence" indicates the period for which
+                                             this place was in use as a place of its indicated type (e.g. an inhabited
+                                             settlement, a functioning monastery or church, an administrative province).
+                                             While it is possible to indicate a source for this date, this date is usually
+                                             based on the estimate of the editors and provided as an aid to searching. As a
+                                             practice, attested dates for a place based on historical sources have instead
+                                             been encoded more precisely using <span class="tei-gi">event</span> of @type="attestation". Natural
+                                             features which have always existed have no date on the <span class="tei-gi">state</span> element of
+                                             @type="existence" since they are are presumed to have always existed throughout
+                                             recorded history.</span>
+                                          <span class="tei-p">In some cases, maps from print publications have been used as the basis for
+                                             coordinate data in <span class="tei-title">The Syriac Gazetteer</span>. In two instances, the
+                                             editors of such print maps provided the digital coordinate data used to prepare
+                                             the print maps. Specifically, coordinates which are attributed to <span class="tei-title">The
+                                                Gorgias Encyclopedic Dictionary of the Syriac Heritage</span> (<span class="tei-ref">http://syriaca.org/bibl/1</span>) or to
+                                             <span class="tei-title">The Syriac World</span> (<span class="tei-ref">http://syriaca.org/bibl/PUTG99V4</span>) were extracted from the KML files
+                                             used to create the print maps for those volumes. Because only the print maps
+                                             were published, the citation for these coordinates refers to the print source.
+                                             The editors of the <span class="tei-title">The Syriac Gazetteer</span> are grateful to the
+                                             editors of <span class="tei-title">The Gorgias Encyclopedic Dictionary of the Syriac
+                                                Heritage</span> and <span class="tei-title">The Syriac World</span> for providing these
+                                             coordinate files.</span>
+                                          <span class="tei-p">The editors have silently normalized data from other sources in some cases. The
+                                             primary instances are listed below.</span>
+                                          <span class="tei-p">The capitalization of names from <span class="tei-title">The Gorgias Encyclopedic Dictionary of
+                                                the Syriac Heritage</span> (<span class="tei-ref">http://syriaca.org/bibl/1</span>) was normalized silently (i.e. names in
+                                             ALL-CAPS were replaced by Proper-noun capitalization).</span>
+                                          <span class="tei-p">The unchanging parts of alternate names from the editions and translations of
+                                             Barsoum, <span class="tei-title">The Scattered Pearls: A History of Syriac Literature and
+                                                Sciences</span> (<span class="tei-ref">http://syriaca.org/bibl/2</span>, <span class="tei-ref">http://syriaca.org/bibl/3</span>, or <span class="tei-ref">http://syriaca.org/bibl/4</span>) have been supplied silently.</span>
+                                          <span class="tei-p">Names from the English translation of Barsoum, <span class="tei-title">The Scattered Pearls: A
+                                                History of Syriac Literature and Sciences</span> (<span class="tei-ref">http://syriaca.org/bibl/4</span>) were
+                                             silently transformed into sentence word order rather than the headword
+                                             alphabetization used by Barsoum. Commas were silently removed.</span>
+                                          </span>
+                                       ...
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>The <span class="tei-gi">encodingDesc</span> element of the <span class="tei-gi">teiHeader</span> is used for indicating
+                                    aspects of the process of encoding the text. Even data are "born digital," they
+                                    nevertheless have certain editorial decisions regarding how they have used data
+                                    derived from print resources, and certain tags available for use in our
+                                    <span class="tei-att">srophe:tags</span> attribute. Those sorts of details are encoded here.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-encodingDesc">
+                                       <span class="tei-editorialDecl">
+                                          <span class="tei-p">This record created following the Syriaca.org guidelines. Documentation
+                                             available at: <span class="tei-ref">
+                                                http://syriaca.org/documentation</span>.</span>
+                                          <span class="tei-p">The capitalization of names from GEDSH (<span class="tei-idno">http://syriaca.org/bibl/1</span>) was normalized (i.e. names in ALL-CAPS were
+                                             replaced by Proper-noun capitalization).</span>
+                                          <span class="tei-p">The unchanging parts of alternate names from Barsoum (<span class="tei-idno">http://syriaca.org/bibl/2</span>, <span class="tei-idno">http://syriaca.org/bibl/3</span>, or <span class="tei-idno">http://syriaca.org/bibl/4</span>) have been supplied to each alternate.</span>
+                                          <span class="tei-p">Names from the English translation of Barsoum (<span class="tei-idno">http://syriaca.org/bibl/4</span>) were put in sentence word order rather than
+                                             fronting a dictionary headword. Any commas in the Barsoum name in English were
+                                             removed.</span>
+                                          <span class="tei-p">The <span class="tei-gi">state</span> element of @type="existence" indicates the period for which
+                                             this place was in use as a place of its indicated type (e.g. an inhabited
+                                             settlement, a functioning monastery or church, an administrative province).
+                                             Natural features always in existence have no <span class="tei-gi">state</span> element of
+                                             @type="existence".</span> ... </span> ... </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>The first element within an <span class="tei-gi">encodingDesc</span> is the <span class="tei-gi">editorialDecl</span>,
+                                    which indicates editorial decisions regarding how the source documents were handled.
+                                    An <span class="tei-gi">editorialDecl</span> cannot directly contain prose, so a prose description of
+                                    each editorial decision should be wrapped in a <span class="tei-gi">p</span> element. References to
+                                    particular bibliographic entries can have their Syriaca.org URIs wrapped in an
+                                    <span class="tei-gi">idno</span> for specificity. The first <span class="tei-gi">p</span> element should contain a pointer
+                                    to the Syriaca.org documentation.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-assert"> A @source attribute must point to an @xml:id attribute on a &lt;bibl&gt;
+                                          element or a &lt;listBibl&gt; element. Multiple values are allowed and must be separated
+                                          by a blank space.
+                                          Acceptable values include: <span class="tei-value-of"></span>. </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-text">
+                                       <span class="tei-body">
+                                          <span class="tei-listPlace">
+                                             <span class="tei-place">
+                                                <span class="tei-placeName" xml:lang="en" lang="en" dir="ltr" id="name3053-1">Arethusa</span>
+                                                <span class="tei-placeName" xml:lang="syr" lang="syr" dir="rtl" id="name3053-2">ܐܪܝܣܬܢ</span>
+                                                <span class="tei-placeName" xml:lang="en" lang="en" dir="ltr" id="name3053-3">Arethusa<span class="tei-footnote-refs" dir="ltr" lang="en" xml:lang="en"><span class="tei-footnote-ref"><a href="#bib3053-1">1</a></span> </span></span>
+                                                <span class="tei-placeName" xml:lang="syr" lang="syr" dir="rtl" id="name3053-4">ܐܪܝܣܬܢ<span class="tei-footnote-refs" dir="ltr" lang="en" xml:lang="en"><span class="tei-footnote-ref"><a href="#bib3053-2">2</a></span> </span></span>
+                                                <span class="tei-desc" xml:lang="en" lang="en" dir="ltr" id="abstract3053-1">The diocese associated with the city of Arethusa</span>
+                                                <span class="tei-state"></span>
+                                                <span class="tei-idno">http://syriaca.org/place/3053</span>
+                                                <span class="tei-bibl" id="bib3053-1">
+                                                   <span class="tei-ptr"></span>
+                                                   <span class="tei-citedRange">73</span>
+                                                   </span>
+                                                <span class="tei-bibl" id="bib3053-2">
+                                                   <span class="tei-ptr"></span>
+                                                   <span class="tei-citedRange">81</span>
+                                                   </span>
+                                                </span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p> The data of the record is contained within the <span class="tei-gi">text</span> element. The Srophé App requires that all 
+                                    <span class="tei-att">source</span> attributes inside the <span class="tei-gi">text</span> element point to an <span class="tei-att">xml:id</span> attribute on 
+                                    a <span class="tei-gi">bibl</span> or <span class="tei-gi">listBibl</span> element.
+                                    
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert"> All &lt;note&gt; elements in the &lt;body&gt; must
+                                          have an @xml:lang attribute. </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-desc">Describes the function of the note. This attribute is recommended and determines
+                                       how the note is displayed on the page.</span>
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">A note describing how the record should be corrected or read
+                                             differently.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">A note logging the reason(s) for deprecating a particular data point.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">A note to help distinguish this entity (person, place, work, etc.) from
+                                             another one.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">A note describing data that is included in the record but is known to be
+                                             incorrect.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">A note describing uncertain data in the record.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">A note describing the license under which this file is released.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">A note that cannot be categorized as any other type.</span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>The <span class="tei-gi">note</span> element is used for a variety of notes about the entity described in the data. 
+                                    All <span class="tei-gi">note</span> elements must have an <span class="tei-att">xml:lang</span> attribute that facilitates the display of notes by 
+                                    language in The Srophé Application. A <span class="tei-att">type</span> attribute is required and determines how the note is displayed on
+                                    the page. Available values for this <span class="tei-att">type</span> attribute are: corrigenda, deprecation, disambiguation, errata, incerta
+                                    license, and misc. Only certain values are allowed in certain contexts within the
+                                    document. 
+                                    
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-assert">A &lt;link&gt; element takes a @target attribute with two or more of the
+                                          following values: <span class="tei-value-of"></span>.
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef"></span>
+                                 <span class="tei-attDef"></span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-event" id="attestation2567-2">
+                                       <span class="tei-p" xml:lang="en" lang="en" dir="ltr">Attestation of name <span class="tei-foreign" xml:lang="syr" lang="syr" dir="rtl">ܬܠܢܫܝܢ</span> in <span class="tei-title">Vatican Syriac 160</span>.</span>
+                                       <span class="tei-link"></span>
+                                       <span class="tei-footnote-refs" dir="ltr" lang="en" xml:lang="en"><span class="tei-footnote-ref"><a href="#bib2567-4">4</a></span> </span></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-event" id="attestation78-6">
+                                       <span class="tei-p" xml:lang="en" lang="en" dir="ltr">Attestation of anti-Chalcedonian bishop in Edessa according to the <span class="tei-title"><a href="http://syriaca.org/work/119">Chronicle of Edessa</a></span>.</span>
+                                       <span class="tei-link"></span>
+                                       <span class="tei-footnote-refs" dir="ltr" lang="en" xml:lang="en"><span class="tei-footnote-ref"><a href="#bib78-10">10</a></span> </span></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>
+                                    The <span class="tei-gi">link</span> element is used to link two pieces of data together, for example an event and the
+                                    
+                                    attestation of a name variant. It must point to an <span class="tei-att">xml:id</span> within the current document.
+                                    
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 <span class="tei-elementRef"></span>
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef"></span>
+                                 <span class="tei-attDef"></span>
+                                 <span class="tei-attDef"></span>
+                                 <span class="tei-attDef"></span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-state">
+                                       <span class="tei-precision"></span>
+                                       <span class="tei-precision"></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef"></span>
+                                 <span class="tei-attDef">
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">describes the precision of the @from attribute on the parent element</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">describes the precision of the @to attribute on the parent element</span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-state">
+                                       <span class="tei-precision"></span>
+                                       <span class="tei-precision"></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-state">
+                                       <span class="tei-precision"></span>
+                                       <span class="tei-precision"></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p> 
+                                    The Srophé Application does not permit @notBefore and @notAfter on the <span class="tei-gi">state</span> element. In the many cases where the precise beginning 
+                                    or ending dates are not known, the range of possible beginning dates or ending dates
+                                    must be given within a <span class="tei-gi">precision</span> 
+                                    element within <span class="tei-gi">state</span>. This <span class="tei-gi">precision</span> element will have a <span class="tei-att">match</span> attribute whose value is either 
+                                    "@from" or "@to" (depending on whether the beginning or ending date is uncertain).
+                                    This <span class="tei-gi">precision</span> element can take <span class="tei-att">notBefore</span> to indicate the terminus post quem and 
+                                    <span class="tei-att">notAfter</span> to indicate the terminus ante quem of the range of uncertainty. If, as is not uncommon,
+                                    both the beginning 
+                                    and the end of the place’s existence are uncertain, these uncertainties should be
+                                    represented by separate <span class="tei-gi">precision</span> 
+                                    elements. When a <span class="tei-gi">precision</span> element is used, the value of the <span class="tei-att">from</span> or <span class="tei-att">to</span> elements on the parent 
+                                    <span class="tei-gi">state</span> should be within the range specified by the <span class="tei-gi">precision</span> element but should be interpreted as imprecise. 
+                                    
+                                 </p>
+                                 
+                                 <p>
+                                    Note: The dates indicated in the <span class="tei-gi">precision</span> element(s) are used for search but the Srophé Application does not 
+                                    currently display them in the HTML.
+                                    
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-alternate">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-textNode"></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p> The <span class="tei-gi">author</span> element may contain either a <span class="tei-gi">persName</span> element or text.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element identifies a column or column range.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element identifies an entry in a collection such as an reference
+                                             work.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element identifies a folio number or folio range</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element contains a line number or line range.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element identifies a map.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element contains a part of a book or collection, i.e. chapter and verse
+                                             of a biblical text.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element contains a page number or page range.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element identifies a section of a text.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element identifies a volume of a multi-volume work.</span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>The <span class="tei-gi">citedRange</span> is used to indicate the portion of a text is being cited in a bibliographic reference.
+                                    
+                                    It requires a <span class="tei-att">unit</span> attribute with one of the following values: col, entry, fol, line, map, part, p,
+                                    section, and vol.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">A &lt;p&gt; element in the text body must have an
+                                          @xml:lang attribute.</span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-exemplum">
+                                 <span class="tei-egXML">
+                                    <span class="tei-event" id="attestation2567-1">
+                                       <span class="tei-p" xml:lang="en" lang="en" dir="ltr">Attestation of name <span class="tei-foreign" xml:lang="syr" lang="syr" dir="rtl">ܬܠܢܫܐ</span> in <span class="tei-title">Vatican Syriac 160</span>.</span>
+                                       <span class="tei-link"></span>
+                                       <span class="tei-footnote-refs" dir="ltr" lang="en" xml:lang="en"><span class="tei-footnote-ref"><a href="#bib2567-3">3</a></span> </span></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>
+                                    The <span class="tei-gi">p</span> element is used for paragraphs of text in various contexts. In the body of a record,
+                                    the <span class="tei-gi">p</span> element must have an 
+                                    <span class="tei-att">xml:id</span> attribute. 
+                                    
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           </span>
+                        </span><div class="citationinfo">
+                        <h3>How to Cite This Entry</h3>
+                        <div id="citation-note" class="content-block indent"><span> <span> Daniel L. Schwartz</span></span>, “<span class="title">TEI Customization for the Srophé Application</span>” last modified , <a href=""></a>.
+                           <div class="collapse" id="showcit">
+                              <div id="citation-bibliography">
+                                 <h4>Bibliography:</h4><span> <span> Daniel L. Schwartz</span></span>, “<span class="title">TEI Customization for the Srophé Application</span>.”, edited by . Syriaca.org: The Syriac Reference Portal,
+                                  Entry published . <a href=""></a>.
+                              </div>
+                              <div id="about">
+                                 <h3>About this Entry</h3>
+                                 <p><span class="heading-inline">Entry Title:</span> <span class="title">TEI Customization for the Srophé Application</span></p>
+                              </div>
+                              <div id="license">
+                                 <h3>Copyright and License for Reuse</h3>
+                                 <div>Except otherwise noted, this page is © .
+                                    
+                                 </div><span class="tei-licence">
+                                    
+                                    <p>Distributed under a Creative Commons Attribution 3.0 Unported License.</p>
+                                    
+                                    <p>The code examples contained in <span class="tei-gi">exemplum</span> elements below come from 
+                                       Syriaca.org projects that have been distributed under a Creative Commons Attribution
+                                       
+                                       3.0 Unported License. Used by permission.
+                                    </p>
+                                    
+                                    <p>The comments on element and attribute use contained in <span class="tei-gi">remarks</span> elements below 
+                                       share some text with other Syriaca.org documentation distributed under a Creative
+                                       Commons 
+                                       Attributiion 3.0 Unported License. This documentation can be found at various links
+                                       available here:
+                                       <a href="http://syriaca.org/documentation/index.html">http://syriaca.org/documentation/index.html</a>
+                                       Used by permission.
+                                       
+                                    </p>
+                                    </span></div>
+                           </div><a class="btn-sm btn-info togglelink pull-right" data-toggle="collapse" data-target="#showcit" data-text-swap="Hide citation">Show full citation information...</a></div>
+                     </div>
+                  </div>
+                  <div class="col-md-5 col-lg-4 right-menu"><br /></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer>
+         
+         <div class="container">
+            <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">
+               <img alt="Creative Commons License" style="border-width:0" src="/resources/images/cc.png" height="18px" />
+               </a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.
+            <br />Copyright Vanderbilt University, Princeton University, and the Contributor(s), 2014.
+            
+         </div>
+         
+      </footer>
+   </body><script type="text/javascript" src="/resources/js/jquery.validate.min.js"></script><script type="text/javascript" src="/resources/js/require.min.js"></script><script type="text/javascript" src="/resources/js/srophe.js"></script><script type="text/javascript" src="/resources/js/lightslider.min.js"></script><script type="text/javascript" src="/resources/js/lightslider-functions.js"></script><script data-template="app:google-analytics"></script></html>

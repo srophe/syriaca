@@ -1,0 +1,2743 @@
+<?xml version="1.0" encoding="UTF-8"?><html xmlns="http://www.w3.org/1999/xhtml" xmlns:srophe="https://srophe.app">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      
+      <title data-template="app:record-title">The Syriac Gazetteer</title>
+      
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      
+      <meta name="DC.type" property="dc.type" content="Text" />
+      
+      <meta name="DC.isPartOf" property="dc.ispartof" content="Syriaca.org: The Syriac Reference Portal" />
+      
+      <link data-template="app:metadata" />
+      
+      <link rel="shortcut icon" href="/resources/images/fav-icons/geo-favicon.ico" />
+      
+      <!-- Bootstrap 3 -->
+      
+      <link rel="stylesheet" type="text/css" href="/resources/bootstrap/css/bootstrap.min.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/sm-core-css.css" />
+      
+      <!-- Srophe styles -->
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/syr-icon-fonts.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/style.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/syriaca.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/geo.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/slider.css" />
+      
+      <link rel="stylesheet" type="text/css" href="/resources/css/lightslider.css" />
+      
+      <link rel="stylesheet" type="text/css" media="print" href="/resources/css/print.css" />
+      
+      <!-- Leaflet -->
+      
+      <link rel="stylesheet" href="/resources/leaflet/leaflet.css" />
+      
+      <link rel="stylesheet" href="/resources/leaflet/leaflet.awesome-markers.css" />
+      <script defer="defer" data-domain="syriaca.org" src="https://plausible.io/js/plausible.js"></script>
+      
+      <!-- JQuery -->
+      <link href="/resources/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+      <script type="text/javascript" src="/resources/js/jquery.min.js"></script>
+      <script type="text/javascript" src="/resources/jquery-ui/jquery-ui.min.js"></script>
+      <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
+      <script type="text/javascript" src="/resources/js/clipboard.min.js"></script>
+      
+      <!-- Bootstrap -->
+      <script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script>
+      
+      <!-- ReCaptcha -->
+      <script src="https://www.google.com/recaptcha/api.js" type="text/javascript" async="async" defer="defer"></script>
+      
+      <!-- keyboard widget css & script -->
+      <link href="/resources/keyboard/css/keyboard.min.css" rel="stylesheet" />
+      
+      <link href="/resources/keyboard/css/keyboard-previewkeyset.min.css" rel="stylesheet" />
+      
+      <link href="/resources/keyboard/syr/syr.css" rel="stylesheet" />
+      <script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-mobile.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/js/jquery.keyboard.extension-navigation.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/syr/jquery.keyboard.extension-autocomplete.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/syr/keyboardSupport.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/syr/syr.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Greek.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Russian.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Arabic.min.js"></script>
+      <script type="text/javascript" src="/resources/keyboard/layouts/ms-Hebrew.min.js"></script>
+      <script type="text/javascript">
+            $(document).ready(function () {
+                $('[data-toggle="tooltip"]').tooltip({ container: 'body' })
+
+                $('.keyboard').keyboard({
+                    openOn: null,
+                    stayOpen: false,
+                    alwaysOpen: false,
+                    autoAccept: true,
+                    usePreview: false,
+                    initialFocus: true,
+                    rtl : true,
+                    layout: 'syriac-phonetic',
+                    hidden: function(event, keyboard, el){
+                       //  keyboard.destroy();
+                     }
+                });
+
+                $('.keyboard-select').click(function () {
+                    var keyboardID = '#' + $(this).data("keyboard-id")
+                    var kb = $(keyboardID).getkeyboard();
+                    //var kb = $('#searchField').getkeyboard();
+                    // change layout based on link ID
+                    kb.options.layout = this.id
+                    // open keyboard if layout is different, or time from it last closing is &amp;gt; 200 ms
+                    if (kb.last.layout !== kb.options.layout || (new Date().getTime() - kb.last.eventTime) &lt; 200) {
+                        kb.reveal();
+                    }
+                });
+                //Change fonts
+                $('.swap-font').on('click', function(){
+                    var selectedFont = $(this).data("font-id")
+                    $('.selectableFont').not('.syr').css('font-family', selectedFont);
+                    $("*:lang(syr)").css('font-family', selectedFont)
+                });
+
+            })
+        </script>
+      </head>
+   <body id="body">
+      <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+         
+         <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               </button>
+            <a class="navbar-brand banner-container" href="/geo/index.html"> 
+               <span class="syriaca-icon syriaca-geo banner-icon">
+                  <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>
+                  </span>
+               <span class="banner-text">The Syriac Gazetteer</span>
+               </a>
+            
+         </div>
+         
+         <div class="navbar-collapse collapse pull-right" id="navbar-collapse-1">
+            
+            <ul class="nav navbar-nav">
+               
+               <li>
+                  <a href="/geo/browse.html" class="nav-text">Browse</a>
+                  
+               </li>
+               
+               <li>
+                  <a href="/geo/about.html" class="nav-text">About</a>
+                  
+               </li>
+               
+               <li>
+                  <a href="/geo/help/index.html" class="nav-text">Help</a>
+                  
+               </li>
+               
+               <li>
+                  <a href="/geo/howtoadd.html" class="nav-text">Add new place</a>
+                  
+               </li>
+               
+               <li class="dropdown">     <a href="#" class="dropdown-toggle lonely-caret" data-toggle="dropdown">         <span class="mobile-submenu">Publications </span>  <b class="caret"></b>     </a>     
+                  <ul class="dropdown-menu pull-right">         
+                     <li>             <a href="/geo/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-geo icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Gazetteer</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/persons/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-sbd icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">SBD</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/authors/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-authors icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Authors</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/saints/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-saints icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Gateway to the Saints</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/q/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-q icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">Qadishe</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/bhse/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-bhse icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="icon-text">BHSE</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/cbss/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-bibl icon-nav"></span>                 <span class="icon-text">Works Cited</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>         
+                     <li>             <a href="/index.html" class="icon-container">                 <span class="syriaca-icon syriaca-syriaca icon-nav">                     <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span>                 </span>                 <span class="mobile-submenu icon-text">Syriaca.org</span>             </a>         
+                     </li>         
+                     <li role="presentation" class="divider"></li>     
+                  </ul> 
+               </li>
+               
+               <li>
+                  <a href="/geo/search.html" class="nav-text">Advanced Search</a>
+                  
+               </li>
+               
+               <li>
+                  
+                  <div id="search-wrapper">
+                     
+                     <form class="navbar-form navbar-right search-box" role="search" action="/geo/search.html" method="get">
+                        
+                        <div class="form-group">
+                           <input type="text" class="form-control keyboard" placeholder="search" name="keyword" id="keywordNav" />
+                           <span class="keyboard-menu">             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Keyboard">                  <span class="syriaca-icon syriaca-keyboard">  </span><span class="caret"></span>             </button>             
+                              <ul class="dropdown-menu">                 
+                                 <li><a href="#" class="keyboard-select" id="syriac-phonetic" data-keyboard-id="keywordNav">Syriac Phonetic</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="syriac-standard" data-keyboard-id="keywordNav">Syriac Standard</a></li>                 
+                                 <li> <a href="#" class="keyboard-select" id="ms-Arabic (101)" data-keyboard-id="keywordNav">Arabic Mod. Standard</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="ms-Hebrew" data-keyboard-id="keywordNav">Hebrew</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="ms-Russian" data-keyboard-id="keywordNav">Russian</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="ms-Greek" data-keyboard-id="keywordNav">Greek</a></li>                 
+                                 <li><a href="#" class="keyboard-select" id="qwerty" data-keyboard-id="keywordNav">English QWERTY</a></li>             
+                              </ul>         </span>
+                           <button class="btn btn-default search-btn" id="searchbtn" type="submit" title="Search">
+                              <span class="glyphicon glyphicon-search"></span>
+                              </button>                                    
+                           
+                        </div>
+                        
+                     </form>
+                     
+                  </div>
+                  
+               </li>
+               
+               <li>
+                  
+                  <div class="btn-nav">
+                     <button class="btn btn-default navbar-btn" id="font" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Font">
+                        <span class="glyphicon glyphicon-font"></span>
+                        </button>  
+                     
+                     <ul class="dropdown-menu dropdown-menu-right" id="swap-font">
+                        
+                        <li>
+                           <a href="#" class="swap-font" id="DefaultSelect" data-font-id="EstrangeloEdessa">Default</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="#" class="swap-font" id="EstrangeloEdessaSelect" data-font-id="EstrangeloEdessa">Estrangelo Edessa</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="#" class="swap-font" id="EastSyriacAdiabeneSelect" data-font-id="EastSyriacAdiabene">East Syriac Adiabene</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="#" class="swap-font" id="SertoBatnanSelect" data-font-id="SertoBatnan">Serto Batnan</a>
+                           
+                        </li>
+                        
+                        <li>
+                           <a href="/documentation/wiki.html?wiki-page=/How-to-view-Syriac-script&amp;wiki-uri=https://github.com/srophe/syriaca-data/wiki">Help <span class="glyphicon glyphicon-question-sign"></span>
+                              </a>
+                           
+                        </li>
+                        
+                     </ul>
+                     
+                  </div>
+                  
+               </li>
+               
+            </ul>
+            
+         </div>
+         
+      </nav>
+      <div>
+         <div class="main-content-block">
+            <div class="interior-content">
+               <div class="container otherFormats"><a href="javascript:window.print();" type="button" class="btn btn-default btn-xs" id="teiBtn" data-toggle="tooltip" title="Click to send this page to the printer."><span class="glyphicon glyphicon-print" aria-hidden="true"></span></a> <a href=".tei" class="btn btn-default btn-xs" id="teiBtn" data-toggle="tooltip" title="Click to view the TEI XML data for this record."><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> TEI/XML
+                     </a> 
+               </div>
+               <div class="row">
+                  <div class="col-md-7 col-lg-8">
+                     <div class="title">
+                        <h1><span id="title"><span>TEI Customization for SPEAR: Syriaca Persons, Events, and Relations</span></span></h1>
+                     </div>
+                     <div class="idno seriesStmt" style="margin:0; margin-top:.25em; margin-bottom: 1em; padding:1em; color: #999999;"><small><span class="uri"> <button type="button" class="btn btn-default btn-xs" id="idnoBtn" data-clipboard-action="copy" data-clipboard-target="#syriaca-id"><span class="srp-label">URI</span></button> <span id="syriaca-id">http://syriaca.org/0000</span><script>
+                        var clipboard = new Clipboard('#idnoBtn');
+                        clipboard.on('success', function(e) {
+                        console.log(e);
+                        });
+                        
+                        clipboard.on('error', function(e) {
+                        console.log(e);
+                        });
+                    </script> </span></small></div><span class="tei-body">
+                        
+                        
+                        <p>This schema has been created to to constrain the TEI P5 for validating the born-digital
+                           project SPEAR: Syriac Persons, Events, and Relations. This customization will be used
+                           for
+                           the encoding of many different documents by many different researchers having differnet
+                           levels of training. As such, a schema is particularly important. The highly-structured
+                           data
+                           model of SPEAR also requires some modifications and additions to TEI P5.
+                        </p>
+                        
+                        <span class="tei-schemaSpec">
+                           <span class="tei-moduleRef"></span>
+                           <span class="tei-moduleRef"></span>
+                           <span class="tei-moduleRef"></span>
+                           <span class="tei-moduleRef"></span>
+                           <span class="tei-moduleRef"></span>
+                           <span class="tei-moduleRef"></span>
+                           
+                           
+                           <span class="tei-classSpec">
+                              <span class="tei-desc">I have needed to include this because it somehow disappeared from this
+                                 customization. I do not know why this was necessary.</span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-constraintSpec">
+                                       <span class="tei-constraint">
+                                          <span class="tei-rule">
+                                             <span class="tei-let"></span>
+                                             <span class="tei-assert">
+                                                Each @ana attribute value must start with "http://syriaca.org/keyword/" and multiple
+                                                
+                                                values must be space separated.
+                                                </span>
+                                             <span class="tei-assert">
+                                                The same keyword URI may not appear twice as the value of the @ana attribute. </span>
+                                             <span class="tei-report">
+                                                Multiple @ana attributes should be separated with one blank space
+                                                </span>
+                                             <span class="tei-report">
+                                                Multiple @ana attributes should be separated with one blank space
+                                                </span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              </span>
+                           
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p> Every <span class="tei-gi">teiHeader</span> contains a <span class="tei-gi">fileDesc</span> (information
+                                    about the creation of a file), an <span class="tei-gi">encodingDesc</span> (editorial rules), a
+                                    <span class="tei-gi">profileDesc</span>&gt; (non-bibliographic aspects of a text), and a
+                                    <span class="tei-gi">revisionDesc</span> (history of revisions). 
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p> Each <span class="tei-gi">fileDesc</span> contains (in order) a <span class="tei-gi">titleStmt</span>, an
+                                    <span class="tei-gi">editionStmt</span>, a <span class="tei-gi">publicationStmt</span>, an optional <span class="tei-gi">seriesStmt</span>, and a <span class="tei-gi">sourceDesc</span>. 
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          The first &lt;title&gt; element child of &lt;titleStmt&gt; must have 
+                                          @level attribute with a value of "m" indicating "monographic" or "a" indicating
+                                          analytic.
+                                          </span>
+                                       <span class="tei-assert">
+                                          The first &lt;title&gt; element child of &lt;titleStmt&gt; must have 
+                                          @type attribute with a value of "main".
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          The second &lt;title&gt; element child of &lt;titleStmt&gt; must have 
+                                          @type attribute with a value of "sub".
+                                          </span>
+                                       <span class="tei-assert">
+                                          The text node of this subtitle must be "A SPEAR Prosopography".
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-textNode"></span>
+                                 </span>
+                              
+                              <span class="tei-remarks">
+                                 
+                                 <p> The TEI guidelines recommend that the <span class="tei-gi">titleStmt</span> element also indicate who
+                                    is responsible for this TEI file. Since <span class="tei-gi">author</span> is typically used for the
+                                    author of a print or manuscript text which was then encoded in TEI, we avoid the use
+                                    of the <span class="tei-gi">author</span> element. Instead, we identify Syriaca.org as the sponsoring
+                                    institution.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           
+                           
+                           
+                           
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          A @ref attribute is required.
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-assert">
+                                          Acceptable values for this @ref attribute include: 
+                                          <span class="tei-value-of"></span>.
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              
+                              <span class="tei-remarks">
+                                 
+                                 <p>This customization limits the vaules of @ref attributes on <span class="tei-gi">name</span> as child of <span class="tei-gi">titleStmt</span> 
+                                    to a Syriaca.org URI for project contributors.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-textNode"></span>
+                                 </span>
+                              
+                              <span class="tei-remarks">
+                                 
+                                 <p> Within the <span class="tei-gi">titleStmt</span>, funding bodies are identified with the
+                                    <span class="tei-gi">funder</span> element. If multiple funding bodies are relevant, then each one receives
+                                    a separate <span class="tei-gi">funder</span> element. 
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              
+                              <span class="tei-remarks">
+                                 
+                                 <p> The <span class="tei-gi">editionStmt</span> allows the specification of an edition or version number.
+                                    When a TEI file is first published online, that edition should be "1.0". Subsequent
+                                    revisions may bump the revision number, either by a whole new version (i.e. to "2.0")
+                                    or by a minor version (i.e. to "1.1"). 
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              
+                              <span class="tei-remarks">
+                                 
+                                 <p>The <span class="tei-gi">publicationStmt</span> is where we identify Syriaca.org as the entity responsible for publishing this information,
+                                    
+                                    indicate the date of the most recent edit, and identify the use license (Creative
+                                    Commons CC-BY).
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-textNode"></span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          The &lt;authority&gt; element should contain the text: "Syriaca.org: The Syriac Reference
+                                          Portal."
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              
+                              <span class="tei-remarks">
+                                 
+                                 <p>Syriaca.org is identified as the responsible entity using <span class="tei-gi">authority</span>.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          The &lt;licence&gt; element must contain &lt;p&gt; with the text: "Distributed under a Creative
+                                          Commons Attribution 3.0 Unported License."
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              
+                              <span class="tei-remarks">
+                                 
+                                 <p> The <span class="tei-gi">license</span> element, child of <span class="tei-gi">availability</span>, is used to specify the Creative Commons CC-BY license under which 
+                                    this record is made available. Some records may incorporate information from works
+                                    under copyright (with permission), a fact which is also 
+                                    indicated with <span class="tei-gi">license</span>. 
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           
+                           <span class="tei-elementSpec">
+                              
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>  
+                                 </span>
+                              
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          The &lt;title&gt; requires a @level attribute with a value of "s".
+                                          </span>
+                                       <span class="tei-assert">
+                                          This &lt;title&gt; must be "SPEAR: Syriac Persons, Events, and Relations".
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          The &lt;title&gt; requires a @level attribute with a value of "m".
+                                          </span>
+                                       <span class="tei-assert">
+                                          This &lt;title&gt; must be one of the following: "The Chronicle of Edessa", "The Lives of
+                                          the Eastern Saints",
+                                          or "The Letters of Severus of Antioch".
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;title&gt; requires a @type attribute with a value of "sub".
+                                          </span>
+                                       <span class="tei-assert">
+                                          This &lt;title&gt; must be "A SPEAR Prosopography".
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;editor&gt; must have a @role attribute with a value of "general".
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-report">
+                                          This &lt;editor&gt; cannot have a @role attribute with a value of "creator".
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;editor&gt; must have a @ref attribute with a value of "http://syriaca.org/documentation/editors.xml#dschwartz".
+                                          </span>
+                                       <span class="tei-assert">
+                                          This &lt;editor&gt; must be "Daniel L. Schwartz".
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;idno&gt; must be "https://spear-prosop.org".
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;idno&gt; must be "https://spear-prosop.org/lives-eastern-saints".
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;idno&gt; must be "https://spear-prosop.org/letters-severus".
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-report">
+                                          This &lt;seriesStmt&gt; cannot contain a &lt;biblScope&gt;.
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;seriesStmt&gt; requires a &lt;biblScope&gt;.
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;biblScope&gt; element requires a a @unit
+                                          attribute having a value of "volume".
+                                          </span>
+                                       <span class="tei-assert">
+                                          This &lt;biblScope&gt; element requires a child &lt;title&gt; element.
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;title&gt; element requires a @level attribute with a value of "s".
+                                          </span>
+                                       <span class="tei-assert">
+                                          This &lt;title&gt; element must contain "SPEAR: Syriac Persons, Events, and Relations".
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              
+                              
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem"></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-textNode"></span>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem"></span>
+                                       <span class="tei-valItem"></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>The body of a SPEAR file contains factoids, each of which appears in a separate <span class="tei-gi">ab</span> element. 
+                                    As such, <span class="tei-gi">ab</span> is the only acceptable child element of <span class="tei-gi">body</span>.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>SPEAR has three basic types of factoid data that are encoded using <span class="tei-gi">listPerson</span>, <span class="tei-gi">listEvent</span>,
+                                    and <span class="tei-gi">listRelation</span> elements. The TEI Guidelines allow the first two to nest inside <span class="tei-gi">ab</span> 
+                                    while the last one is not. For uniformity and ease of encoding,
+                                    SPEAR makes the <span class="tei-gi">listRelation</span> element a part of the model class
+                                    model.listLike so that it can function like other list elements and nest directly
+                                    under the <span class="tei-gi">ab</span> element. SPEAR also removes all attributes from the
+                                    <span class="tei-gi">listRelation</span> element and restricts the child elements to <span class="tei-gi">relation</span>.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">A &lt;bibl&gt; element in the back matter must contain an
+                                          @xml:id attribute.</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-let"></span>
+                                       <span class="tei-assert">The @xml:id on 
+                                          &lt;bibl&gt; in the back matter must take the following form: 'bibl' +
+                                          '<span class="tei-value-of"></span>' + '-' + a unique number.</span>
+                                       <span class="tei-assert">Each @xml:id attribute on &lt;bibl&gt; must have a unique value.</span>
+                                       <span class="tei-report">A properly formatted
+                                          @xml:id ends with a number.</span>
+                                       <span class="tei-assert">A properly formatted
+                                          @xml:id ends with a number.</span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem"></span>
+                                       <span class="tei-valItem"></span>
+                                       <span class="tei-valItem"></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              
+                              
+                              
+                              <span class="tei-remarks">
+                                 
+                                 <p>SPEAR only uses @xml:id and @type attributes on the <span class="tei-gi">bibl</span> element. SPEAR uses
+                                    <span class="tei-gi">bibl</span> elements with an @xml:id only in the <span class="tei-gi">back</span> of the TEI file. The 
+                                    @type attribute indicates whether the <span class="tei-gi">bibl</span> is "primary", "secondary", or a "urn". 
+                                    
+                                 </p>
+                                 
+                                 <p>Since SPEAR relies on the Linked Open Data infrastructure of Syriaca.org, a <span class="tei-gi">bibl</span>
+                                    element in the body only requires a <span class="tei-gi">ptr</span> element indicating the Syriaca.org URI or CTS URN for 
+                                    the bibliographic reference. When indicating a CTS URNs no other additional information
+                                    
+                                    is required. When indicating a Syriaca.org URI, a <span class="tei-gi">citedRange</span> is needed.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-textNode"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element contains a page number or page range.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element contains a line number or line range.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element contains a part of a book or collection, i.e. chapter and verse
+                                             of a biblical text.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element identifies a column.</span>
+                                          </span>
+                                       <span class="tei-valItem"></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-textNode"></span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element contains a page number or page range.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element contains a line number or line range.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element contains a part of a book or collection, i.e. chapter and verse
+                                             of a biblical text.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element identifies a column.</span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              
+                              <span class="tei-remarks">
+                                 
+                                 <p>SPEAR only allows text in a <span class="tei-gi">citedRange</span> element and requires the use of a @unit attribute with a closed list.
+                                    SPEAR prefers that encoders use the part value and cite ancient texts according to
+                                    section numbers.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element contains a date (year) according to the Seleucid
+                                             calendar.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element contains a date (month and year) according to the Seleucid
+                                             calendar.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">the element contains a date according to the year of a king's reign.</span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-constraintSpec">
+                                       <span class="tei-constraint">
+                                          <span class="tei-rule">
+                                             <span class="tei-assert">A &lt;date&gt; element child of &lt;reg&gt;
+                                                must have a @calendar attribute with a value of "Gregorian".</span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">The element contains a date according to the Gregorian calendar.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">The element contains a date according to the Seleucid calendar.</span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              
+                              
+                              
+                              
+                              <span class="tei-remarks">
+                                 
+                                 <p></p>
+                                 
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-textNode"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-report">Element of type
+                                          &lt;desc&gt; cannot be empty.</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">The &lt;desc&gt; element should
+                                          generally contain either &lt;persName&gt; or &lt;placeName&gt;. SPEAR
+                                          encourages a liberal use of &lt;persName&gt;, &lt;placeName&gt;, and &lt;date&gt;
+                                          elements in the &lt;desc&gt; element of event factoids.</span>
+                                       </span>
+                                    
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;relation&gt; requires a &lt;desc&gt;.
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-report">
+                                          The &lt;desc&gt; element may not appear here.
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-let"></span>
+                                       <span class="tei-assert">
+                                          This &lt;desc&gt; must contain <span class="tei-value-of"></span> &lt;rs&gt; elements, one for each values in the @mutual attribute on &lt;relation&gt;.
+                                          </span>
+                                       <span class="tei-assert">
+                                          This &lt;desc&gt; requires &lt;rs&gt; elements with unique @ref attribute values. 
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-let"></span>
+                                       <span class="tei-assert">
+                                          This &lt;desc&gt; must begin with "The following factoids deal with the same event: " 
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-let"></span>
+                                       <span class="tei-assert">
+                                          This &lt;desc&gt; must begin with "The following factoids deal with related events: " 
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>This customization does not allow attributes on the <span class="tei-gi">desc</span> element. It also
+                                    restricts child elements to <span class="tei-gi">choice</span>, <span class="tei-gi">date</span>, <span class="tei-gi">persName</span>, and
+                                    <span class="tei-gi">placeName</span>.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          The @ref attribute must take a Syriaca.org work URI
+                                          which reqires the form 'http://syriaca.org/work/{\d+}' 
+                                          (where {\d+} is a number).
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-textNode"></span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-assert">
+                                          Acceptable values: <span class="tei-value-of"></span>
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-let"></span>
+                                       <span class="tei-assert">
+                                          The text node of this &lt;rs&gt; element must be <span class="tei-value-of"></span>.
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;editor&gt; must have a @role attribute.
+                                          </span>
+                                       <span class="tei-assert">
+                                          This &lt;editor&gt; must have a @ref attribute.
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-assert">
+                                          Acceptable values for this @ref attribute include: 
+                                          <span class="tei-value-of"></span>.
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">A person involved in the creation of this xml file</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">A person responsible for this xml file or collection of xml files</span>
+                                          </span>
+                                       <span class="tei-valItem"></span>
+                                       </span>
+                                    </span>
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>This customization limits the attributes available on <span class="tei-gi">desc</span> to
+                                    @role and @ref and suggests values for @role.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-alternate">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-content">
+                                 <span class="tei-alternate">
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef"></span>
+                                 <span class="tei-attDef"></span>
+                                 <span class="tei-attDef"></span>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-alternate">
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">An &lt;ab&gt; descendant of &lt;body&gt; requires an @xml:id attribute.</span>
+                                       <span class="tei-assert">An &lt;ab&gt; descendant of &lt;body&gt; requires a @resp attribute.</span>
+                                       <span class="tei-assert">An &lt;ab&gt; descendant of &lt;body&gt; requires a @type attribute with the value "factoid".</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-assert">
+                                          Acceptable values for this @resp attribute include: 
+                                          <span class="tei-value-of"></span>.
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-constraintSpec">
+                                       <span class="tei-constraint">
+                                          <span class="tei-assert">An @xml:id attribute
+                                             starts with 'factoid-'.</span>
+                                          <span class="tei-report">A properly formatted
+                                             SPEAR factoid URI ends with a hyphen followed by a number.</span>
+                                          <span class="tei-assert">A properly formatted
+                                             SPEAR factoid URI ends with a number.</span>
+                                          
+                                          </span>
+                                       </span>
+                                    </span>
+                                 <span class="tei-attDef">
+                                    
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    </span>
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    </span>
+                                 <span class="tei-attDef">
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">birth</span>
+                                          <span class="tei-desc">Used to designate person factoids that encode birth dates and/or locations</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">citizenship</span>
+                                          <span class="tei-desc">Used to designate person factoids that encode citizenship</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">death</span>
+                                          <span class="tei-desc">Used to designate person factoids that encode death dates and/or locations</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">education</span>
+                                          <span class="tei-desc">Used to designate person factoids that encode education</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">ethnic label</span>
+                                          <span class="tei-desc">Used to designate person factoids that encode ethnic labels</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">event</span>
+                                          <span class="tei-desc">Used to designate event factoids</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">gender</span>
+                                          <span class="tei-desc">Used to designate person factoids that encode gender</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">language known</span>
+                                          <span class="tei-desc">Used to designate person factoids that encode language knowledge</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">mental state</span>
+                                          <span class="tei-desc">Used to designate person factoids that encode mental states</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">name variant</span>
+                                          <span class="tei-desc">Used to designate person factoids that encode name variants</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">occupation</span>
+                                          <span class="tei-desc">Used to designate person factoids that encode occupations</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">physical trait</span>
+                                          <span class="tei-desc">Used to designate person factoids that encode physical traits</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">relation</span>
+                                          <span class="tei-desc">Used to designate relation factoids</span>
+                                          </span>
+                                       
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">residence</span>
+                                          <span class="tei-desc">Used to designate person factoids that encode places and dates of residence</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">sanctity</span>
+                                          <span class="tei-desc">Used to designate person factoids that encode sanctity</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-gloss">socio-economic status</span>
+                                          <span class="tei-desc">Used to designate person factoids that encode socio-econimic status</span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              
+                              <span class="tei-remarks">
+                                 
+                                 <p>
+                                    This customization requires the basic pattern of SPEAR factoids to be encoded correctly.
+                                    Each
+                                    factoid is encoded in an <span class="tei-gi">ab</span> element. Since each factoid contains data on a 
+                                    Person, Event, or Relation, the schema requires that <span class="tei-gi">ab</span> must contain a
+                                    <span class="tei-gi">listPerson</span>, <span class="tei-gi">listEvent</span>, or <span class="tei-gi">listRelation</span> child element. Since every
+                                    factoid requires a bibliographic reference, every <span class="tei-gi">ab</span> must contain one or more child
+                                    <span class="tei-gi">bibl</span> elements. The encoder also has the option of adding a <span class="tei-gi">note</span>
+                                    element to the factoid as well. 
+                                 </p>
+                                 
+                                 <p>This customization also requires that every <span class="tei-gi">ab</span> element receives @xml:id, @type, @subtype, 
+                                    and @resp attributes. The @xml:id must take the form "factoid-{\d}" where {\d} is
+                                    a number unique within 
+                                    the document. The @type attribute must be "factoid". The @subtype attribute comes
+                                    from a closed list
+                                    of data types encoded in the SPEAR project. The @resp attribute must point to an editor
+                                    listed in the 
+                                    <span class="tei-gi">titleStmt</span>. This ensures that all contributions are attributed at the factoid level.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">An &lt;idno&gt; descendant of &lt;ab&gt;
+                                          requires a @type attribute with the value "URI".</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">This &lt;idno&gt; 
+                                          requires a @type attribute with the value "URI".</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">This &lt;idno&gt; element
+                                          requires a @type attribute with the value "URI".</span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-let"></span>
+                                       <span class="tei-assert">
+                                          The text node of this &lt;idno&gt; must be "https://spear-prosop.org/<span class="tei-value-of"></span>/tei".
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-let"></span>
+                                       <span class="tei-assert">This factoid URI must be: "<span class="tei-value-of"></span>.</span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>
+                                    This customization requires properly formatted identifiers for each TEI document 
+                                    and for each factoid. It ensures the alignment of the document cool-URI, the document
+                                    name (always a number), 
+                                    and the factoid cool-URI.
+                                 </p>
+                                 
+                                 <p>In the <span class="tei-gi">teiHeader</span>, an <span class="tei-gi">idno</span> requires a @type attribute indicating that it is a "URI".
+                                    It must also have the text node "https://spear-prosop.org/{\d}/tei", where {\d} is
+                                    a number that matches
+                                    the number of the document name.
+                                 </p>
+                                 
+                                 <p>Each factoid also requires an <span class="tei-gi">idno</span> with a @type attribute of "URI". 
+                                    It must contain the full cool-URI for that factoid. This URI is constructed using
+                                    the <span class="tei-gi">idno</span> from the
+                                    <span class="tei-gi">publicationStmt</span> and attaching to it the "-{\d}" from the @xml:id on the parent <span class="tei-gi">ab</span>.
+                                    
+                                 </p>
+                                 </span>
+                              
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-assert"><span class="tei-value-of"></span> is not currently in use. SPEAR has a strong preference for using established 
+                                          URIs when possible but appropriate URIs are not always available in the Syriaca.org
+                                          taxonomy. Please
+                                          consult the taxonomy. If no appropriate keyword exists please choosing a keyword of
+                                          your own.
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;event&gt; must have a @when attribute with the value <span class="tei-value-of"></span>.
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;event&gt; must have a @notBefore attribute with the value <span class="tei-value-of"></span>.
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;event&gt; must have a @notAfter attribute with the value <span class="tei-value-of"></span>.
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;event&gt; must have a @from attribute with the value <span class="tei-value-of"></span>.
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;event&gt; must have a @to attribute with the value <span class="tei-value-of"></span>.
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-report">A &lt;relation&gt; element inside of an &lt;event&gt; element cannot take a &lt;desc&gt; element.</span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>
+                                    This customization makes <span class="tei-gi">desc</span> the only acceptable child of <span class="tei-gi">event</span>. It also requires an @ana attribute
+                                    and constrains the values of that attribute to the full list of Syriaca.org keyword
+                                    URIs. In the case of dates associated with an event,
+                                    the customization also requires that date attributes (@when, @notBefore, @notAfter,
+                                    @from, and @to) match on the <span class="tei-gi">event</span> element and within the child
+                                    <span class="tei-gi">desc</span> element.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">The &lt;note&gt; element in a birth place factoid
+                                          must contain a &lt;persName&gt;.</span>
+                                       <span class="tei-assert">The &lt;note&gt; element in a birth place factoid
+                                          must contain a &lt;placeName&gt;.</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">The &lt;note&gt; element in a birth date factoid
+                                          must contain a &lt;persName&gt;.</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">The &lt;note&gt; element in a citizenship factoid
+                                          must contain a &lt;persName&gt;.</span>
+                                       <span class="tei-assert">The &lt;note&gt; element in a citizenship factoid
+                                          must contain a &lt;placeName&gt;.</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">The &lt;note&gt; element in a death place factoid
+                                          must contain a &lt;persName&gt;.</span>
+                                       <span class="tei-assert">The &lt;note&gt; element in a birth place factoid
+                                          must contain a &lt;placeName&gt;.</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">The &lt;note&gt; element in an education factoid
+                                          must contain a &lt;persName&gt;.</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">The &lt;note&gt; element in a death date factoid
+                                          must contain a &lt;persName&gt;.</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">The &lt;note&gt; element in an occupation factoid
+                                          must contain a &lt;persName&gt;.</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">The &lt;note&gt; element in a residence factoid must
+                                          contain a &lt;persName&gt;.</span>
+                                       <span class="tei-assert">The &lt;note&gt; element in a residence factoid
+                                          must contain a &lt;placeName&gt;.</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">The &lt;note&gt; element in a socioeconomic status
+                                          factoid must contain a &lt;persName&gt;.</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">The &lt;note&gt; element in a language-known factoid
+                                          must contain a &lt;persName&gt;.</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">The &lt;note&gt; element inside the &lt;trait&gt;
+                                          element must contain a &lt;persName&gt;.</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">The &lt;note&gt; element inside the &lt;state&gt;
+                                          element must contain a &lt;persName&gt;.</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">This &lt;note&gt; element requires an @ana
+                                          attribute.</span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          The URI in this @ref attribute and the URI in the @ref attribute on the &lt;persName&gt;
+                                          that
+                                          is the child of &lt;person&gt; must match.
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-report">
+                                          The URI in this @ref attribute and the URI in the @ref attribute on the &lt;placeName&gt;
+                                          that
+                                          is the child of &lt;person&gt; must match.
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert"> The only note allowed in this context must contain the following text: "This
+                                          regularized date was calculated by the SPEAR editor from a non-calendrical dating
+                                          system such as regnal years, etc." </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef"></span>
+                                 <span class="tei-attDef"></span>
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-constraintSpec">
+                                       <span class="tei-constraint">
+                                          <span class="tei-rule">
+                                             <span class="tei-assert">This &lt;note&gt; must contain the
+                                                attribute @type="desc" and other &lt;note&gt; types are not allowed in this context.
+                                                Other types of notes (those dealing with "certainty") may appear as children of
+                                                the &lt;ab&gt; element as needed.</span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    <span class="tei-constraintSpec">
+                                       <span class="tei-constraint">
+                                          <span class="tei-rule">
+                                             <span class="tei-report">
+                                                If you wish to apply a date to this factoid, you must use
+                                                date attributes (@when, @notBefore, @notAfter, @to, and/or @from) on the 
+                                                parent of the &lt;note&gt; element.
+                                                </span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem"></span>
+                                       <span class="tei-valItem"></span>
+                                       <span class="tei-valItem"></span>
+                                       </span>
+                                    </span>
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-constraintSpec">
+                                       <span class="tei-constraint">
+                                          <span class="tei-rule">
+                                             <span class="tei-assert">
+                                                A &lt;note&gt; element with @type="certainty" requires a @subtype.
+                                                </span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem"></span>
+                                       <span class="tei-valItem"></span>
+                                       <span class="tei-valItem"></span>
+                                       </span>
+                                    </span>
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem"></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>
+                                    SPEAR factoids contain <span class="tei-gi">note</span> elements that allow the encoder to offer a more prose-oriented description of the
+                                    data that they have
+                                    derived from the source they are analyzing. The content of the <span class="tei-gi">note</span> is what human users encounter when using the HTML serialization of 
+                                    the data. This customization constrains the use of this element to ensure that the
+                                    data
+                                    marked up inside the <span class="tei-gi">note</span> agrees with the more data-oriented encoding found elsewhere in the factoid.
+                                 </p>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-constraintSpec">
+                                       <span class="tei-constraint">
+                                          <span class="tei-rule">
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-report">This @ref may contain only one URI.</span>
+                                             <span class="tei-assert">
+                                                The @ref attribute must take a Syriaca.org person URI which reqires 
+                                                the form 'http://syriaca.org/person/{\d+}' (where {\d+} is a number).
+                                                </span>
+                                             <span class="tei-assert">
+                                                <span class="tei-value-of"></span> is not currently in use. 
+                                                Note that all person URIs take the form 'http://syriaca.org/person/{\d+}' 
+                                                (where {\d+} is a number). If a URI is not current available, replace the number portion
+                                                of the URI with 
+                                                "#" followed without a space by a number that you use consistently when encoding information
+                                                
+                                                about that person. 
+                                                </span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>
+                                    This customization requires <span class="tei-gi">persName</span> to have a @ref attribute that points to a Syriaca.org authority file for a person.
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-constraintSpec">
+                                       <span class="tei-constraint">
+                                          <span class="tei-rule">
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-report">This @ref may contain only one URI.</span>
+                                             <span class="tei-assert">
+                                                The @ref attribute must take a Syriaca.org place URI which reqires 
+                                                the form 'http://syriaca.org/place/{\d+}' (where {\d+} is a number).
+                                                </span>
+                                             <span class="tei-assert">
+                                                <span class="tei-value-of"></span> is not currently in use. 
+                                                Note that all properly formatted place URIs take the form 'http://syriaca.org/place/{\d+}'
+                                                
+                                                (where {\d+} is a number). If a URI is not current available, replace the number portion
+                                                of the URI with 
+                                                "#" followed without a space by a number that you use consistently when encoding information
+                                                
+                                                referring to that place. 
+                                                </span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>
+                                    This customization requires <span class="tei-gi">placeName</span> to have a @ref attribute that points to a Syriaca.org authority file for a place.
+                                 </p>
+                                 </span>
+                              
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-constraintSpec">
+                                       <span class="tei-constraint">
+                                          <span class="tei-rule">
+                                             <span class="tei-let"></span>
+                                             <span class="tei-assert"> The @target attribute on a &lt;ptr&gt; element inside a &lt;bibl&gt; element
+                                                with @type="primary" takes limited values. It either must be
+                                                "http://syriaca.org/work/<span class="tei-value-of"></span>" or
+                                                "http://syriaca.org/bibl/" followed by the corresponding Syriaca.org bibl URI
+                                                number. </span>
+                                             </span>
+                                          <span class="tei-rule">
+                                             <span class="tei-let"></span>
+                                             <span class="tei-assert"> The @target attribute on a &lt;ptr&gt; element inside a &lt;bibl&gt; element
+                                                with @type="urn" must begin either with "urn:cts:syriacLit:nhsl<span class="tei-value-of"></span>.syriacCorpus" followed by the corresponding Syriac
+                                                Corpus URI number. </span>
+                                             </span>
+                                          <span class="tei-rule">
+                                             <span class="tei-let"></span>
+                                             <span class="tei-assert">URN in a &lt;bibl&gt;
+                                                element inside a SPEAR factoid must begin with URN in the &lt;sourceDesc&gt;
+                                                element of the &lt;teiHeader&gt;: "<span class="tei-value-of"></span>:".</span>
+                                             </span>
+                                          <span class="tei-rule">
+                                             <span class="tei-assert"> The
+                                                @target attribute on the &lt;ptr&gt; element, "<span class="tei-value-of"></span>," is
+                                                not among the valid options contained in the &lt;sourceDesc&gt; element of the
+                                                &lt;teiHeader&gt;: (<span class="tei-value-of"></span>) </span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>
+                                    This customization requires a <span class="tei-gi">ptr</span> to have a @type attribute (indicating "primary", "secondary", or "URN") 
+                                    and a @target attribute. It also ensures that the @target attribute with primary and
+                                    secondary sources indicates a 
+                                    Syriaca.org authority file for a work or a bibliographic item.
+                                    
+                                 </p>
+                                 </span>
+                              
+                              
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-assert">This &lt;relation&gt; takes either a @mutual attribute with mutual
+                                          relationships or both @active and @passive attributes with directed
+                                          relationships. Mutual relationships include: <span class="tei-value-of"></span>. Directed relationships include:
+                                          <span class="tei-value-of"></span>.</span>
+                                       <span class="tei-assert">This &lt;relation&gt; takes either a @mutual attribute with mutual
+                                          relationships or both @active and @passive attributes with directed
+                                          relationships. Mutual relationships include: <span class="tei-value-of"></span>. Directed relationships include:
+                                          <span class="tei-value-of"></span>.</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">A @mutual attribute is required on &lt;relation&gt;
+                                          in event factoids.</span>
+                                       <span class="tei-report">@active attributes are not allowed on &lt;relation&gt;
+                                          in event factoids.</span>
+                                       <span class="tei-report">@passive attributes are not allowed on &lt;relation&gt;
+                                          in event factoids.</span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-assert">
+                                          <span class="tei-value-of"></span> is not currently in use. 
+                                          Note that all person URIs take the form 'http://syriaca.org/person/{\d+}' 
+                                          (where {\d+} is a number). If a URI is not current available, replace the number portion
+                                          of the URI with 
+                                          "#" followed without a space by a number that you use consistently when encoding information
+                                          
+                                          about that person.
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;relation&gt; must have a @when attribute with the value <span class="tei-value-of"></span>.
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;relation&gt; must have a @notBefore attribute with the value <span class="tei-value-of"></span>.
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;relation&gt; must have a @notAfter attribute with the value <span class="tei-value-of"></span>.
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;relation&gt; must have a @from attribute with the value <span class="tei-value-of"></span>.
+                                          </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert">
+                                          This &lt;relation&gt; must have a @to attribute with the value <span class="tei-value-of"></span>.
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attList">
+                                    <span class="tei-attList">
+                                       <span class="tei-attDef">
+                                          <span class="tei-datatype">
+                                             <span class="tei-dataRef"></span>
+                                             </span>
+                                          </span>
+                                       <span class="tei-attDef">
+                                          <span class="tei-datatype">
+                                             <span class="tei-dataRef"></span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    <span class="tei-attDef">
+                                       <span class="tei-datatype">
+                                          <span class="tei-dataRef"></span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 <span class="tei-attDef">
+                                    <span class="tei-constraintSpec">
+                                       <span class="tei-constraint">
+                                          <span class="tei-rule">
+                                             <span class="tei-let"></span>
+                                             <span class="tei-assert">Value must be one of the following from the Syriaca.org taxonomy:
+                                                <span class="tei-value-of"></span>.</span>
+                                             </span>
+                                          <span class="tei-rule">
+                                             <span class="tei-let"></span>
+                                             <span class="tei-assert">Value must be one of the following from the Syriaca.org taxonomy:
+                                                <span class="tei-value-of"></span>.</span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 <span class="tei-attDef">
+                                    <span class="tei-constraintSpec">
+                                       <span class="tei-constraint">
+                                          <span class="tei-rule">
+                                             <span class="tei-assert">
+                                                This &lt;relation&gt; element must have a @name attribute with a value of "dcterms:isPartOf".
+                                                </span>
+                                             </span>
+                                          <span class="tei-rule">
+                                             <span class="tei-report">A @name attribute cannot appear here.</span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-constraintSpec">
+                                       <span class="tei-constraint">
+                                          <span class="tei-rule">
+                                             <span class="tei-assert">A &lt;relation&gt; element inside an event factoid
+                                                must take a @type attribute with the value "event".</span>
+                                             </span>
+                                          <span class="tei-rule">
+                                             <span class="tei-assert">A @type attribute with the value
+                                                "part" is required.</span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">Used to denote relationships involving persons</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">Used to denote relationships between event factoids</span>
+                                          </span>
+                                       <span class="tei-valItem"></span>
+                                       </span>
+                                    </span>
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-constraintSpec">
+                                       <span class="tei-constraint">
+                                          <span class="tei-rule">
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-assert"><span class="tei-value-of"></span> is not currently in use. The value of this @ana attribute must 
+                                                be one of the following: <span class="tei-value-of"></span>.</span>
+                                             </span>
+                                          <span class="tei-rule">
+                                             <span class="tei-report">A &lt;relation&gt; element inside an event factoid cannot
+                                                have an @ana attribute.</span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>
+                                    The <span class="tei-gi">relation</span> element is used for personal relationships and constitutes one of the three main
+                                    data types in SPEAR. 
+                                    When SPEAR encodes straight relationships, they appear in a relationship factoid (tei:ab[@subtype="relation"]/tei:listRelation/tei:relation).
+                                    Relationships can also appear inside an event factoid in cases where an event creates
+                                    a relationship, i.e. a wedding is an event that
+                                    created a spousal relationship. In such cases, SPEAR encodes this relationship inside
+                                    the event factoid. In addition to these personal relationships,
+                                    the <span class="tei-gi">relation</span> element is also used to encode relationships between closely related events. The
+                                    <span class="tei-gi">relation</span> element is also used in 
+                                    the <span class="tei-gi">teiHeader</span>.
+                                    
+                                 </p>
+                                 
+                                 <p>
+                                    In the context of personal relationships, this customization constrains the @ref,
+                                    @ana, @active, @passive, and @mutual attributes.
+                                    A @ref attribute is required and must contain a URI pointing to a personal relationship
+                                    in the Syriac Taxonomy. An @ana attribute is optional but when 
+                                    used must contain a URI pointing to a qualifier relationship in the Syriac Taxonomy,
+                                    i.e. a sibling relationship might be qualified as a 
+                                    step-sibling relationship using @ana. For mutual relationship where each participant
+                                    has the same relationship to the other (i.e. spousal), a 
+                                    @mutual attribute is used with all of the participants in that relationship listed.
+                                    In the case of a directed relationship (i.e. where person X
+                                    is the parent of person Y) both the @active and @passive attributes are used. The
+                                    values allowed on the @active, @passive, and @mutual 
+                                    attributes are URIs pointing to Syriaca.org authority files for persons. 
+                                    
+                                 </p>
+                                 
+                                 <p>
+                                    In the context of relationships between events, this customization only allows appropriate
+                                    values on @ref while excluding @ana, @active, and @passive 
+                                    attributes.
+                                    
+                                 </p>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-content">
+                                 <span class="tei-alternate">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-sequence">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>
+                                    The <span class="tei-gi">person</span> element contains person factoid data. This customization requires the proper structure
+                                    for that data.
+                                    The first child of <span class="tei-gi">person</span> must be a self-closing <span class="tei-gi">persName</span> element with a @ref attribute containing a 
+                                    URIs pointing to Syriaca.org authority file for a person. The next child element must
+                                    be one of the following: 
+                                    <span class="tei-gi">birth</span>, <span class="tei-gi">death</span>, <span class="tei-gi">education</span>, <span class="tei-gi">langKnown</span>, <span class="tei-gi">nationality</span>, <span class="tei-gi">occupation</span>, 
+                                    <span class="tei-gi">residence</span>, <span class="tei-gi">socecStatus</span>, <span class="tei-gi">state</span>, or <span class="tei-gi">trait</span>.
+                                    
+                                 </p>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-alternate">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef"></span>
+                                 <span class="tei-attDef"></span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>This customization restricts the attribute classes of the <span class="tei-gi">birth</span> element to
+                                    att.datable.w3c but excludes the @to and @from attributes. If more precise dating
+                                    is
+                                    required for a SPEAR factoid, encoder should use the <span class="tei-gi">date</span> element.
+                                 </p>
+                                 
+                                 <p>
+                                    It also restricts the child elements to those dealing with dates (<span class="tei-gi">date</span> or <span class="tei-gi">choice</span>),
+                                    <span class="tei-gi">placeName</span>, and <span class="tei-gi">note</span>.
+                                    
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-alternate">
+                                       <span class="tei-elementRef"></span>
+                                       <span class="tei-elementRef"></span>
+                                       </span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef"></span>
+                                 <span class="tei-attDef"></span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>This customization restricts the attribute classes of the <span class="tei-gi">death</span> element to
+                                    att.datable.w3c but excludes the @to and @from attributes. If more precise dating
+                                    is
+                                    required for a SPEAR factoid, encoder should use the <span class="tei-gi">date</span> element.
+                                 </p>
+                                 
+                                 <p>
+                                    It also restricts the child elements to those dealing with dates (<span class="tei-gi">date</span> or <span class="tei-gi">choice</span>),
+                                    <span class="tei-gi">placeName</span>, and <span class="tei-gi">note</span>.
+                                    
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-constraintSpec">
+                                       <span class="tei-constraint">
+                                          <span class="tei-rule">
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-assert"><span class="tei-value-of"></span> is not currently in use. SPEAR has a strong preference for using established 
+                                                URIs when possible but appropriate URIs are not always available in the Syriaca.org
+                                                taxonomy. Please
+                                                consult the taxonomy. If no appropriate keyword exists in the following list, please
+                                                use your own
+                                                preferred descriptive term: <span class="tei-value-of"></span>.</span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              
+                              <span class="tei-remarks">
+                                 
+                                 <p>This customization restricts the attribute classes of <span class="tei-gi">education</span>
+                                    to att.datable.w3c and the @ana attribute. If more precise dating is required for
+                                    a
+                                    SPEAR factoid, the encoder should use the <span class="tei-gi">date</span> element.
+                                 </p>
+                                 
+                                 <p>
+                                    It also restricts the required @ana attribute to keyword URIs in the Syriac Taxonomy
+                                    that pertain to 
+                                    fields of education.
+                                    
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>This customization limits the attribute classes of the
+                                    <span class="tei-gi">residence</span> element to att.datable.custom and att.datable.w3c and removes the
+                                    <span class="tei-gi">residence</span> element from all model classes. It also requires exactly one
+                                    <span class="tei-gi">placeName</span> child and one <span class="tei-gi">note</span> child and allows an optional <span class="tei-gi">date</span> child.
+                                 </p>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-constraintSpec">
+                                       <span class="tei-constraint">
+                                          <span class="tei-rule">
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-assert"><span class="tei-value-of"></span> is not currently in use. SPEAR has a strong preference for using established 
+                                                URIs when possible but appropriate URIs are not always available in the Syriaca.org
+                                                taxonomy. Please
+                                                consult the taxonomy. If no appropriate keyword exists in the following list, please
+                                                use your own
+                                                preferred descriptive term: <span class="tei-value-of"></span>.</span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>This customization restricts the attribute classes of <span class="tei-gi">occupation</span>
+                                    to att.datable.w3c and att.global.analytic. If more precise dating is required for
+                                    a
+                                    SPEAR factoid, the encoder should use the <span class="tei-gi">date</span> element.
+                                 </p>
+                                 
+                                 <p>
+                                    It only allows <span class="tei-gi">note</span> as a child element and it restricts the required @ana attribute to keyword URIs in
+                                    the Syriac Taxonomy that pertain to 
+                                    occupations.
+                                    
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-sequence">
+                                    <span class="tei-elementRef"></span>
+                                    <span class="tei-elementRef"></span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>
+                                    This customization constrains the child elements under <span class="tei-gi">langKnowledge</span> to include only
+                                    <span class="tei-gi">langKnown</span> and <span class="tei-gi">note</span>.
+                                    
+                                 </p>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-let"></span>
+                                       <span class="tei-assert"><span class="tei-value-of"></span> is not currently in use. SPEAR has a strong preference for using established 
+                                          URIs when possible but appropriate URIs are not always available in the Syriaca.org
+                                          taxonomy. Please
+                                          consult the taxonomy. If no appropriate keyword exists in the following list, please
+                                          use your own
+                                          preferred descriptive term: <span class="tei-value-of"></span>.
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef"></span>
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem"></span>
+                                       <span class="tei-valItem"></span>
+                                       <span class="tei-valItem"></span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>
+                                    This customization allows a closed list of values on the @level attribute ("low",
+                                    "medium", and "high"). 
+                                    It also restricts the required @ana attribute to keyword URIs in the Syriac Taxonomy
+                                    that pertain to 
+                                    languages.
+                                    
+                                 </p>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-constraintSpec">
+                                       <span class="tei-constraint">
+                                          <span class="tei-rule">
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-assert"><span class="tei-value-of"></span> is not currently in use. SPEAR has a strong preference for using established 
+                                                URIs when possible but appropriate URIs are not always available in the Syriaca.org
+                                                taxonomy. Please
+                                                consult the taxonomy. If no appropriate keyword exists in the following list, please
+                                                use your own
+                                                preferred descriptive term: <span class="tei-value-of"></span>.</span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>This customization restricts the attribute classes of <span class="tei-gi">socecStatus</span>
+                                    to att.datable.w3c and att.global.analytic. If more precise dating is required for
+                                    a
+                                    SPEAR factoid, the encoder should use the <span class="tei-gi">date</span> element.
+                                 </p>
+                                 
+                                 <p>
+                                    It only allows <span class="tei-gi">note</span> as a child element and it restricts the required @ana attribute to keyword URIs in
+                                    the Syriac Taxonomy that pertain to 
+                                    socioeconomic status.
+                                    
+                                 </p>
+                                 </span>
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">used for references to a person's physical characteristics, such as hair
+                                             color, height, weight, physical disabilities, etc.</span>
+                                          
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">used for references to a person's gender identity (as opposed to their
+                                             biological sex which SPEAR does not presume to capture).</span>
+                                          
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">used for references to an ethnic label claimed by a person or ascribed to a
+                                             person; such as "Goth," "Saracen," etc.</span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-constraintSpec">
+                                       <span class="tei-constraint">
+                                          <span class="tei-rule">
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-assert"><span class="tei-value-of"></span> is not currently in use. SPEAR has a strong preference for using established 
+                                                URIs when possible but appropriate URIs are not always available in the Syriaca.org
+                                                taxonomy. Please
+                                                consult the taxonomy. If no appropriate keyword exists in the following list, please
+                                                use your own
+                                                preferred descriptive term: <span class="tei-value-of"></span>.</span>
+                                             </span>
+                                          <span class="tei-rule">
+                                             <span class="tei-assert">Preferred values for the @ana attribute on a &lt;trait&gt; element
+                                                @type="gender" are:
+                                                "http://syriaca.org/keyword/eunuch"; "http://syriaca.org/keyword/female";
+                                                "http://syriaca.org/keyword/male"; and
+                                                "http://syriaca.org/keyword/nun-as-monk". Use these if applicable. If one of
+                                                these does not apply, please use a descriptive term of your
+                                                choosing.</span>
+                                             </span>
+                                          
+                                          <span class="tei-rule">
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-assert"><span class="tei-value-of"></span> is not currently in use. SPEAR has a strong preference for using established 
+                                                URIs when possible but appropriate URIs are not always available in the Syriaca.org
+                                                taxonomy. Please
+                                                consult the taxonomy. If no appropriate keyword exists please choosing a keyword of
+                                                your own.
+                                                </span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>This customization restricts the attribute classes of <span class="tei-gi">trait</span>
+                                    to att.datable.w3c and att.global.analytic. If more precise dating is required for
+                                    a
+                                    SPEAR factoid, the encoder should use the <span class="tei-gi">date</span> element.
+                                 </p>
+                                 
+                                 <p>
+                                    It only allows <span class="tei-gi">note</span> as a child element. It restricts the required @type attribute to the values
+                                    "physical", "gender", and "ethnicLabel". It restricts the required @ana attribute
+                                    to keyword URIs in the 
+                                    Syriac Taxonomy that pertain to each of these three types.
+                                    
+                                 </p>
+                                 </span>
+                              
+                              
+                              
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>
+                                    The <span class="tei-gi">back</span> element must contain only one <span class="tei-gi">listBibl</span>.
+                                    
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>
+                                    The <span class="tei-gi">listBibl</span> element must contain a <span class="tei-gi">head</span> and at least
+                                    one <span class="tei-gi">bibl</span>.
+                                    
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec">
+                              <span class="tei-constraintSpec">
+                                 <span class="tei-constraint">
+                                    <span class="tei-rule">
+                                       <span class="tei-assert"> A &lt;head&gt; element inside the &lt;sourceDesc&gt; must contain the text node:
+                                          "Sources for the Data in this Born Digital Prosopography". </span>
+                                       </span>
+                                    <span class="tei-rule">
+                                       <span class="tei-assert"> A &lt;head&gt; element inside
+                                          the &lt;back&gt; must contain the text node: "Works Cited". </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>
+                                    When the child of <span class="tei-gi">sourceDesc</span>, <span class="tei-gi">head</span> must contain "Sources for the Data in this Born Digital Prosopography".
+                                    When the child of <span class="tei-gi">back</span>, <span class="tei-gi">head</span> must contain "Works Cited".
+                                    
+                                 </p>
+                                 </span>
+                              </span>
+                           
+                           <span class="tei-elementSpec"> 
+                              <span class="tei-classes">
+                                 <span class="tei-memberOf"></span>
+                                 <span class="tei-memberOf"></span>
+                                 </span>
+                              <span class="tei-content">
+                                 <span class="tei-elementRef"></span>
+                                 <span class="tei-elementRef"></span>
+                                 </span>
+                              <span class="tei-attList">
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-constraintSpec">
+                                       
+                                       <span class="tei-constraint">
+                                          <span class="tei-rule">
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-assert"><span class="tei-value-of"></span> is not currently in use. SPEAR has a strong preference for using established 
+                                                URIs when possible but appropriate URIs are not always available in the Syriaca.org
+                                                taxonomy. Please
+                                                consult the taxonomy. If no appropriate keyword exists in the following list, please
+                                                use your own
+                                                preferred descriptive term: <span class="tei-value-of"></span>.</span>
+                                             </span>
+                                          <span class="tei-rule">
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-let"></span>
+                                             <span class="tei-assert"><span class="tei-value-of"></span> is not currently in use. SPEAR has a strong preference for using established 
+                                                URIs when possible but appropriate URIs are not always available in the Syriaca.org
+                                                taxonomy. Please
+                                                consult the taxonomy. If no appropriate keyword exists in the following list, please
+                                                use your own
+                                                preferred descriptive term: <span class="tei-value-of"></span>.</span>
+                                             </span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 <span class="tei-attDef">
+                                    <span class="tei-datatype">
+                                       <span class="tei-dataRef"></span>
+                                       </span>
+                                    <span class="tei-valList">
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">used for references to a person's mental traits; such as intelligence,
+                                             mental disability, wisdom, etc.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">used for references to a person's religious affiliation; including but 
+                                             not limited to membership in an organization, adhering to a set of beliefs, 
+                                             or identifying with a religious community in some way.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">used for references to a person's sanctity.</span>
+                                          </span>
+                                       <span class="tei-valItem">
+                                          <span class="tei-desc">used for references to a person's citizenship in a city, kingdom, empire, etc.</span>
+                                          </span>
+                                       </span>
+                                    </span>
+                                 </span>
+                              <span class="tei-remarks">
+                                 
+                                 <p>This customization restricts the attribute classes of <span class="tei-gi">state</span>
+                                    to att.datable.w3c and att.global.analytic. If more precise dating is required for
+                                    a
+                                    SPEAR factoid, the encoder should use the <span class="tei-gi">date</span> element.
+                                 </p>
+                                 
+                                 <p>
+                                    It only allows <span class="tei-gi">note</span> as a child element. It restricts the required @type attribute to the values
+                                    "mental", "religiousAffiliation", and "sanctity". It restricts the required @ana attribute
+                                    to keyword URIs in the 
+                                    Syriac Taxonomy that pertain to each of these three types.
+                                    
+                                 </p>
+                                 </span>
+                              
+                              </span>
+                           </span>
+                        
+                        
+                        </span><div class="citationinfo">
+                        <h3>How to Cite This Entry</h3>
+                        <div id="citation-note" class="content-block indent"><span> <span> <span> Daniel L. Schwartz</span></span></span>, “<span class="title">TEI Customization for SPEAR: Syriaca Persons, Events, and Relations</span>” last modified , <a href=""></a>.
+                           <div class="collapse" id="showcit">
+                              <div id="citation-bibliography">
+                                 <h4>Bibliography:</h4><span class="editor"><span> <span> Daniel L. Schwartz</span></span></span>, “<span class="title">TEI Customization for SPEAR: Syriaca Persons, Events, and Relations</span>.”, edited by . ,
+                                  Entry published . <a href=""></a>.
+                              </div>
+                              <div id="about">
+                                 <h3>About this Entry</h3>
+                                 <p><span class="heading-inline">Entry Title:</span> <span class="title">TEI Customization for SPEAR: Syriaca Persons, Events, and Relations</span></p>
+                              </div>
+                              <div id="license">
+                                 <h3>Copyright and License for Reuse</h3>
+                                 <div>Except otherwise noted, this page is © .
+                                    
+                                 </div><span class="tei-licence">
+                                    
+                                    <p>Distributed under a Creative Commons Attribution 3.0 Unported License.</p>
+                                    
+                                    <p>The code examples contained in <span class="tei-gi">exemplum</span> elements below come from 
+                                       Syriaca.org projects that have been distributed under a Creative Commons Attribution
+                                       
+                                       3.0 Unported License. Used by permission.
+                                    </p>
+                                    
+                                    <p>The comments on element and attribute use contained in <span class="tei-gi">remarks</span> elements below 
+                                       share some text with other Syriaca.org documentation distributed under a Creative
+                                       Commons 
+                                       Attributiion 3.0 Unported License. This documentation can be found at various links
+                                       available here:
+                                       <a href="http://syriaca.org/documentation/index.html">http://syriaca.org/documentation/index.html</a>
+                                       Used by permission.
+                                       
+                                    </p>
+                                    </span></div>
+                           </div><a class="btn-sm btn-info togglelink pull-right" data-toggle="collapse" data-target="#showcit" data-text-swap="Hide citation">Show full citation information...</a></div>
+                     </div>
+                  </div>
+                  <div class="col-md-5 col-lg-4 right-menu"><br /></div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <footer>
+         
+         <div class="container">
+            <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">
+               <img alt="Creative Commons License" style="border-width:0" src="/resources/images/cc.png" height="18px" />
+               </a> This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/deed.en_US">Creative Commons Attribution 3.0 Unported License</a>.
+            <br />Copyright Vanderbilt University, Princeton University, and the Contributor(s), 2014.
+            
+         </div>
+         
+      </footer>
+   </body><script type="text/javascript" src="/resources/js/jquery.validate.min.js"></script><script type="text/javascript" src="/resources/js/require.min.js"></script><script type="text/javascript" src="/resources/js/srophe.js"></script><script type="text/javascript" src="/resources/js/lightslider.min.js"></script><script type="text/javascript" src="/resources/js/lightslider-functions.js"></script><script data-template="app:google-analytics"></script></html>
