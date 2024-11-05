@@ -466,16 +466,14 @@
             </array>
         </xsl:if>
     </xsl:template>
-    <xsl:template match="*:fields[@function = 'sex']">
+    <xsl:template match="*:fields[@function = 'gender']">
         <xsl:param name="doc"/>
         <xsl:param name="id"/>
         <xsl:if test="contains($id, '/person')">
-        <xsl:if test="$doc/descendant::tei:body/descendant::tei:sex">
-            <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">     
-                <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:sex">
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+            <xsl:if test="$doc/descendant::tei:body/descendant::tei:gender">     
+                <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:gender">
+                    <string key="{.}" xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
                 </xsl:for-each>
-            </array>
         </xsl:if>
         </xsl:if>
     </xsl:template>
