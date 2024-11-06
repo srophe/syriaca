@@ -726,17 +726,29 @@
     </xsl:template>
     <xsl:template match="*:fields[@function = 'birth']">
         <xsl:param name="doc"/>
-        <xsl:if test="$doc/descendant::tei:birth">     
-            <xsl:for-each select="$doc/descendant::tei:birth">
-                <string xmlns="http://www.w3.org/2005/xpath-functions" key="birth"><xsl:value-of select="."/></string>
+        <xsl:if test="$doc/descendant::tei:birth/tei:date">     
+            <xsl:for-each select="$doc/descendant::tei:birth/tei:date">
+                <xsl:variable name="date">
+                    <xsl:choose>
+                        <xsl:when test="@srophe:computed-start"><xsl:value-of select="@srophe:computed-start"/></xsl:when>
+                        <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                <string xmlns="http://www.w3.org/2005/xpath-functions" key="birth"><xsl:value-of select="normalize-space($date)"/></string>
             </xsl:for-each>
         </xsl:if>
     </xsl:template>
     <xsl:template match="*:fields[@function = 'death']">
         <xsl:param name="doc"/>
-        <xsl:if test="$doc/descendant::tei:death">     
-            <xsl:for-each select="$doc/descendant::tei:death">
-                <string xmlns="http://www.w3.org/2005/xpath-functions" key="death"><xsl:value-of select="."/></string>
+        <xsl:if test="$doc/descendant::tei:death/tei:date">     
+            <xsl:for-each select="$doc/descendant::tei:death/tei:date">
+                <xsl:variable name="date">
+                    <xsl:choose>
+                        <xsl:when test="@srophe:computed-start"><xsl:value-of select="@srophe:computed-start"/></xsl:when>
+                        <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                <string xmlns="http://www.w3.org/2005/xpath-functions" key="death"><xsl:value-of select="normalize-space($date)"/></string>
             </xsl:for-each>
         </xsl:if>
     </xsl:template>
