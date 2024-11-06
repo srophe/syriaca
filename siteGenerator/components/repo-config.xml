@@ -115,6 +115,13 @@
             <fields function="title" boost="10">title</fields>
             <fields function="series">series</fields>
             <fields function="idno">idno</fields>
+            <fields function="type">type</fields>
+            <!-- 
+            <fields function="placeType" xpath="tei:person@type">placeType</fields>
+            <fields function="personType" xpath="tei:person[contains(@ana, '#syriaca-',$persons:type,'')]]">personType</fields>
+            <fields function="bhseType" xpath="tei:idno[@type]">bhseType</fields>
+            <fields function="cbssType" xpath="tei:biblStruct[@type]">cbssType</fields>
+            -->
             <!-- Syriaca.org specific fields` -->
             <fields function="titleSyriac">titleSyriac</fields>
             <fields function="titleArabic">titleArabic</fields>
@@ -137,11 +144,12 @@
             <fields function="religiousCommunitiesDates" xpath="tei:state[@type = 'confession'][@syriaca-computed-start or @syriaca-computed-end]">religiousCommunitiesDates</fields>
             <fields function="existenceDates" xpath="tei:state[@type = 'existence'][@syriaca-computed-start or @syriaca-computed-end]">existenceDates</fields>
             <fields function="related" xpath="tei:listRelation/tei:relation[@passive or @mutual]">related</fields>
+            
             <!-- Persons -->
             <fields function="birth" xpath="tei:birth">birth</fields>
             <fields function="death" xpath="tei:death">death</fields>
             <fields function="gender" xpath="tei:gender">gender</fields>
-            <fields function="personType" xpath="tei:person[contains(@ana, '#syriaca-',$persons:type,'')]]">personType</fields>
+            
             <!-- BHSE -->
             <fields function="prologue" xpath="tei:bibl/tei:note[@type='prologue']">prologue</fields>
             <fields function="incipit" xpath="tei:bibl/tei:note[@type='incipit']">incipit</fields>
@@ -151,11 +159,11 @@
             <fields function="ancientVersion" xpath="tei:bibl/tei:bibl[@type='syriaca:AncientVersion']">ancientVersion</fields>
             <fields function="manuscripts" xpath="tei:bibl/tei:bibl[@type='syriaca:Manuscript']">manuscripts</fields>
             <fields function="reference" xpath="tei:bibl/tei:bibl">reference</fields>
-            <fields function="bhseType" xpath="tei:idno[@type]">bhseType</fields>
+            
             <!-- CBSS -->
             <fields function="subject" xpath="tei:relation[@ref='dc:subject']/tei:desc">subject</fields>
             <fields function="abstract" xpath="tei:note[@type='abstract']">abstract</fields>
-            <fields function="cbssType" xpath="tei:biblStruct[@type]">cbssType</fields>
+            
             <!--
             <text xpath="/tei:TEI/descendant::tei:persName" boost="5.0">persName</text>
             <text xpath="/tei:TEI/descendant::tei:placeName" boost="5.0">placeName</text>
