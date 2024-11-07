@@ -456,41 +456,42 @@
         <xsl:param name="doc"/>
         <xsl:param name="id"/>
         <xsl:if test="contains($id, '/place')">
-        <xsl:if test="$doc/descendant::tei:body/descendant::tei:event[@type != 'attestation']">
-            <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">      
-                <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:event[@type != 'attestation']">
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
-                </xsl:for-each>
-            </array>
-        </xsl:if>
+            <xsl:if test="$doc/descendant::tei:body/descendant::tei:event[@type != 'attestation']">
+                <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">      
+                    <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:event[@type != 'attestation']">
+                        <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+                    </xsl:for-each>
+                </array>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
     <xsl:template match="*:fields[@function = 'attestations']">
         <xsl:param name="doc"/>
         <xsl:param name="id"/>
         <xsl:if test="contains($id, '/place')">
-        <xsl:if test="$doc/descendant::tei:body/descendant::tei:event[@type = 'attestation']">
-            <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">      
-                <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:event[@type = 'attestation']">
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
-                </xsl:for-each>
-            </array>
-        </xsl:if>
+            <xsl:if test="$doc/descendant::tei:body/descendant::tei:event[@type = 'attestation']">
+                <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">      
+                    <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:event[@type = 'attestation']">
+                        <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+                    </xsl:for-each>
+                </array>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
     <xsl:template match="*:fields[@function = 'religiousCommunities']">
         <xsl:param name="doc"/>
         <xsl:param name="id"/>
         <xsl:if test="contains($id, '/place')">
-        <xsl:if test="$doc/descendant::tei:body/descendant::tei:state[@type = 'confession']">
-            <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">      
-                <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:state[@type = 'confession']">
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
-                </xsl:for-each>
-            </array>
-        </xsl:if>
+            <xsl:if test="$doc/descendant::tei:body/descendant::tei:state[@type = 'confession']">
+                <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">      
+                    <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:state[@type = 'confession']">
+                        <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+                    </xsl:for-each>
+                </array>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
+    <!--
     <xsl:template match="*:fields[@function = 'related']">
         <xsl:param name="doc"/>
         <xsl:if test="$doc/descendant::tei:body/descendant::tei:listRelation/tei:relation[@passive or @mutual]">
@@ -502,6 +503,7 @@
             </array>
         </xsl:if>
     </xsl:template>
+    -->
     <xsl:template match="*:fields[@function = 'gender']">
         <xsl:param name="doc"/>
         <xsl:param name="id"/>
@@ -513,20 +515,26 @@
         </xsl:if>
         </xsl:if>
     </xsl:template>
-    <xsl:template match="*:fields[@function = 'personType']">
+    <xsl:template match="*:fields[@function = 'stateType']">
         <xsl:param name="doc"/>
         <xsl:param name="id"/>
-        <xsl:if test="contains($id, '/person')">
-        <xsl:variable name="field">
-            <xsl:value-of select="$doc/descendant::tei:body/tei:listPerson/tei:person/@ana"/>
-        </xsl:variable>
-            <xsl:if test="$doc/descendant::tei:body/tei:listPerson/tei:person/@ana[. != '']">
-                <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">     
-                    <xsl:for-each select="tokenize($field,' ')">
-                        <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="substring-after(., '-')"/></string>
-                    </xsl:for-each>
-                </array>
-            </xsl:if>
+        <xsl:if test="$doc/descendant::tei:body/descendant::tei:state[@type]">
+            <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">     
+                <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:state[@type]">
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(@type,' '))"/></string>
+                </xsl:for-each>
+            </array>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="*:fields[@function = 'state']">
+        <xsl:param name="doc"/>
+        <xsl:param name="id"/>
+        <xsl:if test="$doc/descendant::tei:body/descendant::tei:state">
+            <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">     
+                <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:state">
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(descendant-or-self::text(),' '))"/></string>
+                </xsl:for-each>
+            </array>
         </xsl:if>
     </xsl:template>
     <xsl:template match="*:fields[@function = 'prologue']">
@@ -536,7 +544,7 @@
         <xsl:if test="$doc/descendant::tei:body/descendant::tei:bibl/tei:note[@type='prologue']">
             <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">     
                 <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:bibl/tei:note[@type='prologue']">
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(descendant-or-self::text(),' '))"/></string>
                 </xsl:for-each>
             </array>
         </xsl:if>
@@ -549,7 +557,7 @@
         <xsl:if test="$doc/descendant::tei:body/descendant::tei:bibl/tei:note[@type='incipit']">
             <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">     
                 <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:bibl/tei:note[@type='incipit']">
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(descendant-or-self::text(),' '))"/></string>
                 </xsl:for-each>
             </array>
         </xsl:if>
@@ -562,7 +570,7 @@
         <xsl:if test="$doc/descendant::tei:body/descendant::tei:bibl/tei:note[@type='explicit']">
             <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">     
                 <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:bibl/tei:note[@type='explicit']">
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(descendant-or-self::text(),' '))"/></string>
                 </xsl:for-each>
             </array>
         </xsl:if>
@@ -575,7 +583,7 @@
         <xsl:if test="$doc/descendant::tei:body/descendant::tei:bibl/tei:bibl[@type='lawd:Edition']">
             <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">     
                 <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:bibl/tei:bibl[@type='lawd:Edition']">
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(descendant-or-self::text(),' '))"/></string>
                 </xsl:for-each>
             </array>
         </xsl:if>
@@ -588,7 +596,7 @@
         <xsl:if test="$doc/descendant::tei:body/descendant::tei:bibl/tei:bibl[@type='syriaca:ModernTranslation']">
             <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">     
                 <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:bibl/tei:bibl[@type='syriaca:ModernTranslation']">
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(descendant-or-self::text(),' '))"/></string>
                 </xsl:for-each>
             </array>
         </xsl:if>
@@ -601,7 +609,7 @@
         <xsl:if test="$doc/descendant::tei:body/descendant::tei:bibl/tei:bibl[@type='syriaca:AncientVersion']">
             <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">     
                 <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:bibl/tei:bibl[@type='syriaca:AncientVersion']">
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(descendant-or-self::text(),' '))"/></string>
                 </xsl:for-each>
             </array>
         </xsl:if>
@@ -614,7 +622,7 @@
         <xsl:if test="$doc/descendant::tei:body/descendant::tei:bibl/tei:bibl[@type='syriaca:Manuscript']">
             <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">     
                 <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:bibl/tei:bibl[@type='syriaca:Manuscript']">
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(descendant-or-self::text(),' '))"/></string>
                 </xsl:for-each>
             </array>
         </xsl:if>
@@ -627,7 +635,7 @@
         <xsl:if test="$doc/descendant::tei:body/descendant::tei:bibl/tei:bibl">
             <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">     
                 <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:bibl/tei:bibl">
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(descendant-or-self::text(),' '))"/></string>
                 </xsl:for-each>
             </array>
         </xsl:if>
@@ -640,7 +648,7 @@
             <xsl:if test="$doc/descendant::tei:body/descendant::tei:idno/@type[. != 'URI']">
                 <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">     
                     <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:idno/@type[. != 'URI']">
-                        <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+                        <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(descendant-or-self::text(),' '))"/></string>
                     </xsl:for-each>
                 </array>
            </xsl:if>            
@@ -685,35 +693,35 @@
         <xsl:param name="id"/>
         <xsl:if test="contains($id, '/place')">
             <xsl:if test="$doc/descendant::tei:event[@type != 'attestation'][@srophe:computed-start or @from or @when or @to]">
-            <array key="eventDatesStart" xmlns="http://www.w3.org/2005/xpath-functions">
-                <xsl:for-each select="$doc/descendant::tei:event[@type != 'attestation'][@srophe:computed-start or @from or @when or @to]">
-                    <xsl:variable name="startDate">
-                        <xsl:choose>
-                            <xsl:when test="@srophe:computed-start"><xsl:value-of select="@srophe:computed-start"/></xsl:when>
-                            <xsl:when test="@from"><xsl:value-of select="@from"/></xsl:when>
-                            <xsl:when test="@when"><xsl:value-of select="@when"/></xsl:when>
-                            <xsl:when test="@to"><xsl:value-of select="@to"/></xsl:when>
-                            <xsl:when test="@srophe:computed-end"><xsl:value-of select="@srophe:computed-end"/></xsl:when>
-                        </xsl:choose>
-                    </xsl:variable>
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$startDate"/></string>
-                </xsl:for-each>
-            </array>
-            <array key="eventDatesEnd" xmlns="http://www.w3.org/2005/xpath-functions">
-                <xsl:for-each select="$doc/descendant::tei:event[@type != 'attestation'][@srophe:computed-start or @from or @when or @to]">
-                    <xsl:variable name="endDate">
-                        <xsl:choose>
-                            <xsl:when test="@srophe:computed-end"><xsl:value-of select="@srophe:computed-end"/></xsl:when>
-                            <xsl:when test="@to"><xsl:value-of select="@to"/></xsl:when>
-                            <xsl:when test="@when"><xsl:value-of select="@when"/></xsl:when>
-                            <xsl:when test="@from"><xsl:value-of select="@from"/></xsl:when>
-                            <xsl:when test="@srophe:computed-start"><xsl:value-of select="@srophe:computed-start"/></xsl:when>
-                        </xsl:choose>
-                    </xsl:variable>
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$endDate"/></string>
-                </xsl:for-each>
-            </array>
-        </xsl:if>
+                <array key="eventDatesStart" xmlns="http://www.w3.org/2005/xpath-functions">
+                    <xsl:for-each select="$doc/descendant::tei:event[@type != 'attestation'][@srophe:computed-start or @from or @when or @to]">
+                        <xsl:variable name="startDate">
+                            <xsl:choose>
+                                <xsl:when test="@srophe:computed-start"><xsl:value-of select="@srophe:computed-start"/></xsl:when>
+                                <xsl:when test="@from"><xsl:value-of select="@from"/></xsl:when>
+                                <xsl:when test="@when"><xsl:value-of select="@when"/></xsl:when>
+                                <xsl:when test="@to"><xsl:value-of select="@to"/></xsl:when>
+                                <xsl:when test="@srophe:computed-end"><xsl:value-of select="@srophe:computed-end"/></xsl:when>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$startDate"/></string>
+                    </xsl:for-each>
+                </array>
+                <array key="eventDatesEnd" xmlns="http://www.w3.org/2005/xpath-functions">
+                    <xsl:for-each select="$doc/descendant::tei:event[@type != 'attestation'][@srophe:computed-start or @from or @when or @to]">
+                        <xsl:variable name="endDate">
+                            <xsl:choose>
+                                <xsl:when test="@srophe:computed-end"><xsl:value-of select="@srophe:computed-end"/></xsl:when>
+                                <xsl:when test="@to"><xsl:value-of select="@to"/></xsl:when>
+                                <xsl:when test="@when"><xsl:value-of select="@when"/></xsl:when>
+                                <xsl:when test="@from"><xsl:value-of select="@from"/></xsl:when>
+                                <xsl:when test="@srophe:computed-start"><xsl:value-of select="@srophe:computed-start"/></xsl:when>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$endDate"/></string>
+                    </xsl:for-each>
+                </array>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
     <xsl:template match="*:fields[@function = 'attestationsDates']">
@@ -721,35 +729,35 @@
         <xsl:param name="id"/>
         <xsl:if test="contains($id, '/place')">
             <xsl:if test="$doc/descendant::tei:event[@type = 'attestation'][@srophe:computed-start or @from or @when or @to]">
-            <array key="attestationsDatesStart" xmlns="http://www.w3.org/2005/xpath-functions">
-                <xsl:for-each select="$doc/descendant::tei:event[@type = 'attestation'][@srophe:computed-start or @from or @when or @to]">
-                    <xsl:variable name="startDate">
-                        <xsl:choose>
-                            <xsl:when test="@srophe:computed-start"><xsl:value-of select="@srophe:computed-start"/></xsl:when>
-                            <xsl:when test="@from"><xsl:value-of select="@from"/></xsl:when>
-                            <xsl:when test="@when"><xsl:value-of select="@when"/></xsl:when>
-                            <xsl:when test="@to"><xsl:value-of select="@to"/></xsl:when>
-                            <xsl:when test="@srophe:computed-end"><xsl:value-of select="@srophe:computed-end"/></xsl:when>
-                        </xsl:choose>
-                    </xsl:variable>
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$startDate"/></string>
-                </xsl:for-each>
-            </array>
-            <array key="attestationsDatesEnd" xmlns="http://www.w3.org/2005/xpath-functions">
-                <xsl:for-each select="$doc/descendant::tei:event[@type = 'attestation'][@srophe:computed-start or @from or @when or @to]">
-                    <xsl:variable name="endDate">
-                        <xsl:choose>
-                            <xsl:when test="@srophe:computed-end"><xsl:value-of select="@srophe:computed-end"/></xsl:when>
-                            <xsl:when test="@to"><xsl:value-of select="@to"/></xsl:when>
-                            <xsl:when test="@when"><xsl:value-of select="@when"/></xsl:when>
-                            <xsl:when test="@from"><xsl:value-of select="@from"/></xsl:when>
-                            <xsl:when test="@srophe:computed-start"><xsl:value-of select="@srophe:computed-start"/></xsl:when>
-                        </xsl:choose>
-                    </xsl:variable>
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$endDate"/></string>
-                </xsl:for-each>
-            </array>
-        </xsl:if>
+                <array key="attestationsDatesStart" xmlns="http://www.w3.org/2005/xpath-functions">
+                    <xsl:for-each select="$doc/descendant::tei:event[@type = 'attestation'][@srophe:computed-start or @from or @when or @to]">
+                        <xsl:variable name="startDate">
+                            <xsl:choose>
+                                <xsl:when test="@srophe:computed-start"><xsl:value-of select="@srophe:computed-start"/></xsl:when>
+                                <xsl:when test="@from"><xsl:value-of select="@from"/></xsl:when>
+                                <xsl:when test="@when"><xsl:value-of select="@when"/></xsl:when>
+                                <xsl:when test="@to"><xsl:value-of select="@to"/></xsl:when>
+                                <xsl:when test="@srophe:computed-end"><xsl:value-of select="@srophe:computed-end"/></xsl:when>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$startDate"/></string>
+                    </xsl:for-each>
+                </array>
+                <array key="attestationsDatesEnd" xmlns="http://www.w3.org/2005/xpath-functions">
+                    <xsl:for-each select="$doc/descendant::tei:event[@type = 'attestation'][@srophe:computed-start or @from or @when or @to]">
+                        <xsl:variable name="endDate">
+                            <xsl:choose>
+                                <xsl:when test="@srophe:computed-end"><xsl:value-of select="@srophe:computed-end"/></xsl:when>
+                                <xsl:when test="@to"><xsl:value-of select="@to"/></xsl:when>
+                                <xsl:when test="@when"><xsl:value-of select="@when"/></xsl:when>
+                                <xsl:when test="@from"><xsl:value-of select="@from"/></xsl:when>
+                                <xsl:when test="@srophe:computed-start"><xsl:value-of select="@srophe:computed-start"/></xsl:when>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$endDate"/></string>
+                    </xsl:for-each>
+                </array>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
     <xsl:template match="*:fields[@function = 'religiousCommunitiesDates']">
@@ -757,35 +765,35 @@
         <xsl:param name="id"/>
         <xsl:if test="contains($id, '/place')">
             <xsl:if test="$doc/descendant::tei:state[@type = 'confession'][@srophe:computed-start or @from or @when or @to]">
-            <array key="religiousCommunitiesDatesStart" xmlns="http://www.w3.org/2005/xpath-functions">
-                <xsl:for-each select="$doc/descendant::tei:state[@type = 'confession'][@srophe:computed-start or @from or @when or @to]">
-                    <xsl:variable name="startDate">
-                        <xsl:choose>
-                            <xsl:when test="@srophe:computed-start"><xsl:value-of select="@srophe:computed-start"/></xsl:when>
-                            <xsl:when test="@from"><xsl:value-of select="@from"/></xsl:when>
-                            <xsl:when test="@when"><xsl:value-of select="@when"/></xsl:when>
-                            <xsl:when test="@to"><xsl:value-of select="@to"/></xsl:when>
-                            <xsl:when test="@srophe:computed-end"><xsl:value-of select="@srophe:computed-end"/></xsl:when>
-                        </xsl:choose>
-                    </xsl:variable>
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$startDate"/></string>
-                </xsl:for-each>
-            </array>
-            <array key="religiousCommunitiesDatesEnd" xmlns="http://www.w3.org/2005/xpath-functions">
-                <xsl:for-each select="$doc/descendant::tei:state[@type = 'confession'][@srophe:computed-start or @from or @when or @to]">
-                    <xsl:variable name="endDate">
-                        <xsl:choose>
-                            <xsl:when test="@srophe:computed-end"><xsl:value-of select="@srophe:computed-end"/></xsl:when>
-                            <xsl:when test="@to"><xsl:value-of select="@to"/></xsl:when>
-                            <xsl:when test="@when"><xsl:value-of select="@when"/></xsl:when>
-                            <xsl:when test="@from"><xsl:value-of select="@from"/></xsl:when>
-                            <xsl:when test="@srophe:computed-start"><xsl:value-of select="@srophe:computed-start"/></xsl:when>
-                        </xsl:choose>
-                    </xsl:variable>
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$endDate"/></string>
-                </xsl:for-each>
-            </array>
-        </xsl:if>
+                <array key="religiousCommunitiesDatesStart" xmlns="http://www.w3.org/2005/xpath-functions">
+                    <xsl:for-each select="$doc/descendant::tei:state[@type = 'confession'][@srophe:computed-start or @from or @when or @to]">
+                        <xsl:variable name="startDate">
+                            <xsl:choose>
+                                <xsl:when test="@srophe:computed-start"><xsl:value-of select="@srophe:computed-start"/></xsl:when>
+                                <xsl:when test="@from"><xsl:value-of select="@from"/></xsl:when>
+                                <xsl:when test="@when"><xsl:value-of select="@when"/></xsl:when>
+                                <xsl:when test="@to"><xsl:value-of select="@to"/></xsl:when>
+                                <xsl:when test="@srophe:computed-end"><xsl:value-of select="@srophe:computed-end"/></xsl:when>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$startDate"/></string>
+                    </xsl:for-each>
+                </array>
+                <array key="religiousCommunitiesDatesEnd" xmlns="http://www.w3.org/2005/xpath-functions">
+                    <xsl:for-each select="$doc/descendant::tei:state[@type = 'confession'][@srophe:computed-start or @from or @when or @to]">
+                        <xsl:variable name="endDate">
+                            <xsl:choose>
+                                <xsl:when test="@srophe:computed-end"><xsl:value-of select="@srophe:computed-end"/></xsl:when>
+                                <xsl:when test="@to"><xsl:value-of select="@to"/></xsl:when>
+                                <xsl:when test="@when"><xsl:value-of select="@when"/></xsl:when>
+                                <xsl:when test="@from"><xsl:value-of select="@from"/></xsl:when>
+                                <xsl:when test="@srophe:computed-start"><xsl:value-of select="@srophe:computed-start"/></xsl:when>
+                            </xsl:choose>
+                        </xsl:variable>
+                        <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$endDate"/></string>
+                    </xsl:for-each>
+                </array>
+            </xsl:if>
         </xsl:if>
     </xsl:template>
     <xsl:template match="*:fields[@function = 'existenceDates']">
@@ -795,19 +803,62 @@
             <xsl:if test="$doc/descendant::tei:state[@type = 'existence'][@srophe:computed-start]">
                 <array key="existenceDatesStart" xmlns="http://www.w3.org/2005/xpath-functions">
                     <xsl:for-each select="$doc/descendant::tei:state[@type = 'existence']">
-                    <xsl:variable name="startDate" select="@srophe:computed-start"/>
+                        <xsl:variable name="startDate" select="@srophe:computed-start"/>
+                        <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$startDate"/></string>
+                    </xsl:for-each>
+                </array>
+                <array key="existenceDatesEnd" xmlns="http://www.w3.org/2005/xpath-functions">
+                    <xsl:for-each select="$doc/descendant::tei:state[@type = 'existence']">
+                        <xsl:variable name="endDate" select="@srophe:computed-end"/>
+                        <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$endDate"/></string>
+                    </xsl:for-each>
+                </array>
+            </xsl:if>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="*:fields[@function = 'stateDates']">
+        <xsl:param name="doc"/>
+        <xsl:param name="id"/>
+            <xsl:if test="$doc/descendant::tei:state[@srophe:computed-start or @from or @when or @to or @notBefore or @notAfter]">
+            <array key="religiousCommunitiesDatesStart" xmlns="http://www.w3.org/2005/xpath-functions">
+                <xsl:for-each select="$doc/descendant::tei:state[@srophe:computed-start or @from or @when or @to or @notBefore or @notAfter]">
+                    <xsl:variable name="startDate">
+                        <xsl:choose>
+                            <xsl:when test="@srophe:computed-start"><xsl:value-of select="@srophe:computed-start"/></xsl:when>
+                            <xsl:when test="@notBefore"><xsl:value-of select="@notBefore"/></xsl:when>
+                            <xsl:when test="@from"><xsl:value-of select="@from"/></xsl:when>
+                            <xsl:when test="@when"><xsl:value-of select="@when"/></xsl:when>
+                            <xsl:when test="@to"><xsl:value-of select="@to"/></xsl:when>
+                            <xsl:when test="@notAfter"><xsl:value-of select="@notAfter"/></xsl:when>
+                            <xsl:when test="@srophe:computed-end"><xsl:value-of select="@srophe:computed-end"/></xsl:when>
+                        </xsl:choose>
+                    </xsl:variable>
                     <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$startDate"/></string>
                 </xsl:for-each>
             </array>
-                <array key="existenceDatesEnd" xmlns="http://www.w3.org/2005/xpath-functions">
-                    <xsl:for-each select="$doc/descendant::tei:state[@type = 'existence']">
-                    <xsl:variable name="endDate" select="@srophe:computed-end"/>
+            <array key="religiousCommunitiesDatesEnd" xmlns="http://www.w3.org/2005/xpath-functions">
+                <xsl:for-each select="$doc/descendant::tei:state[@srophe:computed-start or @from or @when or @to or @notBefore or @notAfter]">
+                    <xsl:variable name="endDate">
+                        <xsl:choose>
+                            <xsl:when test="@srophe:computed-end"><xsl:value-of select="@srophe:computed-end"/></xsl:when>
+                            <xsl:when test="@notAfter"><xsl:value-of select="@notAfter"/></xsl:when>
+                            <xsl:when test="@to"><xsl:value-of select="@to"/></xsl:when>
+                            <xsl:when test="@when"><xsl:value-of select="@when"/></xsl:when>
+                            <xsl:when test="@from"><xsl:value-of select="@from"/></xsl:when>
+                            <xsl:when test="@notBefore"><xsl:value-of select="@notBefore"/></xsl:when>
+                            <xsl:when test="@srophe:computed-start"><xsl:value-of select="@srophe:computed-start"/></xsl:when>
+                        </xsl:choose>
+                    </xsl:variable>
                     <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$endDate"/></string>
                 </xsl:for-each>
             </array>
         </xsl:if>
-        </xsl:if>
     </xsl:template>
+    
+    <!-- 
+        <state type="martyr" source="#bib25-8">
+
+        <floruit notBefore="0300" notAfter="0500" syriaca-computed-end="0500-01-01" syriaca-computed-start="0300-01-01" source="#bib25-1">4th/5th cent.</floruit> -->
     <xsl:template match="*:fields[@function = 'birth']">
         <xsl:param name="doc"/>
         <xsl:if test="$doc/descendant::tei:birth/tei:date">     

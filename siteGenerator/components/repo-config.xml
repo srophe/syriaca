@@ -116,12 +116,7 @@
             <fields function="series">series</fields>
             <fields function="idno">idno</fields>
             <fields function="type">type</fields>
-            <!-- 
-            <fields function="placeType" xpath="tei:person@type">placeType</fields>
-            <fields function="personType" xpath="tei:person[contains(@ana, '#syriaca-',$persons:type,'')]]">personType</fields>
-            <fields function="bhseType" xpath="tei:idno[@type]">bhseType</fields>
-            <fields function="cbssType" xpath="tei:biblStruct[@type]">cbssType</fields>
-            -->
+
             <!-- Syriaca.org specific fields` -->
             <fields function="titleSyriac">titleSyriac</fields>
             <fields function="titleArabic">titleArabic</fields>
@@ -143,12 +138,19 @@
             <fields function="religiousCommunities" xpath="tei:state[@type = 'confession']">religiousCommunities</fields>
             <fields function="religiousCommunitiesDates" xpath="tei:state[@type = 'confession'][@syriaca-computed-start or @syriaca-computed-end]">religiousCommunitiesDates</fields>
             <fields function="existenceDates" xpath="tei:state[@type = 'existence'][@syriaca-computed-start or @syriaca-computed-end]">existenceDates</fields>
-            <fields function="related" xpath="tei:listRelation/tei:relation[@passive or @mutual]">related</fields>
+            
+            <!-- Related will be handled by RDF -->
+<!--            <fields function="related" xpath="tei:listRelation/tei:relation[@passive or @mutual]">related</fields>-->
             
             <!-- Persons -->
             <fields function="birth" xpath="tei:birth">birth</fields>
             <fields function="death" xpath="tei:death">death</fields>
             <fields function="gender" xpath="tei:gender">gender</fields>
+            <!-- types = office confession saint martyr group occupation fallen apostle animal -->
+            <fields function="stateType" xpath="tei:state/@type">stateType</fields>
+            <fields function="state" xpath="tei:state">state</fields>
+            <fields function="stateDates" xpath="tei:state/@type">stateDates</fields>
+            <fields function="floruitDates" xpath="tei:state/@type">floruitDates</fields>
             
             <!-- BHSE -->
             <fields function="prologue" xpath="tei:bibl/tei:note[@type='prologue']">prologue</fields>
