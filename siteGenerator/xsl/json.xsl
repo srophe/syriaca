@@ -820,7 +820,7 @@
         <xsl:param name="doc"/>
         <xsl:param name="id"/>
             <xsl:if test="$doc/descendant::tei:state[@srophe:computed-start or @from or @when or @to or @notBefore or @notAfter]">
-            <array key="religiousCommunitiesDatesStart" xmlns="http://www.w3.org/2005/xpath-functions">
+                <array key="stateDatesStart" xmlns="http://www.w3.org/2005/xpath-functions">
                 <xsl:for-each select="$doc/descendant::tei:state[@srophe:computed-start or @from or @when or @to or @notBefore or @notAfter]">
                     <xsl:variable name="startDate">
                         <xsl:choose>
@@ -836,8 +836,46 @@
                     <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$startDate"/></string>
                 </xsl:for-each>
             </array>
-            <array key="religiousCommunitiesDatesEnd" xmlns="http://www.w3.org/2005/xpath-functions">
+                <array key="stateDatesEnd" xmlns="http://www.w3.org/2005/xpath-functions">
                 <xsl:for-each select="$doc/descendant::tei:state[@srophe:computed-start or @from or @when or @to or @notBefore or @notAfter]">
+                    <xsl:variable name="endDate">
+                        <xsl:choose>
+                            <xsl:when test="@srophe:computed-end"><xsl:value-of select="@srophe:computed-end"/></xsl:when>
+                            <xsl:when test="@notAfter"><xsl:value-of select="@notAfter"/></xsl:when>
+                            <xsl:when test="@to"><xsl:value-of select="@to"/></xsl:when>
+                            <xsl:when test="@when"><xsl:value-of select="@when"/></xsl:when>
+                            <xsl:when test="@from"><xsl:value-of select="@from"/></xsl:when>
+                            <xsl:when test="@notBefore"><xsl:value-of select="@notBefore"/></xsl:when>
+                            <xsl:when test="@srophe:computed-start"><xsl:value-of select="@srophe:computed-start"/></xsl:when>
+                        </xsl:choose>
+                    </xsl:variable>
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$endDate"/></string>
+                </xsl:for-each>
+            </array>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="*:fields[@function = 'floruitDates']">
+        <xsl:param name="doc"/>
+        <xsl:param name="id"/>
+        <xsl:if test="$doc/descendant::tei:floruit/tei:date[@srophe:computed-start or @from or @when or @to or @notBefore or @notAfter]">
+            <array key="floruitDatesStart" xmlns="http://www.w3.org/2005/xpath-functions">
+                <xsl:for-each select="$doc/descendant::tei:floruit/tei:date[@srophe:computed-start or @from or @when or @to or @notBefore or @notAfter]">
+                    <xsl:variable name="startDate">
+                        <xsl:choose>
+                            <xsl:when test="@srophe:computed-start"><xsl:value-of select="@srophe:computed-start"/></xsl:when>
+                            <xsl:when test="@notBefore"><xsl:value-of select="@notBefore"/></xsl:when>
+                            <xsl:when test="@from"><xsl:value-of select="@from"/></xsl:when>
+                            <xsl:when test="@when"><xsl:value-of select="@when"/></xsl:when>
+                            <xsl:when test="@to"><xsl:value-of select="@to"/></xsl:when>
+                            <xsl:when test="@notAfter"><xsl:value-of select="@notAfter"/></xsl:when>
+                            <xsl:when test="@srophe:computed-end"><xsl:value-of select="@srophe:computed-end"/></xsl:when>
+                        </xsl:choose>
+                    </xsl:variable>
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$startDate"/></string>
+                </xsl:for-each>
+            </array>
+            <array key="floruitDatesEnd" xmlns="http://www.w3.org/2005/xpath-functions">
+                <xsl:for-each select="$doc/descendant::tei:floruit/tei:date[@srophe:computed-start or @from or @when or @to or @notBefore or @notAfter]">
                     <xsl:variable name="endDate">
                         <xsl:choose>
                             <xsl:when test="@srophe:computed-end"><xsl:value-of select="@srophe:computed-end"/></xsl:when>
@@ -861,7 +899,8 @@
         <floruit notBefore="0300" notAfter="0500" syriaca-computed-end="0500-01-01" syriaca-computed-start="0300-01-01" source="#bib25-1">4th/5th cent.</floruit> -->
     <xsl:template match="*:fields[@function = 'birth']">
         <xsl:param name="doc"/>
-        <xsl:if test="$doc/descendant::tei:birth/tei:date">     
+        <xsl:if test="$doc/descendant::tei:birth/tei:date">  
+            <array key="birth" xmlns="http://www.w3.org/2005/xpath-functions">
             <xsl:for-each select="$doc/descendant::tei:birth/tei:date">
                 <xsl:variable name="date">
                     <xsl:choose>
@@ -869,13 +908,15 @@
                         <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
                     </xsl:choose>
                 </xsl:variable>
-                <string xmlns="http://www.w3.org/2005/xpath-functions" key="birth"><xsl:value-of select="normalize-space($date)"/></string>
+                <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space($date)"/></string>
             </xsl:for-each>
+            </array>
         </xsl:if>
     </xsl:template>
     <xsl:template match="*:fields[@function = 'death']">
         <xsl:param name="doc"/>
         <xsl:if test="$doc/descendant::tei:death/tei:date">     
+            <array key="death" xmlns="http://www.w3.org/2005/xpath-functions">
             <xsl:for-each select="$doc/descendant::tei:death/tei:date">
                 <xsl:variable name="date">
                     <xsl:choose>
@@ -883,8 +924,9 @@
                         <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
                     </xsl:choose>
                 </xsl:variable>
-                <string xmlns="http://www.w3.org/2005/xpath-functions" key="death"><xsl:value-of select="normalize-space($date)"/></string>
+                <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space($date)"/></string>
             </xsl:for-each>
+            </array>
         </xsl:if>
     </xsl:template>
     
