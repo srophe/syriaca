@@ -155,6 +155,10 @@
                  <xsl:variable name="syr" select="string-join($doc/descendant::*[contains(@srophe:tags,'#syriaca-headword')][matches(@xml:lang,'^syr')][1],' ')"/>
                  <xsl:value-of select="local:sortStringEn(concat($en, if($syr != '') then  concat(' - ', $syr) else ()))"/>
              </xsl:when>
+             <xsl:when test="$doc/descendant::tei:body/tei:bibl/tei:title[@xml:lang='en']">
+                 <xsl:variable name="title" select="$doc/descendant::tei:biblStruct/descendant::tei:title[@xml:lang='en']"/>
+                 <xsl:value-of select="local:sortStringEn(string-join($title,' '))"/>
+             </xsl:when>
              <xsl:when test="$doc/descendant::tei:biblStruct">
                  <xsl:variable name="title" select="$doc/descendant::tei:biblStruct/descendant::tei:title"/>
                  <xsl:value-of select="local:sortStringEn(string-join($title,' '))"/>

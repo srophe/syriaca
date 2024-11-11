@@ -55,48 +55,47 @@
     </xsl:template>
     <xsl:template name="createIndex">
         <xsl:variable name="xml">
-                <map xmlns="http://www.w3.org/2005/xpath-functions">
-                    <map key="mappings">
-                        <map key="properties">
-                            <xsl:for-each select="$config/descendant::*:searchFields/*:fields">
-                                <map key="{.}">
-                                    <string key="type">
-                                        <xsl:choose>
-                                            <xsl:when test="@type"><xsl:value-of select="string(@type)"/></xsl:when>
-                                            <xsl:otherwise>text</xsl:otherwise>
-                                        </xsl:choose>
-                                    </string>
-                                </map>
-                            </xsl:for-each>
-                        </map>
-                    </map>
-                </map>
-            
-            <!--
-            <array xmlns="http://www.w3.org/2005/xpath-functions">
+            <map xmlns="http://www.w3.org/2005/xpath-functions">
                 <map key="mappings">
-                    <array>
-                        <map key="properties">
-                            <xsl:for-each select="$config/descendant::*:searchFields/*:fields">
-                                <array xmlns="http://www.w3.org/2005/xpath-functions">
+                    <map key="properties">
+                        <xsl:for-each select="$config/descendant::*:searchFields/*:fields">
+                            <xsl:choose>
+                                <xsl:when test="@type ='date'">
+                                    <map key="{.}Start">
+                                        <string key="type">
+                                            <xsl:choose>
+                                                <xsl:when test="@type"><xsl:value-of select="string(@type)"/></xsl:when>
+                                                <xsl:otherwise>text</xsl:otherwise>
+                                            </xsl:choose>
+                                        </string>
+                                    </map>
+                                    <map key="{.}End">
+                                        <string key="type">
+                                            <xsl:choose>
+                                                <xsl:when test="@type"><xsl:value-of select="string(@type)"/></xsl:when>
+                                                <xsl:otherwise>text</xsl:otherwise>
+                                            </xsl:choose>
+                                        </string>
+                                    </map> 
+                                </xsl:when>
+                                <xsl:otherwise>
                                     <map key="{.}">
                                         <string key="type">
                                             <xsl:choose>
                                                 <xsl:when test="@type"><xsl:value-of select="string(@type)"/></xsl:when>
-                                                <xsl:otherwise>keyword</xsl:otherwise>
+                                                <xsl:otherwise>text</xsl:otherwise>
                                             </xsl:choose>
                                         </string>
-                                    </map>
-                                </array>
-                            </xsl:for-each>
-                        </map>
-                    </array>
+                                    </map> 
+                                </xsl:otherwise>
+                            </xsl:choose>
+                        </xsl:for-each>
+                    </map>
                 </map>
-            </array>
-            -->
+            </map>
         </xsl:variable>
         <xsl:value-of select="xml-to-json($xml, map { 'indent' : true() })"/>
-<!--        <xsl:copy-of select="$xml"/>-->
+        <!--        <xsl:copy-of select="$xml"/>-->
     </xsl:template>
     
 </xsl:stylesheet>
