@@ -430,10 +430,10 @@
         <xsl:param name="doc"/>
         <xsl:param name="id"/>
         <xsl:if test="contains($id, '/person')">
-            <xsl:if test="$doc/descendant::tei:body/tei:listPerson/tei:persName or $doc/descendant::tei:body/tei:listPerson/tei:personGrp/tei:persName">
+            <xsl:if test="$doc/descendant::tei:body/tei:listPerson/tei:person/tei:persName or $doc/descendant::tei:body/tei:listPerson/tei:personGrp/tei:persName">
                 <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions"> 
-                    <xsl:for-each-group select="$doc/descendant::tei:body/tei:listPerson/tei:persName[. != ''] | $doc/descendant::tei:body/tei:listPerson/tei:personGrp/tei:persName[. != '']" group-by="text()">
-                        <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+                    <xsl:for-each-group select="$doc/descendant::tei:body/tei:listPerson/tei:person/tei:persName[descendant-or-self::text() != ''] | $doc/descendant::tei:body/tei:listPerson/tei:personGrp/tei:persName[descendant-or-self::text() != '']" group-by=".">
+                        <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(current-grouping-key(),' '))"/></string>
                     </xsl:for-each-group>
                 </array>
             </xsl:if>
@@ -443,10 +443,10 @@
         <xsl:param name="doc"/>
         <xsl:param name="id"/>
         <xsl:if test="contains($id, '/place')">
-            <xsl:if test="$doc/descendant::tei:body/tei:listPlace/tei:placeName">
+            <xsl:if test="$doc/descendant::tei:body/tei:listPlace/tei:place/tei:placeName">
             <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions"> 
-                <xsl:for-each-group select="$doc/descendant::tei:body/tei:listPlace/tei:placeName[. != '']" group-by="text()">
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+                <xsl:for-each-group select="$doc/descendant::tei:body/tei:listPlace/tei:place/tei:placeName[descendant-or-self::text() != '']" group-by=".">
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(current-grouping-key(),' '))"/></string>
                 </xsl:for-each-group>
             </array>
         </xsl:if>
@@ -456,8 +456,8 @@
         <xsl:param name="doc"/>
         <xsl:if test="$doc/descendant::tei:body/descendant::tei:location">
             <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">      
-                <xsl:for-each-group select="$doc/descendant::tei:body/descendant::tei:location" group-by="text()">
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+                <xsl:for-each-group select="$doc/descendant::tei:body/descendant::tei:location" group-by=".">
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(current-grouping-key(),' '))"/></string>
                 </xsl:for-each-group>
             </array>
         </xsl:if>
@@ -539,10 +539,10 @@
     <xsl:template match="*:fields[@function = 'state']">
         <xsl:param name="doc"/>
         <xsl:param name="id"/>
-        <xsl:if test="$doc/descendant::tei:body/descendant::tei:state">
+        <xsl:if test="$doc/descendant::tei:body/descendant::tei:state[normalize-space(string-join(descendant-or-self::text(),'')) != '']">
             <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">     
-                <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:state">
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(descendant-or-self::text(),' '))"/></string>
+                <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:state[normalize-space(string-join(descendant-or-self::text(),'')) != '']">
+                   <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(descendant-or-self::text(),' '))"/></string>
                 </xsl:for-each>
             </array>
         </xsl:if>
