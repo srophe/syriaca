@@ -214,9 +214,9 @@
             </xsl:when>
             <xsl:when test="contains($id, '/person')">
                 <xsl:variable name="field">
-                    <xsl:value-of select="$doc/descendant::tei:body/tei:listPerson/tei:person/@ana"/>
+                    <xsl:value-of select="$doc/descendant::tei:body/descendant::tei:person/@ana"/>
                 </xsl:variable>
-                <xsl:if test="$doc/descendant::tei:body/tei:listPerson/tei:person/@ana[. != '']">
+                <xsl:if test="$doc/descendant::tei:body/descendant::tei:person[@ana != '']">
                     <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">     
                         <xsl:for-each select="tokenize($field,' ')">
                             <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="substring-after(., '-')"/></string>
@@ -351,20 +351,36 @@
     </xsl:template>
     <xsl:template match="*:fields[@function = 'author']">
         <xsl:param name="doc"/>
-        <xsl:if test="$doc/descendant::tei:biblStruct/descendant-or-self::tei:author or $doc/descendant::tei:biblStruct/descendant-or-self::tei:editor">
+        <xsl:if test="$doc/descendant::tei:body/tei:bibl/tei:author[descendant::text() != ''] 
+            or $doc/descendant::tei:body/tei:bibl/tei:editor[descendant::text() != ''] 
+            or $doc/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[descendant::text() != ''] 
+            or $doc/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:editor[descendant::text() != '']">
             <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">      
-                <xsl:for-each select="$doc/descendant::tei:biblStruct/descendant-or-self::tei:author | $doc/descendant::tei:biblStruct/descendant-or-self::tei:editor">
+                <xsl:for-each-group select="$doc/descendant::tei:body/tei:bibl/tei:author[descendant::text() != ''] 
+                    | $doc/descendant::tei:body/tei:bibl/tei:editor[descendant::text() != ''] 
+                    | $doc/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:author[descendant::text() != ''] 
+                    | $doc/descendant::tei:body/tei:biblStruct/descendant-or-self::tei:editor[descendant::text() != '']" group-by=".">
                     <xsl:variable name="lastNameFirst">
                         <xsl:choose>
                             <xsl:when test="tei:surname">
                                 <xsl:value-of select="concat(tei:surname, ' ', tei:forename)"/>
                             </xsl:when>
                             <xsl:otherwise>
-                                <xsl:value-of select="string-join(child::*,' ')"/>
+                                <xsl:value-of select="normalize-space(string-join(descendant-or-self::text(),' '))"/>
                             </xsl:otherwise>
                         </xsl:choose>
                     </xsl:variable>
-                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space($lastNameFirst)"/></string>
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="$lastNameFirst"/></string>
+                </xsl:for-each-group>
+            </array>
+        </xsl:if>
+    </xsl:template>
+    <xsl:template match="*:fields[@function = 'subject']">
+        <xsl:param name="doc"/>
+        <xsl:if test="$doc/descendant::tei:relation[@ref='dc:subject']/tei:desc[. != '']">
+            <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">      
+                <xsl:for-each select="$doc/descendant::tei:relation[@ref='dc:subject']/tei:desc[. != '']">
+                    <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
                 </xsl:for-each>
             </array>
         </xsl:if>
