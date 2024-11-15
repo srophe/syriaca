@@ -670,10 +670,10 @@
         <xsl:if test="$doc/descendant::tei:imprint/tei:date">  
             <array key="cbssPubDateStart" xmlns="http://www.w3.org/2005/xpath-functions">
                 <xsl:for-each select="$doc/descendant::tei:imprint/tei:date">
-                    <xsl:variable name="date" select="."/>
+                    <xsl:variable name="date" select="normalize-space(.)"/>
                     <xsl:variable name="startDate">
                         <xsl:choose>
-                            <xsl:when test="matches($date,'\d[4]-\d[4]')">
+                            <xsl:when test="matches($date,'\d{4}-\d{4}')">
                                 <xsl:value-of select="substring-before($date,'-')"/>
                             </xsl:when>
                             <xsl:otherwise><xsl:value-of select="$date"/></xsl:otherwise>
@@ -687,7 +687,7 @@
                     <xsl:variable name="date" select="."/>
                     <xsl:variable name="endDate">
                         <xsl:choose>
-                            <xsl:when test="matches($date,'\d[4]-\d[4]')">
+                            <xsl:when test="matches($date,'\d{4}-\d{4}')">
                                 <xsl:value-of select="substring-after($date,'-')"/>
                             </xsl:when>
                             <xsl:otherwise><xsl:value-of select="$date"/></xsl:otherwise>
