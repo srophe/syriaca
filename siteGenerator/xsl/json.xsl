@@ -703,12 +703,18 @@
     <xsl:template match="*:fields[@function = 'abstract']">
         <xsl:param name="doc"/>
         <xsl:param name="id"/>
-            <xsl:if test="$doc/descendant::*[starts-with(@xml:id,'abstract')]">
+        <xsl:choose>
+            <xsl:when test="$doc/descendant::*[starts-with(@xml:id,'abstract')]">
                 <string key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">
                     <xsl:value-of select="normalize-space(string-join($doc/descendant::*[starts-with(@xml:id,'abstract')],' '))"/>
-                </string>   
-            </xsl:if>            
-        
+                </string>  
+            </xsl:when>
+            <xsl:when test="$doc/descendant::*[@type='abstract']">
+                <string key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">
+                    <xsl:value-of select="normalize-space(string-join($doc/descendant::*[@type='abstract'],' '))"/>
+                </string>
+            </xsl:when>
+        </xsl:choose>    
     </xsl:template>
     <!-- DATES start and end  -->
     <xsl:template match="*:fields[@function = 'cbssPubDate']">
