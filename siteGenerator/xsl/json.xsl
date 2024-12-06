@@ -700,6 +700,17 @@
         </xsl:if>
     </xsl:template>
     
+    <xsl:template match="*:fields[@function = 'abstract']">
+        <xsl:param name="doc"/>
+        <xsl:param name="id"/>
+        <xsl:if test="contains($id, '/cbss')">
+            <xsl:if test="$doc/descendant::*[starts-with(@xml:id,'abstract')]">
+                <string key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">
+                    <xsl:value-of select="normalize-space(string-join($doc/descendant::*[starts-with(@xml:id,'abstract')],' '))"/>
+                </string>   
+            </xsl:if>            
+        </xsl:if>
+    </xsl:template>
     <!-- DATES start and end  -->
     <xsl:template match="*:fields[@function = 'cbssPubDate']">
         <xsl:param name="doc"/>
