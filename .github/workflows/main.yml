@@ -53,16 +53,13 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}  
 
-      # Optional: Ensure files are recognized as "newer" by updating timestamps to force full redeployment
-      # - name: Update timestamps to ensure sync
-      #   run: |
-      #     find ./ -exec touch {} \;
+      # Optional: Full redeployment
 
-      - name: Debug
-        run: aws s3 sync ./ s3://srophe-syriaca-front-end --delete --exact-timestamps --dryrun
-      # - name: Sync changed files to S3
+      # - name: Debug
+      #   run: aws s3 sync ./ s3://srophe-syriaca-front-end --delete --exact-timestamps --dryrun
+      # - name: Sync all files to S3
       #   run: |
       #     aws s3 sync ./ s3://srophe-syriaca-front-end --delete --exact-timestamps
-        env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+        # env:
+        #   AWS_REGION: ${{ secrets.AWS_REGION }}
+        #   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
