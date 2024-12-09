@@ -32,7 +32,7 @@ jobs:
       # Step 3: Sync only changed files to S3
 
       - name: Debug
-        run: aws s3 sync ./ s3://srophe-syriaca-front-end --dryrun
+        run: aws s3 sync ./ s3://srophe-syriaca-front-end --delete --exact-timestamps --dryrun
       # - name: Sync changed files to S3
       #   run: |
           # aws s3 sync ./ s3://srophe-syriaca-front-end --delete --exact-timestamps
