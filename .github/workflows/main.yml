@@ -35,11 +35,28 @@ jobs:
           role-session-name: GitHub-OIDC-frontend
           
       # Step 3: Sync only changed files to S3
-
-      # Ensure files are recognized as "newer" by updating timestamps
-      - name: Update timestamps to ensure sync
+      - name: Get list of changed files
+        id: changes
         run: |
-          find ./ -exec touch {} \;
+          git fetch origin staticSite
+          git diff --name-only HEAD^ HEAD > changed_files.txt
+          cat changed_files.txt
+
+      # Step 4: Upload only changed files to S3
+      - name: Sync only changed files to S3
+        if: success()
+        run: |
+          while read file; do
+            aws s3 cp "$file" "s3://srophe-syriaca-front-end/$file" --dryrun
+          done < changed_files.txt
+        env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}  
+
+      # Optional: Ensure files are recognized as "newer" by updating timestamps to force full redeployment
+      # - name: Update timestamps to ensure sync
+      #   run: |
+      #     find ./ -exec touch {} \;
 
       - name: Debug
         run: aws s3 sync ./ s3://srophe-syriaca-front-end --delete --exact-timestamps --dryrun
