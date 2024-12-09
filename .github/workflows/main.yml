@@ -47,7 +47,7 @@ jobs:
         if: success()
         run: |
           while read file; do
-            aws s3 cp "$file" "s3://srophe-syriaca-front-end/$file" --dryrun
+            aws s3 cp "$file" "s3://srophe-syriaca-front-end/$file" 
           done < changed_files.txt
         env:
           AWS_REGION: ${{ secrets.AWS_REGION }}
