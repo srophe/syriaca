@@ -13,10 +13,12 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+    
       # Step 1: Check out the repository code
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
+          ref: staticSite  # Explicitly check out the staticSite branch
           fetch-depth: 0  # Fetch the entire history for diff checks
 
       # Step 2: Configure AWS credentials
@@ -27,8 +29,6 @@ jobs:
           aws-region: us-east-1
           role-session-name: GitHub-OIDC-frontend
           
-
-
       # Step 3: Sync only changed files to S3
 
       - name: Debug
