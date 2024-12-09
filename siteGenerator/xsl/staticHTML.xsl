@@ -191,16 +191,6 @@
                 <xsl:otherwise><xsl:message>Unrecognizable file type <xsl:value-of select="$fileType"/> [<xsl:value-of select="$documentURI"/>]</xsl:message></xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
-       <!-- TEST vars -->
-        <!--
-        resource-id : <xsl:value-of select="$resource-id"/>
-        collection-pattern : <xsl:value-of select="$collectionURIPattern"/>
-        resource-path : <xsl:value-of select="$resource-path"/>
-        config: <xsl:sequence select="$config/descendant::*:collection[matches(@record-URI-pattern,concat('^',$collectionURIPattern))][1]"/>
-        collectionValues : <xsl:sequence select="$collectionValues"/>
-        collectionTemplate: <xsl:value-of select="concat($staticSitePath,'/siteGenerator/components/',string($collectionValues/@template))"/>
-        Doc <xsl:sequence select="$collectionTemplate"></xsl:sequence>
-        -->
         <xsl:result-document href="{replace($path,'.xml','.html')}">
             <xsl:choose>
                 <xsl:when test="$fileType = 'HTML'">
@@ -218,15 +208,6 @@
                 </xsl:otherwise>    
             </xsl:choose>
         </xsl:result-document>
-          <!--  
-        <xsl:if test="$fileType = 'TEI'">
-            <xsl:result-document href="{replace(replace($path,'/data/','/json/'),'.xml','.json')}">
-                <xsl:call-template name="docJSON">
-                    <xsl:with-param name="doc" select="root(.)/descendant-or-self::t:TEI"/>
-                </xsl:call-template>
-            </xsl:result-document>
-        </xsl:if>
-        -->
     </xsl:template>
     
     <xsl:template name="htmlPage">
@@ -238,17 +219,18 @@
                 <xsl:choose>
                     <xsl:when test="$pageType = 'HTML'">
                         <xsl:variable name="templatePath"><xsl:value-of select="string(/*:div/@data-template-with)"/></xsl:variable>
-                        <xsl:if test="doc-available(concat($staticSitePath,replace($templatePath,'/templates/','/siteGenerator/components/')))">
-                            <xsl:sequence select="document(concat($staticSitePath,replace($templatePath,'/templates/','/siteGenerator/components/')))"/>
+                        <xsl:variable name="fullTemplatePath"><xsl:value-of select="concat($staticSitePath,'/', replace($templatePath,'templates/','siteGenerator/components/'))"/></xsl:variable>
+                        <xsl:if test="doc-available($fullTemplatePath)">
+                            <xsl:sequence select="document($fullTemplatePath)"/>
                         </xsl:if>    
                     </xsl:when>
                     <xsl:when test="$pageType = 'TEI'">
-                       <xsl:choose>
-                           <xsl:when test="$collectionTemplate/child::*">
-                               <xsl:sequence select="$collectionTemplate"/> 
-                           </xsl:when>
-                           <xsl:otherwise><xsl:message>Error Can not find matching template for TEI type </xsl:message></xsl:otherwise>
-                       </xsl:choose>
+                        <xsl:choose>
+                            <xsl:when test="$collectionTemplate/child::*">
+                                <xsl:sequence select="$collectionTemplate"/> 
+                            </xsl:when>
+                            <xsl:otherwise><xsl:message>Error Can not find matching template for TEI page </xsl:message></xsl:otherwise>
+                        </xsl:choose>
                     </xsl:when>
                 </xsl:choose>
             </xsl:variable>
@@ -256,8 +238,8 @@
                 <xsl:when test="$template/child::*">
                     <xsl:choose>
                         <xsl:when test="$template/descendant::*:head">
-                             <xsl:copy-of select="$template/descendant::*:head"/>
-<!--                            <xsl:apply-templates select="$template/descendant::html:head"/>-->
+                            <xsl:copy-of select="$template/descendant::*:head"/>
+                            <!--                            <xsl:apply-templates select="$template/descendant::html:head"/>-->
                         </xsl:when>
                         <xsl:otherwise><xsl:message>Error in template, check template for html:head </xsl:message></xsl:otherwise>
                     </xsl:choose>
@@ -270,7 +252,7 @@
                         <xsl:choose>
                             <xsl:when test="$template/descendant::html:nav">
                                 <xsl:copy-of select="$template/descendant::html:nav"/>
-<!--                                <xsl:apply-templates select="$template/descendant::html:nav"/>-->
+                                <!--                                <xsl:apply-templates select="$template/descendant::html:nav"/>-->
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:call-template name="genericNav"/>
@@ -282,7 +264,7 @@
                     </xsl:otherwise>
                 </xsl:choose>
                 <xsl:choose>
-                    <xsl:when test="$pageType = 'html'">
+                    <xsl:when test="$pageType = 'HTML'">
                         <xsl:copy-of select="."></xsl:copy-of>
                     </xsl:when>
                     <xsl:otherwise>
@@ -295,7 +277,7 @@
                                 <xsl:call-template name="genericTEIPage"/>
                             </xsl:otherwise>
                         </xsl:choose>
-                -->
+                        -->
                         <xsl:call-template name="genericTEIPage">
                             <xsl:with-param name="config" select="$config"></xsl:with-param>
                             <xsl:with-param name="repository-title" select="$repository-title"/>
@@ -309,7 +291,7 @@
             </body>
             <xsl:if test="$template/child::*[1]/html:script">
                 <xsl:copy-of select="$template/child::*[1]/html:script"/>
-            </xsl:if>
+            </xsl:if>  
         </html>
     </xsl:template>
      
@@ -511,7 +493,7 @@
     </xsl:template>
     <xsl:template name="genericHeader">
         <head xmlns="http://www.w3.org/1999/xhtml">
-            <title>Generic Header:: <xsl:value-of select="$resource-title"/></title>
+            <title>Generic Header: <xsl:value-of select="$resource-title"/></title>
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
             <meta name="DC.type" property="dc.type" content="Text"/>
             <meta name="DC.isPartOf" property="dc.ispartof" content="{$config/html:title[1]}"/>
@@ -610,7 +592,7 @@
                     <span class="syriaca-icon syriaca-syriaca banner-icon">
                         <span class="path1"/><span class="path2"/><span class="path3"/><span class="path4"/>
                     </span>
-                    <span class="banner-text"><xsl:value-of select="$config/html:title[1]"/>T1</span>
+                    <span class="banner-text"><xsl:value-of select="$config/html:title[1]"/></span>
                 </a>
             </div>
             <div class="navbar-collapse collapse pull-right" id="navbar-collapse-1">
