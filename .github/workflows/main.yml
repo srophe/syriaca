@@ -18,8 +18,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          ref: staticSite  # Explicitly check out the staticSite branch
-          fetch-depth: 0  # Fetch the entire history for diff checks
+          fetch-depth: 0  # Fetch the full history for accurate diff comparisons
+      
+      # Explicitly check out the 'staticSite' branch
+      - name: Ensure the correct branch is checked out
+        run: |
+          git checkout staticSite
+          git branch --show-current  # Verify the checked-out branch
 
       # Step 2: Configure AWS credentials
       - name: Configure AWS credentials from AWS account
