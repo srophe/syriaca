@@ -26,11 +26,16 @@ jobs:
           role-to-assume: ${{ secrets.AWS_INTERIM_ROLE }}
           aws-region: us-east-1
           role-session-name: GitHub-OIDC-frontend
+          
+
 
       # Step 3: Sync only changed files to S3
-      - name: Sync changed files to S3
-        run: |
-          aws s3 sync ./ s3://srophe-syriaca-front-end --delete
+
+      - name: Debug
+        run: aws s3 sync ./ s3://srophe-syriaca-front-end --dryrun
+      # - name: Sync changed files to S3
+      #   run: |
+          # aws s3 sync ./ s3://srophe-syriaca-front-end --delete --exact-timestamps
         env:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
