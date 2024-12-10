@@ -43,28 +43,36 @@ jobs:
           cat changed_files.txt
 
       # Step 4: Upload only changed files to S3
-      - name: Sync only changed files to S3
-        if: success()
-        run: |
-          while read file; do
-            echo "Attempting to upload $file..."
-            if ! aws s3 cp "$file" "s3://srophe-syriaca-front-end/$file" ; then
-              echo "File $file not found. Falling back to sync for deletion handling."
-              aws s3 sync ./ s3://srophe-syriaca-front-end --delete --exclude "json-data/*" --include "*"
-              break  # Stop further uploads and rely on sync
-            fi
-          done < changed_files.txt
-        env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}  
+      # - name: Sync only changed files to S3
+      #   if: success()
+      #   run: |
+      #     while read file; do
+      #       echo "Attempting to upload $file..."
+      #       if ! aws s3 cp "$file" "s3://srophe-syriaca-front-end/$file" ; then
+      #         echo "File $file not found. Falling back to sync for deletion handling."
+      #         aws s3 sync ./ s3://srophe-syriaca-front-end --delete --exclude "json-data/*" --include "*"
+      #         break  # Stop further uploads and rely on sync
+      #       fi
+      #     done < changed_files.txt
+      #   env:
+      #     AWS_REGION: ${{ secrets.AWS_REGION }}
+      #     AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}  
 
       # Optional: Full redeployment
 
       # - name: Debug
       #   run: aws s3 sync ./ s3://srophe-syriaca-front-end --delete --exact-timestamps --dryrun
-      # - name: Sync all files to S3
-      #   run: |
-      #     aws s3 sync ./ s3://srophe-syriaca-front-end --delete --exact-timestamps
-        # env:
-        #   AWS_REGION: ${{ secrets.AWS_REGION }}
-        #   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+      - name: Sync all files to S3
+        run: |
+          aws s3 sync ./ s3://srophe-syriaca-front-end --delete --exact-timestamps
+            --exclude "json-data/*"
+            --exclude "testHtml/*"
+            --exclude "person/*"
+            --exclude "place/*"
+            --exclude "keyword/*"
+            --exclude "cbss/*"
+            --exclude "subject/*"
+            --exclude "work/*"
+        env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
