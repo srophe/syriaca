@@ -2,7 +2,7 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
       
-      <title data-template="app:record-title">Syriaca.org</title>
+      <title data-template="app:record-title">Syriaca.org: Search</title>
       
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       
@@ -305,37 +305,100 @@
          </div>
          
       </nav>
-      <div data-template="templates:surround" data-template-with="templates/page.html" data-template-at="content">
-         
-         <div class="main-content-block">
-            
-            <!-- <form data-template="search:search-form" data-template-collection="OPTIONAL: COLLECTION NAME"/>--> 
-            
-            <form data-template="search:search-form"></form>
-            
-            <div class="results">
-               
-               <div data-template="search:search-data">
-                  
-                  <div data-template="app:pageination" data-template-search-string="yes" data-template-sort-options="title,author,pubDate"></div>
-                  
-                  <div data-template="app:display-map"></div>
-                  
-                  <hr />
-                  
-                  
-                  <div data-template="search:show-hits" data-template-kwic="yes"></div>
-                  
-                  
-                  <div data-template="app:pageination"></div>
-                  
+      <h1 style="padding-left:1em; color:white; margin-top:3em;">Advanced Search</h1>
+      <form method="get" action="search.html" class="form-horizontal search" role="form" id="advancedSearch">
+         <div class="well well-small">
+            <div class="well well-small search-inner well-white"><!-- Person Type -->
+               <div class="form-group"><label for="q" class="col-sm-2 col-md-3  control-label">Keyword: </label>
+                  <div class="col-sm-10 col-md-6">
+                     <div class="input-group">
+                        <input type="text" id="qs" name="fullText" class="form-control keyboard ui-keyboard-input ui-widget-content ui-corner-all" aria-haspopup="true" role="textbox">
+                        <div class="input-group-btn"><span class="keyboard-menu"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Keyboard">
+                           &nbsp;<span class="syriaca-icon syriaca-keyboard">&nbsp; </span><span class="caret"></span></button>
+                           <ul class="dropdown-menu">
+                              <li><a href="#" class="keyboard-select" id="syriac-phonetic" data-keyboard-id="qs">Syriac Phonetic</a></li>
+                              <li><a href="#" class="keyboard-select" id="syriac-standard" data-keyboard-id="qs">Syriac Standard</a></li>
+                              <li><a href="#" class="keyboard-select" id="ms-Arabic (101)" data-keyboard-id="qs">Arabic Mod. Standard</a></li>
+                              <li><a href="#" class="keyboard-select" id="qwerty" data-keyboard-id="qs">English QWERTY</a></li>
+                           </ul></span></div>
+                     </div>
+                  </div>
                </div>
-               
+               <div class="form-group"><label for="name" class="col-sm-2 col-md-3  control-label">Title: </label>
+                  <div class="col-sm-10 col-md-6">
+                     <div class="input-group">
+                        <input type="text" id="titleSearch" name="title" class="form-control keyboard ui-keyboard-input ui-widget-content ui-corner-all" 
+                           aria-haspopup="true" role="textbox">
+                        <div class="input-group-btn"><span class="keyboard-menu"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Keyboard">
+                           &nbsp;<span class="syriaca-icon syriaca-keyboard">&nbsp; </span><span class="caret"></span></button>
+                           <ul class="dropdown-menu">
+                              <li><a href="#" class="keyboard-select" id="syriac-phonetic" data-keyboard-id="persNameSearch">Syriac Phonetic</a></li>
+                              <li><a href="#" class="keyboard-select" id="syriac-standard" data-keyboard-id="persNameSearch">Syriac Standard</a></li>
+                              <li><a href="#" class="keyboard-select" id="ms-Arabic (101)" data-keyboard-id="persNameSearch">Arabic Mod. Standard</a></li>
+                              <li><a href="#" class="keyboard-select" id="qwerty" data-keyboard-id="persNameSearch">English QWERTY</a></li>
+                           </ul></span></div>
+                     </div>
+                  </div>
+               </div>
+               <!-- Person Name -->
+               <div class="form-group"><label for="name" class="col-sm-2 col-md-3  control-label">Person Name: </label>
+                  <div class="col-sm-10 col-md-6">
+                     <div class="input-group">
+                        <input type="text" id="persNameSearch" name="persName" class="form-control keyboard ui-keyboard-input ui-widget-content ui-corner-all" 
+                           aria-haspopup="true" role="textbox">
+                        <div class="input-group-btn"><span class="keyboard-menu"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Keyboard">
+                           &nbsp;<span class="syriaca-icon syriaca-keyboard">&nbsp; </span><span class="caret"></span></button>
+                           <ul class="dropdown-menu">
+                              <li><a href="#" class="keyboard-select" id="syriac-phonetic" data-keyboard-id="persNameSearch">Syriac Phonetic</a></li>
+                              <li><a href="#" class="keyboard-select" id="syriac-standard" data-keyboard-id="persNameSearch">Syriac Standard</a></li>
+                              <li><a href="#" class="keyboard-select" id="ms-Arabic (101)" data-keyboard-id="persNameSearch">Arabic Mod. Standard</a></li>
+                              <li><a href="#" class="keyboard-select" id="qwerty" data-keyboard-id="persNameSearch">English QWERTY</a></li>
+                           </ul></span></div>
+                     </div>
+                  </div>
+               </div>
+               <div class="form-group"><label for="name" class="col-sm-2 col-md-3  control-label">Place Name: </label>
+                  <div class="col-sm-10 col-md-6">
+                     <div class="input-group">
+                        <input type="text" id="placeNameSearch" name="placeName" class="form-control keyboard ui-keyboard-input ui-widget-content ui-corner-all" 
+                           aria-haspopup="true" role="textbox">
+                        <div class="input-group-btn"><span class="keyboard-menu"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Keyboard">
+                           &nbsp;<span class="syriaca-icon syriaca-keyboard">&nbsp; </span><span class="caret"></span></button>
+                           <ul class="dropdown-menu">
+                              <li><a href="#" class="keyboard-select" id="syriac-phonetic" data-keyboard-id="persNameSearch">Syriac Phonetic</a></li>
+                              <li><a href="#" class="keyboard-select" id="syriac-standard" data-keyboard-id="persNameSearch">Syriac Standard</a></li>
+                              <li><a href="#" class="keyboard-select" id="ms-Arabic (101)" data-keyboard-id="persNameSearch">Arabic Mod. Standard</a></li>
+                              <li><a href="#" class="keyboard-select" id="qwerty" data-keyboard-id="persNameSearch">English QWERTY</a></li>
+                           </ul></span></div>
+                     </div>
+                  </div>
+               </div>
+               <hr>
             </div>
-            
+            <div class="pull-right"><button type="submit" class="btn btn-info">Search</button>&nbsp;
+               <button type="reset" class="btn">Clear</button></div><br class="clearfix"><br></div>
+      </form>
+      <div class="main-content-block">
+         <div class="container">
+            <div class="row alpha-pages">
+               <div class="col-md-5">
+                  <div id="search-info"></div>
+               </div>
+               <div class="col-md-7" class="pull-right">
+                  <div id="pagination" class="pagination-container pull-right paging">
+                     <ul id="searchPagination" class="pagination pull-right"></ul>
+                  </div>      
+               </div>
+            </div>
+            <div id="search-results"></div>
          </div>
-         
       </div>
+      <script type="text/javascript" src="/resources/js/search.js"></script>
+      <script type="text/javascript">
+         $(document).ready(function () {
+               runSearch();
+            });
+      </script> 
       <footer>
          
          <div class="container">
