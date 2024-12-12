@@ -38,12 +38,15 @@ var apiUrl = "https://50fnejdk87.execute-api.us-east-1.amazonaws.com/opensearch-
     
 function getBrowse(series) {
     if (getParams('q')) {
-        var q = getParams('q');
+        var q = '&q=' + getParams('q');
+    } else if(series) {
+        var q = '&q=' + series;
     } else {
-        var q = series;
+        var q = '';
     }
+    
     //Browse URL
-    var browseURL = apiUrl + '?searchType=letter&letter=' + letter + '&q=' + q + '&from=' + from + '&size=' + size + lang;
+    var browseURL = apiUrl + '?searchType=letter&letter=' + letter + q + '&from=' + from + '&size=' + size + lang;
     $. get (browseURL, function (data) {
         var totalResults = data.hits.total.value;
         displayBrowseInfo(totalResults);
@@ -55,15 +58,21 @@ function getBrowse(series) {
 }
 
 function runSearch() {
-    //Catch keyword passed via parameters. 
     if(getParams('keyword')) {
         var fullText = getParams('keyword');
     } else if(getParams('q')){
         var fullText = getParams('q');
-    }    
+    }  
+    
     var series = getParams('series');
+    if (getParams('series')) {
+        var series = '&series=' + getParams('series');
+    } else {
+        var series = '';
+    }
+    
     if(fullText){ 
-        $. get(apiUrl + '?fullText=' + fullText + '&series=' + series, function (data) {
+        $. get(apiUrl + '?fullText=' + fullText + series, function (data) {
             var totalResults = data.hits.total.value;
             $("#advancedSearch").hide(); 
             displaySearchInfo(data)
