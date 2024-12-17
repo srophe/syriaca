@@ -263,7 +263,7 @@
                   </div>
                   <div id="mapView" class="tab-pane fade">
                      <h3>Map</h3>
-                     <div id='map'></div>
+                     <div class="map-lg"><div id='map'></div></div>
                      <script type="text/javascript">
                         $(document).ready(function () {
                             
@@ -299,9 +299,18 @@
                                            "Terrain (default)": terrain,
                                            "Streets": streets }).addTo(map);
                            geojson.addTo(map); 
-                           });
-                           //Reset from show/hide tab function
+                           
+                           $("body").on("shown.bs.tab", "#mapToggle", function() {
+                              map.invalidateSize(false);
+                           }); 
+/*
+                                                     
+                           
                            window.map.invalidateSize();
+                           */
+                           });
+                           //window.map.invalidateSize();
+                           
                         });
                     </script>
                   </div>
