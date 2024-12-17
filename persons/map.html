@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <base target="_top">
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+      <title>GeoJSON tutorial - Leaflet</title>
+      
+      <link rel="stylesheet" href="/resources/leaflet/leaflet.css" />
+      <link rel="stylesheet" href="/resources/leaflet/leaflet.awesome-markers.css" />
+      <link href="/resources/jquery-ui/jquery-ui.min.css" rel="stylesheet" />
+      <script type="text/javascript" src="/resources/js/jquery.min.js"></script>
+      <script type="text/javascript" src="/resources/jquery-ui/jquery-ui.min.js"></script>
+      <script type="text/javascript" src="/resources/js/jquery.smartmenus.min.js"></script>
+      <script type="text/javascript" src="/resources/js/clipboard.min.js"></script>
+      <script type="text/javascript" src="/resources/bootstrap/js/bootstrap.min.js"></script>
+      <script type="text/javascript" src="/resources/leaflet/leaflet.js"/>
+      <script type="text/javascript" src="/resources/leaflet/leaflet.ajax.min.js"></script>
+      <style>
+         #map {width:100%; height:100%;}
+         .map-pop-title {display:block;font-weight:600; font-size:1.2em; margin-bottom:0; padding-bottom:0;}
+         .map-pop-desc {display:block; padding:.5em;}
+         .main-content {margin:1em; padding:2em;}
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		.leaflet-container {
+			height: 400px;
+			width: 600px;
+			max-width: 100%;
+			max-height: 100%;
+		}
+	</style>
+      
+      
+   </head>
+   <body>
+      
+      <div id='map'></div>
+      
+      <script type="text/javascript">
+            $.getJSON('relatedPlaces.json', function (data) {
+               //var terrain = L.tileLayer('http://api.tiles.mapbox.com/v3/sgillies.map-ac5eaoks/{z}/{x}/{y}.png', {attribution: "ISAW, 2012"});
+               var terrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'});
+               /* Not added by default, only through user control action */
+               var streets = L.tileLayer(
+                   'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
+                   {attribution: "OpenStreetMap"});
+                                   
+               var imperium = L.tileLayer(
+                       'https://dh.gu.se/tiles/imperium/{z}/{x}/{y}.png', {
+                           maxZoom: 10,
+                           attribution: 'Powered by <a href="http://leafletjs.com/">Leaflet</a>. Map base: <a href="https://dh.gu.se/dare/" title="Digital Atlas of the Roman Empire, Department of Archaeology and Ancient History, Lund University, Sweden">DARE</a>, 2015 (cc-by-sa).'
+                       });
+                var geojson = L.geoJson(data, {onEachFeature: function (feature, layer){
+                            var typeText = feature.properties.type
+                            var popupContent = 
+                                "<a href='" + feature.properties.uri + "' class='map-pop-title'>" +
+                                feature.properties.name + "</a>" + (feature.properties.type ? "Type: " + typeText : "") +
+                                (feature.properties.desc ? "<span class='map-pop-desc'>"+ feature.properties.desc +"</span>" : "");
+                                layer.bindPopup(popupContent);
+                     
+                                }
+                            })
+                                    
+               var map = L.map('map').fitBounds(geojson.getBounds(),{maxZoom: 5});     
+               terrain.addTo(map);
+                                               
+               L.control.layers({
+                               "Terrain (default)": terrain,
+                               "Streets": streets }).addTo(map);
+               geojson.addTo(map); 
+            });
+        </script>
+   </body>
+</html>
