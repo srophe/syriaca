@@ -325,7 +325,7 @@
                                     <option value="unknown">unknown</option></select>
                            </div>
                         </div>
-                        
+
                         <input type="hidden" id="series" name="series" value="The Syriac Gazetteer"/>
                      </div>
                   </div>
@@ -334,6 +334,19 @@
                   <button type="submit" class="btn btn-info">Search</button>&nbsp;
                   <button type="reset" class="btn">Clear</button></div><br class="clearfix"><br></div>
          </form>
+                  <div>
+                     <form id="related-places-form" class="form-inline" onsubmit="submitRelatedPlacesSearch(event)">
+                       <div class="form-group">
+                        <label for="placeInput">Place Name or URI:</label>
+                        <input type="text" class="form-control" id="placeInput" placeholder="Enter Place Name or URI">
+                       </div>
+                       <button type="submit" class="btn btn-primary">Search</button>
+                     </form>
+                     <div id="related-places-results" class="results"></div>
+                  </div>
+               </div>
+            </div>
+         </div>
       </div>
       <div>
          <div class="main-content-block">
@@ -352,17 +365,7 @@
             </div>
          </div>
       </div>
-      <div>
-         <h4>Search Related Places</h3>
-         <form id="related-places-form" class="form-inline" onsubmit="submitRelatedPlacesSearch(event)">
-           <div class="form-group">
-            <label for="placeInput">Place Name or URI:</label>
-            <input type="text" class="form-control" id="placeInput" placeholder="Enter Place Name or URI">
-           </div>
-           <button type="submit" class="btn btn-primary">Search</button>
-         </form>
-         <div id="related-places-results" class="results"></div>
-      </div>
+
       <script type="text/javascript" src="/resources/js/search.js"></script>
       <script type="text/javascript" src="/testHtml/neptune-search.js"></script>
       <script type="text/javascript">
