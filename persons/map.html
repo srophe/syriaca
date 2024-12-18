@@ -32,9 +32,7 @@
 			max-width: 100%;
 			max-height: 100%;
 		}
-	</style>
-      
-      
+	</style>   
    </head>
    <body>
       
@@ -55,12 +53,28 @@
                            attribution: 'Powered by <a href="http://leafletjs.com/">Leaflet</a>. Map base: <a href="https://dh.gu.se/dare/" title="Digital Atlas of the Roman Empire, Department of Archaeology and Ancient History, Lund University, Sweden">DARE</a>, 2015 (cc-by-sa).'
                        });
                 var geojson = L.geoJson(data, {onEachFeature: function (feature, layer){
-                            var typeText = feature.properties.type
-                            var popupContent = 
-                                "<a href='" + feature.properties.uri + "' class='map-pop-title'>" +
-                                feature.properties.name + "</a>" + (feature.properties.type ? "Type: " + typeText : "") +
-                                (feature.properties.desc ? "<span class='map-pop-desc'>"+ feature.properties.desc +"</span>" : "");
-                                layer.bindPopup(popupContent);
+
+                                    let html = document.createElement('div');
+                                    var typeText = feature.properties.type;
+                                    var related =  feature.properties.relatedRecords;
+                                    
+                                    var popupContent = 
+                                        "<a href='" + feature.properties.uri + "' class='map-pop-title'>" +
+                                        feature.properties.name + "</a>" + (feature.properties.type ? "Type: " + typeText : "") +
+                                        (feature.properties.desc ? "<span class='map-pop-desc'>"+ feature.properties.desc +"</span>" : "") +
+                                        (related ? "<br/>Related: <br/>" + '' :"No Related");
+                                    
+                                    $(html).append(popupContent); 
+                                    
+                                    for (var i = 0; i < feature.properties.relatedRecords.length; i++) {
+                                            var related = $('<ul/>');
+                                            $(related).append("<li><a href='"+ feature.properties.relatedRecords[i].id +"'>" + feature.properties.relatedRecords[i].title + "</a></li>");
+                                            $(html).append(related);
+                                    }
+                            
+                            
+                                
+                                layer.bindPopup(html);
                      
                                 }
                             })
