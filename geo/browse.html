@@ -93,6 +93,9 @@
                   <a href="/geo/browse.html" class="nav-text">Browse</a>
                </li>
                <li>
+                  <a href="/geo/map.html" class="nav-text">Map</a>
+               </li>
+               <li>
                   <a href="/geo/about.html" class="nav-text">About</a>
                </li>
                <li>
@@ -239,7 +242,6 @@
                   <li><a href="browse.html?searchType=letter&letter=a&q=The Syriac Gazetteer&size=25">English</a></li>
                   <li><a href="browse.html?lang=syr&searchType=letter&q=The Syriac Gazetteer&size=25&letter=ܐ" lang="syr" dir="rtl">   ܠܫܢܐ ܣܘܪܝܝܐ </a></li>
                   <li><a href="browse.html?lang=ar&searchType=letter&q=The Syriac Gazetteer&letter=ا" lang="ar" dir="rtl">   اللغة العربية </a></li>
-                  <li><a data-toggle="tab" href="#mapView" id="mapToggle">Map</a></li>
                </ul>
                <div class="tab-content">
                   <div id="english" class="tab-pane fade in active">
@@ -267,56 +269,6 @@
                   </div>
                   <div id="mapView" class="tab-pane fade">
                      <h3>Map</h3>
-                     <div class="map-lg"><div id='map'></div></div>
-                     <script type="text/javascript">
-                        $(document).ready(function () {
-                            
-                        $.getJSON('places.json', function (data) {
-                           //var terrain = L.tileLayer('http://api.tiles.mapbox.com/v3/sgillies.map-ac5eaoks/{z}/{x}/{y}.png', {attribution: "ISAW, 2012"});
-                           var terrain = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'});
-                           /* Not added by default, only through user control action */
-                           var streets = L.tileLayer(
-                               'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', 
-                               {attribution: "OpenStreetMap"});
-                                               
-                           var imperium = L.tileLayer(
-                                   'https://dh.gu.se/tiles/imperium/{z}/{x}/{y}.png', {
-                                       maxZoom: 10,
-                                       attribution: 'Powered by <a href="http://leafletjs.com/">Leaflet</a>. Map base: <a href="https://dh.gu.se/dare/" title="Digital Atlas of the Roman Empire, Department of Archaeology and Ancient History, Lund University, Sweden">DARE</a>, 2015 (cc-by-sa).'
-                                   });
-                            var geojson = L.geoJson(data, {onEachFeature: function (feature, layer){
-                                        var typeText = feature.properties.type
-                                        var popupContent = 
-                                            "<a href='" + feature.properties.uri + "' class='map-pop-title'>" +
-                                            feature.properties.name + "</a>" + (feature.properties.type ? "Type: " + typeText : "") +
-                                            (feature.properties.desc ? "<span class='map-pop-desc'>"+ feature.properties.desc +"</span>" : "");
-                                            layer.bindPopup(popupContent);
-                                 
-                                            }
-                                        })
-                                                
-                           var map = L.map('map').fitBounds(geojson.getBounds(),{maxZoom: 5});     
-                         
-                           terrain.addTo(map);
-                                                           
-                           L.control.layers({
-                                           "Terrain (default)": terrain,
-                                           "Streets": streets }).addTo(map);
-                           geojson.addTo(map); 
-                           
-                           $("body").on("shown.bs.tab", "#mapToggle", function() {
-                              map.invalidateSize(false);
-                           }); 
-/*
-                                                     
-                           
-                           window.map.invalidateSize();
-                           */
-                           });
-                           //window.map.invalidateSize();
-                           
-                        });
-                    </script>
                   </div>
                </div>
                
