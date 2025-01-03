@@ -290,6 +290,10 @@ function displayResultsInfo(totalResults) {
 function initializeStateFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     state.lang = urlParams.get('lang') || 'en'; // Default to English if no language is set
+    state.keyword = urlParams.get('keyword') || ''; // Default to empty query if not set
+    if(state.keyword){
+        fetchAndRenderAdvancedSearchResults();
+    }
 }
 
 function browseAlphaMenu() {
@@ -473,7 +477,7 @@ function displayCBSSAuthorResults(data) {
 //Advanced Search
 // Handle form submission
 document.addEventListener('DOMContentLoaded', () => {
-
+    initializeStateFromURL();
     if(document.getElementById('advancedSearch')){
         const advancedSearchForm = document.getElementById('advancedSearch');
 
