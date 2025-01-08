@@ -119,9 +119,22 @@ function createPaginationButton(text, onClick) {
 
 // Display search results
 function displayResults(data) {
-
+    
     const resultsContainer = document.getElementById("search-results");
     resultsContainer.innerHTML = ''; // Clear previous results
+    if(document.getElementById("toggleSearchForm")){
+        const toggleButton = document.getElementById("toggleSearchForm");
+        const searchFormContainer = document.getElementById("advancedSearch");
+        
+        // Show the toggle button
+        toggleButton.style.display = "inline-block";
+
+        // Hide the advanced search form
+        searchFormContainer.style.display = "none";
+
+        // Update the button text
+        toggleButton.textContent = "Show Search";
+    }
 
     if (data.hits && data.hits.hits.length > 0) {
         data.hits.hits.forEach(hit => {
@@ -150,6 +163,7 @@ function displayResults(data) {
             const typeString = type ? ` (${type}) `: '';
             const prologue = hit._source.prologue || ' ';
             const idno = hit._source.idno || ''; // Fallback if no idno
+            const coordinates = hit._source.coordinates || ''; // Fallback if no idno
             // Construct the URL using the idno field
             const url = idno ? `${idno}`: '#';
             
@@ -509,7 +523,7 @@ function updateStateFromForm(form) {
     state.eventRangeStart = formData.get('eventDatesStart') || '';
     state.eventRangeEnd = formData.get('eventDatesEnd') || '';
     state.type = formData.getAll('type'); // Get all selected type values, necessary for cbss advanced search only
-    state.series = formData.get('series') || 'The Syriac Gazetteer'; // Default to "The Syriac Gazetteer"
+    state.series = formData.get('series') || ''; 
     state.from = 0; // Reset pagination
     state.stateRangeStart = formData.get('stateDatesStart') || '';
     state.stateRangeEnd = formData.get('stateDatesEnd') || '';
@@ -527,6 +541,7 @@ function updateStateFromForm(form) {
     state.cbssPubDate = formData.get('cbssPubDate') || '';
     state.publisher = formData.get('publisher') || '';
     state.pubPlace = formData.get('pubPlace') || '';
+    state.keyword = formData.get('keyword') || '';
 
 
 
@@ -669,3 +684,23 @@ function resetState() {
     state.cbssSubject = '';
     state.keyword = '';
 }
+document.addEventListener("DOMContentLoaded", function () {
+    if (document.getElementById("toggleSearchForm")) {
+        const toggleButton = document.getElementById("toggleSearchForm");
+            const searchFormContainer = document.getElementById("advancedSearch");
+
+            // Toggle the display of the advanced search form
+            toggleButton.addEventListener("click", function () {
+                if (searchFormContainer.style.display === "none" || searchFormContainer.style.display === "") {
+                    searchFormContainer.style.display = "block";
+                    toggleButton.textContent = "Hide Search";
+                } else {
+                    searchFormContainer.style.display = "none";
+                    toggleButton.textContent = "Show Search";
+                }
+            });
+    }
+    
+});
+
+
