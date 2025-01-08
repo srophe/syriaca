@@ -565,7 +565,7 @@
         <xsl:if test="contains($id, '/person')">
             <xsl:if test="$doc/descendant::tei:body/descendant::tei:gender">     
                 <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:gender">
-                    <string key="{.}" xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(.,' '))"/></string>
+                    <string key="gender" xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(@ana,' '))"/></string>
                 </xsl:for-each>
         </xsl:if>
         </xsl:if>
