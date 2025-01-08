@@ -12,12 +12,15 @@
     
     <xsl:output method="text" encoding="utf-8"/>
     
-    <!-- Run on the directory with places in related elements must have type relatedPlace-->
-    <xsl:param name="relatedCollectionPath" select="'/Users/wsalesky/syriaca/syriaca/syriaca-data/data/persons/tei'"/>
+    <!-- Run on the directory with places in related elements must have type relatedPlace  ex:  /Users/wsalesky/syriaca/syriaca/syriaca-data/data/persons/tei-->
+    <xsl:param name="relatedCollectionPath" select="''"/>
     <!-- Directory places TEI -->
     <xsl:param name="placesCollectionPath" select="'/Users/wsalesky/syriaca/syriaca/syriaca-data/data/places/tei'"/>
-    <!-- places for runinng on placesCollectionPath for placesTEI or relatedPlace for finding realted places -->
-    <xsl:param name="mapType" select="'relatedPlace'"/>
+    <!-- Sub collection of places, currently only used for  Gazetteer to John of Ephesus’s Ecclesiastical History-->
+    <xsl:param name="subCollection" select="'Gazetteer to John of Ephesus’s Ecclesiastical History'"/>
+    
+    <!-- places for runinng on placesCollectionPath for placesTEI or relatedPlace for finding realted places  relatedPlace -->
+    <xsl:param name="mapType" select="''"/>
     
     <xsl:template match="/">
         <xsl:choose>
@@ -39,7 +42,16 @@
                             <string key="type" xmlns="http://www.w3.org/2005/xpath-functions">FeatureCollection</string>  
                             <array key="features" xmlns="http://www.w3.org/2005/xpath-functions">
                                 <xsl:for-each select="collection(xs:anyURI(concat($placesCollectionPath, '?select=*.xml')))" >
-                                    <xsl:call-template name="geoJson"/>
+                                    <xsl:choose>
+                                        <xsl:when test="$subCollection != ''">
+                                            <xsl:if test=".[descendant::tei:seriesStmt/tei:title[. = $subCollection]]">
+                                                <xsl:call-template name="geoJson"/>            
+                                            </xsl:if>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <xsl:call-template name="geoJson"/>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
                                 </xsl:for-each>
                             </array>
                         </map>

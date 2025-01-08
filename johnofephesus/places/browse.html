@@ -134,6 +134,9 @@
                   <a href="/johnofephesus/places/browse.html" class="nav-text">Browse</a>
                   
                </li>
+               <li>
+                  <a href="/johnofephesus/places/map.html" class="nav-text">Map</a>
+               </li>
                
                <li>
                   <a href="/johnofephesus/index.html" class="nav-text">A Guide to John of Ephesus</a>
@@ -216,68 +219,48 @@
          <div class="container top-padding">
             
             <h1>Browse the Gazetteer</h1>
-            
-            <div data-template="browse:get-all" data-template-collection="johnofephesusPlaces">
-               
-               <!-- Example limits data to places collection, see example entry in repo-config.xml -->    
-               
-               <!--        <div data-template="browse:get-all" data-template-collection="places">-->
-               
                <div class="tabbable"> 
-                  
-                  <!-- Browse Tabs Configurable. -->
-                  
                   <ul class="nav nav-tabs" id="nametabs">
-                     
                      <li>
-                        <a href="browse.html" default="default">English</a>
-                        
+                        <a href="browse.html?searchType=letter&letter=a&q=Gazetteer to John of Ephesus’s Ecclesiastical History&size=25">English</a>
                      </li>
-                     
                      <li>
-                        <a href="browse.html?lang=syr&amp;alpha-filter=%DC%90" lang="syr" dir="rtl">
+                        <a href="browse.html?lang=syr&searchType=letter&q=Gazetteer to John of Ephesus’s Ecclesiastical History&size=25&letter=ܐ" lang="syr" dir="rtl">
                            ܠܫܢܐ ܣܘܪܝܝܐ
                            </a>
-                        
                      </li>
-                     
-                     <!--
-                    <li>
-                        <a href="browse.html?lang=ar&amp;alpha-filter=ا" lang="ar" dir="rtl">
-                        اللغة العربية
-                    </a>
-                    </li>
-                    -->
-                     
-                     <li>
-                        <a href="browse.html?view=map">Map</a>
-                        
-                     </li>
-                     
                   </ul>
-                  
-                  <!-- Browse Content -->
-                  
                   <div class="tab-content">
-                     
-                     <div class="tab-pane active">
-                        
-                        <div class="row">
-                           
-                           <div data-template="browse:show-hits" data-template-collection="johnofephesusPlaces"></div>
-                           
+                     <div id="english" class="tab-pane fade in active">
+                        <div class="browse-alpha tabbable">
+                           <ul class="list-inline" id="abcMenu">
+                              
+                           </ul>
                         </div>
-                        
-                        <div data-template="app:pageination" data-template-collection="johnofephesusPlaces"></div>
-                        
                      </div>
-                     
                   </div>
-                  
+                  <div>
+                     <div class="row alpha-pages">
+                        <div class="col-md-5">
+                           <div id="search-info"></div>
+                        </div>
+                        <div class="col-md-7" class="pull-right">
+                           <div id="pagination" class="pagination-container pull-right paging">
+                              <ul id="searchPagination" class="pagination pull-right"></ul>
+                           </div>      
+                        </div>
+                     </div>
+                     <div id="search-results"></div>
+                  </div>
+                  <script type="text/javascript" src="/resources/bootstrap/js/jquery.bootpag.min.js"></script>
+                  <script type="text/javascript" src="/resources/js/search.js"></script>
+                  <script type="text/javascript">
+                         $(document).ready(function () {
+                            browseAlphaMenu();
+                            getBrowse("Gazetteer to John of Ephesus’s Ecclesiastical History");
+                         });
+                     </script>
                </div>
-               
-            </div>
-            
          </div>
          
       </div>

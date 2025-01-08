@@ -134,7 +134,9 @@
                   <a href="/johnofephesus/places/browse.html" class="nav-text">Browse</a>
                   
                </li>
-               
+               <li>
+                  <a href="/johnofephesus/places/map.html" class="nav-text">Map</a>
+               </li>
                <li>
                   <a href="/johnofephesus/index.html" class="nav-text">A Guide to John of Ephesus</a>
                   
@@ -211,37 +213,111 @@
          </div>
          
       </nav>
-      <div xmlns:xi="http://www.w3.org/2001/XInclude" data-template="templates:surround" data-template-with="templates/johnEphesusPlaces.html" data-template-at="content">
-         
-         <div class="container top-padding" style="margin-top:2em;">
-            
-            <h1 class="search-header">Advanced Search</h1>
-            
-            <form data-template="search:search-form" data-template-collection="johnofephesusPlaces"></form>
-            
-            <div class="results">
-               
-               <div data-template="search:search-data" data-template-collection="johnofephesusPlaces">
-                  
-                  <div data-template="app:pageination" data-template-search-string="yes" data-template-sort-options="title,author,pubDate" data-template-collection="johnofephesusPlaces"></div>
-                  
-                  <div data-template="app:display-map" data-template-collection="johnofephesusPlaces"></div>
-                  
-                  <div data-template="search:show-hits" data-template-kwic="yes" data-template-collection="johnofephesusPlaces"></div>
-                  
-                  <div class="page-bottom">
-                     
-                     <div data-template="app:pageination" data-template-collection="johnofephesusPlaces"></div>
-                     
+      <div class="advancedSearch" style="margin-top:75px;">
+         <h1 style="padding-left:1em; color:white;">Advanced Search</h1>
+         <form method="get" action="search.html" class="form-horizontal search" role="form" id="advancedSearch">
+            <div class="well well-small">
+               <div class="well well-small search-inner well-white">
+                  <div class="row">
+                     <div class="col-md-12"><!-- Keyword -->
+                        <div class="form-group">
+                           <label for="q" class="col-sm-2 col-md-3  control-label">Keyword: </label>
+                           <div class="col-sm-10 col-md-9 ">
+                              <div class="input-group">
+                                 <input type="text" id="q" name="fullText" class="form-control keyboard ui-keyboard-input ui-widget-content ui-corner-all" aria-haspopup="true" role="textbox">
+                                 <div class="input-group-btn">
+                                    <span class="keyboard-menu">
+                                       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Keyboard">
+                                          &nbsp;<span class="syriaca-icon syriaca-keyboard">&nbsp; </span><span class="caret"></span></button>
+                                       <ul class="dropdown-menu">
+                                          <li><a href="#" class="keyboard-select" id="syriac-phonetic" data-keyboard-id="q">Syriac Phonetic</a></li>
+                                          <li><a href="#" class="keyboard-select" id="syriac-standard" data-keyboard-id="q">Syriac Standard</a></li>
+                                          <li><a href="#" class="keyboard-select" id="ms-Arabic (101)" data-keyboard-id="q">Arabic Mod. Standard</a></li>
+                                          <li><a href="#" class="keyboard-select" id="qwerty" data-keyboard-id="q">English QWERTY</a></li>
+                                       </ul></span></div>
+                              </div>
+                           </div>
+                        </div>
+                        <!-- Place Name-->
+                        <div class="form-group">
+                           <label for="p" class="col-sm-2 col-md-3  control-label">Place Name: </label>
+                           <div class="col-sm-10 col-md-9 ">
+                              <div class="input-group">
+                                 <input type="text" id="p" name="placeName" class="form-control keyboard ui-keyboard-input ui-widget-content ui-corner-all" aria-haspopup="true" role="textbox">
+                                 <div class="input-group-btn"><span class="keyboard-menu"><button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Select Keyboard">
+                                    &nbsp;<span class="syriaca-icon syriaca-keyboard">&nbsp; </span><span class="caret"></span></button>
+                                    <ul class="dropdown-menu">
+                                       <li><a href="#" class="keyboard-select" id="syriac-phonetic" data-keyboard-id="p">Syriac Phonetic</a></li>
+                                       <li><a href="#" class="keyboard-select" id="syriac-standard" data-keyboard-id="p">Syriac Standard</a></li>
+                                       <li><a href="#" class="keyboard-select" id="ms-Arabic (101)" data-keyboard-id="p">Arabic Mod. Standard</a></li>
+                                       <li><a href="#" class="keyboard-select" id="qwerty" data-keyboard-id="p">English QWERTY</a></li>
+                                    </ul></span></div>
+                              </div>
+                           </div>
+                        </div>
+                        
+                        <div class="form-group">
+                           <label for="existds" class="col-sm-2 col-md-3 control-label">Place Type: </label>
+                           <div class="col-sm-10 col-md-9 form-inline">
+                              <select name="type" id="type" class="input-medium form-control">
+                                 <option value="">- Select -</option>
+                                 <option value="building">building</option>
+                                 <option value="church">church</option>
+                                 <option value="diocese">diocese</option>
+                                 <option value="fortification">fortification</option>
+                                 <option value="island">island</option>
+                                 <option value="madrasa">madrasa</option>
+                                 <option value="monastery">monastery</option>
+                                 <option value="mosque">mosque</option>
+                                 <option value="mountain">mountain</option>
+                                 <option value="open-water">open-water</option>
+                                 <option value="parish">parish</option>
+                                 <option value="province">province</option>
+                                 <option value="quarter">quarter</option>
+                                 <option value="region">region</option>
+                                 <option value="river">river</option>
+                                 <option value="settlement">settlement</option>
+                                 <option value="state">state</option>
+                                 <option value="synagogue">synagogue</option>
+                                 <option value="temple">temple</option>
+                                 <option value="unknown">unknown</option></select>
+                           </div>
+                        </div>      
+                        <input type="hidden" id="series" name="series" value="Gazetteer to John of Ephesus’s Ecclesiastical History"/>
+                     </div>
                   </div>
-                  
                </div>
-               
-            </div>
-            
-         </div>
-         
+               <div class="pull-right">
+                  <button type="submit" class="btn btn-info">Search</button>&nbsp;
+                  <button type="reset" class="btn">Clear</button></div><br class="clearfix"><br></div>
+         </form>
       </div>
+
+      <div>
+         <div class="main-content-block">
+            <button id="toggleSearchForm" class="btn btn-primary" style="display: none;">Show Search</button>
+            <div class="container">
+               <div class="row alpha-pages">
+                  <div class="col-md-5">
+                     <div id="search-info"></div>
+                  </div>
+                  <div class="col-md-7" class="pull-right">
+                     <div id="pagination" class="pagination-container pull-right paging">
+                        <ul id="searchPagination" class="pagination pull-right"></ul>
+                     </div>      
+                  </div>
+               </div>
+               <div id="search-results"></div>
+            </div>
+         </div>
+      </div>
+      
+      <script type="text/javascript" src="/resources/js/search.js"></script>
+      <script type="text/javascript">
+         $(document).ready(function () {
+               runSearch();
+            });
+      </script>
       <footer>
          
          <div class="container">
