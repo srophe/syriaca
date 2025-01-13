@@ -36,7 +36,8 @@ const state = {
     incipit: '',
     explicit: '',
     abstract: '',
-    pubDate: '',
+    cbssPubDateStart: '',
+    cbssPubDateEnd: '',
     publisher: '',
     pubPlace: '',
     cbssSubject: '',
@@ -305,6 +306,8 @@ function initializeStateFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     state.lang = urlParams.get('lang') || 'en'; // Default to English if no language is set
     state.keyword = urlParams.get('keyword') || ''; // Default to empty query if not set
+    state.series = urlParams.get('series') || ''; // Default to empty query if not set
+
     if(state.keyword){
         fetchAndRenderAdvancedSearchResults();
     }
@@ -502,6 +505,17 @@ document.addEventListener('DOMContentLoaded', () => {
             fetchAndRenderAdvancedSearchResults(); 
         });
     }
+    // currently not needed: url params are used to initialize state
+    // if(document.getElementById('site_search_form')){
+    //     const searchForm = document.getElementById('site_search_form');
+
+    //     searchForm.addEventListener('submit', function (e) {
+    //         e.preventDefault(); // Prevent the default form submission behavior (page reload)
+    
+    //         updateStateFromForm(this); // Update state with form data
+    //         fetchAndRenderAdvancedSearchResults(); 
+    //     });
+    // }
 
 });
 //Not needed?
@@ -538,7 +552,8 @@ function updateStateFromForm(form) {
     const dateType = formData.get('date-type') || '';
     state.bookLimit = formData.get('bookLimit') || '';
     state.cbssSubject = formData.get('keywordSearch') || '';
-    state.cbssPubDate = formData.get('cbssPubDate') || '';
+    state.cbssPubDateEnd = formData.get('cbssPubDateEnd') || '';
+    state.cbssPubDateStart = formData.get('cbssPubDateStart') || '';
     state.publisher = formData.get('publisher') || '';
     state.pubPlace = formData.get('pubPlace') || '';
     state.keyword = formData.get('keyword') || '';
@@ -610,7 +625,8 @@ function buildQueryParams() {
         explicit: state.explicit,
         title: state.title,
         author: state.author,
-        cbssPubDate: state.pubDate,
+        cbssPubRangeStart: state.cbssPubDateStart,
+        cbssPubRangeEnd: state.cbssPubDateEnd,
         publisher: state.publisher,
         cbssPubPlace: state.pubPlace,
         subject: state.cbssSubject,
