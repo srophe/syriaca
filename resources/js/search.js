@@ -159,9 +159,15 @@ function displayResults(data) {
             } else {
                 nameString = '';
             }
+            if(hit._source.placeName){
+                var typeString = type ? ` (${type}) `: '';
+            }else if(hit._source.persName){
+                var typeString = type ? ` (${type}) `: '';
+            } else {
+                typeString = '';
+            }
             const abstract = hit._source.abstract || '';
             const abstractString = abstract ? ` ${abstract} <br/>`: '';
-            const typeString = type ? ` (${type}) `: '';
             const prologue = hit._source.prologue || ' ';
             const idno = hit._source.idno || ''; // Fallback if no idno
             const coordinates = hit._source.coordinates || ''; // Fallback if no idno
