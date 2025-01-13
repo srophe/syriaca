@@ -120,6 +120,22 @@ function createPaginationButton(text, onClick) {
 
 // Display search results
 function displayResults(data) {
+    //Set displat for selected menu item
+    const items = document.querySelectorAll('.ui-menu-item');
+    //On initial load add badge to first letter if no other letter is selected. 
+    //items[0].classList.add('badge');
+    
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        // Remove 'selected' class from all items
+        items.forEach(el => el.classList.remove('badge'));
+
+        // Add 'selected' class to the clicked item
+        item.classList.add('badge');
+      });
+      
+    });
+
     
     const resultsContainer = document.getElementById("search-results");
     resultsContainer.innerHTML = ''; // Clear previous results
@@ -354,12 +370,12 @@ function browseAlphaMenu() {
         const menuItem = document.createElement('li');
         menuItem.classList.add('ui-menu-item');
         menuItem.setAttribute('role', 'menuitem');
-
+        //items.forEach(el => el.classList.remove('selected'));
         const menuLink = document.createElement('a');
         menuLink.classList.add('ui-all');
         menuLink.textContent = letter;
         menuLink.href = `?searchType=letter&letter=${letter}&q=${encodeURIComponent(state.query)}&size=${state.size}&lang=${state.lang}`;
-
+        
         // Attach event listener for letter selection
         menuLink.addEventListener('click', (event) => {
             event.preventDefault(); // Prevent page reload
