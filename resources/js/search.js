@@ -578,7 +578,7 @@ function updateStateFromForm(form) {
     }
     if (dateType === 'floruit') {   
         state.floruitRangeStart = formData.get('start-date') || '';
-        state.floruitRangeEnd = '';
+        state.floruitRangeEnd = formData.get('end-date') || '';
         state.deathRangeStart = '';
         state.deathRangeEnd = '';
         state.birthRangeStart = '';
