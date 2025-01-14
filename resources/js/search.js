@@ -113,6 +113,9 @@ function renderPagination(totalResults, resultsPerPage, currentPage, onPageChang
 // Create a pagination button
 function createPaginationButton(text, onClick) {
     const button = document.createElement('button');
+    //btn btn-default
+    button.classList.add('btn');
+    button.classList.add('btn-default');
     button.textContent = text;
     button.onclick = onClick;
     return button;
@@ -123,8 +126,17 @@ function displayResults(data) {
     //Set displat for selected menu item
     const items = document.querySelectorAll('.ui-menu-item');
     //On initial load add badge to first letter if no other letter is selected. 
-    //items[0].classList.add('badge');
+    // Check if any item has the 'selected' class
+    const anyItemSelected = Array.from(items).some(item => 
+      item.classList.contains('badge')
+    );
+  
+    // If no item is selected, add the class to the first one
+    if (!anyItemSelected && items.length > 0) {
+      items[0].classList.add('badge');
+    }
     
+    //Add class badge to selected letter
     items.forEach(item => {
       item.addEventListener('click', () => {
         // Remove 'selected' class from all items
@@ -482,6 +494,31 @@ function getCBSSBrowse(browseType = 'cbssAuthor') {
 function displayCBSSAuthorResults(data) {
     const resultsContainer = document.getElementById("search-results");
           resultsContainer.innerHTML = ''; // Clear previous results
+    
+    //Add selected badge here? 
+    const items = document.querySelectorAll('.ui-menu-item');
+    //On initial load add badge to first letter if no other letter is selected. 
+    // Check if any item has the 'selected' class
+    const anyItemSelected = Array.from(items).some(item => 
+      item.classList.contains('badge')
+    );
+  
+    // If no item is selected, add the class to the first one
+    if (!anyItemSelected && items.length > 0) {
+      items[0].classList.add('badge');
+    }
+    
+    //Add class badge to selected letter
+    items.forEach(item => {
+      item.addEventListener('click', () => {
+        // Remove 'selected' class from all items
+        items.forEach(el => el.classList.remove('badge'));
+
+        // Add 'selected' class to the clicked item
+        item.classList.add('badge');
+      });
+      
+    });
     
     if (data.hits && data.hits.hits.length > 0) {
         data.hits.hits.forEach(hit => {
