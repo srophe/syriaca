@@ -202,17 +202,8 @@ function displayResults(data) {
             const idno = hit._source.idno || ''; // Fallback if no idno
             const coordinates = hit._source.coordinates || ''; // Fallback if no idno
             // Construct the URL using the idno field
-            //const url = idno ? `${idno}`: '#';
-           //URL if JoE
-           if(state.series = 'Prosopography to John of Ephesus’s Ecclesiastical History'){
-                const idnoString = idno.replace('\/person\/', '\/johnofephesus\/persons\/');
-                const url = idnoString ? `${idnoString}`: '#';
-            }else if(state.series = 'Gazetteer to John of Ephesus’s Ecclesiastical History'){
-                const idnoString = idno.replace('\/place\/', '\/johnofephesus\/places\/');
-                const url = idnoString ? `${idnoString}`: '#';
-            } else {
-                 const url = idno ? `${idno}`: '#';
-            }
+            const url = idno ? `${idno}`: '#';
+          
             
             // Populate the result item with the link and details
             if(state.lang === 'syr'){
