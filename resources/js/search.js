@@ -123,6 +123,8 @@ function createPaginationButton(text, onClick) {
 
 // Display search results
 function displayResults(data) {
+    //Add series selector here for JoE display? 
+    
     //Set displat for selected menu item
     const items = document.querySelectorAll('.ui-menu-item');
     //On initial load add badge to first letter if no other letter is selected. 
@@ -201,7 +203,7 @@ function displayResults(data) {
             const coordinates = hit._source.coordinates || ''; // Fallback if no idno
             // Construct the URL using the idno field
             const url = idno ? `${idno}`: '#';
-            
+           
             // Populate the result item with the link and details
             if(state.lang === 'syr'){
                 resultItem.innerHTML = `
