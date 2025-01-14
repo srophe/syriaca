@@ -645,7 +645,7 @@
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="*:fields[@function = 'idnoBHO']">
+    <xsl:template match="*:fields[@function = 'BHO']">
         <xsl:param name="doc"/>
         <xsl:param name="id"/>
         <xsl:if test="contains($id, '/work')">
@@ -658,7 +658,7 @@
             </xsl:if>
         </xsl:if>
     </xsl:template>
-    <xsl:template match="*:fields[@function = 'idnoBHS']">
+    <xsl:template match="*:fields[@function = 'BHS']">
         <xsl:param name="doc"/>
         <xsl:param name="id"/>
         <xsl:if test="contains($id, '/work')">
@@ -671,7 +671,7 @@
             </xsl:if>
         </xsl:if>
     </xsl:template>
-    <xsl:template match="*:fields[@function = 'idnoCPG']">
+    <xsl:template match="*:fields[@function = 'CPG']">
         <xsl:param name="doc"/>
         <xsl:param name="id"/>
         <xsl:if test="contains($id, '/work')">
