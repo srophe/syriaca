@@ -31,6 +31,9 @@ const state = {
     title: '',
     author: '',
     idno: '',
+    BHO: '',
+    BHS: '',
+    CPG: '',
     prologue: '',
     abstract: '',
     incipit: '',
@@ -662,8 +665,21 @@ function updateStateFromForm(form) {
     state.explicit = formData.get('explicit') || '';
     state.title = formData.get('title') || '';
     state.author = formData.get('author') || '';
-    if(formData.get('idno')){
-    state.idno = "http://syriaca.org/work/"+formData.get('idno') || '';}
+    //WS NEED testing
+    if(formData.get('indoText')){
+        if(formData.get('idnoType') === 'BHO'){
+            state.BHO = formData.get('indoText') || '';
+        }else if(formData.get('idnoType') === 'BHS'){
+            state.BHS = formData.get('indoText') || '';
+        } else if(formData.get('idnoType') === 'CPG'){
+            state.CPG = formData.get('indoText') || '';
+        } else {
+        //WS NEED to insure this is an OR query... may need Erin's help'
+            state.BHO = formData.get('indoText') || '';
+            state.BHS = formData.get('indoText') || '';
+            state.CPG = formData.get('indoText') || '';
+        }
+    }
 }
 
 // Build the API query based on state
