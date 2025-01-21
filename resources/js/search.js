@@ -328,6 +328,10 @@ function getPaginatedBrowse() {
             state.totalResults = data.hits.total.value;
             displayResultsInfo(state.totalResults);
             if(state.query === 'cbssAuthor' || state.series === 'Comprehensive Bibliography on Syriac Studies'){ displayCBSSAuthorResults(data); }
+            else if(state.query === 'cbssSubject'){ 
+                console.log("cbssSubject q with no series designated");
+                displayCBSSDocumentResults(data); 
+            }
             else{displayResults(data);}
         })
         .catch(error => {
@@ -358,7 +362,9 @@ function initializeStateFromURL() {
     state.lang = urlParams.get('lang') || 'en'; // Default to English if no language is set
     state.keyword = urlParams.get('keyword') || ''; // Default to empty query if not set
     state.series = urlParams.get('series') || ''; // Default to empty query if not set
+    state.searchType = urlParams.get('searchType') || ''; // Retrieve searchType from the URL
 
+    state.query = urlParams.get('q') || ''; // Retrieve query from the URL
     if(state.keyword){
         fetchAndRenderAdvancedSearchResults();
     }
@@ -556,7 +562,7 @@ function fetchCBSSRecordsBySubject(subjectKey) {
 
     // Build query parameters
     const queryParams = new URLSearchParams({
-        docType: "cbss",
+        searchType: "cbssSubject",        
         subject: subjectKey, 
         size: state.size, 
         from: state.from
