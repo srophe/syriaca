@@ -674,7 +674,7 @@ function updateStateFromForm(form) {
         } else if(formData.get('idnoType') === 'CPG'){
             state.CPG = formData.get('indoText') || '';
         } else {
-        //WS NEED to insure this is an OR query... may need Erin's help'
+        //WS NEED to insure this is an OR query'
             state.BHO = formData.get('indoText') || '';
             state.BHS = formData.get('indoText') || '';
             state.CPG = formData.get('indoText') || '';
