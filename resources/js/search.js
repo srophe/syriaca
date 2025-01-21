@@ -480,14 +480,13 @@ function browseCbssAlphaMenu() {
 }
 
 
-function getCBSSBrowse(browseType = 'cbssAuthor') {
+function getCBSSBrowse() {
     // Set state for CBSS browse
-    state.query = browseType; // Retain the series name in the state
+    initializeStateFromURL();
     state.from = 0; // Reset for the first page
     state.letter = state.letter || 'a'; // Default letter if not already set
-    state.searchType = 'browse'; // Set search type to 'browse'
     const queryParams = new URLSearchParams({
-        searchType: 'browse',
+        searchType: state.searchType,
         q: state.query,
         letter: state.letter,
         from: state.from,
@@ -499,14 +498,144 @@ function getCBSSBrowse(browseType = 'cbssAuthor') {
         .then(response => response.json())
         .then(data => {
             state.totalResults = data.hits.total.value;
-            displayResultsInfo(state.totalResults); 
-            displayCBSSAuthorResults(data); 
-        })
+            // displayResultsInfo(state.totalResults); 
+            if(state.query === 'cbssAuthor' ){ displayCBSSAuthorResults(data); }
+            if(state.query === 'cbssSubject' ){ displayCBSSSubjectResults(data); }   })
         .catch(error => {
             handleError('search-results', 'Error fetching CBSS browse results.');
             console.error(error);
         });
 }
+function displayCBSSSubjectResults(data) {
+    const resultsContainer = document.getElementById("search-results");
+    resultsContainer.innerHTML = ''; // Clear previous results
+    console.log("cbsssubjectresults", state.letter);
+    // Ensure aggregation data is available
+    const subjects = data.aggregations?.unique_subjects?.buckets || [];
+
+    // Filter subjects that start with the designated letter
+    const filteredSubjects = subjects.filter(subject => 
+        subject.key.toLowerCase().startsWith(state.letter.toLowerCase())
+    );
+    state.totalResults = filteredSubjects.length;
+    displayResultsInfo(state.totalResults); 
+    if (state.totalResults > state.size) {
+        renderPagination(state.totalResults, state.size, state.currentPage, changePage);
+    }
+    if (filteredSubjects.length > 0) {
+        const list = document.createElement("ul"); // Create a list to display subjects
+        list.classList.add("subject-list"); // Add a class for styling
+
+        filteredSubjects.forEach(subject => {
+            const listItem = document.createElement("li");
+            const link = document.createElement("a");
+
+            link.href = "#"; // Placeholder, will be handled by the click event
+            link.textContent = `${subject.key} (${subject.doc_count})`; // Display the subject name and count
+            link.style.textDecoration = "none"; // Style the link
+            link.style.color = "#007bff";
+
+            // Attach click event to fetch CBSS records for this subject
+            link.addEventListener("click", (event) => {
+                event.preventDefault(); // Prevent default anchor behavior
+                fetchCBSSRecordsBySubject(subject.key); // Fetch records for the clicked subject
+            });
+
+            listItem.appendChild(link);
+            list.appendChild(listItem);
+        });
+
+        resultsContainer.appendChild(list); // Add the list to the results container
+    } else {
+        resultsContainer.innerHTML = `<p>No subjects found starting with "${state.letter}".</p>`;
+    }
+}
+// Function to fetch CBSS document entries by subject
+function fetchCBSSRecordsBySubject(subjectKey) {
+    const apiUrl = "https://50fnejdk87.execute-api.us-east-1.amazonaws.com/opensearch-api-test";
+
+    // Build query parameters
+    const queryParams = new URLSearchParams({
+        docType: "cbss",
+        subject: subjectKey, 
+        size: state.size, 
+        from: state.from
+    });
+    
+    // Fetch data from the API
+    fetch(`${apiUrl}?${queryParams.toString()}`, { method: 'GET' })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            // Display the results
+            displayCBSSDocumentResults(data, subjectKey);
+        })
+        .catch(error => {
+            console.error('Error fetching CBSS records:', error);
+            handleError('search-results', 'Error fetching CBSS records.');
+        });
+}
+
+// Function to display CBSS document results
+function displayCBSSDocumentResults(data, subjectKey) {
+    const resultsContainer = document.getElementById("search-results");
+    resultsContainer.innerHTML = ''; // Clear previous results
+
+    // Add a subject heading
+    const subjectHeading = document.createElement("h3");
+    subjectHeading.textContent = `Subject: ${subjectKey}`;
+    resultsContainer.appendChild(subjectHeading);
+
+    if (data.hits && data.hits.hits.length > 0) {
+        
+        // Extract and sort the results by author name
+        const sortedHits = data.hits.hits.sort((a, b) => {
+            const authorA = Array.isArray(a._source.author)
+                ? a._source.author.join(", ")
+                : a._source.author || "No Author";
+            const authorB = Array.isArray(b._source.author)
+                ? b._source.author.join(", ")
+                : b._source.author || "No Author";
+
+            // Convert to lowercase for case-insensitive comparison
+            return authorA.toLowerCase().localeCompare(authorB.toLowerCase());
+        });
+
+        // Render the sorted results
+        sortedHits.forEach(hit => {
+            const resultItem = document.createElement("div");
+            resultItem.classList.add("result-item");
+            resultItem.style.marginBottom = "15px"; // Add spacing between items
+
+            // Extract relevant fields from the hit source
+            const subject = hit._source.subject || 'No Subject';
+            const citation = hit._source.citation || 'No Citation';
+            const idno = hit._source.idno || '#';
+
+            // Create clickable URI
+            const uri = idno !== '#' ? `<a href="${idno}" target="_blank">${idno}</a>` : '';
+
+            // Populate the result item with details
+            resultItem.innerHTML = `
+                <div>
+                    <strong>${citation}</strong>
+                    <br/>
+                    <p>Subjects: ${subject}</p>
+                    <p>URI: ${uri}</p>
+                </div>
+            `;
+
+            resultsContainer.appendChild(resultItem);
+        });
+    } else {
+        resultsContainer.innerHTML = '<p>No records found for the selected subject.</p>';
+    }
+}
+
 //Winona's styling implementation
 function displayCBSSAuthorResults(data) {
     const resultsContainer = document.getElementById("search-results");
