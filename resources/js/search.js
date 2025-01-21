@@ -75,7 +75,7 @@ function fetchAndRenderAdvancedSearchResults() {
 function changePage(page) {
     state.currentPage = page;
     state.from = (page - 1) * state.size;
-    if(state.searchType === 'browse' || state.query === 'cbssAuthor' || state.searchType === 'letter'){
+    if(state.searchType === 'browse' || state.query === 'cbssAuthor' || state.searchType === 'letter' || state.searchType === 'cbssSubject'){
         getPaginatedBrowse();
     } else {
         fetchAndRenderAdvancedSearchResults();
@@ -577,6 +577,8 @@ function fetchCBSSRecordsBySubject(subjectKey) {
             return response.json();
         })
         .then(data => {
+            state.totalResults = data.hits.total.value;
+            displayResultsInfo(state.totalResults);
             // Display the results
             displayCBSSDocumentResults(data, subjectKey);
         })
