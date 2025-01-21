@@ -38,7 +38,6 @@ const state = {
     abstract: '',
     incipit: '',
     explicit: '',
-    abstract: '',
     cbssPubDateStart: '',
     cbssPubDateEnd: '',
     publisher: '',
@@ -265,6 +264,7 @@ function displayResults(data) {
 // Reusable error handler
 function handleError(containerId, message) {
     const container = document.getElementById(containerId);
+    container.innerHTML = ''; // Clear previous message
     container.innerHTML = `<p>${message}</p>`;
 }
 
@@ -279,7 +279,7 @@ function getBrowse(series) {
         letter: state.letter,
         from: state.from,
         size: state.size,
-        lang: state.lang,
+        lang: state.lang
     };
 
     // Remove empty or undefined parameters
