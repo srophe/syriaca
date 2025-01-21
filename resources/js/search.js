@@ -540,8 +540,10 @@ function displayCBSSAuthorResults(data) {
     if (data.hits && data.hits.hits.length > 0) {
         data.hits.hits.forEach(hit => {
             const resultItem = document.createElement("div");
+            const bdiElement = document.createElement("bdi");
             resultItem.classList.add("result-item");
             resultItem.style.marginBottom = "15px"; // Add spacing between items
+            //divElement.appendChild(bdiElement); 
             
             // Extract the title, prologue, and idno fields from the response
             const title = hit._source.citation || hit._source.title + ' Missing Citation';
@@ -553,14 +555,14 @@ function displayCBSSAuthorResults(data) {
             const url = idno ? `${idno}`: '#';
             
             // Populate the result item with the link and details
-            resultItem.innerHTML = `
+            bdiElement.innerHTML = `
                 ${title}
                 <br/>URI: 
                 <a href="${url}" target="_blank" style="text-decoration: none; color: #007bff;">
                     <span class="tei-title title-analytic">${url}</span>
                 </a>
               `;
-            
+            resultItem.appendChild(bdiElement);
             resultsContainer.appendChild(resultItem);
         });
     } else {
