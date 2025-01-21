@@ -667,19 +667,19 @@ function updateStateFromForm(form) {
     state.explicit = formData.get('explicit') || '';
     state.title = formData.get('title') || '';
     state.author = formData.get('author') || '';
-    //WS NEED testing
-    if(formData.get('indoText')){
+
+    if(formData.get('idnoText')){
         if(formData.get('idnoType') === 'BHO'){
-            state.BHO = formData.get('indoText') || '';
+            state.BHO = formData.get('idnoText') || '';
         }else if(formData.get('idnoType') === 'BHS'){
-            state.BHS = formData.get('indoText') || '';
+            state.BHS = formData.get('idnoText') || '';
         } else if(formData.get('idnoType') === 'CPG'){
-            state.CPG = formData.get('indoText') || '';
+            state.CPG = formData.get('idnoText') || '';
         } else {
-        //WS NEED to insure this is an OR query'
-            state.BHO = formData.get('indoText') || '';
-            state.BHS = formData.get('indoText') || '';
-            state.CPG = formData.get('indoText') || '';
+        //This requires a change to the dynamic search query processing to handle multiple idno type searches that are not inclusive of each other, using default instead
+            state.BHO = formData.get('idnoText') || '';
+            state.BHS = formData.get('idnoText') || '';
+            state.CPG = formData.get('idnoText') || '';
         }
     }
 }
@@ -721,7 +721,10 @@ function buildQueryParams() {
         publisher: state.publisher,
         cbssPubPlace: state.pubPlace,
         subject: state.cbssSubject,
-        keyword: state.keyword
+        keyword: state.keyword,
+        BHO: state.BHO,
+        BHS: state.BHS,     
+        CPG: state.CPG
 
     };
 
