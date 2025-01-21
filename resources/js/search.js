@@ -76,6 +76,7 @@ function changePage(page) {
     state.currentPage = page;
     state.from = (page - 1) * state.size;
     if(state.searchType === 'browse' || state.query === 'cbssAuthor' || state.searchType === 'letter' || state.searchType === 'cbssSubject'){
+        console.log("change page search type: " + state.searchType);
         getPaginatedBrowse();
     } else {
         fetchAndRenderAdvancedSearchResults();
@@ -311,7 +312,8 @@ function getPaginatedBrowse() {
         from: state.from,
         size: state.size,
         lang: state.lang,
-        series: state.series
+        series: state.series,
+        subject: state.subject
     };
 
     // Remove empty or undefined parameters
@@ -544,6 +546,7 @@ function displayCBSSSubjectResults(data) {
             // Attach click event to fetch CBSS records for this subject
             link.addEventListener("click", (event) => {
                 event.preventDefault(); // Prevent default anchor behavior
+                state.subject = subject.key;
                 fetchCBSSRecordsBySubject(subject.key); // Fetch records for the clicked subject
             });
 
@@ -559,6 +562,7 @@ function displayCBSSSubjectResults(data) {
 // Function to fetch CBSS document entries by subject
 function fetchCBSSRecordsBySubject(subjectKey) {
     const apiUrl = "https://50fnejdk87.execute-api.us-east-1.amazonaws.com/opensearch-api-test";
+    state.searchType = "cbssSubject";     
 
     // Build query parameters
     const queryParams = new URLSearchParams({
