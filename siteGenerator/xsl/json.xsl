@@ -730,7 +730,12 @@
         <xsl:if test="$doc/descendant::tei:body/descendant::tei:state[normalize-space(string-join(descendant-or-self::text(),'')) != '']">
             <array key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">     
                 <xsl:for-each select="$doc/descendant::tei:body/descendant::tei:state[normalize-space(string-join(descendant-or-self::text(),'')) != '']">
-                   <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(descendant-or-self::text(),' '))"/></string>
+                    <xsl:choose>
+                        <xsl:when test="@ref">
+                            <string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="tokenize(@ref,'/')[last()]"/></string>
+                        </xsl:when>
+                        <xsl:otherwise><string xmlns="http://www.w3.org/2005/xpath-functions"><xsl:value-of select="normalize-space(string-join(descendant-or-self::text(),' '))"/></string></xsl:otherwise>
+                    </xsl:choose>
                 </xsl:for-each>
             </array>
         </xsl:if>
