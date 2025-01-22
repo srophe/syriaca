@@ -38,7 +38,6 @@ const state = {
     abstract: '',
     incipit: '',
     explicit: '',
-    abstract: '',
     cbssPubDateStart: '',
     cbssPubDateEnd: '',
     publisher: '',
@@ -76,7 +75,8 @@ function fetchAndRenderAdvancedSearchResults() {
 function changePage(page) {
     state.currentPage = page;
     state.from = (page - 1) * state.size;
-    if(state.searchType === 'browse' || state.query === 'cbssAuthor' || state.searchType === 'letter'){
+    if(state.searchType === 'browse' || state.query === 'cbssAuthor' || state.searchType === 'letter' || state.searchType === 'cbssSubject'){
+        console.log("change page search type: " + state.searchType);
         getPaginatedBrowse();
     } else {
         fetchAndRenderAdvancedSearchResults();
@@ -265,6 +265,7 @@ function displayResults(data) {
 // Reusable error handler
 function handleError(containerId, message) {
     const container = document.getElementById(containerId);
+    container.innerHTML = ''; // Clear previous message
     container.innerHTML = `<p>${message}</p>`;
 }
 
@@ -279,7 +280,7 @@ function getBrowse(series) {
         letter: state.letter,
         from: state.from,
         size: state.size,
-        lang: state.lang,
+        lang: state.lang
     };
 
     // Remove empty or undefined parameters
@@ -311,7 +312,8 @@ function getPaginatedBrowse() {
         from: state.from,
         size: state.size,
         lang: state.lang,
-        series: state.series
+        series: state.series,
+        subject: state.subject
     };
 
     // Remove empty or undefined parameters
@@ -328,6 +330,10 @@ function getPaginatedBrowse() {
             state.totalResults = data.hits.total.value;
             displayResultsInfo(state.totalResults);
             if(state.query === 'cbssAuthor' || state.series === 'Comprehensive Bibliography on Syriac Studies'){ displayCBSSAuthorResults(data); }
+            else if(state.query === 'cbssSubject'){ 
+                console.log("cbssSubject q with no series designated");
+                displayCBSSDocumentResults(data); 
+            }
             else{displayResults(data);}
         })
         .catch(error => {
@@ -358,7 +364,9 @@ function initializeStateFromURL() {
     state.lang = urlParams.get('lang') || 'en'; // Default to English if no language is set
     state.keyword = urlParams.get('keyword') || ''; // Default to empty query if not set
     state.series = urlParams.get('series') || ''; // Default to empty query if not set
+    state.searchType = urlParams.get('searchType') || ''; // Retrieve searchType from the URL
 
+    state.query = urlParams.get('q') || ''; // Retrieve query from the URL
     if(state.keyword){
         fetchAndRenderAdvancedSearchResults();
     }
@@ -480,14 +488,13 @@ function browseCbssAlphaMenu() {
 }
 
 
-function getCBSSBrowse(browseType = 'cbssAuthor') {
+function getCBSSBrowse() {
     // Set state for CBSS browse
-    state.query = browseType; // Retain the series name in the state
+    initializeStateFromURL();
     state.from = 0; // Reset for the first page
     state.letter = state.letter || 'a'; // Default letter if not already set
-    state.searchType = 'browse'; // Set search type to 'browse'
     const queryParams = new URLSearchParams({
-        searchType: 'browse',
+        searchType: state.searchType,
         q: state.query,
         letter: state.letter,
         from: state.from,
@@ -499,14 +506,148 @@ function getCBSSBrowse(browseType = 'cbssAuthor') {
         .then(response => response.json())
         .then(data => {
             state.totalResults = data.hits.total.value;
-            displayResultsInfo(state.totalResults); 
-            displayCBSSAuthorResults(data); 
-        })
+            // displayResultsInfo(state.totalResults); 
+            if(state.query === 'cbssAuthor' ){ displayCBSSAuthorResults(data); }
+            if(state.query === 'cbssSubject' ){ displayCBSSSubjectResults(data); }   })
         .catch(error => {
             handleError('search-results', 'Error fetching CBSS browse results.');
             console.error(error);
         });
 }
+function displayCBSSSubjectResults(data) {
+    const resultsContainer = document.getElementById("search-results");
+    resultsContainer.innerHTML = ''; // Clear previous results
+    console.log("cbsssubjectresults", state.letter);
+    // Ensure aggregation data is available
+    const subjects = data.aggregations?.unique_subjects?.buckets || [];
+
+    // Filter subjects that start with the designated letter
+    const filteredSubjects = subjects.filter(subject => 
+        subject.key.toLowerCase().startsWith(state.letter.toLowerCase())
+    );
+    state.totalResults = filteredSubjects.length;
+    displayResultsInfo(state.totalResults); 
+    if (state.totalResults > state.size) {
+        renderPagination(state.totalResults, state.size, state.currentPage, changePage);
+    }
+    if (filteredSubjects.length > 0) {
+        const list = document.createElement("ul"); // Create a list to display subjects
+        list.classList.add("subject-list"); // Add a class for styling
+
+        filteredSubjects.forEach(subject => {
+            const listItem = document.createElement("li");
+            const link = document.createElement("a");
+
+            link.href = "#"; // Placeholder, will be handled by the click event
+            link.textContent = `${subject.key} (${subject.doc_count})`; // Display the subject name and count
+            link.style.textDecoration = "none"; // Style the link
+            link.style.color = "#007bff";
+
+            // Attach click event to fetch CBSS records for this subject
+            link.addEventListener("click", (event) => {
+                event.preventDefault(); // Prevent default anchor behavior
+                state.subject = subject.key;
+                fetchCBSSRecordsBySubject(subject.key); // Fetch records for the clicked subject
+            });
+
+            listItem.appendChild(link);
+            list.appendChild(listItem);
+        });
+
+        resultsContainer.appendChild(list); // Add the list to the results container
+    } else {
+        resultsContainer.innerHTML = `<p>No subjects found starting with "${state.letter}".</p>`;
+    }
+}
+// Function to fetch CBSS document entries by subject
+function fetchCBSSRecordsBySubject(subjectKey) {
+    const apiUrl = "https://50fnejdk87.execute-api.us-east-1.amazonaws.com/opensearch-api-test";
+    state.searchType = "cbssSubject";     
+
+    // Build query parameters
+    const queryParams = new URLSearchParams({
+        searchType: "cbssSubject",        
+        subject: subjectKey, 
+        size: state.size, 
+        from: state.from
+    });
+    
+    // Fetch data from the API
+    fetch(`${apiUrl}?${queryParams.toString()}`, { method: 'GET' })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            state.totalResults = data.hits.total.value;
+            displayResultsInfo(state.totalResults);
+            // Display the results
+            displayCBSSDocumentResults(data, subjectKey);
+        })
+        .catch(error => {
+            console.error('Error fetching CBSS records:', error);
+            handleError('search-results', 'Error fetching CBSS records.');
+        });
+}
+
+// Function to display CBSS document results
+function displayCBSSDocumentResults(data, subjectKey) {
+    const resultsContainer = document.getElementById("search-results");
+    resultsContainer.innerHTML = ''; // Clear previous results
+
+    // Add a subject heading
+    const subjectHeading = document.createElement("h3");
+    subjectHeading.textContent = `Subject: ${subjectKey}`;
+    resultsContainer.appendChild(subjectHeading);
+
+    if (data.hits && data.hits.hits.length > 0) {
+        
+        // Extract and sort the results by author name
+        const sortedHits = data.hits.hits.sort((a, b) => {
+            const authorA = Array.isArray(a._source.author)
+                ? a._source.author.join(", ")
+                : a._source.author || "No Author";
+            const authorB = Array.isArray(b._source.author)
+                ? b._source.author.join(", ")
+                : b._source.author || "No Author";
+
+            // Convert to lowercase for case-insensitive comparison
+            return authorA.toLowerCase().localeCompare(authorB.toLowerCase());
+        });
+
+        // Render the sorted results
+        sortedHits.forEach(hit => {
+            const resultItem = document.createElement("div");
+            resultItem.classList.add("result-item");
+            resultItem.style.marginBottom = "15px"; // Add spacing between items
+
+            // Extract relevant fields from the hit source
+            const subject = hit._source.subject || 'No Subject';
+            const citation = hit._source.citation || 'No Citation';
+            const idno = hit._source.idno || '#';
+
+            // Create clickable URI
+            const uri = idno !== '#' ? `<a href="${idno}" target="_blank">${idno}</a>` : '';
+
+            // Populate the result item with details
+            resultItem.innerHTML = `
+                <div>
+                    <strong>${citation}</strong>
+                    <br/>
+                    <p>Subjects: ${subject}</p>
+                    <p>URI: ${uri}</p>
+                </div>
+            `;
+
+            resultsContainer.appendChild(resultItem);
+        });
+    } else {
+        resultsContainer.innerHTML = '<p>No records found for the selected subject.</p>';
+    }
+}
+
 //Winona's styling implementation
 function displayCBSSAuthorResults(data) {
     const resultsContainer = document.getElementById("search-results");
@@ -667,19 +808,19 @@ function updateStateFromForm(form) {
     state.explicit = formData.get('explicit') || '';
     state.title = formData.get('title') || '';
     state.author = formData.get('author') || '';
-    //WS NEED testing
-    if(formData.get('indoText')){
+
+    if(formData.get('idnoText')){
         if(formData.get('idnoType') === 'BHO'){
-            state.BHO = formData.get('indoText') || '';
+            state.BHO = formData.get('idnoText') || '';
         }else if(formData.get('idnoType') === 'BHS'){
-            state.BHS = formData.get('indoText') || '';
+            state.BHS = formData.get('idnoText') || '';
         } else if(formData.get('idnoType') === 'CPG'){
-            state.CPG = formData.get('indoText') || '';
+            state.CPG = formData.get('idnoText') || '';
         } else {
-        //WS NEED to insure this is an OR query'
-            state.BHO = formData.get('indoText') || '';
-            state.BHS = formData.get('indoText') || '';
-            state.CPG = formData.get('indoText') || '';
+        //This requires a change to the dynamic search query processing to handle multiple idno type searches that are not inclusive of each other, using default instead
+            state.BHO = formData.get('idnoText') || '';
+            state.BHS = formData.get('idnoText') || '';
+            state.CPG = formData.get('idnoText') || '';
         }
     }
 }
@@ -721,7 +862,10 @@ function buildQueryParams() {
         publisher: state.publisher,
         cbssPubPlace: state.pubPlace,
         subject: state.cbssSubject,
-        keyword: state.keyword
+        keyword: state.keyword,
+        BHO: state.BHO,
+        BHS: state.BHS,     
+        CPG: state.CPG
 
     };
 
