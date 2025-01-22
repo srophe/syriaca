@@ -77,7 +77,7 @@
     
     <xsl:param name="applicationPath" select="'../../'"/>
     <xsl:param name="staticSitePath" select="'../../'"/>
-    <xsl:param name="dataPath" select="'/Users/wsalesky/syriaca/syriaca/syriaca-data/data/'"/>
+    <xsl:param name="dataPath" select="'data-html/'"/>
     
     <!-- Example: generate new index.html page for places collection -->
     <xsl:param name="convert" select="'false'"/>
