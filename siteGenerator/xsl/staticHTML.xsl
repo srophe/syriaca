@@ -369,11 +369,29 @@
                                         <xsl:with-param name="idno" select="$idno"/>
                                             <xsl:with-param name="formats" select="'print,tei,rdf'"/>
                                         </xsl:call-template>
+                                        <div class="row">
+                                            <div class="col-md-7 col-lg-8">
                                         <xsl:apply-templates select="$nodes/ancestor-or-self::t:TEI">
                                             <xsl:with-param name="collection" select="$collection"/>
                                         </xsl:apply-templates>
+                                            </div>
+                                            <div class="col-md-5 col-lg-4 right-menu">
+                                                <!-- Make dynamic -->
+                                                <!-- WS:ToDo Maps -->
+                                                <xsl:choose>
+                                                    <xsl:when test="$nodes/ancestor-or-self::t:TEI/descendant::t:geo">
+                                                        <xsl:call-template name="leafletMap">
+                                                            <xsl:with-param name="nodes" select="$nodes/ancestor-or-self::t:TEI"/>
+                                                        </xsl:call-template>
+                                                    </xsl:when>
+                                                    <!-- Maps for related places -->
+                                                </xsl:choose>
+                                                <span class="rdfRelationships" data-recordID="{$idno}"/>
+                                        
+                                        </div>
+                                        </div>
                                     </div>
-                                </div>
+                                </div>  
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:call-template name="genericTEIPage">
