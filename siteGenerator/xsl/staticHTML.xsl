@@ -362,9 +362,18 @@
                     <xsl:otherwise>
                         <xsl:choose>
                             <xsl:when test="$collectionTemplate">
-                                <xsl:apply-templates select="$nodes/ancestor-or-self::t:TEI">
-                                    <xsl:with-param name="collection" select="$collection"/>
-                                </xsl:apply-templates>
+                                <div class="main-content-block">
+                                    <div class="interior-content">
+                                        <xsl:call-template name="otherDataFormats">
+                                        <xsl:with-param name="node" select="t:TEI"/>
+                                        <xsl:with-param name="idno" select="$idno"/>
+                                            <xsl:with-param name="formats" select="'print,tei,rdf'"/>
+                                        </xsl:call-template>
+                                        <xsl:apply-templates select="$nodes/ancestor-or-self::t:TEI">
+                                            <xsl:with-param name="collection" select="$collection"/>
+                                        </xsl:apply-templates>
+                                    </div>
+                                </div>
                             </xsl:when>
                             <xsl:otherwise>
                                 <xsl:call-template name="genericTEIPage">
