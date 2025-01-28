@@ -72,12 +72,14 @@
     <xsl:param name="applicationPath" select="'/Users/wsalesky/syriaca/syriaca/syriaca'"/>
     <xsl:param name="staticSitePath" select="'/Users/wsalesky/syriaca/syriaca/syriacaStatic'"/>
     <xsl:param name="dataPath" select="'/Users/wsalesky/syriaca/syriaca/syriaca-data-test/data/'"/>
+    <xsl:param name="applicationPath" select="'../../'"/>
+    <xsl:param name="staticSitePath" select="'../../'"/>
     <xsl:param name="convert" select="'true'"/>
     -->
     
     <xsl:param name="applicationPath" select="'../../'"/>
     <xsl:param name="staticSitePath" select="'../../'"/>
-    <xsl:param name="dataPath" select="'./data/'"/>
+    <xsl:param name="dataPath" select="'./data/"/>
     
     <!-- Example: generate new index.html page for places collection -->
     <xsl:param name="convert" select="'false'"/>
@@ -322,7 +324,7 @@
                             <xsl:when test="$collectionTemplate/child::*">
                                 <xsl:sequence select="$collectionTemplate"/> 
                             </xsl:when>
-                            <xsl:otherwise><xsl:message>Error Can not find matching template for TEI page </xsl:message></xsl:otherwise>
+                            <xsl:otherwise><xsl:message>Error Can not find matching template for TEI page <xsl:value-of select="replace(concat($staticSitePath,'/siteGenerator/components/',string($collectionValues/@template),'.html'),'//','/')"/></xsl:message></xsl:otherwise>
                         </xsl:choose>
                     </xsl:when>
                 </xsl:choose>
@@ -336,7 +338,7 @@
                             <xsl:otherwise><xsl:message>Error in template, check template for html:head </xsl:message></xsl:otherwise>
                         </xsl:choose>
                     </xsl:when>
-                    <xsl:otherwise><xsl:message>Error in template, check template for html:head </xsl:message></xsl:otherwise>
+                    <xsl:otherwise><xsl:message>No template found </xsl:message></xsl:otherwise>
                 </xsl:choose>
             <body id="body">
                 <xsl:choose>
