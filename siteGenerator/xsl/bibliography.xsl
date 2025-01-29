@@ -228,6 +228,13 @@
                                 <xsl:variable name="biblfilepath">
                                     <xsl:value-of select="concat($dataFilePath,$file,'.xml')"/>
                                 </xsl:variable>
+                                <!-- Debugging Messages -->
+                                <xsl:message>
+                                    Debugging bibliography.xsl: The value of dataPath is '<xsl:value-of select="$dataPath"/>'.
+                                </xsl:message>
+                                <xsl:message>
+                                    Debugging bibliography.xsl: The value of biblfilepath is '<xsl:value-of select="$bibfilepath"/>'.
+                                </xsl:message>
                                 <xsl:choose>
                                     <xsl:when test="doc-available($biblfilepath)">
                                         <xsl:variable name="rec" select="document($biblfilepath)"/>
@@ -291,6 +298,13 @@
                     <xsl:variable name="biblfilepath">
                         <xsl:value-of select="concat($dataFilePath,$file,'.xml')"/>
                     </xsl:variable>
+                    <!-- Debugging Messages -->
+                    <xsl:message>
+                                    Debugging bibliography.xsl: The value of dataPath is '<xsl:value-of select="$dataPath"/>'.
+                                </xsl:message>
+                                <xsl:message>
+                                    Debugging bibliography.xsl: The value of biblfilepath is '<xsl:value-of select="$bibfilepath"/>'.
+                                </xsl:message>
                     <xsl:choose>
                         <xsl:when test="doc-available($biblfilepath)">
                             <xsl:variable name="rec" select="document($biblfilepath)"/>
