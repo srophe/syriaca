@@ -243,6 +243,7 @@
                                         </xsl:for-each>
                                     </xsl:when>
                                     <xsl:otherwise>
+                                        <xsl:message>No Bibl record found at <xsl:value-of select="$biblfilepath"/></xsl:message>
                                         <xsl:apply-templates mode="footnote"/>
                                         <xsl:sequence select="$passThrough"/>
                                         <xsl:if test="descendant::t:idno[@type='URI']">
@@ -305,6 +306,7 @@
                             </xsl:for-each>
                         </xsl:when>
                         <xsl:otherwise> 
+                            <xsl:message>No Bibl record found at <xsl:value-of select="$biblfilepath"/></xsl:message>
                             <xsl:apply-templates mode="footnote"/>
                             <xsl:sequence select="$passThrough"/>
                             <xsl:if test="descendant::t:idno[@type='URI']">
