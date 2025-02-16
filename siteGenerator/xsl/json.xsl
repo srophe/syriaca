@@ -10,6 +10,23 @@
     xmlns:local="http://syriaca.org/ns" 
     exclude-result-prefixes="xs t x saxon local" version="3.0">
     
+    <!-- ================================================================== 
+      json.xsl
+       
+       Generate openSearch index data as json
+       Uses /siteGenerator/components/repo-config.xml to build fields. If fields are not specified in repo-config.xml it will not be transformed. 
+      
+       code by: 
+        + Winona Salesky (wsalesky@gmail.com)
+          
+       funding provided by:
+        + National Endowment for the Humanities (http://www.neh.gov). Any 
+          views, findings, conclusions, or recommendations expressed in 
+          this code do not necessarily reflect those of the National 
+          Endowment for the Humanities.
+       
+       ================================================================== -->
+    
     <xsl:output method="text" encoding="utf-8"/>
     
     <xsl:param name="applicationPath" select="'/Users/wsalesky/syriaca/syriaca/syriaca'"/>
@@ -904,12 +921,21 @@
         <xsl:if test="contains($id, '/cbss')">
             <xsl:if test="$doc/descendant::tei:bibl[@type='formatted'][@subtype='citation']">
                 <string key="{.}" xmlns="http://www.w3.org/2005/xpath-functions">
-                    <xsl:value-of select="normalize-space(string-join($doc/descendant::tei:bibl[@type='formatted'][@subtype='citation'],' '))"/>
+                    <xsl:apply-templates select="$doc/descendant::tei:bibl[@type='formatted'][@subtype='citation']" mode="citation"/>
+<!--                    <xsl:value-of select="normalize-space(string-join($doc/descendant::tei:bibl[@type='formatted'][@subtype='citation'],' '))"/>-->
                 </string>   
             </xsl:if>            
         </xsl:if>
     </xsl:template>
-    
+    <xsl:template match="tei:title" mode="citation">
+        <xsl:choose>
+            <xsl:when test="@level = 'a'"> "<xsl:value-of select="."/>" </xsl:when>
+            <xsl:otherwise> &lt;i&gt;<xsl:value-of select="."/>&lt;/i&gt; </xsl:otherwise>
+        </xsl:choose>
+    </xsl:template>
+    <xsl:template match="text()" mode="citation">
+        <xsl:text> </xsl:text><xsl:value-of select="normalize-space(.)"/><xsl:text> </xsl:text>
+    </xsl:template>
     <xsl:template match="*:fields[@function = 'abstract']">
         <xsl:param name="doc"/>
         <xsl:param name="id"/>
