@@ -1,70 +1,71 @@
-name: Deploy to S3
+# Turned off this dev code pipeline. All code updates will now run from the Gaddel repo
+# name: Deploy to S3
 
-on:
-  push:
-    branches:
-      - 'staticSite'  # Trigger the workflow on push to the branch
+# on:
+#   push:
+#     branches:
+#       - 'staticSite'  # Trigger the workflow on push to the branch
 
-permissions:
-  id-token: write
-  contents: read
+# permissions:
+#   id-token: write
+#   contents: read
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
+# jobs:
+#   deploy:
+#     runs-on: ubuntu-latest
+#     steps:
     
-      # Step 1: Check out the repository code
-      - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0  # Fetch the full history for accurate diff comparisons
+#       # Step 1: Check out the repository code
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
+#         with:
+#           fetch-depth: 0  # Fetch the full history for accurate diff comparisons
       
-      # Explicitly check out the 'staticSite' branch
-      - name: Ensure the correct branch is checked out
-        run: |
-          git checkout staticSite
-          git branch --show-current  # Verify the checked-out branch
+#       # Explicitly check out the 'staticSite' branch
+#       - name: Ensure the correct branch is checked out
+#         run: |
+#           git checkout staticSite
+#           git branch --show-current  # Verify the checked-out branch
 
-      # Step 2: Configure AWS credentials
-      - name: Configure AWS credentials from AWS account
-        uses: aws-actions/configure-aws-credentials@v2
-        with:
-          role-to-assume: ${{ secrets.AWS_INTERIM_ROLE }}
-          aws-region: us-east-1
-          role-session-name: GitHub-OIDC-frontend
+#       # Step 2: Configure AWS credentials
+#       - name: Configure AWS credentials from AWS account
+#         uses: aws-actions/configure-aws-credentials@v2
+#         with:
+#           role-to-assume: ${{ secrets.AWS_INTERIM_ROLE }}
+#           aws-region: us-east-1
+#           role-session-name: GitHub-OIDC-frontend
           
-      # Step 3: Sync only changed files to S3
-      - name: Get list of changed files
-        id: changes
-        run: |
-          git fetch origin staticSite
-          git diff --name-only HEAD^ HEAD > changed_files.txt
-          cat changed_files.txt
+#       # Step 3: Sync only changed files to S3
+#       - name: Get list of changed files
+#         id: changes
+#         run: |
+#           git fetch origin staticSite
+#           git diff --name-only HEAD^ HEAD > changed_files.txt
+#           cat changed_files.txt
 
-      # Step 4: Upload only changed files to S3
-      - name: Sync only changed files to S3
-        if: success()
-        run: |
-          while read file; do
-            echo "Attempting to upload $file..."
-            if ! aws s3 cp "$file" "s3://srophe-syriaca-front-end/$file" ; then
-              echo "File $file not found. Falling back to sync for deletion handling."
-              aws s3 sync ./ s3://srophe-syriaca-front-end --delete --exact-timestamps --exclude "json-data/*" --exclude "testHtml/*" --exclude "person/*" --exclude "place/*" --exclude "keyword/*" --exclude "cbss/*" --exclude "subject/*" --exclude "work/*"
-              break  # Stop further uploads and rely on sync
-            fi
-          done < changed_files.txt
-        env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}  
+#       # Step 4: Upload only changed files to S3
+#       - name: Sync only changed files to S3
+#         if: success()
+#         run: |
+#           while read file; do
+#             echo "Attempting to upload $file..."
+#             if ! aws s3 cp "$file" "s3://srophe-syriaca-front-end/$file" ; then
+#               echo "File $file not found. Falling back to sync for deletion handling."
+#               aws s3 sync ./ s3://srophe-syriaca-front-end --delete --exact-timestamps --exclude "json-data/*" --exclude "testHtml/*" --exclude "person/*" --exclude "place/*" --exclude "keyword/*" --exclude "cbss/*" --exclude "subject/*" --exclude "work/*"
+#               break  # Stop further uploads and rely on sync
+#             fi
+#           done < changed_files.txt
+#         env:
+#           AWS_REGION: ${{ secrets.AWS_REGION }}
+#           AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}  
 
-      # Optional: Full redeployment
+#       # Optional: Full redeployment
 
-      # - name: Debug
-      #   run: aws s3 sync ./ s3://srophe-syriaca-front-end --delete --exact-timestamps --dryrun
-      # - name: Sync all files to S3
-      #   run: |
-      #     aws s3 sync ./ s3://srophe-syriaca-front-end --delete --exact-timestamps --exclude "json-data/*" --exclude "testHtml/*" --exclude "person/*" --exclude "place/*" --exclude "keyword/*" --exclude "cbss/*" --exclude "subject/*" --exclude "work/*"
-      #   env:
-      #     AWS_REGION: ${{ secrets.AWS_REGION }}
-      #     AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+#       # - name: Debug
+#       #   run: aws s3 sync ./ s3://srophe-syriaca-front-end --delete --exact-timestamps --dryrun
+#       # - name: Sync all files to S3
+#       #   run: |
+#       #     aws s3 sync ./ s3://srophe-syriaca-front-end --delete --exact-timestamps --exclude "json-data/*" --exclude "testHtml/*" --exclude "person/*" --exclude "place/*" --exclude "keyword/*" --exclude "cbss/*" --exclude "subject/*" --exclude "work/*"
+#       #   env:
+#       #     AWS_REGION: ${{ secrets.AWS_REGION }}
+#       #     AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
