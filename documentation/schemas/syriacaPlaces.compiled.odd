@@ -8927,15 +8927,15 @@ codes used elsewhere in the text.</desc><desc xmlns:rng="http://relaxng.org/ns/s
           </constraintSpec><constraintSpec ident="atts-on-relation" scheme="schematron">
             <constraint>
               <sch:rule context="tei:text//tei:relation[@type='disambiguation']">
-                <sch:assert test="@ref='http://syriaca.org/keyword/conceptually-related' or @ref='http://syriaca.org/keyword/co-located' or @ref='http://syriaca.org/keyword/not-to-be-confused-with' or @ref='http://syriaca.org/keyword/share-a-name'">
-                  With @type="disambiguation", the @ref attribute must be one of the following "http://syriaca.org/keyword/conceptually-related", "http://syriaca.org/keyword/co-located", "http://syriaca.org/keyword/not-to-be-confused-with", or "http://syriaca.org/keyword/share-a-name".</sch:assert>
+                <sch:assert test="@ref='http://syriaca.org/taxonomy/conceptually-related' or @ref='http://syriaca.org/taxonomy/co-located' or @ref='http://syriaca.org/taxonomy/not-to-be-confused-with' or @ref='http://syriaca.org/taxonomy/share-a-name'">
+                  With @type="disambiguation", the @ref attribute must be one of the following "http://syriaca.org/taxonomy/conceptually-related", "http://syriaca.org/taxonomy/co-located", "http://syriaca.org/taxonomy/not-to-be-confused-with", or "http://syriaca.org/taxonomy/share-a-name".</sch:assert>
                 <sch:assert test="@mutual">
                   This relationship requires a @mutual attribute.
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:text//tei:relation[@type='see-also']">
                 <sch:assert test="@ref='http://www.w3.org/2004/02/skos/core#related'">
-                  With @type="see-also", the @ref attribute must be "http://www.w3.org/2004/02/skos/core#related".</sch:assert>
+                  With @type="see-also", the @ref attribute must be "http://syriaca.org/taxonomy/related".</sch:assert>
                 <sch:assert test="@mutual">
                   This relationship requires a @mutual attribute.
                 </sch:assert>
@@ -8947,19 +8947,19 @@ codes used elsewhere in the text.</desc><desc xmlns:rng="http://relaxng.org/ns/s
                   This relationship requires @active/@passive attributes.
                 </sch:assert>
               </sch:rule>
-              <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/conceptually-related']">
+              <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/taxonomy/conceptually-related']">
                 <sch:assert test="@type='disambiguation'">
                   This relationship requires @type="disambiguation".</sch:assert>
               </sch:rule>
-              <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/co-located']">
+              <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/taxonomy/co-located']">
                 <sch:assert test="@type='disambiguation'">
                   This relationship requires @type="disambiguation".</sch:assert>
               </sch:rule>
-              <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/not-to-be-confused-with']">
+              <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/taxonomy/not-to-be-confused-with']">
                 <sch:assert test="@type='disambiguation'">
                   This relationship requires @type="disambiguation".</sch:assert>
               </sch:rule>
-              <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/keyword/share-a-name']">
+              <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/taxonomy/share-a-name']">
                 <sch:assert test="@type='disambiguation'">
                   This relationship requires @type="disambiguation".</sch:assert>
               </sch:rule>
@@ -8967,7 +8967,7 @@ codes used elsewhere in the text.</desc><desc xmlns:rng="http://relaxng.org/ns/s
                 <sch:assert test="@type='contained-within'">
                   This relationship requires @type="contained-within"</sch:assert>
               </sch:rule>
-              <sch:rule context="tei:text//tei:relation[@ref='http://www.w3.org/2004/02/skos/core#related']">
+              <sch:rule context="tei:text//tei:relation[@ref='http://syriaca.org/taxonomy/related']">
                 <sch:assert test="@type='disambiguation'">
                   For a 'related' relationship, use @type="see-also".</sch:assert>
               </sch:rule>
@@ -9021,25 +9021,25 @@ codes used elsewhere in the text.</desc><desc xmlns:rng="http://relaxng.org/ns/s
               </valList>
             </attDef><attDef ident="ref" mode="replace" usage="req">
               <valList type="closed">
-                <valItem ident="http://syriaca.org/keyword/conceptually-related">
+                <valItem ident="http://syriaca.org/taxonomy/conceptually-related">
                   <desc>Used to indicate when this entity is closely related conceptually to another entity, i.e. a settlement, its diocese, and its region.</desc>
                 </valItem>
-                <valItem ident="http://syriaca.org/keyword/co-located">
+                <valItem ident="http://syriaca.org/taxonomy/co-located">
                   <desc>Used to indicate when distinct entities share a location and therefore might be confused.</desc>
                 </valItem>
-                <valItem ident="http://syriaca.org/keyword/not-to-be-confused-with">
+                <valItem ident="http://syriaca.org/taxonomy/not-to-be-confused-with">
                   <desc>Used to distinguish between entities that have been confused in the scholarly literature or might be confused by users.</desc>
                 </valItem>
-                <valItem ident="http://syriaca.org/keyword/possibly-identical">
+                <valItem ident="http://syriaca.org/taxonomy/possibly-identical">
                   <desc>Used to indicate that even though Syriaca.org has identified this location as a distinct entity, it is possible that this place is the same an another entity.</desc>
                 </valItem>
-                <valItem ident="http://syriaca.org/keyword/share-a-name">
+                <valItem ident="http://syriaca.org/taxonomy/share-a-name">
                   <desc>Used to indicate when entities share a name but remain distinct; i.e. when different settlements or churches share a name.</desc>
                 </valItem>
                   <valItem ident="http://www.w3.org/2004/02/skos/core#broader">
                   <desc>Used for a nesting relationship and indicates when a larger entity contains the subject of this authority file.</desc>
                 </valItem>
-                <valItem ident="http://www.w3.org/2004/02/skos/core#related">
+                <valItem ident="http://syriaca.org/taxonomy/related">
                   <desc>Used for a "see-also" relationship.</desc>
                 </valItem>
               </valList>
