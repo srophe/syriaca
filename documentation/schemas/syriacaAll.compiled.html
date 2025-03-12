@@ -5336,9 +5336,10 @@ element provenance
 &lt;sch:rule context="//tei:body//tei:bibl/tei:ptr/@target"
  role="warning"&gt;
 &lt;sch:let name="error" value="."/&gt;
-&lt;sch:assert test="starts-with(., 'http://syriaca.org/bibl/')"&gt; The @target value: "&lt;sch:value-of select="$error"/&gt;" is not a Syriaca.org bibl URI. In circumstances where the &lt;ptr&gt; element
- indicates an external web address (i.e. http://pleiades.stoa.org/places/922698), the @target should indicate the correct URL
- for that resource and this warning message should be ignored.
+&lt;sch:assert test="matches(., 'http://syriaca.org/cbss/[A-Z\d]{8}')"&gt; The @target value: "&lt;sch:value-of select="$error"/&gt;" is not a Syriaca.org cbss URI. These URIs take the form of
+ "http://syriaca.org/cbss/[A-Z\d]{8}" where [A-Z\d]{8} indicates an 8-character alpha-numeric string. In circumstances
+ where the &lt;ptr&gt; element indicates an external web address (i.e. http://pleiades.stoa.org/places/922698),
+ the @target should indicate the correct URL for that resource and this warning message should be ignored.
 &lt;/sch:assert&gt;
 &lt;/sch:rule&gt;</div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td><td class="wovenodd-col2"><div class="pre">
 &lt;sch:rule context="tei:ptr"&gt;
@@ -5989,23 +5990,22 @@ element secl
  <span class="element">&lt;idno <span class="attribute">type</span>="<span class="attributevalue">ISSN</span>"&gt;</span>0 345 6789<span class="element">&lt;/idno&gt;</span>
 <span class="element">&lt;/seriesStmt&gt;</span></div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td><td class="wovenodd-col2"><pre id="index.xml-eg-d31e93070" class="pre_eg cdata">
 &lt;content&gt;
- &lt;elementRef key="title" minOccurs="1"
-  maxOccurs="1"/&gt;
- &lt;elementRef key="editor" minOccurs="1"
-  maxOccurs="unbounded"/&gt;
- &lt;elementRef key="biblScope" minOccurs="0"
-  maxOccurs="1"/&gt;
- &lt;elementRef key="idno" minOccurs="1"
-  maxOccurs="1"/&gt;
+ &lt;sequence minOccurs="1" maxOccurs="1"&gt;
+  &lt;elementRef key="title" minOccurs="1"
+   maxOccurs="1"/&gt;
+  &lt;elementRef key="editor" minOccurs="1"
+   maxOccurs="unbounded"/&gt;
+  &lt;elementRef key="biblScope" minOccurs="0"
+   maxOccurs="1"/&gt;
+  &lt;elementRef key="idno" minOccurs="1"
+   maxOccurs="1"/&gt;
+ &lt;/sequence&gt;
 &lt;/content&gt;
     <a href="#index.xml-eg-d31e93070" class="anchorlink">⚓</a></pre></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schema Declaration</span></td><td class="wovenodd-col2"><pre id="index.xml-eg-d31e93077" class="pre_eg">
 element seriesStmt
 {
    tei_att.global.attributes,
-   tei_title,
-   tei_editor+,
-   tei_biblScope?,
-   tei_idno
+   ( tei_title, tei_editor+, tei_biblScope?, tei_idno )
 }<a href="#index.xml-eg-d31e93077" class="anchorlink">⚓</a></pre></td></tr></table></div></div><div class="refdoc" id="TEI.settlement"><h2><span class="headingNumber">1.174. </span><span class="head">&lt;settlement&gt;</span></h2><div class="table"><table class="wovenodd"><tr><td colspan="2" class="wovenodd-col2"><span class="label">&lt;settlement&gt; </span>(<span xml:lang="en" lang="en">settlement</span>) <span xml:lang="en" lang="en">contains the name of a settlement such as a city, town, or village identified as a single geo-political or administrative unit.</span> [<a class="link_ref" href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html#NDPLAC">14.2.3. Place Names</a>]</td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Module</span></td><td class="wovenodd-col2">namesdates</td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Attributes</span></td><td class="wovenodd-col2"><ul class="attList"><li class="classSpecItem"><a class="link_ref" href="#TEI.att.global" title="att.global">att.global</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@xml:id</span></li><li class="item"><span class="attribute">@n</span></li><li class="item"><span class="attribute">@xml:lang</span></li></ul><ul class="classSpecMemberOfs"><li class="classSpecItem"><a class="link_ref" href="#TEI.att.global.rendition" title="att.global.rendition">att.global.rendition</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@rend</span></li></ul></li><li class="classSpecItem"><a class="link_ref" href="#TEI.att.global.linking" title="att.global.linking">att.global.linking</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@corresp</span></li></ul></li><li class="classSpecItem"><a class="link_ref" href="#TEI.att.global.analytic" title="att.global.analytic">att.global.analytic</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@ana</span></li></ul></li><li class="classSpecItem"><a class="link_ref" href="#TEI.att.global.change" title="att.global.change">att.global.change</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@change</span></li></ul></li><li class="classSpecItem"><a class="link_ref" href="#TEI.att.global.responsibility" title="att.global.responsibility">att.global.responsibility</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@resp</span></li></ul></li><li class="classSpecItem"><a class="link_ref" href="#TEI.att.global.source" title="att.global.source">att.global.source</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@source</span></li></ul></li></ul></li><li class="classSpecItem"><a class="link_ref" href="#TEI.att.naming" title="att.naming">att.naming</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@role</span></li></ul><ul class="classSpecMemberOfs"><li class="classSpecItem"><a class="link_ref" href="#TEI.att.canonical" title="att.canonical">att.canonical</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@ref</span></li></ul></li></ul></li><li class="classSpecItem"><a class="link_ref" href="#TEI.att.typed" title="att.typed">att.typed</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@type</span></li><li class="item"><span class="attribute">@subtype</span></li></ul></li><li class="classSpecItem"><a class="link_ref" href="#TEI.att.datable" title="att.datable">att.datable</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@srophe:computed-start</span></li><li class="item"><span class="attribute">@srophe:computed-end</span></li></ul><ul class="classSpecMemberOfs"><li class="classSpecItem"><a class="link_ref" href="#TEI.att.datable.w3c" title="att.datable.w3c">att.datable.w3c</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@when</span></li><li class="item"><span class="attribute">@notBefore</span></li><li class="item"><span class="attribute">@notAfter</span></li><li class="item"><span class="attribute">@from</span></li><li class="item"><span class="attribute">@to</span></li></ul></li><li class="classSpecItem"><a class="link_ref" href="#TEI.att.datable.custom" title="att.datable.custom">att.datable.custom</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@when-custom</span></li><li class="item"><span class="attribute">@notBefore-custom</span></li><li class="item"><span class="attribute">@notAfter-custom</span></li><li class="item"><span class="attribute">@from-custom</span></li><li class="item"><span class="attribute">@to-custom</span></li><li class="item"><span class="attribute">@datingPoint</span></li><li class="item"><span class="attribute">@datingMethod</span></li></ul></li></ul></li><li class="classSpecItem"><a class="link_ref" href="#TEI.att.cmc" title="att.cmc">att.cmc</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@generatedBy</span></li></ul></li></ul><div class="table"><table class="attList"><tr><td class="odd_label">calendar</td><td class="odd_value"><span xml:lang="en" lang="en" class="outOfDateTranslation">indicates one or more systems or calendars to which the date represented by the content of this element belongs.</span><div class="table"><table class="attDef"><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="deprecated"><a class="link_ref" href="http://www.tei-c.org/Activities/Council/Working/tcw27.xml"><span>Deprecated</span></a></span></td><td colspan="1" class="wovenodd-col2"><span xml:lang="en" lang="en" class="deprecated">will be removed on 2024-11-11</span></td></tr><tr><td class="odd_label"><span xml:lang="en" lang="en" class="label">Status</span></td><td class="odd_value"><span xml:lang="en" lang="en">Optional</span></td></tr><tr><td class="odd_label"><span xml:lang="en" lang="en" class="label">Datatype</span></td><td class="odd_value">1–∞ <span xml:lang="en" lang="en">occurrences of</span> <a class="link_ref" href="#TEI.teidata.pointer" title="teidata.pointer">teidata.pointer</a> <span xml:lang="en" lang="en">separated by whitespace</span></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td><td class="wovenodd-col2"><div class="pre">
 &lt;sch:rule context="tei:*[@calendar]"&gt;
 &lt;sch:assert test="string-length( normalize-space(.) ) gt 0"&gt; @calendar indicates one or more
@@ -7747,6 +7747,6 @@ tei_teidata.xTruthValue = xsd:boolean | ( "unknown" | "inapplicable" )<a href="#
 tei_teidata.xpath = text<a href="#index.xml-eg-d31e137961" class="anchorlink">⚓</a></pre></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Note</span></td><td class="wovenodd-col2"><p>Any XPath expression using the syntax defined in <a class="link_ref" href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/BIB.html#XSLT2">6.2.</a>.</p><p>When writing programs that evaluate XPath expressions, programmers should be mindful of the possibility of malicious code injection attacks. For further information about XPath injection attacks, see the <a class="link_ref" href="https://owasp.org/www-community/attacks/XPATH_Injection">article at OWASP</a>.</p></td></tr></table></div></div></section></div><!--TEI back--><div class="stdfooter autogenerated"><div class="footer"><!--standard links to project, institution etc--><a class="plain" href="/">Home</a> </div><address>Date: <br/><!--
  Generated from index.xml using XSLT stylesheets version 7.56.0
 		 based on http://www.tei-c.org/Stylesheets/
-		 on 2024-10-23T20:55:10Z.
+		 on 2025-03-12T20:33:49Z.
 		 SAXON HE 12.3.
 		   --></address></div></body></html>

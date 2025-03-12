@@ -1241,10 +1241,11 @@
             <constraint>
               <sch:rule context="//tei:body//tei:bibl/tei:ptr/@target" role="warning">
                 <sch:let name="error" value="."/>
-                <sch:assert test="starts-with(., 'http://syriaca.org/bibl/')">
-                  The @target value: "<sch:value-of select="$error"/>" is not a Syriaca.org bibl URI. In circumstances where the &lt;ptr&gt; element 
-                  indicates an external web address (i.e. http://pleiades.stoa.org/places/922698), the @target should indicate the correct URL 
-                  for that resource and this warning message should be ignored.
+                <sch:assert test="matches(., 'http://syriaca.org/cbss/[A-Z\d]{8}')">
+                  The @target value: "<sch:value-of select="$error"/>" is not a Syriaca.org cbss URI. These URIs take the form of 
+                  "http://syriaca.org/cbss/[A-Z\d]{8}" where [A-Z\d]{8} indicates an 8-character alpha-numeric string. In circumstances 
+                  where the &lt;ptr&gt; element indicates an external web address (i.e. http://pleiades.stoa.org/places/922698), 
+                  the @target should indicate the correct URL for that resource and this warning message should be ignored.
                 </sch:assert>
               </sch:rule>
             </constraint>
@@ -1412,10 +1413,12 @@
         
         <elementSpec ident="seriesStmt" module="header" mode="change">
           <content>
-            <elementRef key="title" minOccurs="1" maxOccurs="1"/>
-            <elementRef key="editor" minOccurs="1" maxOccurs="unbounded"/>
-            <elementRef key="biblScope" minOccurs="0" maxOccurs="1"/>
-            <elementRef key="idno" minOccurs="1" maxOccurs="1"/>
+            <sequence>
+              <elementRef key="title" minOccurs="1" maxOccurs="1"/>
+              <elementRef key="editor" minOccurs="1" maxOccurs="unbounded"/>
+              <elementRef key="biblScope" minOccurs="0" maxOccurs="1"/>
+              <elementRef key="idno" minOccurs="1" maxOccurs="1"/>
+            </sequence>
           </content>
         </elementSpec>
         

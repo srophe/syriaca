@@ -2214,9 +2214,10 @@ element profileDesc { tei_att.global.attributes, tei_langUsage }<a href="#index.
 &lt;sch:rule context="//tei:body//tei:bibl/tei:ptr/@target"
  role="warning"&gt;
 &lt;sch:let name="error" value="."/&gt;
-&lt;sch:assert test="starts-with(., 'http://syriaca.org/bibl/')"&gt; The @target value: "&lt;sch:value-of select="$error"/&gt;" is not a Syriaca.org bibl URI. In circumstances where the &lt;ptr&gt; element
- indicates an external web address (i.e. http://pleiades.stoa.org/places/922698), the @target should indicate the correct URL
- for that resource and this warning message should be ignored.
+&lt;sch:assert test="matches(., 'http://syriaca.org/cbss/[A-Z\d]{8}')"&gt; The @target value: "&lt;sch:value-of select="$error"/&gt;" is not a Syriaca.org cbss URI. These URIs take the form of
+ "http://syriaca.org/cbss/[A-Z\d]{8}" where [A-Z\d]{8} indicates an 8-character alpha-numeric string. In circumstances
+ where the &lt;ptr&gt; element indicates an external web address (i.e. http://pleiades.stoa.org/places/922698),
+ the @target should indicate the correct URL for that resource and this warning message should be ignored.
 &lt;/sch:assert&gt;
 &lt;/sch:rule&gt;</div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td><td class="wovenodd-col2"><div class="pre">
 &lt;sch:rule context="tei:ptr"&gt;
@@ -2604,23 +2605,22 @@ element rs
 &lt;/sch:assert&gt;
 &lt;/sch:rule&gt;</div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td><td class="wovenodd-col2"><pre id="index.xml-eg-d31e18081" class="pre_eg cdata">
 &lt;content&gt;
- &lt;elementRef key="title" minOccurs="1"
-  maxOccurs="1"/&gt;
- &lt;elementRef key="editor" minOccurs="1"
-  maxOccurs="unbounded"/&gt;
- &lt;elementRef key="biblScope" minOccurs="0"
-  maxOccurs="1"/&gt;
- &lt;elementRef key="idno" minOccurs="1"
-  maxOccurs="1"/&gt;
+ &lt;sequence minOccurs="1" maxOccurs="1"&gt;
+  &lt;elementRef key="title" minOccurs="1"
+   maxOccurs="1"/&gt;
+  &lt;elementRef key="editor" minOccurs="1"
+   maxOccurs="unbounded"/&gt;
+  &lt;elementRef key="biblScope" minOccurs="0"
+   maxOccurs="1"/&gt;
+  &lt;elementRef key="idno" minOccurs="1"
+   maxOccurs="1"/&gt;
+ &lt;/sequence&gt;
 &lt;/content&gt;
     <a href="#index.xml-eg-d31e18081" class="anchorlink">⚓</a></pre></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schema Declaration</span></td><td class="wovenodd-col2"><pre id="index.xml-eg-d31e18088" class="pre_eg">
 element seriesStmt
 {
    tei_att.global.attributes,
-   tei_title,
-   tei_editor+,
-   tei_biblScope?,
-   tei_idno
+   ( tei_title, tei_editor+, tei_biblScope?, tei_idno )
 }<a href="#index.xml-eg-d31e18088" class="anchorlink">⚓</a></pre></td></tr></table></div></div><div class="refdoc" id="TEI.sourceDesc"><h2><span class="headingNumber">1.60. </span><span class="head">&lt;sourceDesc&gt;</span></h2><div class="table"><table class="wovenodd"><tr><td colspan="2" class="wovenodd-col2"><span class="label">&lt;sourceDesc&gt; </span>(<span xml:lang="en" lang="en">source description</span>) <span xml:lang="en" lang="en">describes the source(s) from which an electronic text was derived or generated, typically a bibliographic description in the case of a digitized text, or a phrase such as <span class="q">‘born digital’</span> for a text which has no previous existence.</span> [<a class="link_ref" href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/HD.html#HD3">2.2.7. The Source Description</a>]</td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Module</span></td><td class="wovenodd-col2">header</td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Attributes</span></td><td class="wovenodd-col2"><ul class="attList"><li class="classSpecItem"><a class="link_ref" href="#TEI.att.global" title="att.global">att.global</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@xml:id</span></li><li class="item"><span class="attribute">@n</span></li><li class="item"><span class="attribute">@xml:lang</span></li></ul><ul class="classSpecMemberOfs"><li class="classSpecItem"><a class="link_ref" href="#TEI.att.global.rendition" title="att.global.rendition">att.global.rendition</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@rend</span></li></ul></li><li class="classSpecItem"><a class="link_ref" href="#TEI.att.global.linking" title="att.global.linking">att.global.linking</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@corresp</span></li></ul></li><li class="classSpecItem"><a class="link_ref" href="#TEI.att.global.analytic" title="att.global.analytic">att.global.analytic</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@ana</span></li></ul></li><li class="classSpecItem"><a class="link_ref" href="#TEI.att.global.change" title="att.global.change">att.global.change</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@change</span></li></ul></li><li class="classSpecItem"><a class="link_ref" href="#TEI.att.global.responsibility" title="att.global.responsibility">att.global.responsibility</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@resp</span></li></ul></li><li class="classSpecItem"><a class="link_ref" href="#TEI.att.global.source" title="att.global.source">att.global.source</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@source</span></li></ul></li></ul></li></ul></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Contained by</span></td><td class="wovenodd-col2"><div class="parent"><div class="specChildren"><div class="specChild"><span class="specChildModule">header: </span><span class="specChildElements"><a class="link_odd_elementSpec" href="#TEI.fileDesc" title="&lt;fileDesc&gt;">fileDesc</a></span></div></div></div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">May contain</span></td><td class="wovenodd-col2"><div class="specChildren"><div class="specChild"><span class="specChildModule">core: </span><span class="specChildElements"><a class="link_odd_elementSpec" href="#TEI.p" title="&lt;p&gt;">p</a></span></div></div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Note</span></td><td class="wovenodd-col2"><p>The <a class="link_ref" href="#TEI.sourceDesc" title="&lt;sourceDesc&gt;">&lt;sourceDesc&gt;</a> element is a mandatory component of the <a class="link_ref" href="#TEI.fileDesc" title="&lt;fileDesc&gt;">&lt;fileDesc&gt;</a> element. Its purpose is to indicate the source of the text which is encoded in this file, for library cataloging among other uses. For Syriaca.org data that is not marking up text from a source, the option of indicating that this TEI is "born digital," should be used. For text encoding projects</p></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Example</span></td><td class="wovenodd-col2"><div id="index.xml-egXML-d31e18241" class="pre egXML_valid"><span class="element">&lt;sourceDesc <span class="attribute">xml:id</span>="<span class="attributevalue">sourceDesc1</span>"&gt;</span>
  <span class="element">&lt;biblStruct&gt;</span>
   <span class="element">&lt;monogr&gt;</span>
@@ -3624,6 +3624,6 @@ tei_teidata.word = token { pattern = "[^\p{C}\p{Z}]+" }<a href="#index.xml-eg-d3
 tei_teidata.xpath = text<a href="#index.xml-eg-d31e30221" class="anchorlink">⚓</a></pre></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Note</span></td><td class="wovenodd-col2"><p>Any XPath expression using the syntax defined in <a class="link_ref" href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/BIB.html#XSLT2">6.2.</a>.</p><p>When writing programs that evaluate XPath expressions, programmers should be mindful of the possibility of malicious code injection attacks. For further information about XPath injection attacks, see the <a class="link_ref" href="https://owasp.org/www-community/attacks/XPATH_Injection">article at OWASP</a>.</p></td></tr></table></div></div></section></div><!--TEI back--><div class="stdfooter autogenerated"><div class="footer"><!--standard links to project, institution etc--><a class="plain" href="/">Home</a> </div><address>Date: <br/><!--
  Generated from index.xml using XSLT stylesheets version 7.56.0
 		 based on http://www.tei-c.org/Stylesheets/
-		 on 2024-10-23T20:56:48Z.
+		 on 2025-03-12T20:35:39Z.
 		 SAXON HE 12.3.
 		   --></address></div></body></html>

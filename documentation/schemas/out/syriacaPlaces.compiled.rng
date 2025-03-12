@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2024-10-23T20:56:47Z. . 
+Schema generated from ODD source 2025-03-12T20:35:37Z. . 
 TEI Edition: P5 Version 4.7.0. Last updated on 16th November 2023, revision e5dd73ed0 
 TEI Edition Location: https://www.tei-c.org/Vault/P5/4.7.0/ 
   
@@ -2793,10 +2793,11 @@ Measures]</a:documentation>
                       context="//tei:body//tei:bibl/tei:ptr/@target"
                       role="warning">
                <sch:let name="error" value="."/>
-               <sch:assert test="starts-with(., 'http://syriaca.org/bibl/')">
-                  The @target value: "<sch:value-of select="$error"/>" is not a Syriaca.org bibl URI. In circumstances where the &lt;ptr&gt; element 
-                  indicates an external web address (i.e. http://pleiades.stoa.org/places/922698), the @target should indicate the correct URL 
-                  for that resource and this warning message should be ignored.
+               <sch:assert test="matches(., 'http://syriaca.org/cbss/[A-Z\d]{8}')">
+                  The @target value: "<sch:value-of select="$error"/>" is not a Syriaca.org cbss URI. These URIs take the form of 
+                  "http://syriaca.org/cbss/[A-Z\d]{8}" where [A-Z\d]{8} indicates an 8-character alpha-numeric string. In circumstances 
+                  where the &lt;ptr&gt; element indicates an external web address (i.e. http://pleiades.stoa.org/places/922698), 
+                  the @target should indicate the correct URL for that resource and this warning message should be ignored.
                 </sch:assert>
             </sch:rule>
          </pattern>
@@ -4019,14 +4020,16 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
    <define name="tei_seriesStmt">
       <element name="seriesStmt">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(series statement) groups information about the series, if any, to which a publication belongs. [2.2.5. The Series Statement 2.2. The File Description]</a:documentation>
-         <ref name="tei_title"/>
-         <oneOrMore>
-            <ref name="tei_editor"/>
-         </oneOrMore>
-         <optional>
-            <ref name="tei_biblScope"/>
-         </optional>
-         <ref name="tei_idno"/>
+         <group>
+            <ref name="tei_title"/>
+            <oneOrMore>
+               <ref name="tei_editor"/>
+            </oneOrMore>
+            <optional>
+               <ref name="tei_biblScope"/>
+            </optional>
+            <ref name="tei_idno"/>
+         </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
                   id="syriacaPlaces-seriesStmt-seriesStmt-series-constraint-rule-85">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
