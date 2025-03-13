@@ -146,23 +146,28 @@
           </constraintSpec>
           <constraintSpec ident="confession-desc" scheme="schematron">
             <constraint>
-              <sch:rule context="//tei:state/tei:desc">
-                <!-- Revisit this. It works but it is inelegent. 
-            The problem is that it is difficult to combine regex and schematron functions to move between lowercase w/ hypens to uppercase without.-->
-                <sch:let name="confessionDoc" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/>
-                <sch:let name="confessionLabels" value="$confessionDoc//tei:text//tei:item/tei:label"/>
-                <sch:let name="stateRefPart" value="substring-after(parent::tei:state/@ref, '/taxonomy/')"/>
-                <sch:let name="spaceTo-" value="for $i in . return(replace($i, ' ', '-'))"/>
-                <sch:let name="labelToRef" value="for $i in $spaceTo- return lower-case($spaceTo-)"/>
-                <sch:assert test="parent::tei:state/@type='confession'">A &lt;label&gt; element can only be used when parent &lt;state&gt; element has @type="confession"</sch:assert>
-                <sch:assert test="every $i in $labelToRef satisfies $i = $stateRefPart">
-                  The text node in the &lt;label&gt; element must correspond to the @ref attribute on the parent &lt;state&gt;: 
-                  <sch:value-of select="parent::tei:state/@ref"/>.
-                </sch:assert>
-                <sch:assert test="every $i in . satisfies $i = $confessionLabels">
-                  The text node in the &lt;label&gt; element must be one of the following: <sch:value-of select="string-join($confessionLabels, '; ')"/>.
-                </sch:assert>
-              </sch:rule>
+              <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
+                <sch:ns uri="http://www.tei-c.org/ns/1.0" prefix="tei"/>
+                <sch:ns uri="http://www.w3.org/1999/02/22-rdf-syntax-ns#" prefix="rdf"/>
+                <sch:ns uri="http://www.w3.org/2004/02/skos/core#" prefix="skos"/>
+                <sch:pattern>
+                  <sch:rule context="//tei:state[@type='confession']/tei:desc">
+                    <sch:let name="confessionDoc" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/>
+                    <sch:let name="stateRefPart" value="substring-after(parent::tei:state/@ref, '/taxonomy/')"/>
+                    <sch:let name="descToRefPart" value="lower-case(replace(., ' ', '-'))"/>
+                    <sch:let name="descTokens" value="tokenize(., ' ')"/>
+                    <sch:assert test="parent::tei:state/@type='confession'">A &lt;desc&gt; element can only be used when parent &lt;state&gt; element has @type="confession"</sch:assert>
+                    <sch:assert test="$stateRefPart = $descToRefPart">
+                      The text node in the &lt;desc&gt; element must correspond to the @ref attribute on the parent &lt;state&gt; element: 
+                      <sch:value-of select="parent::tei:state/@ref"/> Use the portion of the URI following "taxonomy/" and capitalize
+                      the first letter of each word.
+                    </sch:assert>
+                    <sch:assert test="every $i in $descTokens satisfies $i [matches(., '[A-Z]\w+')]">
+                      Please capitalize the first letter of each word.
+                    </sch:assert>
+                  </sch:rule>
+                </sch:pattern>
+              </sch:schema>
             </constraint>
           </constraintSpec>
         </elementSpec>
