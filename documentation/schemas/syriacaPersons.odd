@@ -935,20 +935,47 @@
           </constraintSpec>
           <constraintSpec ident="personal-relations-ref" scheme="schematron">
             <constraint>
-              <sch:rule context="tei:listPerson//tei:relation[@type = 'personal']/@ref">
-                <sch:let name="ti" value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex-old.xml')"/>
-                <sch:assert test=". = $ti//listURI[@type = 'relationships']//uri">Value must be one of the following from the Syriaca.org taxonomy:
-                  <sch:value-of select="string-join($ti//listURI[@type = 'relationships']//uri, ';  ')"/>.</sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:listPerson//tei:relation[@type = 'personal']/@ana">
-                <sch:let name="ti" value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex-old.xml')"/>
-                <sch:let name="qrURI" value="$ti//listURI[@type = 'qualifier-relationship']//uri"/>
-                <sch:let name="error" value="."/>
-                <sch:assert test="
-                  every $i in (tokenize(., '/s'))
-                  satisfies $i = $qrURI">
-                  <sch:value-of select="$error"/> is not currently in use. The value of this @ref attribute must be one of the following: <sch:value-of select="string-join($qrURI, ';  ')"/>.</sch:assert>
-              </sch:rule>
+              <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+                <sch:ns uri="http://www.w3.org/1999/02/22-rdf-syntax-ns#" prefix="rdf"/>
+                <sch:ns uri="http://www.w3.org/2004/02/skos/core#" prefix="skos"/>
+                <sch:pattern>
+                  <sch:rule context="tei:listRelation/tei:relation[@type='personal']">
+                    <sch:let name="taxonomy"
+                      value="doc('https://raw.githubusercontent.com/srophe/syriaca-data/refs/heads/gaddel_development/data/taxonomy/taxonomy.rdf')"/>
+                    <sch:let name="mutual"
+                      value="$taxonomy//rdf:Description[@rdf:about='http://syriaca.org/taxonomy/mutual-relations-collection']/skos:member/@rdf:resource"/>
+                    <sch:let name="directed"
+                      value="$taxonomy//rdf:Description[@rdf:about='http://syriaca.org/taxonomy/directed-relations-collection']/skos:member/@rdf:resource"/>
+                    <sch:assert test="@ref = $mutual | $directed">
+                      <sch:value-of select="@ref"/> is not a relationship in the Syriaca.org Taxonomy. 
+                    </sch:assert>
+                    <sch:report test=".[@ref = $mutual]/@active | .[@ref = $mutual]/@passive"
+                      ><sch:value-of select="@ref"/> is a relationship that requires a single @mutual attribute. The use of @active and @passive is not allowed.</sch:report>
+                    <sch:report test=".[@ref = $directed]/@mutual"
+                      ><sch:value-of select="@ref"/> is a relationship that requires a the use of @active and @passive attributes, @mutual is not allowed.</sch:report>
+                  </sch:rule>
+                  <sch:rule context="tei:listRelation/tei:relation[@type='personal']/@mutual | tei:listRelation/tei:relation[@type='personal']/@active | tei:listRelation/tei:relation[@type='personal']/@passive">
+                    <sch:let name="personIndex" value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/persons.xml')"></sch:let>
+                    <sch:let name="personURIs" value="$personIndex//tei:person/@ref"/>
+                    <sch:let name="error" value="."/>
+                    <sch:assert test="
+                      every $i in (tokenize(., ' '))
+                      satisfies $i = $personURIs" role="warning">
+                      <sch:value-of select="$error"/> is not currently in use. 
+                      Note that all person URIs take the form 'http://syriaca.org/person/{\d+}' 
+                      (where {\d+} is a number). 
+                    </sch:assert>
+                  </sch:rule>
+                  <sch:rule context="tei:listRelation/tei:relation[@type='personal']/@ana">
+                    <sch:let name="anaTokens" value="tokenize(., ' ')"/>
+                    <sch:let name="taxonomy" value="doc('https://raw.githubusercontent.com/srophe/syriaca-data/refs/heads/gaddel_development/data/taxonomy/taxonomy.rdf')"/>
+                    <sch:let name="qrURIs" value="$taxonomy//rdf:Description[@rdf:about='http://syriaca.org/taxonomy/qualifier-relationship']/skos:narrower/@rdf:resource"/>
+                    <sch:let name="errors" value="for $i in $anaTokens return $i[not(. = $qrURIs)]"/>
+                    <sch:assert test="every $i in $anaTokens satisfies $i = $qrURIs">
+                      <sch:value-of select="string-join($errors, ', ')"/>: URI(s) not among the qualifier relationships in the Taxonomy. The acceptable values are: <sch:value-of select="string-join($qrURIs, ';  ')"/>.</sch:assert>
+                  </sch:rule>
+                </sch:pattern>
+              </sch:schema>
             </constraint>
           </constraintSpec>
           <attList>
@@ -1105,42 +1132,50 @@
           </constraintSpec>
           <constraintSpec ident="type-ref-combinations" scheme="schematron">
             <constraint>
-              <sch:rule context="tei:state[@type='occupation']/@ref">
-                <sch:report test="contains(., ' ')">
-                  Only one value allowed on @ref. If necessary, use a separate &lt;state&gt; element.
-                </sch:report>
-              </sch:rule>
-              <sch:rule context="tei:state[@type='occupation']/@ref">
-                <sch:let name="ti" value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex-old.xml')"/>
-                <sch:let name="occupations" value="$ti//listURI[@type = 'occupations']/uri"/>
-                <sch:let name="error" value="."/>
-                <sch:assert test=". = $occupations" role="warning">
-                  <sch:value-of select="$error"/> is not currently in use. Syriaca.org prefers the use of established 
-                  URIs when possible but appropriate URIs are not always available in the Syriaca.org taxonomy. Please
-                  consult the taxonomy. If no appropriate keyword exists in the following list, please use your own
-                  preferred descriptive term: <sch:value-of select="string-join($occupations, ';  ')"/>.
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:state[@type='religious-affiliation']/@ref">
-                <!-- Add rule pointing to Taxonomy when development allows. -->
-              </sch:rule>
-              <sch:rule context="tei:state[@type='socio-economic-status']/@ref">
-                <sch:let name="ti" value="doc('https://raw.githubusercontent.com/srophe/syriaca/master/documentation/indexes/taxonomyIndex-old.xml')"/>
-                <sch:let name="socioeconomicStatus" value="$ti//listURI[@type = 'socioeconomic-status']/uri"/>
-                <sch:let name="error" value="."/>
-                <sch:assert test=". = $socioeconomicStatus" role="warning">
-                  <sch:value-of select="$error"/> is not currently in use. Syriaca.org prefers the use of established 
-                  URIs when possible but appropriate URIs are not always available in the Syriaca.org taxonomy. Please
-                  consult the taxonomy. If no appropriate keyword exists in the following list, please use your own
-                  preferred descriptive term: <sch:value-of select="string-join($socioeconomicStatus, ';  ')"/>.
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:state[@type='status']/@ref">
-                <sch:let name="statuses" value="'http://syriaca.org/taxonomy/anonymous', 'http://syriaca.org/taxonomy/apostles', 'http://syriaca.org/taxonomy/fallen', 'http://syriaca.org/taxonomy/martyrs', 'http://syriaca.org/taxonomy/pseudonymous-authors', 'http://syriaca.org/taxonomy/saints', 'http://syriaca.org/taxonomy/writers'"></sch:let>
-                <sch:assert test=". = $statuses">
-                  Allowed values: <sch:value-of select="string-join($statuses, ';  ')"/>.
-                </sch:assert>
-              </sch:rule>
+              <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+                <sch:ns uri="http://www.w3.org/1999/02/22-rdf-syntax-ns#" prefix="rdf"/>
+                <sch:ns uri="http://www.w3.org/2004/02/skos/core#" prefix="skos"/>
+                <sch:pattern>
+                  <sch:rule context="tei:state[@type='occupation']/@ref">
+                    <sch:report test="contains(., ' ')">
+                      Only one value allowed on @ref. If necessary, use a separate &lt;state&gt; element.
+                    </sch:report>
+                  </sch:rule>
+                  <sch:rule context="tei:state[@type='occupation']/@ref">
+                    <sch:let name="anaTokens" value="tokenize(., ' ')"/>
+                    <sch:let name="taxonomy" value="doc('https://raw.githubusercontent.com/srophe/syriaca-data/refs/heads/gaddel_development/data/taxonomy/taxonomy.rdf')"/>
+                    <sch:let name="occupationURIs" value="$taxonomy//rdf:Description[@rdf:about='http://syriaca.org/taxonomy/occupations-collection']/skos:member/@rdf:resource"/>
+                    <sch:let name="errors" value="for $i in $anaTokens return $i[not(. = $occupationURIs)]"/>
+                    <sch:assert test="every $i in $anaTokens satisfies $i = $occupationURIs" role="warning">
+                      <sch:value-of select="string-join($errors, ', ')"/>: URI(s) not among the occupations in the Taxonomy. If you find no appropriate concept on the following list, 
+                      please choose a keyword of your own for the editors to consider: <sch:value-of select="string-join($occupationURIs, ';  ')"/>.</sch:assert>
+                  </sch:rule>
+                  <sch:rule context="tei:state[@type='socio-economic-status']/@ref">
+                    <sch:let name="anaTokens" value="tokenize(., ' ')"/>
+                    <sch:let name="taxonomy" value="doc('https://raw.githubusercontent.com/srophe/syriaca-data/refs/heads/gaddel_development/data/taxonomy/taxonomy.rdf')"/>
+                    <sch:let name="socioeconomicStatusURIs" value="$taxonomy//rdf:Description[@rdf:about='http://syriaca.org/taxonomy/socio-economic-status']/skos:narrower/@rdf:resource"/>
+                    <sch:let name="errors" value="for $i in $anaTokens return $i[not(. = $socioeconomicStatusURIs)]"/>
+                    <sch:assert test="every $i in $anaTokens satisfies $i = $socioeconomicStatusURIs" role="warning">
+                      <sch:value-of select="string-join($errors, ', ')"/>: URI(s) not among the socio-economic statuses in the Taxonomy. If you find no appropriate concept on the following list, 
+                      please choose a keyword of your own for the editors to consider: <sch:value-of select="string-join($socioeconomicStatusURIs, ';  ')"/>.</sch:assert>
+                  </sch:rule>
+                  <sch:rule context="tei:state[@type='status']/@ref">
+                    <sch:let name="statuses" value="'http://syriaca.org/taxonomy/anonymous', 'http://syriaca.org/taxonomy/apostles', 'http://syriaca.org/taxonomy/fallen', 'http://syriaca.org/taxonomy/martyrs', 'http://syriaca.org/taxonomy/pseudonymous-authors', 'http://syriaca.org/taxonomy/saints', 'http://syriaca.org/taxonomy/writers'"></sch:let>
+                    <sch:assert test=". = $statuses">
+                      Allowed values: <sch:value-of select="string-join($statuses, ';  ')"/>.
+                    </sch:assert>
+                  </sch:rule>
+                  <sch:rule context="tei:state[@type='religious-affiliation']/@ref">
+                    <sch:let name="anaTokens" value="tokenize(., ' ')"/>
+                    <sch:let name="taxonomy" value="doc('https://raw.githubusercontent.com/srophe/syriaca-data/refs/heads/gaddel_development/data/taxonomy/taxonomy.rdf')"/>
+                    <sch:let name="religionURIs" value="$taxonomy//rdf:Description[@rdf:about='http://syriaca.org/taxonomy/religious-communities-collection']/skos:member/@rdf:resource"/>
+                    <sch:let name="errors" value="for $i in $anaTokens return $i[not(. = $religionURIs)]"/>
+                    <sch:assert test="every $i in $anaTokens satisfies $i = $religionURIs" role="warning">
+                      <sch:value-of select="string-join($errors, ', ')"/>: URI(s) not the religious communities in the Taxonomy. If you find no appropriate concept on the following list, 
+                      please choose a keyword of your own for the editors to consider: <sch:value-of select="string-join($religionURIs, ';  ')"/>.</sch:assert>
+                  </sch:rule>
+                </sch:pattern>
+              </sch:schema>
             </constraint>
           </constraintSpec>
           <attList>
