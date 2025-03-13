@@ -162,8 +162,8 @@
                       <sch:value-of select="parent::tei:state/@ref"/> Use the portion of the URI following "taxonomy/" and capitalize
                       the first letter of each word.
                     </sch:assert>
-                    <sch:assert test="every $i in $descTokens satisfies $i [matches(., '[A-Z]\w+')]">
-                      Please capitalize the first letter of each word.
+                    <sch:assert test="every $i in $descTokens satisfies ($i = ('the', 'of') or matches($i, '^[A-Z].*'))">
+                      Please capitalize the first letter of each word, except for "the" and "of".
                     </sch:assert>
                   </sch:rule>
                 </sch:pattern>
