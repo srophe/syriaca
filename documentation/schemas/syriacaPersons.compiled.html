@@ -637,8 +637,6 @@ element death
  prefix="skos"/&gt;
 &lt;sch:pattern&gt;
  &lt;sch:rule context="tei:person/tei:state[@type='religious-affiliation']/tei:desc"&gt;
-  &lt;sch:let name="confessionDoc"
-   value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/&gt;
   &lt;sch:let name="stateRefPart"
    value="substring-after(parent::tei:state/@ref, '/taxonomy/')"/&gt;
   &lt;sch:let name="descToRefPart"
@@ -653,36 +651,36 @@ element death
  '^[A-Z].*'))"&gt; Please capitalize the first letter of each word, except for "the" and "of".
   &lt;/sch:assert&gt;
  &lt;/sch:rule&gt;
+ &lt;sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/anonymous']/tei:desc"&gt;
+  &lt;sch:assert test="matches(., 'Anonymous')"&gt; The &lt;desc&gt; must contain "Anonymous".
+  &lt;/sch:assert&gt;
+ &lt;/sch:rule&gt;
+ &lt;sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/apostles']/tei:desc"&gt;
+  &lt;sch:assert test="matches(., 'Apostle')"&gt; The &lt;desc&gt; must contain "Apostle".
+  &lt;/sch:assert&gt;
+ &lt;/sch:rule&gt;
+ &lt;sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/fallen']/tei:desc"&gt;
+  &lt;sch:assert test="matches(., 'Fallen')"&gt; The &lt;desc&gt; must contain "Fallen".
+  &lt;/sch:assert&gt;
+ &lt;/sch:rule&gt;
+ &lt;sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/martyrs']/tei:desc"&gt;
+  &lt;sch:assert test="matches(., 'Martyr')"&gt; The &lt;desc&gt; must contain "Martyr".
+  &lt;/sch:assert&gt;
+ &lt;/sch:rule&gt;
+ &lt;sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/pseudonymous-authors']/tei:desc"&gt;
+  &lt;sch:assert test="matches(., 'Pseudonymous Author')"&gt; The &lt;desc&gt; must contain "Pseudonymous Author".
+  &lt;/sch:assert&gt;
+ &lt;/sch:rule&gt;
+ &lt;sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/saints']/tei:desc"&gt;
+  &lt;sch:assert test="matches(., 'Saint')"&gt; The &lt;desc&gt; must contain "Saint".
+  &lt;/sch:assert&gt;
+ &lt;/sch:rule&gt;
+ &lt;sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/writers']/tei:desc"&gt;
+  &lt;sch:assert test="matches(., 'Author')"&gt; The &lt;desc&gt; must contain "Author".
+  &lt;/sch:assert&gt;
+ &lt;/sch:rule&gt;
 &lt;/sch:pattern&gt;
-&lt;/sch:schema&gt;
-&lt;sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/anonymous']/tei:desc"&gt;
-&lt;sch:assert test="matches(., 'Anonymous')"&gt; The &lt;desc&gt; must contain "Anonymous".
-&lt;/sch:assert&gt;
-&lt;/sch:rule&gt;
-&lt;sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/apostles']/tei:desc"&gt;
-&lt;sch:assert test="matches(., 'Apostle')"&gt; The &lt;desc&gt; must contain "Apostle".
-&lt;/sch:assert&gt;
-&lt;/sch:rule&gt;
-&lt;sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/fallen']/tei:desc"&gt;
-&lt;sch:assert test="matches(., 'Fallen')"&gt; The &lt;desc&gt; must contain "Fallen".
-&lt;/sch:assert&gt;
-&lt;/sch:rule&gt;
-&lt;sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/martyrs']/tei:desc"&gt;
-&lt;sch:assert test="matches(., 'Martyr')"&gt; The &lt;desc&gt; must contain "Martyr".
-&lt;/sch:assert&gt;
-&lt;/sch:rule&gt;
-&lt;sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/pseudonymous-authors']/tei:desc"&gt;
-&lt;sch:assert test="matches(., 'Pseudonymous Author')"&gt; The &lt;desc&gt; must contain "Pseudonymous Author".
-&lt;/sch:assert&gt;
-&lt;/sch:rule&gt;
-&lt;sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/saints']/tei:desc"&gt;
-&lt;sch:assert test="matches(., 'Saint')"&gt; The &lt;desc&gt; must contain "Saint".
-&lt;/sch:assert&gt;
-&lt;/sch:rule&gt;
-&lt;sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/writers']/tei:desc"&gt;
-&lt;sch:assert test="matches(., 'Author')"&gt; The &lt;desc&gt; must contain "Author".
-&lt;/sch:assert&gt;
-&lt;/sch:rule&gt;</div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td><td class="wovenodd-col2"><div class="pre">
+&lt;/sch:schema&gt;</div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td><td class="wovenodd-col2"><div class="pre">
 &lt;sch:schema queryBinding="xslt2"&gt;
 &lt;sch:ns uri="http://www.tei-c.org/ns/1.0"
  prefix="tei"/&gt;
@@ -692,8 +690,6 @@ element death
  prefix="skos"/&gt;
 &lt;sch:pattern&gt;
  &lt;sch:rule context="tei:personGrp/tei:state[@type='religious-affiliation']/tei:desc"&gt;
-  &lt;sch:let name="confessionDoc"
-   value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/&gt;
   &lt;sch:let name="stateRefPart"
    value="substring-after(parent::tei:state/@ref, '/taxonomy/')"/&gt;
   &lt;sch:let name="descToRefPart"
@@ -708,36 +704,36 @@ element death
  '^[A-Z].*'))"&gt; Please capitalize the first letter of each word, except for "the" and "of".
   &lt;/sch:assert&gt;
  &lt;/sch:rule&gt;
+ &lt;sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/anonymous']/tei:desc"&gt;
+  &lt;sch:assert test="matches(., 'Anonymi')"&gt; The &lt;desc&gt; must contain "Anonymi".
+  &lt;/sch:assert&gt;
+ &lt;/sch:rule&gt;
+ &lt;sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/apostles']/tei:desc"&gt;
+  &lt;sch:assert test="matches(., 'Apostles')"&gt; The &lt;desc&gt; must contain "Apostles".
+  &lt;/sch:assert&gt;
+ &lt;/sch:rule&gt;
+ &lt;sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/fallen']/tei:desc"&gt;
+  &lt;sch:assert test="matches(., 'Fallen')"&gt; The &lt;desc&gt; must contain "Fallen".
+  &lt;/sch:assert&gt;
+ &lt;/sch:rule&gt;
+ &lt;sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/martyrs']/tei:desc"&gt;
+  &lt;sch:assert test="matches(., 'Martyrs')"&gt; The &lt;desc&gt; must contain "Martyrs".
+  &lt;/sch:assert&gt;
+ &lt;/sch:rule&gt;
+ &lt;sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/pseudonymous-authors']/tei:desc"&gt;
+  &lt;sch:assert test="matches(., 'Pseudonymous Authors')"&gt; The &lt;desc&gt; must contain "Pseudonymous Authors".
+  &lt;/sch:assert&gt;
+ &lt;/sch:rule&gt;
+ &lt;sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/saints']/tei:desc"&gt;
+  &lt;sch:assert test="matches(., 'Saints')"&gt; The &lt;desc&gt; must contain "Saints".
+  &lt;/sch:assert&gt;
+ &lt;/sch:rule&gt;
+ &lt;sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/writers']/tei:desc"&gt;
+  &lt;sch:assert test="matches(., 'Authors')"&gt; The &lt;desc&gt; must contain "Authors".
+  &lt;/sch:assert&gt;
+ &lt;/sch:rule&gt;
 &lt;/sch:pattern&gt;
-&lt;/sch:schema&gt;
-&lt;sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/anonymous']/tei:desc"&gt;
-&lt;sch:assert test="matches(., 'Anonymi')"&gt; The &lt;desc&gt; must contain "Anonymi".
-&lt;/sch:assert&gt;
-&lt;/sch:rule&gt;
-&lt;sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/apostles']/tei:desc"&gt;
-&lt;sch:assert test="matches(., 'Apostles')"&gt; The &lt;desc&gt; must contain "Apostles".
-&lt;/sch:assert&gt;
-&lt;/sch:rule&gt;
-&lt;sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/fallen']/tei:desc"&gt;
-&lt;sch:assert test="matches(., 'Fallen')"&gt; The &lt;desc&gt; must contain "Fallen".
-&lt;/sch:assert&gt;
-&lt;/sch:rule&gt;
-&lt;sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/martyrs']/tei:desc"&gt;
-&lt;sch:assert test="matches(., 'Martyrs')"&gt; The &lt;desc&gt; must contain "Martyrs".
-&lt;/sch:assert&gt;
-&lt;/sch:rule&gt;
-&lt;sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/pseudonymous-authors']/tei:desc"&gt;
-&lt;sch:assert test="matches(., 'Pseudonymous Authors')"&gt; The &lt;desc&gt; must contain "Pseudonymous Authors".
-&lt;/sch:assert&gt;
-&lt;/sch:rule&gt;
-&lt;sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/saints']/tei:desc"&gt;
-&lt;sch:assert test="matches(., 'Saints')"&gt; The &lt;desc&gt; must contain "Saints".
-&lt;/sch:assert&gt;
-&lt;/sch:rule&gt;
-&lt;sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/writers']/tei:desc"&gt;
-&lt;sch:assert test="matches(., 'Authors')"&gt; The &lt;desc&gt; must contain "Authors".
-&lt;/sch:assert&gt;
-&lt;/sch:rule&gt;</div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td><td class="wovenodd-col2"><div class="pre">
+&lt;/sch:schema&gt;</div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td><td class="wovenodd-col2"><div class="pre">
 &lt;sch:rule context="//tei:body//tei:desc"&gt;
 &lt;sch:assert test="./@xml:lang"&gt; All &lt;desc&gt; elements must have an @xml:lang attribute.
 &lt;/sch:assert&gt;
@@ -4066,6 +4062,6 @@ tei_teidata.word = token { pattern = "[^\p{C}\p{Z}]+" }<a href="#index.xml-eg-d3
 tei_teidata.xpath = text<a href="#index.xml-eg-d31e29908" class="anchorlink">⚓</a></pre></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Note</span></td><td class="wovenodd-col2"><p>Any XPath expression using the syntax defined in <a class="link_ref" href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/BIB.html#XSLT2">6.2.</a>.</p><p>When writing programs that evaluate XPath expressions, programmers should be mindful of the possibility of malicious code injection attacks. For further information about XPath injection attacks, see the <a class="link_ref" href="https://owasp.org/www-community/attacks/XPATH_Injection">article at OWASP</a>.</p></td></tr></table></div></div></section></div><!--TEI back--><div class="stdfooter autogenerated"><div class="footer"><!--standard links to project, institution etc--><a class="plain" href="/">Home</a> </div><address>Date: <br/><!--
  Generated from index.xml using XSLT stylesheets version 7.56.0
 		 based on http://www.tei-c.org/Stylesheets/
-		 on 2025-03-13T21:08:16Z.
+		 on 2025-03-13T21:18:22Z.
 		 SAXON HE 12.3.
 		   --></address></div></body></html>

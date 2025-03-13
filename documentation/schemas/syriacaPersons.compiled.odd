@@ -3413,7 +3413,6 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
                 <sch:ns uri="http://www.w3.org/2004/02/skos/core#" prefix="skos"/>
                 <sch:pattern>
                   <sch:rule context="tei:person/tei:state[@type='religious-affiliation']/tei:desc">
-                    <sch:let name="confessionDoc" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/>
                     <sch:let name="stateRefPart" value="substring-after(parent::tei:state/@ref, '/taxonomy/')"/>
                     <sch:let name="descToRefPart" value="lower-case(replace(., ' ', '-'))"/>
                     <sch:let name="descTokens" value="tokenize(., ' ')"/>
@@ -3426,43 +3425,43 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
                       Please capitalize the first letter of each word, except for "the" and "of".
                     </sch:assert>
                   </sch:rule>
+                  <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/anonymous']/tei:desc">
+                    <sch:assert test="matches(., 'Anonymous')">
+                      The &lt;desc&gt; must contain "Anonymous".
+                    </sch:assert>
+                  </sch:rule>
+                  <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/apostles']/tei:desc">
+                    <sch:assert test="matches(., 'Apostle')">
+                      The &lt;desc&gt; must contain "Apostle".
+                    </sch:assert>
+                  </sch:rule>
+                  <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/fallen']/tei:desc">
+                    <sch:assert test="matches(., 'Fallen')">
+                      The &lt;desc&gt; must contain "Fallen".
+                    </sch:assert>
+                  </sch:rule>
+                  <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/martyrs']/tei:desc">
+                    <sch:assert test="matches(., 'Martyr')">
+                      The &lt;desc&gt; must contain "Martyr".
+                    </sch:assert>
+                  </sch:rule>
+                  <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/pseudonymous-authors']/tei:desc">
+                    <sch:assert test="matches(., 'Pseudonymous Author')">
+                      The &lt;desc&gt; must contain "Pseudonymous Author".
+                    </sch:assert>
+                  </sch:rule>
+                  <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/saints']/tei:desc">
+                    <sch:assert test="matches(., 'Saint')">
+                      The &lt;desc&gt; must contain "Saint".
+                    </sch:assert>
+                  </sch:rule>
+                  <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/writers']/tei:desc">
+                    <sch:assert test="matches(., 'Author')">
+                      The &lt;desc&gt; must contain "Author".
+                    </sch:assert>
+                  </sch:rule>
                 </sch:pattern>
               </sch:schema>
-              <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/anonymous']/tei:desc">
-                <sch:assert test="matches(., 'Anonymous')">
-                  The &lt;desc&gt; must contain "Anonymous".
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/apostles']/tei:desc">
-                <sch:assert test="matches(., 'Apostle')">
-                  The &lt;desc&gt; must contain "Apostle".
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/fallen']/tei:desc">
-                <sch:assert test="matches(., 'Fallen')">
-                  The &lt;desc&gt; must contain "Fallen".
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/martyrs']/tei:desc">
-                <sch:assert test="matches(., 'Martyr')">
-                  The &lt;desc&gt; must contain "Martyr".
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/pseudonymous-authors']/tei:desc">
-                <sch:assert test="matches(., 'Pseudonymous Author')">
-                  The &lt;desc&gt; must contain "Pseudonymous Author".
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/saints']/tei:desc">
-                <sch:assert test="matches(., 'Saint')">
-                  The &lt;desc&gt; must contain "Saint".
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/writers']/tei:desc">
-                <sch:assert test="matches(., 'Author')">
-                  The &lt;desc&gt; must contain "Author".
-                </sch:assert>
-              </sch:rule>
             </constraint>
           </constraintSpec><constraintSpec ident="desc-in-personGrp-state" scheme="schematron">
             <constraint>
@@ -3472,7 +3471,6 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
                 <sch:ns uri="http://www.w3.org/2004/02/skos/core#" prefix="skos"/>
                 <sch:pattern>
                   <sch:rule context="tei:personGrp/tei:state[@type='religious-affiliation']/tei:desc">
-                    <sch:let name="confessionDoc" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/>
                     <sch:let name="stateRefPart" value="substring-after(parent::tei:state/@ref, '/taxonomy/')"/>
                     <sch:let name="descToRefPart" value="lower-case(replace(., ' ', '-'))"/>
                     <sch:let name="descTokens" value="tokenize(., ' ')"/>
@@ -3485,43 +3483,43 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
                       Please capitalize the first letter of each word, except for "the" and "of".
                     </sch:assert>
                   </sch:rule>
+                  <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/anonymous']/tei:desc">
+                    <sch:assert test="matches(., 'Anonymi')">
+                      The &lt;desc&gt; must contain "Anonymi".
+                    </sch:assert>
+                  </sch:rule>
+                  <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/apostles']/tei:desc">
+                    <sch:assert test="matches(., 'Apostles')">
+                      The &lt;desc&gt; must contain "Apostles".
+                    </sch:assert>
+                  </sch:rule>
+                  <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/fallen']/tei:desc">
+                    <sch:assert test="matches(., 'Fallen')">
+                      The &lt;desc&gt; must contain "Fallen".
+                    </sch:assert>
+                  </sch:rule>
+                  <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/martyrs']/tei:desc">
+                    <sch:assert test="matches(., 'Martyrs')">
+                      The &lt;desc&gt; must contain "Martyrs".
+                    </sch:assert>
+                  </sch:rule>
+                  <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/pseudonymous-authors']/tei:desc">
+                    <sch:assert test="matches(., 'Pseudonymous Authors')">
+                      The &lt;desc&gt; must contain "Pseudonymous Authors".
+                    </sch:assert>
+                  </sch:rule>
+                  <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/saints']/tei:desc">
+                    <sch:assert test="matches(., 'Saints')">
+                      The &lt;desc&gt; must contain "Saints".
+                    </sch:assert>
+                  </sch:rule>
+                  <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/writers']/tei:desc">
+                    <sch:assert test="matches(., 'Authors')">
+                      The &lt;desc&gt; must contain "Authors".
+                    </sch:assert>
+                  </sch:rule>
                 </sch:pattern>
               </sch:schema>
-              <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/anonymous']/tei:desc">
-                <sch:assert test="matches(., 'Anonymi')">
-                  The &lt;desc&gt; must contain "Anonymi".
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/apostles']/tei:desc">
-                <sch:assert test="matches(., 'Apostles')">
-                  The &lt;desc&gt; must contain "Apostles".
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/fallen']/tei:desc">
-                <sch:assert test="matches(., 'Fallen')">
-                  The &lt;desc&gt; must contain "Fallen".
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/martyrs']/tei:desc">
-                <sch:assert test="matches(., 'Martyrs')">
-                  The &lt;desc&gt; must contain "Martyrs".
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/pseudonymous-authors']/tei:desc">
-                <sch:assert test="matches(., 'Pseudonymous Authors')">
-                  The &lt;desc&gt; must contain "Pseudonymous Authors".
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/saints']/tei:desc">
-                <sch:assert test="matches(., 'Saints')">
-                  The &lt;desc&gt; must contain "Saints".
-                </sch:assert>
-              </sch:rule>
-              <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/writers']/tei:desc">
-                <sch:assert test="matches(., 'Authors')">
-                  The &lt;desc&gt; must contain "Authors".
-                </sch:assert>
-              </sch:rule>
             </constraint>
           </constraintSpec><constraintSpec ident="lang-on-desc" scheme="schematron">
             <constraint>
