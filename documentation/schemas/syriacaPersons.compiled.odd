@@ -3416,11 +3416,7 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
                     <sch:let name="stateRefPart" value="substring-after(parent::tei:state/@ref, '/taxonomy/')"/>
                     <sch:let name="descToRefPart" value="lower-case(replace(., ' ', '-'))"/>
                     <sch:let name="descTokens" value="tokenize(., ' ')"/>
-                    <sch:assert test="$stateRefPart = $descToRefPart">
-                      The text node in the &lt;desc&gt; element must correspond to the @ref attribute on the parent &lt;state&gt; element: 
-                      <sch:value-of select="parent::tei:state/@ref"/> Use the portion of the URI following "taxonomy/" and capitalize
-                      the first letter of each word.
-                    </sch:assert>
+                    
                     <sch:assert test="every $i in $descTokens satisfies ($i = ('the', 'of') or matches($i, '^[A-Z].*'))">
                       Please capitalize the first letter of each word, except for "the" and "of".
                     </sch:assert>
@@ -3474,7 +3470,11 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
                     <sch:let name="stateRefPart" value="substring-after(parent::tei:state/@ref, '/taxonomy/')"/>
                     <sch:let name="descToRefPart" value="lower-case(replace(., ' ', '-'))"/>
                     <sch:let name="descTokens" value="tokenize(., ' ')"/>
-                    
+                    <sch:assert test="$stateRefPart = $descToRefPart">
+                      The text node in the &lt;desc&gt; element must correspond to the @ref attribute on the parent &lt;state&gt; element: 
+                      <sch:value-of select="parent::tei:state/@ref"/> Use the portion of the URI following "taxonomy/" and capitalize
+                      the first letter of each word.
+                    </sch:assert>
                     <sch:assert test="every $i in $descTokens satisfies ($i = ('the', 'of') or matches($i, '^[A-Z].*'))">
                       Please capitalize the first letter of each word, except for "the" and "of".
                     </sch:assert>
