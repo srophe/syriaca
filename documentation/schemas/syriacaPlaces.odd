@@ -151,7 +151,7 @@
             The problem is that it is difficult to combine regex and schematron functions to move between lowercase w/ hypens to uppercase without.-->
                 <sch:let name="confessionDoc" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/>
                 <sch:let name="confessionLabels" value="$confessionDoc//tei:text//tei:item/tei:label"/>
-                <sch:let name="stateRefPart" value="substring-after(parent::tei:state/@ref, '#')"/>
+                <sch:let name="stateRefPart" value="substring-after(parent::tei:state/@ref, '/taxonomy/')"/>
                 <sch:let name="spaceTo-" value="for $i in . return(replace($i, ' ', '-'))"/>
                 <sch:let name="labelToRef" value="for $i in $spaceTo- return lower-case($spaceTo-)"/>
                 <sch:assert test="parent::tei:state/@type='confession'">A &lt;label&gt; element can only be used when parent &lt;state&gt; element has @type="confession"</sch:assert>
@@ -201,8 +201,10 @@
             <memberOf key="att.sortable" mode="delete"/>
           </classes>
           <content>
-            <elementRef key="place" minOccurs="1" maxOccurs="1"/>
+            <sequence preserveOrder="true">
+              <elementRef key="place" minOccurs="1" maxOccurs="1"/>
             <elementRef key="listRelation" minOccurs="0" maxOccurs="1"/>
+            </sequence>
           </content>
           <remarks mode="add">
             <p>The <gi>listPlace</gi> element of a place record must contain a <att>place</att> 
@@ -385,14 +387,16 @@
             <memberOf key="att.sortable" mode="delete"/>
           </classes>
           <content>
-            <elementRef key="placeName" minOccurs="1" maxOccurs="unbounded"/>
-            <elementRef key="desc" minOccurs="0" maxOccurs="unbounded"/>
-            <elementRef key="location" minOccurs="0" maxOccurs="unbounded"/>
-            <elementRef key="event" minOccurs="0" maxOccurs="unbounded"/>
-            <elementRef key="state" minOccurs="0" maxOccurs="unbounded"/>
-            <elementRef key="note" minOccurs="0" maxOccurs="unbounded"/>
-            <elementRef key="idno" minOccurs="1" maxOccurs="unbounded"/>
-            <elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/>
+            <sequence preserveOrder="true">
+              <elementRef key="placeName" minOccurs="1" maxOccurs="unbounded"/>
+              <elementRef key="desc" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="location" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="event" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="state" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="note" minOccurs="0" maxOccurs="unbounded"/>
+              <elementRef key="idno" minOccurs="1" maxOccurs="unbounded"/>
+              <elementRef key="bibl" minOccurs="1" maxOccurs="unbounded"/>
+            </sequence>
           </content>
           <constraintSpec ident="person-abstract-req" scheme="schematron">
             <constraint>
@@ -784,25 +788,30 @@
           </constraintSpec>
           <constraintSpec ident="state-type-confession" scheme="schematron">
             <constraint>
-              <sch:rule context="tei:text//tei:state[@type='confession']">
-                <sch:let name="docURIno" value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(), '.+?(\d+).+', '$1')"/>
-                <sch:let name="id" value="@xml:id"/>
-                <sch:assert test="@ref">Must have a @ref attribute.</sch:assert>
-                <sch:assert test="matches(./@xml:id, concat('confession', $docURIno, '-', '\d+$'))">
-                  The required @xml:id must be 'confession<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
-                </sch:assert>
-                <sch:report test="preceding-sibling::element()[@xml:id = $id]">This @xml:id is already in use.</sch:report>
-              </sch:rule>
-              <sch:rule context="//tei:state[@type='confession']/@ref"><!-- Add rule pointing to Taxonomy when development allows. -->
-                <sch:let name="confessionDoc" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/>
-                <sch:let name="confessionIDs" value="$confessionDoc//tei:text//tei:item/@xml:id"/>
-                <sch:let name="confessionPtrs" value="for $i in $confessionIDs return concat('#', $i)"/>
-                <sch:let name="confessionRefValues" value="for $i in $confessionPtrs return concat('http://syriaca.org/documentation/confessions.xml', $i)"/>
-                <sch:assert test="every $i in . satisfies $i = $confessionRefValues">
-                  The acceptable values of @ref are 'http://syriaca.org/documentation/confessions.xml' followed by one of the following:
-                  <sch:value-of select="string-join($confessionPtrs, '; ')"/>
-                </sch:assert>
-              </sch:rule>
+              <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron">
+                <sch:ns uri="http://www.w3.org/1999/02/22-rdf-syntax-ns#" prefix="rdf"/>
+                <sch:ns uri="http://www.w3.org/2004/02/skos/core#" prefix="skos"/>
+                <sch:pattern>
+                  <sch:rule context="tei:text//tei:state[@type='confession']">
+                    <sch:let name="docURIno" value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(), '.+?(\d+).+', '$1')"/>
+                    <sch:let name="id" value="@xml:id"/>
+                    <sch:assert test="@ref">Must have a @ref attribute.</sch:assert>
+                    <sch:assert test="matches(./@xml:id, concat('confession', $docURIno, '-', '\d+$'))">
+                      The required @xml:id must be 'confession<sch:value-of select="$docURIno"/>-{\d+$}' (where {\d+$} is a number).
+                    </sch:assert>
+                    <sch:report test="preceding-sibling::element()[@xml:id = $id]">This @xml:id is already in use.</sch:report>
+                  </sch:rule>
+                  <sch:rule context="tei:state[@type='confession']/@ref">
+                    <sch:let name="refTokens" value="tokenize(., ' ')"/>
+                    <sch:let name="taxonomy" value="doc('https://raw.githubusercontent.com/srophe/syriaca-data/refs/heads/gaddel_development/data/taxonomy/taxonomy.rdf')"/>
+                    <sch:let name="religionURIs" value="$taxonomy//rdf:Description[@rdf:about='http://syriaca.org/taxonomy/religious-communities-collection']/skos:member/@rdf:resource"/>
+                    <sch:let name="errors" value="for $i in $refTokens return $i[not(. = $religionURIs)]"/>
+                    <sch:assert test="every $i in $refTokens satisfies $i = $religionURIs" role="warning">
+                      <sch:value-of select="string-join($errors, ', ')"/>: URI(s) not the religious communities in the Taxonomy. If you find no appropriate concept on the following list, 
+                      please choose a keyword of your own for the editors to consider: <sch:value-of select="string-join($religionURIs, ';  ')"/>.</sch:assert>
+                  </sch:rule>
+                </sch:pattern>
+              </sch:schema>
             </constraint>
           </constraintSpec>
           <attList>

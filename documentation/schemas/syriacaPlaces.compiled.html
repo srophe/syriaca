@@ -587,7 +587,7 @@ element date
 &lt;sch:let name="confessionLabels"
  value="$confessionDoc//tei:text//tei:item/tei:label"/&gt;
 &lt;sch:let name="stateRefPart"
- value="substring-after(parent::tei:state/@ref, '#')"/&gt;
+ value="substring-after(parent::tei:state/@ref, '/taxonomy/')"/&gt;
 &lt;sch:let name="spaceTo-"
  value="for $i in . return(replace($i, ' ', '-'))"/&gt;
 &lt;sch:let name="labelToRef"
@@ -1427,13 +1427,16 @@ element listBibl { tei_att.cmc.attributes, tei_bibl+ }<a href="#index.xml-eg-d31
  <span class="element">&lt;/place&gt;</span>
 <span class="element">&lt;/listPlace&gt;</span></div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td><td class="wovenodd-col2"><pre id="index.xml-eg-d31e9712" class="pre_eg cdata">
 &lt;content&gt;
- &lt;elementRef key="place" minOccurs="1"
-  maxOccurs="1"/&gt;
- &lt;elementRef key="listRelation"
-  minOccurs="0" maxOccurs="1"/&gt;
+ &lt;sequence minOccurs="1" maxOccurs="1"
+  preserveOrder="true"&gt;
+  &lt;elementRef key="place" minOccurs="1"
+   maxOccurs="1"/&gt;
+  &lt;elementRef key="listRelation"
+   minOccurs="0" maxOccurs="1"/&gt;
+ &lt;/sequence&gt;
 &lt;/content&gt;
     <a href="#index.xml-eg-d31e9712" class="anchorlink">⚓</a></pre></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schema Declaration</span></td><td class="wovenodd-col2"><pre id="index.xml-eg-d31e9719" class="pre_eg">
-element listPlace { tei_att.cmc.attributes, tei_place, tei_listRelation? }<a href="#index.xml-eg-d31e9719" class="anchorlink">⚓</a></pre></td></tr></table></div></div><div class="refdoc" id="TEI.listRelation"><h2><span class="headingNumber">1.35. </span><span class="head">&lt;listRelation&gt;</span></h2><div class="table"><table class="wovenodd"><tr><td colspan="2" class="wovenodd-col2"><span class="label">&lt;listRelation&gt; </span><span xml:lang="en" lang="en">provides information about relationships identified amongst people, places, and organizations, either informally as prose or as formally expressed relation links.</span> [<a class="link_ref" href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html#NDPERSREL">14.3.2.3. Personal Relationships</a>]</td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Module</span></td><td class="wovenodd-col2">namesdates</td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Attributes</span></td><td class="wovenodd-col2"><ul class="attList"><li class="classSpecItem"><a class="link_ref" href="#TEI.att.cmc" title="att.cmc">att.cmc</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@generatedBy</span></li></ul></li></ul></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Member of</span></td><td class="wovenodd-col2"><div class="parent"><a class="link_odd_classSpec" href="#TEI.model.listLike" title="model.listLike">model.listLike</a></div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Contained by</span></td><td class="wovenodd-col2"><div class="parent"><div class="specChildren"><div class="specChild"><span class="specChildModule">core: </span><span class="specChildElements"><a class="link_odd_elementSpec" href="#TEI.title" title="&lt;title&gt;">title</a></span></div><div class="specChild"><span class="specChildModule">header: </span><span class="specChildElements"><a class="link_odd_elementSpec" href="#TEI.change" title="&lt;change&gt;">change</a> <a class="link_odd_elementSpec" href="#TEI.licence" title="&lt;licence&gt;">licence</a></span></div><div class="specChild"><span class="specChildModule">namesdates: </span><span class="specChildElements"><a class="link_odd_elementSpec" href="#TEI.listPlace" title="&lt;listPlace&gt;">listPlace</a></span></div></div></div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">May contain</span></td><td class="wovenodd-col2"><div class="specChildren"><div class="specChild"><span class="specChildModule">namesdates: </span><span class="specChildElements"><a class="link_odd_elementSpec" href="#TEI.relation" title="&lt;relation&gt;">relation</a></span></div></div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Note</span></td><td class="wovenodd-col2"><p>May contain a prose description organized as paragraphs, or a sequence of <a class="link_ref" href="#TEI.relation" title="&lt;relation&gt;">&lt;relation&gt;</a> elements.</p></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Example</span></td><td class="wovenodd-col2"><div id="index.xml-egXML-d31e9831" class="pre egXML_valid"><span class="element">&lt;listPerson&gt;</span>
+element listPlace { tei_att.cmc.attributes, ( tei_place, tei_listRelation? ) }<a href="#index.xml-eg-d31e9719" class="anchorlink">⚓</a></pre></td></tr></table></div></div><div class="refdoc" id="TEI.listRelation"><h2><span class="headingNumber">1.35. </span><span class="head">&lt;listRelation&gt;</span></h2><div class="table"><table class="wovenodd"><tr><td colspan="2" class="wovenodd-col2"><span class="label">&lt;listRelation&gt; </span><span xml:lang="en" lang="en">provides information about relationships identified amongst people, places, and organizations, either informally as prose or as formally expressed relation links.</span> [<a class="link_ref" href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html#NDPERSREL">14.3.2.3. Personal Relationships</a>]</td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Module</span></td><td class="wovenodd-col2">namesdates</td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Attributes</span></td><td class="wovenodd-col2"><ul class="attList"><li class="classSpecItem"><a class="link_ref" href="#TEI.att.cmc" title="att.cmc">att.cmc</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@generatedBy</span></li></ul></li></ul></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Member of</span></td><td class="wovenodd-col2"><div class="parent"><a class="link_odd_classSpec" href="#TEI.model.listLike" title="model.listLike">model.listLike</a></div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Contained by</span></td><td class="wovenodd-col2"><div class="parent"><div class="specChildren"><div class="specChild"><span class="specChildModule">core: </span><span class="specChildElements"><a class="link_odd_elementSpec" href="#TEI.title" title="&lt;title&gt;">title</a></span></div><div class="specChild"><span class="specChildModule">header: </span><span class="specChildElements"><a class="link_odd_elementSpec" href="#TEI.change" title="&lt;change&gt;">change</a> <a class="link_odd_elementSpec" href="#TEI.licence" title="&lt;licence&gt;">licence</a></span></div><div class="specChild"><span class="specChildModule">namesdates: </span><span class="specChildElements"><a class="link_odd_elementSpec" href="#TEI.listPlace" title="&lt;listPlace&gt;">listPlace</a></span></div></div></div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">May contain</span></td><td class="wovenodd-col2"><div class="specChildren"><div class="specChild"><span class="specChildModule">namesdates: </span><span class="specChildElements"><a class="link_odd_elementSpec" href="#TEI.relation" title="&lt;relation&gt;">relation</a></span></div></div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Note</span></td><td class="wovenodd-col2"><p>May contain a prose description organized as paragraphs, or a sequence of <a class="link_ref" href="#TEI.relation" title="&lt;relation&gt;">&lt;relation&gt;</a> elements.</p></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Example</span></td><td class="wovenodd-col2"><div id="index.xml-egXML-d31e9831" class="pre egXML_valid"><span class="element">&lt;listPerson&gt;</span>
  <span class="element">&lt;person <span class="attribute">xml:id</span>="<span class="attributevalue">pp1</span>"&gt;</span>
 <span class="comment">&lt;!-- data about person pp1 --&gt;</span>
  <span class="element">&lt;/person&gt;</span>
@@ -1960,22 +1963,25 @@ element persName
 &lt;sch:assert test="tei:desc[@type='abstract']"&gt;Every place record must have at least one &lt;desc&gt; @type="abstract".&lt;/sch:assert&gt;
 &lt;/sch:rule&gt;</div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Content model</span></td><td class="wovenodd-col2"><pre id="index.xml-eg-d31e13348" class="pre_eg cdata">
 &lt;content&gt;
- &lt;elementRef key="placeName" minOccurs="1"
-  maxOccurs="unbounded"/&gt;
- &lt;elementRef key="desc" minOccurs="0"
-  maxOccurs="unbounded"/&gt;
- &lt;elementRef key="location" minOccurs="0"
-  maxOccurs="unbounded"/&gt;
- &lt;elementRef key="event" minOccurs="0"
-  maxOccurs="unbounded"/&gt;
- &lt;elementRef key="state" minOccurs="0"
-  maxOccurs="unbounded"/&gt;
- &lt;elementRef key="note" minOccurs="0"
-  maxOccurs="unbounded"/&gt;
- &lt;elementRef key="idno" minOccurs="1"
-  maxOccurs="unbounded"/&gt;
- &lt;elementRef key="bibl" minOccurs="1"
-  maxOccurs="unbounded"/&gt;
+ &lt;sequence minOccurs="1" maxOccurs="1"
+  preserveOrder="true"&gt;
+  &lt;elementRef key="placeName" minOccurs="1"
+   maxOccurs="unbounded"/&gt;
+  &lt;elementRef key="desc" minOccurs="0"
+   maxOccurs="unbounded"/&gt;
+  &lt;elementRef key="location" minOccurs="0"
+   maxOccurs="unbounded"/&gt;
+  &lt;elementRef key="event" minOccurs="0"
+   maxOccurs="unbounded"/&gt;
+  &lt;elementRef key="state" minOccurs="0"
+   maxOccurs="unbounded"/&gt;
+  &lt;elementRef key="note" minOccurs="0"
+   maxOccurs="unbounded"/&gt;
+  &lt;elementRef key="idno" minOccurs="1"
+   maxOccurs="unbounded"/&gt;
+  &lt;elementRef key="bibl" minOccurs="1"
+   maxOccurs="unbounded"/&gt;
+ &lt;/sequence&gt;
 &lt;/content&gt;
     <a href="#index.xml-eg-d31e13348" class="anchorlink">⚓</a></pre></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schema Declaration</span></td><td class="wovenodd-col2"><pre id="index.xml-eg-d31e13355" class="pre_eg">
 element place
@@ -2008,14 +2014,16 @@ element place
     | "unknown"
     | "valley"
    },
-   tei_placeName+,
-   tei_desc*,
-   tei_location*,
-   tei_event*,
-   tei_state*,
-   tei_note*,
-   tei_idno+,
-   tei_bibl+
+   (
+      tei_placeName+,
+      tei_desc*,
+      tei_location*,
+      tei_event*,
+      tei_state*,
+      tei_note*,
+      tei_idno+,
+      tei_bibl+
+   )
 }<a href="#index.xml-eg-d31e13355" class="anchorlink">⚓</a></pre></td></tr></table></div></div><div class="refdoc" id="TEI.placeName"><h2><span class="headingNumber">1.45. </span><span class="head">&lt;placeName&gt;</span></h2><div class="table"><table class="wovenodd"><tr><td colspan="2" class="wovenodd-col2"><span class="label">&lt;placeName&gt; </span>(<span xml:lang="en" lang="en">place name</span>) <span xml:lang="en" lang="en">contains an absolute or relative place name.</span> [<a class="link_ref" href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html#NDPLAC">14.2.3. Place Names</a>]</td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Module</span></td><td class="wovenodd-col2">namesdates</td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Attributes</span></td><td class="wovenodd-col2"><ul class="attList"><li class="classSpecItem"><a class="link_ref" href="#TEI.att.cmc" title="att.cmc">att.cmc</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@generatedBy</span></li></ul></li><li class="attRefItem"><a class="link_ref" href="#TEI.att.global.responsibility" title="att.global.responsibility">att.global.responsibility</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@resp</span></li></ul></li><li class="attRefItem"><a class="link_ref" href="#TEI.att.global.source" title="att.global.source">att.global.source</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@source</span></li></ul></li><li class="attRefItem"><a class="link_ref" href="#TEI.att.personal" title="att.personal">att.personal</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@srophe:tags</span></li><li class="item"><span class="attribute">@sort</span></li></ul></li><li class="attRefItem"><a class="link_ref" href="#TEI.att.canonical" title="att.canonical">att.canonical</a><ul class="classSpecAttDefs"><li class="item"><span class="attribute">@ref</span></li></ul></li></ul><div class="table"><table class="attList"><tr><td class="odd_label">xml:id</td><td class="odd_value">(<span xml:lang="en" lang="en">identifier</span>) <span>The <a class="link_ref" href="#TEI.placeName" title="&lt;placeName&gt;">&lt;placeName&gt;</a> element requires an <span class="att">xml:id</span> attribute whose value is the concatenation of "name", the Syriaca.org ID number of this place (i.e. the last element of the URI), a ‘-’, and the number of this name element in order.</span><div class="table"><table class="attDef"><tr><td class="odd_label"><span xml:lang="en" lang="en" class="label">Derived from</span></td><td class="odd_value"><a class="link_ref" href="#TEI.att.global" title="att.global">att.global</a></td></tr><tr><td class="odd_label"><span xml:lang="en" lang="en" class="label">Status</span></td><td class="odd_value"><span xml:lang="en" lang="en">Optional</span></td></tr><tr><td class="odd_label"><span xml:lang="en" lang="en" class="label">Datatype</span></td><td class="odd_value"><a class="link_ref" href="https://www.w3.org/TR/xmlschema-2/#ID">ID</a></td></tr></table></div></td></tr><tr><td class="odd_label">xml:lang</td><td class="odd_value">(<span xml:lang="en" lang="en">language</span>) <span>The language of the name should be indicated in an <span class="att">xml:lang</span> attribute of the <a class="link_ref" href="#TEI.placeName" title="&lt;placeName&gt;">&lt;placeName&gt;</a> element, whose value is derived from the the <a class="link_ref" href="http://www.loc.gov/standards/iso639-2/php/code_list.php">ISO-639-1 or ISO-639-2 standards</a>. In particular, "en" should be used for "English", "ar" for "Arabic", and "syr" for Syriac. Syriaca.org is not using "syc" for Syriac to avoid the judgment of what constitutes "classical." In the case of vocalized Syriac, the <span class="att">xml:lang</span> attribute should be augmented with a script indication: either "-Syrj" to indicate West Syrian vocalization or "-Syrn" to indicate East Syrian vocalization. Thus the <span class="att">xml:lang</span> attribute will have a value of "syr-Syrj" for vocalized Western Syriac and "syr-Syrn" for vocalized Eastern Syriac. The <span class="att">xml:lang</span> attribute for an unvocalized Syriac name form, such as Syriaca.org’s headword form, should be simply "syr".</span><div class="table"><table class="attDef"><tr><td class="odd_label"><span xml:lang="en" lang="en" class="label">Derived from</span></td><td class="odd_value"><a class="link_ref" href="#TEI.att.global" title="att.global">att.global</a></td></tr><tr><td class="odd_label"><span xml:lang="en" lang="en" class="label">Status</span></td><td class="odd_value"><span xml:lang="en" lang="en">Optional</span></td></tr><tr><td class="odd_label"><span xml:lang="en" lang="en" class="label">Datatype</span></td><td class="odd_value"><a class="link_ref" href="#TEI.teidata.language" title="teidata.language">teidata.language</a></td></tr><tr><td class="odd_label"><span xml:lang="en" lang="en" class="label">Legal values are:</span></td><td class="odd_value"><dl class="valList"><dt><span class="odd_label">ar</span></dt><dd>(<span>Arabic</span>) <span>Arabic of any variety or period</span></dd><dt><span class="odd_label">ar-Syrc</span></dt><dd>(<span>Arabic—Garshuni</span>) <span>Arabic Garshuni in unvocalized or undetermined Syriac script</span></dd><dt><span class="odd_label">ar-Syre</span></dt><dd>(<span>Arabic—Garshuni—Estrangela</span>) <span>Arabic Garshuni in Estrangela Syriac script</span></dd><dt><span class="odd_label">ar-Syrj</span></dt><dd>(<span>Arabic—Garshuni—West Syriac</span>) <span>Arabic Garshuni in vocalized West Syriac script</span></dd><dt><span class="odd_label">ar-Syrn</span></dt><dd>(<span>Arabic—Garshuni—East Syriac</span>) <span>Arabic Garshuni in vocalized East Syriac script</span></dd><dt><span class="odd_label">cop</span></dt><dd>(<span>Coptic</span>) <span>Coptic of any variety or period</span></dd><dt><span class="odd_label">cu</span></dt><dd>(<span>Slavonic—Old Church</span>) <span>Old Church Slavonic</span></dd><dt><span class="odd_label">de</span></dt><dd>(<span>German</span>) <span>German of any variety or period</span></dd><dt><span class="odd_label">de-x-baumstrk</span></dt><dd>(<span>German—Baumstark Romanization</span>) <span>Names or terms Romanized into German according to the standards adopted by Anton Baumstark's Geschichte der syrischen Literatur.</span></dd><dt><span class="odd_label">fr-x-zanetti</span></dt><dd>(<span>French—Zanetti</span>) <span>Names or terms Romanized into French according to the standards adopted by Ugo Zanetti.</span></dd><dt><span class="odd_label">el</span></dt><dd>(<span>Greek—Modern</span>) <span>Modern Greek after A.D. 1453</span></dd><dt><span class="odd_label">en</span></dt><dd>(<span>English</span>) <span>English of any variety or period</span></dd><dt><span class="odd_label">en-x-gedsh</span></dt><dd>(<span>English—GEDSH Romanization</span>) <span>Names or terms Romanized into English according to the standards adopted by the Gorgias Encyclopedic Dictionary of the Syriac Heritage</span></dd><dt><span class="odd_label">en-x-lah</span></dt><dd>(<span>English—LAH Romanization</span>) <span>Names or terms Romanized into English according to the standards adopted by the Late Antique Historiography project.</span></dd><dt><span class="odd_label">en-x-srp1</span></dt><dd>(<span>English—Syriaca.org Alternate Romanization</span>) <span>Names or terms Romanized into English by Syriaca.org using alternate methods for indexing purposes.</span></dd><dt><span class="odd_label">es</span></dt><dd>(<span>Spanish</span>) <span>Spanish</span></dd><dt><span class="odd_label">fr</span></dt><dd>(<span>French</span>) <span>French of any variety or period</span></dd><dt><span class="odd_label">fr-x-bhs</span></dt><dd>(<span>French—BHS Romanization</span>) <span>Names or terms Romanized into French according to the standards adopted by the Bibliotheca Hagiographica Syriaca</span></dd><dt><span class="odd_label">fr-x-fiey</span></dt><dd>(<span>French—Fiey Romanization</span>) <span>Names or terms Romanized into French according to the standards adopted by Fiey, Saints Syriaques</span></dd><dt><span class="odd_label">gez</span></dt><dd>(<span>Ge'ez</span>) <span>Ge'ez</span></dd><dt><span class="odd_label">grc</span></dt><dd>(<span>Greek—Ancient</span>) <span>Ancient Greek to A.D. 1453</span></dd><dt><span class="odd_label">hy</span></dt><dd>(<span>Armenian</span>) <span>Classical or Modern Armenian</span></dd><dt><span class="odd_label">it</span></dt><dd>(<span>Italian</span>) <span>Italian</span></dd><dt><span class="odd_label">ka</span></dt><dd>(<span>Georgian</span>) <span>Classical or Modern Georgian</span></dd><dt><span class="odd_label">la</span></dt><dd>(<span>Latin</span>) <span>Latin of any variety or period</span></dd><dt><span class="odd_label">mal</span></dt><dd>(<span>Malayalam</span>) <span>Malayalam of any variety or period</span></dd><dt><span class="odd_label">mal-Syrc</span></dt><dd>(<span>Malayalam—Garshuni</span>) <span>Malayalam Garshuni in unvocalized or undetermined Syriac script</span></dd><dt><span class="odd_label">mal-Syre</span></dt><dd>(<span>Malayalam—Garshuni—Estrangela</span>) <span>Malayalam Garshuni in Estrangela Syriac script</span></dd><dt><span class="odd_label">mal-Syrj</span></dt><dd>(<span>Malayalam—Garshuni—West Syriac</span>) <span>Malayalam Garshuni in vocalized West Syriac script</span></dd><dt><span class="odd_label">mal-Syrn</span></dt><dd>(<span>Malayalam—Garshuni—East Syriac</span>) <span>Malayalam Garshuni in vocalized East Syriac script</span></dd><dt><span class="odd_label">nl</span></dt><dd>(<span>Dutch</span>) <span>Dutch</span></dd><dt><span class="odd_label">pt</span></dt><dd>(<span>Portuguese</span>) <span>Portuguese</span></dd><dt><span class="odd_label">ru</span></dt><dd>(<span>Russian</span>) <span>Russian</span></dd><dt><span class="odd_label">syr</span></dt><dd>(<span>Syriac</span>) <span>Syriac of any variety or period</span></dd><dt><span class="odd_label">syr-Syre</span></dt><dd>(<span>Syriac—Estrangela script</span>) <span>Syriac in Estrangela script</span></dd><dt><span class="odd_label">syr-Syrj</span></dt><dd>(<span>Syriac—West</span>) <span>Syriac in vocalized West Syriac script</span></dd><dt><span class="odd_label">syr-Syrn</span></dt><dd>(<span>Syriac—East</span>) <span>Syriac in vocalized East Syriac script</span></dd><dt><span class="odd_label">syr-x-syrm</span></dt><dd>(<span>Syriac—Melkite script</span>) <span>Syriac in Melkite script. Note: This is not an ISO code but a private use code for Melkite employed by Syriaca.org until an ISO code is created</span></dd><dt><span class="odd_label">sog</span></dt><dd>(<span>Sogdian</span>) <span>Sogdian</span></dd><dt><span class="odd_label">tr</span></dt><dd>(<span>Turkish</span>) <span>Turkish</span></dd></dl></td></tr></table></div></td></tr><tr><td class="odd_label">calendar</td><td class="odd_value"><span xml:lang="en" lang="en" class="outOfDateTranslation">indicates one or more systems or calendars to which the date represented by the content of this element belongs.</span><div class="table"><table class="attDef"><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="deprecated"><a class="link_ref" href="http://www.tei-c.org/Activities/Council/Working/tcw27.xml"><span>Deprecated</span></a></span></td><td colspan="1" class="wovenodd-col2"><span xml:lang="en" lang="en" class="deprecated">will be removed on 2024-11-11</span></td></tr><tr><td class="odd_label"><span xml:lang="en" lang="en" class="label">Status</span></td><td class="odd_value"><span xml:lang="en" lang="en">Optional</span></td></tr><tr><td class="odd_label"><span xml:lang="en" lang="en" class="label">Datatype</span></td><td class="odd_value">1–∞ <span xml:lang="en" lang="en">occurrences of</span> <a class="link_ref" href="#TEI.teidata.pointer" title="teidata.pointer">teidata.pointer</a> <span xml:lang="en" lang="en">separated by whitespace</span></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td><td class="wovenodd-col2"><div class="pre">
 &lt;sch:rule context="tei:*[@calendar]"&gt;
 &lt;sch:assert test="string-length( normalize-space(.) ) gt 0"&gt; @calendar indicates one or more
@@ -2737,30 +2745,38 @@ element sponsor
 &lt;sch:report test="@ref"&gt; A @ref attribute not allowed here.
 &lt;/sch:report&gt;
 &lt;/sch:rule&gt;</div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td><td class="wovenodd-col2"><div class="pre">
-&lt;sch:rule context="tei:text//tei:state[@type='confession']"&gt;
-&lt;sch:let name="docURIno"
- value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(), 
+&lt;sch:schema&gt;
+&lt;sch:ns uri="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+ prefix="rdf"/&gt;
+&lt;sch:ns uri="http://www.w3.org/2004/02/skos/core#"
+ prefix="skos"/&gt;
+&lt;sch:pattern&gt;
+ &lt;sch:rule context="tei:text//tei:state[@type='confession']"&gt;
+  &lt;sch:let name="docURIno"
+   value="replace(//tei:publicationStmt/tei:idno[@type='URI'][not(@type='deprecated')]/text(), 
  '.+?(\d+).+', '$1')"/&gt;
-&lt;sch:let name="id" value="@xml:id"/&gt;
-&lt;sch:assert test="@ref"&gt;Must have a @ref attribute.&lt;/sch:assert&gt;
-&lt;sch:assert test="matches(./@xml:id, concat('confession', $docURIno, '-', '\d+$'))"&gt; The required @xml:id must be 'confession&lt;sch:value-of select="$docURIno"/&gt;-{\d+$}' (where {\d+$} is a number).
-&lt;/sch:assert&gt;
-&lt;sch:report test="preceding-sibling::element()[@xml:id = $id]"&gt;This @xml:id is already in use.&lt;/sch:report&gt;
-&lt;/sch:rule&gt;
-&lt;sch:rule context="//tei:state[@type='confession']/@ref"&gt;
-&lt;sch:let name="confessionDoc"
- value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/&gt;
-&lt;sch:let name="confessionIDs"
- value="$confessionDoc//tei:text//tei:item/@xml:id"/&gt;
-&lt;sch:let name="confessionPtrs"
- value="for $i in $confessionIDs return concat('#', $i)"/&gt;
-&lt;sch:let name="confessionRefValues"
- value="for $i in $confessionPtrs return concat('http://syriaca.org/documentation/confessions.xml', 
- $i)"/&gt;
-&lt;sch:assert test="every $i in . satisfies $i = $confessionRefValues"&gt; The acceptable values of @ref are 'http://syriaca.org/documentation/confessions.xml' followed by one of the following:
-&lt;sch:value-of select="string-join($confessionPtrs, '; ')"/&gt;
-&lt;/sch:assert&gt;
-&lt;/sch:rule&gt;</div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td><td class="wovenodd-col2"><div class="pre">
+  &lt;sch:let name="id" value="@xml:id"/&gt;
+  &lt;sch:assert test="@ref"&gt;Must have a @ref attribute.&lt;/sch:assert&gt;
+  &lt;sch:assert test="matches(./@xml:id, concat('confession', $docURIno, '-', '\d+$'))"&gt; The required @xml:id must be 'confession&lt;sch:value-of select="$docURIno"/&gt;-{\d+$}' (where {\d+$} is a number).
+  &lt;/sch:assert&gt;
+  &lt;sch:report test="preceding-sibling::element()[@xml:id = $id]"&gt;This @xml:id is already in use.&lt;/sch:report&gt;
+ &lt;/sch:rule&gt;
+ &lt;sch:rule context="tei:state[@type='confession']/@ref"&gt;
+  &lt;sch:let name="refTokens"
+   value="tokenize(., ' ')"/&gt;
+  &lt;sch:let name="taxonomy"
+   value="doc('https://raw.githubusercontent.com/srophe/syriaca-data/refs/heads/gaddel_development/data/taxonomy/taxonomy.rdf')"/&gt;
+  &lt;sch:let name="religionURIs"
+   value="$taxonomy//rdf:Description[@rdf:about='http://syriaca.org/taxonomy/religious-communities-collection']/skos:member/@rdf:resource"/&gt;
+  &lt;sch:let name="errors"
+   value="for $i in $refTokens return $i[not(. = $religionURIs)]"/&gt;
+  &lt;sch:assert test="every $i in $refTokens satisfies $i = $religionURIs"
+   role="warning"&gt;
+   &lt;sch:value-of select="string-join($errors, ', ')"/&gt;: URI(s) not the religious communities in the Taxonomy. If you find no appropriate concept on the following list,
+     please choose a keyword of your own for the editors to consider: &lt;sch:value-of select="string-join($religionURIs, '; ')"/&gt;.&lt;/sch:assert&gt;
+ &lt;/sch:rule&gt;
+&lt;/sch:pattern&gt;
+&lt;/sch:schema&gt;</div></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Schematron</span></td><td class="wovenodd-col2"><div class="pre">
 &lt;sch:rule context="//tei:text//tei:state"&gt;
 &lt;sch:report test="@source and @resp"&gt;Only one of the attributes @resp and @source may be supplied.&lt;/sch:report&gt;
 &lt;sch:assert test="@resp or @source"&gt;One of the attributes @resp or @source must be supplied.&lt;/sch:assert&gt;
@@ -3624,6 +3640,6 @@ tei_teidata.word = token { pattern = "[^\p{C}\p{Z}]+" }<a href="#index.xml-eg-d3
 tei_teidata.xpath = text<a href="#index.xml-eg-d31e30221" class="anchorlink">⚓</a></pre></td></tr><tr><td class="wovenodd-col1"><span xml:lang="en" lang="en" class="label">Note</span></td><td class="wovenodd-col2"><p>Any XPath expression using the syntax defined in <a class="link_ref" href="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/BIB.html#XSLT2">6.2.</a>.</p><p>When writing programs that evaluate XPath expressions, programmers should be mindful of the possibility of malicious code injection attacks. For further information about XPath injection attacks, see the <a class="link_ref" href="https://owasp.org/www-community/attacks/XPATH_Injection">article at OWASP</a>.</p></td></tr></table></div></div></section></div><!--TEI back--><div class="stdfooter autogenerated"><div class="footer"><!--standard links to project, institution etc--><a class="plain" href="/">Home</a> </div><address>Date: <br/><!--
  Generated from index.xml using XSLT stylesheets version 7.56.0
 		 based on http://www.tei-c.org/Stylesheets/
-		 on 2025-03-12T21:43:31Z.
+		 on 2025-03-13T19:19:11Z.
 		 SAXON HE 12.3.
 		   --></address></div></body></html>
