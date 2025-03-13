@@ -3407,6 +3407,27 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
   annotiert wird, üblicherweise einem Dokumentationselement oder einer
   Einheit.</desc><classes><memberOf key="att.global"/><memberOf key="model.descLike"/><memberOf key="att.typed"/><memberOf key="model.labelLike"/><memberOf key="att.cmc"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="choice" minOccurs="0" maxOccurs="unbounded"/><elementRef key="date" minOccurs="0" maxOccurs="unbounded"/><elementRef key="foreign" minOccurs="0" maxOccurs="unbounded"/><elementRef key="measure" minOccurs="0" maxOccurs="unbounded"/><elementRef key="offset" minOccurs="0" maxOccurs="unbounded"/><elementRef key="orgName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="persName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="placeName" minOccurs="0" maxOccurs="unbounded"/><elementRef key="quote" minOccurs="0" maxOccurs="1"/><elementRef key="rs" minOccurs="0" maxOccurs="unbounded"/><elementRef key="title" minOccurs="0" maxOccurs="unbounded"/><textNode/></sequence></content><constraintSpec ident="desc-in-person-state" scheme="schematron">
             <constraint>
+              <sch:schema queryBinding="xslt2">
+                <sch:ns uri="http://www.tei-c.org/ns/1.0" prefix="tei"/>
+                <sch:ns uri="http://www.w3.org/1999/02/22-rdf-syntax-ns#" prefix="rdf"/>
+                <sch:ns uri="http://www.w3.org/2004/02/skos/core#" prefix="skos"/>
+                <sch:pattern>
+                  <sch:rule context="tei:person/tei:state[@type='religious-affiliation']/tei:desc">
+                    <sch:let name="confessionDoc" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/>
+                    <sch:let name="stateRefPart" value="substring-after(parent::tei:state/@ref, '/taxonomy/')"/>
+                    <sch:let name="descToRefPart" value="lower-case(replace(., ' ', '-'))"/>
+                    <sch:let name="descTokens" value="tokenize(., ' ')"/>
+                    <sch:assert test="$stateRefPart = $descToRefPart">
+                      The text node in the &lt;desc&gt; element must correspond to the @ref attribute on the parent &lt;state&gt; element: 
+                      <sch:value-of select="parent::tei:state/@ref"/> Use the portion of the URI following "taxonomy/" and capitalize
+                      the first letter of each word.
+                    </sch:assert>
+                    <sch:assert test="every $i in $descTokens satisfies ($i = ('the', 'of') or matches($i, '^[A-Z].*'))">
+                      Please capitalize the first letter of each word, except for "the" and "of".
+                    </sch:assert>
+                  </sch:rule>
+                </sch:pattern>
+              </sch:schema>
               <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/anonymous']/tei:desc">
                 <sch:assert test="matches(., 'Anonymous')">
                   The &lt;desc&gt; must contain "Anonymous".
@@ -3445,6 +3466,27 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
             </constraint>
           </constraintSpec><constraintSpec ident="desc-in-personGrp-state" scheme="schematron">
             <constraint>
+              <sch:schema queryBinding="xslt2">
+                <sch:ns uri="http://www.tei-c.org/ns/1.0" prefix="tei"/>
+                <sch:ns uri="http://www.w3.org/1999/02/22-rdf-syntax-ns#" prefix="rdf"/>
+                <sch:ns uri="http://www.w3.org/2004/02/skos/core#" prefix="skos"/>
+                <sch:pattern>
+                  <sch:rule context="tei:personGrp/tei:state[@type='religious-affiliation']/tei:desc">
+                    <sch:let name="confessionDoc" value="doc('https://raw.githubusercontent.com/srophe/srophe-eXist-app/master/documentation/confessions.xml')"/>
+                    <sch:let name="stateRefPart" value="substring-after(parent::tei:state/@ref, '/taxonomy/')"/>
+                    <sch:let name="descToRefPart" value="lower-case(replace(., ' ', '-'))"/>
+                    <sch:let name="descTokens" value="tokenize(., ' ')"/>
+                    <sch:assert test="$stateRefPart = $descToRefPart">
+                      The text node in the &lt;desc&gt; element must correspond to the @ref attribute on the parent &lt;state&gt; element: 
+                      <sch:value-of select="parent::tei:state/@ref"/> Use the portion of the URI following "taxonomy/" and capitalize
+                      the first letter of each word.
+                    </sch:assert>
+                    <sch:assert test="every $i in $descTokens satisfies ($i = ('the', 'of') or matches($i, '^[A-Z].*'))">
+                      Please capitalize the first letter of each word, except for "the" and "of".
+                    </sch:assert>
+                  </sch:rule>
+                </sch:pattern>
+              </sch:schema>
               <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/anonymous']/tei:desc">
                 <sch:assert test="matches(., 'Anonymi')">
                   The &lt;desc&gt; must contain "Anonymi".
