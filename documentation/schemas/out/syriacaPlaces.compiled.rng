@@ -3,10 +3,9 @@
          xmlns:tei="http://www.tei-c.org/ns/1.0"
          xmlns:teix="http://www.tei-c.org/ns/Examples"
          xmlns:xlink="http://www.w3.org/1999/xlink"
-         xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2025-03-13T20:45:17Z. . 
+Schema generated from ODD source 2025-03-18T20:42:17Z. . 
 TEI Edition: P5 Version 4.7.0. Last updated on 16th November 2023, revision e5dd73ed0 
 TEI Edition Location: https://www.tei-c.org/Vault/P5/4.7.0/ 
   
@@ -5270,15 +5269,190 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                <sch:assert test="tei:desc[@type='abstract']">Every place record must have at least one &lt;desc&gt; @type="abstract".</sch:assert>
             </sch:rule>
          </pattern>
+         <ref name="tei_att.global.attribute.xmlid"/>
+         <ref name="tei_att.global.attribute.n"/>
+         <ref name="tei_att.global.attribute.xmllang"/>
+         <ref name="tei_att.global.rendition.attribute.rend"/>
+         <ref name="tei_att.global.linking.attribute.corresp"/>
+         <ref name="tei_att.global.change.attribute.change"/>
+         <ref name="tei_att.global.responsibility.attribute.resp"/>
+         <ref name="tei_att.global.source.attribute.source"/>
+         <attribute name="ana">
+            <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(analysis) indicates one or more elements containing interpretations of the element on which the <code xmlns="http://www.w3.org/1999/xhtml">@ana</code> attribute appears.</a:documentation>
+            <list>
+               <oneOrMore>
+                  <data type="anyURI">
+                     <param name="pattern">\S+</param>
+                  </data>
+               </oneOrMore>
+            </list>
+         </attribute>
+         <sch:schema xmlns="http://www.tei-c.org/ns/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:srophe="https://srophe.app"
+                     queryBinding="xslt2">
+            <sch:ns uri="http://www.tei-c.org/ns/1.0" prefix="tei"/>
+            <sch:ns uri="http://www.w3.org/1999/02/22-rdf-syntax-ns#" prefix="rdf"/>
+            <sch:ns uri="http://www.w3.org/2004/02/skos/core#" prefix="skos"/>
+            <sch:pattern>
+               <sch:rule context="tei:place">
+                  <sch:let name="taxonomy"
+                           value="doc('https://raw.githubusercontent.com/srophe/syriaca-data/refs/heads/gaddel_development/data/taxonomy/taxonomy.rdf')"/>
+                  <sch:let name="placeTypesURIs"
+                           value="$taxonomy//rdf:Description[@rdf:about='http://syriaca.org/taxonomy/place-types-collection']/skos:member/@rdf:resource"/>
+                  <sch:assert test="@ana = $placeTypesURIs">
+                          This place element requires an @ana attribute. The value should come from the following list. If you find no appropriate 
+                          concept there, please choose a keyword of your own for the editors to consider: <sch:value-of select="string-join($placeTypesURIs, ';  ')"/>. 
+                          Please note as well that the @type attribute values are also constrained
+                          and that there must be agreement between @ana and @type.
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='building']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/buildings'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/buildings".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='church']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/churches'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/churches".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='composite']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/composite'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/composite".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='designated-space']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/designated-spaces'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/designated-spaces".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='diocese']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/dioceses'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/dioceses".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='fortification']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/fortifications'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/fortifications".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='hospice']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/hospices'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/hospices".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='island']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/islands'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/islands".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='madrasa']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/madrasas'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/madrasas".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='monastery']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/monasteries'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/monasteries".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='mosque']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/mosques'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/mosques".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='mountain']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/mountains'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/mountains".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='natural-feature']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/natural-features'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/natural-features".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='open-water']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/open-water'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/open-water".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='parish']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/parishes'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/parishes".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='province']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/provinces'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/provinces".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='quarter']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/quarters'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/quarters".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='region']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/regions'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/regions".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='residence']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/residences'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/residences".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='river']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/rivers'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/rivers".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='settlement']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/settlements'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/settlements".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='state']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/states'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/states".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='synagogue']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/synagogues'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/synagogues".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='temple']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/temples'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/temples".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='cemetery']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/tombs'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/tombs".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='unknown']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/unknown'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/unknown".
+                        </sch:assert>
+               </sch:rule>
+               <sch:rule context="tei:place[@type='valley']/@ana">
+                  <sch:assert test=". = 'http://syriaca.org/taxonomy/valleys'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/valleys".
+                        </sch:assert>
+               </sch:rule>
+            </sch:pattern>
+         </sch:schema>
          <attribute name="type">
             <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
             <choice>
                <value>building</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A construction for which there is no narrower category, such as a church or mosque. Examples of this type include palaces and named city gates.</a:documentation>
                <value>cemetery</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A place for human burial.</a:documentation>
                <value>church</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A place regularly designated for Christian worship.</a:documentation>
                <value>composite</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A named place concept which merges multiple distinct place types, such as a city and a diocese. More specific types are preferred.</a:documentation>
                <value>designated-space</value>
@@ -5287,6 +5461,8 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">An ecclesiastical province governed by a bishop, archbishop, or metropolitan.</a:documentation>
                <value>fortification</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A military outpost such as a fort or a castle.</a:documentation>
+               <value>hospice</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A hospital or hostel.</a:documentation>
                <value>island</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A land-mass smaller than a continent surrounded on all sides by water.</a:documentation>
                <value>madrasa</value>
@@ -5309,6 +5485,8 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A subdivision of an urban center.</a:documentation>
                <value>region</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A term indicating a geographic extent larger than a city, without a corresponding politico-administrative apparatus. The size could range from a small valley to an entire continent.</a:documentation>
+               <value>residence</value>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A domestic space used for longterm living rather than a simple temporary shelter.</a:documentation>
                <value>river</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A stream of water of whatever size, from the smallest creek to the Amazon. Wadis are also included, even if they are not filled with water year-round.</a:documentation>
                <value>settlement</value>
@@ -5322,7 +5500,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
                <value>unknown</value>
                <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A place whose name is known, but what sort of place it represents is unknown.</a:documentation>
                <value>valley</value>
-               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0"/>
+               <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">A natural feature typically between two mountains or hills.</a:documentation>
             </choice>
          </attribute>
          <empty/>
@@ -5333,7 +5511,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(relationship) describes any kind of relationship or linkage amongst a specified group of places, events, persons, objects or other items. [14.3.2.3. Personal Relationships]</a:documentation>
          <ref name="tei_desc"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-relation-documentation-on-relation-constraint-rule-133">
+                  id="syriacaPlaces-relation-documentation-on-relation-constraint-rule-161">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5343,7 +5521,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-relation-act-pass-mutual-on-relation-constraint-rule-134">
+                  id="syriacaPlaces-relation-act-pass-mutual-on-relation-constraint-rule-162">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5368,7 +5546,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-relation-atts-on-relation-constraint-rule-136">
+                  id="syriacaPlaces-relation-atts-on-relation-constraint-rule-164">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5443,7 +5621,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-relation-ref-or-key-or-name-constraint-rule-145">
+                  id="syriacaPlaces-relation-ref-or-key-or-name-constraint-rule-173">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5454,7 +5632,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-relation-active-mutual-constraint-rule-146">
+                  id="syriacaPlaces-relation-active-mutual-constraint-rule-174">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5465,7 +5643,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-relation-active-passive-constraint-rule-147">
+                  id="syriacaPlaces-relation-active-passive-constraint-rule-175">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5476,7 +5654,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-relation-calendar-check-relation-constraint-rule-148">
+                  id="syriacaPlaces-relation-calendar-check-relation-constraint-rule-176">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5489,7 +5667,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-relation-calendar-check-relation-constraint-rule-149">
+                  id="syriacaPlaces-relation-calendar-check-relation-constraint-rule-177">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5548,7 +5726,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-relation-calendar-calendar-check-relation-constraint-rule-150">
+                  id="syriacaPlaces-relation-calendar-calendar-check-relation-constraint-rule-178">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5615,7 +5793,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </zeroOrMore>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-state-state-type-existence-constraint-rule-151">
+                  id="syriacaPlaces-state-state-type-existence-constraint-rule-179">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5666,7 +5844,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:pattern>
          </sch:schema>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-state-documentation-on-state-constraint-rule-154">
+                  id="syriacaPlaces-state-documentation-on-state-constraint-rule-182">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5676,7 +5854,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-state-calendar-check-state-constraint-rule-155">
+                  id="syriacaPlaces-state-calendar-check-state-constraint-rule-183">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5689,7 +5867,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-state-calendar-check-state-constraint-rule-156">
+                  id="syriacaPlaces-state-calendar-check-state-constraint-rule-184">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5729,7 +5907,7 @@ Suggested values include: 1] initial-rubric (Initial Rubric); 2] final-rubric (F
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-state-calendar-calendar-check-state-constraint-rule-157">
+                  id="syriacaPlaces-state-calendar-calendar-check-state-constraint-rule-185">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5836,7 +6014,7 @@ Sample values include: 1] TEI; 2] DBK (docbook); 3] XX (unknown); 4] Schematron;
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(text) contains a single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample. [4. Default Text Structure 16.1. Varieties of Composite Text]</a:documentation>
          <ref name="tei_body"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPlaces-text-source-within-text-constraint-rule-158">
+                  id="syriacaPlaces-text-source-within-text-constraint-rule-186">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5887,7 +6065,7 @@ Sample values include: 1] TEI; 2] DBK (docbook); 3] XX (unknown); 4] Schematron;
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="syriacaPlaces-att.global.change-change-att-values-constraint-rule-159">
+            id="syriacaPlaces-att.global.change-change-att-values-constraint-rule-187">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:srophe="https://srophe.app"

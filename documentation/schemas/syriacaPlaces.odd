@@ -388,7 +388,6 @@
         
         <elementSpec ident="place" module="namesdates" mode="change">
           <classes mode="change">
-            <memberOf key="att.global" mode="delete"/>
             <memberOf key="att.sortable" mode="delete"/>
           </classes>
           <content>
@@ -418,8 +417,10 @@
                   <desc>A construction for which there is no narrower category, such as a church or mosque. Examples of this type include palaces and named city gates.</desc>
                 </valItem>
                 <valItem ident="cemetery">
+                  <desc>A place for human burial.</desc>
                 </valItem>
                 <valItem ident="church">
+                  <desc>A place regularly designated for Christian worship.</desc>
                 </valItem>
                 <valItem ident="composite">
                   <desc>A named place concept which merges multiple distinct place types, such as a city and a diocese. More specific types are preferred.</desc>
@@ -432,6 +433,9 @@
                 </valItem>
                 <valItem ident="fortification">
                   <desc>A military outpost such as a fort or a castle.</desc>
+                </valItem>
+                <valItem ident="hospice">
+                  <desc>A hospital or hostel.</desc>
                 </valItem>
                 <valItem ident="island">
                   <desc>A land-mass smaller than a continent surrounded on all sides by water.</desc>
@@ -466,6 +470,9 @@
                 <valItem ident="region">
                   <desc>A term indicating a geographic extent larger than a city, without a corresponding politico-administrative apparatus. The size could range from a small valley to an entire continent.</desc>
                 </valItem>
+                <valItem ident="residence">
+                  <desc>A domestic space used for longterm living rather than a simple temporary shelter.</desc>
+                </valItem>
                 <valItem ident="river">
                   <desc>A stream of water of whatever size, from the smallest creek to the Amazon. Wadis are also included, even if they are not filled with water year-round.</desc>
                 </valItem>
@@ -485,8 +492,167 @@
                   <desc>A place whose name is known, but what sort of place it represents is unknown.</desc>
                 </valItem>
                 <valItem ident="valley">
+                  <desc>A natural feature typically between two mountains or hills.</desc>
                 </valItem>
               </valList>
+            </attDef>
+            <attDef ident="ana" mode="change" usage="req">
+              <constraintSpec ident="ana-on-place" scheme="schematron">
+                <constraint>
+                  <sch:schema xmlns:sch="http://purl.oclc.org/dsdl/schematron" queryBinding="xslt2">
+                    <sch:ns uri="http://www.tei-c.org/ns/1.0" prefix="tei"/>
+                    <sch:ns uri="http://www.w3.org/1999/02/22-rdf-syntax-ns#" prefix="rdf"/>
+                    <sch:ns uri="http://www.w3.org/2004/02/skos/core#" prefix="skos"/>
+                    <sch:pattern>
+                      <sch:rule context="tei:place">
+                        <sch:let name="taxonomy" value="doc('https://raw.githubusercontent.com/srophe/syriaca-data/refs/heads/gaddel_development/data/taxonomy/taxonomy.rdf')"/>
+                        <sch:let name="placeTypesURIs" value="$taxonomy//rdf:Description[@rdf:about='http://syriaca.org/taxonomy/place-types-collection']/skos:member/@rdf:resource"/>
+                        <sch:assert test="@ana = $placeTypesURIs">
+                          This place element requires an @ana attribute. The value should come from the following list. If you find no appropriate 
+                          concept there, please choose a keyword of your own for the editors to consider: <sch:value-of select="string-join($placeTypesURIs, ';  ')"/>. 
+                          Please note as well that the @type attribute values are also constrained
+                          and that there must be agreement between @ana and @type.
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='building']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/buildings'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/buildings".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='church']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/churches'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/churches".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='composite']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/composite'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/composite".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='designated-space']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/designated-spaces'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/designated-spaces".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='diocese']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/dioceses'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/dioceses".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='fortification']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/fortifications'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/fortifications".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='hospice']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/hospices'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/hospices".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='island']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/islands'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/islands".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='madrasa']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/madrasas'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/madrasas".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='monastery']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/monasteries'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/monasteries".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='mosque']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/mosques'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/mosques".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='mountain']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/mountains'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/mountains".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='natural-feature']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/natural-features'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/natural-features".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='open-water']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/open-water'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/open-water".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='parish']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/parishes'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/parishes".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='province']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/provinces'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/provinces".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='quarter']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/quarters'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/quarters".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='region']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/regions'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/regions".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='residence']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/residences'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/residences".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='river']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/rivers'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/rivers".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='settlement']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/settlements'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/settlements".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='state']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/states'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/states".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='synagogue']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/synagogues'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/synagogues".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='temple']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/temples'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/temples".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='cemetery']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/tombs'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/tombs".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='unknown']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/unknown'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/unknown".
+                        </sch:assert>
+                      </sch:rule>
+                      <sch:rule context="tei:place[@type='valley']/@ana">
+                        <sch:assert test=". = 'http://syriaca.org/taxonomy/valleys'">
+                          Based on the @type value, this @ana value should be "http://syriaca.org/taxonomy/valleys".
+                        </sch:assert>
+                      </sch:rule>
+                    </sch:pattern>
+                  </sch:schema>
+                </constraint>
+              </constraintSpec>
             </attDef>
           </attList>
           <remarks mode="add">
