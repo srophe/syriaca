@@ -3451,7 +3451,7 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
                       The &lt;desc&gt; must contain "Saint".
                     </sch:assert>
                   </sch:rule>
-                  <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/writers']/tei:desc">
+                  <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/authors']/tei:desc">
                     <sch:assert test="matches(., 'Author')">
                       The &lt;desc&gt; must contain "Author".
                     </sch:assert>
@@ -3509,7 +3509,7 @@ Ce ne seroyt que bon que nous rendissiez noz cloches...</egXML>
                       The &lt;desc&gt; must contain "Saints".
                     </sch:assert>
                   </sch:rule>
-                  <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/writers']/tei:desc">
+                  <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/authors']/tei:desc">
                     <sch:assert test="matches(., 'Authors')">
                       The &lt;desc&gt; must contain "Authors".
                     </sch:assert>
@@ -7959,7 +7959,24 @@ codes used elsewhere in the text.</desc><desc xmlns:rng="http://relaxng.org/ns/s
     </egXML>
   </exemplum><listRef xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude">
     <ref target="https://www.tei-c.org/release/doc/tei-p5-doc/en/html/ND.html#NDPERSEpc">14.3.2.1. Personal Characteristics</ref>
-  </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="gender"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2022-05-03">gender</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-17" xml:lang="en">specifies the gender identity of a person, persona, or character.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-03" xml:lang="es">especifica la identidad de género de una persona.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-03" xml:lang="it">specifica l'identità di genere di una persona.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-09-21" xml:lang="ja">人、ペルソナ、あるいはキャラクターのジェンダーを示す。</desc><classes><memberOf key="att.global"/></classes><content><textNode/></content><constraintSpec ident="documentation-on-gender" scheme="schematron">
+  </listRef></elementSpec><elementSpec rend="add" module="namesdates" ident="gender"><gloss xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" xml:lang="en" versionDate="2022-05-03">gender</gloss><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-17" xml:lang="en">specifies the gender identity of a person, persona, or character.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-03" xml:lang="es">especifica la identidad de género de una persona.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-05-03" xml:lang="it">specifica l'identità di genere di una persona.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2022-09-21" xml:lang="ja">人、ペルソナ、あるいはキャラクターのジェンダーを示す。</desc><classes><memberOf key="att.global"/></classes><content><textNode/></content><constraintSpec ident="gender-ana-values" scheme="schematron">
+           <constraint>
+             <sch:schema queryBinding="xslt2">
+               <sch:ns uri="http://www.tei-c.org/ns/1.0" prefix="tei"/>
+               <sch:ns uri="http://www.w3.org/1999/02/22-rdf-syntax-ns#" prefix="rdf"/>
+               <sch:ns uri="http://www.w3.org/2004/02/skos/core#" prefix="skos"/>
+               <sch:pattern>
+                 <sch:rule context="tei:gender/@ana">
+                   <sch:let name="taxonomy" value="doc('https://raw.githubusercontent.com/srophe/syriaca-data/refs/heads/gaddel_development/data/taxonomy/taxonomy.rdf')"/>
+                   <sch:let name="genders" value="$taxonomy//rdf:Description[@rdf:about='http://syriaca.org/taxonomy/gender']/skos:narrower/@rdf:resource"/>
+                   <sch:assert test="every $i in (tokenize(., ' ')) satisfies $i = $genders" role="warning">
+                     Availabe values for gender are <sch:value-of select="string-join($genders, '; ')"/>. If one of
+                     these does not apply, please use a descriptive term of your choosing for editors to consider for inclusion.</sch:assert>
+                 </sch:rule>
+               </sch:pattern>
+             </sch:schema>
+           </constraint>
+         </constraintSpec><constraintSpec ident="documentation-on-gender" scheme="schematron">
            <constraint>
              <sch:rule context="tei:text//tei:gender">
                <sch:report test="@resp and @source">Only one of the attributes @resp and @source may be supplied.</sch:report>
@@ -8192,8 +8209,8 @@ codes used elsewhere in the text.</desc><desc xmlns:rng="http://relaxng.org/ns/s
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:text//tei:person[contains(@ana, '#syriaca-author')][not(contains(@ana, '#syriaca-pseudonymous-authors'))]">
-                <sch:assert test="//tei:state[@ref='http://syriaca.org/taxonomy/writers']">
-                  This element must contain a child &lt;state&gt; with @ref="http://syriaca.org/taxonomy/writers". 
+                <sch:assert test="//tei:state[@ref='http://syriaca.org/taxonomy/authors']">
+                  This element must contain a child &lt;state&gt; with @ref="http://syriaca.org/taxonomy/authors". 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:text//tei:person[contains(@ana, '#syriaca-pseudonymous')]">
@@ -8366,8 +8383,8 @@ codes used elsewhere in the text.</desc><desc xmlns:rng="http://relaxng.org/ns/s
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:text//tei:personGrp[contains(@ana, '#syriaca-author')][not(contains(@ana, '#syriaca-pseudonymous-authors'))]">
-                <sch:assert test="//tei:state[@ref='http://syriaca.org/taxonomy/writers']">
-                  This element must contain a child &lt;state&gt; with @ref="http://syriaca.org/taxonomy/writers". 
+                <sch:assert test="//tei:state[@ref='http://syriaca.org/taxonomy/authors']">
+                  This element must contain a child &lt;state&gt; with @ref="http://syriaca.org/taxonomy/authors". 
                 </sch:assert>
               </sch:rule>
               <sch:rule context="tei:text//tei:personGrp[contains(@ana, '#syriaca-pseudonymous')]">
@@ -8740,10 +8757,10 @@ codes used elsewhere in the text.</desc><desc xmlns:rng="http://relaxng.org/ns/s
         organisation.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-12-20" xml:lang="ko">개인, 장소, 또는 조직에 관련한 현재 지위 또는 특성 기술을 포함한다.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-02" xml:lang="zh-TW">標明分界方法所定義的權威參照標準裡其中ㄧ個組件。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2008-04-05" xml:lang="ja">人物、場所、組織などの、現在の社会的状態や地位を示す。</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2018-07-18" xml:lang="de">enthält eine Beschreibung eines Status oder einer Qualität, die einer Person, einem Ort oder einer Organisation 
     oft zu einem bestimmten Zeitpunkt oder für einen bestimmten Zeitraum zugeordnet wird.</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-05-04" xml:lang="es">especifica un componente de una referencia canónica definida por el método milestone (hito).</desc><desc xmlns:rng="http://relaxng.org/ns/structure/1.0" xmlns:xi="http://www.w3.org/2001/XInclude" versionDate="2007-01-21" xml:lang="it">specifica un componente di un riferimento canonico definito dal metodo milestone.</desc><classes><memberOf key="att.canonical"/><memberOf key="att.global"/><memberOf key="att.datable"/><memberOf key="att.typed"/><memberOf key="model.placeStateLike"/><memberOf key="att.cmc"/></classes><content><sequence minOccurs="1" maxOccurs="1" preserveOrder="false"><elementRef key="desc" minOccurs="0" maxOccurs="1"/><elementRef key="precision" minOccurs="0" maxOccurs="unbounded"/></sequence></content><constraintSpec ident="state-person-atts" scheme="schematron">
             <constraint>
-              <sch:rule context="tei:person[tei:state/@ref='http://syriaca.org/taxonomy/writers']">
+              <sch:rule context="tei:person[tei:state/@ref='http://syriaca.org/taxonomy/authors']">
                 <sch:assert test="contains(@ana, '#syriaca-author')">Persons with a &lt;state&gt; element indicating an author require @ana="#syriaca-author".</sch:assert>
               </sch:rule>
-              <sch:rule context="tei:personGrp[tei:state/@ref='http://syriaca.org/taxonomy/writers']">
+              <sch:rule context="tei:personGrp[tei:state/@ref='http://syriaca.org/taxonomy/authors']">
                 <sch:assert test="contains(@ana, '#syriaca-author')">Person groups with a &lt;state&gt; element indicating an author require @ana="#syriaca-author".</sch:assert>
               </sch:rule>
               <sch:rule context="tei:person[tei:state/@ref='http://syriaca.org/taxonomy/pseudonymous-authors']">
@@ -8795,7 +8812,7 @@ codes used elsewhere in the text.</desc><desc xmlns:rng="http://relaxng.org/ns/s
                       please choose a keyword of your own for the editors to consider: <sch:value-of select="string-join($socioeconomicStatusURIs, ';  ')"/>.</sch:assert>
                   </sch:rule>
                   <sch:rule context="tei:state[@type='status']/@ref">
-                    <sch:let name="statuses" value="'http://syriaca.org/taxonomy/anonymous', 'http://syriaca.org/taxonomy/apostles', 'http://syriaca.org/taxonomy/fallen', 'http://syriaca.org/taxonomy/martyrs', 'http://syriaca.org/taxonomy/pseudonymous-authors', 'http://syriaca.org/taxonomy/saints', 'http://syriaca.org/taxonomy/writers'"/>
+                    <sch:let name="statuses" value="'http://syriaca.org/taxonomy/anonymous', 'http://syriaca.org/taxonomy/apostles', 'http://syriaca.org/taxonomy/fallen', 'http://syriaca.org/taxonomy/martyrs', 'http://syriaca.org/taxonomy/pseudonymous-authors', 'http://syriaca.org/taxonomy/saints', 'http://syriaca.org/taxonomy/authors'"/>
                     <sch:assert test=". = $statuses">
                       Allowed values: <sch:value-of select="string-join($statuses, ';  ')"/>.
                     </sch:assert>

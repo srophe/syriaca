@@ -6,7 +6,7 @@
          xmlns:srophe="https://srophe.app"
          datatypeLibrary="http://www.w3.org/2001/XMLSchema-datatypes"
          ns="http://www.tei-c.org/ns/1.0"><!--
-Schema generated from ODD source 2025-03-13T22:00:29Z. . 
+Schema generated from ODD source 2025-03-18T18:05:29Z. . 
 TEI Edition: P5 Version 4.7.0. Last updated on 16th November 2023, revision e5dd73ed0 
 TEI Edition Location: https://www.tei-c.org/Vault/P5/4.7.0/ 
   
@@ -2040,7 +2040,7 @@ Suggested values include: 1] human; 2] template; 3] system; 4] bot; 5] unspecifi
                       The &lt;desc&gt; must contain "Saint".
                     </sch:assert>
                </sch:rule>
-               <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/writers']/tei:desc">
+               <sch:rule context="tei:person//tei:state[@ref='http://syriaca.org/taxonomy/authors']/tei:desc">
                   <sch:assert test="matches(., 'Author')">
                       The &lt;desc&gt; must contain "Author".
                     </sch:assert>
@@ -2099,7 +2099,7 @@ Suggested values include: 1] human; 2] template; 3] system; 4] bot; 5] unspecifi
                       The &lt;desc&gt; must contain "Saints".
                     </sch:assert>
                </sch:rule>
-               <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/writers']/tei:desc">
+               <sch:rule context="tei:personGrp//tei:state[@ref='http://syriaca.org/taxonomy/authors']/tei:desc">
                   <sch:assert test="matches(., 'Authors')">
                       The &lt;desc&gt; must contain "Authors".
                     </sch:assert>
@@ -5135,8 +5135,28 @@ Suggested values include: 1] veneration</a:documentation>
       <element name="gender">
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(gender) specifies the gender identity of a person, persona, or character. [14.3.2.1. Personal Characteristics]</a:documentation>
          <text/>
+         <sch:schema xmlns="http://www.tei-c.org/ns/1.0"
+                     xmlns:sch="http://purl.oclc.org/dsdl/schematron"
+                     xmlns:srophe="https://srophe.app"
+                     queryBinding="xslt2">
+            <sch:ns uri="http://www.tei-c.org/ns/1.0" prefix="tei"/>
+            <sch:ns uri="http://www.w3.org/1999/02/22-rdf-syntax-ns#" prefix="rdf"/>
+            <sch:ns uri="http://www.w3.org/2004/02/skos/core#" prefix="skos"/>
+            <sch:pattern>
+               <sch:rule context="tei:gender/@ana">
+                  <sch:let name="taxonomy"
+                           value="doc('https://raw.githubusercontent.com/srophe/syriaca-data/refs/heads/gaddel_development/data/taxonomy/taxonomy.rdf')"/>
+                  <sch:let name="genders"
+                           value="$taxonomy//rdf:Description[@rdf:about='http://syriaca.org/taxonomy/gender']/skos:narrower/@rdf:resource"/>
+                  <sch:assert test="every $i in (tokenize(., ' ')) satisfies $i = $genders"
+                              role="warning">
+                     Availabe values for gender are <sch:value-of select="string-join($genders, '; ')"/>. If one of
+                     these does not apply, please use a descriptive term of your choosing for editors to consider for inclusion.</sch:assert>
+               </sch:rule>
+            </sch:pattern>
+         </sch:schema>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-gender-documentation-on-gender-constraint-rule-151">
+                  id="syriacaPersons-gender-documentation-on-gender-constraint-rule-152">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5146,7 +5166,7 @@ Suggested values include: 1] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-gender-calendar-check-gender-constraint-rule-152">
+                  id="syriacaPersons-gender-calendar-check-gender-constraint-rule-153">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5190,7 +5210,7 @@ Suggested values include: 1] veneration</a:documentation>
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-gender-calendar-calendar-check-gender-constraint-rule-153">
+                  id="syriacaPersons-gender-calendar-calendar-check-gender-constraint-rule-154">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5270,7 +5290,7 @@ Suggested values include: 1] veneration</a:documentation>
             </oneOrMore>
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-person-person-authors-constraint-rule-154">
+                  id="syriacaPersons-person-person-authors-constraint-rule-155">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5283,8 +5303,8 @@ Suggested values include: 1] veneration</a:documentation>
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
                       context="tei:text//tei:person[contains(@ana, '#syriaca-author')][not(contains(@ana, '#syriaca-pseudonymous-authors'))]">
-               <sch:assert test="//tei:state[@ref='http://syriaca.org/taxonomy/writers']">
-                  This element must contain a child &lt;state&gt; with @ref="http://syriaca.org/taxonomy/writers". 
+               <sch:assert test="//tei:state[@ref='http://syriaca.org/taxonomy/authors']">
+                  This element must contain a child &lt;state&gt; with @ref="http://syriaca.org/taxonomy/authors". 
                 </sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
@@ -5303,7 +5323,7 @@ Suggested values include: 1] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-person-person-saints-constraint-rule-157">
+                  id="syriacaPersons-person-person-saints-constraint-rule-158">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5320,7 +5340,7 @@ Suggested values include: 1] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-person-person-anonymi-constraint-rule-158">
+                  id="syriacaPersons-person-person-anonymi-constraint-rule-159">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5334,7 +5354,7 @@ Suggested values include: 1] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-person-person-series-agreement-constraint-rule-159">
+                  id="syriacaPersons-person-person-series-agreement-constraint-rule-160">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5369,7 +5389,7 @@ Suggested values include: 1] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-person-person-abstract-req-constraint-rule-163">
+                  id="syriacaPersons-person-person-abstract-req-constraint-rule-164">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5438,7 +5458,7 @@ Suggested values include: 1] veneration</a:documentation>
             </oneOrMore>
          </group>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-personGrp-personGrp-authors-constraint-rule-164">
+                  id="syriacaPersons-personGrp-personGrp-authors-constraint-rule-165">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5451,8 +5471,8 @@ Suggested values include: 1] veneration</a:documentation>
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
                       context="tei:text//tei:personGrp[contains(@ana, '#syriaca-author')][not(contains(@ana, '#syriaca-pseudonymous-authors'))]">
-               <sch:assert test="//tei:state[@ref='http://syriaca.org/taxonomy/writers']">
-                  This element must contain a child &lt;state&gt; with @ref="http://syriaca.org/taxonomy/writers". 
+               <sch:assert test="//tei:state[@ref='http://syriaca.org/taxonomy/authors']">
+                  This element must contain a child &lt;state&gt; with @ref="http://syriaca.org/taxonomy/authors". 
                 </sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
@@ -5471,7 +5491,7 @@ Suggested values include: 1] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-personGrp-personGrp-saints-constraint-rule-167">
+                  id="syriacaPersons-personGrp-personGrp-saints-constraint-rule-168">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5488,7 +5508,7 @@ Suggested values include: 1] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-personGrp-personGrp-series-agreement-constraint-rule-168">
+                  id="syriacaPersons-personGrp-personGrp-series-agreement-constraint-rule-169">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5523,7 +5543,7 @@ Suggested values include: 1] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-personGrp-personGrp-abstract-req-constraint-rule-172">
+                  id="syriacaPersons-personGrp-personGrp-abstract-req-constraint-rule-173">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5558,7 +5578,7 @@ Suggested values include: 1] veneration</a:documentation>
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(relationship) describes any kind of relationship or linkage amongst a specified group of places, events, persons, objects or other items. [14.3.2.3. Personal Relationships]</a:documentation>
          <ref name="tei_desc"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-documentation-on-relation-constraint-rule-173">
+                  id="syriacaPersons-relation-documentation-on-relation-constraint-rule-174">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5568,7 +5588,7 @@ Suggested values include: 1] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-act-pass-mutual-on-relation-constraint-rule-174">
+                  id="syriacaPersons-relation-act-pass-mutual-on-relation-constraint-rule-175">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5632,7 +5652,7 @@ Suggested values include: 1] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-att-combos-on-relation-constraint-rule-179">
+                  id="syriacaPersons-relation-att-combos-on-relation-constraint-rule-180">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -5738,7 +5758,7 @@ Suggested values include: 1] veneration</a:documentation>
             </sch:pattern>
          </sch:schema>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-ref-or-key-or-name-constraint-rule-190">
+                  id="syriacaPersons-relation-ref-or-key-or-name-constraint-rule-191">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5749,7 +5769,7 @@ Suggested values include: 1] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-active-mutual-constraint-rule-191">
+                  id="syriacaPersons-relation-active-mutual-constraint-rule-192">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5760,7 +5780,7 @@ Suggested values include: 1] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-active-passive-constraint-rule-192">
+                  id="syriacaPersons-relation-active-passive-constraint-rule-193">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5771,7 +5791,7 @@ Suggested values include: 1] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-calendar-check-relation-constraint-rule-193">
+                  id="syriacaPersons-relation-calendar-check-relation-constraint-rule-194">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5784,7 +5804,7 @@ Suggested values include: 1] veneration</a:documentation>
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-calendar-check-relation-constraint-rule-194">
+                  id="syriacaPersons-relation-calendar-check-relation-constraint-rule-195">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5843,7 +5863,7 @@ Suggested values include: 1] http://syriaca.org/taxonomy/not-to-be-confused-with
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-relation-calendar-calendar-check-relation-constraint-rule-195">
+                  id="syriacaPersons-relation-calendar-calendar-check-relation-constraint-rule-196">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -5910,17 +5930,17 @@ Suggested values include: 1] http://syriaca.org/taxonomy/not-to-be-confused-with
             </zeroOrMore>
          </interleave>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-state-state-person-atts-constraint-rule-196">
+                  id="syriacaPersons-state-state-person-atts-constraint-rule-197">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="tei:person[tei:state/@ref='http://syriaca.org/taxonomy/writers']">
+                      context="tei:person[tei:state/@ref='http://syriaca.org/taxonomy/authors']">
                <sch:assert test="contains(@ana, '#syriaca-author')">Persons with a &lt;state&gt; element indicating an author require @ana="#syriaca-author".</sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
-                      context="tei:personGrp[tei:state/@ref='http://syriaca.org/taxonomy/writers']">
+                      context="tei:personGrp[tei:state/@ref='http://syriaca.org/taxonomy/authors']">
                <sch:assert test="contains(@ana, '#syriaca-author')">Person groups with a &lt;state&gt; element indicating an author require @ana="#syriaca-author".</sch:assert>
             </sch:rule>
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
@@ -5999,7 +6019,7 @@ Suggested values include: 1] http://syriaca.org/taxonomy/not-to-be-confused-with
                </sch:rule>
                <sch:rule context="tei:state[@type='status']/@ref">
                   <sch:let name="statuses"
-                           value="'http://syriaca.org/taxonomy/anonymous', 'http://syriaca.org/taxonomy/apostles', 'http://syriaca.org/taxonomy/fallen', 'http://syriaca.org/taxonomy/martyrs', 'http://syriaca.org/taxonomy/pseudonymous-authors', 'http://syriaca.org/taxonomy/saints', 'http://syriaca.org/taxonomy/writers'"/>
+                           value="'http://syriaca.org/taxonomy/anonymous', 'http://syriaca.org/taxonomy/apostles', 'http://syriaca.org/taxonomy/fallen', 'http://syriaca.org/taxonomy/martyrs', 'http://syriaca.org/taxonomy/pseudonymous-authors', 'http://syriaca.org/taxonomy/saints', 'http://syriaca.org/taxonomy/authors'"/>
                   <sch:assert test=". = $statuses">
                       Allowed values: <sch:value-of select="string-join($statuses, ';  ')"/>.
                     </sch:assert>
@@ -6020,7 +6040,7 @@ Suggested values include: 1] http://syriaca.org/taxonomy/not-to-be-confused-with
             </sch:pattern>
          </sch:schema>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-state-documentation-on-state-constraint-rule-209">
+                  id="syriacaPersons-state-documentation-on-state-constraint-rule-210">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -6030,7 +6050,7 @@ Suggested values include: 1] http://syriaca.org/taxonomy/not-to-be-confused-with
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-state-calendar-check-state-constraint-rule-210">
+                  id="syriacaPersons-state-calendar-check-state-constraint-rule-211">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -6043,7 +6063,7 @@ Suggested values include: 1] http://syriaca.org/taxonomy/not-to-be-confused-with
             </sch:rule>
          </pattern>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-state-calendar-check-state-constraint-rule-211">
+                  id="syriacaPersons-state-calendar-check-state-constraint-rule-212">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -6092,7 +6112,7 @@ Suggested values include: 1] http://syriaca.org/taxonomy/not-to-be-confused-with
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-state-calendar-calendar-check-state-constraint-rule-212">
+                  id="syriacaPersons-state-calendar-calendar-check-state-constraint-rule-213">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -6112,7 +6132,7 @@ Suggested values include: 1] http://syriaca.org/taxonomy/not-to-be-confused-with
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(trait) contains a description of some status or quality attributed to a person, place, or organization typically, but not necessarily, independent of the volition or action of the holder and usually not at some specific time or for a specific date range. [14.3.1. Basic Principles 14.3.2.1. Personal Characteristics]</a:documentation>
          <ref name="tei_desc"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-trait-calendar-check-trait-constraint-rule-213">
+                  id="syriacaPersons-trait-calendar-check-trait-constraint-rule-214">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -6141,7 +6161,7 @@ Suggested values include: 1] http://syriaca.org/taxonomy/not-to-be-confused-with
             </attribute>
          </optional>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-trait-calendar-calendar-check-trait-constraint-rule-214">
+                  id="syriacaPersons-trait-calendar-calendar-check-trait-constraint-rule-215">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:rng="http://relaxng.org/ns/structure/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
@@ -6229,7 +6249,7 @@ Suggested values include: 1] http://syriaca.org/taxonomy/not-to-be-confused-with
          <a:documentation xmlns:a="http://relaxng.org/ns/compatibility/annotations/1.0">(text) contains a single text of any kind, whether unitary or composite, for example a poem or drama, a collection of essays, a novel, a dictionary, or a corpus sample. [4. Default Text Structure 16.1. Varieties of Composite Text]</a:documentation>
          <ref name="tei_body"/>
          <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-                  id="syriacaPersons-text-source-within-text-constraint-rule-215">
+                  id="syriacaPersons-text-source-within-text-constraint-rule-216">
             <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                       xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                       xmlns:srophe="https://srophe.app"
@@ -6280,7 +6300,7 @@ Suggested values include: 1] http://syriaca.org/taxonomy/not-to-be-confused-with
       </optional>
    </define>
    <pattern xmlns="http://purl.oclc.org/dsdl/schematron"
-            id="syriacaPersons-att.global.change-change-att-values-constraint-rule-216">
+            id="syriacaPersons-att.global.change-change-att-values-constraint-rule-217">
       <sch:rule xmlns="http://www.tei-c.org/ns/1.0"
                 xmlns:sch="http://purl.oclc.org/dsdl/schematron"
                 xmlns:srophe="https://srophe.app"
